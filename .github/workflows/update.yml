@@ -1,0 +1,59 @@
+name: Daily JSON Games Update
+
+on:
+  schedule:
+    # GitHub's servers run on UTC time.
+    # 12:00 in Spain (mainland) is 10:00 UTC during summer time (CEST)
+    # or 11:00 UTC during winter time (CET).
+    # We set '0 10 * * *' so it runs at 12:00 during the summer.
+    - cron: '0 10 * * *'
+  workflow_dispatch: # Allows the process to be triggered manually from the GitHub website
+
+jobs:
+  build-and-update:
+    runs-on: ubuntu-latest
+
+    permissions:
+      # Required so the bot can push to the data branch
+      contents: write
+
+    steps:
+      # 1. Code from the main branch (this is where tools/update_data.js lives)
+      - name: Checkout main
+        uses: actions/checkout@v4
+
+      # 2. The data branch, cloned into a separate subdirectory
+      - name: Checkout data
+        uses: actions/checkout@v4
+        with:
+          ref: data
+          path: data-branch
+
+      # 3. Install the stable version of Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # 4. Run the script from INSIDE data-branch,
+      #    so the script's relative paths keep working the same way
+      - name: Run processing script
+        working-directory: data-branch
+        run: node ../tools/update_data.js
+
+      # 5. Commit and push the JSON files to the data branch
+      - name: Commit and push the changes (if there are any)
+        working-directory: data-branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add detectable.json detectable_processed.json
+
+          # This conditional prevents the workflow from failing when there is nothing to commit
+          if git diff --cached --quiet; then
+            echo "No changes were found in this run."
+          else
+            git commit -m "Auto-update: daily update of detected games"
+            git push origin data
+          fi
