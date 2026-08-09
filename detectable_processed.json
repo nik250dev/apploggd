@@ -170896,10 +170896,9 @@
   },
   {
     "id": "1129504328848265387",
-    "name": "Five Nights at Freddy's: Help Wanted",
+    "name": "FIVE NIGHTS AT FREDDY'S: HELP WANTED",
     "aliases": [
-      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED",
-      "FIVE NIGHTS AT FREDDY'S: HELP WANTED"
+      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED"
     ],
     "executables": [
       {
@@ -170910,12 +170909,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "732690"
-      },
-      {
         "distributor": "xbox",
         "id": "9P731FVPM8WW"
+      },
+      {
+        "distributor": "steam",
+        "id": "732690"
       }
     ],
     "id_igdb": "115304",
@@ -407557,7 +407556,7 @@
   },
   {
     "id": "1442732231096406137",
-    "name": "HOMESTAR VR",
+    "name": "Homestar VR",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -429420,9 +429419,7 @@
   {
     "id": "1442740292535975977",
     "name": "Rock Paper Scissors: Breakthrough Gaming Arcade",
-    "aliases": [
-      "Rock Paper Scissors - Breakthrough Gaming Arcade"
-    ],
+    "aliases": [],
     "executables": [],
     "third_party_skus": [],
     "id_igdb": "199781",
@@ -433167,7 +433164,7 @@
   },
   {
     "id": "1445094645376745522",
-    "name": "Racing: Breakthrough Gaming Arcade",
+    "name": "Racing (2 Player Cooperation Edition): Breakthrough Gaming Arcade",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -461795,8 +461792,10 @@
   },
   {
     "id": "1458940979703840838",
-    "name": "ZJ the Ball Challenge (Level 2C)",
-    "aliases": [],
+    "name": "ZJ the Ball Challenge: Level 5C",
+    "aliases": [
+      "ZJ the Ball Challenge (Level 5C)"
+    ],
     "executables": [],
     "third_party_skus": [],
     "id_igdb": "214511",
