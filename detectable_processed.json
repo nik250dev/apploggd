@@ -67813,9 +67813,10 @@
   },
   {
     "id": "1124353236564983808",
-    "name": "CounterSide",
+    "name": "Counterside",
     "aliases": [
-      "Counter:Side"
+      "Counter:Side",
+      "CounterSide"
     ],
     "executables": [
       {
@@ -76791,10 +76792,9 @@
   },
   {
     "id": "1124353934623002726",
-    "name": "Crisis Core: Final Fantasy VII - Reunion",
+    "name": "CRISIS CORE: FINAL FANTASY VII - REUNION",
     "aliases": [
-      "CRISIS CORE -FINAL FANTASY VII- REUNION",
-      "CRISIS CORE: FINAL FANTASY VII - REUNION"
+      "CRISIS CORE -FINAL FANTASY VII- REUNION"
     ],
     "executables": [
       {
@@ -76809,12 +76809,12 @@
         "id": "9P6J9NFKGJ68"
       },
       {
-        "distributor": "steam",
-        "id": "1608070"
-      },
-      {
         "distributor": "xbox",
         "id": "9PCWV3FWJZ18"
+      },
+      {
+        "distributor": "steam",
+        "id": "1608070"
       }
     ],
     "id_igdb": "205201",
@@ -236496,12 +236496,16 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "1902960"
-      },
-      {
         "distributor": "xbox",
         "id": "9N3F1LW9HC6C"
+      },
+      {
+        "distributor": "epic",
+        "id": "7EDAEBF7674C4F6994C1B9AF2BB728F2"
+      },
+      {
+        "distributor": "steam",
+        "id": "1902960"
       }
     ],
     "id_igdb": "279642",
@@ -243550,6 +243554,10 @@
       {
         "distributor": "steam",
         "id": "3158270"
+      },
+      {
+        "distributor": "epic",
+        "id": "1F04A0265B15423E90A08CE5AE4A42C5"
       }
     ],
     "id_igdb": "326426",
@@ -253264,9 +253272,9 @@
   },
   {
     "id": "1387990904194732154",
-    "name": "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY",
+    "name": "RAIDOU Remastered: The Mystery of the Soulless Army",
     "aliases": [
-      "RAIDOU Remastered: The Mystery of the Soulless Army"
+      "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY"
     ],
     "executables": [
       {
@@ -253281,12 +253289,12 @@
         "id": "9NB58STJ848G"
       },
       {
-        "distributor": "steam",
-        "id": "2288350"
-      },
-      {
         "distributor": "xbox",
         "id": "9P284W1H02KW"
+      },
+      {
+        "distributor": "steam",
+        "id": "2288350"
       },
       {
         "distributor": "xbox",
@@ -275937,6 +275945,10 @@
       {
         "distributor": "steam",
         "id": "2191500"
+      },
+      {
+        "distributor": "epic",
+        "id": "38CC3951AB0540498D566C6735003D9C"
       }
     ],
     "id_igdb": "278348",
@@ -407556,7 +407568,7 @@
   },
   {
     "id": "1442732231096406137",
-    "name": "Homestar VR",
+    "name": "HOMESTAR VR",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -425536,7 +425548,7 @@
   },
   {
     "id": "1442738697928966154",
-    "name": "Zippy the Circle",
+    "name": "Zippy the Circle (Level 3 and Level 4)",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -429419,7 +429431,9 @@
   {
     "id": "1442740292535975977",
     "name": "Rock Paper Scissors: Breakthrough Gaming Arcade",
-    "aliases": [],
+    "aliases": [
+      "Rock Paper Scissors - Breakthrough Gaming Arcade"
+    ],
     "executables": [],
     "third_party_skus": [],
     "id_igdb": "199781",
@@ -464229,6 +464243,10 @@
       {
         "distributor": "steam",
         "id": "4173750"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N8KFFB1X5VD"
       }
     ],
     "id_igdb": "387370",
@@ -471017,6 +471035,10 @@
       {
         "distributor": "steam",
         "id": "1442520"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NMDT29V25WL"
       }
     ],
     "id_igdb": "140375",
@@ -504769,6 +504791,10 @@
       {
         "distributor": "steam",
         "id": "3141630"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PMP77PLHTX0"
       }
     ],
     "id_igdb": "347027",
@@ -511609,7 +511635,16 @@
     "name": "Big Walk",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1478500"
+      },
+      {
+        "distributor": "epic",
+        "id": "271473D449B34FA5825CD0C6AF7CA728"
+      }
+    ],
     "id_igdb": "279624",
     "cover": "ar63y1",
     "artwork": [
@@ -511752,7 +511787,16 @@
     "name": "Regular Factory: Escape Room",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1790490"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NQWC50SXW0C"
+      }
+    ],
     "id_igdb": "188833",
     "cover": "co4n98",
     "artwork": [
