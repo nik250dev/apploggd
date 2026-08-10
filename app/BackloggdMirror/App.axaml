@@ -1,0 +1,135 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="BackloggdMirror.App"
+             xmlns:local="using:BackloggdMirror"
+             RequestedThemeVariant="Dark">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.Resources>
+        <!-- === Brand Colors === -->
+        <SolidColorBrush x:Key="BrandPrimaryBrush" Color="#EA377A"/>
+        <SolidColorBrush x:Key="BrandPrimaryHoverBrush" Color="#D62F6B"/>
+        <SolidColorBrush x:Key="BrandPrimaryLightBrush" Color="#FF5C99"/>
+        <SolidColorBrush x:Key="BrandSecondaryBorderBrush" Color="#BBDDFD"/>
+        
+        <!-- === Application Backgrounds === -->
+        <SolidColorBrush x:Key="AppBackgroundBrush" Color="#16181C"/>
+        <SolidColorBrush x:Key="PanelBackgroundBrush" Color="#242832"/>
+        <SolidColorBrush x:Key="SurfaceDarkBrush" Color="#1A1D24"/>
+        <SolidColorBrush x:Key="SurfaceBrandHoverBrush" Color="#2A101A"/>
+        <SolidColorBrush x:Key="SurfaceBrandPressedBrush" Color="#3A1520"/>
+        
+        <!-- === Inputs === -->
+        <SolidColorBrush x:Key="InputBackgroundBrush" Color="#1E1E1E"/>
+        <SolidColorBrush x:Key="InputBorderBrush" Color="#333333"/>
+        <SolidColorBrush x:Key="InputHoverBackgroundBrush" Color="#272c37"/>
+        <SolidColorBrush x:Key="PrimaryInputFocusBorderBrush" Color="#EA377A"/> <!-- Focus on the main screen (Login) -->
+        <SolidColorBrush x:Key="SecondaryInputFocusBorderBrush" Color="#839df9"/> <!-- Focus on the secondary screen (game picker) -->
+
+        <!-- === Layout & Borders === -->
+        <SolidColorBrush x:Key="SidebarBackgroundBrush" Color="#242832"/>
+        <SolidColorBrush x:Key="SidebarBorderBrush" Color="#3b414e"/>
+        <SolidColorBrush x:Key="SeparatorBrush" Color="#353b47"/>
+        <SolidColorBrush x:Key="CardBackgroundBrush" Color="#242832"/>
+        <!-- Outline for secondary controls (neutral buttons). Matches the grey the Fluent theme
+             paints on the ComboBox border, so every Settings control carries the same outline
+             weight. -->
+        <SolidColorBrush x:Key="ControlBorderBrush" Color="#A5A6A9"/>
+        <SolidColorBrush x:Key="ControlBorderHoverBrush" Color="#FFFFFF"/>
+
+        <!-- === Text Colors === -->
+        <SolidColorBrush x:Key="TextPrimaryBrush" Color="White"/>
+        <SolidColorBrush x:Key="TextHeadingBrush" Color="#badefc"/>
+        <SolidColorBrush x:Key="TextSecondaryBrush" Color="#D0D0D0"/>
+        <SolidColorBrush x:Key="TextMutedBrush" Color="#AAAAAA"/>
+        <SolidColorBrush x:Key="TextSubtleBrush" Color="#888888"/>
+        <SolidColorBrush x:Key="TextFooterBrush" Color="#555555"/>
+        <SolidColorBrush x:Key="TextGrayBrush" Color="Gray"/>
+        
+        <!-- === Interactive Elements === -->
+        <SolidColorBrush x:Key="ButtonCancelBrush" Color="#4a5568"/>
+        <SolidColorBrush x:Key="ButtonDisabledBackgroundBrush" Color="#555555"/>
+        <SolidColorBrush x:Key="ButtonDisabledForegroundBrush" Color="#AAAAAA"/>
+
+        <!-- === Icons === -->
+        <SolidColorBrush x:Key="IconLightBrush" Color="#cbd4dc"/>
+        <SolidColorBrush x:Key="IconMediumBrush" Color="#888888"/>
+        <SolidColorBrush x:Key="IconDarkBrush" Color="#666666"/>
+        
+        <!-- === Overlays === -->
+        <SolidColorBrush x:Key="OverlayDarkBrush" Color="#CC000000"/>
+        <SolidColorBrush x:Key="OverlayMediumBrush" Color="#80000000"/>
+        <SolidColorBrush x:Key="OverlayLightBrush" Color="#40000000"/>
+        
+        <!-- === Skeleton & Spinners === -->
+        <SolidColorBrush x:Key="SkeletonBackgroundBrush" Color="rgba(143, 156, 167, 0.5)"/>
+        <Color x:Key="SkeletonShimmerStartColor">#00FFFFFF</Color>
+        <Color x:Key="SkeletonShimmerMidColor">#66FFFFFF</Color>
+    </Application.Resources>
+
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+  
+    <Application.Styles>
+        <FluentTheme />
+
+        <!-- Modal footer buttons. They live here rather than in a Window.Styles because both the
+             session confirmation overlay (MainWindow) and the browser-required one (LoginWindow)
+             use them, and Window.Styles are not shared across windows.
+             They must come AFTER FluentTheme to win over the theme's default styles. -->
+
+        <!-- Modal Secondary/Discard Button -->
+        <Style Selector="Button.discard-btn">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Height" Value="40"/>
+        </Style>
+        <Style Selector="Button.discard-btn TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <!-- The text is already white, so hover feedback has to come from the background and border. -->
+        <Style Selector="Button.discard-btn:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SurfaceDarkBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderHoverBrush}"/>
+        </Style>
+        <Style Selector="Button.discard-btn:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SidebarBorderBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderHoverBrush}"/>
+        </Style>
+
+        <!-- Modal Primary/Save Button -->
+        <Style Selector="Button.save-btn">
+            <Setter Property="Background" Value="{DynamicResource BrandPrimaryBrush}"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Height" Value="40"/>
+        </Style>
+        <Style Selector="Button.save-btn:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource BrandPrimaryHoverBrush}"/>
+        </Style>
+        <Style Selector="Button.save-btn:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource BrandPrimaryLightBrush}"/>
+        </Style>
+
+        <!-- Modal Primary/Save Button (Disabled State) -->
+        <Style Selector="Button.save-btn:disabled">
+            <Setter Property="Opacity" Value="0.4"/>
+        </Style>
+        <Style Selector="Button.save-btn:disabled /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource BrandPrimaryBrush}"/>
+        </Style>
+        <Style Selector="Button.save-btn:disabled TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+    </Application.Styles>
+</Application>

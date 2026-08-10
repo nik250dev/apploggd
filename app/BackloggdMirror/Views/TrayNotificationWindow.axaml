@@ -1,0 +1,66 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:services="using:BackloggdMirror.Services"
+        x:Class="BackloggdMirror.Views.TrayNotificationWindow"
+        Title="Notification"
+        SystemDecorations="None"
+        WindowStartupLocation="Manual"
+        Topmost="True"
+        ShowInTaskbar="False"
+        Background="Transparent"
+        Width="350" Height="70"
+        CanResize="False">
+
+    <Window.Styles>
+        <Style Selector="Window">
+            <Setter Property="Opacity" Value="0"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.3" Easing="CubicEaseOut"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Window.visible">
+            <Setter Property="Opacity" Value="1"/>
+        </Style>
+    </Window.Styles>
+
+    <Border Background="{DynamicResource CardBackgroundBrush}" 
+            BorderBrush="{DynamicResource SidebarBorderBrush}"
+            BorderThickness="1"
+            CornerRadius="10"
+            Margin="10"
+            BoxShadow="0 4 15 0 #40000000">
+        <Border CornerRadius="10" ClipToBounds="True">
+            <Grid RowDefinitions="*, Auto">
+                <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto">
+                    <PathIcon Grid.Column="0" Data="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z" 
+                              Width="24" Height="24" 
+                              Foreground="{DynamicResource IconMediumBrush}" 
+                              Margin="15,0,10,0" VerticalAlignment="Center"/>
+                    
+                    <TextBlock Grid.Column="1" 
+                               Text="{Binding [Tray_BackgroundRunning], Source={x:Static services:LocalizationService.Instance}}" 
+                               Foreground="{DynamicResource TextSubtleBrush}" 
+                               FontSize="13" 
+                               TextWrapping="Wrap"
+                               VerticalAlignment="Center"
+                               Margin="0,0,5,0"/>
+
+                    <Button Grid.Column="2" Click="CloseButton_Click"
+                            Background="Transparent" BorderThickness="0" Padding="5" 
+                            Margin="0,5,5,0" VerticalAlignment="Top" Cursor="Hand">
+                        <PathIcon Data="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" 
+                                  Width="10" Height="10" Foreground="{DynamicResource IconDarkBrush}"/>
+                    </Button>
+                </Grid>
+
+                <ProgressBar x:Name="NotificationProgress" Grid.Row="1" Minimum="0" Maximum="100" Value="100" 
+                             Height="3"
+                             Background="Transparent" BorderThickness="0"
+                             Foreground="{DynamicResource IconMediumBrush}"
+                             VerticalAlignment="Bottom"/>
+            </Grid>
+        </Border>
+    </Border>
+</Window>

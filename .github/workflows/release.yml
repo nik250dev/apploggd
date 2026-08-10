@@ -1,0 +1,83 @@
+name: Release
+
+on:
+  push:
+    tags:
+      # Any tag with the form v1.2.3 (or v1.2) triggers a release
+      - 'v*'
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+
+    permissions:
+      # Required so the workflow can create the release and upload the .zip
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      # The tag is the single source of truth for the version: "v1.2.3" -> "1.2.3".
+      # It is injected into the build so the app reports the same version it was released under,
+      # instead of the <Version> hardcoded in the .csproj.
+      - name: Derive version from tag
+        id: version
+        shell: pwsh
+        run: |
+          $version = "${{ github.ref_name }}" -replace '^v', ''
+          "version=$version" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+          Write-Host "Building version $version"
+
+      # Single place defining the package name, reused by the publish, zip and upload steps.
+      - name: Derive package name
+        id: release
+        shell: pwsh
+        run: |
+          "name=Apploggd-v${{ steps.version.outputs.version }}-win-x64" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+
+      # Publishing straight into a version-named folder so the .zip expands into that same folder
+      # instead of scattering its contents wherever the user extracts it.
+      - name: Publish (win-x64, self-contained, single file)
+        shell: pwsh
+        run: |
+          dotnet publish app/BackloggdMirror/BackloggdMirror.csproj `
+            -c Release `
+            -r win-x64 `
+            --self-contained true `
+            -p:PublishSingleFile=true `
+            -p:Version=${{ steps.version.outputs.version }} `
+            -o "publish/${{ steps.release.outputs.name }}"
+
+      # The whole folder ships, not just the .exe: PublishSingleFile leaves the native libraries
+      # (Skia, HarfBuzz, ANGLE) and Playwright's files next to it, and the app will not start
+      # without them.
+      - name: Package as .zip
+        shell: pwsh
+        run: |
+          Compress-Archive `
+            -Path "publish/${{ steps.release.outputs.name }}" `
+            -DestinationPath "${{ steps.release.outputs.name }}.zip"
+
+          Get-ChildItem "${{ steps.release.outputs.name }}.zip" | Select-Object Name, Length
+
+      # Published as a draft on purpose: the workflow builds and uploads, the release notes are
+      # written by hand on the web and published when they are ready. The auto-generated notes are
+      # only a starting point to edit over.
+      #
+      # A draft is invisible to /releases/latest, so the in-app update notice does not fire until
+      # the release is published from the web.
+      - name: Create the draft release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ github.ref_name }}" "${{ steps.release.outputs.name }}.zip" `
+            --draft `
+            --title "Apploggd ${{ steps.version.outputs.version }}" `
+            --generate-notes

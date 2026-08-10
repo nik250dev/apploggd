@@ -1,0 +1,1147 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:BackloggdMirror.ViewModels"
+        xmlns:conv="using:BackloggdMirror.Converters"
+        xmlns:models="using:BackloggdMirror.Models"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="using:Avalonia.Controls"
+        xmlns:services="using:BackloggdMirror.Services"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="BackloggdMirror.Views.MainWindow"
+        WindowStartupLocation="CenterScreen"
+        x:DataType="vm:MainWindowViewModel"
+        Width="1200" Height="660"
+        CanResize="False"
+        Icon="/Assets/app-logo.png"
+        FontFamily="Roboto, Segoe UI, Sans-Serif"
+        Title="Apploggd"
+        x:Name="Root">
+
+    <Window.Resources>
+        <conv:ToastTypeToBrushConverter x:Key="ToastTypeToBrushConverter"/>
+        <conv:ToastTypeToIconConverter x:Key="ToastTypeToIconConverter"/>
+        <conv:ToastTypeToBackgroundConverter x:Key="ToastTypeToBackgroundConverter"/>
+        <conv:ToastTypeToForegroundConverter x:Key="ToastTypeToForegroundConverter"/>
+        <conv:BottomMessageTypeToIconConverter x:Key="BottomMessageTypeToIconConverter"/>
+        <conv:BottomMessageTypeToBrushConverter x:Key="BottomMessageTypeToBrushConverter"/>
+    </Window.Resources>
+
+    <Window.Styles>
+        <Style Selector="Image.bg">
+            <Setter Property="Opacity" Value="0"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:1.0" Easing="CubicEaseOut"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Image.bg.visible">
+            <Setter Property="Opacity" Value="0.1"/> 
+        </Style>
+        <Style Selector="Button.sidebar">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="Height" Value="65"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+        <Style Selector="Button.sidebar:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SidebarBorderBrush}"/>
+        </Style>
+        <Style Selector="Button.sidebar PathIcon">
+            <Setter Property="Width" Value="24"/>
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="Foreground" Value="{DynamicResource IconMediumBrush}"/>
+        </Style>
+        <Style Selector="Button.sidebar:pointerover PathIcon">
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <!-- Active State Style -->
+        <Style Selector="Button.sidebar.active PathIcon">
+            <Setter Property="Foreground" Value="{DynamicResource BrandPrimaryBrush}"/>
+        </Style>
+        
+        <!-- Blur Effect Style -->
+        <Style Selector="Grid.blurred">
+            <Setter Property="Effect">
+                <BlurEffect Radius="20"/>
+            </Setter>
+        </Style>
+
+        <!-- Info Icon Style -->
+        <Style Selector="Button.icon-btn PathIcon">
+            <Setter Property="Foreground" Value="{DynamicResource IconMediumBrush}"/>
+        </Style>
+        
+        <Style Selector="Button.icon-btn:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        
+        <Style Selector="Button.icon-btn:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        
+        <!-- Circular Spinner Loader Animation -->
+        <Style Selector="Path.spinner">
+            <Setter Property="RenderTransformOrigin" Value="50%,50%" />
+            
+            <Setter Property="RenderTransform">
+                <RotateTransform Angle="0" />
+            </Setter>
+
+            <Style.Animations>
+                <Animation Duration="0:0:0.7" 
+                           IterationCount="Infinite"
+                           PlaybackDirection="Normal"> 
+                    <KeyFrame Cue="0%">
+                        <Setter Property="RotateTransform.Angle" Value="0"/>
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="RotateTransform.Angle" Value="360"/>
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+
+        <!-- Outline Button Style -->
+        <Style Selector="Button.outline">
+            <Setter Property="Background" Value="{DynamicResource SurfaceDarkBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BrandPrimaryBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="15,5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="Button.outline:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SurfaceBrandHoverBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BrandPrimaryLightBrush}"/>
+        </Style>
+        <Style Selector="Button.outline:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SurfaceBrandPressedBrush}"/>
+        </Style>
+
+        <!-- Subtle Button Style. Same colours as the modals' "Discard" (Button.discard-btn in
+             App.axaml), but with padding instead of a fixed height and width driven by content.
+             For low-hierarchy actions: the brand accent stays reserved for each screen's
+             primary action. -->
+        <Style Selector="Button.subtle">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="15,5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <!-- Foreground is repeated on every state because the Fluent theme overwrites it on the
+             template's ContentPresenter on hover and on press. -->
+        <Style Selector="Button.subtle:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SurfaceDarkBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderHoverBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="Button.subtle:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SidebarBorderBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderHoverBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+
+        <!-- Waiting Circles Animation -->
+        <Style Selector="Ellipse.waiting">
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Fill" Value="{DynamicResource BrandPrimaryBrush}"/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+
+        <Style Selector="Ellipse.c1">
+            <Style.Animations>
+                <Animation Duration="0:0:0.8" IterationCount="Infinite" PlaybackDirection="Alternate">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="Opacity" Value="0.3"/>
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="Opacity" Value="1.0"/>
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+        <Style Selector="Ellipse.c2">
+            <Style.Animations>
+                <Animation Duration="0:0:0.8" Delay="0:0:0.2" IterationCount="Infinite" PlaybackDirection="Alternate">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="Opacity" Value="0.3"/>
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="Opacity" Value="1.0"/>
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+        <Style Selector="Ellipse.c3">
+            <Style.Animations>
+                <Animation Duration="0:0:0.8" Delay="0:0:0.4" IterationCount="Infinite" PlaybackDirection="Alternate">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="Opacity" Value="0.3"/>
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="Opacity" Value="1.0"/>
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+
+        <!-- Skeleton Loader Style -->
+        <Style Selector="Border.skeleton">
+            <Setter Property="Background" Value="{DynamicResource SkeletonBackgroundBrush}"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="ClipToBounds" Value="True"/>
+        </Style>
+        
+        <Style Selector="Border.skeleton > Border">
+            <Setter Property="Background">
+                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+                    <GradientStop Color="{DynamicResource SkeletonShimmerStartColor}" Offset="0" />
+                    <GradientStop Color="{DynamicResource SkeletonShimmerMidColor}" Offset="0.5" />
+                    <GradientStop Color="{DynamicResource SkeletonShimmerStartColor}" Offset="1" />
+                </LinearGradientBrush>
+            </Setter>
+            <Style.Animations>
+                <Animation Duration="0:0:1.5" IterationCount="Infinite">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="TranslateTransform.X" Value="-200"/>
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="TranslateTransform.X" Value="400"/>
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+
+        <Style Selector="TextBox">
+            <Setter Property="Background" Value="{DynamicResource InputBackgroundBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource InputBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+            <Setter Property="BorderBrush" Value="{DynamicResource SecondaryInputFocusBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="{DynamicResource InputHoverBackgroundBrush}"/>
+        </Style>
+        <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="{DynamicResource InputHoverBackgroundBrush}"/>
+        </Style>
+
+        <!-- The modal footer button styles (discard-btn / save-btn) live in App.axaml so they can
+             be shared with LoginWindow. -->
+
+        <!-- Bottom Message Bar Styles -->
+        <Style Selector="Border.bottom-message">
+            <Setter Property="Margin" Value="0,0,0,-50"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <ThicknessTransition Property="Margin" Duration="0:0:0.3" Easing="CubicEaseOut"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Border.bottom-message.visible">
+            <Setter Property="Margin" Value="0,0,0,0"/>
+        </Style>
+    </Window.Styles>
+
+    <Panel>
+        <!-- Main App Content -->
+        <Grid ColumnDefinitions="80, *" Classes.blurred="{Binding IsAnyOverlayVisible}">
+            <!-- Sidebar -->
+            <Border Grid.Column="0" Background="{DynamicResource SidebarBackgroundBrush}" BorderBrush="{DynamicResource SidebarBorderBrush}" BorderThickness="0,0,1,0">
+                <Grid RowDefinitions="Auto, *, Auto">
+                    <!-- Top Icons -->
+                    <StackPanel Grid.Row="0" Spacing="20" Margin="0,20,0,0">
+                        <!-- Home Button -->
+                        <Button Classes="sidebar" Classes.active="{Binding IsHomeVisible}" Command="{Binding NavigateToHomeCommand}" Cursor="Hand">
+                            <StackPanel Spacing="5" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <PathIcon Data="M 12 2.0996094 L 1 12 L 4 12 L 4 21 L 11 21 L 11 15 L 13 15 L 13 21 L 20 21 L 20 12 L 23 12 L 12 2.0996094 z M 12 4.7910156 L 18 10.191406 L 18 11 L 18 19 L 15 19 L 15 13 L 9 13 L 9 19 L 6 19 L 6 10.191406 L 12 4.7910156 z" />
+                                <TextBlock Text="{Binding [Sidebar_Home], Source={x:Static services:LocalizationService.Instance}}" FontSize="10" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        
+                        <!-- Settings Button -->
+                        <Button Classes="sidebar" Classes.active="{Binding IsSettingsVisible}" Command="{Binding NavigateToSettingsCommand}" Cursor="Hand">
+                            <StackPanel Spacing="5" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                 <Panel Width="30" Height="24">
+                                 <PathIcon Data="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.04 4.95,18.95L7.44,17.95C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.95L19.05,18.95C19.27,19.04 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
+                                     <Ellipse Width="10" Height="10"
+                                              IsVisible="{Binding IsUpdateAvailable}"
+                                              Fill="{DynamicResource BrandPrimaryBrush}"
+                                              Stroke="{DynamicResource SidebarBackgroundBrush}"
+                                              StrokeThickness="2"
+                                              HorizontalAlignment="Right" VerticalAlignment="Top"
+                                              Margin="0,-1,0,0"/>
+                                 </Panel>
+                                <TextBlock Text="{Binding [Sidebar_Settings], Source={x:Static services:LocalizationService.Instance}}" FontSize="10" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+
+                    <!-- Bottom Icons -->
+                    <StackPanel Grid.Row="2" Spacing="20" Margin="0,0,0,20">
+                        <!-- Logout Button -->
+                        <Button Classes="sidebar" Command="{Binding LogoutCommand}" Cursor="Hand">
+                            <StackPanel Spacing="5" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                 <PathIcon Data="M 9 21 H 5 C 4.46957 21 3.96086 20.7893 3.58579 20.4142 C 3.21071 20.0391 3 19.5304 3 19 V 5 C 3 4.46957 3.21071 3.96086 3.58579 3.58579 C 3.96086 3.21071 4.46957 3 5 3 H 9 V 5 H 5 V 19 H 9 V 21 Z M 16 17 L 21 12 L 16 7 V 11 H 9 V 13 H 16 V 17 Z" 
+                                       Foreground="{DynamicResource BrandPrimaryBrush}"/>
+                                <TextBlock Text="{Binding [Sidebar_Logout], Source={x:Static services:LocalizationService.Instance}}" FontSize="10" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
+                            </StackPanel>
+                             
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Main Content -->
+            <Panel Grid.Column="1" Background="{DynamicResource AppBackgroundBrush}" ClipToBounds="True">
+                
+                <!-- Home View -->
+                <Grid IsVisible="{Binding IsHomeVisible}" RowDefinitions="*, *, 10">
+                    <Border Grid.Row="0" Background="{DynamicResource PanelBackgroundBrush}" Margin="20" CornerRadius="20" ClipToBounds="True">
+                        <Panel>
+                             <Image Source="{Binding GameBackgroundImage}" 
+                                    Stretch="UniformToFill" 
+                                    Classes="bg" 
+                                    Classes.visible="{Binding IsBackgroundImageVisible}" />
+                            <!-- Waiting State -->
+                            <Panel IsVisible="{Binding !IsGameRunning}" VerticalAlignment="Stretch" Margin="20">
+                                
+                                <!-- Scanning Mode -->
+                                <Grid RowDefinitions="*, Auto, Auto" IsVisible="{Binding IsGameDetectionActive}" VerticalAlignment="Stretch">
+                                    <!-- Section 1: Animation -->
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Ellipse Classes="waiting c1"/>
+                                        <Ellipse Classes="waiting c2"/>
+                                        <Ellipse Classes="waiting c3"/>
+                                    </StackPanel>
+                                    
+                                    <!-- Section 2: Text -->
+                                    <TextBlock Grid.Row="1" Text="{Binding [Home_WaitingForGame], Source={x:Static services:LocalizationService.Instance}}" FontSize="24" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+                                    
+                                    <!-- Section 3: Button -->
+                                    <Button Grid.Row="2" Classes="outline" HorizontalAlignment="Center" Command="{Binding ToggleGameDetectionCommand}">
+                                        <StackPanel Orientation="Horizontal" Spacing="10">
+                                            <PathIcon Data="M23 5C22 5 22 6 22 6V16C22 17 23 17 24 17H25C26 17 26 16 26 16V6C26 6 26 5 25 5ZM30 5C30 5 29 5 29 6V16C29 17 30 17 31 17H32C32 17 33 17 33 16V6C33 6 33 5 32 5Z" Width="14" Height="14" Foreground="{DynamicResource BrandPrimaryBrush}"/>
+                                            <TextBlock Text="{Binding [Home_PauseSearch], Source={x:Static services:LocalizationService.Instance}}" Foreground="{DynamicResource BrandPrimaryBrush}"/>
+                                        </StackPanel>
+                                    </Button>
+                                </Grid>
+
+                                <!-- Paused Mode -->
+                                <Grid RowDefinitions="*, Auto, Auto" IsVisible="{Binding IsGameDetectionPaused}" VerticalAlignment="Stretch">
+                                    <!-- Section 1: Icon -->
+                                    <PathIcon Grid.Row="0" Data="M23 5C22 5 22 6 22 6V16C22 17 23 17 24 17H25C26 17 26 16 26 16V6C26 6 26 5 25 5ZM30 5C30 5 29 5 29 6V16C29 17 30 17 31 17H32C32 17 33 17 33 16V6C33 6 33 5 32 5Z" Width="125" Height="125" Foreground="{DynamicResource BrandPrimaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    
+                                    <!-- Section 2: Text -->
+                                    <TextBlock Grid.Row="1" Text="{Binding [Home_SearchPaused], Source={x:Static services:LocalizationService.Instance}}" FontSize="24" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+                                    
+                                    <!-- Section 3: Button -->
+                                    <Button Grid.Row="2" Classes="outline" HorizontalAlignment="Center" Command="{Binding ToggleGameDetectionCommand}">
+                                        <StackPanel Orientation="Horizontal" Spacing="10">
+                                            <PathIcon Data="M8,5.14V19.14L19,12.14L8,5.14Z" Width="14" Height="14" Foreground="{DynamicResource BrandPrimaryBrush}"/>
+                                            <TextBlock Text="{Binding [Home_ResumeSearch], Source={x:Static services:LocalizationService.Instance}}" Foreground="{DynamicResource BrandPrimaryBrush}"/>
+                                        </StackPanel>
+                                    </Button>
+                                </Grid>
+
+                            </Panel>
+
+                            <!-- Game Running State -->
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="10" IsVisible="{Binding IsGameRunning}">
+                                <TextBlock Text="{Binding [Home_PlayingNow], Source={x:Static services:LocalizationService.Instance}}" FontSize="18" Foreground="{DynamicResource BrandPrimaryBrush}" HorizontalAlignment="Center">
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect Color="Black" BlurRadius="10" Opacity="1.0"/>
+                                    </TextBlock.Effect>
+                                </TextBlock>
+                                <TextBlock Text="{Binding GameName}" FontSize="36" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}" HorizontalAlignment="Center" TextWrapping="Wrap">
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect Color="Black" BlurRadius="15" Opacity="1.0" OffsetX="0" OffsetY="0"/>
+                                    </TextBlock.Effect>
+                                </TextBlock>
+                                <TextBlock Text="{Binding PlayTime}" FontSize="60" FontFamily="Consolas, Monospace" Foreground="{DynamicResource BrandPrimaryBrush}" HorizontalAlignment="Center" Margin="0,10,0,0">
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect Color="#EA377A" BlurRadius="20" Opacity="0.6"/>
+                                    </TextBlock.Effect>
+                                </TextBlock>
+                            </StackPanel>
+                        </Panel>
+                    </Border>
+
+                    <!-- Last Played Games List -->
+                    <Grid Grid.Row="1" Margin="20,0,20,20" RowDefinitions="Auto, *">
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="10" Margin="0,0,0,10">
+                            <TextBlock Text="{Binding [Home_RecentlyPlayed], Source={x:Static services:LocalizationService.Instance}}" Foreground="{DynamicResource TextHeadingBrush}" FontSize="18" FontWeight="Normal" LetterSpacing="0" VerticalAlignment="Center"/>
+                            <Button Command="{Binding ReloadRecentlyPlayedGamesCommand}" 
+                                    IsVisible="{Binding !IsLastPlayedGamesLoading}"
+                                    Background="Transparent" 
+                                    BorderThickness="0" 
+                                    Padding="5" 
+                                    Cursor="Hand" 
+                                    ToolTip.Tip="{Binding [Home_ReloadGamesTooltip], Source={x:Static services:LocalizationService.Instance}}">
+                                <PathIcon Data="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z" 
+                                          Foreground="{DynamicResource IconLightBrush}" 
+                                          Width="16" Height="16"/>
+                            </Button>
+
+                        </StackPanel>
+                        
+                        <Border Grid.Row="1" Background="{DynamicResource CardBackgroundBrush}" CornerRadius="20" IsVisible="{Binding IsLastPlayedGamesEmptyVisible}" Margin="0,0,0,15">
+                            <TextBlock Text="{Binding [Home_NoGamesRegistered], Source={x:Static services:LocalizationService.Instance}}" 
+                                       Foreground="{DynamicResource TextGrayBrush}" 
+                                       FontSize="15"
+                                       FontWeight="Normal"
+                                       HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center"/>
+                        </Border>
+
+                        <Border Grid.Row="1" Background="{DynamicResource CardBackgroundBrush}" CornerRadius="20" IsVisible="{Binding IsLastPlayedGamesErrorVisible}" Margin="0,0,0,15">
+                            <TextBlock Text="{Binding [Home_ErrorFetchingGames], Source={x:Static services:LocalizationService.Instance}}" 
+                                       Foreground="{DynamicResource TextGrayBrush}" 
+                                       FontSize="15"
+                                       FontWeight="Normal"
+                                       HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center"
+                                       TextWrapping="Wrap"
+                                       TextAlignment="Center"
+                                       Margin="20,0"/>
+                        </Border>
+
+                        <ItemsControl Grid.Row="1" ItemsSource="{Binding LastPlayedGames}" IsVisible="{Binding IsLastPlayedGamesListVisible}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Rows="1"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="{DynamicResource CardBackgroundBrush}" CornerRadius="15" Margin="5" ClipToBounds="True">
+                                        <Grid RowDefinitions="*, Auto">
+                                            <!-- Cover Image -->
+                                            <Image Grid.Row="0" Source="{Binding CoverBitmap}" Stretch="UniformToFill" VerticalAlignment="Center"/>
+                                            
+                                            <!-- Overlay Info -->
+                                            <Border Grid.Row="0" Background="{DynamicResource OverlayDarkBrush}" VerticalAlignment="Bottom" Padding="10">
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding GameName}" Foreground="{DynamicResource TextPrimaryBrush}" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
+                                                    <TextBlock Text="{Binding RegistrationDate}" Foreground="{DynamicResource TextMutedBrush}" FontSize="12"/>
+                                                </StackPanel>
+                                            </Border>
+
+                                            <!-- Play Time -->
+                                            <Border Grid.Row="1" Background="{DynamicResource CardBackgroundBrush}" Padding="10">
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="5">
+                                                    <PathIcon Data="M12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22C6.47,22 2,17.5 2,12A10,10 0 0,1 12,2M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z" 
+                                                              Foreground="{DynamicResource BrandPrimaryBrush}" Width="14" Height="14"/>
+                                                    <TextBlock Text="{Binding PlayTime}" Foreground="{DynamicResource TextPrimaryBrush}" FontSize="12"/>
+                                                </StackPanel>
+                                            </Border>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <!-- Loading Spinner -->
+                        <Path Grid.Row="1" Classes="spinner" 
+                              IsVisible="{Binding IsLastPlayedGamesLoading}"
+                              Data="M 25,0 A 25,25 0 1 1 0,25" 
+                              StrokeThickness="3" 
+                              Stretch="Uniform"
+                              Width="50" Height="50"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center">
+                              <Path.Stroke>
+                                   <ConicGradientBrush>
+                                       <GradientStop Color="rgba(143, 156, 167, 0)" Offset="0" /> 
+                                       <GradientStop Color="rgba(143, 156, 167, 1)" Offset="1" />   
+                                   </ConicGradientBrush>
+                               </Path.Stroke>
+                           </Path>
+                    </Grid>
+                </Grid>
+
+                <!-- Settings View -->
+                <Panel IsVisible="{Binding IsSettingsVisible}">
+                    <Panel.Styles>
+                        <!-- Local Styles for Settings Controls -->
+                        <Style Selector="TextBlock.h2">
+                            <Setter Property="FontSize" Value="24"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="Foreground" Value="{DynamicResource TextHeadingBrush}"/>
+                            <Setter Property="Margin" Value="0,0,0,20"/>
+                        </Style>
+                        
+                        <Style Selector="TextBlock.h3">
+                            <Setter Property="FontSize" Value="18"/>
+                            <Setter Property="FontWeight" Value="Normal"/>
+                            <Setter Property="Foreground" Value="{DynamicResource TextHeadingBrush}"/>
+                            <Setter Property="Margin" Value="0,10,0,15"/>
+                        </Style>
+
+                        <Style Selector="TextBlock.setting-label">
+                            <Setter Property="FontSize" Value="14"/>
+                            <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+
+                        <Style Selector="Border.setting-group">
+                            <Setter Property="Background" Value="{DynamicResource PanelBackgroundBrush}"/>
+                            <Setter Property="CornerRadius" Value="15"/>
+                            <Setter Property="Padding" Value="20"/>
+                            <Setter Property="Margin" Value="0,0,0,20"/>
+                        </Style>
+
+                        <!-- Primary action button for the update. Brand fill rather than outline so
+                             it stands out against the other Settings buttons. -->
+                        <Style Selector="Button.update-btn">
+                            <Setter Property="Background" Value="{DynamicResource BrandPrimaryBrush}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+                            <Setter Property="CornerRadius" Value="8"/>
+                            <Setter Property="Padding" Value="18,7"/>
+                            <Setter Property="FontWeight" Value="SemiBold"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Style>
+                        <Style Selector="Button.update-btn:pointerover /template/ ContentPresenter">
+                            <Setter Property="Background" Value="{DynamicResource BrandPrimaryHoverBrush}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+                        </Style>
+                        <Style Selector="Button.update-btn:pressed /template/ ContentPresenter">
+                            <Setter Property="Background" Value="{DynamicResource BrandPrimaryLightBrush}"/>
+                        </Style>
+
+                         <!-- Custom Switch Color -->
+                        <Style Selector="ToggleSwitch:checked /template/ Border#SwitchKnobBounds">
+                            <Setter Property="Background" Value="{DynamicResource BrandPrimaryBrush}"/>
+                            <Setter Property="BorderBrush" Value="{DynamicResource BrandPrimaryBrush}"/>
+                        </Style>
+                        <Style Selector="ToggleSwitch:checked /template/ Border#SwitchKnob">
+                            <Setter Property="Background" Value="{DynamicResource TextPrimaryBrush}"/>
+                        </Style>
+                    </Panel.Styles>
+
+                    <Grid RowDefinitions="Auto, *" Margin="20,0,5,0">
+
+
+                        <!-- Content Scroll -->
+                        <ScrollViewer Grid.Row="1" Padding="0,5,20,5">
+                            <StackPanel Spacing="0">
+                                
+                                <!-- Section: General -->
+                                <TextBlock Text="{Binding [Settings_Section_General], Source={x:Static services:LocalizationService.Instance}}" Classes="h3"/>
+                                <Border Classes="setting-group">
+                                    <StackPanel Spacing="15">
+                                        <Grid ColumnDefinitions="*, Auto">
+                                            <StackPanel Spacing="2">
+                                                <TextBlock Text="{Binding [Settings_StartWithWindows], Source={x:Static services:LocalizationService.Instance}}" Classes="setting-label"/>
+                                            </StackPanel>
+                                            <ToggleSwitch Grid.Column="1" IsChecked="{Binding StartWithWindows}" OnContent="" OffContent=""/>
+                                        </Grid>
+                                        
+                                        <Separator Background="{DynamicResource SeparatorBrush}" Height="1"/>
+
+                                        <Grid ColumnDefinitions="*, Auto">
+                                            <StackPanel Spacing="2">
+                                                <TextBlock Text="{Binding [Settings_MinimizeToTray], Source={x:Static services:LocalizationService.Instance}}" Classes="setting-label"/>
+                                                <TextBlock Text="{Binding [Settings_MinimizeToTrayDesc], Source={x:Static services:LocalizationService.Instance}}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}"/>
+                                            </StackPanel>
+                                            <ToggleSwitch Grid.Column="1" IsChecked="{Binding MinimizeToTray}" OnContent="" OffContent=""/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Border>
+
+                                <!-- Section: Apariencia -->
+                                <TextBlock Text="{Binding [Settings_Section_Appearance], Source={x:Static services:LocalizationService.Instance}}" Classes="h3"/>
+                                <Border Classes="setting-group">
+                                    <StackPanel Spacing="15">
+                                        <Grid ColumnDefinitions="*, 200">
+                                            <TextBlock Text="{Binding [Settings_Language], Source={x:Static services:LocalizationService.Instance}}" Classes="setting-label"/>
+                                            <ComboBox Grid.Column="1" SelectedItem="{Binding SelectedLanguageOption}" ItemsSource="{Binding LanguageOptions}" HorizontalAlignment="Stretch">
+                                                <ComboBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding DisplayName}" VerticalAlignment="Center"/>
+                                                    </DataTemplate>
+                                                </ComboBox.ItemTemplate>
+                                            </ComboBox>
+                                        </Grid>
+                                    </StackPanel>
+                                </Border>
+
+                                <!-- Section: Cuenta & Datos -->
+                                <TextBlock Text="{Binding [Settings_Section_AccountData], Source={x:Static services:LocalizationService.Instance}}" Classes="h3"/>
+                                <Border Classes="setting-group">
+                                    <StackPanel Spacing="15">
+                                        <Grid ColumnDefinitions="*, Auto">
+                                            <StackPanel Spacing="2" Margin="0,0,15,0" VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding [Settings_ClearData], Source={x:Static services:LocalizationService.Instance}}" Classes="setting-label"/>
+                                                <TextBlock Text="{Binding [Settings_ClearDataDesc], Source={x:Static services:LocalizationService.Instance}}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}" TextWrapping="Wrap"/>
+                                            </StackPanel>
+                                            <Button Grid.Column="1" Classes="subtle" VerticalAlignment="Center"
+                                                    Content="{Binding [Settings_ClearDataButton], Source={x:Static services:LocalizationService.Instance}}"
+                                                    Command="{Binding OpenClearDataConfirmationCommand}"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Border>
+                                
+                                <!-- Section: About -->
+                                <TextBlock Text="{Binding [Settings_Section_About], Source={x:Static services:LocalizationService.Instance}}" Classes="h3"/>
+                                <Border Classes="setting-group">
+                                    <StackPanel Spacing="15">
+                                        <Grid ColumnDefinitions="*, Auto">
+                                            <StackPanel Spacing="2" VerticalAlignment="Center">
+                                                <TextBlock Text="Apploggd" Classes="setting-label"/>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding [Settings_Version], Source={x:Static services:LocalizationService.Instance}}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}"/>
+                                                    <TextBlock Text="{Binding AppVersion}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                            <Button Grid.Column="1" Classes="subtle" VerticalAlignment="Center"
+                                                    Content="{Binding [Settings_ViewChangelog], Source={x:Static services:LocalizationService.Instance}}"
+                                                    Command="{Binding OpenChangelogCommand}"/>
+                                        </Grid>
+
+                                        <!-- New version notice. Only visible when the check against
+                                             GitHub releases finds a newer one. -->
+                                        <Border IsVisible="{Binding IsUpdateAvailable}"
+                                                Background="{DynamicResource SurfaceBrandHoverBrush}"
+                                                BorderBrush="{DynamicResource BrandPrimaryBrush}"
+                                                BorderThickness="1"
+                                                CornerRadius="10"
+                                                Padding="15,12">
+                                            <Grid ColumnDefinitions="Auto, *, Auto">
+                                                <PathIcon Grid.Column="0"
+                                                          Data="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"
+                                                          Width="20" Height="20"
+                                                          Foreground="{DynamicResource BrandPrimaryBrush}"
+                                                          VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                                <StackPanel Grid.Column="1" Spacing="2" VerticalAlignment="Center" Margin="0,0,15,0">
+                                                    <TextBlock Text="{Binding UpdateAvailableText}"
+                                                               FontSize="14" FontWeight="SemiBold"
+                                                               Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                                    <TextBlock Text="{Binding UpdatePublishedText}"
+                                                               IsVisible="{Binding HasUpdatePublishedDate}"
+                                                               FontSize="12" TextWrapping="Wrap"
+                                                               Foreground="{DynamicResource TextSubtleBrush}"/>
+                                                </StackPanel>
+                                                <Button Grid.Column="2" Classes="update-btn" VerticalAlignment="Center"
+                                                        Content="{Binding [AppUpdate_Download], Source={x:Static services:LocalizationService.Instance}}"
+                                                        Command="{Binding DownloadUpdateCommand}"/>
+                                            </Grid>
+                                        </Border>
+                                    </StackPanel>
+                                </Border>
+
+                                 <!-- Info Footer -->
+                                <StackPanel HorizontalAlignment="Center" Margin="0,10,0,30" Spacing="5">
+                                    <TextBlock Text="{Binding [Settings_MadeBy], Source={x:Static services:LocalizationService.Instance}}" Foreground="{DynamicResource TextFooterBrush}" FontSize="12" HorizontalAlignment="Center"/>
+                                </StackPanel>
+
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Grid>
+                </Panel>
+                
+                <!-- Bottom Message Bar -->
+                <Border Classes="bottom-message" 
+                        Classes.visible="{Binding IsBottomMessageVisible}"
+                        Background="{DynamicResource CardBackgroundBrush}" 
+                        BorderBrush="{DynamicResource SidebarBorderBrush}"
+                        BorderThickness="0,1,0,0"
+                        VerticalAlignment="Bottom" 
+                        Height="30"
+                        Padding="20,0">
+                    <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                        <!-- Loading Spinner -->
+                        <Path Classes="spinner" 
+                              IsVisible="{Binding IsBottomMessageLoading}"
+                              Data="M 25,0 A 25,25 0 1 1 0,25" 
+                              StrokeThickness="3" 
+                              Stretch="Uniform"
+                              Width="14" Height="14"
+                              VerticalAlignment="Center">
+                              <Path.Stroke>
+                                   <ConicGradientBrush>
+                                       <GradientStop Color="rgba(143, 156, 167, 0)" Offset="0" /> 
+                                       <GradientStop Color="rgba(143, 156, 167, 1)" Offset="1" />   
+                                   </ConicGradientBrush>
+                               </Path.Stroke>
+                        </Path>
+                        
+                        <!-- Status Icon -->
+                        <PathIcon IsVisible="{Binding IsBottomMessageIconVisible}"
+                                  Data="{Binding BottomMessageType, Converter={StaticResource BottomMessageTypeToIconConverter}}"
+                                  Foreground="{Binding BottomMessageType, Converter={StaticResource BottomMessageTypeToBrushConverter}}"
+                                  Width="14" Height="14"
+                                  VerticalAlignment="Center"/>
+
+                        <TextBlock Text="{Binding BottomMessageText}" 
+                                   Foreground="{DynamicResource TextPrimaryBrush}" 
+                                   VerticalAlignment="Center" 
+                                   FontSize="13"
+                                   FontWeight="Normal"/>
+                    </StackPanel>
+                </Border>
+            </Panel>
+        </Grid>
+
+        <!-- Changelog Overlay -->
+        <!-- Declared before the session confirmation so that one sits on top if a game closes while
+             the changelog is open. -->
+        <Panel IsVisible="{Binding IsChangelogVisible}" Background="{DynamicResource OverlayMediumBrush}">
+            <Border Background="{DynamicResource AppBackgroundBrush}" CornerRadius="20" Width="600" Height="500"
+                    BorderBrush="{DynamicResource PanelBackgroundBrush}" BorderThickness="1" ClipToBounds="True">
+                <Grid RowDefinitions="Auto, *, Auto">
+                    <!-- Header -->
+                    <TextBlock Grid.Row="0"
+                               Text="{Binding [Changelog_Title], Source={x:Static services:LocalizationService.Instance}}"
+                               FontSize="20" Foreground="{DynamicResource TextPrimaryBrush}"
+                               Margin="20,20,20,5"/>
+
+                    <!-- Error state: outside the ScrollViewer, it needs no scrolling -->
+                    <TextBlock Grid.Row="1" IsVisible="{Binding IsChangelogEmpty}"
+                               Text="{Binding [Changelog_Empty], Source={x:Static services:LocalizationService.Instance}}"
+                               Foreground="{DynamicResource TextGrayBrush}" FontSize="14"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"
+                               TextWrapping="Wrap" TextAlignment="Center" Margin="20,0"/>
+
+                    <!-- Content -->
+                    <!-- The horizontal margin goes on the ScrollViewer rather than its Padding:
+                         Padding is not subtracted when measuring the content, so long text would
+                         not wrap. -->
+                    <ScrollViewer Grid.Row="1" Margin="20,10,20,10" HorizontalScrollBarVisibility="Disabled">
+                            <ItemsControl ItemsSource="{Binding ChangelogBlocks}">
+                                <ItemsControl.DataTemplates>
+                                    <!-- Version header -->
+                                    <DataTemplate DataType="models:ChangelogVersionBlock">
+                                        <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,5,0,10">
+                                            <Border Background="{DynamicResource BrandPrimaryBrush}" CornerRadius="5" Padding="10,3" VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding Version}" Foreground="{DynamicResource TextPrimaryBrush}" FontWeight="Bold" FontSize="14"/>
+                                            </Border>
+                                            <TextBlock Text="{Binding Date}" IsVisible="{Binding HasDate}"
+                                                       Foreground="{DynamicResource TextSubtleBrush}" FontSize="12" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+
+                                    <!-- Subtitle -->
+                                    <DataTemplate DataType="models:ChangelogSectionBlock">
+                                        <TextBlock Text="{Binding Title}" Foreground="{DynamicResource TextHeadingBrush}"
+                                                   FontSize="15" Margin="0,10,0,6"/>
+                                    </DataTemplate>
+
+                                    <!-- List item -->
+                                    <DataTemplate DataType="models:ChangelogItemBlock">
+                                        <DockPanel Margin="4,0,0,6">
+                                            <Ellipse DockPanel.Dock="Left" Width="4" Height="4"
+                                                     Fill="{DynamicResource BrandPrimaryBrush}"
+                                                     VerticalAlignment="Top" Margin="0,7,10,0"/>
+                                            <TextBlock Text="{Binding Text}"
+                                                       Foreground="{DynamicResource TextSecondaryBrush}" FontSize="13"
+                                                       TextWrapping="Wrap"/>
+                                        </DockPanel>
+                                    </DataTemplate>
+
+                                    <!-- Paragraph -->
+                                    <DataTemplate DataType="models:ChangelogParagraphBlock">
+                                        <TextBlock Text="{Binding Text}" Foreground="{DynamicResource TextMutedBrush}"
+                                                   FontSize="13" TextWrapping="Wrap" Margin="0,0,0,6"/>
+                                    </DataTemplate>
+                                </ItemsControl.DataTemplates>
+                            </ItemsControl>
+                    </ScrollViewer>
+
+                    <!-- Footer -->
+                    <Border Grid.Row="2" Background="{DynamicResource PanelBackgroundBrush}" Height="60" Padding="20,0">
+                        <Button Content="{Binding [Changelog_Close], Source={x:Static services:LocalizationService.Instance}}"
+                                Command="{Binding CloseChangelogCommand}"
+                                HorizontalAlignment="Right" VerticalAlignment="Center"
+                                Background="{DynamicResource ButtonCancelBrush}" Foreground="{DynamicResource TextPrimaryBrush}"
+                                CornerRadius="5" Padding="15,8" Cursor="Hand"/>
+                    </Border>
+                </Grid>
+            </Border>
+        </Panel>
+
+        <!-- Clear App Data Confirmation Overlay -->
+        <Panel IsVisible="{Binding IsClearDataConfirmationVisible}" Background="{DynamicResource OverlayMediumBrush}">
+            <Border Background="{DynamicResource AppBackgroundBrush}" CornerRadius="20" Width="480"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    BoxShadow="0 0 50 0 #EA377A" BorderBrush="{DynamicResource BrandPrimaryBrush}" BorderThickness="1"
+                    ClipToBounds="True">
+                <Grid RowDefinitions="Auto, Auto">
+                    <StackPanel Grid.Row="0" Margin="25,25,25,20" Spacing="12">
+                        <TextBlock Text="{Binding [ClearData_ConfirmTitle], Source={x:Static services:LocalizationService.Instance}}"
+                                   FontSize="20" Foreground="{DynamicResource TextPrimaryBrush}" TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding [ClearData_ConfirmBody], Source={x:Static services:LocalizationService.Instance}}"
+                                   FontSize="13" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap"/>
+                    </StackPanel>
+
+                    <!-- Buttons Footer -->
+                    <Border Grid.Row="1" Background="{DynamicResource PanelBackgroundBrush}" Height="60" Padding="20,0" CornerRadius="0,0,20,20">
+                        <Grid ColumnDefinitions="*, 15, *">
+                            <Button Grid.Column="0" Classes="discard-btn" Command="{Binding CloseClearDataConfirmationCommand}">
+                                <TextBlock Text="{Binding [ClearData_Cancel], Source={x:Static services:LocalizationService.Instance}}" VerticalAlignment="Center"/>
+                            </Button>
+                            <Button Grid.Column="2" Classes="save-btn" Command="{Binding ClearAppDataCommand}">
+                                <TextBlock Text="{Binding [ClearData_Confirm], Source={x:Static services:LocalizationService.Instance}}"
+                                           Foreground="{DynamicResource TextPrimaryBrush}" FontWeight="Bold" VerticalAlignment="Center"/>
+                            </Button>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+        </Panel>
+
+        <!-- No Browser Warning Overlay -->
+        <Panel IsVisible="{Binding IsNoBrowserWarningVisible}" Background="{DynamicResource OverlayMediumBrush}">
+            <Border Background="{DynamicResource AppBackgroundBrush}" CornerRadius="20" Width="480"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    BoxShadow="0 0 50 0 #EA377A" BorderBrush="{DynamicResource BrandPrimaryBrush}" BorderThickness="1"
+                    ClipToBounds="True">
+                <Grid RowDefinitions="Auto, Auto">
+                    <StackPanel Grid.Row="0" Margin="25,25,25,20" Spacing="12">
+                        <TextBlock Text="{Binding [AppUpdate_NoBrowser_Title], Source={x:Static services:LocalizationService.Instance}}"
+                                   FontSize="20" Foreground="{DynamicResource TextPrimaryBrush}" TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding [AppUpdate_NoBrowser_Body], Source={x:Static services:LocalizationService.Instance}}"
+                                   FontSize="13" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap"/>
+                        <Border Background="{DynamicResource SurfaceDarkBrush}" CornerRadius="8" Padding="12,10">
+                            <SelectableTextBlock Text="{Binding NoBrowserUrl}"
+                                                 FontSize="12" TextWrapping="Wrap"
+                                                 Foreground="{DynamicResource BrandPrimaryLightBrush}"
+                                                 SelectionBrush="{DynamicResource BrandPrimaryBrush}"/>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- Buttons Footer -->
+                    <Border Grid.Row="1" Background="{DynamicResource PanelBackgroundBrush}" Height="60" Padding="20,0" CornerRadius="0,0,20,20">
+                        <Button Classes="save-btn" HorizontalAlignment="Right" Width="140"
+                                Command="{Binding CloseNoBrowserWarningCommand}">
+                            <TextBlock Text="{Binding [AppUpdate_NoBrowser_Close], Source={x:Static services:LocalizationService.Instance}}"
+                                       Foreground="{DynamicResource TextPrimaryBrush}" FontWeight="Bold" VerticalAlignment="Center"/>
+                        </Button>
+                    </Border>
+                </Grid>
+            </Border>
+        </Panel>
+
+        <!-- Session Confirmation Overlay -->
+        <Panel IsVisible="{Binding IsSessionConfirmationVisible}" Background="{DynamicResource OverlayMediumBrush}">
+            <!-- Game Selector Overlay (On Top) -->
+            <Panel IsVisible="{Binding IsGameSelectorVisible}" ZIndex="10">
+                <Border Background="{DynamicResource AppBackgroundBrush}" CornerRadius="20" Width="600" Height="500" 
+                        BorderBrush="{DynamicResource PanelBackgroundBrush}" BorderThickness="1" ClipToBounds="True">
+                    <Grid RowDefinitions="*, Auto">
+                        <!-- Content Area -->
+                        <Grid Grid.Row="0" RowDefinitions="Auto, *" Margin="20">
+                            <!-- Header: Search Bar -->
+                            <Grid Grid.Row="0" Margin="0,0,0,20">
+                                <TextBox Text="{Binding GameSearchQuery}" Watermark="{Binding [Session_SearchGameWatermark], Source={x:Static services:LocalizationService.Instance}}" 
+                                         Background="{DynamicResource InputHoverBackgroundBrush}" Foreground="{DynamicResource TextPrimaryBrush}" BorderBrush="{DynamicResource SidebarBorderBrush}" BorderThickness="1" CornerRadius="5" Padding="10" Height="45"
+                                         VerticalContentAlignment="Center">
+                                    <TextBox.KeyBindings>
+                                        <KeyBinding Gesture="Enter" Command="{Binding SearchGamesCommand}" />
+                                    </TextBox.KeyBindings>
+                                    <TextBox.InnerRightContent>
+                                        <Button Command="{Binding SearchGamesCommand}" Background="Transparent" BorderThickness="0" Margin="0,0,10,0" Padding="5" Cursor="Hand">
+                                            <Button.Template>
+                                                <ControlTemplate TargetType="Button">
+                                                    <ContentPresenter Content="{TemplateBinding Content}" 
+                                                                      HorizontalAlignment="Center" 
+                                                                      VerticalAlignment="Center"
+                                                                      Background="Transparent"/>
+                                                </ControlTemplate>
+                                            </Button.Template>
+                                            <PathIcon Data="M15.5,14L20.5,19L19,20.5L14,15.5V14.71L13.73,14.43C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.43,13.73L14.71,14H15.5M9.5,14C12,14 14,12 14,9.5C14,7 9.5,5 9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14Z" 
+                                                      Foreground="{DynamicResource IconLightBrush}" Width="20" Height="20"/>
+                                        </Button>
+                                    </TextBox.InnerRightContent>
+                                </TextBox>
+                            </Grid>
+
+                            <!-- Results Grid -->
+                            <ScrollViewer Grid.Row="1">
+                                 <Panel>
+                                     <Path Classes="spinner" 
+                                           IsVisible="{Binding IsGameSearchLoading}"
+                                           Data="M 25,0 A 25,25 0 1 1 0,25" 
+                                           StrokeThickness="3" 
+                                           Stretch="Uniform"
+                                           Width="50" Height="50"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center">
+                                           <Path.Stroke>
+                                                <ConicGradientBrush>
+                                                    <GradientStop Color="rgba(143, 156, 167, 0)" Offset="0" /> 
+                                                    <GradientStop Color="rgba(143, 156, 167, 1)" Offset="1" />   
+                                                </ConicGradientBrush>
+                                            </Path.Stroke>
+                                        </Path>
+                                     
+                                     <ItemsControl ItemsSource="{Binding GameSearchResults}" IsVisible="{Binding !IsGameSearchLoading}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel HorizontalAlignment="Center" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Button Command="{Binding #Root.((vm:MainWindowViewModel)DataContext).SelectRefinedGameCommand}" 
+                                                        CommandParameter="{Binding}"
+                                                        Background="Transparent" BorderThickness="0" Margin="5" Padding="0"
+                                                        ToolTip.Tip="{Binding Title}" Cursor="Hand">
+                                                    <Border CornerRadius="8" ClipToBounds="True" Width="100" Height="140">
+                                                        <Image Source="{Binding CoverBitmap}" Stretch="UniformToFill"/>
+                                                    </Border>
+                                                </Button>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                 </Panel>
+                            </ScrollViewer>
+                        </Grid>
+
+                        <!-- Footer -->
+                        <Border Grid.Row="1" Background="{DynamicResource PanelBackgroundBrush}" Height="60" Padding="20,0">
+                            <Button Content="{Binding [Session_Cancel], Source={x:Static services:LocalizationService.Instance}}" Command="{Binding CloseGameSelectorCommand}" 
+                                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                                    Background="{DynamicResource ButtonCancelBrush}" Foreground="{DynamicResource TextPrimaryBrush}" CornerRadius="5" Padding="15,8" Cursor="Hand"/>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Panel>
+
+            <!-- Session Content -->
+            <Border Background="{DynamicResource AppBackgroundBrush}" CornerRadius="20" Width="400" Height="300" 
+                    BoxShadow="0 0 50 0 #EA377A" BorderBrush="{DynamicResource BrandPrimaryBrush}" BorderThickness="1"
+                    IsVisible="{Binding !IsGameSelectorVisible}">
+                <Grid RowDefinitions="*, Auto">
+                    <Grid Grid.Row="0" RowDefinitions="Auto, *" Margin="20">
+                        <Grid Grid.Row="0" Margin="0,0,0,20">
+                        <TextBlock Text="{Binding [Session_ConfirmTitle], Source={x:Static services:LocalizationService.Instance}}" FontSize="20" Foreground="{DynamicResource TextPrimaryBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        
+                        <!-- Info Icon and Tooltip -->
+                        <Panel HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <Button x:Name="InfoButton" Classes="icon-btn" PointerEntered="OnInfoIconPointerEntered" PointerExited="OnInfoIconPointerExited" Command="{Binding DismissForcedTooltipCommand}" Background="Transparent" BorderThickness="0" Padding="0">
+                                <PathIcon x:Name="InfoIcon" Data="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z" 
+                                          Width="20" Height="20"/>
+                            </Button>
+                            
+                            <!-- Custom Tooltip Popup (Used for both Forced and Hover states) -->
+                            <Popup IsOpen="{Binding IsTooltipVisible}" PlacementTarget="{Binding ElementName=InfoButton}" PlacementMode="Top" VerticalOffset="-10">
+                                <Grid RowDefinitions="*, Auto">
+                                    <Border Grid.Row="0" Background="{DynamicResource PanelBackgroundBrush}" BorderBrush="{DynamicResource BrandPrimaryBrush}" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,0,0,0">
+                                        <TextBlock Text="{Binding [Session_IncorrectGameTooltip], Source={x:Static services:LocalizationService.Instance}}" 
+                                                   Foreground="{DynamicResource TextPrimaryBrush}" MaxWidth="250" TextWrapping="Wrap" FontSize="12"/>
+                                    </Border>
+                                    <Path Grid.Row="1" Data="M0,0 L5,5 L10,0" Stroke="{DynamicResource BrandPrimaryBrush}" StrokeThickness="1" HorizontalAlignment="Center" Margin="0,0,0,0"/>
+                                    <!-- Cover bottom border of box to merge with arrow 
+                                    <Path Grid.Row="1" Data="M0,0 8,0 8,2 0,2 Z" Fill="#242832" Stroke="#242832" StrokeThickness="1" HorizontalAlignment="Center" Margin="0,-2,0,0"/> -->
+                                    <Path Grid.Row="1" Data="M0,0 L10,0" Stroke="{DynamicResource PanelBackgroundBrush}" StrokeThickness="3" HorizontalAlignment="Center" Margin="0,-1,0,0"/> 
+                                </Grid>
+                            </Popup>
+                        </Panel>
+                    </Grid>
+                    
+                    <Grid Grid.Row="1" ColumnDefinitions="100, *" Margin="0,0,0,20">
+                        <!-- Game Cover (Clickable) -->
+                        <Border Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                BorderBrush="#30394c" BorderThickness="1" CornerRadius="4" ClipToBounds="True">
+                            <Panel Cursor="Hand">
+                                <!-- Helper Container for Aspect Ratio Scaling -->
+                                <Viewbox Stretch="Uniform">
+                                <Panel Width="528" Height="704">
+                                    <Button Command="{Binding OpenGameSelectorCommand}" IsEnabled="{Binding AreButtonsEnabled}"
+                                            HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                            PointerEntered="OnCoverPointerEntered" PointerExited="OnCoverPointerExited"
+                                            Padding="0" BorderThickness="0" Background="Transparent" CornerRadius="10"
+                                            ToolTip.Tip="{Binding [Session_ChangeGameTooltip], Source={x:Static services:LocalizationService.Instance}}">
+                                        <Border CornerRadius="10" ClipToBounds="True">
+                                             <Panel>
+                                                 <Image Source="{Binding SessionGameCover}" Stretch="UniformToFill"/>
+
+                                                 <!-- Placeholder for games with no cover. The FontSize is in the
+                                                      coordinates of the 528x704 Panel, which the Viewbox scales. -->
+                                                 <TextBlock Text="No cover"
+                                                            IsVisible="{Binding IsNoCoverPlaceholderVisible}"
+                                                            Foreground="{DynamicResource ButtonCancelBrush}"
+                                                            FontSize="72" FontWeight="SemiBold"
+                                                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                             </Panel>
+                                        </Border>
+                                    </Button>
+                                </Panel>
+                            </Viewbox>
+                            
+                            <!-- Hover Overlay Hint (Outside Viewbox) -->
+                            <Border Background="{DynamicResource OverlayLightBrush}" IsHitTestVisible="False" CornerRadius="2" IsVisible="{Binding IsRecycleOverlayVisible}">
+                                <PathIcon Data="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z" 
+                                          Foreground="{DynamicResource IconLightBrush}" 
+                                          Width="20" Height="20"
+                                          HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            
+                            <!-- Loading Spinner (Outside Viewbox to maintain fixed size) -->
+                            <Path Classes="spinner" 
+                                  IsVisible="{Binding IsSessionCoverLoading}"
+                                  Data="M 25,0 A 25,25 0 1 1 0,25" 
+                                  StrokeThickness="3" 
+                                  Stretch="Uniform"
+                                  Width="25" Height="25"
+                                  HorizontalAlignment="Center" VerticalAlignment="Center">
+                                  <Path.Stroke>
+                                       <ConicGradientBrush>
+                                           <GradientStop Color="rgba(143, 156, 167, 0)" Offset="0" /> 
+                                           <GradientStop Color="rgba(143, 156, 167, 1)" Offset="1" />   
+                                       </ConicGradientBrush>
+                                   </Path.Stroke>
+                            </Path>
+                        </Panel>
+                    </Border>
+                        
+                        <!-- Game Details -->
+                        <StackPanel Grid.Column="1" Margin="15,0,0,0" VerticalAlignment="Center">
+                            <Panel>
+                                <TextBlock Text="{Binding SessionGameTitle}" 
+                                           IsVisible="{Binding !IsSessionTitleLoading}"
+                                           FontSize="22" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}" TextWrapping="Wrap"/>
+                                           
+                                <!-- Title Loader (Skeleton) -->
+                                <Border Classes="skeleton" 
+                                        IsVisible="{Binding IsSessionTitleLoading}" 
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Left"
+                                        Width="200" Height="28">
+                                    <Border Width="100" HorizontalAlignment="Left" Margin="0" Height="28">
+                                         <Border.RenderTransform>
+                                             <TranslateTransform />
+                                         </Border.RenderTransform>
+                                    </Border>
+                                </Border>
+                            </Panel>
+                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                <TextBlock Text="{Binding [Session_TotalTime], Source={x:Static services:LocalizationService.Instance}}" Foreground="{DynamicResource TextMutedBrush}" FontSize="14"/>
+                                <TextBlock Text="{Binding SessionPlayTime}" Foreground="{DynamicResource BrandPrimaryBrush}" FontWeight="Bold" FontSize="14"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                    
+                    </Grid>
+
+                    <!-- Buttons Footer -->
+                    <Border Grid.Row="1" Background="{DynamicResource PanelBackgroundBrush}" Height="60" Padding="20,0" CornerRadius="0,0,20,20">
+                        <Grid ColumnDefinitions="*, 15, *">
+                            <Button Grid.Column="0" Classes="discard-btn" Command="{Binding DiscardSessionCommand}" IsEnabled="{Binding AreButtonsEnabled}">
+                                <TextBlock Text="{Binding [Session_Discard], Source={x:Static services:LocalizationService.Instance}}" VerticalAlignment="Center"/>
+                            </Button>
+                            
+                            <Panel Grid.Column="2" Background="Transparent" PointerEntered="OnSaveButtonPointerEntered" PointerExited="OnSaveButtonPointerExited">
+                                <Button Classes="save-btn" Command="{Binding SaveSessionCommand}" IsEnabled="{Binding IsSaveEnabled}"
+                                    ToolTip.Placement="Top" ToolTip.VerticalOffset="-10" ToolTip.ShowOnDisabled="True" ToolTip.ShowDelay="0"
+                                    ToolTip.Tip="{Binding SaveButtonTooltip}">
+                                <Button.Styles>
+                                    <Style Selector="ToolTip">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                        <Setter Property="Template">
+                                            <ControlTemplate>
+                                                <Grid RowDefinitions="*, Auto" IsVisible="{Binding !IsGameIdentified}">
+                                                    <Border Grid.Row="0" Background="{DynamicResource PanelBackgroundBrush}" BorderBrush="{DynamicResource BrandPrimaryBrush}" BorderThickness="1" CornerRadius="5" Padding="10">
+                                                        <TextBlock Text="{TemplateBinding Content}" MaxWidth="250" TextWrapping="Wrap" FontSize="12" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                                    </Border>
+                                                    <Path Grid.Row="1" Data="M0,0 L5,5 L10,0" Stroke="{DynamicResource BrandPrimaryBrush}" StrokeThickness="1" HorizontalAlignment="Center" Margin="0,0,0,0"/>
+                                                    <Path Grid.Row="1" Data="M0,0 L10,0" Stroke="{DynamicResource PanelBackgroundBrush}" StrokeThickness="3" HorizontalAlignment="Center" Margin="0,-1,0,0"/>
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </Setter>
+                                    </Style>
+                                </Button.Styles>
+                                <Panel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding [Session_Save], Source={x:Static services:LocalizationService.Instance}}" Foreground="{DynamicResource TextPrimaryBrush}" FontWeight="Bold" IsVisible="{Binding !IsSavingSession}" VerticalAlignment="Center"/>
+                                    <Path Classes="spinner" 
+                                          IsVisible="{Binding IsSavingSession}"
+                                          Data="M 25,0 A 25,25 0 1 1 0,25" 
+                                          StrokeThickness="3" 
+                                          Stretch="Uniform"
+                                          Width="20" Height="20"
+                                          HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Path.Stroke>
+                                            <ConicGradientBrush>
+                                                <GradientStop Color="rgba(255, 255, 255, 0)" Offset="0" /> 
+                                                <GradientStop Color="rgba(255, 255, 255, 1)" Offset="1" />   
+                                            </ConicGradientBrush>
+                                        </Path.Stroke>
+                                    </Path>
+                                </Panel>
+                            </Button>
+                            </Panel>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+
+        </Panel>
+
+        <!-- Toast Notifications Layer -->
+        <ItemsControl ItemsSource="{Binding ToastNotifications}" 
+                      HorizontalAlignment="Right" VerticalAlignment="Top"
+                      Margin="0,30,30,0" Width="350"
+                      ZIndex="100">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Spacing="10"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border CornerRadius="8" ClipToBounds="True" BoxShadow="0 4 15 0 #80000000" Margin="0,0,0,5"
+                            Background="{Binding Type, Converter={StaticResource ToastTypeToBackgroundConverter}}">
+                        
+                        <Grid RowDefinitions="Auto, Auto">
+                            <!-- Main Content -->
+                            <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto" Margin="15">
+                                <!-- Type Icon -->
+                                <PathIcon Grid.Column="0" 
+                                          Data="{Binding Type, Converter={StaticResource ToastTypeToIconConverter}}" 
+                                          Foreground="{Binding Type, Converter={StaticResource ToastTypeToBrushConverter}}"
+                                          Width="24" Height="24"
+                                          Margin="0,0,15,0"/>
+                                          
+                                <!-- Message -->
+                                <TextBlock Grid.Column="1" Text="{Binding Message}" 
+                                           Foreground="{Binding Type, Converter={StaticResource ToastTypeToForegroundConverter}}" VerticalAlignment="Center" 
+                                           TextWrapping="Wrap" FontSize="14" FontWeight="Medium"/>
+                                           
+                                <!-- Dismiss Button -->
+                                <Button Grid.Column="2" Command="{Binding DismissCommand}"
+                                        Background="Transparent" BorderThickness="0" Padding="5" 
+                                        Margin="10,-5,-5,-5" VerticalAlignment="Top" Cursor="Hand">
+                                    <PathIcon Data="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" 
+                                              Width="10" Height="10" Foreground="{DynamicResource IconDarkBrush}"/>
+                                </Button>
+                            </Grid>
+                            
+                            <!-- Progress Bar -->
+                            <ProgressBar Grid.Row="1" Minimum="0" Maximum="100" Value="{Binding Progress}" 
+                                         Height="3"
+                                         Background="Transparent" BorderThickness="0"
+                                         Foreground="{Binding Type, Converter={StaticResource ToastTypeToBrushConverter}}"
+                                         VerticalAlignment="Bottom"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Panel>
+
+</Window>

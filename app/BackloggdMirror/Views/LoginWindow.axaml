@@ -1,0 +1,178 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:BackloggdMirror.ViewModels"
+        xmlns:services="using:BackloggdMirror.Services"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="500"
+        x:Class="BackloggdMirror.Views.LoginWindow"
+        x:DataType="vm:LoginViewModel"
+        Title="Apploggd"
+        Width="400" Height="500"
+        WindowStartupLocation="CenterScreen"
+        CanResize="False"
+        Icon="/Assets/app-logo.png"
+        Background="{DynamicResource AppBackgroundBrush}"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="PreferSystemChrome"
+        FontFamily="Roboto, Segoe UI, Sans-Serif">
+
+    <Window.Styles>
+        <Style Selector="TextBox">
+            <Setter Property="Background" Value="{DynamicResource InputBackgroundBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource InputBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+            <Setter Property="BorderBrush" Value="{DynamicResource PrimaryInputFocusBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="{DynamicResource InputHoverBackgroundBrush}"/>
+        </Style>
+        <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="{DynamicResource InputHoverBackgroundBrush}"/>
+        </Style>
+        
+        <Style Selector="Button.primary">
+            <Setter Property="Background" Value="{DynamicResource BrandPrimaryBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <Style Selector="Button.primary:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource BrandPrimaryHoverBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="Button.primary:disabled">
+            <Setter Property="Opacity" Value="0.4"/>
+        </Style>
+        <Style Selector="Button.primary:disabled /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource BrandPrimaryBrush}"/>
+        </Style>
+        <Style Selector="Button.primary:disabled TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+    </Window.Styles>
+
+    <Border Padding="40">
+        <StackPanel VerticalAlignment="Center" Spacing="20">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
+                <Border BorderBrush="{DynamicResource BrandSecondaryBorderBrush}" BorderThickness="0,0,0,5" VerticalAlignment="Bottom" Padding="4,0">
+                    <TextBlock Text="A" 
+                            FontSize="64" 
+                            FontWeight="Bold" 
+                            Foreground="{DynamicResource TextPrimaryBrush}"
+                            Margin="-4,0,-3,-12"
+                            HorizontalAlignment="Center"/>
+                </Border>
+            </StackPanel>
+
+            <StackPanel IsVisible="{Binding IsUiVisible}" Spacing="10" HorizontalAlignment="Stretch">
+                <TextBlock Text="{Binding [Login_Welcome], Source={x:Static services:LocalizationService.Instance}}" FontSize="32" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+
+                <StackPanel Spacing="15" IsEnabled="{Binding !IsBusy}">
+                    <TextBox x:Name="UsernameTextBox" Text="{Binding Username}" Watermark="{Binding [Login_Username], Source={x:Static services:LocalizationService.Instance}}" Classes="input" Margin="0,0,0,-10" Background="{DynamicResource InputHoverBackgroundBrush}">
+                        <TextBox.InnerLeftContent>
+                            <PathIcon Data="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"
+                                      Width="15" Height="15"
+                                      Foreground="{DynamicResource TextMutedBrush}"
+                                      Margin="10,0,5,0"/>
+                        </TextBox.InnerLeftContent>
+                    </TextBox>
+                    <TextBox x:Name="PasswordTextBox" Text="{Binding Password}" Watermark="{Binding [Login_Password], Source={x:Static services:LocalizationService.Instance}}" PasswordChar="●" Classes="input" Margin="0,0,0,-10" Background="{DynamicResource InputHoverBackgroundBrush}">
+                        <TextBox.InnerLeftContent>
+                            <PathIcon Data="M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8H17V6A5,5 0 0,0 12,1A5,5 0 0,0 7,6V8H6A2,2 0 0,0 4,10V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V10A2,2 0 0,0 18,8M17,20H6V10H17V20M9,6A3,3 0 0,1 12,3A3,3 0 0,1 15,6V8H9V6Z"
+                                      Width="15" Height="15"
+                                      Foreground="{DynamicResource TextMutedBrush}"
+                                      Margin="10,0,5,0"/>
+                        </TextBox.InnerLeftContent>
+                    </TextBox>
+                </StackPanel>
+
+                <CheckBox x:Name="RememberMeCheckBox" IsChecked="{Binding IsRememberMeChecked}" 
+                          IsEnabled="{Binding !IsBusy}"
+                          Content="{Binding [Login_RememberMe], Source={x:Static services:LocalizationService.Instance}}" 
+                          Margin="0,10,0,0"
+                          Foreground="{DynamicResource TextPrimaryBrush}"/>
+                
+                <ProgressBar x:Name="LoadingProgressBar" IsIndeterminate="True" IsVisible="{Binding IsBusy}" Height="4" Foreground="{DynamicResource BrandPrimaryBrush}" HorizontalAlignment="Stretch"/>
+
+                <TextBlock x:Name="StatusTextBlock" Text="{Binding StatusMessage}" Foreground="{DynamicResource BrandPrimaryBrush}" HorizontalAlignment="Center" TextWrapping="Wrap" FontSize="12" MinHeight="30"/>
+
+                <Button x:Name="LoginButton" Command="{Binding LoginCommand}" Content="{Binding [Login_Button], Source={x:Static services:LocalizationService.Instance}}" Classes="primary" HorizontalAlignment="Stretch" IsEnabled="{Binding CanLogin}" IsDefault="True"/>
+            </StackPanel>
+
+            <StackPanel x:Name="CheckingSessionPanel" IsVisible="{Binding IsCheckingSession}" VerticalAlignment="Center" Spacing="10">
+                 <ProgressBar IsIndeterminate="True" Height="4" Foreground="{DynamicResource BrandPrimaryBrush}" Width="200" HorizontalAlignment="Center"/>
+                 <TextBlock Text="{Binding StatusMessage}" Foreground="{DynamicResource BrandPrimaryBrush}" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" FontSize="14"/>
+            </StackPanel>
+
+            <!-- Shown when neither Playwright's Chromium nor a system browser is available.
+                 Deliberately another state of the window rather than a modal: IsUiVisible already
+                 hides the login form, so overlaying a card on top added nothing. -->
+            <StackPanel x:Name="BrowserPromptPanel"
+                        IsVisible="{Binding IsBrowserPromptVisible}"
+                        Spacing="10" HorizontalAlignment="Stretch">
+
+                <TextBlock Text="{Binding [Browser_Prompt_Title], Source={x:Static services:LocalizationService.Instance}}"
+                           FontSize="18" FontWeight="Bold"
+                           Foreground="{DynamicResource TextPrimaryBrush}"
+                           TextWrapping="Wrap"/>
+
+                <TextBlock Text="{Binding [Browser_Prompt_Body], Source={x:Static services:LocalizationService.Instance}}"
+                           FontSize="13" LineHeight="18"
+                           Foreground="{DynamicResource TextSecondaryBrush}"
+                           TextWrapping="Wrap"/>
+
+                <TextBlock Text="{Binding [Browser_Prompt_Size], Source={x:Static services:LocalizationService.Instance}}"
+                           FontSize="12"
+                           Foreground="{DynamicResource TextMutedBrush}"
+                           TextWrapping="Wrap"/>
+
+                <StackPanel Spacing="0">
+                    <TextBlock Text="{Binding [Browser_Prompt_ManualHint], Source={x:Static services:LocalizationService.Instance}}"
+                               FontSize="12"
+                               Foreground="{DynamicResource TextMutedBrush}"
+                               TextWrapping="Wrap"/>
+                    <!-- URL hardcoded on purpose: NavigateUri is a Uri, and compiled bindings
+                         resolve neither static properties nor a string->Uri conversion. -->
+                    <HyperlinkButton x:Name="BrowserPromptLink"
+                                     NavigateUri="https://www.google.com/chrome/"
+                                     Content="{Binding [Browser_Prompt_LinkText], Source={x:Static services:LocalizationService.Instance}}"
+                                     Padding="0,4,0,0" FontSize="12" Cursor="Hand"
+                                     Foreground="{DynamicResource BrandPrimaryBrush}"
+                                     HorizontalAlignment="Left"/>
+                </StackPanel>
+
+                <!-- Same 50/50 split with a 15px gutter as the MainWindow modal footer -->
+                <Grid ColumnDefinitions="*, 15, *" Margin="0,10,0,0">
+                    <Button Grid.Column="0" x:Name="BrowserPromptCloseButton"
+                            Classes="discard-btn"
+                            Command="{Binding CloseFromBrowserPromptCommand}">
+                        <TextBlock Text="{Binding [Browser_Prompt_Close], Source={x:Static services:LocalizationService.Instance}}"
+                                   VerticalAlignment="Center"/>
+                    </Button>
+
+                    <Button Grid.Column="2" x:Name="BrowserPromptAcceptButton"
+                            Classes="save-btn"
+                            Command="{Binding AcceptBrowserDownloadCommand}">
+                        <TextBlock Text="{Binding [Browser_Prompt_Accept], Source={x:Static services:LocalizationService.Instance}}"
+                                   Foreground="{DynamicResource TextPrimaryBrush}" FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                    </Button>
+                </Grid>
+            </StackPanel>
+
+        </StackPanel>
+    </Border>
+</Window>

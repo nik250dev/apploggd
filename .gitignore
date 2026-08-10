@@ -1,0 +1,76 @@
+# ---------------------------------------------------------------------------
+# Apploggd (BackloggdMirror) — .gitignore
+# ---------------------------------------------------------------------------
+
+# --- .NET build output -------------------------------------------------------
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+[Ll]og/
+[Ll]ogs/
+artifacts/
+publish/
+*.dll
+*.exe
+*.pdb
+*.cache
+*.tlog
+project.lock.json
+project.assets.json
+*.nuget.props
+*.nuget.targets
+
+# The Node driver + Chromium that Playwright drops next to the binary (~400 MB).
+.playwright/
+playwright-report/
+test-results/
+.ms-playwright/
+
+# --- User / IDE files (personal, not part of the project) --------------------
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+.vs/
+.idea/
+*.swp
+*~
+
+# Local editor configuration
+.vscode/
+*.code-workspace
+
+# --- Local data and secrets --------------------------------------------------
+user.dat
+/settings.json
+Keys/
+detectable_processed.json.etag
+*.etag
+log_*.log
+secrets.json
+appsettings.*.local.json
+.env
+.env.*
+*.pfx
+*.snk
+
+# --- Test projects -----------------------------------------------------------
+BackloggdMirror.Tests/
+BackloggdMirror.UnitTests/
+BackloggdMirror.IntegrationTests/
+BackloggdMirror.UITests/
+
+# --- Internal documentation --------------------------------------------------
+PROJECT_CONTEXT.md
+
+# --- Operating system --------------------------------------------------------
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# Exception: this JSON is the embedded asset the app needs in order to build.
+!BackloggdMirror/Assets/detectable_processed.json
