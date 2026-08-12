@@ -19843,9 +19843,10 @@
   },
   {
     "id": "451132630390538270",
-    "name": "BLESS GLOBAL",
+    "name": "Bless Global",
     "aliases": [
-      "BLESS"
+      "BLESS",
+      "BLESS GLOBAL"
     ],
     "executables": [
       {
@@ -67845,9 +67846,10 @@
   },
   {
     "id": "1124353236564983808",
-    "name": "CounterSide",
+    "name": "Counterside",
     "aliases": [
-      "Counter:Side"
+      "Counter:Side",
+      "CounterSide"
     ],
     "executables": [
       {
@@ -76823,10 +76825,9 @@
   },
   {
     "id": "1124353934623002726",
-    "name": "Crisis Core: Final Fantasy VII - Reunion",
+    "name": "CRISIS CORE: FINAL FANTASY VII - REUNION",
     "aliases": [
-      "CRISIS CORE -FINAL FANTASY VII- REUNION",
-      "CRISIS CORE: FINAL FANTASY VII - REUNION"
+      "CRISIS CORE -FINAL FANTASY VII- REUNION"
     ],
     "executables": [
       {
@@ -120748,7 +120749,7 @@
   },
   {
     "id": "1124357218289074187",
-    "name": "King's Quest: Chapter 1 - A Knight to Remember",
+    "name": "King's Quest",
     "aliases": [],
     "executables": [
       {
@@ -120759,12 +120760,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "345390"
-      },
-      {
         "distributor": "xbox",
         "id": "BRMFLRV79C3H"
+      },
+      {
+        "distributor": "steam",
+        "id": "345390"
       }
     ],
     "id_igdb": "8260",
@@ -122303,9 +122304,10 @@
   },
   {
     "id": "1124357342394335324",
-    "name": "KILL la KILL: IF",
+    "name": "Kill la Kill: If",
     "aliases": [
-      "KILL la KILL THE GAME: IF"
+      "KILL la KILL THE GAME: IF",
+      "KILL la KILL: IF"
     ],
     "executables": [
       {
@@ -130215,7 +130217,7 @@
   },
   {
     "id": "1124357886492033094",
-    "name": "Radiator 2",
+    "name": "Radiator Forever",
     "aliases": [],
     "executables": [
       {
@@ -140390,7 +140392,7 @@
   },
   {
     "id": "1124358613373305016",
-    "name": "Mob Factory Demo",
+    "name": "Mob Factory",
     "aliases": [],
     "executables": [
       {
@@ -170931,10 +170933,9 @@
   },
   {
     "id": "1129504328848265387",
-    "name": "Five Nights at Freddy's: Help Wanted",
+    "name": "FIVE NIGHTS AT FREDDY'S: HELP WANTED",
     "aliases": [
-      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED",
-      "FIVE NIGHTS AT FREDDY'S: HELP WANTED"
+      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED"
     ],
     "executables": [
       {
@@ -198651,7 +198652,7 @@
   },
   {
     "id": "1218695342779011243",
-    "name": "Toy Shire",
+    "name": "Toy Shire: Room One",
     "aliases": [],
     "executables": [
       {
@@ -201205,12 +201206,16 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9PLMFMMBQ5CM"
+      },
+      {
         "distributor": "steam",
         "id": "2475460"
       },
       {
-        "distributor": "xbox",
-        "id": "9PLMFMMBQ5CM"
+        "distributor": "epic",
+        "id": "312174CF57134898A8F751921430D765"
       }
     ],
     "id_igdb": "258837",
@@ -208513,7 +208518,7 @@
   },
   {
     "id": "1253091967848677447",
-    "name": "Dungeon Full Dive",
+    "name": "Dungeon Full Dive: Player Edition",
     "aliases": [],
     "executables": [
       {
@@ -241054,6 +241059,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9PD12JWCT0ST"
+      },
+      {
         "distributor": "steam",
         "id": "2389040"
       }
@@ -263473,17 +263482,17 @@
   },
   {
     "id": "1402418040481779722",
-    "name": "Trine 2 Director's Cut",
+    "name": "Trine 2: Complete Story",
     "aliases": [],
     "executables": [
       {
-        "name": "trine2_32bit.exe",
-        "os": "win32",
+        "name": "trine2.app",
+        "os": "darwin",
         "is_launcher": false
       },
       {
-        "name": "trine2.app",
-        "os": "darwin",
+        "name": "trine2_32bit.exe",
+        "os": "win32",
         "is_launcher": false
       }
     ],
@@ -285366,9 +285375,10 @@
   },
   {
     "id": "1428182872589602867",
-    "name": "420BLAZE IT 2: GAME OF THE YEAR",
+    "name": "420Blaze It 2: Game of the Year",
     "aliases": [
-      "420 BLAZE IT 2: GAME OF THE YEAR"
+      "420 BLAZE IT 2: GAME OF THE YEAR",
+      "420BLAZE IT 2: GAME OF THE YEAR"
     ],
     "executables": [],
     "third_party_skus": [
@@ -368770,9 +368780,10 @@
   },
   {
     "id": "1442715029052063765",
-    "name": "SNWBRD: Freestyle Snowboarding",
+    "name": "Snwbrd: Freestyle Snowboarding",
     "aliases": [
-      "SNWBRD"
+      "SNWBRD",
+      "SNWBRD: Freestyle Snowboarding"
     ],
     "executables": [],
     "third_party_skus": [
@@ -414829,10 +414840,9 @@
   },
   {
     "id": "1442734322128916531",
-    "name": "Arcade Archives: Naughty Boy",
+    "name": "Arcade Archives: NAUGHTY BOY",
     "aliases": [
-      "Arcade Archives NAUGHTY BOY",
-      "Arcade Archives: NAUGHTY BOY"
+      "Arcade Archives NAUGHTY BOY"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -495702,7 +495712,15 @@
       },
       {
         "distributor": "xbox",
+        "id": "9NQ97NDCWSHD"
+      },
+      {
+        "distributor": "xbox",
         "id": "9NS9TJV1JL86"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NQFKTLZX1J9"
       }
     ],
     "id_igdb": "347633",
@@ -512255,5 +512273,632 @@
     "cover": "co5stf",
     "artwork": null,
     "url": "pokemon-rejuvenation"
+  },
+  {
+    "id": "1536947689256648806",
+    "name": "Sports: Renovations",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9PH5HD2ZH7X1"
+      },
+      {
+        "distributor": "steam",
+        "id": "2230960"
+      }
+    ],
+    "id_igdb": "314456",
+    "cover": "co8pvs",
+    "artwork": [
+      "ar33fq",
+      "ar3g7v"
+    ],
+    "url": "sports-renovations"
+  },
+  {
+    "id": "1536947702284292097",
+    "name": "The Relic: First Guardian",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2827820"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P2XN4RV8BKB"
+      }
+    ],
+    "id_igdb": "165397",
+    "cover": "ar640u",
+    "artwork": null,
+    "url": "the-relic-first-guardian"
+  },
+  {
+    "id": "1536947717836775525",
+    "name": "All Our Broken Parts",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3473430"
+      }
+    ],
+    "id_igdb": "366025",
+    "cover": "ar5ohh",
+    "artwork": null,
+    "url": "all-our-broken-parts"
+  },
+  {
+    "id": "1536947736107155576",
+    "name": "Expeditions: Samurai",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2212910"
+      }
+    ],
+    "id_igdb": "404904",
+    "cover": "coc6vi",
+    "artwork": [
+      "ar6c42"
+    ],
+    "url": "expeditions-samurai"
+  },
+  {
+    "id": "1536947747809267722",
+    "name": "Cat Cafe Manager 2: Big City Bliss",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3109590"
+      }
+    ],
+    "id_igdb": "313810",
+    "cover": "co8pmt",
+    "artwork": [
+      "ar338x"
+    ],
+    "url": "cat-cafe-manager-2-big-city-bliss"
+  },
+  {
+    "id": "1536947753362399344",
+    "name": "Cat Chaos",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3417940"
+      }
+    ],
+    "id_igdb": "392042",
+    "cover": "coblvt",
+    "artwork": [
+      "ar5fb5"
+    ],
+    "url": "cat-chaos"
+  },
+  {
+    "id": "1536947774938157067",
+    "name": "Celestial Return",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2704090"
+      }
+    ],
+    "id_igdb": "277763",
+    "cover": "coazqs",
+    "artwork": [
+      "ar4u9m",
+      "ar4x5l",
+      "ar4x5m"
+    ],
+    "url": "celestial-return"
+  },
+  {
+    "id": "1536947780805722172",
+    "name": "EthrA",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2177510"
+      }
+    ],
+    "id_igdb": "236489",
+    "cover": "coafty",
+    "artwork": [
+      "ar25fo"
+    ],
+    "url": "ethra"
+  },
+  {
+    "id": "1536947784958091374",
+    "name": "Ruffed Up",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4551870"
+      }
+    ],
+    "id_igdb": "406106",
+    "cover": "coc9g5",
+    "artwork": [
+      "ar63g0"
+    ],
+    "url": "ruffed-up"
+  },
+  {
+    "id": "1536947797675347978",
+    "name": "Money Under the Bed",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4409320"
+      }
+    ],
+    "id_igdb": "392839",
+    "cover": "cobop8",
+    "artwork": [
+      "ar5hjv",
+      "ar5hjw"
+    ],
+    "url": "money-under-the-bed"
+  },
+  {
+    "id": "1536947802825822238",
+    "name": "Blightfall",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3839680"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1536947809687969824",
+    "name": "Deadly Trick",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3088400"
+      }
+    ],
+    "id_igdb": "368801",
+    "cover": "coaign",
+    "artwork": [
+      "ar4923"
+    ],
+    "url": "deadly-trick"
+  },
+  {
+    "id": "1536947817069813840",
+    "name": "Oharion",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4739190"
+      }
+    ],
+    "id_igdb": "413071",
+    "cover": null,
+    "artwork": [
+      "ar6enf",
+      "ar6ene"
+    ],
+    "url": "oharion"
+  },
+  {
+    "id": "1536947822447034408",
+    "name": "Elderwood Online",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2847820"
+      }
+    ],
+    "id_igdb": "291879",
+    "cover": "coc155",
+    "artwork": [
+      "ar5tzc"
+    ],
+    "url": "elderwood-online"
+  },
+  {
+    "id": "1536947828604018799",
+    "name": "Sandcastle",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3216520"
+      }
+    ],
+    "id_igdb": "399476",
+    "cover": "cobz9h",
+    "artwork": [
+      "ar5wqb"
+    ],
+    "url": "sandcastle--1"
+  },
+  {
+    "id": "1536947844815265792",
+    "name": "Lost & Found: A This Bed We Made Story",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4333200"
+      }
+    ],
+    "id_igdb": "391841",
+    "cover": "cobllh",
+    "artwork": [
+      "ar5eyt"
+    ],
+    "url": "lost-and-found-a-this-bed-we-made-story"
+  },
+  {
+    "id": "1536947852788367360",
+    "name": "Lost Arsenal",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3713880"
+      }
+    ],
+    "id_igdb": "405214",
+    "cover": "coc7bb",
+    "artwork": [
+      "ar60zj"
+    ],
+    "url": "lost-arsenal"
+  },
+  {
+    "id": "1536947860124471367",
+    "name": "Wild n Chill",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3847920"
+      }
+    ],
+    "id_igdb": "403353",
+    "cover": "coc4oy",
+    "artwork": [
+      "ar5y4r"
+    ],
+    "url": "wild-n-chill"
+  },
+  {
+    "id": "1536947867069980733",
+    "name": "Pick Ball",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4763080"
+      }
+    ],
+    "id_igdb": "404428",
+    "cover": "coc6bf",
+    "artwork": [
+      "ar5zvx"
+    ],
+    "url": "pick-ball"
+  },
+  {
+    "id": "1536947873114230784",
+    "name": "Lost Vessel",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4652730"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1536947877627174972",
+    "name": "Zombuds",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4443350"
+      }
+    ],
+    "id_igdb": "404357",
+    "cover": "coc66t",
+    "artwork": [
+      "ar5zs9"
+    ],
+    "url": "zombuds"
+  },
+  {
+    "id": "1536947882551156826",
+    "name": "Pight",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2682270"
+      }
+    ],
+    "id_igdb": "275839",
+    "cover": "co7llx",
+    "artwork": null,
+    "url": "pight"
+  },
+  {
+    "id": "1536947889631268924",
+    "name": "VOXOTRON",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4633120"
+      }
+    ],
+    "id_igdb": "405237",
+    "cover": "coc7ce",
+    "artwork": [
+      "ar67wi"
+    ],
+    "url": "voxotron"
+  },
+  {
+    "id": "1536947899072512051",
+    "name": "The Last Disease Z",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1843400"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1536947909403222096",
+    "name": "If Red Then Stop",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3987060"
+      }
+    ],
+    "id_igdb": "382241",
+    "cover": "cob2ya",
+    "artwork": [
+      "ar4z9j"
+    ],
+    "url": "if-red-then-stop"
+  },
+  {
+    "id": "1536947930118754396",
+    "name": "Vanya Online",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4866960"
+      }
+    ],
+    "id_igdb": "410719",
+    "cover": "cocjjy",
+    "artwork": null,
+    "url": "vanya-online"
+  },
+  {
+    "id": "1536947942370447391",
+    "name": "Toy Shop: Tidy Up",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4914830"
+      }
+    ],
+    "id_igdb": "412001",
+    "cover": "coclx1",
+    "artwork": [
+      "ar6cy7"
+    ],
+    "url": "toy-shop-tidy-up"
+  },
+  {
+    "id": "1536947968694034472",
+    "name": "Cellar Keeper",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4935510"
+      }
+    ],
+    "id_igdb": "411220",
+    "cover": "cockax",
+    "artwork": [
+      "ar6dn7"
+    ],
+    "url": "cellar-keeper"
+  },
+  {
+    "id": "1536947977418182686",
+    "name": "Rent Due",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4923090"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1536947985865506907",
+    "name": "Ride Up Together",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4895550"
+      }
+    ],
+    "id_igdb": "410574",
+    "cover": "cock8h",
+    "artwork": [
+      "ar6bb5"
+    ],
+    "url": "ride-up-together"
+  },
+  {
+    "id": "1536948000138731620",
+    "name": "My Tsundere Sister",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4622110"
+      }
+    ],
+    "id_igdb": "407473",
+    "cover": "cocacb",
+    "artwork": [
+      "ar6c1f"
+    ],
+    "url": "my-tsundere-sister"
+  },
+  {
+    "id": "1536948009202360410",
+    "name": "Shelve the Potions!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4928820"
+      }
+    ],
+    "id_igdb": "411469",
+    "cover": "coclsr",
+    "artwork": [
+      "ar6d43"
+    ],
+    "url": "shelve-the-potions"
+  },
+  {
+    "id": "1536948018979541063",
+    "name": "Japan Stigmatized Property 3",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4611990"
+      }
+    ],
+    "id_igdb": "412670",
+    "cover": "cocn6k",
+    "artwork": [
+      "ar6e89"
+    ],
+    "url": "japan-stigmatized-property-3"
+  },
+  {
+    "id": "1536948047806726195",
+    "name": "The Dream Of A Cockspur",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1699710"
+      }
+    ],
+    "id_igdb": "276570",
+    "cover": "coav8b",
+    "artwork": [
+      "ar2ms5"
+    ],
+    "url": "the-dream-of-a-cockspur"
+  },
+  {
+    "id": "1536948058938540034",
+    "name": "Beastfolk Barber",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4093320"
+      }
+    ],
+    "id_igdb": "386598",
+    "cover": "cocn1z",
+    "artwork": [
+      "ar6e06"
+    ],
+    "url": "beastfolk-barber--1"
   }
 ]
