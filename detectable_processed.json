@@ -198652,7 +198652,7 @@
   },
   {
     "id": "1218695342779011243",
-    "name": "Toy Shire: Room One",
+    "name": "Toy Shire",
     "aliases": [],
     "executables": [
       {
@@ -208518,7 +208518,7 @@
   },
   {
     "id": "1253091967848677447",
-    "name": "Dungeon Full Dive: Player Edition",
+    "name": "Dungeon Full Dive",
     "aliases": [],
     "executables": [
       {
@@ -240675,6 +240675,10 @@
       {
         "distributor": "steam",
         "id": "1304430"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MVN54VW971C"
       }
     ],
     "id_igdb": "286113",
@@ -241061,6 +241065,10 @@
       {
         "distributor": "xbox",
         "id": "9PD12JWCT0ST"
+      },
+      {
+        "distributor": "epic",
+        "id": "BDE423D750924A6CA513C7BE9FF921EA"
       },
       {
         "distributor": "steam",
@@ -276949,7 +276957,7 @@
   },
   {
     "id": "1428176162064175145",
-    "name": "Stellar Settlers: Space Base Builder",
+    "name": "Stellar Settlers",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -281448,7 +281456,12 @@
     "name": "Liar's Pub",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9P8MTLW98JN2"
+      }
+    ],
     "id_igdb": "327440",
     "cover": "co9agr",
     "artwork": [
@@ -283568,6 +283581,10 @@
       {
         "distributor": "steam",
         "id": "3175860"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N86T5C7QR5J"
       }
     ],
     "id_igdb": "315385",
@@ -336422,6 +336439,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9P5WL628P8X6"
+      },
       {
         "distributor": "steam",
         "id": "3363560"
@@ -391836,10 +391857,6 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "C0QV4P26NNDW"
-      },
-      {
-        "distributor": "xbox",
         "id": "9NX8ZGRF0HGT"
       }
     ],
@@ -392008,7 +392025,16 @@
     "name": "Super Dodge Ball",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "C0QV4P26NNDW"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PCF4GSVW5M3"
+      }
+    ],
     "id_igdb": "40426",
     "cover": "co8ozf",
     "artwork": null,
@@ -403177,7 +403203,7 @@
   },
   {
     "id": "1442730747663356014",
-    "name": "Double Dragon & Kunio-kun: Retro Brawler Bundle",
+    "name": "Double Dragon & Kunio-kun Retro Brawler Bundle",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -407672,7 +407698,7 @@
   },
   {
     "id": "1442732231096406137",
-    "name": "Homestar VR",
+    "name": "HOMESTAR VR",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -473372,6 +473398,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "epic",
+        "id": "478EE97399714C20B39CDF492CA87BC2"
+      },
+      {
         "distributor": "steam",
         "id": "2950790"
       }
@@ -481575,12 +481605,20 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9PLGB8Q7JZ91"
+      },
+      {
         "distributor": "steam",
         "id": "2543830"
       },
       {
         "distributor": "xbox",
-        "id": "9PLGB8Q7JZ91"
+        "id": "9MSMK78400DC"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MW47TV1Z5RZ"
       }
     ],
     "id_igdb": "383019",
@@ -496290,6 +496328,10 @@
       {
         "distributor": "steam",
         "id": "3825600"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MT2RZF7VL3P"
       }
     ],
     "id_igdb": "388463",
@@ -508811,7 +508853,7 @@
   },
   {
     "id": "1529337545643524207",
-    "name": "SHALTER-03",
+    "name": "Fell & Sell",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -512900,5 +512942,202 @@
       "ar6e06"
     ],
     "url": "beastfolk-barber--1"
+  },
+  {
+    "id": "1537310190129647686",
+    "name": "Cyber Rail",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2468230"
+      }
+    ],
+    "id_igdb": "267468",
+    "cover": "co73t9",
+    "artwork": [
+      "ar2jcj"
+    ],
+    "url": "cyber-rail"
+  },
+  {
+    "id": "1537310211881046029",
+    "name": "500 Finger Fillet",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4602120"
+      }
+    ],
+    "id_igdb": "412311",
+    "cover": "cocmh6",
+    "artwork": [
+      "ar6dmm"
+    ],
+    "url": "500-finger-fillet"
+  },
+  {
+    "id": "1537310233259671572",
+    "name": "Model Kit Shop Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4014100"
+      }
+    ],
+    "id_igdb": "397829",
+    "cover": "cocol8",
+    "artwork": [
+      "ar5on8"
+    ],
+    "url": "model-kit-shop-simulator"
+  },
+  {
+    "id": "1537310250460381194",
+    "name": "Sombie",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3651370"
+      }
+    ],
+    "id_igdb": "372399",
+    "cover": "coandi",
+    "artwork": [
+      "ar4eum",
+      "ar4eul"
+    ],
+    "url": "sombie"
+  },
+  {
+    "id": "1537310264041676861",
+    "name": "Dominus Automa",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3795810"
+      }
+    ],
+    "id_igdb": "372769",
+    "cover": "ar5mhp",
+    "artwork": [
+      "ar5mhs",
+      "ar5mho"
+    ],
+    "url": "dominus-automa"
+  },
+  {
+    "id": "1537310279040237568",
+    "name": "Too Many Balls",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4627590"
+      }
+    ],
+    "id_igdb": "404117",
+    "cover": "ar5zqc",
+    "artwork": [
+      "ar5zqd"
+    ],
+    "url": "too-many-balls"
+  },
+  {
+    "id": "1537310307997843538",
+    "name": "Unhuman",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4289340"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1537310342500188221",
+    "name": "Rogues & Fate",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4638060"
+      }
+    ],
+    "id_igdb": "411255",
+    "cover": "cocke1",
+    "artwork": null,
+    "url": "rogues-and-fate"
+  },
+  {
+    "id": "1537310374960037970",
+    "name": "Lowmoor Idle RPG: An Adventurer's Chronicle",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4977360"
+      }
+    ],
+    "id_igdb": "412647",
+    "cover": "cocn63",
+    "artwork": [
+      "ar6e2s"
+    ],
+    "url": "lowmoor-idle-rpg-an-adventurers-chronicle"
+  },
+  {
+    "id": "1537310394014498846",
+    "name": "Evil School",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3818020"
+      }
+    ],
+    "id_igdb": "410052",
+    "cover": "cocljy",
+    "artwork": [
+      "ar6d07"
+    ],
+    "url": "evil-school"
+  },
+  {
+    "id": "1537310410238337095",
+    "name": "ECHOES",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4875860"
+      }
+    ],
+    "id_igdb": "409224",
+    "cover": "coclp6",
+    "artwork": [
+      "ar6ci4",
+      "ar697p"
+    ],
+    "url": "echoes--10"
   }
 ]
