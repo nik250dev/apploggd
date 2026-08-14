@@ -76825,9 +76825,10 @@
   },
   {
     "id": "1124353934623002726",
-    "name": "CRISIS CORE: FINAL FANTASY VII - REUNION",
+    "name": "Crisis Core: Final Fantasy VII - Reunion",
     "aliases": [
-      "CRISIS CORE -FINAL FANTASY VII- REUNION"
+      "CRISIS CORE -FINAL FANTASY VII- REUNION",
+      "CRISIS CORE: FINAL FANTASY VII - REUNION"
     ],
     "executables": [
       {
@@ -76842,12 +76843,12 @@
         "id": "9PCWV3FWJZ18"
       },
       {
-        "distributor": "xbox",
-        "id": "9P6J9NFKGJ68"
-      },
-      {
         "distributor": "steam",
         "id": "1608070"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P6J9NFKGJ68"
       }
     ],
     "id_igdb": "205201",
@@ -122304,10 +122305,9 @@
   },
   {
     "id": "1124357342394335324",
-    "name": "Kill la Kill: If",
+    "name": "KILL la KILL: IF",
     "aliases": [
-      "KILL la KILL THE GAME: IF",
-      "KILL la KILL: IF"
+      "KILL la KILL THE GAME: IF"
     ],
     "executables": [
       {
@@ -140392,7 +140392,7 @@
   },
   {
     "id": "1124358613373305016",
-    "name": "Mob Factory",
+    "name": "Mob Factory Demo",
     "aliases": [],
     "executables": [
       {
@@ -170933,9 +170933,10 @@
   },
   {
     "id": "1129504328848265387",
-    "name": "FIVE NIGHTS AT FREDDY'S: HELP WANTED",
+    "name": "Five Nights at Freddy's: Help Wanted",
     "aliases": [
-      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED"
+      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED",
+      "FIVE NIGHTS AT FREDDY'S: HELP WANTED"
     ],
     "executables": [
       {
@@ -178698,12 +178699,16 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9P7Z1D3N8KR7"
-      },
-      {
         "distributor": "steam",
         "id": "2270"
+      },
+      {
+        "distributor": "xbox",
+        "id": "BSXDD75Q561F"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P7Z1D3N8KR7"
       }
     ],
     "id_igdb": "306982",
@@ -210980,6 +210985,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "epic",
+        "id": "C333D24CF51348C9B9DADF2C4C4C53D2"
+      },
       {
         "distributor": "steam",
         "id": "2186700"
@@ -263709,6 +263718,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9NLVC6STPS52"
+      },
+      {
         "distributor": "steam",
         "id": "227300"
       }
@@ -271454,12 +271467,42 @@
         "name": "eaanticheat.gameservicelauncer.exe",
         "os": "win32",
         "is_launcher": true
+      },
+      {
+        "name": "battlefield 6 event/bf6event.exe",
+        "os": "win32",
+        "is_launcher": false
+      },
+      {
+        "name": "bf6event.exe",
+        "os": "win32",
+        "is_launcher": false
       }
     ],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9P0CFMZ94Q8R"
+      },
+      {
         "distributor": "steam",
         "id": "2807960"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P4BB02MWDZK"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NGCN2R5QB79"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P2FF14JZLL3"
+      },
+      {
+        "distributor": "epic",
+        "id": "A14A02AA3C8143729605EAF7C93D7501"
       }
     ],
     "id_igdb": "317407",
@@ -283066,6 +283109,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "epic",
+        "id": "9F91A642CF3E4288929AA3C581C96114"
+      },
+      {
         "distributor": "steam",
         "id": "2213700"
       }
@@ -285392,10 +285439,9 @@
   },
   {
     "id": "1428182872589602867",
-    "name": "420Blaze It 2: Game of the Year",
+    "name": "420BLAZE IT 2: GAME OF THE YEAR",
     "aliases": [
-      "420 BLAZE IT 2: GAME OF THE YEAR",
-      "420BLAZE IT 2: GAME OF THE YEAR"
+      "420 BLAZE IT 2: GAME OF THE YEAR"
     ],
     "executables": [],
     "third_party_skus": [
@@ -304206,6 +304252,10 @@
       {
         "distributor": "steam",
         "id": "1067360"
+      },
+      {
+        "distributor": "epic",
+        "id": "1718F23D17C046398D8D248EC9B8F9D6"
       }
     ],
     "id_igdb": "358217",
@@ -321385,8 +321435,9 @@
   },
   {
     "id": "1440130398813159515",
-    "name": "THE JOY OF CREATION",
+    "name": "The Joy of Creation",
     "aliases": [
+      "THE JOY OF CREATION",
       "TJOC"
     ],
     "executables": [],
@@ -397542,9 +397593,10 @@
   },
   {
     "id": "1442728871614091295",
-    "name": "Arcade Archives: ARGUS",
+    "name": "Arcade Archives: Argus",
     "aliases": [
-      "Arcade Archives ARGUS"
+      "Arcade Archives ARGUS",
+      "Arcade Archives: ARGUS"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -403203,7 +403255,7 @@
   },
   {
     "id": "1442730747663356014",
-    "name": "Double Dragon & Kunio-kun Retro Brawler Bundle",
+    "name": "Double Dragon & Kunio-kun: Retro Brawler Bundle",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -414866,9 +414918,10 @@
   },
   {
     "id": "1442734322128916531",
-    "name": "Arcade Archives: NAUGHTY BOY",
+    "name": "Arcade Archives: Naughty Boy",
     "aliases": [
-      "Arcade Archives NAUGHTY BOY"
+      "Arcade Archives NAUGHTY BOY",
+      "Arcade Archives: NAUGHTY BOY"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -422276,9 +422329,10 @@
   },
   {
     "id": "1442737663558811792",
-    "name": "Arcade Archives: THE ASTYANAX",
+    "name": "Arcade Archives: The Astyanax",
     "aliases": [
-      "Arcade Archives THE ASTYANAX"
+      "Arcade Archives THE ASTYANAX",
+      "Arcade Archives: THE ASTYANAX"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -466457,6 +466511,10 @@
       {
         "distributor": "steam",
         "id": "3155570"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PC52KJ6LQJM"
       }
     ],
     "id_igdb": "266187",
@@ -481689,6 +481747,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9NRX1XJB3NRN"
+      },
+      {
         "distributor": "steam",
         "id": "4005090"
       }
@@ -483553,6 +483615,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9MSR1ZM3W4SD"
+      },
       {
         "distributor": "steam",
         "id": "2841650"
@@ -491713,6 +491779,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "epic",
+        "id": "F0EA7D17BC7C44DB9DA6D69E54871570"
+      },
       {
         "distributor": "steam",
         "id": "4514790"
@@ -504993,6 +505063,10 @@
       {
         "distributor": "xbox",
         "id": "9PMP77PLHTX0"
+      },
+      {
+        "distributor": "epic",
+        "id": "35C5EA52C79C4EC8B8B1FA12E0CF3798"
       }
     ],
     "id_igdb": "347027",
@@ -510192,11 +510266,7 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9PKGXQW57M1R"
-      },
-      {
-        "distributor": "epic",
-        "id": "E7F4AC33FF3D4CE4B243075F0B5DBA84"
+        "id": "9PH4M2J4680F"
       },
       {
         "distributor": "steam",
@@ -510204,7 +510274,15 @@
       },
       {
         "distributor": "xbox",
-        "id": "9PH4M2J4680F"
+        "id": "9P3HXLRJS31T"
+      },
+      {
+        "distributor": "epic",
+        "id": "E7F4AC33FF3D4CE4B243075F0B5DBA84"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PKGXQW57M1R"
       },
       {
         "distributor": "xbox",
@@ -513139,5 +513217,450 @@
       "ar697p"
     ],
     "url": "echoes--10"
+  },
+  {
+    "id": "1537505773771292784",
+    "name": "Bakso Simulator 2",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3354200"
+      }
+    ],
+    "id_igdb": "324721",
+    "cover": "ar66cz",
+    "artwork": [
+      "ar38ou"
+    ],
+    "url": "bakso-simulator-2"
+  },
+  {
+    "id": "1537505898023620618",
+    "name": "Bus Simulator 27",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NN5XHDHPX5Z"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PNHKN79L7NF"
+      },
+      {
+        "distributor": "epic",
+        "id": "B5FBDA9D4D554BCF85760DD2619C1585"
+      },
+      {
+        "distributor": "steam",
+        "id": "2397320"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NHM3VNWRCRD"
+      }
+    ],
+    "id_igdb": "355086",
+    "cover": "coa4qo",
+    "artwork": null,
+    "url": "bus-simulator-27"
+  },
+  {
+    "id": "1537506401683898419",
+    "name": "Taxi Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1159390"
+      }
+    ],
+    "id_igdb": "123939",
+    "cover": "co1xvk",
+    "artwork": [
+      "arid4"
+    ],
+    "url": "taxi-simulator"
+  },
+  {
+    "id": "1537507075721011371",
+    "name": "Chess 2",
+    "aliases": [],
+    "executables": [
+      {
+        "name": "chess2.exe",
+        "os": "win32",
+        "is_launcher": false
+      }
+    ],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4774460"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1537509977688768522",
+    "name": "Rift Wizard 3",
+    "aliases": [],
+    "executables": [
+      {
+        "name": "riftwizard3.exe",
+        "os": "win32",
+        "is_launcher": false
+      }
+    ],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4366330"
+      }
+    ],
+    "id_igdb": "400404",
+    "cover": "coc0jg",
+    "artwork": [
+      "ar5tc1"
+    ],
+    "url": "rift-wizard-3"
+  },
+  {
+    "id": "1537512360451899412",
+    "name": "Stronghold 4",
+    "aliases": [],
+    "executables": [
+      {
+        "name": "stronghold4.exe",
+        "os": "win32",
+        "is_launcher": false
+      }
+    ],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2153760"
+      }
+    ],
+    "id_igdb": "405145",
+    "cover": "coc77z",
+    "artwork": [
+      "ar6cyl"
+    ],
+    "url": "stronghold-4--1"
+  },
+  {
+    "id": "1537512742502670406",
+    "name": "2 Fights in 2 Tight Spaces",
+    "aliases": [],
+    "executables": [
+      {
+        "name": "2fightsin2tightspaces.exe",
+        "os": "win32",
+        "is_launcher": false
+      }
+    ],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3734890"
+      }
+    ],
+    "id_igdb": "405126",
+    "cover": "coc772",
+    "artwork": [
+      "ar6dig"
+    ],
+    "url": "2-fights-in-2-tight-spaces"
+  },
+  {
+    "id": "1537513534219624508",
+    "name": "Aooni2",
+    "aliases": [],
+    "executables": [
+      {
+        "name": "aooni2.exe",
+        "os": "win32",
+        "is_launcher": false
+      }
+    ],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4226580"
+      }
+    ],
+    "id_igdb": "410832",
+    "cover": "cocjt6",
+    "artwork": [
+      "ar6c8c"
+    ],
+    "url": "aooni2"
+  },
+  {
+    "id": "1537513959777632376",
+    "name": "The Binding of Isaac: Afterbirth+",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "570660"
+      }
+    ],
+    "id_igdb": "310644",
+    "cover": "co8p3u",
+    "artwork": [
+      "ar335p"
+    ],
+    "url": "the-binding-of-isaac-afterbirth-plus--1"
+  },
+  {
+    "id": "1537672329738330282",
+    "name": "FLASH AND DIE",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3985060"
+      }
+    ],
+    "id_igdb": "391167",
+    "cover": "cobpxq",
+    "artwork": [
+      "ar5dvz"
+    ],
+    "url": "flash-and-die"
+  },
+  {
+    "id": "1537672344456273930",
+    "name": "Guinea Pig Temple",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4169070"
+      }
+    ],
+    "id_igdb": "395889",
+    "cover": "cobtow",
+    "artwork": [
+      "ar5ldz"
+    ],
+    "url": "guinea-pig-temple"
+  },
+  {
+    "id": "1537672350437343355",
+    "name": "Fastrak: Metro",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3918220"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1537672355864649769",
+    "name": "Little Sheep Valley",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4075740"
+      }
+    ],
+    "id_igdb": "403179",
+    "cover": "coc4gf",
+    "artwork": [
+      "ar5xzu"
+    ],
+    "url": "little-sheep-valley"
+  },
+  {
+    "id": "1537672363972362250",
+    "name": "Travelling At Night",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2915730"
+      }
+    ],
+    "id_igdb": "326862",
+    "cover": "co989d",
+    "artwork": [
+      "ar39bk"
+    ],
+    "url": "travelling-at-night"
+  },
+  {
+    "id": "1537672371526438952",
+    "name": "Horse Magnifier: The Full Horse",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4585340"
+      }
+    ],
+    "id_igdb": "412747",
+    "cover": "cocna3",
+    "artwork": [
+      "ar6ezg"
+    ],
+    "url": "horse-magnifier-the-full-horse"
+  },
+  {
+    "id": "1537672375838052362",
+    "name": "Pegfinity",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3947040"
+      }
+    ],
+    "id_igdb": "403282",
+    "cover": "coc4rd",
+    "artwork": [
+      "ar5y88"
+    ],
+    "url": "pegfinity"
+  },
+  {
+    "id": "1537672380632014898",
+    "name": "Ember Folks",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4670160"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1537672387242365038",
+    "name": "SCP: ReEnter",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4088120"
+      }
+    ],
+    "id_igdb": "377925",
+    "cover": "coauq7",
+    "artwork": [
+      "ar4p54"
+    ],
+    "url": "scp-reenter"
+  },
+  {
+    "id": "1537672391512297572",
+    "name": "Retrowave 2",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3331000"
+      }
+    ],
+    "id_igdb": "340694",
+    "cover": "co9pih",
+    "artwork": [
+      "ar3rxz"
+    ],
+    "url": "retrowave-2"
+  },
+  {
+    "id": "1537672397832855612",
+    "name": "What the Buck?!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4832970"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1537672405630058547",
+    "name": "Train Station Tycoon",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1565490"
+      }
+    ],
+    "id_igdb": "411263",
+    "cover": "cocktf",
+    "artwork": [
+      "ar6bra"
+    ],
+    "url": "train-station-tycoon"
+  },
+  {
+    "id": "1537514913335877753",
+    "name": "My Little Pony",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "206776",
+    "cover": null,
+    "artwork": null,
+    "url": "my-little-pony"
+  },
+  {
+    "id": "1537672313703637052",
+    "name": "Skate",
+    "aliases": [
+      "skate."
+    ],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "C3QWNCV55VLL"
+      }
+    ],
+    "id_igdb": "2585",
+    "cover": "co6hns",
+    "artwork": [
+      "ar10mu"
+    ],
+    "url": "skate"
   }
 ]
