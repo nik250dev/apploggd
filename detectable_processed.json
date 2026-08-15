@@ -2813,18 +2813,18 @@
   },
   {
     "id": "363411278527594516",
-    "name": "Business Tour",
+    "name": "Business Tour - Online Multiplayer Board Game",
     "aliases": [
       "Business Tour - Online Multiplayer Board Game"
     ],
     "executables": [
       {
-        "name": "businesstour.exe",
+        "name": "business tour/businesstour.exe",
         "os": "win32",
         "is_launcher": false
       },
       {
-        "name": "business tour/businesstour.exe",
+        "name": "businesstour.exe",
         "os": "win32",
         "is_launcher": false
       }
@@ -6925,10 +6925,8 @@
   },
   {
     "id": "393178973129015328",
-    "name": "Zombidle: Remonstered",
-    "aliases": [
-      "Zombidle : REMONSTERED"
-    ],
+    "name": "Zombidle: REMONSTERED",
+    "aliases": [],
     "executables": [
       {
         "name": "zombidle.exe",
@@ -9408,10 +9406,9 @@
   },
   {
     "id": "425440319509626881",
-    "name": "Watch Dogs",
+    "name": "Watch_Dogs",
     "aliases": [
-      "Watch Dogs",
-      "Watch_Dogs"
+      "Watch Dogs"
     ],
     "executables": [
       {
@@ -11393,7 +11390,7 @@
   },
   {
     "id": "425454019205529600",
-    "name": "Far Cry 3: Blood Dragon",
+    "name": "Far Cry 3 Blood Dragon",
     "aliases": [
       "Far Cry? 3 Blood Dragon"
     ],
@@ -13984,7 +13981,7 @@
   },
   {
     "id": "425460776195719168",
-    "name": "The Lord of the Rings: War in the North",
+    "name": "Lord of the Rings: War in the North",
     "aliases": [
       "The Lord of the Rings: War in the North"
     ],
@@ -14322,7 +14319,7 @@
   },
   {
     "id": "425709808705077272",
-    "name": "Neighbours from Hell Compilation",
+    "name": "Neighbours From Hell Compilation",
     "aliases": [
       "Neighbours from Hell"
     ],
@@ -17254,7 +17251,7 @@
   },
   {
     "id": "428054629146951691",
-    "name": "Hunt: Showdown 1896",
+    "name": "Hunt: Showdown (Test Server)",
     "aliases": [],
     "executables": [
       {
@@ -17973,7 +17970,7 @@
   },
   {
     "id": "443157047157194772",
-    "name": "SimCity",
+    "name": "SimCity™",
     "aliases": [
       "SimCity"
     ],
@@ -20845,7 +20842,7 @@
   },
   {
     "id": "451540774530711572",
-    "name": "Warhammer 40,000: Dawn of War II - Retribution",
+    "name": "Dawn of War II - Retribution",
     "aliases": [],
     "executables": [
       {
@@ -25512,7 +25509,7 @@
   },
   {
     "id": "454811906230845440",
-    "name": "Far Cry 4",
+    "name": "FarCry 4",
     "aliases": [],
     "executables": [
       {
@@ -26069,7 +26066,7 @@
   },
   {
     "id": "457301510515195924",
-    "name": "Command & Conquer: Generals - Zero Hour",
+    "name": "Command & Conquer™: Generals and Zero Hour",
     "aliases": [
       "Command & Conquer Generals: Zero Hour"
     ],
@@ -31553,7 +31550,7 @@
   },
   {
     "id": "492129256772599837",
-    "name": "Star Wars: Republic Commando",
+    "name": "STAR WARS™ Republic Commando™",
     "aliases": [],
     "executables": [
       {
@@ -31981,7 +31978,7 @@
   },
   {
     "id": "492161312730775553",
-    "name": "Victoria: An Empire Under the Sun",
+    "name": "Victoria I",
     "aliases": [],
     "executables": [
       {
@@ -32541,7 +32538,7 @@
   },
   {
     "id": "496525141467987991",
-    "name": "Age of Conan: Unchained",
+    "name": "Age of Conan",
     "aliases": [],
     "executables": [
       {
@@ -36280,16 +36277,16 @@
   },
   {
     "id": "496853043103662080",
-    "name": "Marvel Heroes",
+    "name": "Marvel Heroes 2016",
     "aliases": [],
     "executables": [
       {
-        "name": "marvelheroes2016.exe",
+        "name": "marvelheroesomega.exe",
         "os": "win32",
         "is_launcher": false
       },
       {
-        "name": "marvelheroesomega.exe",
+        "name": "marvelheroes2016.exe",
         "os": "win32",
         "is_launcher": false
       }
@@ -36844,19 +36841,19 @@
   },
   {
     "id": "498948228146921472",
-    "name": "Naruto Shippuden: Ultimate Ninja Storm 3 Full Burst",
+    "name": "NARUTO SHIPPUDEN: Ultimate Ninja STORM 3 Full Burst",
     "aliases": [
-      "Naruto Shippuden Ultimate Ninja Storm 3 Full Burst",
-      "NARUTO SHIPPUDEN Ultimate Ninja STORM 3 Full Burst"
+      "NARUTO SHIPPUDEN Ultimate Ninja STORM 3 Full Burst",
+      "Naruto Shippuden Ultimate Ninja Storm 3 Full Burst"
     ],
     "executables": [
       {
-        "name": "ns3fb.exe",
+        "name": "nsuns3.exe",
         "os": "win32",
         "is_launcher": false
       },
       {
-        "name": "nsuns3.exe",
+        "name": "ns3fb.exe",
         "os": "win32",
         "is_launcher": false
       }
@@ -36959,16 +36956,16 @@
   },
   {
     "id": "498971974945603587",
-    "name": "Wreckfest",
+    "name": "Next Car Game: Wreckfest",
     "aliases": [],
     "executables": [
       {
-        "name": "wreckfest_x64.exe",
+        "name": "wreckfest.exe",
         "os": "win32",
         "is_launcher": false
       },
       {
-        "name": "wreckfest.exe",
+        "name": "wreckfest_x64.exe",
         "os": "win32",
         "is_launcher": false
       }
@@ -37234,7 +37231,7 @@
   },
   {
     "id": "498981634339635253",
-    "name": "PixelJunk Shooter Ultimate",
+    "name": "PixelJunk™ Shooter Ultimate",
     "aliases": [],
     "executables": [
       {
@@ -37368,7 +37365,7 @@
   },
   {
     "id": "498986175512576058",
-    "name": "Jackpot Poker by PokerStars",
+    "name": "PokerStars",
     "aliases": [],
     "executables": [
       {
@@ -37385,7 +37382,7 @@
   },
   {
     "id": "498986525757800468",
-    "name": "Lockheed Martin: Prepar3D",
+    "name": "Prepar3D",
     "aliases": [],
     "executables": [
       {
@@ -41614,7 +41611,7 @@
   },
   {
     "id": "505125120960888877",
-    "name": "Dragon Quest X: Inishie no Ryuu no Denshou Online",
+    "name": "ドラゴンクエストＸ　いにしえの竜の伝承　オンライン",
     "aliases": [
       "Dragon Quest X: Mezameshi Itsutsu no Shuzoku Online"
     ],
@@ -42034,7 +42031,7 @@
   },
   {
     "id": "505139561995829278",
-    "name": "Open in the Groove",
+    "name": "OpenITG",
     "aliases": [
       "In The Groove 2"
     ],
@@ -42226,18 +42223,18 @@
   },
   {
     "id": "505142782654939150",
-    "name": "Next",
+    "name": "マジカルバトルアリーナNEXT・幻想郷空閃姫",
     "aliases": [
       "Magical Battle Arena NEXT"
     ],
     "executables": [
       {
-        "name": "mban_m.exe",
+        "name": "mban_f.exe",
         "os": "win32",
         "is_launcher": false
       },
       {
-        "name": "mban_f.exe",
+        "name": "mban_m.exe",
         "os": "win32",
         "is_launcher": false
       }
@@ -42715,7 +42712,7 @@
   },
   {
     "id": "505493023031951411",
-    "name": "Quake III Arena",
+    "name": "Quake III",
     "aliases": [
       "Quake III"
     ],
@@ -43910,7 +43907,7 @@
   },
   {
     "id": "505520072870199335",
-    "name": "VA-11 HALL-A: Cyberpunk Bartender Action",
+    "name": "VA-11 HALL-A",
     "aliases": [
       "VA-11 Hall-A"
     ],
@@ -46131,7 +46128,7 @@
   },
   {
     "id": "1124351695015661608",
-    "name": "Deltarune",
+    "name": "DELTARUNE (Chapter 1 & 2 DEMO)",
     "aliases": [],
     "executables": [
       {
@@ -46152,9 +46149,8 @@
   },
   {
     "id": "1124351697007951964",
-    "name": "Pico Park: Classic Edition",
+    "name": "PICO PARK:Classic Edition",
     "aliases": [
-      "PICO PARK:Classic Edition",
       "PICO PARK"
     ],
     "executables": [
@@ -51235,7 +51231,7 @@
   },
   {
     "id": "1124352090240729169",
-    "name": "In Sink",
+    "name": "In Sink: A Co-Op Escape Prologue",
     "aliases": [],
     "executables": [
       {
@@ -53116,7 +53112,7 @@
   },
   {
     "id": "1124352215193239622",
-    "name": "Hello Neighbor 2",
+    "name": "Hello Neighbor Alpha 2",
     "aliases": [],
     "executables": [
       {
@@ -54003,7 +53999,7 @@
   },
   {
     "id": "1124352286643212438",
-    "name": "Contraband Police",
+    "name": "Contraband Police: Prologue",
     "aliases": [],
     "executables": [
       {
@@ -54260,7 +54256,7 @@
   },
   {
     "id": "1124352307430174840",
-    "name": "DayZ",
+    "name": "DayZ Server",
     "aliases": [],
     "executables": [
       {
@@ -62374,7 +62370,7 @@
   },
   {
     "id": "1124352866652532737",
-    "name": "The Stanley Parable Demonstration",
+    "name": "The Stanley Parable Demo",
     "aliases": [],
     "executables": [
       {
@@ -65566,7 +65562,7 @@
   },
   {
     "id": "1124353077701525504",
-    "name": "Elsword",
+    "name": "Elsword Free-to-Play",
     "aliases": [],
     "executables": [
       {
@@ -67846,10 +67842,9 @@
   },
   {
     "id": "1124353236564983808",
-    "name": "Counterside",
+    "name": "CounterSide",
     "aliases": [
-      "Counter:Side",
-      "CounterSide"
+      "Counter:Side"
     ],
     "executables": [
       {
@@ -73938,7 +73933,7 @@
   },
   {
     "id": "1124353663922618368",
-    "name": "DNF Duel",
+    "name": "DNF DUEL",
     "aliases": [],
     "executables": [
       {
@@ -76825,10 +76820,9 @@
   },
   {
     "id": "1124353934623002726",
-    "name": "Crisis Core: Final Fantasy VII - Reunion",
+    "name": "CRISIS CORE: FINAL FANTASY VII - REUNION",
     "aliases": [
-      "CRISIS CORE -FINAL FANTASY VII- REUNION",
-      "CRISIS CORE: FINAL FANTASY VII - REUNION"
+      "CRISIS CORE -FINAL FANTASY VII- REUNION"
     ],
     "executables": [
       {
@@ -76840,15 +76834,15 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
+        "id": "9P6J9NFKGJ68"
+      },
+      {
+        "distributor": "xbox",
         "id": "9PCWV3FWJZ18"
       },
       {
         "distributor": "steam",
         "id": "1608070"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9P6J9NFKGJ68"
       }
     ],
     "id_igdb": "205201",
@@ -81089,7 +81083,7 @@
   },
   {
     "id": "1124354263536119849",
-    "name": "Sherlock Holmes: Crimes & Punishments",
+    "name": "Sherlock Holmes: Crimes and Punishments",
     "aliases": [],
     "executables": [
       {
@@ -82288,7 +82282,7 @@
   },
   {
     "id": "1124354351591342201",
-    "name": "Wild Life",
+    "name": "Wild Life Demo",
     "aliases": [],
     "executables": [
       {
@@ -89745,7 +89739,7 @@
   },
   {
     "id": "1124354895479324682",
-    "name": "Fears to Fathom: Norwood Hitchhike",
+    "name": "Fears to Fathom - Episode 2",
     "aliases": [],
     "executables": [
       {
@@ -93040,7 +93034,7 @@
   },
   {
     "id": "1124355160664195092",
-    "name": "A WALK IN THE WOODS",
+    "name": "A Walk in the Woods",
     "aliases": [],
     "executables": [
       {
@@ -93052,11 +93046,11 @@
     "third_party_skus": [
       {
         "distributor": "steam",
-        "id": "842420"
+        "id": "557900"
       },
       {
         "distributor": "steam",
-        "id": "557900"
+        "id": "842420"
       }
     ],
     "id_igdb": "99117",
@@ -94349,7 +94343,7 @@
   },
   {
     "id": "1124355284048031794",
-    "name": "Luck be a Landlord",
+    "name": "Luck be a Landlord (DEMO)",
     "aliases": [],
     "executables": [
       {
@@ -94463,7 +94457,7 @@
   },
   {
     "id": "1124355290863779850",
-    "name": "Roller Champions",
+    "name": "Roller Champions™",
     "aliases": [],
     "executables": [
       {
@@ -96785,7 +96779,7 @@
   },
   {
     "id": "1124355460158472295",
-    "name": "Prince of Suburbia",
+    "name": "Prince of Suburbia - Part 1",
     "aliases": [],
     "executables": [
       {
@@ -101427,7 +101421,7 @@
   },
   {
     "id": "1124355786915725323",
-    "name": "Fights in Tight Spaces",
+    "name": "Fights in Tight Spaces (Prologue)",
     "aliases": [],
     "executables": [
       {
@@ -117772,7 +117766,7 @@
   },
   {
     "id": "1124357001678438522",
-    "name": "The Life and Suffering of Sir Brante",
+    "name": "The Life and Suffering of Sir Brante — Chapter 1&2",
     "aliases": [],
     "executables": [
       {
@@ -128202,7 +128196,7 @@
   },
   {
     "id": "1124357748134527119",
-    "name": "Ragnarok Online",
+    "name": "Ragnarok",
     "aliases": [],
     "executables": [
       {
@@ -132334,7 +132328,7 @@
   },
   {
     "id": "1124358058194251898",
-    "name": "Tree of Savior",
+    "name": "Tree of Savior (Japanese Ver.)",
     "aliases": [],
     "executables": [
       {
@@ -137092,7 +137086,7 @@
   },
   {
     "id": "1124358392056655932",
-    "name": "Forza Horizon 4",
+    "name": "Forza Horizon 4 Demo",
     "aliases": [],
     "executables": [
       {
@@ -137103,12 +137097,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9P8CP1L72JXS"
-      },
-      {
         "distributor": "microsoft",
         "id": ""
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P8CP1L72JXS"
       }
     ],
     "cover": null,
@@ -140392,7 +140386,7 @@
   },
   {
     "id": "1124358613373305016",
-    "name": "Mob Factory Demo",
+    "name": "Mob Factory",
     "aliases": [],
     "executables": [
       {
@@ -141957,7 +141951,7 @@
   },
   {
     "id": "1124358718314795078",
-    "name": "Robin to the Rescue",
+    "name": "Robin Hood",
     "aliases": [],
     "executables": [
       {
@@ -142590,7 +142584,7 @@
   },
   {
     "id": "1124358763227402250",
-    "name": "Disney's Hercules Action Game",
+    "name": "Disney's Hercules",
     "aliases": [],
     "executables": [
       {
@@ -158875,7 +158869,7 @@
   },
   {
     "id": "1124359941709381782",
-    "name": "Tower of Fantasy",
+    "name": "幻塔",
     "aliases": [],
     "executables": [
       {
@@ -170933,10 +170927,9 @@
   },
   {
     "id": "1129504328848265387",
-    "name": "Five Nights at Freddy's: Help Wanted",
+    "name": "FIVE NIGHTS AT FREDDY'S: HELP WANTED",
     "aliases": [
-      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED",
-      "FIVE NIGHTS AT FREDDY'S: HELP WANTED"
+      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED"
     ],
     "executables": [
       {
@@ -170947,12 +170940,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9P731FVPM8WW"
-      },
-      {
         "distributor": "steam",
         "id": "732690"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P731FVPM8WW"
       }
     ],
     "id_igdb": "115304",
@@ -171746,7 +171739,7 @@
   },
   {
     "id": "1129504549191831552",
-    "name": "shapez",
+    "name": "shapez.io",
     "aliases": [
       "shapez"
     ],
@@ -174412,7 +174405,7 @@
   },
   {
     "id": "1129505077321801810",
-    "name": "EverQuest",
+    "name": "EverQuest Free-to-Play",
     "aliases": [
       "EverQuest Free-to-Play"
     ],
@@ -174464,7 +174457,7 @@
   },
   {
     "id": "1129505088575119471",
-    "name": "The Ark of Horizon",
+    "name": "the Ark of Horizon",
     "aliases": [],
     "executables": [
       {
@@ -175746,7 +175739,7 @@
   },
   {
     "id": "1129505287167033414",
-    "name": "The Button",
+    "name": "THE BUTTON",
     "aliases": [],
     "executables": [
       {
@@ -176038,7 +176031,7 @@
   },
   {
     "id": "1129505419207921816",
-    "name": "ArmA 2",
+    "name": "Arma 2",
     "aliases": [],
     "executables": [
       {
@@ -179827,7 +179820,7 @@
   },
   {
     "id": "1133852631979282432",
-    "name": "SimRail: The Railway Simulator",
+    "name": "SimRail - The Railway Simulator",
     "aliases": [],
     "executables": [
       {
@@ -181396,7 +181389,7 @@
   },
   {
     "id": "1140359735518957598",
-    "name": "Bopl Battle",
+    "name": "Bopl Battle Demo",
     "aliases": [],
     "executables": [
       {
@@ -181884,7 +181877,7 @@
   },
   {
     "id": "1146247844441899049",
-    "name": "Kebab Chefs!: Restaurant Simulator",
+    "name": "Kebab Simulator: Prologue",
     "aliases": [],
     "executables": [
       {
@@ -185586,7 +185579,7 @@
   },
   {
     "id": "1163957136213168159",
-    "name": "Microsoft Minesweeper",
+    "name": "Minesweeper",
     "aliases": [
       "Minesweeper"
     ],
@@ -186299,7 +186292,7 @@
   },
   {
     "id": "1164997420145459210",
-    "name": "iRacing",
+    "name": "iRacing.com Race Simulation",
     "aliases": [
       "iRacing.com Race Simulation"
     ],
@@ -187249,7 +187242,7 @@
   },
   {
     "id": "1170070899567906877",
-    "name": "Alicia Online",
+    "name": "Alicia",
     "aliases": [
       "Alicia"
     ],
@@ -191756,7 +191749,7 @@
   },
   {
     "id": "1188194332226879559",
-    "name": "Davigo",
+    "name": "DAVIGO",
     "aliases": [],
     "executables": [
       {
@@ -192758,7 +192751,7 @@
   },
   {
     "id": "1194898513587347516",
-    "name": "Atelier Resleriana: Forgotten Alchemy and the Polar Night Liberator",
+    "name": "レスレリアーナのアトリエ ～忘れられた錬金術と極夜の解放者～",
     "aliases": [],
     "executables": [
       {
@@ -195297,7 +195290,7 @@
   },
   {
     "id": "1205286964593692752",
-    "name": "Supermarket Simulator",
+    "name": "Supermarket Simulator: Prologue",
     "aliases": [],
     "executables": [
       {
@@ -197283,7 +197276,7 @@
   },
   {
     "id": "1214301390466318357",
-    "name": "Black Desert",
+    "name": "Black Desert (Россия)",
     "aliases": [],
     "executables": [
       {
@@ -197533,7 +197526,7 @@
   },
   {
     "id": "1215494218491895919",
-    "name": "Dragon's Dogma II",
+    "name": "Dragon's Dogma 2 Character Creator & Storage",
     "aliases": [],
     "executables": [
       {
@@ -197915,7 +197908,7 @@
   },
   {
     "id": "1216128419444690995",
-    "name": "Command & Conquer: Red Alert 2 and Yuri’s Revenge",
+    "name": "Command & Conquer: Red Alert™ 2 and Yuri’s Revenge™",
     "aliases": [],
     "executables": [
       {
@@ -200611,7 +200604,7 @@
   },
   {
     "id": "1225928035270918246",
-    "name": "Crime Scene Cleaner",
+    "name": "Crime Scene Cleaner: Prologue",
     "aliases": [],
     "executables": [
       {
@@ -207576,7 +207569,7 @@
   },
   {
     "id": "1250207987134365819",
-    "name": "You Suck at Parking",
+    "name": "You Suck at Parking® - Complete Edition",
     "aliases": [],
     "executables": [
       {
@@ -211130,7 +211123,7 @@
   },
   {
     "id": "1261698762569416856",
-    "name": "Ai-(Onic)",
+    "name": "ドキドキAI尋問ゲーム 完全版",
     "aliases": [],
     "executables": [
       {
@@ -218088,7 +218081,7 @@
   },
   {
     "id": "1284317752840163328",
-    "name": "INARI",
+    "name": "Inari",
     "aliases": [],
     "executables": [
       {
@@ -223107,7 +223100,7 @@
   },
   {
     "id": "1300066500132212777",
-    "name": "Only Up!",
+    "name": "Only Up !",
     "aliases": [],
     "executables": [
       {
@@ -233683,10 +233676,8 @@
   },
   {
     "id": "1334236670924423251",
-    "name": "Legion of Valkyrie",
-    "aliases": [
-      "战姬军团"
-    ],
+    "name": "战姬军团",
+    "aliases": [],
     "executables": [
       {
         "name": "zjjt/legion of valkyrie.exe",
@@ -236050,6 +236041,10 @@
       {
         "distributor": "steam",
         "id": "1333910"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P03G4S6G41T"
       }
     ],
     "id_igdb": "139605",
@@ -236780,7 +236775,7 @@
   },
   {
     "id": "1343190681090523156",
-    "name": "12",
+    "name": "大逆転裁判1＆2　-成歩堂龍ノ介の冒險と覺悟-",
     "aliases": [],
     "executables": [
       {
@@ -238525,7 +238520,7 @@
   },
   {
     "id": "1348611381259145326",
-    "name": "Crime Simulator",
+    "name": "Crime Simulator (DEMO)",
     "aliases": [],
     "executables": [
       {
@@ -240392,7 +240387,7 @@
   },
   {
     "id": "1353986824040615989",
-    "name": "Atelier Yumia: The Alchemist of Memories & the Envisioned Land",
+    "name": "ユミアのアトリエ ～追憶の錬金術士と幻創の地～",
     "aliases": [],
     "executables": [
       {
@@ -242157,10 +242152,8 @@
   },
   {
     "id": "1359090448487940287",
-    "name": "KindergarTen 1: No Mercy",
-    "aliases": [
-      "KindergarTen 1 - No Mercy"
-    ],
+    "name": "No Mercy",
+    "aliases": [],
     "executables": [
       {
         "name": "no mercy/nomercy.exe",
@@ -242181,7 +242174,7 @@
   },
   {
     "id": "1359196158035103846",
-    "name": "13!",
+    "name": "삼국지13",
     "aliases": [],
     "executables": [
       {
@@ -242336,7 +242329,7 @@
   },
   {
     "id": "1360177588034736249",
-    "name": "Sephiria",
+    "name": "세피리아",
     "aliases": [],
     "executables": [
       {
@@ -244909,7 +244902,7 @@
   },
   {
     "id": "1368104838260588575",
-    "name": "Hollow Cocoon",
+    "name": "ウツロマユ - Hollow Cocoon - 体験版",
     "aliases": [],
     "executables": [
       {
@@ -245034,7 +245027,7 @@
   },
   {
     "id": "1368603150977728643",
-    "name": "Let's Play! Oink Games",
+    "name": "レッツプレイ！オインクゲームズ",
     "aliases": [],
     "executables": [
       {
@@ -246775,10 +246768,8 @@
   },
   {
     "id": "1370067773572648970",
-    "name": "Senren Banka",
-    "aliases": [
-      "Senren ＊ Banka"
-    ],
+    "name": "千恋＊万花",
+    "aliases": [],
     "executables": [
       {
         "name": "senrenbanka/senrenbanka.exe",
@@ -247115,7 +247106,7 @@
   },
   {
     "id": "1370792563359092958",
-    "name": "Sultan's Game",
+    "name": "苏丹的游戏",
     "aliases": [],
     "executables": [
       {
@@ -253443,7 +253434,7 @@
   },
   {
     "id": "1388051286192160809",
-    "name": "Aokana: Four Rhythms Across the Blue",
+    "name": "Aokana - Four Rhythms Across the Blue",
     "aliases": [],
     "executables": [
       {
@@ -260146,7 +260137,7 @@
   },
   {
     "id": "1402416795352305716",
-    "name": "Dungeon Fighter Online",
+    "name": "던전앤파이터",
     "aliases": [
       "Dungeon & Fighter"
     ],
@@ -260519,7 +260510,7 @@
   },
   {
     "id": "1402416830395453481",
-    "name": "Star Wars: Rebellion",
+    "name": "STAR WARS Rebellion",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -261392,7 +261383,7 @@
   },
   {
     "id": "1402416907843534919",
-    "name": "Last Year",
+    "name": "Last Year: The Nightmare",
     "aliases": [],
     "executables": [
       {
@@ -264594,7 +264585,7 @@
   },
   {
     "id": "1402418249374896220",
-    "name": "Mad Machines",
+    "name": "MAD MACHINES",
     "aliases": [],
     "executables": [
       {
@@ -269068,7 +269059,7 @@
   },
   {
     "id": "1412059543382396980",
-    "name": "Y",
+    "name": "スーパーロボット大戦Y",
     "aliases": [],
     "executables": [
       {
@@ -270236,7 +270227,7 @@
   },
   {
     "id": "1419050618542362705",
-    "name": "Little Nightmares III",
+    "name": "Little Nightmares III - Демо-версия",
     "aliases": [],
     "executables": [
       {
@@ -271060,7 +271051,7 @@
   },
   {
     "id": "1423444585647968287",
-    "name": "DIGIMON STORY: TIME STRANGER",
+    "name": "Digimon Story Time Stranger",
     "aliases": [],
     "executables": [
       {
@@ -282403,7 +282394,7 @@
   },
   {
     "id": "1428180459254190080",
-    "name": "Body Cam Shooter",
+    "name": "Bodycamera Shooter",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -285439,9 +285430,10 @@
   },
   {
     "id": "1428182872589602867",
-    "name": "420BLAZE IT 2: GAME OF THE YEAR",
+    "name": "420Blaze It 2: Game of the Year",
     "aliases": [
-      "420 BLAZE IT 2: GAME OF THE YEAR"
+      "420 BLAZE IT 2: GAME OF THE YEAR",
+      "420BLAZE IT 2: GAME OF THE YEAR"
     ],
     "executables": [],
     "third_party_skus": [
@@ -301571,7 +301563,7 @@
   },
   {
     "id": "1428212039494537397",
-    "name": "Hellmaster: The Legend of Dante",
+    "name": "Hellmaster",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -308576,7 +308568,7 @@
   },
   {
     "id": "1435707463935594496",
-    "name": "Test: The Game",
+    "name": "Test",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -308651,7 +308643,7 @@
   },
   {
     "id": "1436052593511235655",
-    "name": "Justice Online",
+    "name": "逆水寒",
     "aliases": [],
     "executables": [
       {
@@ -320733,17 +320725,17 @@
   },
   {
     "id": "1440130098987532348",
-    "name": "Persona 3 Portable",
+    "name": "Shin Megami Tensei: P3P - Persona 3 Portable",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "1809700"
-      },
-      {
         "distributor": "xbox",
         "id": "9NJWL0XVLP7T"
+      },
+      {
+        "distributor": "steam",
+        "id": "1809700"
       }
     ],
     "id_igdb": "234701",
@@ -321946,9 +321938,7 @@
   {
     "id": "1440130601297510491",
     "name": "Watch",
-    "aliases": [
-      "WATCH▷"
-    ],
+    "aliases": [],
     "executables": [],
     "third_party_skus": [],
     "id_igdb": "117604",
@@ -325874,7 +325864,7 @@
   },
   {
     "id": "1440133861601448079",
-    "name": "E-On",
+    "name": "Eon",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -340041,9 +340031,8 @@
   },
   {
     "id": "1440141099212738610",
-    "name": "Hackmud",
+    "name": "hackmud",
     "aliases": [
-      "hackmud",
       "ｈａｃｋｍｕｄ"
     ],
     "executables": [],
@@ -348569,7 +348558,7 @@
   },
   {
     "id": "1440541963001532557",
-    "name": "Cast Away: The Oddysee",
+    "name": "Cato",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -350519,7 +350508,7 @@
   },
   {
     "id": "1441987016110637227",
-    "name": "High Rise",
+    "name": "Highrise",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -356231,7 +356220,7 @@
   },
   {
     "id": "1441993244895477830",
-    "name": "Free Fire Max",
+    "name": "Free Fire",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -359287,7 +359276,12 @@
     "name": "Webgeon Speedrun Edition",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NQLK0RXLLXF"
+      }
+    ],
     "id_igdb": "213393",
     "cover": "co53h0",
     "artwork": [
@@ -361355,7 +361349,7 @@
   },
   {
     "id": "1442712588646613103",
-    "name": "QIX++",
+    "name": "Qix++",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -364044,7 +364038,7 @@
   },
   {
     "id": "1442713542234210427",
-    "name": "Samurai Warrior: The Battles of Usagi Yojimbo",
+    "name": "Samurai Warrior",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -365409,7 +365403,7 @@
   },
   {
     "id": "1442713947475284029",
-    "name": "AM2R: Return of Samus",
+    "name": "AM2R",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -371284,7 +371278,7 @@
   },
   {
     "id": "1442715692309942282",
-    "name": "Airplane Race Simulator 2 Player Game",
+    "name": "Toy Airplane Race Simulator",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -371407,7 +371401,7 @@
   },
   {
     "id": "1442715730335240232",
-    "name": "Hentai: Make Love Not War 2",
+    "name": "Make Love Not War 2",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -376755,7 +376749,7 @@
   },
   {
     "id": "1442717289135996938",
-    "name": "Double Dragon & Kunio-kun: Retro Brawler Bundle",
+    "name": "Kunio-kun: The World Classics Collection",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -377373,7 +377367,7 @@
   },
   {
     "id": "1442717513485123616",
-    "name": "Hajwala Desert",
+    "name": "Desert Racing GST",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -377980,7 +377974,7 @@
   },
   {
     "id": "1442717716224937984",
-    "name": "A Difficult Game About Climbing",
+    "name": "Difficult Climbing Game",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -382059,7 +382053,7 @@
   },
   {
     "id": "1442719015582826599",
-    "name": "RayForce",
+    "name": "Galactic Attack",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -383383,7 +383377,7 @@
   },
   {
     "id": "1442719524993372428",
-    "name": "Save the Doge",
+    "name": "Save The Doge",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -383828,7 +383822,7 @@
   },
   {
     "id": "1442719657663664128",
-    "name": "Pro Flight Simulator: Deluxe",
+    "name": "Pro Flight Simulator Deluxe",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -386570,7 +386564,7 @@
   },
   {
     "id": "1442720624811446394",
-    "name": "Sum10",
+    "name": "SUM10",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -394303,9 +394297,10 @@
   },
   {
     "id": "1442727833993613332",
-    "name": "Arcade Archives: EXERION",
+    "name": "Arcade Archives: Exerion",
     "aliases": [
-      "Arcade Archives EXERION"
+      "Arcade Archives EXERION",
+      "Arcade Archives: EXERION"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -394805,7 +394800,7 @@
   },
   {
     "id": "1442727997479059519",
-    "name": "Ajax",
+    "name": "A-Jax",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -395095,7 +395090,7 @@
   },
   {
     "id": "1442728090907316244",
-    "name": "Another World: 20th Anniversary Edition",
+    "name": "Out of This World",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -395679,7 +395674,7 @@
   },
   {
     "id": "1442728245098446859",
-    "name": "GOLEM",
+    "name": "Golem",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -395692,7 +395687,7 @@
   },
   {
     "id": "1442728248088858644",
-    "name": "Invisible, Inc.",
+    "name": "Invisible, Inc.: Console Edition",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -397097,7 +397092,7 @@
   },
   {
     "id": "1442728707084255242",
-    "name": "Brick Race",
+    "name": "BRICK RACE",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -397258,7 +397253,7 @@
   },
   {
     "id": "1442728741716361256",
-    "name": "Carnival Games VR",
+    "name": "Carnival Games: VR",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -397593,10 +397588,9 @@
   },
   {
     "id": "1442728871614091295",
-    "name": "Arcade Archives: Argus",
+    "name": "Arcade Archives: ARGUS",
     "aliases": [
-      "Arcade Archives ARGUS",
-      "Arcade Archives: ARGUS"
+      "Arcade Archives ARGUS"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -400275,7 +400269,7 @@
   },
   {
     "id": "1442729667231744030",
-    "name": "Cotton 100%",
+    "name": "Märchen Adventure Cotton 100%",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -401528,7 +401522,7 @@
   },
   {
     "id": "1442730059772334080",
-    "name": "Tank Battalion",
+    "name": "Battle City",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -402274,7 +402268,7 @@
   },
   {
     "id": "1442730380527403018",
-    "name": "SUPER Volley Ball",
+    "name": "Super Volleyball",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -402484,7 +402478,7 @@
   },
   {
     "id": "1442730457891475579",
-    "name": "Rod-Land",
+    "name": "Rod Land",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -404251,7 +404245,7 @@
   },
   {
     "id": "1442731069437775903",
-    "name": "We Sing Pop!",
+    "name": "We Sing: Pop!",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -405892,7 +405886,7 @@
   },
   {
     "id": "1442731662885519360",
-    "name": "Warp & Warp",
+    "name": "Warp Warp",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -406418,7 +406412,7 @@
   },
   {
     "id": "1442731829969948692",
-    "name": "Midnight Deluxe",
+    "name": "Midnight: Deluxe",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -406710,7 +406704,7 @@
   },
   {
     "id": "1442731929521754245",
-    "name": "Frogger 2: Swampy's Revenge",
+    "name": "Frogger 2",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -406721,7 +406715,7 @@
   },
   {
     "id": "1442731931396472974",
-    "name": "FunTown Mahjong",
+    "name": "Funtown: Mahjong",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -408660,7 +408654,7 @@
   },
   {
     "id": "1442732507681521695",
-    "name": "fidget spinner",
+    "name": "Fidget Spinner",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -410727,7 +410721,7 @@
   },
   {
     "id": "1442733108343476294",
-    "name": "Joe & Mac Returns",
+    "name": "Joe & Mac: Returns",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -413742,7 +413736,7 @@
   },
   {
     "id": "1442733964866355200",
-    "name": "Ryuuo no Oshigoto!",
+    "name": "The Ryuo's Work is Never Done!",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -414100,7 +414094,7 @@
   },
   {
     "id": "1442734084605480971",
-    "name": "HOMESTAR VR",
+    "name": "Homestar VR Special Edition",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -414254,7 +414248,7 @@
   },
   {
     "id": "1442734122664595487",
-    "name": "XPOSED",
+    "name": "Xposed",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -419753,7 +419747,7 @@
   },
   {
     "id": "1442736520367964262",
-    "name": "Super Puzzles Dream: Xmas",
+    "name": "#Xmas, Super Puzzles Dream",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -422700,7 +422694,7 @@
   },
   {
     "id": "1442737838452899870",
-    "name": "THE CASINO COLLECTION: Ruleta, Vídeo Póker, Tragaperras, Craps, Baccarat, Five-Card Draw Poker, Texas hold 'em, Blackjack and Page One",
+    "name": "The Casino Collection",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -423351,7 +423345,7 @@
   },
   {
     "id": "1442738016283263109",
-    "name": "Shingen Samurai-Fighter",
+    "name": "Takeda Shingen",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -425683,7 +425677,7 @@
   },
   {
     "id": "1442738671890600079",
-    "name": "ANIQUILATION",
+    "name": "Aniquilation",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -427178,7 +427172,7 @@
   },
   {
     "id": "1442739213559660665",
-    "name": "VRock",
+    "name": "VROCK",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -427192,7 +427186,7 @@
   },
   {
     "id": "1442739223043244183",
-    "name": "Valentine Candy: Break Head to Head",
+    "name": "Valentine Candy Break Head to Head",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -427351,7 +427345,7 @@
   },
   {
     "id": "1442739272892547257",
-    "name": "Racing: Breakthrough Gaming Arcade",
+    "name": "Racing (4 Player Cooperation Edition): Breakthrough Gaming Arcade",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -428533,7 +428527,7 @@
   },
   {
     "id": "1442739742868504598",
-    "name": "Elo 1100 Chess",
+    "name": "ELO 1100 Chess",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -430718,7 +430712,7 @@
   },
   {
     "id": "1442740926547230894",
-    "name": "Mira and the Legend of the Djinns",
+    "name": "Mira And The Legend Of The Djinns",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -431747,7 +431741,7 @@
   },
   {
     "id": "1442741375077711916",
-    "name": "Nemesis",
+    "name": "Gradius",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -433372,8 +433366,10 @@
   },
   {
     "id": "1445084239061319920",
-    "name": "Softball: Breakthrough Gaming Arcade - 3 Player Cooperation Edition",
-    "aliases": [],
+    "name": "Softball: Breakthrough Gaming Arcade",
+    "aliases": [
+      "Softball - Breakthrough Gaming Arcade"
+    ],
     "executables": [],
     "third_party_skus": [],
     "id_igdb": "218190",
@@ -438912,9 +438908,7 @@
   {
     "id": "1445182690881179658",
     "name": "Softball: Breakthrough Gaming Arcade",
-    "aliases": [
-      "Softball - Breakthrough Gaming Arcade"
-    ],
+    "aliases": [],
     "executables": [],
     "third_party_skus": [],
     "id_igdb": "204999",
@@ -438964,7 +438958,7 @@
   },
   {
     "id": "1445217050799902730",
-    "name": "Super Robot Taisen T",
+    "name": "Super Robot Wars T",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -440549,7 +440543,7 @@
   },
   {
     "id": "1445819924294664425",
-    "name": "I Wanna Be the Boshy",
+    "name": "I Wanna Be The Boshy",
     "aliases": [],
     "executables": [
       {
@@ -442506,7 +442500,7 @@
   },
   {
     "id": "1445976348387578016",
-    "name": "Rise of Kingdoms",
+    "name": "Rise of Kingdoms: Lost Crusade",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -449116,7 +449110,7 @@
   },
   {
     "id": "1445981031118278756",
-    "name": "Space Cat",
+    "name": "Space Cat!",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -450452,7 +450446,7 @@
   },
   {
     "id": "1445981424736931870",
-    "name": "Nemithia: Tale of the Legendary Saviors",
+    "name": "Nemithia",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -450811,7 +450805,7 @@
   },
   {
     "id": "1445981503485116498",
-    "name": "ASSAULT SECTOR",
+    "name": "Assault Sector",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -450938,7 +450932,7 @@
   },
   {
     "id": "1445981524930465893",
-    "name": "JunkTok: Paranormal Investigators Challenge",
+    "name": "Paranormal Investigators",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -451438,10 +451432,8 @@
   },
   {
     "id": "1445981662466019328",
-    "name": "5-Star 1000 Top Rated",
-    "aliases": [
-      "★★★★★ 1000 Top Rated"
-    ],
+    "name": "1000 Top Rated",
+    "aliases": [],
     "executables": [],
     "third_party_skus": [],
     "id_igdb": "91008",
@@ -451565,10 +451557,8 @@
   },
   {
     "id": "1445981715830149235",
-    "name": "The King of Fighters XIII: Global Match",
-    "aliases": [
-      "THE KING OF FIGHTERS XIII GLOBAL MATCH"
-    ],
+    "name": "The King Of Fighters XIII Global Match",
+    "aliases": [],
     "executables": [],
     "third_party_skus": [],
     "id_igdb": "261086",
@@ -453905,9 +453895,7 @@
   {
     "id": "1445982511632224358",
     "name": "4 Pics 1 Word Quiz",
-    "aliases": [
-      "4pics1word- quiz"
-    ],
+    "aliases": [],
     "executables": [],
     "third_party_skus": [],
     "id_igdb": "103685",
@@ -453996,7 +453984,7 @@
   },
   {
     "id": "1445982540983832747",
-    "name": "Avoid: Classic Edition",
+    "name": "Avoid Classic Edition",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -454361,7 +454349,7 @@
   },
   {
     "id": "1445982664585908336",
-    "name": "Day at School My Teacher Game",
+    "name": "Day at School: My Teacher Game",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -456510,7 +456498,7 @@
   },
   {
     "id": "1447784915130253323",
-    "name": "Amnesia: Memories",
+    "name": "Amnesia™: Memories",
     "aliases": [],
     "executables": [
       {
@@ -471908,7 +471896,7 @@
   },
   {
     "id": "1476232448273551471",
-    "name": "SCP: Containment Breach",
+    "name": "SCP – Containment Breach",
     "aliases": [],
     "executables": [
       {
@@ -472198,7 +472186,7 @@
   },
   {
     "id": "1477018113982730400",
-    "name": "Wolf of Stock Street",
+    "name": "股市淫狼",
     "aliases": [],
     "executables": [
       {
@@ -482443,7 +482431,7 @@
   },
   {
     "id": "1486568997347393616",
-    "name": "Net 24h: Vietnamese Internet Cafe Simulator",
+    "name": "Net 24h: Vietnamese Internet Cafe Chaos",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -483651,7 +483639,7 @@
   },
   {
     "id": "1489101525581299865",
-    "name": "SYMMETRY",
+    "name": "Symmetry",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -495749,12 +495737,16 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "3010850"
+        "distributor": "xbox",
+        "id": "9NHLZS3G6D8H"
       },
       {
         "distributor": "xbox",
         "id": "9PLTG5DJ32XQ"
+      },
+      {
+        "distributor": "steam",
+        "id": "3010850"
       },
       {
         "distributor": "xbox",
@@ -505326,7 +505318,7 @@
   },
   {
     "id": "1521727709615755364",
-    "name": "Kanji de Go Go!",
+    "name": "Kanji de gōgō!",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -505376,7 +505368,7 @@
   },
   {
     "id": "1521727415813013544",
-    "name": "Age of Empires Mobile",
+    "name": "Age of Empires Mobile\r",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -506155,7 +506147,7 @@
   },
   {
     "id": "1522814674939285555",
-    "name": "Deltarune: Chapter 5",
+    "name": "Deltarune Chapter 5",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -513662,5 +513654,148 @@
       "ar10mu"
     ],
     "url": "skate"
+  },
+  {
+    "id": "1538034658699251802",
+    "name": "VanySlash",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2871010"
+      }
+    ],
+    "id_igdb": "297333",
+    "cover": "co82r5",
+    "artwork": [
+      "ar2wfs"
+    ],
+    "url": "vanyslash"
+  },
+  {
+    "id": "1538034684502741012",
+    "name": "Alice and the Devil's Prison",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4145350"
+      }
+    ],
+    "id_igdb": "406645",
+    "cover": "coc90n",
+    "artwork": [
+      "ar6c09"
+    ],
+    "url": "alice-and-the-devils-prison"
+  },
+  {
+    "id": "1538034703939014657",
+    "name": "Ballatory",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3957050"
+      }
+    ],
+    "id_igdb": "391308",
+    "cover": "cobkxz",
+    "artwork": [
+      "ar5e55"
+    ],
+    "url": "ballatory"
+  },
+  {
+    "id": "1538034722750472333",
+    "name": "Harvest Dice Profit",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4583230"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1538034754954469376",
+    "name": "DreamEcho",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3226060"
+      }
+    ],
+    "id_igdb": "374358",
+    "cover": "coapnf",
+    "artwork": [
+      "ar4hzi"
+    ],
+    "url": "dreamecho"
+  },
+  {
+    "id": "1538034775670005791",
+    "name": "Lazy Kickers",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4613890"
+      }
+    ],
+    "id_igdb": "407559",
+    "cover": "cocagr",
+    "artwork": [
+      "ar653s",
+      "ar653t"
+    ],
+    "url": "lazy-kickers"
+  },
+  {
+    "id": "1538034795005870090",
+    "name": "Empire: Four Kingdoms",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3590360"
+      }
+    ],
+    "id_igdb": "70902",
+    "cover": "co2klg",
+    "artwork": [
+      "ar1tmp"
+    ],
+    "url": "goodgame-empire"
+  },
+  {
+    "id": "1538034814546874398",
+    "name": "Shelves and Sorcery: Tidy Up the Enchanted Shop",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3614130"
+      }
+    ],
+    "id_igdb": "411566",
+    "cover": "cocky5",
+    "artwork": [
+      "ar6dar"
+    ],
+    "url": "shelves-and-sorcery-tidy-up-the-enchanted-shop"
   }
 ]
