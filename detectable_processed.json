@@ -12784,7 +12784,7 @@
   },
   {
     "id": "425456795683913750",
-    "name": "Inside",
+    "name": "INSIDE",
     "aliases": [
       "INSIDE"
     ],
@@ -12797,16 +12797,16 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "epic",
+        "id": "13BB5776B9E1424D84CE42D9BA61C0CA"
+      },
+      {
         "distributor": "xbox",
         "id": "C17GQF31D617"
       },
       {
         "distributor": "steam",
         "id": "304430"
-      },
-      {
-        "distributor": "epic",
-        "id": "13BB5776B9E1424D84CE42D9BA61C0CA"
       }
     ],
     "id_igdb": "7342",
@@ -14837,8 +14837,16 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9NW5319WVF3H"
+      },
+      {
         "distributor": "steam",
         "id": "32800"
+      },
+      {
+        "distributor": "epic",
+        "id": "DA67FD6354E34FFDA607D113E4DF904F"
       }
     ],
     "id_igdb": "1052",
@@ -67842,9 +67850,10 @@
   },
   {
     "id": "1124353236564983808",
-    "name": "CounterSide",
+    "name": "Counterside",
     "aliases": [
-      "Counter:Side"
+      "Counter:Side",
+      "CounterSide"
     ],
     "executables": [
       {
@@ -122299,9 +122308,10 @@
   },
   {
     "id": "1124357342394335324",
-    "name": "KILL la KILL: IF",
+    "name": "Kill la Kill: If",
     "aliases": [
-      "KILL la KILL THE GAME: IF"
+      "KILL la KILL THE GAME: IF",
+      "KILL la KILL: IF"
     ],
     "executables": [
       {
@@ -222645,16 +222655,24 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "epic",
-        "id": "F8BF474B836F4303AE3AC469EBE5F447"
+        "distributor": "steam",
+        "id": "292000"
+      },
+      {
+        "distributor": "steam",
+        "id": "28323"
       },
       {
         "distributor": "xbox",
         "id": "9PF1Q2F7JM9G"
       },
       {
-        "distributor": "steam",
-        "id": "292000"
+        "distributor": "epic",
+        "id": "F8BF474B836F4303AE3AC469EBE5F447"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PKCVF4PT070"
       }
     ],
     "id_igdb": "149340",
@@ -321427,9 +321445,8 @@
   },
   {
     "id": "1440130398813159515",
-    "name": "The Joy of Creation",
+    "name": "THE JOY OF CREATION",
     "aliases": [
-      "THE JOY OF CREATION",
       "TJOC"
     ],
     "executables": [],
@@ -321979,6 +321996,10 @@
       {
         "distributor": "steam",
         "id": "2320980"
+      },
+      {
+        "distributor": "epic",
+        "id": "7AF9DDADF4E0495C90D4EF773C317FD1"
       }
     ],
     "id_igdb": "252774",
@@ -340031,8 +340052,9 @@
   },
   {
     "id": "1440141099212738610",
-    "name": "hackmud",
+    "name": "Hackmud",
     "aliases": [
+      "hackmud",
       "ｈａｃｋｍｕｄ"
     ],
     "executables": [],
@@ -394297,10 +394319,9 @@
   },
   {
     "id": "1442727833993613332",
-    "name": "Arcade Archives: Exerion",
+    "name": "Arcade Archives: EXERION",
     "aliases": [
-      "Arcade Archives EXERION",
-      "Arcade Archives: EXERION"
+      "Arcade Archives EXERION"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -414912,10 +414933,9 @@
   },
   {
     "id": "1442734322128916531",
-    "name": "Arcade Archives: Naughty Boy",
+    "name": "Arcade Archives: NAUGHTY BOY",
     "aliases": [
-      "Arcade Archives NAUGHTY BOY",
-      "Arcade Archives: NAUGHTY BOY"
+      "Arcade Archives NAUGHTY BOY"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -422323,10 +422343,9 @@
   },
   {
     "id": "1442737663558811792",
-    "name": "Arcade Archives: The Astyanax",
+    "name": "Arcade Archives: THE ASTYANAX",
     "aliases": [
-      "Arcade Archives THE ASTYANAX",
-      "Arcade Archives: THE ASTYANAX"
+      "Arcade Archives THE ASTYANAX"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -475186,6 +475205,10 @@
       {
         "distributor": "steam",
         "id": "3297800"
+      },
+      {
+        "distributor": "epic",
+        "id": "22D3DB5D295244D1B2CF0543EF2B2DE1"
       }
     ],
     "id_igdb": "368838",
@@ -482431,7 +482454,7 @@
   },
   {
     "id": "1486568997347393616",
-    "name": "Net 24h: Vietnamese Internet Cafe Chaos",
+    "name": "Net 24h: Vietnamese Internet Cafe Simulator",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -513797,5 +513820,265 @@
       "ar6dar"
     ],
     "url": "shelves-and-sorcery-tidy-up-the-enchanted-shop"
+  },
+  {
+    "id": "1538397654910898176",
+    "name": "Agefield High: Rock the School",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3562580"
+      }
+    ],
+    "id_igdb": "356188",
+    "cover": "coa5dh",
+    "artwork": [
+      "ar3vd2"
+    ],
+    "url": "agefield-high-rock-the-school"
+  },
+  {
+    "id": "1538397669125398588",
+    "name": "Dice Throne Digital",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3855060"
+      }
+    ],
+    "id_igdb": "388981",
+    "cover": "cobh3m",
+    "artwork": [
+      "ar58qi"
+    ],
+    "url": "dice-throne-digital"
+  },
+  {
+    "id": "1538397673743196250",
+    "name": "Gemblades",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3165590"
+      }
+    ],
+    "id_igdb": "386881",
+    "cover": "cobcf4",
+    "artwork": [
+      "ar55io"
+    ],
+    "url": "gemblades"
+  },
+  {
+    "id": "1538397678759841802",
+    "name": "Ruins of Dawn",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4364910"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1538397683121782826",
+    "name": "TUNG",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4341400"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1538397690143182920",
+    "name": "SCREAM NOTE",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4791980"
+      }
+    ],
+    "id_igdb": "408316",
+    "cover": "cocl26",
+    "artwork": [
+      "ar6bwu"
+    ],
+    "url": "scream-note"
+  },
+  {
+    "id": "1538397695876538398",
+    "name": "Night Plane",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3310570"
+      }
+    ],
+    "id_igdb": "378426",
+    "cover": "coclm7",
+    "artwork": [
+      "ar4pux"
+    ],
+    "url": "night-plane"
+  },
+  {
+    "id": "1538397703095066736",
+    "name": "I.T Never Ends",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4225400"
+      }
+    ],
+    "id_igdb": "388373",
+    "cover": "cocoxh",
+    "artwork": [
+      "ar57ya"
+    ],
+    "url": "it-never-ends"
+  },
+  {
+    "id": "1538397707541159997",
+    "name": "IGNOBLE",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4216180"
+      }
+    ],
+    "id_igdb": "386667",
+    "cover": "cobf1h",
+    "artwork": [
+      "ar6dre"
+    ],
+    "url": "ignoble"
+  },
+  {
+    "id": "1538397713509515275",
+    "name": "The One Fish",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4883580"
+      }
+    ],
+    "id_igdb": "410892",
+    "cover": "cocjvh",
+    "artwork": [
+      "ar6eul"
+    ],
+    "url": "the-one-fish"
+  },
+  {
+    "id": "1538397720623190017",
+    "name": "Magical Girl ER",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4395870"
+      }
+    ],
+    "id_igdb": "410041",
+    "cover": "coce1h",
+    "artwork": [
+      "ar69ol"
+    ],
+    "url": "magical-girl-er"
+  },
+  {
+    "id": "1538397727723884558",
+    "name": "Mandate Order",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "epic",
+        "id": "D4C93314C8FC4DA2B4E41CE6B48BE328"
+      },
+      {
+        "distributor": "steam",
+        "id": "1733690"
+      }
+    ],
+    "id_igdb": "374619",
+    "cover": "cobczu",
+    "artwork": [
+      "ar566g",
+      "ar561m",
+      "ar561n"
+    ],
+    "url": "mandate-order"
+  },
+  {
+    "id": "1538397747248635924",
+    "name": "Tormentum II",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "931060"
+      }
+    ],
+    "id_igdb": "111364",
+    "cover": "ar63dj",
+    "artwork": [
+      "ar6a1u"
+    ],
+    "url": "tormentum-ii"
+  },
+  {
+    "id": "1538397735051591763",
+    "name": "The Choicer Voicer",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "307223",
+    "cover": "co8f5b",
+    "artwork": null,
+    "url": "the-choicer-voicer"
+  },
+  {
+    "id": "1538397740478758942",
+    "name": "Drive With Friends",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "387860",
+    "cover": "coc99c",
+    "artwork": [
+      "ar57bm"
+    ],
+    "url": "drive-with-friends"
   }
 ]
