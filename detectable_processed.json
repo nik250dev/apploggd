@@ -19848,10 +19848,9 @@
   },
   {
     "id": "451132630390538270",
-    "name": "Bless Global",
+    "name": "BLESS GLOBAL",
     "aliases": [
-      "BLESS",
-      "BLESS GLOBAL"
+      "BLESS"
     ],
     "executables": [
       {
@@ -109710,7 +109709,7 @@
   },
   {
     "id": "1124356382100041849",
-    "name": "Inmost",
+    "name": "INMOST",
     "aliases": [],
     "executables": [
       {
@@ -188432,7 +188431,7 @@
   },
   {
     "id": "1174042035276230686",
-    "name": "DOOM II: Hell on Earth",
+    "name": "Doom II: Hell on Earth",
     "aliases": [
       "DOOM II",
       "DOOM II: Hell on Earth"
@@ -188446,12 +188445,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "2300"
-      },
-      {
         "distributor": "xbox",
         "id": "9PLT62LRF9V7"
+      },
+      {
+        "distributor": "steam",
+        "id": "2300"
       }
     ],
     "id_igdb": "312",
@@ -208526,7 +208525,7 @@
   },
   {
     "id": "1253091967848677447",
-    "name": "Dungeon Full Dive",
+    "name": "Dungeon Full Dive: Player Edition",
     "aliases": [],
     "executables": [
       {
@@ -285448,10 +285447,9 @@
   },
   {
     "id": "1428182872589602867",
-    "name": "420Blaze It 2: Game of the Year",
+    "name": "420BLAZE IT 2: GAME OF THE YEAR",
     "aliases": [
-      "420 BLAZE IT 2: GAME OF THE YEAR",
-      "420BLAZE IT 2: GAME OF THE YEAR"
+      "420 BLAZE IT 2: GAME OF THE YEAR"
     ],
     "executables": [],
     "third_party_skus": [
@@ -321445,8 +321443,9 @@
   },
   {
     "id": "1440130398813159515",
-    "name": "THE JOY OF CREATION",
+    "name": "The Joy of Creation",
     "aliases": [
+      "THE JOY OF CREATION",
       "TJOC"
     ],
     "executables": [],
@@ -340052,9 +340051,8 @@
   },
   {
     "id": "1440141099212738610",
-    "name": "Hackmud",
+    "name": "hackmud",
     "aliases": [
-      "hackmud",
       "ｈａｃｋｍｕｄ"
     ],
     "executables": [],
@@ -368868,10 +368866,9 @@
   },
   {
     "id": "1442715029052063765",
-    "name": "Snwbrd: Freestyle Snowboarding",
+    "name": "SNWBRD: Freestyle Snowboarding",
     "aliases": [
-      "SNWBRD",
-      "SNWBRD: Freestyle Snowboarding"
+      "SNWBRD"
     ],
     "executables": [],
     "third_party_skus": [
@@ -397609,9 +397606,10 @@
   },
   {
     "id": "1442728871614091295",
-    "name": "Arcade Archives: ARGUS",
+    "name": "Arcade Archives: Argus",
     "aliases": [
-      "Arcade Archives ARGUS"
+      "Arcade Archives ARGUS",
+      "Arcade Archives: ARGUS"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -414933,9 +414931,10 @@
   },
   {
     "id": "1442734322128916531",
-    "name": "Arcade Archives: NAUGHTY BOY",
+    "name": "Arcade Archives: Naughty Boy",
     "aliases": [
-      "Arcade Archives NAUGHTY BOY"
+      "Arcade Archives NAUGHTY BOY",
+      "Arcade Archives: NAUGHTY BOY"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -475093,6 +475092,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9NJVQDPGHGCM"
+      },
+      {
         "distributor": "steam",
         "id": "3621330"
       }
@@ -508942,7 +508945,7 @@
   },
   {
     "id": "1529337545643524207",
-    "name": "Fell & Sell",
+    "name": "SHALTER-03",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
