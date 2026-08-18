@@ -19848,9 +19848,10 @@
   },
   {
     "id": "451132630390538270",
-    "name": "BLESS GLOBAL",
+    "name": "Bless Global",
     "aliases": [
-      "BLESS"
+      "BLESS",
+      "BLESS GLOBAL"
     ],
     "executables": [
       {
@@ -47216,6 +47217,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9P91FNMH1GG0"
+      },
+      {
         "distributor": "steam",
         "id": "933110"
       },
@@ -67849,10 +67854,9 @@
   },
   {
     "id": "1124353236564983808",
-    "name": "Counterside",
+    "name": "CounterSide",
     "aliases": [
-      "Counter:Side",
-      "CounterSide"
+      "Counter:Side"
     ],
     "executables": [
       {
@@ -122307,10 +122311,9 @@
   },
   {
     "id": "1124357342394335324",
-    "name": "Kill la Kill: If",
+    "name": "KILL la KILL: IF",
     "aliases": [
-      "KILL la KILL THE GAME: IF",
-      "KILL la KILL: IF"
+      "KILL la KILL THE GAME: IF"
     ],
     "executables": [
       {
@@ -188431,7 +188434,7 @@
   },
   {
     "id": "1174042035276230686",
-    "name": "Doom II: Hell on Earth",
+    "name": "DOOM II: Hell on Earth",
     "aliases": [
       "DOOM II",
       "DOOM II: Hell on Earth"
@@ -208525,7 +208528,7 @@
   },
   {
     "id": "1253091967848677447",
-    "name": "Dungeon Full Dive: Player Edition",
+    "name": "Dungeon Full Dive",
     "aliases": [],
     "executables": [
       {
@@ -239902,8 +239905,20 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9N86L7WK9QF7"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P42LWGMC7K4"
+      },
+      {
         "distributor": "steam",
         "id": "3159330"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NVTL9XKM7BG"
       },
       {
         "distributor": "epic",
@@ -239912,14 +239927,6 @@
       {
         "distributor": "xbox",
         "id": "9NV1N71TKRZS"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9P42LWGMC7K4"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NVTL9XKM7BG"
       }
     ],
     "id_igdb": "300976",
@@ -282950,6 +282957,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9PPH71DV44T7"
+      },
+      {
         "distributor": "steam",
         "id": "2764460"
       }
@@ -325669,6 +325680,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NBB5TF1FFRS"
+      },
       {
         "distributor": "steam",
         "id": "3062150"
@@ -394316,9 +394331,10 @@
   },
   {
     "id": "1442727833993613332",
-    "name": "Arcade Archives: EXERION",
+    "name": "Arcade Archives: Exerion",
     "aliases": [
-      "Arcade Archives EXERION"
+      "Arcade Archives EXERION",
+      "Arcade Archives: EXERION"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -414931,10 +414947,9 @@
   },
   {
     "id": "1442734322128916531",
-    "name": "Arcade Archives: Naughty Boy",
+    "name": "Arcade Archives: NAUGHTY BOY",
     "aliases": [
-      "Arcade Archives NAUGHTY BOY",
-      "Arcade Archives: NAUGHTY BOY"
+      "Arcade Archives NAUGHTY BOY"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -422342,9 +422357,10 @@
   },
   {
     "id": "1442737663558811792",
-    "name": "Arcade Archives: THE ASTYANAX",
+    "name": "Arcade Archives: The Astyanax",
     "aliases": [
-      "Arcade Archives THE ASTYANAX"
+      "Arcade Archives THE ASTYANAX",
+      "Arcade Archives: THE ASTYANAX"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -477569,7 +477585,7 @@
   },
   {
     "id": "1479318355029524522",
-    "name": "Drive With Friends",
+    "name": "Friendslop Drive",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -508945,7 +508961,7 @@
   },
   {
     "id": "1529337545643524207",
-    "name": "SHALTER-03",
+    "name": "Fell & Sell",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -514083,5 +514099,20 @@
       "ar57bm"
     ],
     "url": "drive-with-friends"
+  },
+  {
+    "id": "1539122505447505971",
+    "name": "CINDER CITY",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "361814",
+    "cover": "cocc6j",
+    "artwork": [
+      "ar66pl",
+      "ar66po",
+      "ar41d8"
+    ],
+    "url": "cinder-city"
   }
 ]
