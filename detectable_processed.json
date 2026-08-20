@@ -76833,9 +76833,10 @@
   },
   {
     "id": "1124353934623002726",
-    "name": "CRISIS CORE: FINAL FANTASY VII - REUNION",
+    "name": "Crisis Core: Final Fantasy VII - Reunion",
     "aliases": [
-      "CRISIS CORE -FINAL FANTASY VII- REUNION"
+      "CRISIS CORE -FINAL FANTASY VII- REUNION",
+      "CRISIS CORE: FINAL FANTASY VII - REUNION"
     ],
     "executables": [
       {
@@ -76846,16 +76847,16 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "steam",
+        "id": "1608070"
+      },
+      {
         "distributor": "xbox",
         "id": "9P6J9NFKGJ68"
       },
       {
         "distributor": "xbox",
         "id": "9PCWV3FWJZ18"
-      },
-      {
-        "distributor": "steam",
-        "id": "1608070"
       }
     ],
     "id_igdb": "205201",
@@ -170941,9 +170942,10 @@
   },
   {
     "id": "1129504328848265387",
-    "name": "FIVE NIGHTS AT FREDDY'S: HELP WANTED",
+    "name": "Five Nights at Freddy's: Help Wanted",
     "aliases": [
-      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED"
+      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED",
+      "FIVE NIGHTS AT FREDDY'S: HELP WANTED"
     ],
     "executables": [
       {
@@ -253373,9 +253375,9 @@
   },
   {
     "id": "1387990904194732154",
-    "name": "RAIDOU Remastered: The Mystery of the Soulless Army",
+    "name": "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY",
     "aliases": [
-      "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY"
+      "RAIDOU Remastered: The Mystery of the Soulless Army"
     ],
     "executables": [
       {
@@ -253386,20 +253388,20 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9NB58STJ848G"
+        "distributor": "steam",
+        "id": "2288350"
       },
       {
         "distributor": "xbox",
         "id": "9P284W1H02KW"
       },
       {
-        "distributor": "steam",
-        "id": "2288350"
+        "distributor": "xbox",
+        "id": "9NX3566L9NH9"
       },
       {
         "distributor": "xbox",
-        "id": "9NX3566L9NH9"
+        "id": "9NB58STJ848G"
       }
     ],
     "id_igdb": "337024",
@@ -321461,8 +321463,9 @@
   },
   {
     "id": "1440130398813159515",
-    "name": "THE JOY OF CREATION",
+    "name": "The Joy of Creation",
     "aliases": [
+      "THE JOY OF CREATION",
       "TJOC"
     ],
     "executables": [],
@@ -340072,9 +340075,8 @@
   },
   {
     "id": "1440141099212738610",
-    "name": "Hackmud",
+    "name": "hackmud",
     "aliases": [
-      "hackmud",
       "ｈａｃｋｍｕｄ"
     ],
     "executables": [],
@@ -362531,9 +362533,10 @@
   },
   {
     "id": "1442713050993135749",
-    "name": "Arcade Archives: MAZINGER Z",
+    "name": "Arcade Archives: Mazinger Z",
     "aliases": [
-      "Arcade Archives MAZINGER Z"
+      "Arcade Archives MAZINGER Z",
+      "Arcade Archives: MAZINGER Z"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -368888,10 +368891,9 @@
   },
   {
     "id": "1442715029052063765",
-    "name": "Snwbrd: Freestyle Snowboarding",
+    "name": "SNWBRD: Freestyle Snowboarding",
     "aliases": [
-      "SNWBRD",
-      "SNWBRD: Freestyle Snowboarding"
+      "SNWBRD"
     ],
     "executables": [],
     "third_party_skus": [
@@ -394339,9 +394341,10 @@
   },
   {
     "id": "1442727833993613332",
-    "name": "Arcade Archives: EXERION",
+    "name": "Arcade Archives: Exerion",
     "aliases": [
-      "Arcade Archives EXERION"
+      "Arcade Archives EXERION",
+      "Arcade Archives: EXERION"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -414953,9 +414956,10 @@
   },
   {
     "id": "1442734322128916531",
-    "name": "Arcade Archives: NAUGHTY BOY",
+    "name": "Arcade Archives: Naughty Boy",
     "aliases": [
-      "Arcade Archives NAUGHTY BOY"
+      "Arcade Archives NAUGHTY BOY",
+      "Arcade Archives: NAUGHTY BOY"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -441772,7 +441776,7 @@
   },
   {
     "id": "1445976223309238342",
-    "name": "Professional Ship Simulator",
+    "name": "Nautic XP",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -457715,6 +457719,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NWDBGWHTFLM"
+      },
       {
         "distributor": "steam",
         "id": "3370870"
@@ -482482,7 +482490,7 @@
   },
   {
     "id": "1486568997347393616",
-    "name": "Net 24h: Vietnamese Internet Cafe Simulator",
+    "name": "Net 24h: Vietnamese Internet Cafe Chaos",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -509736,6 +509744,10 @@
       {
         "distributor": "xbox",
         "id": "9P5RTC9G5JVG"
+      },
+      {
+        "distributor": "epic",
+        "id": "010B5FC945254EDDB485F0841D008A87"
       }
     ],
     "id_igdb": "251915",
@@ -513862,6 +513874,10 @@
       {
         "distributor": "steam",
         "id": "3562580"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NWLTB80V1W9"
       }
     ],
     "id_igdb": "356188",
@@ -514708,5 +514724,240 @@
       "ar6fj1"
     ],
     "url": "jojos-bizarre-adventure-golden-spirit"
+  },
+  {
+    "id": "1539846678402826311",
+    "name": "Death Palette",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NTZHGP0GFTP"
+      },
+      {
+        "distributor": "steam",
+        "id": "1321120"
+      }
+    ],
+    "id_igdb": "155883",
+    "cover": "co5lhn",
+    "artwork": [
+      "ar23yp"
+    ],
+    "url": "molu-tiaoseban"
+  },
+  {
+    "id": "1539846686401101966",
+    "name": "Suika Game Planet",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4650440"
+      }
+    ],
+    "id_igdb": "366891",
+    "cover": "cocktc",
+    "artwork": [
+      "ar6br4",
+      "ar6br3",
+      "ar6br7",
+      "ar6br6"
+    ],
+    "url": "suika-game-planet"
+  },
+  {
+    "id": "1539846699340795945",
+    "name": "Step Theater",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4264410"
+      }
+    ],
+    "id_igdb": "395007",
+    "cover": "cobryv",
+    "artwork": [
+      "ar6bcb"
+    ],
+    "url": "step-theater"
+  },
+  {
+    "id": "1539846704658907166",
+    "name": "Scallywags",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3770820"
+      }
+    ],
+    "id_igdb": "404605",
+    "cover": "coc6kk",
+    "artwork": [
+      "ar608j"
+    ],
+    "url": "scallywags--1"
+  },
+  {
+    "id": "1539846710111764480",
+    "name": "Targeted: -10 Days",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "epic",
+        "id": "E02939EF2ACC407BB4713EE52E63EA35"
+      },
+      {
+        "distributor": "steam",
+        "id": "3075050"
+      }
+    ],
+    "id_igdb": "309477",
+    "cover": "co8joo",
+    "artwork": [
+      "ar3189"
+    ],
+    "url": "targeted-10-days"
+  },
+  {
+    "id": "1539846724938375169",
+    "name": "VOIDFACE",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3224540"
+      }
+    ],
+    "id_igdb": "332424",
+    "cover": "ar5r9b",
+    "artwork": [
+      "ar5r9a",
+      "ar5r99",
+      "ar5r9c"
+    ],
+    "url": "voidface"
+  },
+  {
+    "id": "1539846737739645050",
+    "name": "The Legend of Mala Tokmachka",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4787190"
+      }
+    ],
+    "id_igdb": "414149",
+    "cover": "cocpt0",
+    "artwork": [
+      "ar6g53"
+    ],
+    "url": "the-legend-of-mala-tokmachka"
+  },
+  {
+    "id": "1539846748380467200",
+    "name": "The Pale Mimic",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4415740"
+      }
+    ],
+    "id_igdb": "403874",
+    "cover": "coc5gp",
+    "artwork": [
+      "ar5yvb"
+    ],
+    "url": "the-pale-mimic"
+  },
+  {
+    "id": "1539846754470723595",
+    "name": "KEYKRUNCHER",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4887630"
+      }
+    ],
+    "id_igdb": "408685",
+    "cover": "coccci",
+    "artwork": [
+      "ar66tn"
+    ],
+    "url": "keykruncher"
+  },
+  {
+    "id": "1539846761416495176",
+    "name": "Internet Survivor Survivors",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4625810"
+      }
+    ],
+    "id_igdb": "413626",
+    "cover": "cocp0j",
+    "artwork": [
+      "ar6fhq"
+    ],
+    "url": "internet-survivor-survivors"
+  },
+  {
+    "id": "1539846771759390781",
+    "name": "Sanguo dingli Online Remastered",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4770830"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1539812812854132867",
+    "name": "Call of Duty",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "621",
+    "cover": "co2n19",
+    "artwork": [
+      "arejd"
+    ],
+    "url": "call-of-duty"
+  },
+  {
+    "id": "1539827578653909032",
+    "name": "EA Sports UFC 2",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "19918",
+    "cover": "co2bz5",
+    "artwork": [
+      "ar764"
+    ],
+    "url": "ea-sports-ufc-2"
   }
 ]
