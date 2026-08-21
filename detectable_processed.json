@@ -3935,15 +3935,19 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
+        "id": "C1GQ187R0TZ9"
+      },
+      {
+        "distributor": "steam",
+        "id": "233450"
+      },
+      {
+        "distributor": "xbox",
         "id": "BSWF567PL81W"
       },
       {
         "distributor": "epic",
         "id": "3FFB410DAB2D409AACD39A1ABC6FCBBA"
-      },
-      {
-        "distributor": "steam",
-        "id": "233450"
       }
     ],
     "id_igdb": "1338",
@@ -19848,10 +19852,9 @@
   },
   {
     "id": "451132630390538270",
-    "name": "Bless Global",
+    "name": "BLESS GLOBAL",
     "aliases": [
-      "BLESS",
-      "BLESS GLOBAL"
+      "BLESS"
     ],
     "executables": [
       {
@@ -44181,32 +44184,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9NJQCN3QLRVP"
-      },
-      {
-        "distributor": "xbox",
-        "id": "BXRLGWWBJ9R7"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9P3QVG2MT9ND"
-      },
-      {
         "distributor": "steam",
         "id": "760214"
       },
       {
-        "distributor": "steam",
-        "id": "1151340"
-      },
-      {
         "distributor": "xbox",
-        "id": "9PDDKBQCLD26"
-      },
-      {
-        "distributor": "steam",
-        "id": "1302538"
+        "id": "9NJQCN3QLRVP"
       },
       {
         "distributor": "xbox",
@@ -44214,7 +44197,23 @@
       },
       {
         "distributor": "xbox",
-        "id": "9NKGNMNK3K3Z"
+        "id": "C02Q80MGL56S"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PDDKBQCLD26"
+      },
+      {
+        "distributor": "xbox",
+        "id": "C2FB66WKND47"
+      },
+      {
+        "distributor": "steam",
+        "id": "1302538"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P3QVG2MT9ND"
       },
       {
         "distributor": "xbox",
@@ -44222,7 +44221,7 @@
       },
       {
         "distributor": "xbox",
-        "id": "9PBNR4X5H3C8"
+        "id": "9NKGNMNK3K3Z"
       },
       {
         "distributor": "xbox",
@@ -44230,7 +44229,15 @@
       },
       {
         "distributor": "xbox",
-        "id": "C2FB66WKND47"
+        "id": "BXRLGWWBJ9R7"
+      },
+      {
+        "distributor": "steam",
+        "id": "1151340"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PBNR4X5H3C8"
       }
     ],
     "id_igdb": "103020",
@@ -67854,10 +67861,9 @@
   },
   {
     "id": "1124353236564983808",
-    "name": "Counterside",
+    "name": "CounterSide",
     "aliases": [
-      "Counter:Side",
-      "CounterSide"
+      "Counter:Side"
     ],
     "executables": [
       {
@@ -76833,10 +76839,9 @@
   },
   {
     "id": "1124353934623002726",
-    "name": "Crisis Core: Final Fantasy VII - Reunion",
+    "name": "CRISIS CORE: FINAL FANTASY VII - REUNION",
     "aliases": [
-      "CRISIS CORE -FINAL FANTASY VII- REUNION",
-      "CRISIS CORE: FINAL FANTASY VII - REUNION"
+      "CRISIS CORE -FINAL FANTASY VII- REUNION"
     ],
     "executables": [
       {
@@ -76847,12 +76852,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "1608070"
-      },
-      {
         "distributor": "xbox",
         "id": "9P6J9NFKGJ68"
+      },
+      {
+        "distributor": "steam",
+        "id": "1608070"
       },
       {
         "distributor": "xbox",
@@ -151323,7 +151328,7 @@
   },
   {
     "id": "1124359412774092941",
-    "name": "Star Wars: The Force Unleashed - Ultimate Sith Edition",
+    "name": "Star Wars: The Force Unleashed",
     "aliases": [],
     "executables": [
       {
@@ -208536,7 +208541,7 @@
   },
   {
     "id": "1253091967848677447",
-    "name": "Dungeon Full Dive",
+    "name": "Dungeon Full Dive: Player Edition",
     "aliases": [],
     "executables": [
       {
@@ -213402,6 +213407,11 @@
       {
         "name": "fields of mistria/fieldsofmistria.exe",
         "os": "win32",
+        "is_launcher": false
+      },
+      {
+        "name": "fields of mistria/fieldsofmistria",
+        "os": "linux",
         "is_launcher": false
       }
     ],
@@ -252368,6 +252378,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "epic",
+        "id": "7E3C0E52AB6840299E6DCB3429E6B2AC"
+      },
+      {
         "distributor": "steam",
         "id": "2194730"
       }
@@ -260447,12 +260461,20 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "epic",
-        "id": "096D7313D4AE432F9327081A45DB439D"
+        "distributor": "xbox",
+        "id": "BNC1BNGGSWHV"
       },
       {
         "distributor": "steam",
         "id": "475150"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NBLGGH43DHL"
+      },
+      {
+        "distributor": "epic",
+        "id": "096D7313D4AE432F9327081A45DB439D"
       }
     ],
     "id_igdb": "32614",
@@ -271159,7 +271181,7 @@
     "aliases": [],
     "executables": [
       {
-        "name": "cod.exe",
+        "name": "sp25-cod.exe",
         "os": "win32",
         "is_launcher": false
       },
@@ -271167,29 +271189,12 @@
         "name": "cod25-cod.exe",
         "os": "win32",
         "is_launcher": false
-      },
-      {
-        "name": "sp25-cod.exe",
-        "os": "win32",
-        "is_launcher": false
       }
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "3606480"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9PHN10S19030"
-      },
-      {
         "distributor": "xbox",
         "id": "9P0BJSGTBJTG"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9PLBM5790L94"
       },
       {
         "distributor": "xbox",
@@ -271197,7 +271202,19 @@
       },
       {
         "distributor": "xbox",
+        "id": "9PLBM5790L94"
+      },
+      {
+        "distributor": "xbox",
         "id": "9N8KMNW6942X"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PHN10S19030"
+      },
+      {
+        "distributor": "steam",
+        "id": "3606480"
       }
     ],
     "id_igdb": "348220",
@@ -285466,10 +285483,9 @@
   },
   {
     "id": "1428182872589602867",
-    "name": "420Blaze It 2: Game of the Year",
+    "name": "420BLAZE IT 2: GAME OF THE YEAR",
     "aliases": [
-      "420 BLAZE IT 2: GAME OF THE YEAR",
-      "420BLAZE IT 2: GAME OF THE YEAR"
+      "420 BLAZE IT 2: GAME OF THE YEAR"
     ],
     "executables": [],
     "third_party_skus": [
@@ -340075,8 +340091,9 @@
   },
   {
     "id": "1440141099212738610",
-    "name": "hackmud",
+    "name": "Hackmud",
     "aliases": [
+      "hackmud",
       "ｈａｃｋｍｕｄ"
     ],
     "executables": [],
@@ -397632,9 +397649,10 @@
   },
   {
     "id": "1442728871614091295",
-    "name": "Arcade Archives: ARGUS",
+    "name": "Arcade Archives: Argus",
     "aliases": [
-      "Arcade Archives ARGUS"
+      "Arcade Archives ARGUS",
+      "Arcade Archives: ARGUS"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -414956,10 +414974,9 @@
   },
   {
     "id": "1442734322128916531",
-    "name": "Arcade Archives: Naughty Boy",
+    "name": "Arcade Archives: NAUGHTY BOY",
     "aliases": [
-      "Arcade Archives NAUGHTY BOY",
-      "Arcade Archives: NAUGHTY BOY"
+      "Arcade Archives NAUGHTY BOY"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -441776,17 +441793,17 @@
   },
   {
     "id": "1445976223309238342",
-    "name": "Nautic XP",
+    "name": "Professional Ship Simulator",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "epic",
-        "id": "0D24FAF082074FE79ED5D0AAE8F40833"
-      },
-      {
         "distributor": "steam",
         "id": "3636930"
+      },
+      {
+        "distributor": "epic",
+        "id": "0D24FAF082074FE79ED5D0AAE8F40833"
       }
     ],
     "id_igdb": "372515",
@@ -482490,7 +482507,7 @@
   },
   {
     "id": "1486568997347393616",
-    "name": "Net 24h: Vietnamese Internet Cafe Chaos",
+    "name": "Net 24h: Vietnamese Internet Cafe Simulator",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -507533,8 +507550,8 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9NH7J9L5PGTM"
+        "distributor": "epic",
+        "id": "5E3377FE4FF34650BFBD8DBEA9B3A222"
       },
       {
         "distributor": "steam",
@@ -507542,15 +507559,19 @@
       },
       {
         "distributor": "xbox",
-        "id": "9P0N59WQ7ZQ2"
+        "id": "9NH7J9L5PGTM"
       },
       {
         "distributor": "xbox",
         "id": "9MTJNBHVGFR2"
       },
       {
-        "distributor": "epic",
-        "id": "5E3377FE4FF34650BFBD8DBEA9B3A222"
+        "distributor": "xbox",
+        "id": "9P0N59WQ7ZQ2"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NFPC1Z6HSN4"
       }
     ],
     "id_igdb": "289696",
@@ -514936,10 +514957,26 @@
   },
   {
     "id": "1539812812854132867",
-    "name": "Call of Duty",
+    "name": "Call of Duty: Modern Warfare 4",
     "aliases": [],
-    "executables": [],
-    "third_party_skus": [],
+    "executables": [
+      {
+        "name": "sp26-cod.exe",
+        "os": "win32",
+        "is_launcher": false
+      },
+      {
+        "name": "cod.exe",
+        "os": "win32",
+        "is_launcher": false
+      }
+    ],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1938090"
+      }
+    ],
     "id_igdb": "621",
     "cover": "co2n19",
     "artwork": [
@@ -514959,5 +514996,335 @@
       "ar764"
     ],
     "url": "ea-sports-ufc-2"
+  },
+  {
+    "id": "1540209018553892904",
+    "name": "Hands Over",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4661070"
+      }
+    ],
+    "id_igdb": "403826",
+    "cover": "coc5fg",
+    "artwork": [
+      "ar5ze1"
+    ],
+    "url": "hands-over"
+  },
+  {
+    "id": "1540209029354102845",
+    "name": "Excremental Game",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4268200"
+      }
+    ],
+    "id_igdb": "385757",
+    "cover": "cobevx",
+    "artwork": [
+      "ar6bcr",
+      "ar6b21"
+    ],
+    "url": "excremental-game"
+  },
+  {
+    "id": "1540209035176058950",
+    "name": "ModernFire",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4024960"
+      }
+    ],
+    "id_igdb": "370079",
+    "cover": "coak13",
+    "artwork": [
+      "ar4ajt",
+      "ar4ajs"
+    ],
+    "url": "modernfire"
+  },
+  {
+    "id": "1540209040364281896",
+    "name": "The Corrupted",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4141900"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1540209044914966558",
+    "name": "Solar Wave",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3212820"
+      }
+    ],
+    "id_igdb": "349225",
+    "cover": "co9z1f",
+    "artwork": [
+      "ar4m22"
+    ],
+    "url": "solar-wave"
+  },
+  {
+    "id": "1540209052817162342",
+    "name": "The Lantern of the Laughless Saint",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3849000"
+      }
+    ],
+    "id_igdb": "387817",
+    "cover": "cobe8o",
+    "artwork": [
+      "ar571t"
+    ],
+    "url": "the-lantern-of-the-laughless-saint"
+  },
+  {
+    "id": "1540209060702330891",
+    "name": "Uncanny Valley: Checkpoint",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3262820"
+      }
+    ],
+    "id_igdb": "404186",
+    "cover": "coc5z5",
+    "artwork": [
+      "ar5zh8"
+    ],
+    "url": "uncanny-valley-checkpoint"
+  },
+  {
+    "id": "1540209065664454767",
+    "name": "Ploink",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3929350"
+      }
+    ],
+    "id_igdb": "360832",
+    "cover": "coa9sp",
+    "artwork": [
+      "ar409m",
+      "ar409l"
+    ],
+    "url": "ploink"
+  },
+  {
+    "id": "1540209069275480134",
+    "name": "YARETA",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3230380"
+      }
+    ],
+    "id_igdb": "368607",
+    "cover": "coaie7",
+    "artwork": [
+      "ar48yr"
+    ],
+    "url": "yareta"
+  },
+  {
+    "id": "1540209077416628295",
+    "name": "THE CANON OF BALLS",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3962460"
+      }
+    ],
+    "id_igdb": "397344",
+    "cover": "cobw0w",
+    "artwork": [
+      "ar5nzf"
+    ],
+    "url": "the-canon-of-balls--1"
+  },
+  {
+    "id": "1540209083829854340",
+    "name": "WE ARE SO DEAD",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4796830"
+      }
+    ],
+    "id_igdb": "412043",
+    "cover": "coclvv",
+    "artwork": [
+      "ar6d8g"
+    ],
+    "url": "we-are-so-dead"
+  },
+  {
+    "id": "1540209093631807508",
+    "name": "King in the Mountain",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4767130"
+      }
+    ],
+    "id_igdb": "408930",
+    "cover": "cocd5j",
+    "artwork": [
+      "ar6cov"
+    ],
+    "url": "king-in-the-mountain"
+  },
+  {
+    "id": "1540209100774703155",
+    "name": "Hell Deck",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4843210"
+      }
+    ],
+    "id_igdb": "410089",
+    "cover": "coce56",
+    "artwork": null,
+    "url": "hell-deck"
+  },
+  {
+    "id": "1540209114582360074",
+    "name": "Drop Loot",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4916600"
+      }
+    ],
+    "id_igdb": "411029",
+    "cover": "cocki2",
+    "artwork": [
+      "ar6bge"
+    ],
+    "url": "drop-loot"
+  },
+  {
+    "id": "1540209121024933959",
+    "name": "Nightmere",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4917610"
+      }
+    ],
+    "id_igdb": "412021",
+    "cover": "cocm3r",
+    "artwork": [
+      "ar6cwk",
+      "ar6d50"
+    ],
+    "url": "nightmere"
+  },
+  {
+    "id": "1540209127115202601",
+    "name": "Legend of Defenders",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4740930"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1540209134069223427",
+    "name": "Gate to Die",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4866420"
+      }
+    ],
+    "id_igdb": "412500",
+    "cover": "cocnf6",
+    "artwork": [
+      "ar6eal"
+    ],
+    "url": "gate-to-die"
+  },
+  {
+    "id": "1540209139404247090",
+    "name": "SILT",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9PLQHF6VM1ZM"
+      },
+      {
+        "distributor": "steam",
+        "id": "1325890"
+      },
+      {
+        "distributor": "epic",
+        "id": "8B9589EF31834D4B82F69EEC3F0BEC79"
+      }
+    ],
+    "id_igdb": "152261",
+    "cover": "co39tu",
+    "artwork": [
+      "artzl"
+    ],
+    "url": "silt"
   }
 ]
