@@ -67861,9 +67861,10 @@
   },
   {
     "id": "1124353236564983808",
-    "name": "CounterSide",
+    "name": "Counterside",
     "aliases": [
-      "Counter:Side"
+      "Counter:Side",
+      "CounterSide"
     ],
     "executables": [
       {
@@ -76839,9 +76840,10 @@
   },
   {
     "id": "1124353934623002726",
-    "name": "CRISIS CORE: FINAL FANTASY VII - REUNION",
+    "name": "Crisis Core: Final Fantasy VII - Reunion",
     "aliases": [
-      "CRISIS CORE -FINAL FANTASY VII- REUNION"
+      "CRISIS CORE -FINAL FANTASY VII- REUNION",
+      "CRISIS CORE: FINAL FANTASY VII - REUNION"
     ],
     "executables": [
       {
@@ -76856,12 +76858,12 @@
         "id": "9P6J9NFKGJ68"
       },
       {
-        "distributor": "steam",
-        "id": "1608070"
-      },
-      {
         "distributor": "xbox",
         "id": "9PCWV3FWJZ18"
+      },
+      {
+        "distributor": "steam",
+        "id": "1608070"
       }
     ],
     "id_igdb": "205201",
@@ -122318,10 +122320,9 @@
   },
   {
     "id": "1124357342394335324",
-    "name": "Kill la Kill: If",
+    "name": "KILL la KILL: IF",
     "aliases": [
-      "KILL la KILL THE GAME: IF",
-      "KILL la KILL: IF"
+      "KILL la KILL THE GAME: IF"
     ],
     "executables": [
       {
@@ -170947,10 +170948,9 @@
   },
   {
     "id": "1129504328848265387",
-    "name": "Five Nights at Freddy's: Help Wanted",
+    "name": "FIVE NIGHTS AT FREDDY'S: HELP WANTED",
     "aliases": [
-      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED",
-      "FIVE NIGHTS AT FREDDY'S: HELP WANTED"
+      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED"
     ],
     "executables": [
       {
@@ -188443,7 +188443,7 @@
   },
   {
     "id": "1174042035276230686",
-    "name": "DOOM II: Hell on Earth",
+    "name": "Doom II: Hell on Earth",
     "aliases": [
       "DOOM II",
       "DOOM II: Hell on Earth"
@@ -188457,12 +188457,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9PLT62LRF9V7"
-      },
-      {
         "distributor": "steam",
         "id": "2300"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PLT62LRF9V7"
       }
     ],
     "id_igdb": "312",
@@ -242553,6 +242553,10 @@
       {
         "distributor": "steam",
         "id": "2239710"
+      },
+      {
+        "distributor": "epic",
+        "id": "3F4E96D3E0B44DF2B3CF769D33EBC8E2"
       }
     ],
     "id_igdb": "230366",
@@ -250916,12 +250920,7 @@
         "is_launcher": false
       }
     ],
-    "third_party_skus": [
-      {
-        "distributor": "steam",
-        "id": "33570"
-      }
-    ],
+    "third_party_skus": [],
     "id_igdb": "287",
     "cover": "coasmb",
     "artwork": [
@@ -266975,15 +266974,19 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9P834N9S4LL0"
+        "id": "9NQK1C3SFV1K"
       },
       {
         "distributor": "xbox",
-        "id": "9N15MGJQHRTG"
+        "id": "9P834N9S4LL0"
       },
       {
         "distributor": "steam",
         "id": "1941540"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N15MGJQHRTG"
       }
     ],
     "id_igdb": "314276",
@@ -285483,9 +285486,10 @@
   },
   {
     "id": "1428182872589602867",
-    "name": "420BLAZE IT 2: GAME OF THE YEAR",
+    "name": "420Blaze It 2: Game of the Year",
     "aliases": [
-      "420 BLAZE IT 2: GAME OF THE YEAR"
+      "420 BLAZE IT 2: GAME OF THE YEAR",
+      "420BLAZE IT 2: GAME OF THE YEAR"
     ],
     "executables": [],
     "third_party_skus": [
@@ -321479,9 +321483,8 @@
   },
   {
     "id": "1440130398813159515",
-    "name": "The Joy of Creation",
+    "name": "THE JOY OF CREATION",
     "aliases": [
-      "THE JOY OF CREATION",
       "TJOC"
     ],
     "executables": [],
@@ -340091,9 +340094,8 @@
   },
   {
     "id": "1440141099212738610",
-    "name": "Hackmud",
+    "name": "hackmud",
     "aliases": [
-      "hackmud",
       "ｈａｃｋｍｕｄ"
     ],
     "executables": [],
@@ -362550,10 +362552,9 @@
   },
   {
     "id": "1442713050993135749",
-    "name": "Arcade Archives: Mazinger Z",
+    "name": "Arcade Archives: MAZINGER Z",
     "aliases": [
-      "Arcade Archives MAZINGER Z",
-      "Arcade Archives: MAZINGER Z"
+      "Arcade Archives MAZINGER Z"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -368908,9 +368909,10 @@
   },
   {
     "id": "1442715029052063765",
-    "name": "SNWBRD: Freestyle Snowboarding",
+    "name": "Snwbrd: Freestyle Snowboarding",
     "aliases": [
-      "SNWBRD"
+      "SNWBRD",
+      "SNWBRD: Freestyle Snowboarding"
     ],
     "executables": [],
     "third_party_skus": [
@@ -394358,10 +394360,9 @@
   },
   {
     "id": "1442727833993613332",
-    "name": "Arcade Archives: Exerion",
+    "name": "Arcade Archives: EXERION",
     "aliases": [
-      "Arcade Archives EXERION",
-      "Arcade Archives: EXERION"
+      "Arcade Archives EXERION"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -397649,10 +397650,9 @@
   },
   {
     "id": "1442728871614091295",
-    "name": "Arcade Archives: Argus",
+    "name": "Arcade Archives: ARGUS",
     "aliases": [
-      "Arcade Archives ARGUS",
-      "Arcade Archives: ARGUS"
+      "Arcade Archives ARGUS"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -414974,9 +414974,10 @@
   },
   {
     "id": "1442734322128916531",
-    "name": "Arcade Archives: NAUGHTY BOY",
+    "name": "Arcade Archives: Naughty Boy",
     "aliases": [
-      "Arcade Archives NAUGHTY BOY"
+      "Arcade Archives NAUGHTY BOY",
+      "Arcade Archives: NAUGHTY BOY"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -477619,7 +477620,7 @@
   },
   {
     "id": "1479318355029524522",
-    "name": "Friendslop Drive",
+    "name": "Drive With Friends",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -514338,7 +514339,7 @@
   },
   {
     "id": "1539484286111977531",
-    "name": "Orbital Crash",
+    "name": "Hordeguard: Winds of the North",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -514460,7 +514461,7 @@
   },
   {
     "id": "1539484340889583668",
-    "name": "Orbital Crash: Arena Shooter",
+    "name": "Orbital Crash",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -515326,5 +515327,95 @@
       "artzl"
     ],
     "url": "silt"
+  },
+  {
+    "id": "1540571691841888316",
+    "name": "Corner King: Boxing Tycoon",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4259990"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1540571702122254417",
+    "name": "Piroker",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4517160"
+      }
+    ],
+    "id_igdb": "411258",
+    "cover": "cockct",
+    "artwork": [
+      "ar6c9u"
+    ],
+    "url": "piroker"
+  },
+  {
+    "id": "1540571713539149854",
+    "name": "HYPERDROP: A Pachinko Roguelite",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4624920"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1540571724679094354",
+    "name": "Patrician III",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "33570"
+      }
+    ],
+    "id_igdb": "287",
+    "cover": "coasmb",
+    "artwork": [
+      "ar4m52"
+    ],
+    "url": "patrician-iii"
+  },
+  {
+    "id": "1540571737488367626",
+    "name": "Vapor World: Over the Mind",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9N5VHX8KMVNV"
+      },
+      {
+        "distributor": "steam",
+        "id": "1996090"
+      }
+    ],
+    "id_igdb": "172712",
+    "cover": "co3wwj",
+    "artwork": [
+      "ar14qr"
+    ],
+    "url": "vapor-world-over-the-mind"
   }
 ]
