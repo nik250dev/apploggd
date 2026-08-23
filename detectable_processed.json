@@ -19096,15 +19096,19 @@
     "third_party_skus": [
       {
         "distributor": "steam",
-        "id": "13424"
+        "id": "589290"
       },
       {
         "distributor": "steam",
-        "id": "589290"
+        "id": "13424"
       },
       {
         "distributor": "xbox",
         "id": "9PF53MDNSMHQ"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NCL58967XD8"
       }
     ],
     "id_igdb": "28164",
@@ -19852,9 +19856,10 @@
   },
   {
     "id": "451132630390538270",
-    "name": "BLESS GLOBAL",
+    "name": "Bless Global",
     "aliases": [
-      "BLESS"
+      "BLESS",
+      "BLESS GLOBAL"
     ],
     "executables": [
       {
@@ -76840,10 +76845,9 @@
   },
   {
     "id": "1124353934623002726",
-    "name": "Crisis Core: Final Fantasy VII - Reunion",
+    "name": "CRISIS CORE: FINAL FANTASY VII - REUNION",
     "aliases": [
-      "CRISIS CORE -FINAL FANTASY VII- REUNION",
-      "CRISIS CORE: FINAL FANTASY VII - REUNION"
+      "CRISIS CORE -FINAL FANTASY VII- REUNION"
     ],
     "executables": [
       {
@@ -76855,15 +76859,15 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9P6J9NFKGJ68"
-      },
-      {
-        "distributor": "xbox",
         "id": "9PCWV3FWJZ18"
       },
       {
         "distributor": "steam",
         "id": "1608070"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P6J9NFKGJ68"
       }
     ],
     "id_igdb": "205201",
@@ -122320,9 +122324,10 @@
   },
   {
     "id": "1124357342394335324",
-    "name": "KILL la KILL: IF",
+    "name": "Kill la Kill: If",
     "aliases": [
-      "KILL la KILL THE GAME: IF"
+      "KILL la KILL THE GAME: IF",
+      "KILL la KILL: IF"
     ],
     "executables": [
       {
@@ -188443,7 +188448,7 @@
   },
   {
     "id": "1174042035276230686",
-    "name": "Doom II: Hell on Earth",
+    "name": "DOOM II: Hell on Earth",
     "aliases": [
       "DOOM II",
       "DOOM II: Hell on Earth"
@@ -240568,12 +240573,7 @@
         "is_launcher": false
       }
     ],
-    "third_party_skus": [
-      {
-        "distributor": "steam",
-        "id": "351870"
-      }
-    ],
+    "third_party_skus": [],
     "id_igdb": "10118",
     "cover": "co23ho",
     "artwork": [
@@ -248857,7 +248857,7 @@
   },
   {
     "id": "1375911283026825487",
-    "name": "Повестка: Совместный побег",
+    "name": "Summon: Joint Escape",
     "aliases": [],
     "executables": [
       {
@@ -253388,9 +253388,9 @@
   },
   {
     "id": "1387990904194732154",
-    "name": "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY",
+    "name": "RAIDOU Remastered: The Mystery of the Soulless Army",
     "aliases": [
-      "RAIDOU Remastered: The Mystery of the Soulless Army"
+      "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY"
     ],
     "executables": [
       {
@@ -253401,20 +253401,20 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "2288350"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9P284W1H02KW"
-      },
-      {
         "distributor": "xbox",
         "id": "9NX3566L9NH9"
       },
       {
         "distributor": "xbox",
         "id": "9NB58STJ848G"
+      },
+      {
+        "distributor": "steam",
+        "id": "2288350"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P284W1H02KW"
       }
     ],
     "id_igdb": "337024",
@@ -254679,7 +254679,7 @@
   },
   {
     "id": "1392158367434281021",
-    "name": "Chicken Invaders 3: Revenge of the Yolk",
+    "name": "Chicken Invaders 3",
     "aliases": [],
     "executables": [
       {
@@ -256213,8 +256213,16 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9P094ZWKHR56"
+      },
+      {
         "distributor": "steam",
         "id": "508790"
+      },
+      {
+        "distributor": "epic",
+        "id": "B85566D19CCB4F19895B5897E1D381A9"
       }
     ],
     "id_igdb": "31898",
@@ -340094,8 +340102,9 @@
   },
   {
     "id": "1440141099212738610",
-    "name": "hackmud",
+    "name": "Hackmud",
     "aliases": [
+      "hackmud",
       "ｈａｃｋｍｕｄ"
     ],
     "executables": [],
@@ -388282,12 +388291,20 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "2966320"
+        "distributor": "xbox",
+        "id": "9P1LG9CJVH72"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NLFW0TMBNVQ"
       },
       {
         "distributor": "xbox",
         "id": "9P86LLDCL5CC"
+      },
+      {
+        "distributor": "steam",
+        "id": "2966320"
       }
     ],
     "id_igdb": "310885",
@@ -414974,10 +414991,9 @@
   },
   {
     "id": "1442734322128916531",
-    "name": "Arcade Archives: Naughty Boy",
+    "name": "Arcade Archives: NAUGHTY BOY",
     "aliases": [
-      "Arcade Archives NAUGHTY BOY",
-      "Arcade Archives: NAUGHTY BOY"
+      "Arcade Archives NAUGHTY BOY"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -461737,6 +461753,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "BTGWRK5HZ2N9"
+      },
+      {
         "distributor": "steam",
         "id": "227380"
       }
@@ -474457,7 +474477,7 @@
   },
   {
     "id": "1477213831347306569",
-    "name": "Chicken Invaders 4",
+    "name": "Chicken Invaders 4: Ultimate Omelette",
     "aliases": [],
     "executables": [
       {
@@ -495884,12 +495904,16 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "2584270"
+        "distributor": "xbox",
+        "id": "9NQ97NDCWSHD"
       },
       {
         "distributor": "xbox",
-        "id": "9NQ97NDCWSHD"
+        "id": "9NQFKTLZX1J9"
+      },
+      {
+        "distributor": "steam",
+        "id": "2584270"
       },
       {
         "distributor": "xbox",
@@ -495897,7 +495921,7 @@
       },
       {
         "distributor": "xbox",
-        "id": "9NQFKTLZX1J9"
+        "id": "9NTD3R9WD0VT"
       }
     ],
     "id_igdb": "347633",
@@ -515417,5 +515441,240 @@
       "ar14qr"
     ],
     "url": "vapor-world-over-the-mind"
+  },
+  {
+    "id": "1540934150637359174",
+    "name": "Steins;Gate RE:Boot",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4012810"
+      }
+    ],
+    "id_igdb": "320972",
+    "cover": "cocqc6",
+    "artwork": [
+      "ar4pdk",
+      "ar4pm7",
+      "ar6gie",
+      "ar6gid"
+    ],
+    "url": "steins-gate-re-boot"
+  },
+  {
+    "id": "1540934179309490269",
+    "name": "Trails in the Sky 2nd Chapter",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4225980"
+      }
+    ],
+    "id_igdb": "377314",
+    "cover": "cobrhh",
+    "artwork": null,
+    "url": "trails-in-the-sky-2nd-chapter"
+  },
+  {
+    "id": "1540934194450931803",
+    "name": "Dawn One",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2127340"
+      }
+    ],
+    "id_igdb": "235750",
+    "cover": "co6411",
+    "artwork": [
+      "ar24sr"
+    ],
+    "url": "dawn-one"
+  },
+  {
+    "id": "1540934200880795759",
+    "name": "BattleTabs",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4457520"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1540934217301753967",
+    "name": "HELLCARD II",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3106270"
+      }
+    ],
+    "id_igdb": "388355",
+    "cover": "cobftn",
+    "artwork": [
+      "ar580a"
+    ],
+    "url": "hellcard-ii"
+  },
+  {
+    "id": "1540934229729345629",
+    "name": "Sparedevil",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2960500"
+      }
+    ],
+    "id_igdb": "303840",
+    "cover": "cocmjp",
+    "artwork": [
+      "ar2yte"
+    ],
+    "url": "sparedevil"
+  },
+  {
+    "id": "1540934241162895430",
+    "name": "Pizza House Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4132330"
+      },
+      {
+        "distributor": "epic",
+        "id": "4EAD71477A0D4CBD98DE6E71EC2F8119"
+      }
+    ],
+    "id_igdb": "406274",
+    "cover": "coc90v",
+    "artwork": [
+      "ar6cv0"
+    ],
+    "url": "pizza-house-simulator"
+  },
+  {
+    "id": "1540934249870266398",
+    "name": "Clock-out Denied",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4775820"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1540934261329367061",
+    "name": "Plink Lab",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4614970"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1540934276059758682",
+    "name": "Broke Wizards",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4398500"
+      },
+      {
+        "distributor": "epic",
+        "id": "7810FE29DBA9484DAD7B6A2E01FE8B80"
+      }
+    ],
+    "id_igdb": "411184",
+    "cover": "cock8g",
+    "artwork": [
+      "ar6bbb"
+    ],
+    "url": "broke-wizards"
+  },
+  {
+    "id": "1540934298297835641",
+    "name": "Qun xia chuan: Xingcn zhe",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4957110"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1540934312105345117",
+    "name": "Cultures: 8th Wonder of the World",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "351870"
+      }
+    ],
+    "id_igdb": "10118",
+    "cover": "co23ho",
+    "artwork": [
+      "arojd"
+    ],
+    "url": "cultures-8th-wonder-of-the-world"
+  },
+  {
+    "id": "1540934162297659474",
+    "name": "Ash Pines: The Motel",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9N2DB8358S5L"
+      }
+    ],
+    "id_igdb": "361695",
+    "cover": "coac9f",
+    "artwork": [
+      "ar41vs"
+    ],
+    "url": "ash-pines-the-motel"
   }
 ]
