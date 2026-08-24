@@ -39334,6 +39334,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "epic",
+        "id": "1109B87F323946E5B7883D724E6A22BA"
+      },
+      {
         "distributor": "steam",
         "id": "204060"
       }
@@ -67866,10 +67870,9 @@
   },
   {
     "id": "1124353236564983808",
-    "name": "Counterside",
+    "name": "CounterSide",
     "aliases": [
-      "Counter:Side",
-      "CounterSide"
+      "Counter:Side"
     ],
     "executables": [
       {
@@ -170953,9 +170956,10 @@
   },
   {
     "id": "1129504328848265387",
-    "name": "FIVE NIGHTS AT FREDDY'S: HELP WANTED",
+    "name": "Five Nights at Freddy's: Help Wanted",
     "aliases": [
-      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED"
+      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED",
+      "FIVE NIGHTS AT FREDDY'S: HELP WANTED"
     ],
     "executables": [
       {
@@ -170966,12 +170970,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "732690"
-      },
-      {
         "distributor": "xbox",
         "id": "9P731FVPM8WW"
+      },
+      {
+        "distributor": "steam",
+        "id": "732690"
       }
     ],
     "id_igdb": "115304",
@@ -208546,7 +208550,7 @@
   },
   {
     "id": "1253091967848677447",
-    "name": "Dungeon Full Dive: Player Edition",
+    "name": "Dungeon Full Dive",
     "aliases": [],
     "executables": [
       {
@@ -238847,6 +238851,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "BPZMCH4W02TT"
+      },
+      {
         "distributor": "steam",
         "id": "390720"
       }
@@ -253388,9 +253396,9 @@
   },
   {
     "id": "1387990904194732154",
-    "name": "RAIDOU Remastered: The Mystery of the Soulless Army",
+    "name": "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY",
     "aliases": [
-      "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY"
+      "RAIDOU Remastered: The Mystery of the Soulless Army"
     ],
     "executables": [
       {
@@ -253402,19 +253410,19 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
+        "id": "9NB58STJ848G"
+      },
+      {
+        "distributor": "xbox",
         "id": "9NX3566L9NH9"
       },
       {
         "distributor": "xbox",
-        "id": "9NB58STJ848G"
+        "id": "9P284W1H02KW"
       },
       {
         "distributor": "steam",
         "id": "2288350"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9P284W1H02KW"
       }
     ],
     "id_igdb": "337024",
@@ -285494,10 +285502,9 @@
   },
   {
     "id": "1428182872589602867",
-    "name": "420Blaze It 2: Game of the Year",
+    "name": "420BLAZE IT 2: GAME OF THE YEAR",
     "aliases": [
-      "420 BLAZE IT 2: GAME OF THE YEAR",
-      "420BLAZE IT 2: GAME OF THE YEAR"
+      "420 BLAZE IT 2: GAME OF THE YEAR"
     ],
     "executables": [],
     "third_party_skus": [
@@ -301932,7 +301939,9 @@
   {
     "id": "1428212193798656010",
     "name": "Rise of the White Sun",
-    "aliases": [],
+    "aliases": [
+      "Rise Of The White Sun - 白日升"
+    ],
     "executables": [],
     "third_party_skus": [
       {
@@ -311924,6 +311933,10 @@
       {
         "distributor": "steam",
         "id": "1063490"
+      },
+      {
+        "distributor": "epic",
+        "id": "57100ABEFC28446BA0E8046674604A1D"
       }
     ],
     "id_igdb": "119886",
@@ -321491,8 +321504,9 @@
   },
   {
     "id": "1440130398813159515",
-    "name": "THE JOY OF CREATION",
+    "name": "The Joy of Creation",
     "aliases": [
+      "THE JOY OF CREATION",
       "TJOC"
     ],
     "executables": [],
@@ -340102,9 +340116,8 @@
   },
   {
     "id": "1440141099212738610",
-    "name": "Hackmud",
+    "name": "hackmud",
     "aliases": [
-      "hackmud",
       "ｈａｃｋｍｕｄ"
     ],
     "executables": [],
@@ -397667,9 +397680,10 @@
   },
   {
     "id": "1442728871614091295",
-    "name": "Arcade Archives: ARGUS",
+    "name": "Arcade Archives: Argus",
     "aliases": [
-      "Arcade Archives ARGUS"
+      "Arcade Archives ARGUS",
+      "Arcade Archives: ARGUS"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -432277,6 +432291,14 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9MXNGTGKPP1W"
+      },
+      {
+        "distributor": "epic",
+        "id": "A7CADA234B3840B88336F028778FF162"
+      },
+      {
         "distributor": "steam",
         "id": "1233590"
       }
@@ -432478,7 +432500,7 @@
   },
   {
     "id": "1444870737453252640",
-    "name": "Patrician IV: Steam Special Edition",
+    "name": "Patrician IV",
     "aliases": [],
     "executables": [
       {
@@ -447019,7 +447041,7 @@
   },
   {
     "id": "1445977119153852509",
-    "name": "Eldorante",
+    "name": "ELDORANTE",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -457016,6 +457038,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "epic",
+        "id": "0BF87BBC635142C0AC1864FCE65E3EB5"
+      },
+      {
         "distributor": "steam",
         "id": "208400"
       }
@@ -459568,6 +459594,10 @@
       {
         "distributor": "steam",
         "id": "1373430"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P0L9HQ9TT2V"
       }
     ],
     "id_igdb": "138756",
@@ -477640,7 +477670,7 @@
   },
   {
     "id": "1479318355029524522",
-    "name": "Drive With Friends",
+    "name": "Friendslop Drive",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
