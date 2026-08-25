@@ -19856,10 +19856,9 @@
   },
   {
     "id": "451132630390538270",
-    "name": "Bless Global",
+    "name": "BLESS GLOBAL",
     "aliases": [
-      "BLESS",
-      "BLESS GLOBAL"
+      "BLESS"
     ],
     "executables": [
       {
@@ -49781,8 +49780,9 @@
   },
   {
     "id": "1124351982908493894",
-    "name": "MIR 4",
+    "name": "Mir 4",
     "aliases": [
+      "MIR 4",
       "MIR4"
     ],
     "executables": [
@@ -76848,9 +76848,10 @@
   },
   {
     "id": "1124353934623002726",
-    "name": "CRISIS CORE: FINAL FANTASY VII - REUNION",
+    "name": "Crisis Core: Final Fantasy VII - Reunion",
     "aliases": [
-      "CRISIS CORE -FINAL FANTASY VII- REUNION"
+      "CRISIS CORE -FINAL FANTASY VII- REUNION",
+      "CRISIS CORE: FINAL FANTASY VII - REUNION"
     ],
     "executables": [
       {
@@ -76865,12 +76866,12 @@
         "id": "9PCWV3FWJZ18"
       },
       {
-        "distributor": "steam",
-        "id": "1608070"
-      },
-      {
         "distributor": "xbox",
         "id": "9P6J9NFKGJ68"
+      },
+      {
+        "distributor": "steam",
+        "id": "1608070"
       }
     ],
     "id_igdb": "205201",
@@ -122327,10 +122328,9 @@
   },
   {
     "id": "1124357342394335324",
-    "name": "Kill la Kill: If",
+    "name": "KILL la KILL: IF",
     "aliases": [
-      "KILL la KILL THE GAME: IF",
-      "KILL la KILL: IF"
+      "KILL la KILL THE GAME: IF"
     ],
     "executables": [
       {
@@ -170956,10 +170956,9 @@
   },
   {
     "id": "1129504328848265387",
-    "name": "Five Nights at Freddy's: Help Wanted",
+    "name": "FIVE NIGHTS AT FREDDY'S: HELP WANTED",
     "aliases": [
-      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED",
-      "FIVE NIGHTS AT FREDDY'S: HELP WANTED"
+      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED"
     ],
     "executables": [
       {
@@ -170970,12 +170969,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9P731FVPM8WW"
-      },
-      {
         "distributor": "steam",
         "id": "732690"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P731FVPM8WW"
       }
     ],
     "id_igdb": "115304",
@@ -188334,20 +188333,8 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "1528080"
-      },
-      {
         "distributor": "xbox",
-        "id": "9PP507NQD1K4"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9PJMZ47DL234"
-      },
-      {
-        "distributor": "steam",
-        "id": "1149620"
+        "id": "9NN2WL7GT7NJ"
       },
       {
         "distributor": "epic",
@@ -188355,15 +188342,31 @@
       },
       {
         "distributor": "xbox",
+        "id": "9NPC79PHSDZ6"
+      },
+      {
+        "distributor": "xbox",
         "id": "9NH6JRWC8MTZ"
       },
       {
         "distributor": "xbox",
-        "id": "9PPQ8VZKSDJK"
+        "id": "9PJMZ47DL234"
       },
       {
         "distributor": "xbox",
-        "id": "9NN2WL7GT7NJ"
+        "id": "9PP507NQD1K4"
+      },
+      {
+        "distributor": "steam",
+        "id": "1528080"
+      },
+      {
+        "distributor": "steam",
+        "id": "1149620"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PPQ8VZKSDJK"
       }
     ],
     "id_igdb": "122522",
@@ -188452,7 +188455,7 @@
   },
   {
     "id": "1174042035276230686",
-    "name": "DOOM II: Hell on Earth",
+    "name": "Doom II: Hell on Earth",
     "aliases": [
       "DOOM II",
       "DOOM II: Hell on Earth"
@@ -188517,12 +188520,12 @@
     ],
     "executables": [
       {
-        "name": "mafia - definitive edition/mafiadefinitiveedition.exe",
+        "name": "mafia definitive edition/mafiadefinitiveedition.exe",
         "os": "win32",
         "is_launcher": false
       },
       {
-        "name": "mafia definitive edition/mafiadefinitiveedition.exe",
+        "name": "mafia - definitive edition/mafiadefinitiveedition.exe",
         "os": "win32",
         "is_launcher": false
       }
@@ -188530,11 +188533,15 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9PGWB5ZMDPDM"
+        "id": "9NP3CC2X23BN"
       },
       {
         "distributor": "steam",
         "id": "1030840"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NZC09NNR93L"
       },
       {
         "distributor": "epic",
@@ -188542,11 +188549,11 @@
       },
       {
         "distributor": "xbox",
-        "id": "9NZC09NNR93L"
+        "id": "9N24WGZTP92S"
       },
       {
         "distributor": "xbox",
-        "id": "9N24WGZTP92S"
+        "id": "9PGWB5ZMDPDM"
       }
     ],
     "id_igdb": "134070",
@@ -285502,9 +285509,10 @@
   },
   {
     "id": "1428182872589602867",
-    "name": "420BLAZE IT 2: GAME OF THE YEAR",
+    "name": "420Blaze It 2: Game of the Year",
     "aliases": [
-      "420 BLAZE IT 2: GAME OF THE YEAR"
+      "420 BLAZE IT 2: GAME OF THE YEAR",
+      "420BLAZE IT 2: GAME OF THE YEAR"
     ],
     "executables": [],
     "third_party_skus": [
@@ -368931,10 +368939,9 @@
   },
   {
     "id": "1442715029052063765",
-    "name": "Snwbrd: Freestyle Snowboarding",
+    "name": "SNWBRD: Freestyle Snowboarding",
     "aliases": [
-      "SNWBRD",
-      "SNWBRD: Freestyle Snowboarding"
+      "SNWBRD"
     ],
     "executables": [],
     "third_party_skus": [
@@ -397680,10 +397687,9 @@
   },
   {
     "id": "1442728871614091295",
-    "name": "Arcade Archives: Argus",
+    "name": "Arcade Archives: ARGUS",
     "aliases": [
-      "Arcade Archives ARGUS",
-      "Arcade Archives: ARGUS"
+      "Arcade Archives ARGUS"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -401285,12 +401291,16 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "C0RNBFHQ7X96"
+      },
+      {
         "distributor": "steam",
         "id": "647570"
       },
       {
         "distributor": "xbox",
-        "id": "C0RNBFHQ7X96"
+        "id": "9NKDZ44LZR2R"
       }
     ],
     "id_igdb": "37064",
@@ -415005,9 +415015,10 @@
   },
   {
     "id": "1442734322128916531",
-    "name": "Arcade Archives: NAUGHTY BOY",
+    "name": "Arcade Archives: Naughty Boy",
     "aliases": [
-      "Arcade Archives NAUGHTY BOY"
+      "Arcade Archives NAUGHTY BOY",
+      "Arcade Archives: NAUGHTY BOY"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -477670,7 +477681,7 @@
   },
   {
     "id": "1479318355029524522",
-    "name": "Friendslop Drive",
+    "name": "Drive With Friends",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
