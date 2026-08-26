@@ -19856,9 +19856,10 @@
   },
   {
     "id": "451132630390538270",
-    "name": "BLESS GLOBAL",
+    "name": "Bless Global",
     "aliases": [
-      "BLESS"
+      "BLESS",
+      "BLESS GLOBAL"
     ],
     "executables": [
       {
@@ -49780,9 +49781,8 @@
   },
   {
     "id": "1124351982908493894",
-    "name": "Mir 4",
+    "name": "MIR 4",
     "aliases": [
-      "MIR 4",
       "MIR4"
     ],
     "executables": [
@@ -76848,10 +76848,9 @@
   },
   {
     "id": "1124353934623002726",
-    "name": "Crisis Core: Final Fantasy VII - Reunion",
+    "name": "CRISIS CORE: FINAL FANTASY VII - REUNION",
     "aliases": [
-      "CRISIS CORE -FINAL FANTASY VII- REUNION",
-      "CRISIS CORE: FINAL FANTASY VII - REUNION"
+      "CRISIS CORE -FINAL FANTASY VII- REUNION"
     ],
     "executables": [
       {
@@ -76862,16 +76861,16 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9PCWV3FWJZ18"
+        "distributor": "steam",
+        "id": "1608070"
       },
       {
         "distributor": "xbox",
         "id": "9P6J9NFKGJ68"
       },
       {
-        "distributor": "steam",
-        "id": "1608070"
+        "distributor": "xbox",
+        "id": "9PCWV3FWJZ18"
       }
     ],
     "id_igdb": "205201",
@@ -170956,9 +170955,10 @@
   },
   {
     "id": "1129504328848265387",
-    "name": "FIVE NIGHTS AT FREDDY'S: HELP WANTED",
+    "name": "Five Nights at Freddy's: Help Wanted",
     "aliases": [
-      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED"
+      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED",
+      "FIVE NIGHTS AT FREDDY'S: HELP WANTED"
     ],
     "executables": [
       {
@@ -170969,12 +170969,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "732690"
-      },
-      {
         "distributor": "xbox",
         "id": "9P731FVPM8WW"
+      },
+      {
+        "distributor": "steam",
+        "id": "732690"
       }
     ],
     "id_igdb": "115304",
@@ -238835,6 +238835,10 @@
     "third_party_skus": [
       {
         "distributor": "steam",
+        "id": "1765810"
+      },
+      {
+        "distributor": "steam",
         "id": "1378060"
       }
     ],
@@ -248511,6 +248515,10 @@
     "third_party_skus": [
       {
         "distributor": "steam",
+        "id": "12241"
+      },
+      {
+        "distributor": "steam",
         "id": "983350"
       }
     ],
@@ -255632,6 +255640,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9P5SDG8BZ91W"
+      },
+      {
         "distributor": "steam",
         "id": "1079210"
       }
@@ -255645,7 +255657,7 @@
   },
   {
     "id": "1394544103261343785",
-    "name": "SWAT",
+    "name": "GHD",
     "aliases": [],
     "executables": [
       {
@@ -285509,10 +285521,9 @@
   },
   {
     "id": "1428182872589602867",
-    "name": "420Blaze It 2: Game of the Year",
+    "name": "420BLAZE IT 2: GAME OF THE YEAR",
     "aliases": [
-      "420 BLAZE IT 2: GAME OF THE YEAR",
-      "420BLAZE IT 2: GAME OF THE YEAR"
+      "420 BLAZE IT 2: GAME OF THE YEAR"
     ],
     "executables": [],
     "third_party_skus": [
@@ -358429,6 +358440,10 @@
       {
         "distributor": "steam",
         "id": "505740"
+      },
+      {
+        "distributor": "epic",
+        "id": "1C943DE0163F4F0982F34DC0FC37DCE9"
       }
     ],
     "id_igdb": "96094",
@@ -362582,9 +362597,10 @@
   },
   {
     "id": "1442713050993135749",
-    "name": "Arcade Archives: MAZINGER Z",
+    "name": "Arcade Archives: Mazinger Z",
     "aliases": [
-      "Arcade Archives MAZINGER Z"
+      "Arcade Archives MAZINGER Z",
+      "Arcade Archives: MAZINGER Z"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -415015,10 +415031,9 @@
   },
   {
     "id": "1442734322128916531",
-    "name": "Arcade Archives: Naughty Boy",
+    "name": "Arcade Archives: NAUGHTY BOY",
     "aliases": [
-      "Arcade Archives NAUGHTY BOY",
-      "Arcade Archives: NAUGHTY BOY"
+      "Arcade Archives NAUGHTY BOY"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -422426,9 +422441,10 @@
   },
   {
     "id": "1442737663558811792",
-    "name": "Arcade Archives: THE ASTYANAX",
+    "name": "Arcade Archives: The Astyanax",
     "aliases": [
-      "Arcade Archives THE ASTYANAX"
+      "Arcade Archives THE ASTYANAX",
+      "Arcade Archives: THE ASTYANAX"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -432324,7 +432340,7 @@
   },
   {
     "id": "1443708066393620581",
-    "name": "Minigame Madness Lite",
+    "name": "Minigame Madness",
     "aliases": [],
     "executables": [
       {
@@ -432337,6 +432353,10 @@
       {
         "distributor": "steam",
         "id": "1827800"
+      },
+      {
+        "distributor": "steam",
+        "id": "1408080"
       }
     ],
     "cover": null,
@@ -452506,7 +452526,16 @@
     "name": "EternaL Psychomachia",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9N1GZ4FLVNLV"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MZ2GND7W7QK"
+      }
+    ],
     "cover": null,
     "artwork": null,
     "url": null
@@ -459037,7 +459066,12 @@
         "is_launcher": false
       }
     ],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "574690"
+      }
+    ],
     "id_igdb": "29732",
     "cover": "cobr4j",
     "artwork": null,
@@ -471634,6 +471668,10 @@
       {
         "distributor": "steam",
         "id": "1903510"
+      },
+      {
+        "distributor": "steam",
+        "id": "781180"
       }
     ],
     "cover": null,
@@ -515717,5 +515755,599 @@
       "ar41vs"
     ],
     "url": "ash-pines-the-motel"
+  },
+  {
+    "id": "1542021009295675454",
+    "name": "GodsTV",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2626570"
+      }
+    ],
+    "id_igdb": "361544",
+    "cover": "coax9b",
+    "artwork": [
+      "ar4119"
+    ],
+    "url": "godstv"
+  },
+  {
+    "id": "1542021015276888085",
+    "name": "Gallipoli",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9P5D9KZ17GS5"
+      },
+      {
+        "distributor": "epic",
+        "id": "A07B9F4519464D1B92B620320E37138B"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P0ZKCGHXB88"
+      },
+      {
+        "distributor": "steam",
+        "id": "3065940"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NTT5VGZV7DL"
+      }
+    ],
+    "id_igdb": "361663",
+    "cover": "coaasv",
+    "artwork": [
+      "ar6a4d",
+      "ar6a4c"
+    ],
+    "url": "gallipoli"
+  },
+  {
+    "id": "1542021027423330305",
+    "name": "Minsgon Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3935270"
+      }
+    ],
+    "id_igdb": "373363",
+    "cover": "cocpic",
+    "artwork": [
+      "ar4geu"
+    ],
+    "url": "minsgon-simulator"
+  },
+  {
+    "id": "1542021031663898686",
+    "name": "Sobosuba",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1946560"
+      }
+    ],
+    "id_igdb": "293517",
+    "cover": "coanww",
+    "artwork": [
+      "ar2uii"
+    ],
+    "url": "sobosuba"
+  },
+  {
+    "id": "1542021035853873182",
+    "name": "Caaahr!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4627980"
+      }
+    ],
+    "id_igdb": "405654",
+    "cover": "coc7t6",
+    "artwork": null,
+    "url": "caaahr"
+  },
+  {
+    "id": "1542021042426486845",
+    "name": "Payday: Aces High",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3456660"
+      }
+    ],
+    "id_igdb": "395847",
+    "cover": "cobtmu",
+    "artwork": [
+      "ar5lhv"
+    ],
+    "url": "payday-aces-high"
+  },
+  {
+    "id": "1542021049426776242",
+    "name": "BLOODLETTER",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3493400"
+      }
+    ],
+    "id_igdb": "337717",
+    "cover": "ar5lwj",
+    "artwork": [
+      "ar5lwk",
+      "ar3f8j"
+    ],
+    "url": "bloodletter--1"
+  },
+  {
+    "id": "1542021053973532812",
+    "name": "Pet.Net",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4211870"
+      }
+    ],
+    "id_igdb": "371131",
+    "cover": "coax1n",
+    "artwork": [
+      "ar4rb0"
+    ],
+    "url": "pet-dot-net"
+  },
+  {
+    "id": "1542021058834468927",
+    "name": "How to Fish",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4001890"
+      }
+    ],
+    "id_igdb": "378170",
+    "cover": "cob7jt",
+    "artwork": [
+      "ar51mj"
+    ],
+    "url": "how-to-fish"
+  },
+  {
+    "id": "1542021068368388136",
+    "name": "Night Rolls Cozy Store",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "965190"
+      }
+    ],
+    "id_igdb": "407211",
+    "cover": "coc9zu",
+    "artwork": [
+      "ar6483"
+    ],
+    "url": "night-rolls-cozy-store"
+  },
+  {
+    "id": "1542021076135968770",
+    "name": "Punch Upon a Time",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4485570"
+      }
+    ],
+    "id_igdb": "399204",
+    "cover": "cobysu",
+    "artwork": null,
+    "url": "punch-upon-a-time"
+  },
+  {
+    "id": "1542021081039245322",
+    "name": "Epitome",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3274530"
+      }
+    ],
+    "id_igdb": "386631",
+    "cover": "cobbzp",
+    "artwork": [
+      "ar551u"
+    ],
+    "url": "epitome"
+  },
+  {
+    "id": "1542021086021947413",
+    "name": "I'm No Demonlord",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3258560"
+      }
+    ],
+    "id_igdb": "385485",
+    "cover": "ar5fyw",
+    "artwork": [
+      "ar5fyx",
+      "ar5fyy"
+    ],
+    "url": "im-no-demonlord"
+  },
+  {
+    "id": "1542021092409999370",
+    "name": "Mr. Triangle's Adventure",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4612650"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1542021114039894108",
+    "name": "PROFITS 2167: Planetary Resource Optimization & Freight Infrastructure Technician Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4534000"
+      }
+    ],
+    "id_igdb": "397201",
+    "cover": "ar5zd8",
+    "artwork": [
+      "ar6gg6",
+      "ar5zd7"
+    ],
+    "url": "profits-2167-planetary-resource-optimization-and-freight-infrastructure-technician-simulator"
+  },
+  {
+    "id": "1542021119005958164",
+    "name": "SuperWeird",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3818770"
+      }
+    ],
+    "id_igdb": "353883",
+    "cover": "coa3oe",
+    "artwork": null,
+    "url": "superweird"
+  },
+  {
+    "id": "1542021127512260729",
+    "name": "My Singing Monsters Karaoke",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4633140"
+      }
+    ],
+    "id_igdb": "412306",
+    "cover": "cocmdk",
+    "artwork": [
+      "ar6eod"
+    ],
+    "url": "my-singing-monsters-karaoke"
+  },
+  {
+    "id": "1542021135401484328",
+    "name": "A.D.D. (Anomaly Detection Department)",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4914590"
+      }
+    ],
+    "id_igdb": "412470",
+    "cover": "cocmum",
+    "artwork": [
+      "ar6dta"
+    ],
+    "url": "add-anomaly-detection-department"
+  },
+  {
+    "id": "1542021141848395838",
+    "name": "Infinity Bounce",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4572170"
+      }
+    ],
+    "id_igdb": "412398",
+    "cover": "cocmxm",
+    "artwork": [
+      "ar6dvo"
+    ],
+    "url": "infinity-bounce"
+  },
+  {
+    "id": "1542021146742886511",
+    "name": "Konbini Cleanup",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4951190"
+      }
+    ],
+    "id_igdb": "413298",
+    "cover": "cocogb",
+    "artwork": [
+      "ar6f14"
+    ],
+    "url": "konbini-cleanup"
+  },
+  {
+    "id": "1542021152371769454",
+    "name": "MarginCall",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4961460"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1542021157253943327",
+    "name": "Moo Who?",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4948000"
+      }
+    ],
+    "id_igdb": "414543",
+    "cover": "cocra8",
+    "artwork": [
+      "ar6he8"
+    ],
+    "url": "moo-who"
+  },
+  {
+    "id": "1542021164174676008",
+    "name": "PC Fish: Taskbar Aquarium",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4842670"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1542021172537860187",
+    "name": "Mall: Tidy Up Together",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4962010"
+      }
+    ],
+    "id_igdb": "411864",
+    "cover": "cocpq8",
+    "artwork": [
+      "ar6cqo",
+      "ar6cqp"
+    ],
+    "url": "mall-tidy-up-together"
+  },
+  {
+    "id": "1542021178863001640",
+    "name": "Deep Blue Sushi",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4005220"
+      }
+    ],
+    "id_igdb": "414377",
+    "cover": "cocqef",
+    "artwork": [
+      "ar6git"
+    ],
+    "url": "deep-blue-sushi"
+  },
+  {
+    "id": "1542021185393655879",
+    "name": "Apple Faces Up",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4511010"
+      }
+    ],
+    "id_igdb": "414101",
+    "cover": "cocppq",
+    "artwork": [
+      "ar6g72"
+    ],
+    "url": "apple-faces-up"
+  },
+  {
+    "id": "1542021190275833916",
+    "name": "S21",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4953120"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1542021194713141319",
+    "name": "Dub Rumble",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5083150"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1542021216767053904",
+    "name": "Heatwarped",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4846360"
+      }
+    ],
+    "id_igdb": "414518",
+    "cover": "cocqnt",
+    "artwork": [
+      "ar6gu3"
+    ],
+    "url": "heatwarped"
+  },
+  {
+    "id": "1542021223469547643",
+    "name": "RHYTHMKILL",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3667050"
+      }
+    ],
+    "id_igdb": "361064",
+    "cover": "coaa35",
+    "artwork": [
+      "ar6csv",
+      "ar6csw"
+    ],
+    "url": "rhythmkill"
+  },
+  {
+    "id": "1542021245552296016",
+    "name": "Tennis no Ouji-sama: Doki-doki Survival Sanroku no Mystic",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3907380"
+      }
+    ],
+    "id_igdb": "395102",
+    "cover": "cobs4q",
+    "artwork": [
+      "ar5k0s"
+    ],
+    "url": "the-prince-of-tennis-doki-doki-survival-eternal-passion-tie-break-game"
+  },
+  {
+    "id": "1542021249805455434",
+    "name": "Cardpocalypse",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "904400"
+      },
+      {
+        "distributor": "epic",
+        "id": "2BFD5CA43EF443739ADA168E017E1B78"
+      },
+      {
+        "distributor": "steam",
+        "id": "16402"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NP9N5L5X9Q4"
+      }
+    ],
+    "id_igdb": "106150",
+    "cover": "co1uqu",
+    "artwork": [
+      "ar9ob"
+    ],
+    "url": "cardpocalypse"
   }
 ]
