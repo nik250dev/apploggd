@@ -4812,11 +4812,15 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "BWX7S94S2LMJ"
+        "id": "C3VQH1CZFM7F"
       },
       {
         "distributor": "steam",
         "id": "235540"
+      },
+      {
+        "distributor": "xbox",
+        "id": "BWX7S94S2LMJ"
       }
     ],
     "id_igdb": "9181",
@@ -19095,8 +19099,16 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "589290"
+        "distributor": "xbox",
+        "id": "9P5CGB1JW14V"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PFQ9MSG4XXQ"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P47W3M17SN5"
       },
       {
         "distributor": "steam",
@@ -19104,11 +19116,19 @@
       },
       {
         "distributor": "xbox",
-        "id": "9PF53MDNSMHQ"
+        "id": "9P489C2F93B0"
       },
       {
         "distributor": "xbox",
         "id": "9NCL58967XD8"
+      },
+      {
+        "distributor": "steam",
+        "id": "589290"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PF53MDNSMHQ"
       }
     ],
     "id_igdb": "28164",
@@ -19676,6 +19696,10 @@
       {
         "distributor": "steam",
         "id": "439350"
+      },
+      {
+        "distributor": "steam",
+        "id": "439350\t"
       }
     ],
     "id_igdb": "56010",
@@ -56307,23 +56331,11 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9MV5SG2QHX8W"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NPLRJ9CC870"
+        "id": "9P7PFH4RMFZD"
       },
       {
         "distributor": "steam",
         "id": "1985810"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9N41CR72ZVSL"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NKRZ9PL3FJ4"
       },
       {
         "distributor": "battlenet",
@@ -56331,7 +56343,23 @@
       },
       {
         "distributor": "xbox",
-        "id": "9P7PFH4RMFZD"
+        "id": "9NPLRJ9CC870"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N41CR72ZVSL"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N72SFQ24KW8"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MV5SG2QHX8W"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NKRZ9PL3FJ4"
       }
     ],
     "id_igdb": "137001",
@@ -67870,9 +67898,10 @@
   },
   {
     "id": "1124353236564983808",
-    "name": "CounterSide",
+    "name": "Counterside",
     "aliases": [
-      "Counter:Side"
+      "Counter:Side",
+      "CounterSide"
     ],
     "executables": [
       {
@@ -76848,9 +76877,10 @@
   },
   {
     "id": "1124353934623002726",
-    "name": "CRISIS CORE: FINAL FANTASY VII - REUNION",
+    "name": "Crisis Core: Final Fantasy VII - Reunion",
     "aliases": [
-      "CRISIS CORE -FINAL FANTASY VII- REUNION"
+      "CRISIS CORE -FINAL FANTASY VII- REUNION",
+      "CRISIS CORE: FINAL FANTASY VII - REUNION"
     ],
     "executables": [
       {
@@ -76866,11 +76896,11 @@
       },
       {
         "distributor": "xbox",
-        "id": "9P6J9NFKGJ68"
+        "id": "9PCWV3FWJZ18"
       },
       {
         "distributor": "xbox",
-        "id": "9PCWV3FWJZ18"
+        "id": "9P6J9NFKGJ68"
       }
     ],
     "id_igdb": "205201",
@@ -93507,6 +93537,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9MVTC1F5F68S"
+      },
+      {
         "distributor": "steam",
         "id": "1489630"
       }
@@ -100269,6 +100303,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "40390\t"
+      },
       {
         "distributor": "steam",
         "id": "40390"
@@ -170955,10 +170993,9 @@
   },
   {
     "id": "1129504328848265387",
-    "name": "Five Nights at Freddy's: Help Wanted",
+    "name": "FIVE NIGHTS AT FREDDY'S: HELP WANTED",
     "aliases": [
-      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED",
-      "FIVE NIGHTS AT FREDDY'S: HELP WANTED"
+      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED"
     ],
     "executables": [
       {
@@ -201197,6 +201234,10 @@
         "id": "1465460"
       },
       {
+        "distributor": "xbox",
+        "id": "9PLS38PR0FKJ"
+      },
+      {
         "distributor": "epic",
         "id": "582F0EAFBDE4494BBF31EF210830DD62"
       }
@@ -203854,6 +203895,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2099110\t"
+      },
       {
         "distributor": "steam",
         "id": "2099110"
@@ -230698,6 +230743,10 @@
     "third_party_skus": [
       {
         "distributor": "steam",
+        "id": "2607060\t"
+      },
+      {
+        "distributor": "steam",
         "id": "2607060"
       }
     ],
@@ -235191,6 +235240,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1413250\t"
+      },
       {
         "distributor": "steam",
         "id": "1413250"
@@ -240940,6 +240993,10 @@
       {
         "distributor": "steam",
         "id": "2612680"
+      },
+      {
+        "distributor": "steam",
+        "id": "2612680 "
       }
     ],
     "id_igdb": "275979",
@@ -245355,6 +245412,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "epic",
+        "id": "EE30A29B65554C92A720AD1C8D3E4B18"
+      },
       {
         "distributor": "steam",
         "id": "2429490"
@@ -251102,6 +251163,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9N5FBD97PC72"
+      },
+      {
         "distributor": "steam",
         "id": "910630"
       }
@@ -251203,6 +251268,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1125510\t"
+      },
       {
         "distributor": "steam",
         "id": "1125510"
@@ -255414,6 +255483,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "epic",
+        "id": "F3E8024474E84FD48ED6AF08EB89EDD0"
+      },
       {
         "distributor": "steam",
         "id": "631570"
@@ -337275,7 +337348,7 @@
   },
   {
     "id": "1440138857889927301",
-    "name": "Over Field",
+    "name": "OverField",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -345625,12 +345698,16 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9NFB0Q076ZN9"
+        "distributor": "epic",
+        "id": "F698D5D792654AC99F47D67E93916BEF"
       },
       {
         "distributor": "xbox",
-        "id": "9P0VF4BSN88L"
+        "id": "9PHJTVJZ429L"
+      },
+      {
+        "distributor": "steam",
+        "id": "918570"
       },
       {
         "distributor": "xbox",
@@ -345638,15 +345715,7 @@
       },
       {
         "distributor": "xbox",
-        "id": "9PB5DX22HVVG"
-      },
-      {
-        "distributor": "epic",
-        "id": "F698D5D792654AC99F47D67E93916BEF"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9P6M888FRBS0"
+        "id": "9P6JBT365ZBK"
       },
       {
         "distributor": "xbox",
@@ -345654,7 +345723,11 @@
       },
       {
         "distributor": "xbox",
-        "id": "9PHJTVJZ429L"
+        "id": "9NW4T7GP9D8X"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NLF1ZKQ269R\t"
       },
       {
         "distributor": "xbox",
@@ -345662,15 +345735,27 @@
       },
       {
         "distributor": "xbox",
-        "id": "9NK53Q901G9P"
-      },
-      {
-        "distributor": "xbox",
         "id": "9NRDQD2L0NLZ"
       },
       {
         "distributor": "xbox",
-        "id": "9P6JBT365ZBK"
+        "id": "9P6M888FRBS0"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NFB0Q076ZN9"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NK53Q901G9P"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PB5DX22HVVG"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P0VF4BSN88L"
       },
       {
         "distributor": "xbox",
@@ -345678,15 +345763,7 @@
       },
       {
         "distributor": "xbox",
-        "id": "9NW4T7GP9D8X"
-      },
-      {
-        "distributor": "xbox",
         "id": "9NLF1ZKQ269R"
-      },
-      {
-        "distributor": "steam",
-        "id": "918570"
       }
     ],
     "id_igdb": "141536",
@@ -348140,6 +348217,10 @@
       {
         "distributor": "steam",
         "id": "1872970"
+      },
+      {
+        "distributor": "epic",
+        "id": "F858C9DA38E24EB1B3DC0C52F7DC95C9"
       }
     ],
     "id_igdb": "194743",
@@ -362597,10 +362678,9 @@
   },
   {
     "id": "1442713050993135749",
-    "name": "Arcade Archives: Mazinger Z",
+    "name": "Arcade Archives: MAZINGER Z",
     "aliases": [
-      "Arcade Archives MAZINGER Z",
-      "Arcade Archives: MAZINGER Z"
+      "Arcade Archives MAZINGER Z"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -366180,6 +366260,10 @@
       {
         "distributor": "steam",
         "id": "1788890"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PFCJQKRBNX4    "
       }
     ],
     "id_igdb": "186411",
@@ -367300,12 +367384,16 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "epic",
+        "id": "DDA4F41BF1F64B98B0E91D74C9BE9FA0"
+      },
+      {
         "distributor": "xbox",
         "id": "9N2DXGTLG8FN"
       },
       {
-        "distributor": "epic",
-        "id": "DDA4F41BF1F64B98B0E91D74C9BE9FA0"
+        "distributor": "steam",
+        "id": "2244480\t"
       },
       {
         "distributor": "steam",
@@ -368955,9 +369043,10 @@
   },
   {
     "id": "1442715029052063765",
-    "name": "SNWBRD: Freestyle Snowboarding",
+    "name": "Snwbrd: Freestyle Snowboarding",
     "aliases": [
-      "SNWBRD"
+      "SNWBRD",
+      "SNWBRD: Freestyle Snowboarding"
     ],
     "executables": [],
     "third_party_skus": [
@@ -397703,9 +397792,10 @@
   },
   {
     "id": "1442728871614091295",
-    "name": "Arcade Archives: ARGUS",
+    "name": "Arcade Archives: Argus",
     "aliases": [
-      "Arcade Archives ARGUS"
+      "Arcade Archives ARGUS",
+      "Arcade Archives: ARGUS"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -415031,9 +415121,10 @@
   },
   {
     "id": "1442734322128916531",
-    "name": "Arcade Archives: NAUGHTY BOY",
+    "name": "Arcade Archives: Naughty Boy",
     "aliases": [
-      "Arcade Archives NAUGHTY BOY"
+      "Arcade Archives NAUGHTY BOY",
+      "Arcade Archives: NAUGHTY BOY"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -460962,6 +461053,14 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "epic",
+        "id": "7509A5C8FEB744AE866D9E3326D52D3B"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NCNJ43HGVMM"
+      },
+      {
         "distributor": "steam",
         "id": "898650"
       }
@@ -469850,6 +469949,10 @@
       {
         "distributor": "steam",
         "id": "2261430"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PH0FD698M3C"
       }
     ],
     "id_igdb": "231484",
@@ -480840,6 +480943,10 @@
       {
         "distributor": "steam",
         "id": "3979870"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MT2HKWB3NXZ"
       }
     ],
     "id_igdb": "391179",
@@ -487904,6 +488011,10 @@
       {
         "distributor": "steam",
         "id": "3699590"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PLH7R84GJWP"
       }
     ],
     "id_igdb": "360075",
@@ -498403,10 +498514,17 @@
   },
   {
     "id": "1516279434838147182",
-    "name": "KOTAMON: My Sis Found A Super-Rare Card In Her Cereal Box, So I Became A Garbage Man To Find The Entire Collection And Earn $1,000,000",
-    "aliases": [],
+    "name": "Kotamon: My Sis Found a Super-Rare Card in Her Cereal Box, so I Became a Garbage Man to Find the Entire Collection and Earn $1,000,000",
+    "aliases": [
+      "KOTÁMON: My Sis Found A Super-Rare Card In Her Cereal Box, So I Became A Garbage Man To Find The Entire Collection And Earn $1,000,000"
+    ],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4294490"
+      }
+    ],
     "id_igdb": "387714",
     "cover": "cobdyg",
     "artwork": [
@@ -498700,7 +498818,7 @@
   },
   {
     "id": "1517247038306123827",
-    "name": "The Guild: Europa 1410",
+    "name": "The Guild 1 Remake: Europa 1410",
     "aliases": [
       "The Guild - Europa 1410"
     ],
@@ -500405,7 +500523,12 @@
     "name": "Sniper Camouflage Orange Spy Warrior I Buried Two Bodies in the Garden and the Police Haven't Figured Out Yet That They're Missing Because They Were a Lonely Old Couple Who Had No Relatives Simulator 2026",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4323130"
+      }
+    ],
     "id_igdb": "386546",
     "cover": "cobbu2",
     "artwork": [
@@ -500628,7 +500751,9 @@
   {
     "id": "1518103339449974859",
     "name": "Neat",
-    "aliases": [],
+    "aliases": [
+      "Neat!"
+    ],
     "executables": [],
     "third_party_skus": [
       {
@@ -503502,6 +503627,10 @@
       {
         "distributor": "steam",
         "id": "2621930"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NP25GB92DP5"
       }
     ],
     "id_igdb": "347439",
@@ -507979,7 +508108,7 @@
   },
   {
     "id": "1526802014661771297",
-    "name": "TFC2: Collapse of The Bronze Age",
+    "name": "TFC2: The Fertile Crescent 2 - Collapse of The Bronze Age",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -515881,7 +516010,7 @@
   },
   {
     "id": "1542021049426776242",
-    "name": "BLOODLETTER",
+    "name": "Bloodletter",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -516349,5 +516478,94 @@
       "ar9ob"
     ],
     "url": "cardpocalypse"
+  },
+  {
+    "id": "1542383672454553682",
+    "name": "Beat Weaver",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4265140"
+      }
+    ],
+    "id_igdb": "393657",
+    "cover": "cobpck",
+    "artwork": [
+      "ar5i2w"
+    ],
+    "url": "beat-weaver"
+  },
+  {
+    "id": "1542383686039769199",
+    "name": "Box of Broken Nails",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4034000"
+      }
+    ],
+    "id_igdb": "385344",
+    "cover": "coba1v",
+    "artwork": [
+      "ar53d1"
+    ],
+    "url": "box-of-broken-nails"
+  },
+  {
+    "id": "1542383697632698369",
+    "name": "Bad Grip Club",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4754860"
+      }
+    ],
+    "id_igdb": "406956",
+    "cover": "coc9jl",
+    "artwork": [
+      "ar63tp"
+    ],
+    "url": "bad-grip-club"
+  },
+  {
+    "id": "1542383707791564911",
+    "name": "Social Democracy: An Alternate History",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3083910"
+      }
+    ],
+    "id_igdb": "301376",
+    "cover": "cobx9a",
+    "artwork": null,
+    "url": "social-democracy-an-alternate-history"
+  },
+  {
+    "id": "1542383726967783545",
+    "name": "Valkyrie Iteration: Mecha Pilot Raising Pocket Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3466240"
+      }
+    ],
+    "id_igdb": "361061",
+    "cover": "coaa33",
+    "artwork": [
+      "ar40ks",
+      "ar40kt"
+    ],
+    "url": "valkyrie-iteration-mecha-pilot-raising-pocket-simulator"
   }
 ]
