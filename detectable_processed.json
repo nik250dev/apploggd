@@ -50250,9 +50250,8 @@
   },
   {
     "id": "1124351982908493894",
-    "name": "Mir 4",
+    "name": "MIR 4",
     "aliases": [
-      "MIR 4",
       "MIR4"
     ],
     "executables": [
@@ -101117,6 +101116,10 @@
     "third_party_skus": [
       {
         "distributor": "steam",
+        "id": "40390\t"
+      },
+      {
+        "distributor": "steam",
         "id": "40390"
       }
     ],
@@ -132747,10 +132750,6 @@
       }
     ],
     "third_party_skus": [
-      {
-        "distributor": "steam",
-        "id": "1420350\t"
-      },
       {
         "distributor": "steam",
         "id": "1420350"
@@ -189722,7 +189721,7 @@
   },
   {
     "id": "1174042035276230686",
-    "name": "DOOM II: Hell on Earth",
+    "name": "Doom II: Hell on Earth",
     "aliases": [
       "DOOM II",
       "DOOM II: Hell on Earth"
@@ -189736,12 +189735,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "2300"
-      },
-      {
         "distributor": "xbox",
         "id": "9PLT62LRF9V7"
+      },
+      {
+        "distributor": "steam",
+        "id": "2300"
       }
     ],
     "id_igdb": "312",
@@ -205141,6 +205140,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2099110\t"
+      },
       {
         "distributor": "steam",
         "id": "2099110"
@@ -232021,6 +232024,10 @@
     "third_party_skus": [
       {
         "distributor": "steam",
+        "id": "2607060\t"
+      },
+      {
+        "distributor": "steam",
         "id": "2607060"
       }
     ],
@@ -242271,10 +242278,6 @@
       {
         "distributor": "steam",
         "id": "2612680"
-      },
-      {
-        "distributor": "steam",
-        "id": "2612680 "
       }
     ],
     "id_igdb": "275979",
@@ -273940,12 +273943,20 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "steam",
+        "id": "2100020"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PDGQPBSRR0M"
+      },
+      {
         "distributor": "xbox",
         "id": "9NDPVFFZF6SK"
       },
       {
         "distributor": "steam",
-        "id": "2100020"
+        "id": "79332"
       }
     ],
     "id_igdb": "214706",
@@ -286993,10 +287004,9 @@
   },
   {
     "id": "1428182872589602867",
-    "name": "420Blaze It 2: Game of the Year",
+    "name": "420BLAZE IT 2: GAME OF THE YEAR",
     "aliases": [
-      "420 BLAZE IT 2: GAME OF THE YEAR",
-      "420BLAZE IT 2: GAME OF THE YEAR"
+      "420 BLAZE IT 2: GAME OF THE YEAR"
     ],
     "executables": [],
     "third_party_skus": [
@@ -346275,11 +346285,15 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9NSDNLFCDV3H"
+        "id": "9PNK3VD9H6MB"
       },
       {
         "distributor": "steam",
         "id": "909660"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NZZB00NTZV0"
       },
       {
         "distributor": "epic",
@@ -346287,7 +346301,7 @@
       },
       {
         "distributor": "xbox",
-        "id": "9NZZB00NTZV0"
+        "id": "9NSDNLFCDV3H"
       }
     ],
     "id_igdb": "106332",
@@ -347235,60 +347249,12 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "918570"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9PB5DX22HVVG"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NLF1ZKQ269R\t"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9P6M888FRBS0"
-      },
-      {
         "distributor": "xbox",
         "id": "9N0K0Q39X4NT"
       },
       {
         "distributor": "xbox",
-        "id": "9P6JBT365ZBK"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NRMXFFD3K13"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NW4T7GP9D8X"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NK53Q901G9P"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NRDQD2L0NLZ"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NZJHZ16G17J"
-      },
-      {
-        "distributor": "epic",
-        "id": "F698D5D792654AC99F47D67E93916BEF"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NZ47R1HNPQ1"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9P0VF4BSN88L"
+        "id": "9NLF1ZKQ269R"
       },
       {
         "distributor": "xbox",
@@ -347296,11 +347262,55 @@
       },
       {
         "distributor": "xbox",
+        "id": "9P6M888FRBS0"
+      },
+      {
+        "distributor": "steam",
+        "id": "918570"
+      },
+      {
+        "distributor": "epic",
+        "id": "F698D5D792654AC99F47D67E93916BEF"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NRDQD2L0NLZ"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P0VF4BSN88L"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NRMXFFD3K13"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NK53Q901G9P"
+      },
+      {
+        "distributor": "xbox",
         "id": "9PHJTVJZ429L"
       },
       {
         "distributor": "xbox",
-        "id": "9NLF1ZKQ269R"
+        "id": "9PB5DX22HVVG"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NZ47R1HNPQ1"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NW4T7GP9D8X"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P6JBT365ZBK"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NZJHZ16G17J"
       }
     ],
     "id_igdb": "141536",
@@ -399502,10 +399512,9 @@
   },
   {
     "id": "1442728871614091295",
-    "name": "Arcade Archives: Argus",
+    "name": "Arcade Archives: ARGUS",
     "aliases": [
-      "Arcade Archives ARGUS",
-      "Arcade Archives: ARGUS"
+      "Arcade Archives ARGUS"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -425988,12 +425997,16 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "epic",
+        "id": "4912067A5F4F4346B312AA226B2787AC"
+      },
+      {
         "distributor": "xbox",
         "id": "9P96BJ164SL8"
       },
       {
-        "distributor": "epic",
-        "id": "4912067A5F4F4346B312AA226B2787AC"
+        "distributor": "steam",
+        "id": "4921760"
       }
     ],
     "id_igdb": "51820",
@@ -467579,7 +467592,15 @@
       },
       {
         "distributor": "xbox",
+        "id": "9P7SMC59003M"
+      },
+      {
+        "distributor": "xbox",
         "id": "9PK8PHLCQDF6"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PH327N126WG"
       }
     ],
     "id_igdb": "348202",
@@ -518599,7 +518620,12 @@
     "name": "Chronoscript: The Endless End",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4018380"
+      }
+    ],
     "id_igdb": "369997",
     "cover": "coajy0",
     "artwork": [
@@ -518612,7 +518638,12 @@
     "name": "The Fire Must Be Fed",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4512580"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -518623,7 +518654,12 @@
     "name": "Seekers of the Ancient",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2598580"
+      }
+    ],
     "id_igdb": "395321",
     "cover": "coc68d",
     "artwork": [
@@ -518636,7 +518672,202 @@
     "name": "Wasteland Gunsmith Simulator",
     "aliases": [],
     "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4933700"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1543470593612193814",
+    "name": "Board Game Society",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3037040"
+      }
+    ],
+    "id_igdb": "337063",
+    "cover": "co9ytm",
+    "artwork": [
+      "ar3dik"
+    ],
+    "url": "board-game-society"
+  },
+  {
+    "id": "1543470630597300276",
+    "name": "Around The Core",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4300950"
+      }
+    ],
+    "id_igdb": "408449",
+    "cover": "cocbzo",
+    "artwork": [
+      "ar6cv2"
+    ],
+    "url": "around-the-core"
+  },
+  {
+    "id": "1543470646225543299",
+    "name": "Flyra: FPV Drone Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4075900"
+      }
+    ],
+    "id_igdb": "407654",
+    "cover": "cocalx",
+    "artwork": [
+      "ar6cq0"
+    ],
+    "url": "flyra-fpv-drone-simulator"
+  },
+  {
+    "id": "1543470670766153758",
+    "name": "Polylithic",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1839060"
+      }
+    ],
+    "id_igdb": "219396",
+    "cover": "co8u3t",
+    "artwork": [
+      "ar1w39"
+    ],
+    "url": "polylithic"
+  },
+  {
+    "id": "1543470677791604796",
+    "name": "Exit The Abyss",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3518110"
+      }
+    ],
+    "id_igdb": "356141",
+    "cover": "coah3r",
+    "artwork": [
+      "ar3w5y"
+    ],
+    "url": "exit-the-abyss"
+  },
+  {
+    "id": "1543470685572042863",
+    "name": "Roomballs",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2882310"
+      }
+    ],
+    "id_igdb": "336804",
+    "cover": "co9ku0",
+    "artwork": [
+      "ar3de1"
+    ],
+    "url": "roomballs"
+  },
+  {
+    "id": "1543470692543103097",
+    "name": "This Is Golf",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4450570"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1543470699568439357",
+    "name": "Union of Rivals",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4263170"
+      }
+    ],
+    "id_igdb": "414845",
+    "cover": "cocraj",
+    "artwork": [
+      "ar6iii"
+    ],
+    "url": "union-of-rivals"
+  },
+  {
+    "id": "1543470708275941457",
+    "name": "Money for Girls: Amortized",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4833450"
+      }
+    ],
+    "id_igdb": "412048",
+    "cover": "cocm2w",
+    "artwork": [
+      "ar6hdw"
+    ],
+    "url": "money-for-girls-amortized"
+  },
+  {
+    "id": "1543470580072714332",
+    "name": "Panty Party Perfect",
+    "aliases": [],
+    "executables": [],
     "third_party_skus": [],
+    "id_igdb": "401422",
+    "cover": "coc20f",
+    "artwork": [
+      "ar5v31",
+      "ar5v30"
+    ],
+    "url": "panty-party-perfect"
+  },
+  {
+    "id": "1543470617095835720",
+    "name": "Dead or Alive 6 Last Round Core Fighters",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NKDM3XL3P86"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
