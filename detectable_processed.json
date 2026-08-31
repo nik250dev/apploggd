@@ -20089,9 +20089,10 @@
   },
   {
     "id": "451132630390538270",
-    "name": "BLESS GLOBAL",
+    "name": "Bless Global",
     "aliases": [
-      "BLESS"
+      "BLESS",
+      "BLESS GLOBAL"
     ],
     "executables": [
       {
@@ -50250,8 +50251,9 @@
   },
   {
     "id": "1124351982908493894",
-    "name": "MIR 4",
+    "name": "Mir 4",
     "aliases": [
+      "MIR 4",
       "MIR4"
     ],
     "executables": [
@@ -57995,10 +57997,6 @@
       }
     ],
     "third_party_skus": [
-      {
-        "distributor": "steam",
-        "id": "1335200 "
-      },
       {
         "distributor": "steam",
         "id": "1335200"
@@ -132752,6 +132750,10 @@
     "third_party_skus": [
       {
         "distributor": "steam",
+        "id": "1420350\t"
+      },
+      {
+        "distributor": "steam",
         "id": "1420350"
       }
     ],
@@ -189721,7 +189723,7 @@
   },
   {
     "id": "1174042035276230686",
-    "name": "Doom II: Hell on Earth",
+    "name": "DOOM II: Hell on Earth",
     "aliases": [
       "DOOM II",
       "DOOM II: Hell on Earth"
@@ -189735,12 +189737,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9PLT62LRF9V7"
-      },
-      {
         "distributor": "steam",
         "id": "2300"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PLT62LRF9V7"
       }
     ],
     "id_igdb": "312",
@@ -232024,10 +232026,6 @@
     "third_party_skus": [
       {
         "distributor": "steam",
-        "id": "2607060\t"
-      },
-      {
-        "distributor": "steam",
         "id": "2607060"
       }
     ],
@@ -242278,6 +242276,10 @@
       {
         "distributor": "steam",
         "id": "2612680"
+      },
+      {
+        "distributor": "steam",
+        "id": "2612680 "
       }
     ],
     "id_igdb": "275979",
@@ -252567,10 +252569,6 @@
     "third_party_skus": [
       {
         "distributor": "steam",
-        "id": "1125510\t"
-      },
-      {
-        "distributor": "steam",
         "id": "1125510"
       }
     ],
@@ -254781,9 +254779,9 @@
   },
   {
     "id": "1387990904194732154",
-    "name": "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY",
+    "name": "RAIDOU Remastered: The Mystery of the Soulless Army",
     "aliases": [
-      "RAIDOU Remastered: The Mystery of the Soulless Army"
+      "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY"
     ],
     "executables": [
       {
@@ -254793,6 +254791,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NB58STJ848G"
+      },
       {
         "distributor": "steam",
         "id": "2288350"
@@ -254804,10 +254806,6 @@
       {
         "distributor": "xbox",
         "id": "9P284W1H02KW"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NB58STJ848G"
       }
     ],
     "id_igdb": "337024",
@@ -323022,9 +323020,8 @@
   },
   {
     "id": "1440130398813159515",
-    "name": "The Joy of Creation",
+    "name": "THE JOY OF CREATION",
     "aliases": [
-      "THE JOY OF CREATION",
       "TJOC"
     ],
     "executables": [],
@@ -334742,6 +334739,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9PLBW95NVL56"
+      },
+      {
         "distributor": "steam",
         "id": "3525970"
       }
@@ -341691,8 +341692,9 @@
   },
   {
     "id": "1440141099212738610",
-    "name": "hackmud",
+    "name": "Hackmud",
     "aliases": [
+      "hackmud",
       "ｈａｃｋｍｕｄ"
     ],
     "executables": [],
@@ -416945,10 +416947,9 @@
   },
   {
     "id": "1442734322128916531",
-    "name": "Arcade Archives: Naughty Boy",
+    "name": "Arcade Archives: NAUGHTY BOY",
     "aliases": [
-      "Arcade Archives NAUGHTY BOY",
-      "Arcade Archives: NAUGHTY BOY"
+      "Arcade Archives NAUGHTY BOY"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -424385,10 +424386,9 @@
   },
   {
     "id": "1442737663558811792",
-    "name": "Arcade Archives: The Astyanax",
+    "name": "Arcade Archives: THE ASTYANAX",
     "aliases": [
-      "Arcade Archives THE ASTYANAX",
-      "Arcade Archives: THE ASTYANAX"
+      "Arcade Archives THE ASTYANAX"
     ],
     "executables": [],
     "third_party_skus": [],
