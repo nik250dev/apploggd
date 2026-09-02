@@ -9142,16 +9142,20 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "207490"
+        "distributor": "epic",
+        "id": "66E9C042D8CD42B7956F5E195E0442DE"
       },
       {
         "distributor": "xbox",
         "id": "BRBVZF1T3GH3"
       },
       {
-        "distributor": "epic",
-        "id": "66E9C042D8CD42B7956F5E195E0442DE"
+        "distributor": "steam",
+        "id": "207490"
+      },
+      {
+        "distributor": "steam",
+        "id": "207490\t"
       }
     ],
     "id_igdb": "981",
@@ -101111,6 +101115,10 @@
       {
         "distributor": "steam",
         "id": "40390"
+      },
+      {
+        "distributor": "steam",
+        "id": "40390\t"
       }
     ],
     "id_igdb": "3802",
@@ -229757,6 +229765,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "steam",
+        "id": "1539140\t"
+      },
+      {
         "distributor": "xbox",
         "id": "BQVR09243LRZ"
       },
@@ -232015,6 +232027,10 @@
       {
         "distributor": "steam",
         "id": "2607060"
+      },
+      {
+        "distributor": "steam",
+        "id": "2607060\t"
       }
     ],
     "id_igdb": "271048",
@@ -519503,5 +519519,37 @@
       "ar6rs"
     ],
     "url": "teamfight-tactics"
+  },
+  {
+    "id": "1544489564431712256",
+    "name": "Crimson Moon",
+    "aliases": [],
+    "executables": [
+      {
+        "name": "crimsonmoonng.exe",
+        "os": "win32",
+        "is_launcher": false
+      }
+    ],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4317690"
+      },
+      {
+        "distributor": "epic",
+        "id": "e70aa1bad5d849d1b819ad03a1549f8c"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NMDSXMVQTN4"
+      }
+    ],
+    "id_igdb": "389428",
+    "cover": "cobigu",
+    "artwork": [
+      "ar5b77"
+    ],
+    "url": "crimson-moon--1"
   }
 ]
