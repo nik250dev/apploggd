@@ -9065,16 +9065,20 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "BRBVZF1T3GH3"
-      },
-      {
         "distributor": "epic",
         "id": "66E9C042D8CD42B7956F5E195E0442DE"
       },
       {
         "distributor": "steam",
         "id": "207490"
+      },
+      {
+        "distributor": "steam",
+        "id": "207490\t"
+      },
+      {
+        "distributor": "xbox",
+        "id": "BRBVZF1T3GH3"
       }
     ],
     "id_igdb": "981",
@@ -19880,9 +19884,10 @@
   },
   {
     "id": "451132630390538270",
-    "name": "BLESS GLOBAL",
+    "name": "Bless Global",
     "aliases": [
-      "BLESS"
+      "BLESS",
+      "BLESS GLOBAL"
     ],
     "executables": [
       {
@@ -49808,9 +49813,8 @@
   },
   {
     "id": "1124351982908493894",
-    "name": "Mir 4",
+    "name": "MIR 4",
     "aliases": [
-      "MIR 4",
       "MIR4"
     ],
     "executables": [
@@ -54860,7 +54864,7 @@
   },
   {
     "id": "1124352347926180000",
-    "name": "Spider-Man: Far From Home Virtual Reality",
+    "name": "Spider-Man: Far From Home - Virtual Reality Experience",
     "aliases": [],
     "executables": [
       {
@@ -67906,9 +67910,10 @@
   },
   {
     "id": "1124353236564983808",
-    "name": "CounterSide",
+    "name": "Counterside",
     "aliases": [
-      "Counter:Side"
+      "Counter:Side",
+      "CounterSide"
     ],
     "executables": [
       {
@@ -171008,10 +171013,9 @@
   },
   {
     "id": "1129504328848265387",
-    "name": "Five Nights at Freddy's: Help Wanted",
+    "name": "FIVE NIGHTS AT FREDDY'S: HELP WANTED",
     "aliases": [
-      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED",
-      "FIVE NIGHTS AT FREDDY'S: HELP WANTED"
+      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED"
     ],
     "executables": [
       {
@@ -188508,7 +188512,7 @@
   },
   {
     "id": "1174042035276230686",
-    "name": "Doom II: Hell on Earth",
+    "name": "DOOM II: Hell on Earth",
     "aliases": [
       "DOOM II",
       "DOOM II: Hell on Earth"
@@ -253504,9 +253508,9 @@
   },
   {
     "id": "1387990904194732154",
-    "name": "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY",
+    "name": "RAIDOU Remastered: The Mystery of the Soulless Army",
     "aliases": [
-      "RAIDOU Remastered: The Mystery of the Soulless Army"
+      "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY"
     ],
     "executables": [
       {
@@ -253518,11 +253522,11 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9NX3566L9NH9"
+        "id": "9NB58STJ848G"
       },
       {
         "distributor": "xbox",
-        "id": "9NB58STJ848G"
+        "id": "9P284W1H02KW"
       },
       {
         "distributor": "steam",
@@ -253530,7 +253534,7 @@
       },
       {
         "distributor": "xbox",
-        "id": "9P284W1H02KW"
+        "id": "9NX3566L9NH9"
       }
     ],
     "id_igdb": "337024",
@@ -283367,7 +283371,7 @@
   },
   {
     "id": "1428181102295781438",
-    "name": "13Z",
+    "name": "13Z: The Zodiac Trials",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -321640,9 +321644,8 @@
   },
   {
     "id": "1440130398813159515",
-    "name": "The Joy of Creation",
+    "name": "THE JOY OF CREATION",
     "aliases": [
-      "THE JOY OF CREATION",
       "TJOC"
     ],
     "executables": [],
@@ -340264,8 +340267,9 @@
   },
   {
     "id": "1440141099212738610",
-    "name": "hackmud",
+    "name": "Hackmud",
     "aliases": [
+      "hackmud",
       "ｈａｃｋｍｕｄ"
     ],
     "executables": [],
@@ -369107,9 +369111,10 @@
   },
   {
     "id": "1442715029052063765",
-    "name": "SNWBRD: Freestyle Snowboarding",
+    "name": "Snwbrd: Freestyle Snowboarding",
     "aliases": [
-      "SNWBRD"
+      "SNWBRD",
+      "SNWBRD: Freestyle Snowboarding"
     ],
     "executables": [],
     "third_party_skus": [
@@ -397867,10 +397872,9 @@
   },
   {
     "id": "1442728871614091295",
-    "name": "Arcade Archives: Argus",
+    "name": "Arcade Archives: ARGUS",
     "aliases": [
-      "Arcade Archives ARGUS",
-      "Arcade Archives: ARGUS"
+      "Arcade Archives ARGUS"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -415196,10 +415200,9 @@
   },
   {
     "id": "1442734322128916531",
-    "name": "Arcade Archives: Naughty Boy",
+    "name": "Arcade Archives: NAUGHTY BOY",
     "aliases": [
-      "Arcade Archives NAUGHTY BOY",
-      "Arcade Archives: NAUGHTY BOY"
+      "Arcade Archives NAUGHTY BOY"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -422607,10 +422610,9 @@
   },
   {
     "id": "1442737663558811792",
-    "name": "Arcade Archives: The Astyanax",
+    "name": "Arcade Archives: THE ASTYANAX",
     "aliases": [
-      "Arcade Archives THE ASTYANAX",
-      "Arcade Archives: THE ASTYANAX"
+      "Arcade Archives THE ASTYANAX"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -499609,7 +499611,7 @@
   },
   {
     "id": "1517247326589161738",
-    "name": "Bombanana!",
+    "name": "BOMBANANA!",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -503729,7 +503731,7 @@
   },
   {
     "id": "1519553199600832556",
-    "name": "Schedule store simulator",
+    "name": "Schedule Store Simulator",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
