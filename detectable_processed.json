@@ -21464,20 +21464,24 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "24200"
-      },
-      {
         "distributor": "xbox",
-        "id": "BX33NK7DFKFS"
+        "id": "C59QBPB8P1XJ"
       },
       {
         "distributor": "xbox",
         "id": "9PPBQVV15N4P"
       },
       {
+        "distributor": "steam",
+        "id": "24200"
+      },
+      {
         "distributor": "xbox",
-        "id": "C59QBPB8P1XJ"
+        "id": "9PM38RMPMG97"
+      },
+      {
+        "distributor": "xbox",
+        "id": "BX33NK7DFKFS"
       }
     ],
     "id_igdb": "576",
@@ -26442,7 +26446,9 @@
   {
     "id": "459968630935781376",
     "name": "God Eater 2: Rage Burst",
-    "aliases": [],
+    "aliases": [
+      "GOD EATER 2 RAGE BURST"
+    ],
     "executables": [
       {
         "name": "ge2rb.exe",
@@ -34112,12 +34118,16 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "221540"
+        "distributor": "xbox",
+        "id": "BRK1B5GSB6W4"
       },
       {
         "distributor": "xbox",
         "id": "C1Y6K8BG7T1C"
+      },
+      {
+        "distributor": "steam",
+        "id": "221540"
       }
     ],
     "id_igdb": "10184",
@@ -35566,16 +35576,20 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "266510"
-      },
-      {
         "distributor": "xbox",
         "id": "BVF0R0WZZW1Q"
       },
       {
+        "distributor": "xbox",
+        "id": "BP41KKZCBLZT"
+      },
+      {
         "distributor": "gog",
         "id": ""
+      },
+      {
+        "distributor": "steam",
+        "id": "266510"
       }
     ],
     "id_igdb": "9101",
@@ -46626,6 +46640,10 @@
       {
         "distributor": "epic",
         "id": "BDDBB30A6C36455A9CA82C3A0F91AF06"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N7KJ9QBJQM6"
       }
     ],
     "id_igdb": "61859",
@@ -48893,7 +48911,7 @@
   },
   {
     "id": "1124351909235539978",
-    "name": "Stalzone",
+    "name": "STALZONE",
     "aliases": [],
     "executables": [
       {
@@ -56560,7 +56578,9 @@
   {
     "id": "1124352466230726847",
     "name": "Prototype",
-    "aliases": [],
+    "aliases": [
+      "[PROTOTYPE]"
+    ],
     "executables": [
       {
         "name": "prototype/prototypef.exe",
@@ -67910,10 +67930,9 @@
   },
   {
     "id": "1124353236564983808",
-    "name": "Counterside",
+    "name": "CounterSide",
     "aliases": [
-      "Counter:Side",
-      "CounterSide"
+      "Counter:Side"
     ],
     "executables": [
       {
@@ -86529,6 +86548,10 @@
       {
         "distributor": "steam",
         "id": "501080"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N586D85HDJ0"
       }
     ],
     "id_igdb": "22356",
@@ -173708,6 +173731,7 @@
     "id": "1129504909918752838",
     "name": "Mega Man X Dive",
     "aliases": [
+      "MEGAMAN X DiVE",
       "ROCKMAN X DiVE"
     ],
     "executables": [
@@ -194598,7 +194622,9 @@
   {
     "id": "1202493549975969822",
     "name": "Granblue Fantasy: Relink",
-    "aliases": [],
+    "aliases": [
+      "GRANBLUE FANTASY Relink"
+    ],
     "executables": [
       {
         "name": "granblue fantasy relink/granblue_fantasy_relink.exe",
@@ -228514,6 +228540,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "steam",
+        "id": "1539140\t"
+      },
+      {
         "distributor": "xbox",
         "id": "BQVR09243LRZ"
       },
@@ -238807,12 +238837,16 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9NKZ0RBTNB9B"
-      },
-      {
         "distributor": "steam",
         "id": "1491000"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NHLV358CD75"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NKZ0RBTNB9B"
       }
     ],
     "id_igdb": "226343",
@@ -240616,7 +240650,9 @@
   {
     "id": "1354168026454429757",
     "name": "Dynasty Warriors 8: Empires",
-    "aliases": [],
+    "aliases": [
+      "DYNASTY WARRIORS 8 Empires"
+    ],
     "executables": [
       {
         "name": "dynasty warriors 8 - empires/launch.exe",
@@ -278685,8 +278721,16 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9NZW1QWDBXRF"
+      },
+      {
         "distributor": "steam",
         "id": "1746030"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NQ4RTV75V9J"
       }
     ],
     "id_igdb": "201417",
@@ -294089,6 +294133,10 @@
       {
         "distributor": "steam",
         "id": "2184280"
+      },
+      {
+        "distributor": "epic",
+        "id": "82D2C076744D4E1AA12E8843CF129CFA"
       }
     ],
     "id_igdb": "249036",
@@ -320993,6 +321041,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9N50GHFRD57S"
+      },
+      {
         "distributor": "steam",
         "id": "2235430"
       }
@@ -340267,9 +340319,8 @@
   },
   {
     "id": "1440141099212738610",
-    "name": "Hackmud",
+    "name": "hackmud",
     "aliases": [
-      "hackmud",
       "ｈａｃｋｍｕｄ"
     ],
     "executables": [],
@@ -362746,9 +362797,10 @@
   },
   {
     "id": "1442713050993135749",
-    "name": "Arcade Archives: MAZINGER Z",
+    "name": "Arcade Archives: Mazinger Z",
     "aliases": [
-      "Arcade Archives MAZINGER Z"
+      "Arcade Archives MAZINGER Z",
+      "Arcade Archives: MAZINGER Z"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -369111,20 +369163,19 @@
   },
   {
     "id": "1442715029052063765",
-    "name": "Snwbrd: Freestyle Snowboarding",
+    "name": "SNWBRD: Freestyle Snowboarding",
     "aliases": [
-      "SNWBRD",
-      "SNWBRD: Freestyle Snowboarding"
+      "SNWBRD"
     ],
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9MWMGJFDZW4D"
-      },
-      {
         "distributor": "steam",
         "id": "1912130"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MWMGJFDZW4D"
       }
     ],
     "id_igdb": "235196",
@@ -387823,7 +387874,7 @@
   },
   {
     "id": "1442720854965489804",
-    "name": "The Harmony Chronicles: Demon Of The Void - Collector's Edition",
+    "name": "The Harmony Chronicles: Demon of the Void - Collector’s Edition",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -403886,7 +403937,9 @@
   {
     "id": "1442730837752938568",
     "name": "One Piece: Grand Cruise",
-    "aliases": [],
+    "aliases": [
+      "ONE PIECE GRAND CRUISE"
+    ],
     "executables": [],
     "third_party_skus": [],
     "id_igdb": "47292",
@@ -405085,7 +405138,9 @@
   {
     "id": "1442731251802046587",
     "name": "Omega Labyrinth Z",
-    "aliases": [],
+    "aliases": [
+      "ωLabyrinth Z"
+    ],
     "executables": [],
     "third_party_skus": [],
     "id_igdb": "27512",
@@ -407565,7 +407620,9 @@
   {
     "id": "1442732080512503920",
     "name": "Disco Dodgeball Remix",
-    "aliases": [],
+    "aliases": [
+      "Disco Dodgeball - REMIX"
+    ],
     "executables": [],
     "third_party_skus": [],
     "id_igdb": "100438",
@@ -415200,9 +415257,10 @@
   },
   {
     "id": "1442734322128916531",
-    "name": "Arcade Archives: NAUGHTY BOY",
+    "name": "Arcade Archives: Naughty Boy",
     "aliases": [
-      "Arcade Archives NAUGHTY BOY"
+      "Arcade Archives NAUGHTY BOY",
+      "Arcade Archives: NAUGHTY BOY"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -422610,9 +422668,10 @@
   },
   {
     "id": "1442737663558811792",
-    "name": "Arcade Archives: THE ASTYANAX",
+    "name": "Arcade Archives: The Astyanax",
     "aliases": [
-      "Arcade Archives THE ASTYANAX"
+      "Arcade Archives THE ASTYANAX",
+      "Arcade Archives: THE ASTYANAX"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -464651,6 +464710,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9P64L0SSV1HF"
+      },
+      {
         "distributor": "steam",
         "id": "3218630"
       }
@@ -495174,27 +495237,38 @@
     "id": "1512292746889662576",
     "name": "Onimusha: Way of the Sword",
     "aliases": [],
-    "executables": [],
+    "executables": [
+      {
+        "name": "onimushawots_demo.exe",
+        "os": "win32",
+        "is_launcher": false
+      },
+      {
+        "name": "onimushawots.exe",
+        "os": "win32",
+        "is_launcher": false
+      }
+    ],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9P50G4HDZJSH"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NH6PQ3L7TTP"
+      },
       {
         "distributor": "epic",
         "id": "D545D872F3504B8D95F0B099BE88D012"
       },
       {
         "distributor": "xbox",
-        "id": "9P50G4HDZJSH"
+        "id": "9PH7CL8KW2N2"
       },
       {
         "distributor": "steam",
         "id": "2638890"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9PH7CL8KW2N2"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NH6PQ3L7TTP"
       }
     ],
     "id_igdb": "325602",
@@ -517637,5 +517711,215 @@
     "cover": null,
     "artwork": null,
     "url": null
+  },
+  {
+    "id": "1545645030629314570",
+    "name": "First Racer",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "158822",
+    "cover": "co3zpo",
+    "artwork": [
+      "arxoj"
+    ],
+    "url": "first-racer"
+  },
+  {
+    "id": "1545645039814836274",
+    "name": "Airline Founder",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1545645047045955584",
+    "name": "Infinite Soul",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "361919",
+    "cover": "coab1m",
+    "artwork": [
+      "ar41e2"
+    ],
+    "url": "infinite-soul"
+  },
+  {
+    "id": "1545645051185463416",
+    "name": "Backroom Cleaners",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "383672",
+    "cover": "cob639",
+    "artwork": [
+      "ar50vo"
+    ],
+    "url": "backroom-cleaners"
+  },
+  {
+    "id": "1545645055383965737",
+    "name": "Sword & Banner",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "404889",
+    "cover": "coc6uw",
+    "artwork": [
+      "ar60jo",
+      "ar60jn"
+    ],
+    "url": "sword-and-banner"
+  },
+  {
+    "id": "1545645062426337352",
+    "name": "Shark Mart",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "402445",
+    "cover": "coc5la",
+    "artwork": [
+      "ar5z2e"
+    ],
+    "url": "shark-mart"
+  },
+  {
+    "id": "1545645066230431815",
+    "name": "Project Tomorrow",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "414215",
+    "cover": "cocq60",
+    "artwork": [
+      "ar6ga8"
+    ],
+    "url": "project-tomorrow"
+  },
+  {
+    "id": "1545645070550564867",
+    "name": "Straying Rules",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1545645075009110016",
+    "name": "Ninja Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "157404",
+    "cover": "co41v3",
+    "artwork": [
+      "arwxl"
+    ],
+    "url": "space-ninja-simulator"
+  },
+  {
+    "id": "1545645081489444925",
+    "name": "Walk Hero",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "199747",
+    "cover": "co97em",
+    "artwork": [
+      "ar1mbx"
+    ],
+    "url": "walk-hero"
+  },
+  {
+    "id": "1545645085218054194",
+    "name": "Criminal Case",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "19328",
+    "cover": "co48vh",
+    "artwork": [
+      "ar19nm"
+    ],
+    "url": "criminal-case"
+  },
+  {
+    "id": "1545645088393269349",
+    "name": "Too Many Toys!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "415373",
+    "cover": "cocs2a",
+    "artwork": null,
+    "url": "too-many-toys"
+  },
+  {
+    "id": "1545645091270430821",
+    "name": "Go Next!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1545645095074795531",
+    "name": "We Build Cabins",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "414715",
+    "cover": "cocr18",
+    "artwork": [
+      "ar6h3x"
+    ],
+    "url": "we-build-cabins"
+  },
+  {
+    "id": "1545645100976046120",
+    "name": "Muv-Luv Girls Garden Mellow Days",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1545645103618596935",
+    "name": "BodyCam 2026",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1545645106273587264",
+    "name": "Observe.",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "285619",
+    "cover": "co8rn0",
+    "artwork": [
+      "ar2qil"
+    ],
+    "url": "observe"
   }
 ]
