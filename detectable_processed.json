@@ -76908,9 +76908,10 @@
   },
   {
     "id": "1124353934623002726",
-    "name": "CRISIS CORE: FINAL FANTASY VII - REUNION",
+    "name": "Crisis Core: Final Fantasy VII - Reunion",
     "aliases": [
-      "CRISIS CORE -FINAL FANTASY VII- REUNION"
+      "CRISIS CORE -FINAL FANTASY VII- REUNION",
+      "CRISIS CORE: FINAL FANTASY VII - REUNION"
     ],
     "executables": [
       {
@@ -76922,11 +76923,11 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9PCWV3FWJZ18"
+        "id": "9P6J9NFKGJ68"
       },
       {
         "distributor": "xbox",
-        "id": "9P6J9NFKGJ68"
+        "id": "9PCWV3FWJZ18"
       },
       {
         "distributor": "steam",
@@ -122399,10 +122400,9 @@
   },
   {
     "id": "1124357342394335324",
-    "name": "Kill la Kill: If",
+    "name": "KILL la KILL: IF",
     "aliases": [
-      "KILL la KILL THE GAME: IF",
-      "KILL la KILL: IF"
+      "KILL la KILL THE GAME: IF"
     ],
     "executables": [
       {
@@ -336790,6 +336790,10 @@
       {
         "distributor": "steam",
         "id": "2158550"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PJ8DRW67XTV"
       }
     ],
     "id_igdb": "369520",
@@ -340319,8 +340323,9 @@
   },
   {
     "id": "1440141099212738610",
-    "name": "hackmud",
+    "name": "Hackmud",
     "aliases": [
+      "hackmud",
       "ｈａｃｋｍｕｄ"
     ],
     "executables": [],
@@ -369163,19 +369168,20 @@
   },
   {
     "id": "1442715029052063765",
-    "name": "SNWBRD: Freestyle Snowboarding",
+    "name": "Snwbrd: Freestyle Snowboarding",
     "aliases": [
-      "SNWBRD"
+      "SNWBRD",
+      "SNWBRD: Freestyle Snowboarding"
     ],
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "1912130"
-      },
-      {
         "distributor": "xbox",
         "id": "9MWMGJFDZW4D"
+      },
+      {
+        "distributor": "steam",
+        "id": "1912130"
       }
     ],
     "id_igdb": "235196",
@@ -394633,9 +394639,10 @@
   },
   {
     "id": "1442727833993613332",
-    "name": "Arcade Archives: EXERION",
+    "name": "Arcade Archives: Exerion",
     "aliases": [
-      "Arcade Archives EXERION"
+      "Arcade Archives EXERION",
+      "Arcade Archives: EXERION"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -397923,9 +397930,10 @@
   },
   {
     "id": "1442728871614091295",
-    "name": "Arcade Archives: ARGUS",
+    "name": "Arcade Archives: Argus",
     "aliases": [
-      "Arcade Archives ARGUS"
+      "Arcade Archives ARGUS",
+      "Arcade Archives: ARGUS"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -422668,10 +422676,9 @@
   },
   {
     "id": "1442737663558811792",
-    "name": "Arcade Archives: The Astyanax",
+    "name": "Arcade Archives: THE ASTYANAX",
     "aliases": [
-      "Arcade Archives THE ASTYANAX",
-      "Arcade Archives: THE ASTYANAX"
+      "Arcade Archives THE ASTYANAX"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -459296,7 +459303,7 @@
   },
   {
     "id": "1452704095931600937",
-    "name": "Triangle",
+    "name": "Mr. Triangle's Adventure",
     "aliases": [],
     "executables": [
       {
@@ -510751,7 +510758,15 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
+        "id": "9NFHVLFDSFVD"
+      },
+      {
+        "distributor": "xbox",
         "id": "9MT7881CVTGX"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N4WM7ZGQFV1"
       },
       {
         "distributor": "steam",
@@ -510759,11 +510774,11 @@
       },
       {
         "distributor": "xbox",
-        "id": "9N4WM7ZGQFV1"
+        "id": "9MTX99PFKLWD"
       },
       {
         "distributor": "xbox",
-        "id": "9MTX99PFKLWD"
+        "id": "9N4VX355HT0K"
       },
       {
         "distributor": "xbox",
@@ -517058,7 +517073,24 @@
     "name": "Star Wars Zero Company",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2075800"
+      },
+      {
+        "distributor": "epic",
+        "id": "DE33353D9BED419A8B985A46A34D0956"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P6668BK7C67"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N7SNXM6W6G4"
+      }
+    ],
     "id_igdb": "340113",
     "cover": "ar60xt",
     "artwork": [
@@ -517076,7 +517108,16 @@
     "name": "Farmbotic",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9MTS4L0NG48X"
+      },
+      {
+        "distributor": "steam",
+        "id": "2573060"
+      }
+    ],
     "id_igdb": "348350",
     "cover": "coakz4",
     "artwork": [
@@ -517089,7 +517130,16 @@
     "name": "Metal Gear Solid 4: Guns of the Patriots",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2492670"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N8GBK506W03"
+      }
+    ],
     "id_igdb": "380",
     "cover": "co5eju",
     "artwork": null,
@@ -517097,10 +517147,27 @@
   },
   {
     "id": "1544195393519353917",
-    "name": "Captain Tsubasa 2: World Fighters",
+    "name": "Captain Tsubasa II: World Fighters",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NBSH4BQ40B5"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N8TN15X157T"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NQ94SN0CBMF"
+      },
+      {
+        "distributor": "steam",
+        "id": "2172910"
+      }
+    ],
     "id_igdb": "388427",
     "cover": "ar582k",
     "artwork": [
@@ -517112,10 +517179,15 @@
   },
   {
     "id": "1544195406127304777",
-    "name": "Metal Gear Solid: Master Collection Vol. 2",
+    "name": "Metal Gear Solid Master Collection: Volume 2",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9PDMVGH0VGXD"
+      }
+    ],
     "id_igdb": "392677",
     "cover": "cobtal",
     "artwork": [
@@ -517128,7 +517200,12 @@
     "name": "The Dream Office",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2510970"
+      }
+    ],
     "id_igdb": "258299",
     "cover": "cocsgr",
     "artwork": [
@@ -517141,7 +517218,12 @@
     "name": "Beat For Speed",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4430260"
+      }
+    ],
     "id_igdb": "405274",
     "cover": "coc7ic",
     "artwork": [
@@ -517154,7 +517236,12 @@
     "name": "Alice's Gaze",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4529120"
+      }
+    ],
     "id_igdb": "405818",
     "cover": "cocsn2",
     "artwork": [
@@ -517167,7 +517254,12 @@
     "name": "Folk Emerging",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2275300"
+      }
+    ],
     "id_igdb": "244766",
     "cover": "cobeg6",
     "artwork": [
@@ -517182,7 +517274,12 @@
     "name": "EVAC",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3490700"
+      }
+    ],
     "id_igdb": "350312",
     "cover": "coa0cd",
     "artwork": [
@@ -517195,7 +517292,12 @@
     "name": "Gunmetal Gothic",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2248150"
+      }
+    ],
     "id_igdb": "252581",
     "cover": "co6lnm",
     "artwork": [
@@ -517209,7 +517311,12 @@
     "name": "Din's Champion",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2880010"
+      }
+    ],
     "id_igdb": "316289",
     "cover": "co8vb3",
     "artwork": [
@@ -517222,7 +517329,12 @@
     "name": "Police Officer",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4281060"
+      }
+    ],
     "id_igdb": "415218",
     "cover": "cocrtf",
     "artwork": [
@@ -517236,7 +517348,12 @@
     "name": "Incremental Fishing",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4456630"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -517244,10 +517361,15 @@
   },
   {
     "id": "1544195456882712698",
-    "name": "INFINITE CHUMP",
+    "name": "Infinite Chump",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2771710"
+      }
+    ],
     "id_igdb": "287750",
     "cover": "co7sei",
     "artwork": [
@@ -517260,7 +517382,12 @@
     "name": "Snap the Cat",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4539530"
+      }
+    ],
     "id_igdb": "406299",
     "cover": "cocs5p",
     "artwork": [
@@ -517273,7 +517400,12 @@
     "name": "Crazy Life",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3514000"
+      }
+    ],
     "id_igdb": "415632",
     "cover": "cocsjx",
     "artwork": null,
@@ -517284,7 +517416,12 @@
     "name": "Ravenwood Academy: A Wizard101 Story",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2853430"
+      }
+    ],
     "id_igdb": "298165",
     "cover": "cobqj8",
     "artwork": [
@@ -517297,7 +517434,12 @@
     "name": "Barbarian",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1475300"
+      }
+    ],
     "id_igdb": "3793",
     "cover": "co1ot0",
     "artwork": [
@@ -517310,7 +517452,12 @@
     "name": "Dominus Gladiatus",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3572090"
+      }
+    ],
     "id_igdb": "404343",
     "cover": "coc666",
     "artwork": [
@@ -517323,7 +517470,12 @@
     "name": "Mazey Village",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1766240"
+      }
+    ],
     "id_igdb": "191032",
     "cover": "co9xp3",
     "artwork": [
@@ -517334,10 +517486,15 @@
   },
   {
     "id": "1544195506438414409",
-    "name": "Red Rust Pioneers: Multiplayer Western Survival Simulator",
+    "name": "Red Rust Pioneers",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3664440"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -517348,7 +517505,12 @@
     "name": "SeaColony",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4661260"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -517359,7 +517521,12 @@
     "name": "Lurking",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4490840"
+      }
+    ],
     "id_igdb": "176866",
     "cover": "co40dw",
     "artwork": null,
@@ -517370,7 +517537,12 @@
     "name": "Out of Hand: Deluxe",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3193680"
+      }
+    ],
     "id_igdb": "330138",
     "cover": "co9cn9",
     "artwork": [
@@ -517383,7 +517555,12 @@
     "name": "World of Slime",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4671450"
+      }
+    ],
     "id_igdb": "4543",
     "cover": "co86ej",
     "artwork": null,
@@ -517394,7 +517571,12 @@
     "name": "Outpost Simulator",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3508880"
+      }
+    ],
     "id_igdb": "377117",
     "cover": "coatvf",
     "artwork": [
@@ -517405,10 +517587,19 @@
   },
   {
     "id": "1544195525778341928",
-    "name": "Slain 2",
+    "name": "Slain 2: The Beast Within",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9ND604MFDKZ2"
+      },
+      {
+        "distributor": "steam",
+        "id": "3601680"
+      }
+    ],
     "id_igdb": "340587",
     "cover": "coad9q",
     "artwork": [
@@ -517421,7 +517612,16 @@
     "name": "Sunset Racer",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3654200"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P3L274Z26B6"
+      }
+    ],
     "id_igdb": "344488",
     "cover": "co9ufd",
     "artwork": [
@@ -517434,7 +517634,12 @@
     "name": "Football Agent",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4860970"
+      }
+    ],
     "id_igdb": "370452",
     "cover": "coakmx",
     "artwork": null,
@@ -517445,7 +517650,12 @@
     "name": "Incremental Pain Profit",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4823250"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -517456,7 +517666,12 @@
     "name": "Ski-E-O! Ski Resort Tycoon",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4493130"
+      }
+    ],
     "id_igdb": "414510",
     "cover": "cocqpx",
     "artwork": [
@@ -517469,7 +517684,12 @@
     "name": "The Unworthy",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4840160"
+      }
+    ],
     "id_igdb": "414862",
     "cover": "cocr9w",
     "artwork": [
@@ -517482,7 +517702,12 @@
     "name": "BOMBACON!",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4956000"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -517493,7 +517718,12 @@
     "name": "SmashCore",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4945040"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -517504,7 +517734,12 @@
     "name": "Treasure Cove",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3905070"
+      }
+    ],
     "id_igdb": "93125",
     "cover": null,
     "artwork": null,
@@ -517515,7 +517750,12 @@
     "name": "My Party Is Grinding",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4952980"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -517526,7 +517766,12 @@
     "name": "The Yard: Escape from Prison",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4964620"
+      }
+    ],
     "id_igdb": "414610",
     "cover": "cocqug",
     "artwork": [
@@ -517537,9 +517782,16 @@
   {
     "id": "1544195583529717832",
     "name": "Bergwerk: A Mining Sim",
-    "aliases": [],
+    "aliases": [
+      "BERGWERK - A Mining Sim"
+    ],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4090650"
+      }
+    ],
     "id_igdb": "412235",
     "cover": "cocmi8",
     "artwork": [
@@ -517552,7 +517804,12 @@
     "name": "Mimic Party",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5053820"
+      }
+    ],
     "id_igdb": "413646",
     "cover": "cocp1r",
     "artwork": [
@@ -517565,7 +517822,12 @@
     "name": "Waste The Fallen",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3948160"
+      }
+    ],
     "id_igdb": "413735",
     "cover": "cocp6y",
     "artwork": [
@@ -517578,7 +517840,12 @@
     "name": "Warlapse",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4920680"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -517589,7 +517856,12 @@
     "name": "Wolcen 2",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4216080"
+      }
+    ],
     "id_igdb": "414929",
     "cover": "cocrfq",
     "artwork": [
@@ -517602,7 +517874,12 @@
     "name": "Last Breath",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3873040"
+      }
+    ],
     "id_igdb": "218848",
     "cover": "co5dbh",
     "artwork": null,
@@ -517635,7 +517912,12 @@
     "name": "Oar'some Adventures",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4555210"
+      }
+    ],
     "id_igdb": "411805",
     "cover": "cocrli",
     "artwork": [
@@ -517659,7 +517941,12 @@
     "name": "Teamfight Tactics",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "epic",
+        "id": "ADA73CC2D68A46A18F529EBB87328DEE"
+      }
+    ],
     "id_igdb": "120176",
     "cover": "cocsmb",
     "artwork": [
@@ -517921,5 +518208,214 @@
       "ar2qil"
     ],
     "url": "observe"
+  },
+  {
+    "id": "1546007124717338726",
+    "name": "Astral Court DX",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4568830"
+      }
+    ],
+    "id_igdb": "368081",
+    "cover": "cobx07",
+    "artwork": [
+      "ar5p61"
+    ],
+    "url": "astral-court-dx"
+  },
+  {
+    "id": "1546007136683819099",
+    "name": "Incident Archives: Flight 882",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4625290"
+      }
+    ],
+    "id_igdb": "413820",
+    "cover": "cocpah",
+    "artwork": [
+      "ar6fvc"
+    ],
+    "url": "incident-archives-flight-882"
+  },
+  {
+    "id": "1546007145294725200",
+    "name": "Hardware Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4274110"
+      }
+    ],
+    "id_igdb": "403855",
+    "cover": "coc5k4",
+    "artwork": [
+      "ar5z08"
+    ],
+    "url": "hardware-simulator"
+  },
+  {
+    "id": "1546007159978987600",
+    "name": "Titanic Escape Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4645360"
+      }
+    ],
+    "id_igdb": "411584",
+    "cover": "cocm0l",
+    "artwork": [
+      "ar6hbu"
+    ],
+    "url": "titanic-escape-simulator"
+  },
+  {
+    "id": "1546007170062098492",
+    "name": "With Your Coworker",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4564320"
+      }
+    ],
+    "id_igdb": "407944",
+    "cover": "cocb20",
+    "artwork": [
+      "ar65eq"
+    ],
+    "url": "with-your-coworker"
+  },
+  {
+    "id": "1546007177251127358",
+    "name": "the cabin game",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4406280"
+      }
+    ],
+    "id_igdb": "398960",
+    "cover": "cobyn1",
+    "artwork": [
+      "ar5rb6"
+    ],
+    "url": "the-cabin-game"
+  },
+  {
+    "id": "1546007198935687268",
+    "name": "Sura: Shattered Star",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4914580"
+      }
+    ],
+    "id_igdb": "412474",
+    "cover": "cocmur",
+    "artwork": [
+      "ar6dti"
+    ],
+    "url": "sura-shattered-star"
+  },
+  {
+    "id": "1546007210054787173",
+    "name": "Hide and Moo!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5061170"
+      }
+    ],
+    "id_igdb": "414286",
+    "cover": "cocq6g",
+    "artwork": [
+      "ar6ge9"
+    ],
+    "url": "hide-and-moo"
+  },
+  {
+    "id": "1546007231999512647",
+    "name": "Blasterbug: Last Bug Standing!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3069340"
+      }
+    ],
+    "id_igdb": "414844",
+    "cover": "cocr8q",
+    "artwork": [
+      "ar6hcq"
+    ],
+    "url": "blasterbug-last-bug-standing"
+  },
+  {
+    "id": "1546007115708104705",
+    "name": "ShipShaper: Falconeer Chronicles",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1546007219571793981",
+    "name": "Card Make Arena",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "414129",
+    "cover": "cocps0",
+    "artwork": [
+      "ar6h1n",
+      "ar6h1m"
+    ],
+    "url": "card-make-arena"
+  },
+  {
+    "id": "1546007238433308743",
+    "name": "Homicide Desk",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1546007241562398810",
+    "name": "Badassgard",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
   }
 ]
