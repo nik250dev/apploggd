@@ -67930,9 +67930,10 @@
   },
   {
     "id": "1124353236564983808",
-    "name": "CounterSide",
+    "name": "Counterside",
     "aliases": [
-      "Counter:Side"
+      "Counter:Side",
+      "CounterSide"
     ],
     "executables": [
       {
@@ -76908,10 +76909,9 @@
   },
   {
     "id": "1124353934623002726",
-    "name": "Crisis Core: Final Fantasy VII - Reunion",
+    "name": "CRISIS CORE: FINAL FANTASY VII - REUNION",
     "aliases": [
-      "CRISIS CORE -FINAL FANTASY VII- REUNION",
-      "CRISIS CORE: FINAL FANTASY VII - REUNION"
+      "CRISIS CORE -FINAL FANTASY VII- REUNION"
     ],
     "executables": [
       {
@@ -76922,16 +76922,16 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "steam",
+        "id": "1608070"
+      },
+      {
         "distributor": "xbox",
         "id": "9P6J9NFKGJ68"
       },
       {
         "distributor": "xbox",
         "id": "9PCWV3FWJZ18"
-      },
-      {
-        "distributor": "steam",
-        "id": "1608070"
       }
     ],
     "id_igdb": "205201",
@@ -122400,9 +122400,10 @@
   },
   {
     "id": "1124357342394335324",
-    "name": "KILL la KILL: IF",
+    "name": "Kill la Kill: If",
     "aliases": [
-      "KILL la KILL THE GAME: IF"
+      "KILL la KILL THE GAME: IF",
+      "KILL la KILL: IF"
     ],
     "executables": [
       {
@@ -362802,10 +362803,9 @@
   },
   {
     "id": "1442713050993135749",
-    "name": "Arcade Archives: Mazinger Z",
+    "name": "Arcade Archives: MAZINGER Z",
     "aliases": [
-      "Arcade Archives MAZINGER Z",
-      "Arcade Archives: MAZINGER Z"
+      "Arcade Archives MAZINGER Z"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -394639,10 +394639,9 @@
   },
   {
     "id": "1442727833993613332",
-    "name": "Arcade Archives: Exerion",
+    "name": "Arcade Archives: EXERION",
     "aliases": [
-      "Arcade Archives EXERION",
-      "Arcade Archives: EXERION"
+      "Arcade Archives EXERION"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -397930,10 +397929,9 @@
   },
   {
     "id": "1442728871614091295",
-    "name": "Arcade Archives: Argus",
+    "name": "Arcade Archives: ARGUS",
     "aliases": [
-      "Arcade Archives ARGUS",
-      "Arcade Archives: ARGUS"
+      "Arcade Archives ARGUS"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -415265,10 +415263,9 @@
   },
   {
     "id": "1442734322128916531",
-    "name": "Arcade Archives: Naughty Boy",
+    "name": "Arcade Archives: NAUGHTY BOY",
     "aliases": [
-      "Arcade Archives NAUGHTY BOY",
-      "Arcade Archives: NAUGHTY BOY"
+      "Arcade Archives NAUGHTY BOY"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -517887,7 +517884,7 @@
   },
   {
     "id": "1544195620519280781",
-    "name": "Metal Gear Solid: Master Collection Vol.2 Bonus Content",
+    "name": "Metal Gear Solid: Master Collection Vol. 2 Bonus Content",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -517973,12 +517970,20 @@
         "id": "4317690"
       },
       {
+        "distributor": "xbox",
+        "id": "9P6RKSP3MMCM"
+      },
+      {
         "distributor": "epic",
         "id": "e70aa1bad5d849d1b819ad03a1549f8c"
       },
       {
         "distributor": "xbox",
         "id": "9NMDSXMVQTN4"
+      },
+      {
+        "distributor": "epic",
+        "id": "E1E4ABC7C7294906AD35DC1F0644306D"
       }
     ],
     "id_igdb": "389428",
@@ -518004,7 +518009,12 @@
     "name": "First Racer",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1364690"
+      }
+    ],
     "id_igdb": "158822",
     "cover": "co3zpo",
     "artwork": [
@@ -518017,7 +518027,12 @@
     "name": "Airline Founder",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4729250"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -518028,7 +518043,12 @@
     "name": "Infinite Soul",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3892890"
+      }
+    ],
     "id_igdb": "361919",
     "cover": "coab1m",
     "artwork": [
@@ -518041,7 +518061,12 @@
     "name": "Backroom Cleaners",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3377830"
+      }
+    ],
     "id_igdb": "383672",
     "cover": "cob639",
     "artwork": [
@@ -518054,7 +518079,12 @@
     "name": "Sword & Banner",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4574370"
+      }
+    ],
     "id_igdb": "404889",
     "cover": "coc6uw",
     "artwork": [
@@ -518068,7 +518098,12 @@
     "name": "Shark Mart",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4704000"
+      }
+    ],
     "id_igdb": "402445",
     "cover": "coc5la",
     "artwork": [
@@ -518081,7 +518116,12 @@
     "name": "Project Tomorrow",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4402200"
+      }
+    ],
     "id_igdb": "414215",
     "cover": "cocq60",
     "artwork": [
@@ -518094,7 +518134,12 @@
     "name": "Straying Rules",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4072030"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -518105,7 +518150,12 @@
     "name": "Ninja Simulator",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1323140"
+      }
+    ],
     "id_igdb": "157404",
     "cover": "co41v3",
     "artwork": [
@@ -518118,7 +518168,12 @@
     "name": "Walk Hero",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1970220"
+      }
+    ],
     "id_igdb": "199747",
     "cover": "co97em",
     "artwork": [
@@ -518141,10 +518196,15 @@
   },
   {
     "id": "1545645088393269349",
-    "name": "Too Many Toys!",
+    "name": "Too Many Toys",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5028390"
+      }
+    ],
     "id_igdb": "415373",
     "cover": "cocs2a",
     "artwork": null,
@@ -518155,7 +518215,12 @@
     "name": "Go Next!",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5064170"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -518166,7 +518231,12 @@
     "name": "We Build Cabins",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4556530"
+      }
+    ],
     "id_igdb": "414715",
     "cover": "cocr18",
     "artwork": [
@@ -518179,7 +518249,12 @@
     "name": "Muv-Luv Girls Garden Mellow Days",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5005700"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -518190,7 +518265,12 @@
     "name": "BodyCam 2026",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NMNML425PX9"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -518201,7 +518281,12 @@
     "name": "Observe.",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4803530"
+      }
+    ],
     "id_igdb": "285619",
     "cover": "co8rn0",
     "artwork": [
@@ -518373,10 +518458,15 @@
   },
   {
     "id": "1546007115708104705",
-    "name": "ShipShaper: Falconeer Chronicles",
+    "name": "ShipShaper",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4339280"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -518387,7 +518477,12 @@
     "name": "Card Make Arena",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3776020"
+      }
+    ],
     "id_igdb": "414129",
     "cover": "cocps0",
     "artwork": [
@@ -518401,7 +518496,12 @@
     "name": "Homicide Desk",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4935210"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -518412,10 +518512,171 @@
     "name": "Badassgard",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3415350"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
     "url": null
+  },
+  {
+    "id": "1546369984039751711",
+    "name": "Minerals: Deep Core Mining",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4639040"
+      }
+    ],
+    "id_igdb": "404349",
+    "cover": "coc66d",
+    "artwork": null,
+    "url": "minerals-deep-core-mining"
+  },
+  {
+    "id": "1546370020471341157",
+    "name": "S.A.L.A.M.E.",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4581930"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1546370044026560602",
+    "name": "The Eternal Woods",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4509630"
+      }
+    ],
+    "id_igdb": "414427",
+    "cover": "cocqhm",
+    "artwork": [
+      "ar6gx4"
+    ],
+    "url": "the-eternal-woods"
+  },
+  {
+    "id": "1546370066050973781",
+    "name": "Night Guard: The Last Shift",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4635890"
+      }
+    ],
+    "id_igdb": "177533",
+    "cover": "cocr8h",
+    "artwork": [
+      "ar17it"
+    ],
+    "url": "night-guard-the-last-shift"
+  },
+  {
+    "id": "1546370083813859470",
+    "name": "The Adventurers",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3062500"
+      }
+    ],
+    "id_igdb": "315996",
+    "cover": "co8saa",
+    "artwork": [
+      "ar45m5"
+    ],
+    "url": "the-adventurers--1"
+  },
+  {
+    "id": "1546370097302470666",
+    "name": "Blue Sign",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4911340"
+      }
+    ],
+    "id_igdb": "412477",
+    "cover": "cocmtr",
+    "artwork": [
+      "ar6dsq"
+    ],
+    "url": "blue-sign"
+  },
+  {
+    "id": "1546370115107561503",
+    "name": "Tidy Mart",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4967500"
+      }
+    ],
+    "id_igdb": "411999",
+    "cover": "coclx0",
+    "artwork": [
+      "ar6cw5"
+    ],
+    "url": "tidy-mart"
+  },
+  {
+    "id": "1546370144094261288",
+    "name": "HexAim",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4874640"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1546370170757320765",
+    "name": "My Fav Chill Streamer Dies a Million Times",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3507880"
+      }
+    ],
+    "id_igdb": "409387",
+    "cover": "cocprq",
+    "artwork": [
+      "ar6cve"
+    ],
+    "url": "my-fav-chill-streamer-dies-a-million-times"
   }
 ]
