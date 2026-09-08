@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Fixed
+
+- Animations no longer run while minimized or in the tray
+
 ## 1.0.0 — 2026-08-09
 
 First release of Apploggd.

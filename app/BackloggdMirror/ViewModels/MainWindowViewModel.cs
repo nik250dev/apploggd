@@ -102,6 +102,7 @@ public partial class MainWindowViewModel : ViewModelBase
     private readonly AutostartService _autostartService;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsWaitingAnimationVisible))]
     private bool _isHomeVisible = true;
 
     [ObservableProperty]
@@ -219,6 +220,7 @@ public partial class MainWindowViewModel : ViewModelBase
     private bool _isLoggedIn = false;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsWaitingAnimationVisible))]
     private bool _isGameRunning = false;
 
     [ObservableProperty]
@@ -1056,9 +1058,16 @@ public partial class MainWindowViewModel : ViewModelBase
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsGameDetectionActive))]
+    [NotifyPropertyChangedFor(nameof(IsWaitingAnimationVisible))]
     private bool _isGameDetectionPaused = false;
 
     public bool IsGameDetectionActive => !IsGameDetectionPaused;
+
+    /// <summary>
+    /// IsVisible for the three pulsing circles of the waiting state: they only had it on their
+    /// ancestors, and a collapsed parent does not stop a child's animation.
+    /// </summary>
+    public bool IsWaitingAnimationVisible => IsHomeVisible && !IsGameRunning && IsGameDetectionActive;
 
     [RelayCommand]
     private void RestoreMainWindow()
