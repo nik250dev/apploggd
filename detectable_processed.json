@@ -67930,10 +67930,9 @@
   },
   {
     "id": "1124353236564983808",
-    "name": "Counterside",
+    "name": "CounterSide",
     "aliases": [
-      "Counter:Side",
-      "CounterSide"
+      "Counter:Side"
     ],
     "executables": [
       {
@@ -76909,9 +76908,10 @@
   },
   {
     "id": "1124353934623002726",
-    "name": "CRISIS CORE: FINAL FANTASY VII - REUNION",
+    "name": "Crisis Core: Final Fantasy VII - Reunion",
     "aliases": [
-      "CRISIS CORE -FINAL FANTASY VII- REUNION"
+      "CRISIS CORE -FINAL FANTASY VII- REUNION",
+      "CRISIS CORE: FINAL FANTASY VII - REUNION"
     ],
     "executables": [
       {
@@ -76922,16 +76922,16 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "1608070"
+        "distributor": "xbox",
+        "id": "9PCWV3FWJZ18"
       },
       {
         "distributor": "xbox",
         "id": "9P6J9NFKGJ68"
       },
       {
-        "distributor": "xbox",
-        "id": "9PCWV3FWJZ18"
+        "distributor": "steam",
+        "id": "1608070"
       }
     ],
     "id_igdb": "205201",
@@ -122400,10 +122400,9 @@
   },
   {
     "id": "1124357342394335324",
-    "name": "Kill la Kill: If",
+    "name": "KILL la KILL: IF",
     "aliases": [
-      "KILL la KILL THE GAME: IF",
-      "KILL la KILL: IF"
+      "KILL la KILL THE GAME: IF"
     ],
     "executables": [
       {
@@ -253545,9 +253544,9 @@
   },
   {
     "id": "1387990904194732154",
-    "name": "RAIDOU Remastered: The Mystery of the Soulless Army",
+    "name": "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY",
     "aliases": [
-      "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY"
+      "RAIDOU Remastered: The Mystery of the Soulless Army"
     ],
     "executables": [
       {
@@ -253558,20 +253557,20 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9NB58STJ848G"
+        "distributor": "steam",
+        "id": "2288350"
       },
       {
         "distributor": "xbox",
         "id": "9P284W1H02KW"
       },
       {
-        "distributor": "steam",
-        "id": "2288350"
+        "distributor": "xbox",
+        "id": "9NX3566L9NH9"
       },
       {
         "distributor": "xbox",
-        "id": "9NX3566L9NH9"
+        "id": "9NB58STJ848G"
       }
     ],
     "id_igdb": "337024",
@@ -297264,17 +297263,17 @@
   },
   {
     "id": "1428209154631405649",
-    "name": "Dice A Million",
+    "name": "Dice a Million",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "3430340"
-      },
-      {
         "distributor": "xbox",
         "id": "9N3NTDPJCD9Z"
+      },
+      {
+        "distributor": "steam",
+        "id": "3430340"
       }
     ],
     "id_igdb": "335662",
@@ -321697,8 +321696,9 @@
   },
   {
     "id": "1440130398813159515",
-    "name": "THE JOY OF CREATION",
+    "name": "The Joy of Creation",
     "aliases": [
+      "THE JOY OF CREATION",
       "TJOC"
     ],
     "executables": [],
@@ -340324,9 +340324,8 @@
   },
   {
     "id": "1440141099212738610",
-    "name": "Hackmud",
+    "name": "hackmud",
     "aliases": [
-      "hackmud",
       "ｈａｃｋｍｕｄ"
     ],
     "executables": [],
@@ -362803,9 +362802,10 @@
   },
   {
     "id": "1442713050993135749",
-    "name": "Arcade Archives: MAZINGER Z",
+    "name": "Arcade Archives: Mazinger Z",
     "aliases": [
-      "Arcade Archives MAZINGER Z"
+      "Arcade Archives MAZINGER Z",
+      "Arcade Archives: MAZINGER Z"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -369168,20 +369168,19 @@
   },
   {
     "id": "1442715029052063765",
-    "name": "Snwbrd: Freestyle Snowboarding",
+    "name": "SNWBRD: Freestyle Snowboarding",
     "aliases": [
-      "SNWBRD",
-      "SNWBRD: Freestyle Snowboarding"
+      "SNWBRD"
     ],
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9MWMGJFDZW4D"
-      },
-      {
         "distributor": "steam",
         "id": "1912130"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MWMGJFDZW4D"
       }
     ],
     "id_igdb": "235196",
@@ -397929,9 +397928,10 @@
   },
   {
     "id": "1442728871614091295",
-    "name": "Arcade Archives: ARGUS",
+    "name": "Arcade Archives: Argus",
     "aliases": [
-      "Arcade Archives ARGUS"
+      "Arcade Archives ARGUS",
+      "Arcade Archives: ARGUS"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -415263,9 +415263,10 @@
   },
   {
     "id": "1442734322128916531",
-    "name": "Arcade Archives: NAUGHTY BOY",
+    "name": "Arcade Archives: Naughty Boy",
     "aliases": [
-      "Arcade Archives NAUGHTY BOY"
+      "Arcade Archives NAUGHTY BOY",
+      "Arcade Archives: NAUGHTY BOY"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -422673,9 +422674,10 @@
   },
   {
     "id": "1442737663558811792",
-    "name": "Arcade Archives: THE ASTYANAX",
+    "name": "Arcade Archives: The Astyanax",
     "aliases": [
-      "Arcade Archives THE ASTYANAX"
+      "Arcade Archives THE ASTYANAX",
+      "Arcade Archives: THE ASTYANAX"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -490106,7 +490108,7 @@
   },
   {
     "id": "1502518870756298762",
-    "name": "Out To Deliver",
+    "name": "Pizza Knight: Out To Deliver",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -517850,7 +517852,7 @@
   },
   {
     "id": "1544195598562099200",
-    "name": "Wolcen 2",
+    "name": "Wolcen II",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -518678,5 +518680,22 @@
       "ar6cve"
     ],
     "url": "my-fav-chill-streamer-dies-a-million-times"
+  },
+  {
+    "id": "1546706891349037116",
+    "name": "Kritika Open Beta",
+    "aliases": [],
+    "executables": [
+      {
+        "name": "jf.exe",
+        "os": "win32",
+        "is_launcher": false
+      }
+    ],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
   }
 ]
