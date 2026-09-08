@@ -64,9 +64,11 @@ sessions to your account.**
 
 ## Installation
 
-1. Download the latest version from the 
+1. Download `Apploggd-v<version>-win-x64.zip` from the
    [releases page](https://github.com/nik250dev/apploggd/releases).
-2. Extract it wherever you like (no installer; it's portable).
+2. Extract it wherever you like (no installer; it's portable). It expands into an `Apploggd`
+   folder — keep its contents as they come: `Apploggd.exe`, `Update.exe` and `current\` all have to
+   stay together for the app to be able to update itself.
 3. Run `Apploggd.exe`.
 
 ## How it works under the hood

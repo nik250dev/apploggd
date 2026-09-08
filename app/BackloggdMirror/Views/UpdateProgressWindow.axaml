@@ -1,0 +1,69 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:services="using:BackloggdMirror.Services"
+        xmlns:vm="using:BackloggdMirror.ViewModels"
+        x:Class="BackloggdMirror.Views.UpdateProgressWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="Updating Apploggd"
+        SystemDecorations="None"
+        WindowStartupLocation="CenterScreen"
+        Topmost="True"
+        ShowInTaskbar="False"
+        Background="Transparent"
+        Width="480" Height="230"
+        CanResize="False">
+
+    <Window.Styles>
+        <Style Selector="Window">
+            <Setter Property="Opacity" Value="0"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.3" Easing="CubicEaseOut"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Window.visible">
+            <Setter Property="Opacity" Value="1"/>
+        </Style>
+    </Window.Styles>
+
+    <!-- Same shape as the changelog modal: dark card, 20px corners, panel-coloured hairline border
+         and a panel-coloured strip along the bottom. -->
+    <Border Background="{DynamicResource AppBackgroundBrush}"
+            BorderBrush="{DynamicResource PanelBackgroundBrush}"
+            BorderThickness="1"
+            CornerRadius="20"
+            Margin="10"
+            BoxShadow="0 4 30 0 #80000000"
+            ClipToBounds="True">
+        <Grid RowDefinitions="Auto, *, Auto">
+            <!-- Header -->
+            <TextBlock Grid.Row="0"
+                       Text="{Binding [AppUpdate_Progress_Title], Source={x:Static services:LocalizationService.Instance}}"
+                       FontSize="20" Foreground="{DynamicResource TextPrimaryBrush}"
+                       Margin="20,20,20,5"/>
+
+            <!-- Content -->
+            <StackPanel Grid.Row="1" Margin="20,10,20,10" VerticalAlignment="Center" Spacing="12">
+                <TextBlock Text="{Binding UpdateStatusText}"
+                           FontSize="13" Foreground="{DynamicResource TextSecondaryBrush}"
+                           TextWrapping="Wrap"/>
+
+                <ProgressBar Minimum="0" Maximum="100"
+                             Value="{Binding UpdateProgress}"
+                             IsIndeterminate="{Binding IsUpdateProgressIndeterminate}"
+                             Height="6" CornerRadius="3"
+                             Background="{DynamicResource PanelBackgroundBrush}"
+                             BorderThickness="0"
+                             Foreground="{DynamicResource BrandPrimaryBrush}"/>
+            </StackPanel>
+
+            <!-- Footer -->
+            <Border Grid.Row="2" Background="{DynamicResource PanelBackgroundBrush}" Height="60" Padding="20,0">
+                <TextBlock Text="{Binding [AppUpdate_Progress_Restart], Source={x:Static services:LocalizationService.Instance}}"
+                           FontSize="12" Foreground="{DynamicResource TextSubtleBrush}"
+                           TextWrapping="Wrap" VerticalAlignment="Center"/>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

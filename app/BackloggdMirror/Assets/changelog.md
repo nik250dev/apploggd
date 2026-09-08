@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Apploggd now updates itself, with an "Update Apploggd" button
+
 ## 1.0.0 — 2026-08-09
 
 First release of Apploggd.

@@ -6,12 +6,18 @@ on:
       # Any tag with the form v1.2.3 (or v1.2) triggers a release
       - 'v*'
 
+env:
+  # Must match the Velopack PackageReference in the .csproj: the CLI and the library refuse to work
+  # against a different major/minor.
+  VPK_VERSION: '1.2.0'
+  PACK_ID: 'Apploggd'
+
 jobs:
   build-and-release:
     runs-on: windows-latest
 
     permissions:
-      # Required so the workflow can create the release and upload the .zip
+      # Required so the workflow can create the release and upload the packages
       contents: write
 
     steps:
@@ -34,50 +40,126 @@ jobs:
           "version=$version" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
           Write-Host "Building version $version"
 
-      # Single place defining the package name, reused by the publish, zip and upload steps.
-      - name: Derive package name
-        id: release
+      - name: Install the Velopack CLI
         shell: pwsh
-        run: |
-          "name=Apploggd-v${{ steps.version.outputs.version }}-win-x64" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+        run: dotnet tool install -g vpk --version ${{ env.VPK_VERSION }}
 
-      # Publishing straight into a version-named folder so the .zip expands into that same folder
-      # instead of scattering its contents wherever the user extracts it.
-      - name: Publish (win-x64, self-contained, single file)
+      # No PublishSingleFile: vpk packs a folder, and a single-file bundle would leave it nothing to
+      # diff for delta updates.
+      - name: Publish (win-x64, self-contained)
         shell: pwsh
         run: |
           dotnet publish app/BackloggdMirror/BackloggdMirror.csproj `
             -c Release `
             -r win-x64 `
             --self-contained true `
-            -p:PublishSingleFile=true `
             -p:Version=${{ steps.version.outputs.version }} `
-            -o "publish/${{ steps.release.outputs.name }}"
+            -o publish
 
-      # The whole folder ships, not just the .exe: PublishSingleFile leaves the native libraries
-      # (Skia, HarfBuzz, ANGLE) and Playwright's files next to it, and the app will not start
-      # without them.
-      - name: Package as .zip
-        shell: pwsh
-        run: |
-          Compress-Archive `
-            -Path "publish/${{ steps.release.outputs.name }}" `
-            -DestinationPath "${{ steps.release.outputs.name }}.zip"
-
-          Get-ChildItem "${{ steps.release.outputs.name }}.zip" | Select-Object Name, Length
-
-      # Published as a draft on purpose: the workflow builds and uploads, the release notes are
-      # written by hand on the web and published when they are ready. The auto-generated notes are
-      # only a starting point to edit over.
-      #
-      # A draft is invisible to /releases/latest, so the in-app update notice does not fire until
-      # the release is published from the web.
-      - name: Create the draft release
+      # Deltas can only be built against the previous release, so it has to be on disk before pack.
+      # Not fatal: the first release has nothing to download, and without it pack just emits a full
+      # package.
+      - name: Download the previous release
+        continue-on-error: true
         shell: pwsh
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "${{ github.ref_name }}" "${{ steps.release.outputs.name }}.zip" `
-            --draft `
-            --title "Apploggd ${{ steps.version.outputs.version }}" `
-            --generate-notes
+          vpk download github `
+            --repoUrl "https://github.com/${{ github.repository }}" `
+            --outputDir Releases `
+            --token $env:GH_TOKEN
+
+      # --noInst: Apploggd ships portable only, so the installer is not built. The .nupkg and
+      # releases.win.json still are — they are the feed the in-app updater reads.
+      - name: Pack with Velopack
+        shell: pwsh
+        run: |
+          vpk pack `
+            --packId ${{ env.PACK_ID }} `
+            --packVersion ${{ steps.version.outputs.version }} `
+            --packDir publish `
+            --mainExe Apploggd.exe `
+            --packTitle Apploggd `
+            --packAuthors nik250dev `
+            --icon app/BackloggdMirror/Assets/app-logo.ico `
+            --outputDir Releases `
+            --noInst
+
+          Get-ChildItem Releases | Select-Object Name, Length
+
+      # vpk's portable bundle is called "Apploggd-win-Portable.zip" in every release and has no
+      # containing folder, so it scatters its four entries wherever it is extracted. It is repacked
+      # under an "Apploggd" folder and given back the versioned name the download links use.
+      #
+      # Safe to reshape: the portable bundle is only ever downloaded by a person. The updater reads
+      # releases.win.json, which lists the .nupkg files and never mentions this one. What does have
+      # to follow is assets.win.json, the manifest the upload step reads to decide what to attach.
+      - name: Repackage the portable bundle
+        shell: pwsh
+        run: |
+          $newName = "${{ env.PACK_ID }}-${{ github.ref_name }}-win-x64.zip"
+          $original = "Releases/${{ env.PACK_ID }}-win-Portable.zip"
+          $stage = "portable-stage"
+
+          New-Item -ItemType Directory -Force "$stage/${{ env.PACK_ID }}" | Out-Null
+          Expand-Archive -Path $original -DestinationPath "$stage/${{ env.PACK_ID }}" -Force
+          Remove-Item $original
+
+          # CreateFromDirectory rather than Compress-Archive: it writes the "/" separators the zip
+          # format calls for, and some extractors need them to rebuild the folder tree.
+          Add-Type -AssemblyName System.IO.Compression.FileSystem
+          [System.IO.Compression.ZipFile]::CreateFromDirectory(
+            (Resolve-Path $stage),
+            (Join-Path (Resolve-Path "Releases") $newName),
+            [System.IO.Compression.CompressionLevel]::Optimal,
+            $false)
+
+          $manifestPath = "Releases/assets.win.json"
+          $manifest = Get-Content $manifestPath -Raw | ConvertFrom-Json
+
+          foreach ($asset in $manifest) {
+            if ($asset.Type -eq "Portable") { $asset.RelativeFileName = $newName }
+          }
+
+          # @() so a manifest that ever holds a single entry still serialises as an array, and
+          # WriteAllText because Set-Content's UTF-8 means BOM or no BOM depending on the shell.
+          $json = ConvertTo-Json @($manifest) -Depth 5 -Compress
+          [System.IO.File]::WriteAllText((Resolve-Path $manifestPath), $json)
+
+          Write-Host "Portable bundle repackaged as $newName"
+          Get-ChildItem Releases | Select-Object Name, Length
+
+      # Published as a draft on purpose: the workflow builds and uploads, the release notes are
+      # written by hand on the web and published when they are ready.
+      #
+      # A draft is invisible to both /releases/latest and Velopack's GithubSource, so neither the
+      # version notice nor the in-app update fires until the release is published from the web.
+      - name: Upload the draft release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          vpk upload github `
+            --repoUrl "https://github.com/${{ github.repository }}" `
+            --outputDir Releases `
+            --tag ${{ github.ref_name }} `
+            --releaseName "Apploggd ${{ steps.version.outputs.version }}" `
+            --token $env:GH_TOKEN
+
+      # vpk has no equivalent of gh's --generate-notes, so the starting point for the hand-written
+      # notes is filled in afterwards. Best-effort: an empty body is not worth failing a build over.
+      - name: Seed the release notes
+        continue-on-error: true
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $notes = gh api "repos/${{ github.repository }}/releases/generate-notes" `
+            -f tag_name="${{ github.ref_name }}" --jq .body
+
+          # Through a file, not --notes: release notes run to thousands of characters and carry
+          # newlines and quotes, which is exactly what passing them as an argument mangles.
+          [System.IO.File]::WriteAllText((Join-Path $PWD "release-notes.md"), ($notes -join "`n"))
+
+          gh release edit "${{ github.ref_name }}" --notes-file release-notes.md

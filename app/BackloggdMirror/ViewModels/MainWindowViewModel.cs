@@ -23,12 +23,12 @@ public partial class MainWindowViewModel : ViewModelBase
     /// tasks (registration, database update) that have no idea which thread they are on.
     /// Each toast expires on its own and calls <see cref="RemoveToast"/>.
     /// </summary>
-    public void ShowToast(string message, ToastType type, TimeSpan? duration = null)
+    public void ShowToast(string message, ToastType type, TimeSpan? duration = null, string? actionText = null, Action? action = null)
     {
         Console.WriteLine($"[MainWindowViewModel] ShowToast called: {message}");
         Dispatcher.UIThread.Post(() =>
         {
-            var toast = new ToastNotificationViewModel(message, type, RemoveToast, duration);
+            var toast = new ToastNotificationViewModel(message, type, RemoveToast, duration, actionText, action);
             ToastNotifications.Add(toast);
         });
     }
@@ -90,6 +90,12 @@ public partial class MainWindowViewModel : ViewModelBase
     public event Action? RequestFlashWindow;
     public event Action? RequestShowMainWindow;
     public event Action? RequestCloseApplication;
+
+    /// <summary>Message, button label and action for the tray notice that replaces the toast on a silent start.</summary>
+    public event Action<string, string, Action>? RequestTrayUpdateNotice;
+
+    public event Action? RequestShowUpdateProgress;
+    public event Action? RequestCloseUpdateProgress;
 
 
     private readonly IBackloggdAuthService _authService;
@@ -496,6 +502,14 @@ public partial class MainWindowViewModel : ViewModelBase
         // which at this very moment is busy with the games database: the notice lives in the sidebar
         // badge and in Settings > About.
         _ = CheckForAppUpdateAsync();
+
+        // Straight after an update, show what changed. Set here rather than on window load because
+        // the modal lives in MainWindow's tree, so it is already up when the window first appears.
+        if (AppUpdaterService.RestartedAfterUpdate)
+        {
+            _logger.Info($"[MainWindowViewModel] Restarted by Velopack after an update; opening the changelog.");
+            OpenChangelog();
+        }
     }
 
 
@@ -607,7 +621,15 @@ public partial class MainWindowViewModel : ViewModelBase
     private bool _isChangelogVisible = false;
 
     /// <summary>Blurs the main content while any modal is open.</summary>
-    public bool IsAnyOverlayVisible => IsSessionConfirmationVisible || IsChangelogVisible || IsClearDataConfirmationVisible || IsNoBrowserWarningVisible;
+    /// <summary>
+    /// Included in <see cref="IsAnyOverlayVisible"/> even though the progress window is a window of
+    /// its own: the blur belongs to whatever sits behind it, which is this one.
+    /// </summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsAnyOverlayVisible))]
+    private bool _isUpdateProgressVisible = false;
+
+    public bool IsAnyOverlayVisible => IsSessionConfirmationVisible || IsChangelogVisible || IsClearDataConfirmationVisible || IsNoBrowserWarningVisible || IsUpdateProgressVisible;
 
     public ObservableCollection<BackloggdMirror.Models.ChangelogBlock> ChangelogBlocks { get; } = new();
 
@@ -650,12 +672,39 @@ public partial class MainWindowViewModel : ViewModelBase
     private AppUpdateService AppUpdateService => _appUpdateService ??= new AppUpdateService(_logger);
     private ExternalLinkService ExternalLinkService => _externalLinkService ??= new ExternalLinkService(_logger);
 
+    private AppUpdaterService? _appUpdaterService;
+
+    private AppUpdaterService AppUpdater => _appUpdaterService ??= new AppUpdaterService(_logger);
+
     /// <summary>Available release, or null when up to date. Holds the URL "Download" navigates to.</summary>
     private AppUpdateInfo? _availableUpdate;
+
+    /// <summary>Pending Velopack update, kept so the buttons can apply it without checking again.</summary>
+    private Velopack.UpdateInfo? _pendingVelopackUpdate;
+
+    /// <summary>
+    /// True from the moment an update starts until the process exits. Guards against a second click,
+    /// and tells MainWindow that the close it is about to get is a real one, not a minimise to tray.
+    /// </summary>
+    public bool IsApplyingUpdate { get; private set; }
+
+    [ObservableProperty]
+    private string _updateStatusText = string.Empty;
+
+    [ObservableProperty]
+    private int _updateProgress;
+
+    /// <summary>Set once downloading is done: applying gives no progress to report.</summary>
+    [ObservableProperty]
+    private bool _isUpdateProgressIndeterminate;
 
     /// <summary>Drives both the sidebar badge and the notice in Settings &gt; About.</summary>
     [ObservableProperty]
     private bool _isUpdateAvailable = false;
+
+    /// <summary>Drives the changelog's "Update Apploggd" button: only Velopack can actually apply one.</summary>
+    [ObservableProperty]
+    private bool _isInAppUpdateAvailable = false;
 
     [ObservableProperty]
     private string _updateAvailableText = string.Empty;
@@ -681,6 +730,38 @@ public partial class MainWindowViewModel : ViewModelBase
     /// </summary>
     private async Task CheckForAppUpdateAsync()
     {
+        // Logged so a build that cannot self-update is obvious from the log alone.
+        _logger.Info($"[MainWindowViewModel] In-app updates supported: {AppUpdater.IsSupported} (Velopack version: {AppUpdater.PackagedVersion ?? "n/a"}).");
+
+        // Velopack answers "can this copy update itself", which is a different question from the
+        // GitHub notice below: it drives the update button and its toast, nothing else.
+        var velopackUpdate = await AppUpdater.CheckForUpdatesAsync();
+        if (velopackUpdate is not null)
+        {
+            var loc = LocalizationService.Instance;
+            var message = string.Format(loc["Toast_UpdateAvailable"], velopackUpdate.TargetFullRelease.Version);
+            var actionText = loc["AppUpdate_UpdateButton"];
+
+            // Every "Update Apploggd" button applies this same one, so the click needs no re-check.
+            _pendingVelopackUpdate = velopackUpdate;
+
+            Dispatcher.UIThread.Post(() => IsInAppUpdateAvailable = true);
+
+            // 30s rather than the usual 7: both notices carry an action, so they have to survive the
+            // user looking away.
+            if (AutostartService.StartedSilently)
+            {
+                _logger.Info("[MainWindowViewModel] Silent start, so the update is announced from the tray instead of a toast.");
+
+                // The window exists but was never shown, so a toast would count down unseen.
+                Dispatcher.UIThread.Post(() => RequestTrayUpdateNotice?.Invoke(message, actionText, RunUpdateCommand));
+            }
+            else
+            {
+                ShowToast(message, ToastType.Warning, TimeSpan.FromSeconds(30), actionText, RunUpdateCommand);
+            }
+        }
+
         var update = await AppUpdateService.CheckForUpdateAsync(AppVersion);
 
         if (update is null) return;
@@ -726,6 +807,150 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             NoBrowserUrl = url;
             IsNoBrowserWarningVisible = true;
+        }
+    }
+
+    /// <summary>Lets the toast and the tray notice fire the same command their buttons bind to.</summary>
+    private void RunUpdateCommand() => UpdateApploggdCommand.Execute(null);
+
+    /// <summary>
+    /// Stops detection before an update, so nothing starts a session while the process is being
+    /// replaced. A session already being timed is <b>discarded</b>, not registered: the confirmation
+    /// modal needs a user and a process, and this one is about to have neither.
+    /// Leaves detection paused, so the restarted copy comes back in "Detection paused".
+    /// </summary>
+    private void SuspendDetectionForUpdate()
+    {
+        if (IsGameRunning)
+        {
+            _logger.Info($"[MainWindowViewModel] Update requested while timing '{_currentGameName}' ({PlayTime}). Discarding the session without registering it.");
+
+            _stopwatch.Reset();
+            _displayTimer.Stop();
+            IsGameRunning = false;
+            _currentGameName = null;
+            _currentProcessId = 0;
+            _currentIdIgdb = null;
+            GameName = string.Empty;
+            PlayTime = "00:00:00";
+            IsBackgroundImageVisible = false;
+        }
+        else
+        {
+            _logger.Info("[MainWindowViewModel] Update requested; pausing game detection.");
+        }
+
+        IsGameDetectionPaused = true;
+        GameStatus = "Search Paused";
+        UpdateTrayMenuText();
+    }
+
+    /// <summary>
+    /// Downloads and applies the pending update, showing the progress window while it runs. Behind
+    /// every "Update Apploggd" button: Settings &gt; About, the toast, and the tray notice.
+    /// Does not return on success — <see cref="AppUpdaterService.ApplyAndRestart"/> replaces the process.
+    /// </summary>
+    [RelayCommand]
+    private async Task UpdateApploggdAsync()
+    {
+        var loc = LocalizationService.Instance;
+        var update = _pendingVelopackUpdate;
+
+        if (update is null)
+        {
+            _logger.Warning("[MainWindowViewModel] 'Update Apploggd' pressed but no pending update is known. Ignoring.");
+            ShowToast(loc["AppUpdate_Failed"], ToastType.Error);
+            return;
+        }
+
+        if (IsApplyingUpdate)
+        {
+            _logger.Info("[MainWindowViewModel] 'Update Apploggd' pressed again while an update was already running. Ignoring.");
+            return;
+        }
+
+        // A session waiting to be confirmed is one the user already played and has not decided about.
+        // Restarting now would throw it away silently, and the toast and the tray notice both sit
+        // above the modal, so the button really is reachable from here.
+        if (IsSessionConfirmationVisible)
+        {
+            _logger.Warning("[MainWindowViewModel] 'Update Apploggd' pressed while a session is awaiting confirmation. Refusing until it is resolved.");
+            ShowToast(loc["AppUpdate_SessionPending"], ToastType.Warning);
+            return;
+        }
+
+        IsApplyingUpdate = true;
+        SuspendDetectionForUpdate();
+
+        var version = update.TargetFullRelease.Version.ToString();
+        var isDelta = update.DeltasToTarget.Length > 0;
+
+        _logger.Info($"[MainWindowViewModel] === Update to {version} requested (from {AppUpdater.PackagedVersion}) ===");
+        _logger.Info($"[MainWindowViewModel] Target package: {update.TargetFullRelease.FileName}; deltas available: {isDelta}.");
+
+        UpdateProgress = 0;
+        UpdateStatusText = string.Format(loc["AppUpdate_Progress_Downloading"], version);
+        IsUpdateProgressVisible = true;
+        RequestShowUpdateProgress?.Invoke();
+
+        // A beat before the download starts, so the window can be read rather than flashing past.
+        // The bar runs indeterminate meanwhile: at a fixed 0% it would look stalled, not starting.
+        IsUpdateProgressIndeterminate = true;
+        await Task.Delay(TimeSpan.FromSeconds(5));
+        IsUpdateProgressIndeterminate = false;
+
+        // Logged in 25% steps: the callback fires far too often to put every tick in the log.
+        var lastBucket = -1;
+        var downloaded = await AppUpdater.DownloadAsync(update, percent =>
+        {
+            Dispatcher.UIThread.Post(() => UpdateProgress = percent);
+
+            var bucket = percent / 25;
+            if (bucket > lastBucket)
+            {
+                lastBucket = bucket;
+                _logger.Info($"[MainWindowViewModel] Update download at {percent}%.");
+            }
+        });
+
+        if (!downloaded)
+        {
+            _logger.Error("[MainWindowViewModel] Update download failed. Staying on the installed version.");
+            IsApplyingUpdate = false;
+            IsUpdateProgressVisible = false;
+            RequestCloseUpdateProgress?.Invoke();
+            ShowToast(loc["AppUpdate_Failed"], ToastType.Error);
+            return;
+        }
+
+        UpdateProgress = 100;
+        IsUpdateProgressIndeterminate = true;
+        UpdateStatusText = loc["AppUpdate_Progress_Applying"];
+
+        // Lets the window paint the "applying" state before the app goes away.
+        await Task.Delay(400);
+
+        if (!AppUpdater.ApplyOnExit(update))
+        {
+            IsApplyingUpdate = false;
+            IsUpdateProgressVisible = false;
+            RequestCloseUpdateProgress?.Invoke();
+            ShowToast(loc["AppUpdate_Failed"], ToastType.Error);
+            return;
+        }
+
+        _logger.Info("[MainWindowViewModel] Shutting down so Update.exe can replace this copy. The next log lines come from the new version.");
+
+        // Through the lifetime rather than by closing MainWindow: on a silent start that window was
+        // never shown, and Update.exe only waits 60s for this process to go away.
+        if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            desktop.Shutdown();
+        }
+        else
+        {
+            _logger.Warning("[MainWindowViewModel] No desktop lifetime to shut down through; exiting the hard way.");
+            Environment.Exit(0);
         }
     }
 

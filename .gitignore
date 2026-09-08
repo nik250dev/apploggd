@@ -11,6 +11,9 @@
 [Ll]ogs/
 artifacts/
 publish/
+publish-debug/
+# vpk pack output
+Releases/
 *.dll
 *.exe
 *.pdb
