@@ -4,7 +4,7 @@
 
 ### Added
 
-- Apploggd now updates itself, with an "Update Apploggd" button
+- Apploggd now updates itself, from the notice in Settings > About, the startup toast or the tray
 
 ## 1.0.0 — 2026-08-09
 

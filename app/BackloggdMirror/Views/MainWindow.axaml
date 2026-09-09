@@ -632,20 +632,15 @@
                                                     <TextBlock Text="{Binding AppVersion}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}"/>
                                                 </StackPanel>
                                             </StackPanel>
-                                            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
-                                                <Button Classes="update-btn" Padding="15,5"
-                                                        IsVisible="{Binding IsInAppUpdateAvailable}"
-                                                        Content="{Binding [AppUpdate_UpdateButton], Source={x:Static services:LocalizationService.Instance}}"
-                                                        Command="{Binding UpdateApploggdCommand}"/>
-                                                <Button Classes="subtle"
-                                                        Content="{Binding [Settings_ViewChangelog], Source={x:Static services:LocalizationService.Instance}}"
-                                                        Command="{Binding OpenChangelogCommand}"/>
-                                            </StackPanel>
+                                            <Button Grid.Column="1" Classes="subtle" VerticalAlignment="Center"
+                                                    Content="{Binding [Settings_ViewChangelog], Source={x:Static services:LocalizationService.Instance}}"
+                                                    Command="{Binding OpenChangelogCommand}"/>
                                         </Grid>
 
-                                        <!-- New version notice. Only visible when the check against
-                                             GitHub releases finds a newer one. -->
-                                        <Border IsVisible="{Binding IsUpdateAvailable}"
+                                        <!-- New version notice. Shown when either check finds a newer
+                                             version: Velopack's, which can install it, or the GitHub
+                                             one, which can only point at the release page. -->
+                                        <Border IsVisible="{Binding IsUpdateNoticeVisible}"
                                                 Background="{DynamicResource SurfaceBrandHoverBrush}"
                                                 BorderBrush="{DynamicResource BrandPrimaryBrush}"
                                                 BorderThickness="1"
@@ -666,7 +661,16 @@
                                                                FontSize="12" TextWrapping="Wrap"
                                                                Foreground="{DynamicResource TextSubtleBrush}"/>
                                                 </StackPanel>
+                                                <!-- One button, two jobs. A Velopack package installs
+                                                     the update itself; anything else (a 1.0.0 portable,
+                                                     a folder copied by hand) can only be sent to the
+                                                     release page. Never both at once. -->
                                                 <Button Grid.Column="2" Classes="update-btn" VerticalAlignment="Center"
+                                                        IsVisible="{Binding IsInAppUpdateAvailable}"
+                                                        Content="{Binding [AppUpdate_Update], Source={x:Static services:LocalizationService.Instance}}"
+                                                        Command="{Binding UpdateApploggdCommand}"/>
+                                                <Button Grid.Column="2" Classes="update-btn" VerticalAlignment="Center"
+                                                        IsVisible="{Binding !IsInAppUpdateAvailable}"
                                                         Content="{Binding [AppUpdate_Download], Source={x:Static services:LocalizationService.Instance}}"
                                                         Command="{Binding DownloadUpdateCommand}"/>
                                             </Grid>

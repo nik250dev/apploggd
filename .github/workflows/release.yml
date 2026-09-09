@@ -3,8 +3,9 @@ name: Release
 on:
   push:
     tags:
-      # Any tag with the form v1.2.3 (or v1.2) triggers a release
-      - 'v*'
+      # Only tags with the form v1.2.3. Three components are not cosmetic: vpk takes this as the
+      # package version and refuses anything shorter.
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 
 env:
   # Must match the Velopack PackageReference in the .csproj: the CLI and the library refuse to work
@@ -37,6 +38,14 @@ jobs:
         shell: pwsh
         run: |
           $version = "${{ github.ref_name }}" -replace '^v', ''
+
+          # The tag filter already keeps other shapes out. This is the second lock, because the
+          # filter is a glob rather than a regex and the next thing to complain would be vpk,
+          # several minutes into the build and with a worse message than this one.
+          if ($version -notmatch '^\d+\.\d+\.\d+$') {
+            throw "Tag '${{ github.ref_name }}' is not of the form v1.2.3, which is the only shape a release can be built from."
+          }
+
           "version=$version" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
           Write-Host "Building version $version"
 
@@ -90,45 +99,14 @@ jobs:
 
       # vpk's portable bundle is called "Apploggd-win-Portable.zip" in every release and has no
       # containing folder, so it scatters its four entries wherever it is extracted. It is repacked
-      # under an "Apploggd" folder and given back the versioned name the download links use.
+      # under an "Apploggd" folder and given back the versioned name the download links use, and
+      # assets.win.json is pointed at the new name so the upload step still attaches it.
       #
-      # Safe to reshape: the portable bundle is only ever downloaded by a person. The updater reads
-      # releases.win.json, which lists the .nupkg files and never mentions this one. What does have
-      # to follow is assets.win.json, the manifest the upload step reads to decide what to attach.
+      # In a script rather than inline so that scripts/Invoke-LocalRelease.ps1, which runs this whole
+      # pipeline against a local folder, exercises the same code instead of a copy of it.
       - name: Repackage the portable bundle
         shell: pwsh
-        run: |
-          $newName = "${{ env.PACK_ID }}-${{ github.ref_name }}-win-x64.zip"
-          $original = "Releases/${{ env.PACK_ID }}-win-Portable.zip"
-          $stage = "portable-stage"
-
-          New-Item -ItemType Directory -Force "$stage/${{ env.PACK_ID }}" | Out-Null
-          Expand-Archive -Path $original -DestinationPath "$stage/${{ env.PACK_ID }}" -Force
-          Remove-Item $original
-
-          # CreateFromDirectory rather than Compress-Archive: it writes the "/" separators the zip
-          # format calls for, and some extractors need them to rebuild the folder tree.
-          Add-Type -AssemblyName System.IO.Compression.FileSystem
-          [System.IO.Compression.ZipFile]::CreateFromDirectory(
-            (Resolve-Path $stage),
-            (Join-Path (Resolve-Path "Releases") $newName),
-            [System.IO.Compression.CompressionLevel]::Optimal,
-            $false)
-
-          $manifestPath = "Releases/assets.win.json"
-          $manifest = Get-Content $manifestPath -Raw | ConvertFrom-Json
-
-          foreach ($asset in $manifest) {
-            if ($asset.Type -eq "Portable") { $asset.RelativeFileName = $newName }
-          }
-
-          # @() so a manifest that ever holds a single entry still serialises as an array, and
-          # WriteAllText because Set-Content's UTF-8 means BOM or no BOM depending on the shell.
-          $json = ConvertTo-Json @($manifest) -Depth 5 -Compress
-          [System.IO.File]::WriteAllText((Resolve-Path $manifestPath), $json)
-
-          Write-Host "Portable bundle repackaged as $newName"
-          Get-ChildItem Releases | Select-Object Name, Length
+        run: ./scripts/Repack-Portable.ps1 -PackId ${{ env.PACK_ID }} -TagName ${{ github.ref_name }}
 
       # Published as a draft on purpose: the workflow builds and uploads, the release notes are
       # written by hand on the web and published when they are ready.

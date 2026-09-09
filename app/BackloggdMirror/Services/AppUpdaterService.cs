@@ -99,7 +99,7 @@ public sealed class AppUpdaterService
         }
     }
 
-    /// <summary>Downloads the update; the installed copy is only touched by <see cref="ApplyAndRestart"/>.</summary>
+    /// <summary>Downloads the update; the installed copy is only touched by <see cref="ApplyOnExit"/>.</summary>
     public async Task<bool> DownloadAsync(UpdateInfo update, Action<int>? onProgress = null, CancellationToken cancellationToken = default)
     {
         if (_manager is null || !IsSupported) return false;

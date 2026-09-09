@@ -507,7 +507,11 @@ public partial class MainWindowViewModel : ViewModelBase
         // the modal lives in MainWindow's tree, so it is already up when the window first appears.
         if (AppUpdaterService.RestartedAfterUpdate)
         {
-            _logger.Info($"[MainWindowViewModel] Restarted by Velopack after an update; opening the changelog.");
+            // Consumed rather than just read: a logout builds this ViewModel again in the same
+            // process, and a flag left standing would reopen the changelog on every login.
+            AppUpdaterService.RestartedAfterUpdate = false;
+
+            _logger.Info("[MainWindowViewModel] Restarted by Velopack after an update; opening the changelog.");
             OpenChangelog();
         }
     }
@@ -700,11 +704,23 @@ public partial class MainWindowViewModel : ViewModelBase
 
     /// <summary>Drives both the sidebar badge and the notice in Settings &gt; About.</summary>
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsUpdateNoticeVisible))]
     private bool _isUpdateAvailable = false;
 
-    /// <summary>Drives the changelog's "Update Apploggd" button: only Velopack can actually apply one.</summary>
+    /// <summary>
+    /// True when this copy can install the update itself, which is what turns the notice's button
+    /// from "Download" into "Update". Only a Velopack package can.
+    /// </summary>
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsUpdateNoticeVisible))]
     private bool _isInAppUpdateAvailable = false;
+
+    /// <summary>
+    /// The notice shows when either check found a newer version. Deliberately not the same thing as
+    /// <see cref="IsUpdateAvailable"/>, which still drives the sidebar badge on its own: an
+    /// anonymous rate limit on the GitHub API must not hide a button Velopack knows how to use.
+    /// </summary>
+    public bool IsUpdateNoticeVisible => IsUpdateAvailable || IsInAppUpdateAvailable;
 
     [ObservableProperty]
     private string _updateAvailableText = string.Empty;
@@ -745,7 +761,14 @@ public partial class MainWindowViewModel : ViewModelBase
             // Every "Update Apploggd" button applies this same one, so the click needs no re-check.
             _pendingVelopackUpdate = velopackUpdate;
 
-            Dispatcher.UIThread.Post(() => IsInAppUpdateAvailable = true);
+            Dispatcher.UIThread.Post(() =>
+            {
+                IsInAppUpdateAvailable = true;
+
+                // Fills the notice on its own: the GitHub check below usually overwrites this with
+                // the same version, but it is allowed to fail and leave the notice with no text.
+                RefreshAppUpdateTexts();
+            });
 
             // 30s rather than the usual 7: both notices carry an action, so they have to survive the
             // user looking away.
@@ -782,13 +805,16 @@ public partial class MainWindowViewModel : ViewModelBase
     /// </summary>
     private void RefreshAppUpdateTexts()
     {
-        if (_availableUpdate is null) return;
+        // Whichever check found it. GitHub's wins when both did, because only it carries a
+        // publication date; Velopack's feed has no such field.
+        var version = _availableUpdate?.Version ?? _pendingVelopackUpdate?.TargetFullRelease.Version.ToString();
+        if (version is null) return;
 
         var loc = LocalizationService.Instance;
 
-        UpdateAvailableText = string.Format(loc["AppUpdate_Available"], _availableUpdate.Version);
+        UpdateAvailableText = string.Format(loc["AppUpdate_Available"], version);
 
-        UpdatePublishedText = _availableUpdate.PublishedAt is { } publishedAt
+        UpdatePublishedText = _availableUpdate?.PublishedAt is { } publishedAt
             ? string.Format(loc["AppUpdate_PublishedOn"],
                             publishedAt.ToLocalTime().ToString(loc["AppUpdate_DateFormat"], loc.CurrentCulture))
             : string.Empty;
@@ -848,7 +874,7 @@ public partial class MainWindowViewModel : ViewModelBase
     /// <summary>
     /// Downloads and applies the pending update, showing the progress window while it runs. Behind
     /// every "Update Apploggd" button: Settings &gt; About, the toast, and the tray notice.
-    /// Does not return on success — <see cref="AppUpdaterService.ApplyAndRestart"/> replaces the process.
+    /// Does not return on success — <see cref="AppUpdaterService.ApplyOnExit"/> replaces the process.
     /// </summary>
     [RelayCommand]
     private async Task UpdateApploggdAsync()
@@ -891,6 +917,11 @@ public partial class MainWindowViewModel : ViewModelBase
         UpdateProgress = 0;
         UpdateStatusText = string.Format(loc["AppUpdate_Progress_Downloading"], version);
         IsUpdateProgressVisible = true;
+
+        // The window comes back first, so the progress sits over the app instead of the desktop.
+        // It is the only thing that undoes a silent start or a minimise to tray, and it is also what
+        // makes a failure visible: the toasts below live in MainWindow.
+        RequestShowMainWindow?.Invoke();
         RequestShowUpdateProgress?.Invoke();
 
         // A beat before the download starts, so the window can be read rather than flashing past.
