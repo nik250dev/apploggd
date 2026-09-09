@@ -22,16 +22,26 @@ public partial class ToastNotificationViewModel : ViewModelBase
     [ObservableProperty]
     private double _progress = 100;
 
+    /// <summary>Label of the optional action button; empty on a plain toast.</summary>
+    [ObservableProperty]
+    private string _actionText = string.Empty;
+
+    public bool HasAction => _action is not null;
+
     private readonly DispatcherTimer _timer;
     private readonly Action<ToastNotificationViewModel> _onDismiss;
+    private readonly Action? _action;
     private readonly TimeSpan _totalDuration;
     private DateTime _startTime;
 
-    public ToastNotificationViewModel(string message, ToastType type, Action<ToastNotificationViewModel> onDismiss, TimeSpan? duration = null)
+    public ToastNotificationViewModel(string message, ToastType type, Action<ToastNotificationViewModel> onDismiss, TimeSpan? duration = null,
+                                      string? actionText = null, Action? action = null)
     {
         Message = message;
         Type = type;
         _onDismiss = onDismiss;
+        _action = action;
+        ActionText = actionText ?? string.Empty;
         _totalDuration = duration ?? TimeSpan.FromSeconds(7);
 
         // ~60 fps, because this drives an animated bar rather than just an expiry check.
@@ -69,5 +79,13 @@ public partial class ToastNotificationViewModel : ViewModelBase
     {
         _timer.Stop();
         _onDismiss(this);
+    }
+
+    /// <summary>Runs the action and closes the toast: leaving it counting down after a click reads as a no-op.</summary>
+    [RelayCommand]
+    private void InvokeAction()
+    {
+        _action?.Invoke();
+        Dismiss();
     }
 }

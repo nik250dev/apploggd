@@ -15,6 +15,11 @@ public partial class TrayNotificationWindow : Window
 {
     private DispatcherTimer? _closeTimer;
     private readonly IAppLogger? _logger;
+    private readonly TimeSpan _duration;
+    private readonly Action? _action;
+
+    /// <summary>Height with an action button; the XAML value is the one for a plain notice.</summary>
+    private const double HeightWithAction = 112;
 
     /// <summary>
     /// Kept genuinely parameterless (rather than folded into the overload below with a default
@@ -25,11 +30,32 @@ public partial class TrayNotificationWindow : Window
     {
     }
 
-    public TrayNotificationWindow(IAppLogger? logger)
+    /// <summary>
+    /// Defaults to the "still running in the tray" notice. Pass <paramref name="message"/> and an
+    /// action to reuse the same window, placement and fade for a different notice.
+    /// </summary>
+    public TrayNotificationWindow(IAppLogger? logger, string? message = null, TimeSpan? duration = null,
+                                  string? actionText = null, Action? action = null)
     {
         _logger = logger;
+        _duration = duration ?? TimeSpan.FromSeconds(4);
+        _action = action;
 
         InitializeComponent();
+
+        if (message != null)
+        {
+            MessageText.Text = message;
+        }
+
+        if (action != null)
+        {
+            ActionButton.Content = actionText ?? string.Empty;
+            ActionButton.IsVisible = true;
+
+            // Set before positioning: the placement is computed from Height.
+            Height = HeightWithAction;
+        }
 
         PositionWindow();
     }
@@ -87,7 +113,7 @@ public partial class TrayNotificationWindow : Window
     private void OnTimerTick(object? sender, EventArgs e)
     {
         var elapsed = DateTime.Now - _startTime;
-        var remaining = TimeSpan.FromSeconds(4) - elapsed;
+        var remaining = _duration - elapsed;
 
         if (remaining <= TimeSpan.Zero)
         {
@@ -97,7 +123,7 @@ public partial class TrayNotificationWindow : Window
         }
         else
         {
-            NotificationProgress.Value = (remaining.TotalMilliseconds / 4000.0) * 100;
+            NotificationProgress.Value = (remaining.TotalMilliseconds / _duration.TotalMilliseconds) * 100;
         }
     }
 
@@ -123,5 +149,12 @@ public partial class TrayNotificationWindow : Window
     {
         _closeTimer?.Stop();
         StartCloseAnimation();
+    }
+
+    /// <summary>Runs the action and closes: leaving the notice counting down after a click reads as a no-op.</summary>
+    public void ActionButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        _action?.Invoke();
+        CloseButton_Click(sender, e);
     }
 }

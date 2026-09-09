@@ -153,6 +153,30 @@
             <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
         </Style>
 
+        <!-- Action button inside a toast. Translucent white instead of a themed brush: it sits on the
+             toast's own colour, which is not a surface from the theme. -->
+        <Style Selector="Button.toast-action">
+            <Setter Property="Background" Value="#33FFFFFF"/>
+            <Setter Property="BorderBrush" Value="#59FFFFFF"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="12,4"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <!-- Foreground repeated per state: the Fluent theme overwrites it on the ContentPresenter. -->
+        <Style Selector="Button.toast-action:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#4DFFFFFF"/>
+            <Setter Property="BorderBrush" Value="#8CFFFFFF"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button.toast-action:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="#66FFFFFF"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
         <!-- Waiting Circles Animation -->
         <Style Selector="Ellipse.waiting">
             <Setter Property="Width" Value="30"/>
@@ -621,9 +645,10 @@
                                                     Command="{Binding OpenChangelogCommand}"/>
                                         </Grid>
 
-                                        <!-- New version notice. Only visible when the check against
-                                             GitHub releases finds a newer one. -->
-                                        <Border IsVisible="{Binding IsUpdateAvailable}"
+                                        <!-- New version notice. Shown when either check finds a newer
+                                             version: Velopack's, which can install it, or the GitHub
+                                             one, which can only point at the release page. -->
+                                        <Border IsVisible="{Binding IsUpdateNoticeVisible}"
                                                 Background="{DynamicResource SurfaceBrandHoverBrush}"
                                                 BorderBrush="{DynamicResource BrandPrimaryBrush}"
                                                 BorderThickness="1"
@@ -644,7 +669,16 @@
                                                                FontSize="12" TextWrapping="Wrap"
                                                                Foreground="{DynamicResource TextSubtleBrush}"/>
                                                 </StackPanel>
+                                                <!-- One button, two jobs. A Velopack package installs
+                                                     the update itself; anything else (a 1.0.0 portable,
+                                                     a folder copied by hand) can only be sent to the
+                                                     release page. Never both at once. -->
                                                 <Button Grid.Column="2" Classes="update-btn" VerticalAlignment="Center"
+                                                        IsVisible="{Binding IsInAppUpdateAvailable}"
+                                                        Content="{Binding [AppUpdate_Update], Source={x:Static services:LocalizationService.Instance}}"
+                                                        Command="{Binding UpdateApploggdCommand}"/>
+                                                <Button Grid.Column="2" Classes="update-btn" VerticalAlignment="Center"
+                                                        IsVisible="{Binding !IsInAppUpdateAvailable}"
                                                         Content="{Binding [AppUpdate_Download], Source={x:Static services:LocalizationService.Instance}}"
                                                         Command="{Binding DownloadUpdateCommand}"/>
                                             </Grid>
@@ -1115,7 +1149,7 @@
                     <Border CornerRadius="8" ClipToBounds="True" BoxShadow="0 4 15 0 #80000000" Margin="0,0,0,5"
                             Background="{Binding Type, Converter={StaticResource ToastTypeToBackgroundConverter}}">
                         
-                        <Grid RowDefinitions="Auto, Auto">
+                        <Grid RowDefinitions="Auto, Auto, Auto">
                             <!-- Main Content -->
                             <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto" Margin="15">
                                 <!-- Type Icon -->
@@ -1139,8 +1173,15 @@
                                 </Button>
                             </Grid>
                             
+                            <!-- Optional action. Indented to the message, not the icon. -->
+                            <Button Grid.Row="1" Classes="toast-action"
+                                    IsVisible="{Binding HasAction}"
+                                    Content="{Binding ActionText}"
+                                    Command="{Binding InvokeActionCommand}"
+                                    HorizontalAlignment="Left" Margin="54,-4,15,15"/>
+
                             <!-- Progress Bar -->
-                            <ProgressBar Grid.Row="1" Minimum="0" Maximum="100" Value="{Binding Progress}" 
+                            <ProgressBar Grid.Row="2" Minimum="0" Maximum="100" Value="{Binding Progress}"
                                          Height="3"
                                          Background="Transparent" BorderThickness="0"
                                          Foreground="{Binding Type, Converter={StaticResource ToastTypeToBrushConverter}}"

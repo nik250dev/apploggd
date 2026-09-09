@@ -3,6 +3,7 @@ using System;
 using System.Threading;
 using System.Runtime.InteropServices;
 using BackloggdMirror.Services;
+using Velopack;
 
 namespace BackloggdMirror;
 
@@ -16,6 +17,12 @@ sealed class Program
     [STAThread]
     public static void Main(string[] args)
     {
+        // Must run before anything else: on an install/update hook Velopack does its work here and
+        // exits, so it has to happen before the mutex is taken and before Avalonia starts.
+        VelopackApp.Build()
+            .OnRestarted(_ => AppUpdaterService.RestartedAfterUpdate = true)
+            .Run();
+
         // Single instance. It matters more than usual here: two copies would both poll for games
         // and both try to write the same session to Backloggd. The GUID keeps the name unique, and
         // holding the Mutex in a static field is what keeps it alive for the process lifetime.

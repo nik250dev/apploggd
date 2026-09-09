@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- Apploggd now updates itself, from the notice in Settings > About, the startup toast or the tray
+
 ### Fixed
 
 - Restored compatibility for the "saving session" flow after an upstream UI change.
