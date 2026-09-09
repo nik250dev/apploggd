@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+### Fixed
+
+- Restored compatibility for the "saving session" flow after an upstream UI change.
+- Reduced resource usage of the headless browser
+
 ## 1.0.0 — 2026-08-09
 
 First release of Apploggd.
