@@ -50,8 +50,30 @@ public partial class MainWindow : Window
         _logger = logger;
 
         InitializeComponent();
+        UpdateAnimationsEnabled();
         InitializeTrayIcons(); // Pre-render icons
         InitializeTrayIcon();
+    }
+
+    /// <summary>
+    /// Drives the "animate" class the infinite animations of MainWindow.axaml hang off. Neither
+    /// minimizing nor hiding to the tray stops an Avalonia animation on its own — that was ~7 % of
+    /// a core burnt on frames nobody can see. Removing the class detaches them outright, so the
+    /// render loop has nothing left to wake up for; they restart from frame one on the way back.
+    /// </summary>
+    private void UpdateAnimationsEnabled()
+    {
+        Classes.Set("animate", IsVisible && WindowState != WindowState.Minimized);
+    }
+
+    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
+    {
+        base.OnPropertyChanged(change);
+
+        if (change.Property == IsVisibleProperty || change.Property == WindowStateProperty)
+        {
+            UpdateAnimationsEnabled();
+        }
     }
 
     private void InitializeTrayIcons()

@@ -6,6 +6,7 @@
 
 - Restored compatibility for the "saving session" flow after an upstream UI change.
 - Reduced resource usage of the headless browser
+- Animations no longer run while minimized or in the tray
 
 ## 1.0.0 — 2026-08-09
 
