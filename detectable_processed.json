@@ -109249,27 +109249,6 @@
     "url": "toy-story-3-the-video-game"
   },
   {
-    "id": "1124356208988532856",
-    "name": "Lossless Scaling",
-    "aliases": [],
-    "executables": [
-      {
-        "name": "lossless scaling/losslessscaling.exe",
-        "os": "win32",
-        "is_launcher": false
-      }
-    ],
-    "third_party_skus": [
-      {
-        "distributor": "steam",
-        "id": "993090"
-      }
-    ],
-    "cover": null,
-    "artwork": null,
-    "url": null
-  },
-  {
     "id": "1124356210540433550",
     "name": "Capcom Arcade 2nd Stadium",
     "aliases": [],
