@@ -768,12 +768,17 @@
                                 <ItemsControl.DataTemplates>
                                     <!-- Version header -->
                                     <DataTemplate DataType="models:ChangelogVersionBlock">
-                                        <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,5,0,10">
-                                            <Border Background="{DynamicResource BrandPrimaryBrush}" CornerRadius="5" Padding="10,3" VerticalAlignment="Center">
-                                                <TextBlock Text="{Binding Version}" Foreground="{DynamicResource TextPrimaryBrush}" FontWeight="Bold" FontSize="14"/>
-                                            </Border>
-                                            <TextBlock Text="{Binding Date}" IsVisible="{Binding HasDate}"
-                                                       Foreground="{DynamicResource TextSubtleBrush}" FontSize="12" VerticalAlignment="Center"/>
+                                        <StackPanel Margin="0,5,0,10">
+                                            <!-- Rule separating this version from the previous one; the first version has none. -->
+                                            <Border IsVisible="{Binding ShowSeparator}" Height="1" Margin="0,14,0,18"
+                                                    Background="{DynamicResource SeparatorBrush}"/>
+                                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                                <Border Background="{DynamicResource BrandPrimaryBrush}" CornerRadius="5" Padding="10,3" VerticalAlignment="Center">
+                                                    <TextBlock Text="{Binding Version}" Foreground="{DynamicResource TextPrimaryBrush}" FontWeight="Bold" FontSize="14"/>
+                                                </Border>
+                                                <TextBlock Text="{Binding Date}" IsVisible="{Binding HasDate}"
+                                                           Foreground="{DynamicResource TextSubtleBrush}" FontSize="12" VerticalAlignment="Center"/>
+                                            </StackPanel>
                                         </StackPanel>
                                     </DataTemplate>
 

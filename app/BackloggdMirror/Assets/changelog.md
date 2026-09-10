@@ -6,6 +6,10 @@
 
 - Apploggd now updates itself, from the notice in Settings > About, the startup toast or the tray
 
+### Changed
+
+- Versions in the "What's new" window are now separated by a rule
+
 ### Fixed
 
 - Restored compatibility for the "saving session" flow after an upstream UI change.
