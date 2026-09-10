@@ -1,4 +1,4 @@
-<Window xmlns="https://github.com/avaloniaui"
+﻿<Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:BackloggdMirror.ViewModels"
         xmlns:conv="using:BackloggdMirror.Converters"
@@ -83,14 +83,19 @@
             <Setter Property="Background" Value="Transparent"/>
         </Style>
         
-        <!-- Circular Spinner Loader Animation -->
+        <!-- Circular Spinner Loader Animation. Look and animation are split on purpose: an
+             Avalonia animation runs while its selector matches, on screen or not, so every
+             infinite animation below is gated on the element showing ([IsVisible=True]) and on
+             the window being drawn (Window.animate, see MainWindow.axaml.cs). Gate new ones too. -->
         <Style Selector="Path.spinner">
             <Setter Property="RenderTransformOrigin" Value="50%,50%" />
             
             <Setter Property="RenderTransform">
                 <RotateTransform Angle="0" />
             </Setter>
+        </Style>
 
+        <Style Selector="Window.animate Path.spinner[IsVisible=True]">
             <Style.Animations>
                 <Animation Duration="0:0:0.7" 
                            IterationCount="Infinite"
@@ -148,6 +153,30 @@
             <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
         </Style>
 
+        <!-- Action button inside a toast. Translucent white instead of a themed brush: it sits on the
+             toast's own colour, which is not a surface from the theme. -->
+        <Style Selector="Button.toast-action">
+            <Setter Property="Background" Value="#33FFFFFF"/>
+            <Setter Property="BorderBrush" Value="#59FFFFFF"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="12,4"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <!-- Foreground repeated per state: the Fluent theme overwrites it on the ContentPresenter. -->
+        <Style Selector="Button.toast-action:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#4DFFFFFF"/>
+            <Setter Property="BorderBrush" Value="#8CFFFFFF"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button.toast-action:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="#66FFFFFF"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
         <!-- Waiting Circles Animation -->
         <Style Selector="Ellipse.waiting">
             <Setter Property="Width" Value="30"/>
@@ -156,7 +185,7 @@
             <Setter Property="Margin" Value="10"/>
         </Style>
 
-        <Style Selector="Ellipse.c1">
+        <Style Selector="Window.animate Ellipse.c1[IsVisible=True]">
             <Style.Animations>
                 <Animation Duration="0:0:0.8" IterationCount="Infinite" PlaybackDirection="Alternate">
                     <KeyFrame Cue="0%">
@@ -168,7 +197,7 @@
                 </Animation>
             </Style.Animations>
         </Style>
-        <Style Selector="Ellipse.c2">
+        <Style Selector="Window.animate Ellipse.c2[IsVisible=True]">
             <Style.Animations>
                 <Animation Duration="0:0:0.8" Delay="0:0:0.2" IterationCount="Infinite" PlaybackDirection="Alternate">
                     <KeyFrame Cue="0%">
@@ -180,7 +209,7 @@
                 </Animation>
             </Style.Animations>
         </Style>
-        <Style Selector="Ellipse.c3">
+        <Style Selector="Window.animate Ellipse.c3[IsVisible=True]">
             <Style.Animations>
                 <Animation Duration="0:0:0.8" Delay="0:0:0.4" IterationCount="Infinite" PlaybackDirection="Alternate">
                     <KeyFrame Cue="0%">
@@ -208,6 +237,9 @@
                     <GradientStop Color="{DynamicResource SkeletonShimmerStartColor}" Offset="1" />
                 </LinearGradientBrush>
             </Setter>
+        </Style>
+
+        <Style Selector="Window.animate Border.skeleton[IsVisible=True] > Border">
             <Style.Animations>
                 <Animation Duration="0:0:1.5" IterationCount="Infinite">
                     <KeyFrame Cue="0%">
@@ -292,7 +324,7 @@
                     </StackPanel>
 
                     <!-- Bottom Icons -->
-                    <StackPanel Grid.Row="2" Spacing="20" Margin="0,0,0,20">
+                    <StackPanel Grid.Row="2" Spacing="4" Margin="0,0,0,20">
                         <!-- Logout Button -->
                         <Button Classes="sidebar" Command="{Binding LogoutCommand}" Cursor="Hand">
                             <StackPanel Spacing="5" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -302,6 +334,13 @@
                             </StackPanel>
                              
                         </Button>
+
+                        <TextBlock Text="{Binding AppVersion, StringFormat='v{0}'}"
+                                   FontSize="11"
+                                   Opacity="0.7"
+                                   Foreground="{DynamicResource TextSubtleBrush}"
+                                   HorizontalAlignment="Center"
+                                   TextAlignment="Center"/>
                     </StackPanel>
                 </Grid>
             </Border>
@@ -324,9 +363,9 @@
                                 <Grid RowDefinitions="*, Auto, Auto" IsVisible="{Binding IsGameDetectionActive}" VerticalAlignment="Stretch">
                                     <!-- Section 1: Animation -->
                                     <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        <Ellipse Classes="waiting c1"/>
-                                        <Ellipse Classes="waiting c2"/>
-                                        <Ellipse Classes="waiting c3"/>
+                                        <Ellipse Classes="waiting c1" IsVisible="{Binding IsWaitingAnimationVisible}"/>
+                                        <Ellipse Classes="waiting c2" IsVisible="{Binding IsWaitingAnimationVisible}"/>
+                                        <Ellipse Classes="waiting c3" IsVisible="{Binding IsWaitingAnimationVisible}"/>
                                     </StackPanel>
                                     
                                     <!-- Section 2: Text -->
@@ -613,9 +652,10 @@
                                                     Command="{Binding OpenChangelogCommand}"/>
                                         </Grid>
 
-                                        <!-- New version notice. Only visible when the check against
-                                             GitHub releases finds a newer one. -->
-                                        <Border IsVisible="{Binding IsUpdateAvailable}"
+                                        <!-- New version notice. Shown when either check finds a newer
+                                             version: Velopack's, which can install it, or the GitHub
+                                             one, which can only point at the release page. -->
+                                        <Border IsVisible="{Binding IsUpdateNoticeVisible}"
                                                 Background="{DynamicResource SurfaceBrandHoverBrush}"
                                                 BorderBrush="{DynamicResource BrandPrimaryBrush}"
                                                 BorderThickness="1"
@@ -636,7 +676,16 @@
                                                                FontSize="12" TextWrapping="Wrap"
                                                                Foreground="{DynamicResource TextSubtleBrush}"/>
                                                 </StackPanel>
+                                                <!-- One button, two jobs. A Velopack package installs
+                                                     the update itself; anything else (a 1.0.0 portable,
+                                                     a folder copied by hand) can only be sent to the
+                                                     release page. Never both at once. -->
                                                 <Button Grid.Column="2" Classes="update-btn" VerticalAlignment="Center"
+                                                        IsVisible="{Binding IsInAppUpdateAvailable}"
+                                                        Content="{Binding [AppUpdate_Update], Source={x:Static services:LocalizationService.Instance}}"
+                                                        Command="{Binding UpdateApploggdCommand}"/>
+                                                <Button Grid.Column="2" Classes="update-btn" VerticalAlignment="Center"
+                                                        IsVisible="{Binding !IsInAppUpdateAvailable}"
                                                         Content="{Binding [AppUpdate_Download], Source={x:Static services:LocalizationService.Instance}}"
                                                         Command="{Binding DownloadUpdateCommand}"/>
                                             </Grid>
@@ -720,18 +769,24 @@
                     <!-- Content -->
                     <!-- The horizontal margin goes on the ScrollViewer rather than its Padding:
                          Padding is not subtracted when measuring the content, so long text would
-                         not wrap. -->
+                         not wrap. The gutter for the overlaid scroll bar goes on the ItemsControl
+                         for the same reason. -->
                     <ScrollViewer Grid.Row="1" Margin="20,10,20,10" HorizontalScrollBarVisibility="Disabled">
-                            <ItemsControl ItemsSource="{Binding ChangelogBlocks}">
+                            <ItemsControl ItemsSource="{Binding ChangelogBlocks}" Margin="0,0,14,0">
                                 <ItemsControl.DataTemplates>
                                     <!-- Version header -->
                                     <DataTemplate DataType="models:ChangelogVersionBlock">
-                                        <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,5,0,10">
-                                            <Border Background="{DynamicResource BrandPrimaryBrush}" CornerRadius="5" Padding="10,3" VerticalAlignment="Center">
-                                                <TextBlock Text="{Binding Version}" Foreground="{DynamicResource TextPrimaryBrush}" FontWeight="Bold" FontSize="14"/>
-                                            </Border>
-                                            <TextBlock Text="{Binding Date}" IsVisible="{Binding HasDate}"
-                                                       Foreground="{DynamicResource TextSubtleBrush}" FontSize="12" VerticalAlignment="Center"/>
+                                        <StackPanel Margin="0,5,0,10">
+                                            <!-- Rule separating this version from the previous one; the first version has none. -->
+                                            <Border IsVisible="{Binding ShowSeparator}" Height="1" Margin="0,14,0,18"
+                                                    Background="{DynamicResource SeparatorBrush}"/>
+                                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                                <Border Background="{DynamicResource BrandPrimaryBrush}" CornerRadius="5" Padding="10,3" VerticalAlignment="Center">
+                                                    <TextBlock Text="{Binding Version}" Foreground="{DynamicResource TextPrimaryBrush}" FontWeight="Bold" FontSize="14"/>
+                                                </Border>
+                                                <TextBlock Text="{Binding Date}" IsVisible="{Binding HasDate}"
+                                                           Foreground="{DynamicResource TextSubtleBrush}" FontSize="12" VerticalAlignment="Center"/>
+                                            </StackPanel>
                                         </StackPanel>
                                     </DataTemplate>
 
@@ -1107,7 +1162,7 @@
                     <Border CornerRadius="8" ClipToBounds="True" BoxShadow="0 4 15 0 #80000000" Margin="0,0,0,5"
                             Background="{Binding Type, Converter={StaticResource ToastTypeToBackgroundConverter}}">
                         
-                        <Grid RowDefinitions="Auto, Auto">
+                        <Grid RowDefinitions="Auto, Auto, Auto">
                             <!-- Main Content -->
                             <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto" Margin="15">
                                 <!-- Type Icon -->
@@ -1131,8 +1186,15 @@
                                 </Button>
                             </Grid>
                             
+                            <!-- Optional action. Indented to the message, not the icon. -->
+                            <Button Grid.Row="1" Classes="toast-action"
+                                    IsVisible="{Binding HasAction}"
+                                    Content="{Binding ActionText}"
+                                    Command="{Binding InvokeActionCommand}"
+                                    HorizontalAlignment="Left" Margin="54,-4,15,15"/>
+
                             <!-- Progress Bar -->
-                            <ProgressBar Grid.Row="1" Minimum="0" Maximum="100" Value="{Binding Progress}" 
+                            <ProgressBar Grid.Row="2" Minimum="0" Maximum="100" Value="{Binding Progress}"
                                          Height="3"
                                          Background="Transparent" BorderThickness="0"
                                          Foreground="{Binding Type, Converter={StaticResource ToastTypeToBrushConverter}}"

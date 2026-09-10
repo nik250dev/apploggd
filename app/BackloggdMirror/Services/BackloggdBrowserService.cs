@@ -49,6 +49,13 @@ namespace BackloggdMirror.Services
         private const int ConsentModalTimeoutMs = 8000;
 
         /// <summary>
+        /// Wait for the log editor button, which is the first element that proves the game page
+        /// really loaded. Explicit rather than Playwright's 30 s default: this is where a blocked or
+        /// redesigned page ends up, and the user is staring at a spinner until it expires.
+        /// </summary>
+        private const int LogEditorTimeoutMs = 10000;
+
+        /// <summary>
         /// Closes the cookie consent modal if it appears.
         ///
         /// Backloggd has switched CMP: it used to serve Quantcast (<c>#qc-cmp2-ui</c>) and now serves
@@ -97,7 +104,7 @@ namespace BackloggdMirror.Services
                     new PageWaitForSelectorOptions { State = WaitForSelectorState.Visible, Timeout = ConsentModalTimeoutMs });
                 return true;
             }
-            catch (PlaywrightException)
+            catch (Exception ex) when (ex is PlaywrightException or System.TimeoutException)
             {
                 return false;
             }
@@ -361,13 +368,11 @@ namespace BackloggdMirror.Services
         /// </summary>
         public async Task RegisterGame(string gameName, System.Net.CookieContainer cookieContainer, int gamePlayDateHours, int gamePlayDateMinutes, string? gameUrl = null)
         {
-            IPlaywright playwright = null;
-            IBrowser browser = null;
-
             Console.WriteLine($"[RegisterGame] Starting registration for {gameName} (URL: {gameUrl ?? "search"})...");
             _logger?.Info($"[RegisterGame] Starting registration for {gameName} (URL: {gameUrl ?? "search"})...");
-            playwright = await Playwright.CreateAsync();
-            browser = await playwright.Chromium.LaunchAsync(BrowserLaunch.HiddenOptions());
+
+            using var playwright = await Playwright.CreateAsync();
+            await using var browser = await playwright.Chromium.LaunchAsync(BrowserLaunch.HiddenOptions());
 
             var context = await browser.NewContextAsync(new BrowserNewContextOptions
             {
@@ -379,43 +384,43 @@ namespace BackloggdMirror.Services
 
             var page = await context.NewPageAsync();
 
-            if (!string.IsNullOrEmpty(gameUrl))
-            {
-                // Callers supply the slug in either shape ("slug" or "/games/slug/") depending on
-                // whether it came from the local database or from the manual game picker.
-                string slug = gameUrl.Split('/', StringSplitOptions.RemoveEmptyEntries)[^1];
-                var fullUrl = $"https://backloggd.com/games/{slug}/";
-                Console.WriteLine($"[RegisterGame] Navigating directly to: {fullUrl}");
-                _logger?.Info($"[RegisterGame] Navigating directly to: {fullUrl}");
-                await page.GotoAsync(fullUrl);
-            }
-            else
-            {
-                // No slug: the game was never identified, so it has to be found by name.
-                Console.WriteLine($"[RegisterGame] No URL provided, searching for: {gameName}");
-                _logger?.Info($"[RegisterGame] No URL provided, searching for: {gameName}");
-                await page.GotoAsync("https://backloggd.com/search/games/");
-            }
-
-            await HandleCookieModalAsync(page);
-
-            if (string.IsNullOrEmpty(gameUrl))
-            {
-                await page.FillAsync("#nav-bar-search", gameName);
-                await page.ClickAsync(".search-btn");
-                await page.WaitForSelectorAsync("#search-results");
-                // Restricted to .main_game so the pick is the game itself, not one of its DLCs or
-                // expansions, which the search returns alongside it.
-                await page.Locator("#search-results :has(.main_game) .game-name").First.ClickAsync();
-            }
-
             try
             {
+                if (!string.IsNullOrEmpty(gameUrl))
+                {
+                    // Callers supply the slug in either shape ("slug" or "/games/slug/") depending on
+                    // whether it came from the local database or from the manual game picker.
+                    string slug = gameUrl.Split('/', StringSplitOptions.RemoveEmptyEntries)[^1];
+                    var fullUrl = $"https://backloggd.com/games/{slug}/";
+                    Console.WriteLine($"[RegisterGame] Navigating directly to: {fullUrl}");
+                    _logger?.Info($"[RegisterGame] Navigating directly to: {fullUrl}");
+                    await page.GotoAsync(fullUrl);
+                }
+                else
+                {
+                    // No slug: the game was never identified, so it has to be found by name.
+                    Console.WriteLine($"[RegisterGame] No URL provided, searching for: {gameName}");
+                    _logger?.Info($"[RegisterGame] No URL provided, searching for: {gameName}");
+                    await page.GotoAsync("https://backloggd.com/search/games/");
+                }
+
+                await HandleCookieModalAsync(page);
+
+                if (string.IsNullOrEmpty(gameUrl))
+                {
+                    await page.FillAsync("#nav-bar-search", gameName);
+                    await page.ClickAsync(".search-btn");
+                    await page.WaitForSelectorAsync("#search-results");
+                    // Restricted to .main_game so the pick is the game itself, not one of its DLCs or
+                    // expansions, which the search returns alongside it.
+                    await page.Locator("#search-results :has(.main_game) .game-name").First.ClickAsync();
+                }
+
                 await page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
 
                 var logButtonSelector = ".side-section .d-none.d-md-flex .log-editor-btn";
                 Console.WriteLine($"[RegisterGame] Waiting for log button: {logButtonSelector}");
-                await page.WaitForSelectorAsync(logButtonSelector);
+                await page.WaitForSelectorAsync(logButtonSelector, new PageWaitForSelectorOptions { Timeout = LogEditorTimeoutMs });
 
                 await DismissConsentOverlayIfPresentAsync(page);
 
@@ -505,14 +510,6 @@ namespace BackloggdMirror.Services
                 }
 
                 throw;
-            }
-            finally
-            {
-                // This method owns its browser (unlike the ones using 'using'), so it has to close
-                // it on every path, including the rethrow above.
-                Console.WriteLine("[RegisterGame] Cleaning up browser session.");
-                await browser.CloseAsync();
-                playwright.Dispose();
             }
         }
 

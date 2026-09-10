@@ -20,6 +20,7 @@ public partial class MainWindow : Window
     private NativeMenuItem? _trayToggleItem;
     private NativeMenuItem? _trayExitItem;
     private TrayNotificationWindow? _trayNotificationWindow;
+    private UpdateProgressWindow? _updateProgressWindow;
 
     // Taken as a constructor argument rather than read off the DataContext: the tray icon is built
     // in the constructor, before any DataContext has been assigned, and its failures are exactly
@@ -50,8 +51,30 @@ public partial class MainWindow : Window
         _logger = logger;
 
         InitializeComponent();
+        UpdateAnimationsEnabled();
         InitializeTrayIcons(); // Pre-render icons
         InitializeTrayIcon();
+    }
+
+    /// <summary>
+    /// Drives the "animate" class the infinite animations of MainWindow.axaml hang off. Neither
+    /// minimizing nor hiding to the tray stops an Avalonia animation on its own — that was ~7 % of
+    /// a core burnt on frames nobody can see. Removing the class detaches them outright, so the
+    /// render loop has nothing left to wake up for; they restart from frame one on the way back.
+    /// </summary>
+    private void UpdateAnimationsEnabled()
+    {
+        Classes.Set("animate", IsVisible && WindowState != WindowState.Minimized);
+    }
+
+    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
+    {
+        base.OnPropertyChanged(change);
+
+        if (change.Property == IsVisibleProperty || change.Property == WindowStateProperty)
+        {
+            UpdateAnimationsEnabled();
+        }
     }
 
     private void InitializeTrayIcons()
@@ -136,6 +159,15 @@ public partial class MainWindow : Window
 
         vm.RequestCloseApplication -= CloseApplication;
         vm.RequestCloseApplication += CloseApplication;
+
+        vm.RequestTrayUpdateNotice -= ShowTrayUpdateNotice;
+        vm.RequestTrayUpdateNotice += ShowTrayUpdateNotice;
+
+        vm.RequestShowUpdateProgress -= ShowUpdateProgress;
+        vm.RequestShowUpdateProgress += ShowUpdateProgress;
+
+        vm.RequestCloseUpdateProgress -= CloseUpdateProgress;
+        vm.RequestCloseUpdateProgress += CloseUpdateProgress;
 
         vm.PropertyChanged -= OnViewModelPropertyChanged;
         vm.PropertyChanged += OnViewModelPropertyChanged;
@@ -316,10 +348,15 @@ public partial class MainWindow : Window
         bool minimizeToTray = true; // Default
         if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
         {
-            if (vm.IsLoggingOut)
+            if (vm.IsLoggingOut || vm.IsApplyingUpdate)
             {
-                // A logout must genuinely close this window so the login one can replace it; the
-                // setting does not apply here.
+                // A logout must genuinely close this window so the login one can replace it, and an
+                // update needs the process gone before Update.exe can replace the folder; the
+                // setting does not apply to either.
+                //
+                // Skipping the minimise branch matters more than it looks during an update: it also
+                // skips ShowTrayNotification, and a window created mid-shutdown is not in the list
+                // Avalonia is closing, so it survives and keeps the process alive for ever.
                 minimizeToTray = false;
             }
             else
@@ -389,6 +426,46 @@ public partial class MainWindow : Window
         }
 
         _trayNotificationWindow = new TrayNotificationWindow(_logger);
+        _trayNotificationWindow.Closed += (s, ev) => _trayNotificationWindow = null;
+        _trayNotificationWindow.Show();
+    }
+
+    /// <summary>
+    /// Progress of an in-app update. Shares the ViewModel with this window, so the progress bar
+    /// binds straight to it.
+    /// </summary>
+    private void ShowUpdateProgress()
+    {
+        if (_updateProgressWindow != null) return;
+
+        _updateProgressWindow = new UpdateProgressWindow { DataContext = DataContext };
+        _updateProgressWindow.Closed += (s, ev) => _updateProgressWindow = null;
+        _updateProgressWindow.Show();
+
+        _logger?.Info("[MainWindow] Update progress window shown.");
+    }
+
+    /// <summary>Only reached when the update fails: a successful one replaces the process instead.</summary>
+    private void CloseUpdateProgress()
+    {
+        _updateProgressWindow?.Close();
+        _updateProgressWindow = null;
+
+        _logger?.Info("[MainWindow] Update progress window closed without applying an update.");
+    }
+
+    /// <summary>
+    /// The new-version notice on a silent start, where the window was never shown and a toast would
+    /// expire unseen. Same window, placement and fade as the "still running" notice.
+    /// </summary>
+    private void ShowTrayUpdateNotice(string message, string actionText, Action action)
+    {
+        if (_trayNotificationWindow != null)
+        {
+            _trayNotificationWindow.Close();
+        }
+
+        _trayNotificationWindow = new TrayNotificationWindow(_logger, message, TimeSpan.FromSeconds(30), actionText, action);
         _trayNotificationWindow.Closed += (s, ev) => _trayNotificationWindow = null;
         _trayNotificationWindow.Show();
     }

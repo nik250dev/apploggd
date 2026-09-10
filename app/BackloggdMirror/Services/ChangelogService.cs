@@ -78,6 +78,7 @@ public class ChangelogService
     internal static List<ChangelogBlock> Parse(string markdown)
     {
         var blocks = new List<ChangelogBlock>();
+        var seenVersion = false;
 
         foreach (var rawLine in markdown.Split('\n'))
         {
@@ -94,7 +95,8 @@ public class ChangelogService
             }
             else if (line.StartsWith("## ", StringComparison.Ordinal))
             {
-                blocks.Add(ParseVersionHeader(line.Substring(3).Trim()));
+                blocks.Add(ParseVersionHeader(line.Substring(3).Trim(), seenVersion));
+                seenVersion = true;
             }
             else if (line.StartsWith("# ", StringComparison.Ordinal))
             {
@@ -113,19 +115,20 @@ public class ChangelogService
         return blocks;
     }
 
-    private static ChangelogVersionBlock ParseVersionHeader(string header)
+    private static ChangelogVersionBlock ParseVersionHeader(string header, bool showSeparator)
     {
         var separatorIndex = header.IndexOfAny(HeaderSeparators);
 
         if (separatorIndex < 0)
         {
-            return new ChangelogVersionBlock { Version = header };
+            return new ChangelogVersionBlock { Version = header, ShowSeparator = showSeparator };
         }
 
         return new ChangelogVersionBlock
         {
             Version = header.Substring(0, separatorIndex).Trim(),
-            Date = header.Substring(separatorIndex + 1).Trim()
+            Date = header.Substring(separatorIndex + 1).Trim(),
+            ShowSeparator = showSeparator
         };
     }
 }

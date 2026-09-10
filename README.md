@@ -11,7 +11,7 @@ Tired of manually logging every play session on Backloggd? Me too :)
 Apploggd automatically detects what you're playing, times the session and logs the playtime
 to your Backloggd journal when you close the game.
 
-![Version](https://img.shields.io/badge/version-1.0.0-8b5cf6)
+![Version](https://img.shields.io/badge/version-1.1.0-8b5cf6)
 ![Platform](https://img.shields.io/badge/platform-Windows-0078d4)
 ![.NET](https://img.shields.io/badge/.NET-8.0-512bd4)
 
@@ -64,9 +64,11 @@ sessions to your account.**
 
 ## Installation
 
-1. Download the latest version from the 
+1. Download `Apploggd-v<version>-win-x64.zip` from the
    [releases page](https://github.com/nik250dev/apploggd/releases).
-2. Extract it wherever you like (no installer; it's portable).
+2. Extract it wherever you like (no installer; it's portable). It expands into an `Apploggd`
+   folder — keep its contents as they come: `Apploggd.exe`, `Update.exe` and `current\` all have to
+   stay together for the app to be able to update itself.
 3. Run `Apploggd.exe`.
 
 ## How it works under the hood

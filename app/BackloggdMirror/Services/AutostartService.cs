@@ -1,5 +1,6 @@
 using Microsoft.Win32;
 using System;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
@@ -39,9 +40,12 @@ public class AutostartService
     /// </summary>
     public static bool IsSilentStart(string[]? args)
     {
-        if (args == null) return false;
-        return Array.Exists(args, a => string.Equals(a, StartupArgument, StringComparison.OrdinalIgnoreCase));
+        StartedSilently = args != null && Array.Exists(args, a => string.Equals(a, StartupArgument, StringComparison.OrdinalIgnoreCase));
+        return StartedSilently;
     }
+
+    /// <summary>Latched by <see cref="IsSilentStart"/> so the rest of the app can ask without carrying the args around.</summary>
+    public static bool StartedSilently { get; private set; }
 
     // The guard attribute is what lets the platform analyzer accept the registry calls that every
     // "if (!IsSupported) return;" below protects.
@@ -55,9 +59,28 @@ public class AutostartService
     /// </summary>
     private static string? BuildCommand()
     {
-        string? path = Environment.ProcessPath;
+        string? path = ResolveLauncherPath();
         if (string.IsNullOrEmpty(path)) return null;
         return $"\"{path}\" {StartupArgument}";
+    }
+
+    /// <summary>Under Velopack the running exe sits in <c>current\</c>, which every update replaces; the stub at the root survives and forwards its arguments.</summary>
+    private static string? ResolveLauncherPath()
+    {
+        string? path = Environment.ProcessPath;
+        if (string.IsNullOrEmpty(path)) return path;
+
+        var contentDir = Path.GetDirectoryName(path);
+        if (contentDir is null || !string.Equals(Path.GetFileName(contentDir), "current", StringComparison.OrdinalIgnoreCase))
+        {
+            return path;
+        }
+
+        var rootDir = Path.GetDirectoryName(contentDir);
+        if (rootDir is null || !File.Exists(Path.Combine(rootDir, "Update.exe"))) return path;
+
+        var stub = Path.Combine(rootDir, Path.GetFileName(path));
+        return File.Exists(stub) ? stub : path;
     }
 
     [SupportedOSPlatform("windows")]
