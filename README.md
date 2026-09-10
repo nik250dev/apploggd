@@ -11,7 +11,7 @@ Tired of manually logging every play session on Backloggd? Me too :)
 Apploggd automatically detects what you're playing, times the session and logs the playtime
 to your Backloggd journal when you close the game.
 
-![Version](https://img.shields.io/badge/version-1.0.0-8b5cf6)
+![Version](https://img.shields.io/badge/version-1.1.0-8b5cf6)
 ![Platform](https://img.shields.io/badge/platform-Windows-0078d4)
 ![.NET](https://img.shields.io/badge/.NET-8.0-512bd4)
 
