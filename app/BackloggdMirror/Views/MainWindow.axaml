@@ -82,7 +82,28 @@
         <Style Selector="Button.icon-btn:pressed /template/ ContentPresenter">
             <Setter Property="Background" Value="Transparent"/>
         </Style>
-        
+
+        <!-- Link Button Style: underlined muted text, no chrome, brightens on hover. -->
+        <Style Selector="Button.link">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="Button.link TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}"/>
+            <Setter Property="TextDecorations" Value="Underline"/>
+        </Style>
+        <Style Selector="Button.link:pointerover TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="Button.link:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style Selector="Button.link:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+
         <!-- Circular Spinner Loader Animation. Look and animation are split on purpose: an
              Avalonia animation runs while its selector matches, on screen or not, so every
              infinite animation below is gated on the element showing ([IsVisible=True]) and on
@@ -409,6 +430,15 @@
                                         <DropShadowEffect Color="#EA377A" BlurRadius="20" Opacity="0.6"/>
                                     </TextBlock.Effect>
                                 </TextBlock>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="6" Margin="0,8,0,0">
+                                    <StackPanel.Effect>
+                                        <DropShadowEffect Color="Black" BlurRadius="10" Opacity="1.0"/>
+                                    </StackPanel.Effect>
+                                    <TextBlock Text="{Binding [Home_NotAGame], Source={x:Static services:LocalizationService.Instance}}" FontSize="13" Foreground="{DynamicResource TextSubtleBrush}" VerticalAlignment="Center"/>
+                                    <Button Classes="link">
+                                        <TextBlock Text="{Binding [Home_AddToBlacklist], Source={x:Static services:LocalizationService.Instance}}" FontSize="13"/>
+                                    </Button>
+                                </StackPanel>
                             </StackPanel>
                         </Panel>
                     </Border>
