@@ -1,4 +1,4 @@
-<Window xmlns="https://github.com/avaloniaui"
+﻿<Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:BackloggdMirror.ViewModels"
         xmlns:conv="using:BackloggdMirror.Converters"
@@ -324,7 +324,7 @@
                     </StackPanel>
 
                     <!-- Bottom Icons -->
-                    <StackPanel Grid.Row="2" Spacing="20" Margin="0,0,0,20">
+                    <StackPanel Grid.Row="2" Spacing="4" Margin="0,0,0,20">
                         <!-- Logout Button -->
                         <Button Classes="sidebar" Command="{Binding LogoutCommand}" Cursor="Hand">
                             <StackPanel Spacing="5" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -334,6 +334,13 @@
                             </StackPanel>
                              
                         </Button>
+
+                        <TextBlock Text="{Binding AppVersion, StringFormat='v{0}'}"
+                                   FontSize="11"
+                                   Opacity="0.7"
+                                   Foreground="{DynamicResource TextSubtleBrush}"
+                                   HorizontalAlignment="Center"
+                                   TextAlignment="Center"/>
                     </StackPanel>
                 </Grid>
             </Border>

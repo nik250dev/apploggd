@@ -5,6 +5,7 @@
 ### Added
 
 - Apploggd now updates itself, from the notice in Settings > About, the startup toast or the tray
+- The app version is now shown at the bottom of the sidebar, under the logout button
 
 ### Changed
 
