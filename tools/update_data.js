@@ -13,6 +13,20 @@ const IGNORED_NAMES = new Set([
   "steam"
 ]);
 
+// Discord also lists overlays and tools that are not games; keyed by exe because the name is not stable.
+const IGNORED_EXECUTABLES = new Set([
+  "losslessscaling.exe"
+]);
+
+function isIgnored(game) {
+  if (!game.name) return true;
+  if (IGNORED_NAMES.has(game.name.trim().toLowerCase())) return true;
+  return (game.executables || []).some(exe => {
+    const fileName = (exe.name || "").split('/').pop().trim().toLowerCase();
+    return IGNORED_EXECUTABLES.has(fileName);
+  });
+}
+
 async function runProcess() {
   try {
     console.log("Starting download of the Discord file...");
@@ -22,11 +36,7 @@ async function runProcess() {
     const rawDiscordGames = await response.json();
 
     // Filter the Discord list
-    const discordGames = rawDiscordGames.filter(game => {
-      if (!game.name) return false;
-      const normalizedName = game.name.trim().toLowerCase();
-      return !IGNORED_NAMES.has(normalizedName);
-    });
+    const discordGames = rawDiscordGames.filter(game => !isIgnored(game));
 
     // 1. Read the local detectable.json file
     let localDetectable = [];
@@ -61,20 +71,30 @@ async function runProcess() {
       }
     }
 
-    // 3. Stop early if there are no changes
-    if (newGames.length === 0 && modifiedGames.length === 0) {
-      console.log("No changes detected in the essential fields of any game. Process finished.");
-      return;
-    }
-
-    console.log(`Summary: ${newGames.length} new and ${modifiedGames.length} modified.`);
-
-    // 4. Read the local detectable_processed.json file
+    // 3. Read the local detectable_processed.json file
     let localProcessed = [];
     if (fs.existsSync('detectable_processed.json')) {
       localProcessed = JSON.parse(fs.readFileSync('detectable_processed.json', 'utf8'));
     }
     const processedMap = new Map(localProcessed.map(game => [game.id, game]));
+
+    // The filter above only blocks new entries, so anything blacklisted later has to be dropped here.
+    const purgedGames = [];
+    for (const [id, processedGame] of processedMap) {
+      if (isIgnored(processedGame)) {
+        console.log(`[PURGED] -> (${processedGame.name})`);
+        processedMap.delete(id);
+        purgedGames.push(processedGame);
+      }
+    }
+
+    // 4. Stop early if there are no changes
+    if (newGames.length === 0 && modifiedGames.length === 0 && purgedGames.length === 0) {
+      console.log("No changes detected in the essential fields of any game. Process finished.");
+      return;
+    }
+
+    console.log(`Summary: ${newGames.length} new, ${modifiedGames.length} modified and ${purgedGames.length} purged.`);
 
     // HANDLE MODIFIED GAMES (keeping the previous id_igdb, cover, artwork and URL without hitting the API)
     for (const game of modifiedGames) {
