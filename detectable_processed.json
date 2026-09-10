@@ -20144,9 +20144,10 @@
   },
   {
     "id": "451132630390538270",
-    "name": "BLESS GLOBAL",
+    "name": "Bless Global",
     "aliases": [
-      "BLESS"
+      "BLESS",
+      "BLESS GLOBAL"
     ],
     "executables": [
       {
@@ -50501,9 +50502,8 @@
   },
   {
     "id": "1124351982908493894",
-    "name": "Mir 4",
+    "name": "MIR 4",
     "aliases": [
-      "MIR 4",
       "MIR4"
     ],
     "executables": [
@@ -68981,9 +68981,10 @@
   },
   {
     "id": "1124353236564983808",
-    "name": "CounterSide",
+    "name": "Counterside",
     "aliases": [
-      "Counter:Side"
+      "Counter:Side",
+      "CounterSide"
     ],
     "executables": [
       {
@@ -85896,7 +85897,7 @@
   },
   {
     "id": "1124354526070198392",
-    "name": "Swarm Simulator",
+    "name": "Swarm Simulator: Evolution",
     "aliases": [],
     "executables": [
       {
@@ -124245,9 +124246,10 @@
   },
   {
     "id": "1124357342394335324",
-    "name": "KILL la KILL: IF",
+    "name": "Kill la Kill: If",
     "aliases": [
-      "KILL la KILL THE GAME: IF"
+      "KILL la KILL THE GAME: IF",
+      "KILL la KILL: IF"
     ],
     "executables": [
       {
@@ -173463,10 +173465,9 @@
   },
   {
     "id": "1129504328848265387",
-    "name": "Five Nights at Freddy's: Help Wanted",
+    "name": "FIVE NIGHTS AT FREDDY'S: HELP WANTED",
     "aliases": [
-      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED",
-      "FIVE NIGHTS AT FREDDY'S: HELP WANTED"
+      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED"
     ],
     "executables": [
       {
@@ -173477,12 +173478,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "732690"
-      },
-      {
         "distributor": "xbox",
         "id": "9P731FVPM8WW"
+      },
+      {
+        "distributor": "steam",
+        "id": "732690"
       }
     ],
     "id_igdb": "115304",
@@ -250788,8 +250789,16 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "epic",
+        "id": "E7174759F61F4863A47F03907C11DADC"
+      },
+      {
         "distributor": "steam",
         "id": "3226530"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P5QLMX9NC8S"
       }
     ],
     "id_igdb": "328027",
@@ -256833,9 +256842,9 @@
   },
   {
     "id": "1387990904194732154",
-    "name": "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY",
+    "name": "RAIDOU Remastered: The Mystery of the Soulless Army",
     "aliases": [
-      "RAIDOU Remastered: The Mystery of the Soulless Army"
+      "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY"
     ],
     "executables": [
       {
@@ -256846,20 +256855,20 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "2288350"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9P284W1H02KW"
-      },
-      {
         "distributor": "xbox",
         "id": "9NX3566L9NH9"
       },
       {
         "distributor": "xbox",
         "id": "9NB58STJ848G"
+      },
+      {
+        "distributor": "steam",
+        "id": "2288350"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P284W1H02KW"
       }
     ],
     "id_igdb": "337024",
@@ -289269,9 +289278,10 @@
   },
   {
     "id": "1428182872589602867",
-    "name": "420BLAZE IT 2: GAME OF THE YEAR",
+    "name": "420Blaze It 2: Game of the Year",
     "aliases": [
-      "420 BLAZE IT 2: GAME OF THE YEAR"
+      "420 BLAZE IT 2: GAME OF THE YEAR",
+      "420BLAZE IT 2: GAME OF THE YEAR"
     ],
     "executables": [],
     "third_party_skus": [
@@ -298224,6 +298234,10 @@
       {
         "distributor": "steam",
         "id": "2918090"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P1MPWT913V2"
       }
     ],
     "id_igdb": "318266",
@@ -303291,6 +303305,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "epic",
+        "id": "957A28BC8D3448A99F3EFCE9DABE15B3"
+      },
+      {
         "distributor": "steam",
         "id": "3333700"
       }
@@ -304677,8 +304695,16 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9N7XPXKBKFP5"
+      },
+      {
         "distributor": "steam",
         "id": "3411440"
+      },
+      {
+        "distributor": "epic",
+        "id": "C9F01F863A37488580AD5E0D37CE9A9C"
       }
     ],
     "id_igdb": "349904",
@@ -344263,8 +344289,9 @@
   },
   {
     "id": "1440141099212738610",
-    "name": "hackmud",
+    "name": "Hackmud",
     "aliases": [
+      "hackmud",
       "ｈａｃｋｍｕｄ"
     ],
     "executables": [],
@@ -348709,7 +348736,7 @@
   },
   {
     "id": "1440143207139639441",
-    "name": "Astro's Playroom",
+    "name": "ASTRO's PLAYROOM",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -351034,6 +351061,10 @@
       {
         "distributor": "steam",
         "id": "1510440"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P4L8V60K9T5"
       }
     ],
     "id_igdb": "152058",
@@ -367255,10 +367286,9 @@
   },
   {
     "id": "1442713050993135749",
-    "name": "Arcade Archives: Mazinger Z",
+    "name": "Arcade Archives: MAZINGER Z",
     "aliases": [
-      "Arcade Archives MAZINGER Z",
-      "Arcade Archives: MAZINGER Z"
+      "Arcade Archives MAZINGER Z"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -373672,9 +373702,10 @@
   },
   {
     "id": "1442715029052063765",
-    "name": "SNWBRD: Freestyle Snowboarding",
+    "name": "Snwbrd: Freestyle Snowboarding",
     "aliases": [
-      "SNWBRD"
+      "SNWBRD",
+      "SNWBRD: Freestyle Snowboarding"
     ],
     "executables": [],
     "third_party_skus": [
@@ -399296,10 +399327,9 @@
   },
   {
     "id": "1442727833993613332",
-    "name": "Arcade Archives: Exerion",
+    "name": "Arcade Archives: EXERION",
     "aliases": [
-      "Arcade Archives EXERION",
-      "Arcade Archives: EXERION"
+      "Arcade Archives EXERION"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -402621,10 +402651,9 @@
   },
   {
     "id": "1442728871614091295",
-    "name": "Arcade Archives: Argus",
+    "name": "Arcade Archives: ARGUS",
     "aliases": [
-      "Arcade Archives ARGUS",
-      "Arcade Archives: ARGUS"
+      "Arcade Archives ARGUS"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -414685,12 +414714,16 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "google_play",
-        "id": "de.entwicklerx.swampdefence2"
+        "distributor": "xbox",
+        "id": "9NB004LRM54X"
       },
       {
         "distributor": "xbox",
         "id": "9N3PF52BR9FW"
+      },
+      {
+        "distributor": "google_play",
+        "id": "de.entwicklerx.swampdefence2"
       }
     ],
     "id_igdb": "112113",
@@ -427746,10 +427779,9 @@
   },
   {
     "id": "1442737663558811792",
-    "name": "Arcade Archives: The Astyanax",
+    "name": "Arcade Archives: THE ASTYANAX",
     "aliases": [
-      "Arcade Archives THE ASTYANAX",
-      "Arcade Archives: THE ASTYANAX"
+      "Arcade Archives THE ASTYANAX"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -455610,6 +455642,10 @@
       {
         "distributor": "steam",
         "id": "2606360"
+      },
+      {
+        "distributor": "steam",
+        "id": "643370"
       }
     ],
     "id_igdb": "171381",
@@ -462767,6 +462803,10 @@
       {
         "distributor": "steam",
         "id": "2393920"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NQ5BCM1MJ95"
       }
     ],
     "id_igdb": "252768",
@@ -482610,6 +482650,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NW6WF7X636K"
+      },
       {
         "distributor": "steam",
         "id": "3585460"
@@ -513753,6 +513797,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9MTV43N5JJMH"
+      },
+      {
         "distributor": "steam",
         "id": "3831210"
       }
@@ -514346,7 +514394,16 @@
     "name": "Splash of Color",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9N6K54VNTZSN"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MSX09V4GH6W"
+      }
+    ],
     "id_igdb": "259702",
     "cover": "co6vja",
     "artwork": [
@@ -525149,6 +525206,10 @@
       {
         "distributor": "steam",
         "id": "4636030"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NFDN83XJZ6J"
       }
     ],
     "id_igdb": null,
@@ -525274,5 +525335,197 @@
     "cover": null,
     "artwork": null,
     "url": null
+  },
+  {
+    "id": "1547456800545177730",
+    "name": "Galvatein: Adventurer’s Guild",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3208930"
+      }
+    ],
+    "id_igdb": "346495",
+    "cover": "co9w57",
+    "artwork": [
+      "ar3msf"
+    ],
+    "url": "galvatein-adventurers-guild"
+  },
+  {
+    "id": "1547456793708593192",
+    "name": "Pyramids and Aliens: Escape Room",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "295019",
+    "cover": "co93xy",
+    "artwork": [
+      "ar2v9n"
+    ],
+    "url": "pyramids-and-aliens-escape-room"
+  },
+  {
+    "id": "1547456824708563045",
+    "name": "Dungeon Picnic",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "349172",
+    "cover": "co9yti",
+    "artwork": [
+      "ar3pyr"
+    ],
+    "url": "dungeon-picnic"
+  },
+  {
+    "id": "1547456833365741658",
+    "name": "Dino Card Hunt",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1547456841913729104",
+    "name": "Into the Planet's Flesh",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "401626",
+    "cover": "coc2bh",
+    "artwork": [
+      "ar5yc8"
+    ],
+    "url": "into-the-planets-flesh"
+  },
+  {
+    "id": "1547456847823241286",
+    "name": "Pumpkin Woods",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "293019",
+    "cover": "co99m6",
+    "artwork": [
+      "ar3996",
+      "ar3997"
+    ],
+    "url": "pumpkin-woods"
+  },
+  {
+    "id": "1547456850289631275",
+    "name": "Woo Woo",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "388919",
+    "cover": "cobh22",
+    "artwork": [
+      "ar58pa",
+      "ar58p9"
+    ],
+    "url": "woo-woo"
+  },
+  {
+    "id": "1547456853737218108",
+    "name": "Idle Pixel Battle",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "411410",
+    "cover": "cockns",
+    "artwork": [
+      "ar6bmq"
+    ],
+    "url": "idle-pixel-battle"
+  },
+  {
+    "id": "1547456861366911027",
+    "name": "Maestro's Cold War 2",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "323013",
+    "cover": "cocv0w",
+    "artwork": [
+      "ar375o"
+    ],
+    "url": "maestros-cold-war-2"
+  },
+  {
+    "id": "1547456867624554516",
+    "name": "The Bestest Knight",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1547456871210819614",
+    "name": "Imperial Knights",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "412770",
+    "cover": "cocnbn",
+    "artwork": [
+      "ar6e80"
+    ],
+    "url": "imperial-knights"
+  },
+  {
+    "id": "1547456874058620978",
+    "name": "Rekindled",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "404192",
+    "cover": "coc651",
+    "artwork": [
+      "ar5zpe"
+    ],
+    "url": "rekindled"
+  },
+  {
+    "id": "1547456879364415589",
+    "name": "NEVER HAPPENED",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1547456884603101217",
+    "name": "Spellbound & Shelved",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1547456886884794409",
+    "name": "Overdue",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "179055",
+    "cover": null,
+    "artwork": null,
+    "url": "criminally-overdue"
   }
 ]
