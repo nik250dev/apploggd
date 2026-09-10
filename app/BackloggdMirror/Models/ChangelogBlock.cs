@@ -18,6 +18,9 @@ public sealed class ChangelogVersionBlock : ChangelogBlock
     public string Date { get; init; } = string.Empty;
 
     public bool HasDate => !string.IsNullOrWhiteSpace(Date);
+
+    /// <summary>False for the first version of the file, which needs no rule above it.</summary>
+    public bool ShowSeparator { get; init; }
 }
 
 /// <summary>Subheading within a version ("### What's new").</summary>
