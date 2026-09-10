@@ -762,9 +762,10 @@
                     <!-- Content -->
                     <!-- The horizontal margin goes on the ScrollViewer rather than its Padding:
                          Padding is not subtracted when measuring the content, so long text would
-                         not wrap. -->
+                         not wrap. The gutter for the overlaid scroll bar goes on the ItemsControl
+                         for the same reason. -->
                     <ScrollViewer Grid.Row="1" Margin="20,10,20,10" HorizontalScrollBarVisibility="Disabled">
-                            <ItemsControl ItemsSource="{Binding ChangelogBlocks}">
+                            <ItemsControl ItemsSource="{Binding ChangelogBlocks}" Margin="0,0,14,0">
                                 <ItemsControl.DataTemplates>
                                     <!-- Version header -->
                                     <DataTemplate DataType="models:ChangelogVersionBlock">
