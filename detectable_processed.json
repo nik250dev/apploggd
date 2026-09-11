@@ -2200,20 +2200,20 @@
   },
   {
     "id": "359510680459673610",
-    "name": "Battlefield 4",
+    "name": "Battlefield 4: Premium Edition",
     "aliases": [
+      "Battlefield 4™",
       "Battlefield 4™ (64 bit)",
-      "Battlefiled 4 CTE",
-      "Battlefield 4™"
+      "Battlefiled 4 CTE"
     ],
     "executables": [
       {
-        "name": "bf4cte.exe",
+        "name": "bf4.exe",
         "os": "win32",
         "is_launcher": false
       },
       {
-        "name": "bf4.exe",
+        "name": "bf4cte.exe",
         "os": "win32",
         "is_launcher": false
       }
@@ -2221,7 +2221,7 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "BP15SF17LH13"
+        "id": "C3JM9MMHTGGJ"
       },
       {
         "distributor": "steam",
@@ -2232,12 +2232,12 @@
         "id": "9NPSWGMTPRVW"
       },
       {
-        "distributor": "epic",
-        "id": "0A541DEB1BBB42C987CB48D695431E18"
+        "distributor": "xbox",
+        "id": "BP15SF17LH13"
       },
       {
-        "distributor": "xbox",
-        "id": "C3JM9MMHTGGJ"
+        "distributor": "epic",
+        "id": "0A541DEB1BBB42C987CB48D695431E18"
       }
     ],
     "id_igdb": "52642",
@@ -35316,9 +35316,10 @@
   },
   {
     "id": "496740365072728064",
-    "name": "FINAL FANTASY III",
+    "name": "Final Fantasy III",
     "aliases": [
-      "FINAL FANTASY III"
+      "FINAL FANTASY III",
+      "FINAL FANTASY III: PiXEL REMASTER"
     ],
     "executables": [
       {
@@ -35329,20 +35330,20 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "239120"
+        "distributor": "xbox",
+        "id": "9NWDPFPPK30V"
       },
       {
-        "distributor": "google_play",
-        "id": "com.square_enix.android_googleplay.FFPR3"
+        "distributor": "steam",
+        "id": "239120"
       },
       {
         "distributor": "google_play",
         "id": "com.square_enix.android_googleplay.FFIII_GP"
       },
       {
-        "distributor": "xbox",
-        "id": "9NWDPFPPK30V"
+        "distributor": "google_play",
+        "id": "com.square_enix.android_googleplay.FFPR3"
       },
       {
         "distributor": "steam",
@@ -41352,7 +41353,7 @@
   },
   {
     "id": "504088792223842314",
-    "name": "ZombiU",
+    "name": "Zombi",
     "aliases": [
       "Zombi"
     ],
@@ -41370,19 +41371,19 @@
       },
       {
         "distributor": "xbox",
-        "id": "9NLZH0VNVSKR"
-      },
-      {
-        "distributor": "uplay",
-        "id": "1653"
+        "id": "BR03N9C6Z9G6"
       },
       {
         "distributor": "xbox",
-        "id": "BR03N9C6Z9G6"
+        "id": "9NLZH0VNVSKR"
       },
       {
         "distributor": "epic",
         "id": "143474AB55EC49E8B9B9D79931CB2512"
+      },
+      {
+        "distributor": "uplay",
+        "id": "1653"
       }
     ],
     "id_igdb": "11491",
@@ -46812,7 +46813,7 @@
   },
   {
     "id": "1124351698740195439",
-    "name": "Horizon Zero Dawn",
+    "name": "Horizon Zero Dawn: Complete Edition",
     "aliases": [],
     "executables": [
       {
@@ -46823,12 +46824,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "1151640"
-      },
-      {
         "distributor": "epic",
         "id": "3328B08AC1C14540AA265A1A85C07839"
+      },
+      {
+        "distributor": "steam",
+        "id": "1151640"
       }
     ],
     "id_igdb": "72870",
@@ -56923,7 +56924,7 @@
   },
   {
     "id": "1124352434857332786",
-    "name": "Clue: Classic Mystery Game",
+    "name": "Clue/Cluedo: Classic",
     "aliases": [],
     "executables": [
       {
@@ -75491,7 +75492,7 @@
   },
   {
     "id": "1124353686320197632",
-    "name": "Icewind Dale",
+    "name": "Icewind Dale: Enhanced Edition",
     "aliases": [],
     "executables": [
       {
@@ -104342,7 +104343,7 @@
   },
   {
     "id": "1124355871783272558",
-    "name": "Indigo Prophecy",
+    "name": "Fahrenheit: Indigo Prophecy Remastered",
     "aliases": [],
     "executables": [
       {
@@ -142399,7 +142400,7 @@
   },
   {
     "id": "1124358602740740106",
-    "name": "Top Speed 2",
+    "name": "Top Speed 2: Racing Legends",
     "aliases": [],
     "executables": [
       {
@@ -153612,7 +153613,7 @@
   },
   {
     "id": "1124359412774092941",
-    "name": "Star Wars: The Force Unleashed",
+    "name": "Star Wars: The Force Unleashed - Ultimate Sith Edition",
     "aliases": [],
     "executables": [
       {
@@ -158927,7 +158928,7 @@
   },
   {
     "id": "1124359791729463296",
-    "name": "The Last Door",
+    "name": "The Last Door: Collector's Edition",
     "aliases": [],
     "executables": [
       {
@@ -167193,8 +167194,10 @@
   },
   {
     "id": "1124360376813899867",
-    "name": "Out There",
-    "aliases": [],
+    "name": "Out There: Omega Edition",
+    "aliases": [
+      "Out There: Ω Edition"
+    ],
     "executables": [
       {
         "name": "outthereomega/outthereomega.exe",
@@ -207496,7 +207499,7 @@
   },
   {
     "id": "1239940435917672488",
-    "name": "Marathon",
+    "name": "Classic Marathon",
     "aliases": [],
     "executables": [
       {
@@ -219534,7 +219537,7 @@
   },
   {
     "id": "1279168816533868554",
-    "name": "Vikings: For Valhalla",
+    "name": "Viking Rise",
     "aliases": [],
     "executables": [
       {
@@ -219545,12 +219548,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "2819520"
-      },
-      {
         "distributor": "google_play",
         "id": "com.igg.android.vikingriseglobal"
+      },
+      {
+        "distributor": "steam",
+        "id": "2819520"
       },
       {
         "distributor": "epic",
@@ -236859,7 +236862,7 @@
   },
   {
     "id": "1333662896235872327",
-    "name": "Virtua Fighter 5: Ultimate Showdown",
+    "name": "Virtua Fighter 5 R.E.V.O.",
     "aliases": [],
     "executables": [
       {
@@ -236874,16 +236877,16 @@
         "id": "9PK9VV0V4DWJ"
       },
       {
-        "distributor": "steam",
-        "id": "3112260"
-      },
-      {
         "distributor": "xbox",
         "id": "9NSM674QVLBS"
       },
       {
         "distributor": "xbox",
         "id": "9NH125TK028C"
+      },
+      {
+        "distributor": "steam",
+        "id": "3112260"
       }
     ],
     "id_igdb": "322751",
@@ -239612,7 +239615,7 @@
   },
   {
     "id": "1341559953562927135",
-    "name": "Marathon 2: Durandal",
+    "name": "Classic Marathon 2",
     "aliases": [],
     "executables": [
       {
@@ -258149,7 +258152,7 @@
   },
   {
     "id": "1392158367434281021",
-    "name": "Chicken Invaders 3",
+    "name": "Chicken Invaders 3: Revenge of the Yolk",
     "aliases": [],
     "executables": [
       {
@@ -260368,7 +260371,7 @@
   },
   {
     "id": "1398771961873825872",
-    "name": "After Inc.",
+    "name": "After Inc: Revival",
     "aliases": [],
     "executables": [
       {
@@ -316850,7 +316853,7 @@
   },
   {
     "id": "1439428790420897942",
-    "name": "Fate/Hollow Ataraxia",
+    "name": "Fate/hollow ataraxia REMASTERED",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -317140,7 +317143,7 @@
   },
   {
     "id": "1439429307649757276",
-    "name": "Transit King",
+    "name": "Transit King Tycoon",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -324075,7 +324078,7 @@
   },
   {
     "id": "1440129768069795870",
-    "name": "Tomba!",
+    "name": "Tomba! Special Edition",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -335825,7 +335828,7 @@
   },
   {
     "id": "1440136326681854114",
-    "name": "Justice Online",
+    "name": "Sword of Justice",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -341838,17 +341841,17 @@
   },
   {
     "id": "1440139103483068549",
-    "name": "Metal Gear Solid: Peace Walker - HD Edition",
+    "name": "Metal Gear Solid: Peace Walker - Master Collection Version",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "2492660"
-      },
-      {
         "distributor": "xbox",
         "id": "9NQ9BZ0HZNHW"
+      },
+      {
+        "distributor": "steam",
+        "id": "2492660"
       }
     ],
     "id_igdb": "45178",
@@ -344079,17 +344082,17 @@
   },
   {
     "id": "1440140943880749166",
-    "name": "State of Decay 2: Ultimate Edition",
+    "name": "State of Decay 2: Juggernaut Edition",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9P11XKZP0KHH"
+        "id": "9NSCH45HZ9HK"
       },
       {
         "distributor": "xbox",
-        "id": "9NSCH45HZ9HK"
+        "id": "9P11XKZP0KHH"
       }
     ],
     "id_igdb": "95706",
@@ -345941,17 +345944,17 @@
   },
   {
     "id": "1440142122853601530",
-    "name": "Risk: Global Domination",
+    "name": "RISK: Global Domination",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "google_play",
-        "id": "com.hasbro.riskbigscreen"
-      },
-      {
         "distributor": "steam",
         "id": "1128810"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.hasbro.riskbigscreen"
       }
     ],
     "id_igdb": "121346",
@@ -346205,13 +346208,17 @@
   },
   {
     "id": "1440142227451154478",
-    "name": "Hole.io",
+    "name": "Hole io",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9N13JZCRPPRG"
+        "id": "9PB4PZH076RM"
+      },
+      {
+        "distributor": "steam",
+        "id": "2751230"
       },
       {
         "distributor": "google_play",
@@ -346223,11 +346230,7 @@
       },
       {
         "distributor": "xbox",
-        "id": "9PB4PZH076RM"
-      },
-      {
-        "distributor": "steam",
-        "id": "2751230"
+        "id": "9N13JZCRPPRG"
       }
     ],
     "id_igdb": "263553",
@@ -349185,7 +349188,7 @@
   },
   {
     "id": "1440143377311207545",
-    "name": "Summoner Wars",
+    "name": "Summoners War: Chronicles",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -349905,7 +349908,7 @@
   },
   {
     "id": "1440540929147535360",
-    "name": "PERFECT DARK",
+    "name": "Perfect Dark",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -350338,14 +350341,10 @@
   },
   {
     "id": "1440541048597123287",
-    "name": "Diablo II: Resurrected",
+    "name": "Diablo II: Resurrected – Infernal Edition",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
-      {
-        "distributor": "xbox",
-        "id": "9NT0PNTL6B79"
-      },
       {
         "distributor": "xbox",
         "id": "9N5V10LKDRPQ"
@@ -350353,6 +350352,10 @@
       {
         "distributor": "xbox",
         "id": "9NQSX9D0HPRK"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NT0PNTL6B79"
       },
       {
         "distributor": "xbox",
@@ -395529,17 +395532,17 @@
   },
   {
     "id": "1442726487466840236",
-    "name": "ACA Neo Geo: Shock Troopers",
+    "name": "Shock Troopers",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "google_play",
-        "id": "com.snk.acasht1"
-      },
-      {
         "distributor": "steam",
         "id": "366270"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.snk.acasht1"
       }
     ],
     "id_igdb": "35377",
@@ -398866,7 +398869,7 @@
   },
   {
     "id": "1442727662325071912",
-    "name": "Plague Inc.",
+    "name": "Plague Inc: The Cure",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -400886,14 +400889,10 @@
   },
   {
     "id": "1442728295891341342",
-    "name": "Candleman",
+    "name": "Candleman: The Complete Journey",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
-      {
-        "distributor": "xbox",
-        "id": "BW89MHGPNF2F"
-      },
       {
         "distributor": "steam",
         "id": "591630"
@@ -400901,6 +400900,10 @@
       {
         "distributor": "xbox",
         "id": "BS95882KBB4F"
+      },
+      {
+        "distributor": "xbox",
+        "id": "BW89MHGPNF2F"
       }
     ],
     "id_igdb": "81247",
@@ -424868,7 +424871,7 @@
   },
   {
     "id": "1442736421889773629",
-    "name": "Switchball",
+    "name": "Switchball HD",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -438002,7 +438005,7 @@
   },
   {
     "id": "1444870737453252640",
-    "name": "Patrician IV",
+    "name": "Patrician IV: Steam Special Edition",
     "aliases": [],
     "executables": [
       {
@@ -446563,7 +446566,7 @@
   },
   {
     "id": "1445975632680062996",
-    "name": "Coffee Shop Simulator",
+    "name": "Coffee Bar Simulator",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -466615,7 +466618,7 @@
   },
   {
     "id": "1456486837534068839",
-    "name": "Yggdra Union: We'll Never Fight Alone",
+    "name": "YGGDRA UNION",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -470623,17 +470626,17 @@
   },
   {
     "id": "1464818728179994748",
-    "name": "Ridge Racer",
+    "name": "G-Mode Archives+: Ridge Racer",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9PCW8M2SHJ8N"
-      },
-      {
         "distributor": "steam",
         "id": "4733110"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PCW8M2SHJ8N"
       }
     ],
     "id_igdb": "8546",
@@ -480467,7 +480470,7 @@
   },
   {
     "id": "1477213831347306569",
-    "name": "Chicken Invaders 4: Ultimate Omelette",
+    "name": "Chicken Invaders 4",
     "aliases": [],
     "executables": [
       {
@@ -501870,17 +501873,17 @@
   },
   {
     "id": "1513022394212679834",
-    "name": "Mech Arena: Robot Showdown",
+    "name": "Mech Arena",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "1809860"
-      },
-      {
         "distributor": "google_play",
         "id": "com.plarium.mechlegion"
+      },
+      {
+        "distributor": "steam",
+        "id": "1809860"
       }
     ],
     "id_igdb": "192558",
@@ -520240,7 +520243,7 @@
   },
   {
     "id": "1538034795005870090",
-    "name": "Empire: Four Kingdoms",
+    "name": "Goodgame Empire",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -521145,17 +521148,17 @@
   },
   {
     "id": "1539846678402826311",
-    "name": "Death Palette",
+    "name": "Matsuro Palette",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9NTZHGP0GFTP"
-      },
-      {
         "distributor": "steam",
         "id": "1321120"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NTZHGP0GFTP"
       },
       {
         "distributor": "google_play",
@@ -522195,7 +522198,7 @@
   },
   {
     "id": "1542021049426776242",
-    "name": "Bloodletter",
+    "name": "BLOODLETTER",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -523085,17 +523088,17 @@
   },
   {
     "id": "1544195387265646592",
-    "name": "Metal Gear Solid 4: Guns of the Patriots",
+    "name": "Metal Gear Solid 4: Guns of the Patriots - Master Collection Version",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "2492670"
-      },
-      {
         "distributor": "xbox",
         "id": "9N8GBK506W03"
+      },
+      {
+        "distributor": "steam",
+        "id": "2492670"
       }
     ],
     "id_igdb": "380",
@@ -525527,5 +525530,78 @@
     "cover": null,
     "artwork": null,
     "url": "criminally-overdue"
+  },
+  {
+    "id": "1547819345655103550",
+    "name": "Backseat",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "383753",
+    "cover": "cob6ct",
+    "artwork": null,
+    "url": "backseat--1"
+  },
+  {
+    "id": "1547819355683684355",
+    "name": "Red Dust Colony",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1547819365225996308",
+    "name": "Red Rocket Defencism",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "317759",
+    "cover": "co9fuu",
+    "artwork": [
+      "ar34yv"
+    ],
+    "url": "red-rocket-defencism"
+  },
+  {
+    "id": "1547819373526384731",
+    "name": "Dread Admiral",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "403933",
+    "cover": "coc5mi",
+    "artwork": null,
+    "url": "dread-admiral"
+  },
+  {
+    "id": "1547819379943546990",
+    "name": "Fool King",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "356724",
+    "cover": "cobtvo",
+    "artwork": [
+      "ar6h1x",
+      "ar6ha5"
+    ],
+    "url": "fool-king"
+  },
+  {
+    "id": "1547819389800288379",
+    "name": "BreathBound",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "372447",
+    "cover": "coanfa",
+    "artwork": [
+      "ar4ewp"
+    ],
+    "url": "breathbound"
   }
 ]
