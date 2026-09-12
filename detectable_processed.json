@@ -78137,9 +78137,10 @@
   },
   {
     "id": "1124353934623002726",
-    "name": "CRISIS CORE: FINAL FANTASY VII - REUNION",
+    "name": "Crisis Core: Final Fantasy VII - Reunion",
     "aliases": [
-      "CRISIS CORE -FINAL FANTASY VII- REUNION"
+      "CRISIS CORE -FINAL FANTASY VII- REUNION",
+      "CRISIS CORE: FINAL FANTASY VII - REUNION"
     ],
     "executables": [
       {
@@ -78150,16 +78151,16 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9P6J9NFKGJ68"
+        "distributor": "steam",
+        "id": "1608070"
       },
       {
         "distributor": "xbox",
         "id": "9PCWV3FWJZ18"
       },
       {
-        "distributor": "steam",
-        "id": "1608070"
+        "distributor": "xbox",
+        "id": "9P6J9NFKGJ68"
       }
     ],
     "id_igdb": "205201",
@@ -112468,7 +112469,7 @@
   },
   {
     "id": "1124356453268996126",
-    "name": "Doraemon Story of Seasons",
+    "name": "DORAEMON STORY OF SEASONS",
     "aliases": [],
     "executables": [
       {
@@ -124247,10 +124248,9 @@
   },
   {
     "id": "1124357342394335324",
-    "name": "Kill la Kill: If",
+    "name": "KILL la KILL: IF",
     "aliases": [
-      "KILL la KILL THE GAME: IF",
-      "KILL la KILL: IF"
+      "KILL la KILL THE GAME: IF"
     ],
     "executables": [
       {
@@ -173468,9 +173468,10 @@
   },
   {
     "id": "1129504328848265387",
-    "name": "FIVE NIGHTS AT FREDDY'S: HELP WANTED",
+    "name": "Five Nights at Freddy's: Help Wanted",
     "aliases": [
-      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED"
+      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED",
+      "FIVE NIGHTS AT FREDDY'S: HELP WANTED"
     ],
     "executables": [
       {
@@ -186298,7 +186299,7 @@
   },
   {
     "id": "1161771578049175602",
-    "name": "Code Vein",
+    "name": "CODE VEIN",
     "aliases": [
       "CODE VEIN"
     ],
@@ -289281,10 +289282,9 @@
   },
   {
     "id": "1428182872589602867",
-    "name": "420Blaze It 2: Game of the Year",
+    "name": "420BLAZE IT 2: GAME OF THE YEAR",
     "aliases": [
-      "420 BLAZE IT 2: GAME OF THE YEAR",
-      "420BLAZE IT 2: GAME OF THE YEAR"
+      "420 BLAZE IT 2: GAME OF THE YEAR"
     ],
     "executables": [],
     "third_party_skus": [
@@ -303307,6 +303307,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9N034X5G08B7"
+      },
       {
         "distributor": "epic",
         "id": "957A28BC8D3448A99F3EFCE9DABE15B3"
@@ -325477,8 +325481,9 @@
   },
   {
     "id": "1440130398813159515",
-    "name": "THE JOY OF CREATION",
+    "name": "The Joy of Creation",
     "aliases": [
+      "THE JOY OF CREATION",
       "TJOC"
     ],
     "executables": [],
@@ -367289,9 +367294,10 @@
   },
   {
     "id": "1442713050993135749",
-    "name": "Arcade Archives: MAZINGER Z",
+    "name": "Arcade Archives: Mazinger Z",
     "aliases": [
-      "Arcade Archives MAZINGER Z"
+      "Arcade Archives MAZINGER Z",
+      "Arcade Archives: MAZINGER Z"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -373705,10 +373711,9 @@
   },
   {
     "id": "1442715029052063765",
-    "name": "Snwbrd: Freestyle Snowboarding",
+    "name": "SNWBRD: Freestyle Snowboarding",
     "aliases": [
-      "SNWBRD",
-      "SNWBRD: Freestyle Snowboarding"
+      "SNWBRD"
     ],
     "executables": [],
     "third_party_skus": [
@@ -399330,9 +399335,10 @@
   },
   {
     "id": "1442727833993613332",
-    "name": "Arcade Archives: EXERION",
+    "name": "Arcade Archives: Exerion",
     "aliases": [
-      "Arcade Archives EXERION"
+      "Arcade Archives EXERION",
+      "Arcade Archives: EXERION"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -402654,9 +402660,10 @@
   },
   {
     "id": "1442728871614091295",
-    "name": "Arcade Archives: ARGUS",
+    "name": "Arcade Archives: Argus",
     "aliases": [
-      "Arcade Archives ARGUS"
+      "Arcade Archives ARGUS",
+      "Arcade Archives: ARGUS"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -475116,7 +475123,9 @@
   {
     "id": "1473517556173111357",
     "name": "Anime Shop Simulator",
-    "aliases": [],
+    "aliases": [
+      "Anime Shop Simulator ✨"
+    ],
     "executables": [],
     "third_party_skus": [
       {
@@ -501878,10 +501887,6 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "google_play",
-        "id": "com.plarium.mechlegion"
-      },
-      {
         "distributor": "steam",
         "id": "1809860"
       }
@@ -521365,11 +521370,11 @@
   },
   {
     "id": "1539812812854132867",
-    "name": "Call of Duty: Modern Warfare 4",
+    "name": "Call of Duty",
     "aliases": [],
     "executables": [
       {
-        "name": "cod26-cod.exe",
+        "name": "sp26-cod.exe",
         "os": "win32",
         "is_launcher": false
       },
@@ -521379,7 +521384,7 @@
         "is_launcher": false
       },
       {
-        "name": "sp26-cod.exe",
+        "name": "cod26-cod.exe",
         "os": "win32",
         "is_launcher": false
       }
@@ -525603,5 +525608,126 @@
       "ar4ewp"
     ],
     "url": "breathbound"
+  },
+  {
+    "id": "1548181482332491856",
+    "name": "Dragon Quest Monsters: The Withered World",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "403174",
+    "cover": "coctri",
+    "artwork": null,
+    "url": "dragon-quest-monsters-the-withered-world"
+  },
+  {
+    "id": "1548181490372714546",
+    "name": "Hidden Cats in Barcelona",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "400653",
+    "cover": "coc0xe",
+    "artwork": [
+      "ar5u2p"
+    ],
+    "url": "hidden-cats-in-barcelona"
+  },
+  {
+    "id": "1548181497889165332",
+    "name": "Intravenous III",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "397241",
+    "cover": "cobvoa",
+    "artwork": null,
+    "url": "intravenous-3"
+  },
+  {
+    "id": "1548181503140167741",
+    "name": "Golden Swirl",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "368836",
+    "cover": "coawa3",
+    "artwork": [
+      "ar4r8q",
+      "ar493e"
+    ],
+    "url": "golden-swirl"
+  },
+  {
+    "id": "1548181505870930040",
+    "name": "Veterum",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "211815",
+    "cover": "co701v",
+    "artwork": [
+      "ar1rnu"
+    ],
+    "url": "veterum"
+  },
+  {
+    "id": "1548181511638098000",
+    "name": "Tap Dungeon",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1548181515119235093",
+    "name": "Mexican Ninja",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "347240",
+    "cover": "coadam",
+    "artwork": null,
+    "url": "mexican-ninja"
+  },
+  {
+    "id": "1548181518298382398",
+    "name": "Kaiju Harvest",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1548181523851649084",
+    "name": "Desk Top Racer",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "412731",
+    "cover": "cocn96",
+    "artwork": [
+      "ar6e9e"
+    ],
+    "url": "desk-top-racer"
+  },
+  {
+    "id": "1548181545846833272",
+    "name": "Dragon Quest Heroes: Torneko's Mystery Dungeon - Classic HD",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "417182",
+    "cover": "cocvbe",
+    "artwork": [
+      "ar6kiz"
+    ],
+    "url": "dragon-quest-heroes-tornekos-mystery-dungeon-classic-hd"
   }
 ]
