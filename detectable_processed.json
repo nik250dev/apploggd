@@ -78136,9 +78136,10 @@
   },
   {
     "id": "1124353934623002726",
-    "name": "CRISIS CORE: FINAL FANTASY VII - REUNION",
+    "name": "Crisis Core: Final Fantasy VII - Reunion",
     "aliases": [
-      "CRISIS CORE -FINAL FANTASY VII- REUNION"
+      "CRISIS CORE -FINAL FANTASY VII- REUNION",
+      "CRISIS CORE: FINAL FANTASY VII - REUNION"
     ],
     "executables": [
       {
@@ -78153,12 +78154,12 @@
         "id": "9PCWV3FWJZ18"
       },
       {
-        "distributor": "xbox",
-        "id": "9P6J9NFKGJ68"
-      },
-      {
         "distributor": "steam",
         "id": "1608070"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P6J9NFKGJ68"
       }
     ],
     "id_igdb": "205201",
@@ -124246,10 +124247,9 @@
   },
   {
     "id": "1124357342394335324",
-    "name": "Kill la Kill: If",
+    "name": "KILL la KILL: IF",
     "aliases": [
-      "KILL la KILL THE GAME: IF",
-      "KILL la KILL: IF"
+      "KILL la KILL THE GAME: IF"
     ],
     "executables": [
       {
@@ -270283,25 +270283,15 @@
   },
   {
     "id": "1402418714716143646",
-    "name": "Grand Theft Auto V",
+    "name": "Grand Theft Auto V Legacy",
     "aliases": [
-      "Grand Theft Auto V Legacy",
+      "Grand Theft Auto V",
       "Grand Theft Auto V Enhanced",
-      "Grand Theft Auto V"
+      "Grand Theft Auto V Legacy"
     ],
     "executables": [
       {
-        "name": "grand theft auto v/ragepluginhook.exe",
-        "os": "win32",
-        "is_launcher": false
-      },
-      {
         "name": "gta5.exe",
-        "os": "win32",
-        "is_launcher": false
-      },
-      {
-        "name": "grand theft auto v/gta5.exe",
         "os": "win32",
         "is_launcher": false
       },
@@ -270311,7 +270301,12 @@
         "is_launcher": false
       },
       {
-        "name": "lspdfr/lspdfr configurator.exe",
+        "name": "grand theft auto v/ragepluginhook.exe",
+        "os": "win32",
+        "is_launcher": false
+      },
+      {
+        "name": "subprocess/fivem_gtaprocess.exe",
         "os": "win32",
         "is_launcher": false
       },
@@ -270321,12 +270316,17 @@
         "is_launcher": false
       },
       {
+        "name": "lspdfr/lspdfr configurator.exe",
+        "os": "win32",
+        "is_launcher": false
+      },
+      {
         "name": "grand theft auto v/gta5_be.exe",
         "os": "win32",
         "is_launcher": false
       },
       {
-        "name": "subprocess/fivem_gtaprocess.exe",
+        "name": "grand theft auto v/gta5.exe",
         "os": "win32",
         "is_launcher": false
       }
@@ -367319,9 +367319,10 @@
   },
   {
     "id": "1442713050993135749",
-    "name": "Arcade Archives: MAZINGER Z",
+    "name": "Arcade Archives: Mazinger Z",
     "aliases": [
-      "Arcade Archives MAZINGER Z"
+      "Arcade Archives MAZINGER Z",
+      "Arcade Archives: MAZINGER Z"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -399362,9 +399363,10 @@
   },
   {
     "id": "1442727833993613332",
-    "name": "Arcade Archives: EXERION",
+    "name": "Arcade Archives: Exerion",
     "aliases": [
-      "Arcade Archives EXERION"
+      "Arcade Archives EXERION",
+      "Arcade Archives: EXERION"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -402686,9 +402688,10 @@
   },
   {
     "id": "1442728871614091295",
-    "name": "Arcade Archives: ARGUS",
+    "name": "Arcade Archives: Argus",
     "aliases": [
-      "Arcade Archives ARGUS"
+      "Arcade Archives ARGUS",
+      "Arcade Archives: ARGUS"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -427815,10 +427818,9 @@
   },
   {
     "id": "1442737663558811792",
-    "name": "Arcade Archives: The Astyanax",
+    "name": "Arcade Archives: THE ASTYANAX",
     "aliases": [
-      "Arcade Archives THE ASTYANAX",
-      "Arcade Archives: THE ASTYANAX"
+      "Arcade Archives THE ASTYANAX"
     ],
     "executables": [],
     "third_party_skus": [],
