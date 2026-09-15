@@ -20144,9 +20144,10 @@
   },
   {
     "id": "451132630390538270",
-    "name": "BLESS GLOBAL",
+    "name": "Bless Global",
     "aliases": [
-      "BLESS"
+      "BLESS",
+      "BLESS GLOBAL"
     ],
     "executables": [
       {
@@ -50502,9 +50503,8 @@
   },
   {
     "id": "1124351982908493894",
-    "name": "Mir 4",
+    "name": "MIR 4",
     "aliases": [
-      "MIR 4",
       "MIR4"
     ],
     "executables": [
@@ -78136,10 +78136,9 @@
   },
   {
     "id": "1124353934623002726",
-    "name": "Crisis Core: Final Fantasy VII - Reunion",
+    "name": "CRISIS CORE: FINAL FANTASY VII - REUNION",
     "aliases": [
-      "CRISIS CORE -FINAL FANTASY VII- REUNION",
-      "CRISIS CORE: FINAL FANTASY VII - REUNION"
+      "CRISIS CORE -FINAL FANTASY VII- REUNION"
     ],
     "executables": [
       {
@@ -78150,12 +78149,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9PCWV3FWJZ18"
-      },
-      {
         "distributor": "steam",
         "id": "1608070"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PCWV3FWJZ18"
       },
       {
         "distributor": "xbox",
@@ -124247,9 +124246,10 @@
   },
   {
     "id": "1124357342394335324",
-    "name": "KILL la KILL: IF",
+    "name": "Kill la Kill: If",
     "aliases": [
-      "KILL la KILL THE GAME: IF"
+      "KILL la KILL THE GAME: IF",
+      "KILL la KILL: IF"
     ],
     "executables": [
       {
@@ -173467,9 +173467,10 @@
   },
   {
     "id": "1129504328848265387",
-    "name": "FIVE NIGHTS AT FREDDY'S: HELP WANTED",
+    "name": "Five Nights at Freddy's: Help Wanted",
     "aliases": [
-      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED"
+      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED",
+      "FIVE NIGHTS AT FREDDY'S: HELP WANTED"
     ],
     "executables": [
       {
@@ -173480,12 +173481,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "732690"
-      },
-      {
         "distributor": "xbox",
         "id": "9P731FVPM8WW"
+      },
+      {
+        "distributor": "steam",
+        "id": "732690"
       }
     ],
     "id_igdb": "115304",
@@ -173944,8 +173945,8 @@
     "id": "1129504432829235365",
     "name": "Sally Face",
     "aliases": [
-      "Sally Face - Episode One",
-      "Sally Face"
+      "Sally Face",
+      "Sally Face - Episode One"
     ],
     "executables": [
       {
@@ -173956,12 +173957,16 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "steam",
+        "id": "541570"
+      },
+      {
         "distributor": "xbox",
         "id": "9N1C74G2JXHM"
       },
       {
-        "distributor": "steam",
-        "id": "541570"
+        "distributor": "google_play",
+        "id": "com.portablemoose.sallyface"
       }
     ],
     "id_igdb": "26580",
@@ -191176,7 +191181,7 @@
   },
   {
     "id": "1174042035276230686",
-    "name": "DOOM II: Hell on Earth",
+    "name": "Doom II: Hell on Earth",
     "aliases": [
       "DOOM II",
       "DOOM II: Hell on Earth"
@@ -191190,12 +191195,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "2300"
-      },
-      {
         "distributor": "xbox",
         "id": "9PLT62LRF9V7"
+      },
+      {
+        "distributor": "steam",
+        "id": "2300"
       }
     ],
     "id_igdb": "312",
@@ -201863,6 +201868,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.egunan.SputnikaGame"
+      },
       {
         "distributor": "steam",
         "id": "2730270"
@@ -242231,6 +242240,10 @@
       {
         "distributor": "steam",
         "id": "2873080"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.nino.tulpa.google"
       }
     ],
     "id_igdb": "325916",
@@ -256856,9 +256869,9 @@
   },
   {
     "id": "1387990904194732154",
-    "name": "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY",
+    "name": "RAIDOU Remastered: The Mystery of the Soulless Army",
     "aliases": [
-      "RAIDOU Remastered: The Mystery of the Soulless Army"
+      "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY"
     ],
     "executables": [
       {
@@ -256870,11 +256883,11 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9NB58STJ848G"
+        "id": "9P284W1H02KW"
       },
       {
         "distributor": "xbox",
-        "id": "9P284W1H02KW"
+        "id": "9NB58STJ848G"
       },
       {
         "distributor": "steam",
@@ -270787,12 +270800,16 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9ND19JDMBS3R"
+      },
+      {
         "distributor": "steam",
         "id": "2133760"
       },
       {
-        "distributor": "xbox",
-        "id": "9ND19JDMBS3R"
+        "distributor": "google_play",
+        "id": "com.neoludic.tbs"
       }
     ],
     "id_igdb": "216718",
@@ -289304,9 +289321,10 @@
   },
   {
     "id": "1428182872589602867",
-    "name": "420BLAZE IT 2: GAME OF THE YEAR",
+    "name": "420Blaze It 2: Game of the Year",
     "aliases": [
-      "420 BLAZE IT 2: GAME OF THE YEAR"
+      "420 BLAZE IT 2: GAME OF THE YEAR",
+      "420BLAZE IT 2: GAME OF THE YEAR"
     ],
     "executables": [],
     "third_party_skus": [
@@ -328208,6 +328226,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.happy.ttdz1"
+      },
+      {
         "distributor": "steam",
         "id": "994910"
       }
@@ -330165,6 +330187,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.Kompete"
+      },
       {
         "distributor": "epic",
         "id": "359ED81FDE234FF2A1B190BA60DA928E"
@@ -340751,6 +340777,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.noguiin.mycarmylife"
+      },
+      {
         "distributor": "steam",
         "id": "3933710"
       }
@@ -344322,9 +344352,8 @@
   },
   {
     "id": "1440141099212738610",
-    "name": "Hackmud",
+    "name": "hackmud",
     "aliases": [
-      "hackmud",
       "ｈａｃｋｍｕｄ"
     ],
     "executables": [],
@@ -367319,10 +367348,9 @@
   },
   {
     "id": "1442713050993135749",
-    "name": "Arcade Archives: Mazinger Z",
+    "name": "Arcade Archives: MAZINGER Z",
     "aliases": [
-      "Arcade Archives MAZINGER Z",
-      "Arcade Archives: MAZINGER Z"
+      "Arcade Archives MAZINGER Z"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -399363,10 +399391,9 @@
   },
   {
     "id": "1442727833993613332",
-    "name": "Arcade Archives: Exerion",
+    "name": "Arcade Archives: EXERION",
     "aliases": [
-      "Arcade Archives EXERION",
-      "Arcade Archives: EXERION"
+      "Arcade Archives EXERION"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -420258,10 +420285,9 @@
   },
   {
     "id": "1442734322128916531",
-    "name": "Arcade Archives: Naughty Boy",
+    "name": "Arcade Archives: NAUGHTY BOY",
     "aliases": [
-      "Arcade Archives NAUGHTY BOY",
-      "Arcade Archives: NAUGHTY BOY"
+      "Arcade Archives NAUGHTY BOY"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -427818,9 +427844,10 @@
   },
   {
     "id": "1442737663558811792",
-    "name": "Arcade Archives: THE ASTYANAX",
+    "name": "Arcade Archives: The Astyanax",
     "aliases": [
-      "Arcade Archives THE ASTYANAX"
+      "Arcade Archives THE ASTYANAX",
+      "Arcade Archives: THE ASTYANAX"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -471408,11 +471435,21 @@
     "id": "1468082130474111047",
     "name": "Aniimo",
     "aliases": [],
-    "executables": [],
+    "executables": [
+      {
+        "name": "aniimo.exe",
+        "os": "win32",
+        "is_launcher": false
+      }
+    ],
     "third_party_skus": [
       {
         "distributor": "epic",
         "id": "60A36A8A594C49AB9FB58FA33BE6156E"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PH327N126WG"
       },
       {
         "distributor": "steam",
@@ -471425,10 +471462,6 @@
       {
         "distributor": "xbox",
         "id": "9PK8PHLCQDF6"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9PH327N126WG"
       }
     ],
     "id_igdb": "348202",
@@ -525161,6 +525194,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "air.com.darkdome.girlinthewindow"
+      },
+      {
         "distributor": "steam",
         "id": "4700560"
       }
@@ -525194,6 +525231,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.gameinsight.airport"
+      },
       {
         "distributor": "steam",
         "id": "4514800"
