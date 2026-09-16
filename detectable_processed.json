@@ -9149,16 +9149,20 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "epic",
-        "id": "FC8D1547232045F6A23257CFD04EF3E8"
+        "distributor": "steam",
+        "id": "242550"
       },
       {
         "distributor": "xbox",
         "id": "9NQ4M2DG11L0"
       },
       {
-        "distributor": "steam",
-        "id": "242550"
+        "distributor": "epic",
+        "id": "FC8D1547232045F6A23257CFD04EF3E8"
+      },
+      {
+        "distributor": "xbox",
+        "id": "C26K4DVGR45B"
       }
     ],
     "id_igdb": "1968",
@@ -12859,12 +12863,16 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "435480"
+        "distributor": "xbox",
+        "id": "9PG0ZSTFBL1T"
       },
       {
         "distributor": "xbox",
-        "id": "9PG0ZSTFBL1T"
+        "id": "BPPR6D5C2GLF"
+      },
+      {
+        "distributor": "steam",
+        "id": "435480"
       }
     ],
     "id_igdb": "19553",
@@ -68982,9 +68990,10 @@
   },
   {
     "id": "1124353236564983808",
-    "name": "CounterSide",
+    "name": "Counterside",
     "aliases": [
-      "Counter:Side"
+      "Counter:Side",
+      "CounterSide"
     ],
     "executables": [
       {
@@ -173467,10 +173476,9 @@
   },
   {
     "id": "1129504328848265387",
-    "name": "Five Nights at Freddy's: Help Wanted",
+    "name": "FIVE NIGHTS AT FREDDY'S: HELP WANTED",
     "aliases": [
-      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED",
-      "FIVE NIGHTS AT FREDDY'S: HELP WANTED"
+      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED"
     ],
     "executables": [
       {
@@ -191181,7 +191189,7 @@
   },
   {
     "id": "1174042035276230686",
-    "name": "Doom II: Hell on Earth",
+    "name": "DOOM II: Hell on Earth",
     "aliases": [
       "DOOM II",
       "DOOM II: Hell on Earth"
@@ -344352,8 +344360,9 @@
   },
   {
     "id": "1440141099212738610",
-    "name": "hackmud",
+    "name": "Hackmud",
     "aliases": [
+      "hackmud",
       "ｈａｃｋｍｕｄ"
     ],
     "executables": [],
@@ -359686,12 +359695,16 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9PL427M642BV"
+      },
+      {
         "distributor": "steam",
         "id": "950050"
       },
       {
         "distributor": "xbox",
-        "id": "9PL427M642BV"
+        "id": "BR97MQC18RQL"
       }
     ],
     "id_igdb": "37066",
@@ -398620,12 +398633,16 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "epic",
-        "id": "3422379633B9432C892E10C11FF9F25D"
+        "distributor": "xbox",
+        "id": "BXQQQQ8HRBSF"
       },
       {
         "distributor": "steam",
         "id": "359600"
+      },
+      {
+        "distributor": "epic",
+        "id": "3422379633B9432C892E10C11FF9F25D"
       },
       {
         "distributor": "xbox",
@@ -402715,10 +402732,9 @@
   },
   {
     "id": "1442728871614091295",
-    "name": "Arcade Archives: Argus",
+    "name": "Arcade Archives: ARGUS",
     "aliases": [
-      "Arcade Archives ARGUS",
-      "Arcade Archives: ARGUS"
+      "Arcade Archives ARGUS"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -427844,10 +427860,9 @@
   },
   {
     "id": "1442737663558811792",
-    "name": "Arcade Archives: The Astyanax",
+    "name": "Arcade Archives: THE ASTYANAX",
     "aliases": [
-      "Arcade Archives THE ASTYANAX",
-      "Arcade Archives: THE ASTYANAX"
+      "Arcade Archives THE ASTYANAX"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -513333,7 +513348,7 @@
   },
   {
     "id": "1524626598647562310",
-    "name": "Touhou Koumakyou: New Classic - the Embodiment of Scarlet Devil",
+    "name": "Touhou Koumakyou: New Classic - The Embodiment of Scarlet Devil",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
