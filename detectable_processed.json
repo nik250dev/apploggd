@@ -304021,6 +304021,10 @@
       {
         "distributor": "steam",
         "id": "2893820"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P3HHVSDW4LF"
       }
     ],
     "id_igdb": "322389",
@@ -501057,6 +501061,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9P55Z0JJGVWN"
+      },
+      {
         "distributor": "steam",
         "id": "1867240"
       }
@@ -525449,6 +525457,14 @@
       {
         "distributor": "xbox",
         "id": "9NRCV7JX9L7Q"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PK85WVFH32Q"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MWWH8WK2G98"
       }
     ],
     "id_igdb": "408771",
@@ -526185,5 +526201,912 @@
     "cover": null,
     "artwork": null,
     "url": null
+  },
+  {
+    "id": "1549993561947242607",
+    "name": "Crazy Taxi: World Tour",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9PCL8F2K2LT2"
+      },
+      {
+        "distributor": "steam",
+        "id": "2924540"
+      }
+    ],
+    "id_igdb": "279633",
+    "cover": "coc77a",
+    "artwork": [
+      "ar6by9"
+    ],
+    "url": "crazy-taxi-world-tour"
+  },
+  {
+    "id": "1549993570356953208",
+    "name": "HOT WHEELS Infinite Rush",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9P46DNFG3D6C"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PC4CHM4HXW5"
+      },
+      {
+        "distributor": "steam",
+        "id": "2821390"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NQKG3STPZF3"
+      },
+      {
+        "distributor": "epic",
+        "id": "FBA19781558B4439992B2D0776D90A9C"
+      }
+    ],
+    "id_igdb": "404710",
+    "cover": "coc6me",
+    "artwork": [
+      "ar69x2"
+    ],
+    "url": "hot-wheels-infinite-rush"
+  },
+  {
+    "id": "1549993576686030928",
+    "name": "Algolemeth",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2731030"
+      }
+    ],
+    "id_igdb": "283903",
+    "cover": "co9dnw",
+    "artwork": [
+      "ar2pmh"
+    ],
+    "url": "algolemeth"
+  },
+  {
+    "id": "1549993581576720444",
+    "name": "Category 6",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2823820"
+      }
+    ],
+    "id_igdb": "292445",
+    "cover": "coctcv",
+    "artwork": [
+      "ar2u0y"
+    ],
+    "url": "category-6"
+  },
+  {
+    "id": "1549993587448483851",
+    "name": "Gun a Rat",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4163660"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1549993593333223484",
+    "name": "Cosmic Fear",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3306920"
+      }
+    ],
+    "id_igdb": "340029",
+    "cover": "co9o9r",
+    "artwork": [
+      "ar3frq"
+    ],
+    "url": "cosmic-fear"
+  },
+  {
+    "id": "1549993606746476554",
+    "name": "Gunman Contracts: Stand Alone",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2421750"
+      }
+    ],
+    "id_igdb": "269009",
+    "cover": "co972q",
+    "artwork": [
+      "ar2ju2"
+    ],
+    "url": "gunman-contracts-stand-alone"
+  },
+  {
+    "id": "1549993614103281767",
+    "name": "Dissolution of My Self",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4573760"
+      }
+    ],
+    "id_igdb": "405785",
+    "cover": "cocwcj",
+    "artwork": [
+      "ar6jqa"
+    ],
+    "url": "dissolution-of-my-self"
+  },
+  {
+    "id": "1549993620285947904",
+    "name": "Swan Song",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3265290"
+      }
+    ],
+    "id_igdb": "318921",
+    "cover": "coa9fl",
+    "artwork": null,
+    "url": "swan-song--3"
+  },
+  {
+    "id": "1549993627013615646",
+    "name": "Fractal Foundry",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4287960"
+      }
+    ],
+    "id_igdb": "398725",
+    "cover": "coby15",
+    "artwork": [
+      "ar5qm6"
+    ],
+    "url": "fractal-foundry"
+  },
+  {
+    "id": "1549993633934086204",
+    "name": "Dead Party",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1270660"
+      }
+    ],
+    "id_igdb": "397029",
+    "cover": "cobvn2",
+    "artwork": [
+      "ar5nly"
+    ],
+    "url": "dead-party"
+  },
+  {
+    "id": "1549993642876342315",
+    "name": "Deck & Conn",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3828500"
+      }
+    ],
+    "id_igdb": "361654",
+    "cover": "coaalh",
+    "artwork": [
+      "ar4127"
+    ],
+    "url": "deck-and-conn"
+  },
+  {
+    "id": "1549993646638628938",
+    "name": "Fangstorm",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4418500"
+      }
+    ],
+    "id_igdb": "397520",
+    "cover": "cocvxk",
+    "artwork": [
+      "ar5os4"
+    ],
+    "url": "fangstorm"
+  },
+  {
+    "id": "1549993653680734209",
+    "name": "Moon Garden",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4319660"
+      }
+    ],
+    "id_igdb": "406606",
+    "cover": "coc8yl",
+    "artwork": [
+      "ar6cnl"
+    ],
+    "url": "moon-garden"
+  },
+  {
+    "id": "1549993663415713942",
+    "name": "Adventure Land: The Code MMORPG",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "777150"
+      }
+    ],
+    "id_igdb": "113728",
+    "cover": "co56yd",
+    "artwork": [
+      "ar1qjn"
+    ],
+    "url": "adventure-land-the-code-mmorpg"
+  },
+  {
+    "id": "1549993672811094118",
+    "name": "Grandma Left Me A Building",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4599880"
+      }
+    ],
+    "id_igdb": "410584",
+    "cover": "cocja7",
+    "artwork": [
+      "ar6aax"
+    ],
+    "url": "grandma-left-me-a-building"
+  },
+  {
+    "id": "1549993681162080277",
+    "name": "Bookstore Incremental",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4664470"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1549993696261447680",
+    "name": "GRIDLANDS",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4541920"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1549993711167995924",
+    "name": "TheFlagship",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "997090"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1549993718952497222",
+    "name": "Lucky Coin Pusher",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3065710"
+      }
+    ],
+    "id_igdb": "379227",
+    "cover": "coawm7",
+    "artwork": [
+      "ar4qtg"
+    ],
+    "url": "lucky-coin-pusher"
+  },
+  {
+    "id": "1549993726720352337",
+    "name": "Tentacle Locker 2",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4071460"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1549993731275366511",
+    "name": "Graveyard Orbit",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4654120"
+      }
+    ],
+    "id_igdb": "407329",
+    "cover": "coca5o",
+    "artwork": [
+      "ar64ey"
+    ],
+    "url": "graveyard-orbit"
+  },
+  {
+    "id": "1549993738208677919",
+    "name": "Proto Boxing",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3389940"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1549993745951367169",
+    "name": "HoloTrials: Case Covered",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4252960"
+      }
+    ],
+    "id_igdb": "409620",
+    "cover": "cocdhg",
+    "artwork": [
+      "ar6kn8"
+    ],
+    "url": "holotrials-case-covered"
+  },
+  {
+    "id": "1549993754306543656",
+    "name": "Living on Plain Pasta",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4903800"
+      }
+    ],
+    "id_igdb": "409386",
+    "cover": "cocs6j",
+    "artwork": [
+      "ar6ien"
+    ],
+    "url": "living-on-plain-pasta"
+  },
+  {
+    "id": "1549993759050047528",
+    "name": "Sudokiller",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4918010"
+      }
+    ],
+    "id_igdb": "417211",
+    "cover": "cocvam",
+    "artwork": [
+      "ar6kw9"
+    ],
+    "url": "sudokiller"
+  },
+  {
+    "id": "1549993766360850492",
+    "name": "Stream Train",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4071650"
+      }
+    ],
+    "id_igdb": "410341",
+    "cover": "cocivn",
+    "artwork": [
+      "ar69xf"
+    ],
+    "url": "stream-train--1"
+  },
+  {
+    "id": "1549993772597903361",
+    "name": "Can I Come In?",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4969200"
+      }
+    ],
+    "id_igdb": "415368",
+    "cover": "cocs2w",
+    "artwork": [
+      "ar6i93"
+    ],
+    "url": "can-i-come-in"
+  },
+  {
+    "id": "1549993780063641621",
+    "name": "Ignite the Depths",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4910490"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1549993785847582762",
+    "name": "MineMergeMatic",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4976010"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1549993793078431805",
+    "name": "Ball Scratch Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4951590"
+      }
+    ],
+    "id_igdb": "414648",
+    "cover": "cocr4c",
+    "artwork": [
+      "ar6h8f"
+    ],
+    "url": "ball-scratch-simulator"
+  },
+  {
+    "id": "1549993807968210995",
+    "name": "Black Friday Janitor: Clean the Whole Mall",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3396010"
+      }
+    ],
+    "id_igdb": "413300",
+    "cover": "cocwc8",
+    "artwork": [
+      "ar6f12"
+    ],
+    "url": "black-friday-janitor-clean-the-whole-mall"
+  },
+  {
+    "id": "1549993814226243596",
+    "name": "Dead Extraction",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5006540"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1549993821176332340",
+    "name": "Last Buzz",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4927030"
+      }
+    ],
+    "id_igdb": "417440",
+    "cover": "cocw7q",
+    "artwork": [
+      "ar6l78"
+    ],
+    "url": "last-buzz"
+  },
+  {
+    "id": "1549993826163236865",
+    "name": "Tidewrack",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5035340"
+      }
+    ],
+    "id_igdb": "413673",
+    "cover": "cocoz3",
+    "artwork": [
+      "ar6jvk"
+    ],
+    "url": "tidewrack"
+  },
+  {
+    "id": "1549993848141512757",
+    "name": "For the Fatherland: Chronicle of Park Chung-hee",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5035220"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1549993855720361984",
+    "name": "I Buried Steve",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5031430"
+      }
+    ],
+    "id_igdb": "415445",
+    "cover": "cocs5e",
+    "artwork": [
+      "ar6ij9"
+    ],
+    "url": "i-buried-steve"
+  },
+  {
+    "id": "1549993863945523240",
+    "name": "War of Genesis: Idle Loot",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4891320"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1549993869708623883",
+    "name": "Nocthra",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4026590"
+      }
+    ],
+    "id_igdb": "414091",
+    "cover": "cocppj",
+    "artwork": [
+      "ar6g5u"
+    ],
+    "url": "nocthra"
+  },
+  {
+    "id": "1549993877388136508",
+    "name": "Plushy Store Tidy Up",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1470810"
+      }
+    ],
+    "id_igdb": "414042",
+    "cover": "cocqfn",
+    "artwork": [
+      "ar6g2b"
+    ],
+    "url": "plushy-store-tidy-up"
+  },
+  {
+    "id": "1549993883910283346",
+    "name": "Cardsharp",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5094940"
+      }
+    ],
+    "id_igdb": "417445",
+    "cover": "cocvxa",
+    "artwork": [
+      "ar6l7a"
+    ],
+    "url": "cardsharp"
+  },
+  {
+    "id": "1549993890877018142",
+    "name": "Dumb Ways to Build",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9N7CB46MF74V"
+      },
+      {
+        "distributor": "steam",
+        "id": "4412320"
+      }
+    ],
+    "id_igdb": "414526",
+    "cover": "cocqnw",
+    "artwork": [
+      "ar6h83",
+      "ar6h84",
+      "ar6h82"
+    ],
+    "url": "dumb-ways-to-build"
+  },
+  {
+    "id": "1549993901862158406",
+    "name": "Ghost in the SQL Data",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5072430"
+      }
+    ],
+    "id_igdb": "414822",
+    "cover": "cocrfi",
+    "artwork": [
+      "ar6hi3"
+    ],
+    "url": "ghost-in-the-sql-data"
+  },
+  {
+    "id": "1549993907184738366",
+    "name": "Tasty Chef",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5019920"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1549993912859492412",
+    "name": "GRAVHOUNDS",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2440760"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PBG4MTM3JJC"
+      }
+    ],
+    "id_igdb": "414958",
+    "cover": "cocrh5",
+    "artwork": [
+      "ar6hjy"
+    ],
+    "url": "gravhounds"
+  },
+  {
+    "id": "1549993920287612960",
+    "name": "Find The Needle",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5160800"
+      }
+    ],
+    "id_igdb": "415859",
+    "cover": "cocszx",
+    "artwork": [
+      "ar6jbb"
+    ],
+    "url": "find-the-needle"
+  },
+  {
+    "id": "1549993939354783785",
+    "name": "BLINDFOLD: Hide and Seek",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5058180"
+      }
+    ],
+    "id_igdb": "413172",
+    "cover": "coco6o",
+    "artwork": [
+      "ar6esl"
+    ],
+    "url": "blindfold-hide-and-seek"
+  },
+  {
+    "id": "1549993948544630834",
+    "name": "Chinese Street Food Legend",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3584920"
+      }
+    ],
+    "id_igdb": "393987",
+    "cover": "ar5iic",
+    "artwork": [
+      "ar5iif"
+    ],
+    "url": "chinese-street-food-legend"
+  },
+  {
+    "id": "1549993986360483991",
+    "name": "ArcheAge Chronicles",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3218230"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NZQ2G7FM8L3"
+      },
+      {
+        "distributor": "epic",
+        "id": "E175ABE7E4524652B8B7EBC3E95FCB78"
+      }
+    ],
+    "id_igdb": "317622",
+    "cover": "co8xgc",
+    "artwork": [
+      "ar35hh"
+    ],
+    "url": "archeage-chronicles"
+  },
+  {
+    "id": "1549993956777918465",
+    "name": "Hidden City: Hidden Object Adventure",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "88900",
+    "cover": "co21r6",
+    "artwork": [
+      "ar19ut"
+    ],
+    "url": "hidden-city-hidden-object-adventure"
   }
 ]
