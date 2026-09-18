@@ -246331,12 +246331,12 @@
     ],
     "executables": [
       {
-        "name": "rsdragonwilds/epiconlineservicesinstaller.exe",
+        "name": "win64/rsdragonwilds-win64-shipping.exe",
         "os": "win32",
         "is_launcher": false
       },
       {
-        "name": "win64/rsdragonwilds-win64-shipping.exe",
+        "name": "rsdragonwilds/epiconlineservicesinstaller.exe",
         "os": "win32",
         "is_launcher": false
       }
@@ -246348,11 +246348,15 @@
       },
       {
         "distributor": "xbox",
-        "id": "9P402RWR63H4"
+        "id": "9N72SM3MH0SR"
       },
       {
         "distributor": "epic",
         "id": "4F8976FB2ED8447D98F32A86D33E69AF"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P402RWR63H4"
       }
     ],
     "id_igdb": "337712",
@@ -373781,10 +373785,9 @@
   },
   {
     "id": "1442715029052063765",
-    "name": "Snwbrd: Freestyle Snowboarding",
+    "name": "SNWBRD: Freestyle Snowboarding",
     "aliases": [
-      "SNWBRD",
-      "SNWBRD: Freestyle Snowboarding"
+      "SNWBRD"
     ],
     "executables": [],
     "third_party_skus": [
@@ -399412,9 +399415,10 @@
   },
   {
     "id": "1442727833993613332",
-    "name": "Arcade Archives: EXERION",
+    "name": "Arcade Archives: Exerion",
     "aliases": [
-      "Arcade Archives EXERION"
+      "Arcade Archives EXERION",
+      "Arcade Archives: EXERION"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -427864,9 +427868,10 @@
   },
   {
     "id": "1442737663558811792",
-    "name": "Arcade Archives: THE ASTYANAX",
+    "name": "Arcade Archives: The Astyanax",
     "aliases": [
-      "Arcade Archives THE ASTYANAX"
+      "Arcade Archives THE ASTYANAX",
+      "Arcade Archives: THE ASTYANAX"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -527108,5 +527113,249 @@
       "ar19ut"
     ],
     "url": "hidden-city-hidden-object-adventure"
+  },
+  {
+    "id": "1550356042171285535",
+    "name": "POTENTIAL MAN",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4629600"
+      }
+    ],
+    "id_igdb": "411102",
+    "cover": "cock4k",
+    "artwork": [
+      "ar6bvq"
+    ],
+    "url": "potential-man"
+  },
+  {
+    "id": "1550356065244160110",
+    "name": "Emberville",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2295170"
+      }
+    ],
+    "id_igdb": "272981",
+    "cover": "cocjzw",
+    "artwork": [
+      "ar3762",
+      "ar2l9j"
+    ],
+    "url": "emberville"
+  },
+  {
+    "id": "1550356075986026597",
+    "name": "Los Pilarcitos",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4189740"
+      }
+    ],
+    "id_igdb": "398368",
+    "cover": "cobxh3",
+    "artwork": [
+      "ar5poi"
+    ],
+    "url": "los-pilarcitos"
+  },
+  {
+    "id": "1550356092331229314",
+    "name": "Fireboy & Watergirl And Friends",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4401160"
+      }
+    ],
+    "id_igdb": "402120",
+    "cover": "coc2zk",
+    "artwork": [
+      "ar5w8m"
+    ],
+    "url": "fireboy-and-watergirl-and-friends"
+  },
+  {
+    "id": "1550356113072062464",
+    "name": "Order Picker Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4798110"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1550356133263450142",
+    "name": "Team Principal: A Racing Manager",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4340600"
+      }
+    ],
+    "id_igdb": "396011",
+    "cover": "cobtw5",
+    "artwork": [
+      "ar5n0a"
+    ],
+    "url": "team-principal-a-racing-manager"
+  },
+  {
+    "id": "1550356150887780394",
+    "name": "NASCAR 26",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4883590"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PFKG4BSV6PN"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NM8K3RRTJTV"
+      }
+    ],
+    "id_igdb": "412990",
+    "cover": "cocno9",
+    "artwork": [
+      "ar6ehr"
+    ],
+    "url": "nascar-26"
+  },
+  {
+    "id": "1550356164615610410",
+    "name": "Abys Orbit",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5007590"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1550356180336115825",
+    "name": "Mall Tidy Up Frenemies",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5077080"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1550356200745345054",
+    "name": "Did You See That?",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4830110"
+      }
+    ],
+    "id_igdb": "416647",
+    "cover": "cocug4",
+    "artwork": [
+      "ar6jx7"
+    ],
+    "url": "did-you-see-that"
+  },
+  {
+    "id": "1550356288150569011",
+    "name": "Crystal Crisis",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "epic",
+        "id": "5493B8894A4B4F49984240F298A8EF06"
+      },
+      {
+        "distributor": "steam",
+        "id": "447700"
+      }
+    ],
+    "id_igdb": "101152",
+    "cover": "co26bw",
+    "artwork": [
+      "ar6lnr",
+      "aranx"
+    ],
+    "url": "crystal-crisis"
+  },
+  {
+    "id": "1550356251622379672",
+    "name": "Lord of Mysteries",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "373593",
+    "cover": "coat53",
+    "artwork": null,
+    "url": "lord-of-mysteries"
+  },
+  {
+    "id": "1550356272283385988",
+    "name": "The Choicer Voicer Game",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1550356300838477885",
+    "name": "Marvel's Wolverine",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "168667",
+    "cover": "ar5z89",
+    "artwork": [
+      "ar5z89",
+      "ar5z88",
+      "ar12pz",
+      "ar5gfp"
+    ],
+    "url": "marvels-wolverine"
   }
 ]
