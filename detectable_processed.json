@@ -50511,8 +50511,9 @@
   },
   {
     "id": "1124351982908493894",
-    "name": "MIR 4",
+    "name": "Mir 4",
     "aliases": [
+      "MIR 4",
       "MIR4"
     ],
     "executables": [
@@ -50524,12 +50525,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "1623660"
-      },
-      {
         "distributor": "google_play",
         "id": "com.wemade.mir4global"
+      },
+      {
+        "distributor": "steam",
+        "id": "1623660"
       }
     ],
     "id_igdb": "162235",
@@ -68990,10 +68991,9 @@
   },
   {
     "id": "1124353236564983808",
-    "name": "Counterside",
+    "name": "CounterSide",
     "aliases": [
-      "Counter:Side",
-      "CounterSide"
+      "Counter:Side"
     ],
     "executables": [
       {
@@ -124255,10 +124255,9 @@
   },
   {
     "id": "1124357342394335324",
-    "name": "Kill la Kill: If",
+    "name": "KILL la KILL: IF",
     "aliases": [
-      "KILL la KILL THE GAME: IF",
-      "KILL la KILL: IF"
+      "KILL la KILL THE GAME: IF"
     ],
     "executables": [
       {
@@ -173476,9 +173475,10 @@
   },
   {
     "id": "1129504328848265387",
-    "name": "FIVE NIGHTS AT FREDDY'S: HELP WANTED",
+    "name": "Five Nights at Freddy's: Help Wanted",
     "aliases": [
-      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED"
+      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED",
+      "FIVE NIGHTS AT FREDDY'S: HELP WANTED"
     ],
     "executables": [
       {
@@ -189615,6 +189615,11 @@
     "aliases": [],
     "executables": [
       {
+        "name": "dragonheir.exe",
+        "os": "win32",
+        "is_launcher": false
+      },
+      {
         "name": "dragonheir silent gods/dragonheir.exe",
         "os": "win32",
         "is_launcher": false
@@ -189622,12 +189627,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "2203070"
-      },
-      {
         "distributor": "google_play",
         "id": "com.sgra.dragon"
+      },
+      {
+        "distributor": "steam",
+        "id": "2203070"
       }
     ],
     "id_igdb": "226376",
@@ -238920,6 +238925,10 @@
       {
         "distributor": "steam",
         "id": "2689120"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N3VNL013JRF"
       }
     ],
     "id_igdb": "278415",
@@ -256881,9 +256890,9 @@
   },
   {
     "id": "1387990904194732154",
-    "name": "RAIDOU Remastered: The Mystery of the Soulless Army",
+    "name": "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY",
     "aliases": [
-      "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY"
+      "RAIDOU Remastered: The Mystery of the Soulless Army"
     ],
     "executables": [
       {
@@ -256898,12 +256907,12 @@
         "id": "9P284W1H02KW"
       },
       {
-        "distributor": "xbox",
-        "id": "9NB58STJ848G"
-      },
-      {
         "distributor": "steam",
         "id": "2288350"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NB58STJ848G"
       },
       {
         "distributor": "xbox",
@@ -303442,6 +303451,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9PHV0S2QJ318"
+      },
+      {
         "distributor": "steam",
         "id": "3017730"
       }
@@ -325541,8 +325554,9 @@
   },
   {
     "id": "1440130398813159515",
-    "name": "THE JOY OF CREATION",
+    "name": "The Joy of Creation",
     "aliases": [
+      "THE JOY OF CREATION",
       "TJOC"
     ],
     "executables": [],
@@ -344368,9 +344382,8 @@
   },
   {
     "id": "1440141099212738610",
-    "name": "Hackmud",
+    "name": "hackmud",
     "aliases": [
-      "hackmud",
       "ｈａｃｋｍｕｄ"
     ],
     "executables": [],
@@ -367369,9 +367382,10 @@
   },
   {
     "id": "1442713050993135749",
-    "name": "Arcade Archives: MAZINGER Z",
+    "name": "Arcade Archives: Mazinger Z",
     "aliases": [
-      "Arcade Archives MAZINGER Z"
+      "Arcade Archives MAZINGER Z",
+      "Arcade Archives: MAZINGER Z"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -420309,9 +420323,10 @@
   },
   {
     "id": "1442734322128916531",
-    "name": "Arcade Archives: NAUGHTY BOY",
+    "name": "Arcade Archives: Naughty Boy",
     "aliases": [
-      "Arcade Archives NAUGHTY BOY"
+      "Arcade Archives NAUGHTY BOY",
+      "Arcade Archives: NAUGHTY BOY"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -428621,6 +428636,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NZG1T895SR4"
+      },
       {
         "distributor": "steam",
         "id": "1645630"
@@ -516261,7 +516280,7 @@
   },
   {
     "id": "1530787095818403914",
-    "name": "Staffer Retro",
+    "name": "Staffer Retro : A Supernatural Mystery Quest",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -527357,5 +527376,274 @@
       "ar5gfp"
     ],
     "url": "marvels-wolverine"
+  },
+  {
+    "id": "1550718387997507614",
+    "name": "Wo Long 2: Wings of Ember",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NFW93G1GFXG"
+      },
+      {
+        "distributor": "steam",
+        "id": "4507990"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P9HQ6JQ7CVH"
+      }
+    ],
+    "id_igdb": "405070",
+    "cover": "coc74u",
+    "artwork": [
+      "ar6akh"
+    ],
+    "url": "wo-long-2-wings-of-ember"
+  },
+  {
+    "id": "1550718398017572955",
+    "name": "Nuclear Design Bureau",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4190240"
+      }
+    ],
+    "id_igdb": "418299",
+    "cover": null,
+    "artwork": null,
+    "url": "nuclear-design-bureau"
+  },
+  {
+    "id": "1550718410474782813",
+    "name": "FPV Battleground",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3273420"
+      }
+    ],
+    "id_igdb": "340243",
+    "cover": "coasqn",
+    "artwork": [
+      "ar4maa"
+    ],
+    "url": "fpv-battleground"
+  },
+  {
+    "id": "1550718426417332265",
+    "name": "Titanic: Honor and Glory",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4006670"
+      }
+    ],
+    "id_igdb": "57921",
+    "cover": "co68xk",
+    "artwork": [
+      "ar6hqa"
+    ],
+    "url": "titanic-honor-and-glory"
+  },
+  {
+    "id": "1550718432675242126",
+    "name": "Rollout Inline",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4464990"
+      }
+    ],
+    "id_igdb": "418263",
+    "cover": "cocwyp",
+    "artwork": [
+      "ar6lsk"
+    ],
+    "url": "rollout-inline"
+  },
+  {
+    "id": "1550718446478823455",
+    "name": "Tamara",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3628050"
+      }
+    ],
+    "id_igdb": "339483",
+    "cover": "co9re4",
+    "artwork": [
+      "ar3kgi"
+    ],
+    "url": "tamara"
+  },
+  {
+    "id": "1550718453072138261",
+    "name": "Tenebris: Terra Incognita",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2280060"
+      }
+    ],
+    "id_igdb": "235777",
+    "cover": "co8mli",
+    "artwork": [
+      "ar24tk"
+    ],
+    "url": "tenebris-terra-incognita"
+  },
+  {
+    "id": "1550718469148901557",
+    "name": "Rehaunted",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4538140"
+      }
+    ],
+    "id_igdb": "410924",
+    "cover": "cockxz",
+    "artwork": [
+      "ar6buu"
+    ],
+    "url": "rehaunted"
+  },
+  {
+    "id": "1550718478623838258",
+    "name": "Gun Shop: Tidy Up",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5050370"
+      }
+    ],
+    "id_igdb": "413780",
+    "cover": "cocp6b",
+    "artwork": [
+      "ar6fmq"
+    ],
+    "url": "gun-shop-tidy-up"
+  },
+  {
+    "id": "1550718486777565245",
+    "name": "DR Dominoes",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4404610"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1550718360524820480",
+    "name": "Mega Man X: Command Mission",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "416112",
+    "cover": "coctnx",
+    "artwork": [
+      "ar6lnz"
+    ],
+    "url": "mega-man-x-command-mission--1"
+  },
+  {
+    "id": "1550718404699103293",
+    "name": "BLACKWOOD",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "371847",
+    "cover": "coampe",
+    "artwork": [
+      "ar4dwt"
+    ],
+    "url": "blackwood"
+  },
+  {
+    "id": "1550718418469003324",
+    "name": "Sails",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "395506",
+    "cover": "cobt4w",
+    "artwork": null,
+    "url": "natsuiro-sail-trim-sail-2"
+  },
+  {
+    "id": "1550718421497417759",
+    "name": "Iron Bramble",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "401010",
+    "cover": "coc1id",
+    "artwork": [
+      "ar5ugw"
+    ],
+    "url": "iron-bramble"
+  },
+  {
+    "id": "1550718438060855378",
+    "name": "Stink Buddies",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1550718459011276861",
+    "name": "Taillights",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1550718463012638860",
+    "name": "Galumb",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "414573",
+    "cover": "cocqra",
+    "artwork": [
+      "ar6imb"
+    ],
+    "url": "galumb"
   }
 ]
