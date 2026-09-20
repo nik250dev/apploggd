@@ -78145,9 +78145,10 @@
   },
   {
     "id": "1124353934623002726",
-    "name": "CRISIS CORE: FINAL FANTASY VII - REUNION",
+    "name": "Crisis Core: Final Fantasy VII - Reunion",
     "aliases": [
-      "CRISIS CORE -FINAL FANTASY VII- REUNION"
+      "CRISIS CORE -FINAL FANTASY VII- REUNION",
+      "CRISIS CORE: FINAL FANTASY VII - REUNION"
     ],
     "executables": [
       {
@@ -78158,16 +78159,16 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "1608070"
-      },
-      {
         "distributor": "xbox",
         "id": "9PCWV3FWJZ18"
       },
       {
         "distributor": "xbox",
         "id": "9P6J9NFKGJ68"
+      },
+      {
+        "distributor": "steam",
+        "id": "1608070"
       }
     ],
     "id_igdb": "205201",
@@ -173475,10 +173476,9 @@
   },
   {
     "id": "1129504328848265387",
-    "name": "Five Nights at Freddy's: Help Wanted",
+    "name": "FIVE NIGHTS AT FREDDY'S: HELP WANTED",
     "aliases": [
-      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED",
-      "FIVE NIGHTS AT FREDDY'S: HELP WANTED"
+      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED"
     ],
     "executables": [
       {
@@ -191194,7 +191194,7 @@
   },
   {
     "id": "1174042035276230686",
-    "name": "DOOM II: Hell on Earth",
+    "name": "Doom II: Hell on Earth",
     "aliases": [
       "DOOM II",
       "DOOM II: Hell on Earth"
@@ -256890,9 +256890,9 @@
   },
   {
     "id": "1387990904194732154",
-    "name": "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY",
+    "name": "RAIDOU Remastered: The Mystery of the Soulless Army",
     "aliases": [
-      "RAIDOU Remastered: The Mystery of the Soulless Army"
+      "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY"
     ],
     "executables": [
       {
@@ -256902,10 +256902,6 @@
       }
     ],
     "third_party_skus": [
-      {
-        "distributor": "xbox",
-        "id": "9P284W1H02KW"
-      },
       {
         "distributor": "steam",
         "id": "2288350"
@@ -256917,6 +256913,10 @@
       {
         "distributor": "xbox",
         "id": "9NX3566L9NH9"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P284W1H02KW"
       }
     ],
     "id_igdb": "337024",
@@ -289342,10 +289342,9 @@
   },
   {
     "id": "1428182872589602867",
-    "name": "420Blaze It 2: Game of the Year",
+    "name": "420BLAZE IT 2: GAME OF THE YEAR",
     "aliases": [
-      "420 BLAZE IT 2: GAME OF THE YEAR",
-      "420BLAZE IT 2: GAME OF THE YEAR"
+      "420 BLAZE IT 2: GAME OF THE YEAR"
     ],
     "executables": [],
     "third_party_skus": [
@@ -325554,9 +325553,8 @@
   },
   {
     "id": "1440130398813159515",
-    "name": "The Joy of Creation",
+    "name": "THE JOY OF CREATION",
     "aliases": [
-      "THE JOY OF CREATION",
       "TJOC"
     ],
     "executables": [],
@@ -399429,10 +399427,9 @@
   },
   {
     "id": "1442727833993613332",
-    "name": "Arcade Archives: Exerion",
+    "name": "Arcade Archives: EXERION",
     "aliases": [
-      "Arcade Archives EXERION",
-      "Arcade Archives: EXERION"
+      "Arcade Archives EXERION"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -460869,7 +460866,7 @@
   },
   {
     "id": "1445982809792708628",
-    "name": "Aion 2",
+    "name": "AION 2",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -523287,7 +523284,9 @@
   {
     "id": "1544195406127304777",
     "name": "Metal Gear Solid Master Collection: Volume 2",
-    "aliases": [],
+    "aliases": [
+      "METAL GEAR SOLID MASTER COLLECTION: Vol. 2"
+    ],
     "executables": [],
     "third_party_skus": [
       {
