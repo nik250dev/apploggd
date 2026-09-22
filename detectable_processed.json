@@ -20152,10 +20152,9 @@
   },
   {
     "id": "451132630390538270",
-    "name": "Bless Global",
+    "name": "BLESS GLOBAL",
     "aliases": [
-      "BLESS",
-      "BLESS GLOBAL"
+      "BLESS"
     ],
     "executables": [
       {
@@ -68990,10 +68989,9 @@
   },
   {
     "id": "1124353236564983808",
-    "name": "Counterside",
+    "name": "CounterSide",
     "aliases": [
-      "Counter:Side",
-      "CounterSide"
+      "Counter:Side"
     ],
     "executables": [
       {
@@ -78145,9 +78143,10 @@
   },
   {
     "id": "1124353934623002726",
-    "name": "CRISIS CORE: FINAL FANTASY VII - REUNION",
+    "name": "Crisis Core: Final Fantasy VII - Reunion",
     "aliases": [
-      "CRISIS CORE -FINAL FANTASY VII- REUNION"
+      "CRISIS CORE -FINAL FANTASY VII- REUNION",
+      "CRISIS CORE: FINAL FANTASY VII - REUNION"
     ],
     "executables": [
       {
@@ -78158,12 +78157,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "1608070"
-      },
-      {
         "distributor": "xbox",
         "id": "9PCWV3FWJZ18"
+      },
+      {
+        "distributor": "steam",
+        "id": "1608070"
       },
       {
         "distributor": "xbox",
@@ -85684,6 +85683,10 @@
       {
         "distributor": "steam",
         "id": "1069660"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P1JPRRZ59GN"
       }
     ],
     "id_igdb": "125374",
@@ -98137,7 +98140,7 @@
   },
   {
     "id": "1124355428734742579",
-    "name": "Another Eden",
+    "name": "ANOTHER EDEN",
     "aliases": [],
     "executables": [
       {
@@ -124255,10 +124258,9 @@
   },
   {
     "id": "1124357342394335324",
-    "name": "Kill la Kill: If",
+    "name": "KILL la KILL: IF",
     "aliases": [
-      "KILL la KILL THE GAME: IF",
-      "KILL la KILL: IF"
+      "KILL la KILL THE GAME: IF"
     ],
     "executables": [
       {
@@ -178035,7 +178037,7 @@
   },
   {
     "id": "1129505216962773083",
-    "name": "Valkyrie Connect",
+    "name": "VALKYRIE CONNECT",
     "aliases": [
       "VALKYRIE CONNECT"
     ],
@@ -242840,12 +242842,16 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "2259310"
-      },
-      {
         "distributor": "xbox",
         "id": "9P1GTVHTSMT4"
+      },
+      {
+        "distributor": "epic",
+        "id": "56C37A9C634646B2B2477A6BC71D5952"
+      },
+      {
+        "distributor": "steam",
+        "id": "2259310"
       }
     ],
     "id_igdb": "329109",
@@ -273357,6 +273363,10 @@
       {
         "distributor": "steam",
         "id": "2444750"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PK0DZ68LGC0"
       }
     ],
     "id_igdb": "293572",
@@ -273880,6 +273890,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NM757FVZHMJ"
+      },
       {
         "distributor": "steam",
         "id": "2949320"
@@ -289342,10 +289356,9 @@
   },
   {
     "id": "1428182872589602867",
-    "name": "420Blaze It 2: Game of the Year",
+    "name": "420BLAZE IT 2: GAME OF THE YEAR",
     "aliases": [
-      "420 BLAZE IT 2: GAME OF THE YEAR",
-      "420BLAZE IT 2: GAME OF THE YEAR"
+      "420 BLAZE IT 2: GAME OF THE YEAR"
     ],
     "executables": [],
     "third_party_skus": [
@@ -314842,6 +314855,10 @@
       {
         "distributor": "xbox",
         "id": "C0WQ88P3LL9J"
+      },
+      {
+        "distributor": "steam",
+        "id": "375960"
       }
     ],
     "id_igdb": "11185",
@@ -344381,9 +344398,8 @@
   },
   {
     "id": "1440141099212738610",
-    "name": "Hackmud",
+    "name": "hackmud",
     "aliases": [
-      "hackmud",
       "ｈａｃｋｍｕｄ"
     ],
     "executables": [],
@@ -348376,12 +348392,16 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9NW7M71V29DT"
-      },
-      {
         "distributor": "steam",
         "id": "762840"
+      },
+      {
+        "distributor": "epic",
+        "id": "8D5E945D953F4C9E916EABC2BF61B8BF"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NW7M71V29DT"
       }
     ],
     "id_igdb": "132038",
@@ -367382,9 +367402,10 @@
   },
   {
     "id": "1442713050993135749",
-    "name": "Arcade Archives: MAZINGER Z",
+    "name": "Arcade Archives: Mazinger Z",
     "aliases": [
-      "Arcade Archives MAZINGER Z"
+      "Arcade Archives MAZINGER Z",
+      "Arcade Archives: MAZINGER Z"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -373798,10 +373819,9 @@
   },
   {
     "id": "1442715029052063765",
-    "name": "Snwbrd: Freestyle Snowboarding",
+    "name": "SNWBRD: Freestyle Snowboarding",
     "aliases": [
-      "SNWBRD",
-      "SNWBRD: Freestyle Snowboarding"
+      "SNWBRD"
     ],
     "executables": [],
     "third_party_skus": [
@@ -416474,6 +416494,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9NBPJ9VF6WQ9"
+      },
+      {
         "distributor": "steam",
         "id": "1094600"
       }
@@ -420322,9 +420346,10 @@
   },
   {
     "id": "1442734322128916531",
-    "name": "Arcade Archives: NAUGHTY BOY",
+    "name": "Arcade Archives: Naughty Boy",
     "aliases": [
-      "Arcade Archives NAUGHTY BOY"
+      "Arcade Archives NAUGHTY BOY",
+      "Arcade Archives: NAUGHTY BOY"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -465966,7 +465991,9 @@
   {
     "id": "1456486627106095124",
     "name": "Bodycam Onrecord",
-    "aliases": [],
+    "aliases": [
+      "FIRE STATE"
+    ],
     "executables": [],
     "third_party_skus": [
       {
@@ -471802,6 +471829,10 @@
       {
         "distributor": "epic",
         "id": "E4F9D4000EB44DBE86D98F2D8B923398"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NXSNQR7CM1Q"
       },
       {
         "distributor": "steam",
@@ -480376,6 +480407,18 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "77134"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PP9ZHFDSZ2S"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PG1RQ45461Z"
+      },
       {
         "distributor": "steam",
         "id": "3887090"
@@ -489876,6 +489919,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9P06THMR9Z2C"
+      },
       {
         "distributor": "xbox",
         "id": "9MSR1ZM3W4SD"
@@ -527578,7 +527625,12 @@
     "name": "BLACKWOOD",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3639070"
+      }
+    ],
     "id_igdb": "371847",
     "cover": "coampe",
     "artwork": [
@@ -527591,7 +527643,12 @@
     "name": "Sails",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3794620"
+      }
+    ],
     "id_igdb": "395506",
     "cover": "cobt4w",
     "artwork": null,
@@ -527602,7 +527659,12 @@
     "name": "Iron Bramble",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4328820"
+      }
+    ],
     "id_igdb": "401010",
     "cover": "coc1id",
     "artwork": [
@@ -527615,7 +527677,12 @@
     "name": "Stink Buddies",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4509370"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -527626,7 +527693,12 @@
     "name": "Taillights",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4835830"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -527644,5 +527716,61 @@
       "ar6imb"
     ],
     "url": "galumb"
+  },
+  {
+    "id": "1551691007387508878",
+    "name": "Gravebound",
+    "aliases": [],
+    "executables": [
+      {
+        "name": "gravebound.exe",
+        "os": "win32",
+        "is_launcher": false
+      }
+    ],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3613050"
+      }
+    ],
+    "id_igdb": "345195",
+    "cover": "coavnx",
+    "artwork": [
+      "ar3lwc"
+    ],
+    "url": "gravebound"
+  },
+  {
+    "id": "1551805479813128202",
+    "name": "Re:Store the Record Store",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4902600"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1551805505591185488",
+    "name": "King of Jade: Stone Tycoon",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4821420"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
   }
 ]
