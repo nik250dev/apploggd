@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- [Emulation] Support for RetroArch
+- [Emulation] Support for Game Boy, Game Boy Color, Game Boy Advance, DS, 3DS, NES, SNES, Nintendo 64, GameCube, Wii, Wii U, Mega Drive, Game Gear, Dreamcast, PlayStation, PS2, PS3, PSP, PS Vita, Xbox and Xbox 360
+
 ## 1.1.0 — 2026-09-10
 
 ### Added

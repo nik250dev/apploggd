@@ -1,13 +1,19 @@
+using BackloggdMirror.Models;
+
 namespace BackloggdMirror.Services;
 
 public interface IGameDetectionService
 {
     /// <summary>
-    /// Polled once per second. <paramref name="idIgdb"/> can be null even on a hit, which means the
-    /// game was detected but not identified — the UI then requires the user to pick it by hand
-    /// before the session can be saved.
+    /// Polled every three seconds while no session is open. Returns null when nothing is running.
     /// </summary>
-    bool IsGameRunning(out string gameName, out uint processId, out string? idIgdb);
+    DetectedGame? Detect();
+
+    /// <summary>
+    /// Polled every three seconds while a session is open. For an emulated game this is more than a
+    /// liveness check: the emulator stays open when the content is closed or swapped.
+    /// </summary>
+    bool IsStillRunning(DetectedGame game);
 
     /// <summary>Rebuilds the in-memory indexes after the games database is updated on disk.</summary>
     void ReloadDatabase();

@@ -8,19 +8,22 @@ using System.Runtime.InteropServices;
 using System.Text.Json;
 using Avalonia.Platform;
 using BackloggdMirror.Models;
+using BackloggdMirror.Services.Emulation;
 
 namespace BackloggdMirror.Services;
 
 /// <summary>
 /// Answers "is a game running right now?", polled every three seconds by the main ViewModel.
 ///
-/// Two tiers, in this order because they differ in confidence: matching the process executable
-/// against the local database is exact and yields the IGDB id for free, whereas the window
-/// heuristic only produces a window <em>title</em> that still has to be identified afterwards.
+/// Three tiers, in this order because they differ in confidence: matching the process executable
+/// against the local database is exact and yields the IGDB id for free; the emulator tier is exact
+/// too but has to work out which ROM is loaded before it can name a game; and the window heuristic
+/// only produces a window <em>title</em> that still has to be identified afterwards.
 /// </summary>
 public class GameDetectionService : IGameDetectionService
 {
     private readonly IGameDetectionStrategy _strategy;
+    private readonly EmulatorDetector? _emulatorDetector;
 
     /// <summary>
     /// Index for quick lookup: exe name (lowercase) → list of candidate matches.
@@ -39,6 +42,7 @@ public class GameDetectionService : IGameDetectionService
         {
             var igdbResolver = new IgdbResolverService(logger);
             _strategy = new WindowsGameDetector(igdbResolver);
+            _emulatorDetector = new EmulatorDetector(logger);
         }
         else
         {
@@ -60,16 +64,55 @@ public class GameDetectionService : IGameDetectionService
         _strategy.ReloadDatabase();
     }
 
-    public bool IsGameRunning(out string gameName, out uint processId, out string? idIgdb)
+    public DetectedGame? Detect()
     {
         // Priority 1: Executable name matching against the JSON database
-        if (TryDetectByExecutableName(out gameName, out processId, out idIgdb))
+        if (TryDetectByExecutableName(out string exeName, out uint exePid, out string? exeIdIgdb))
         {
-            return true;
+            return new DetectedGame(exeName, exePid, exeIdIgdb, DetectionSource.Executable);
+        }
+
+        // Priority 1.5: emulators, which run games the other two tiers cannot name
+        var emulated = _emulatorDetector?.Detect();
+        if (emulated != null)
+        {
+            return emulated;
         }
 
         // Priority 2: Window class / fullscreen analysis (existing strategy)
-        return _strategy.IsGameRunning(out gameName, out processId, out idIgdb);
+        if (_strategy.IsGameRunning(out string windowName, out uint windowPid, out string? windowIdIgdb))
+        {
+            return new DetectedGame(windowName, windowPid, windowIdIgdb, DetectionSource.Window);
+        }
+
+        return null;
+    }
+
+    public bool IsStillRunning(DetectedGame game)
+    {
+        if (game.Source == DetectionSource.Emulator)
+        {
+            return _emulatorDetector != null && _emulatorDetector.IsStillRunning(game);
+        }
+
+        return IsProcessAlive(game.ProcessId);
+    }
+
+    private static bool IsProcessAlive(uint processId)
+    {
+        if (processId == 0)
+            return false;
+
+        try
+        {
+            using var process = Process.GetProcessById((int)processId);
+            return !process.HasExited;
+        }
+        catch
+        {
+            // GetProcessById throws once the PID is gone, which is the normal way a session ends.
+            return false;
+        }
     }
 
     /// <summary>

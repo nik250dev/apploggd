@@ -5,6 +5,7 @@ using BackloggdMirror.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Threading;
 using System.Diagnostics;
@@ -459,13 +460,17 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public ObservableCollection<BackloggdMirror.Models.JournalEntry> LastPlayedGames { get; } = new();
 
-    internal string? _currentGameName;
-    internal uint _currentProcessId;
-    internal string? _currentIdIgdb;
+    internal DetectedGame? _currentGame;
     private readonly DispatcherTimer _pollingTimer;
     private readonly DispatcherTimer _displayTimer;
     private readonly Stopwatch _stopwatch;
 
+    /// <summary>
+    /// Serializes everything that touches the detection services. They keep unsynchronized caches
+    /// (exe and name indexes, resolved ids, per-PID emulator state) that used to be safe only
+    /// because every caller happened to be the UI thread; the scan now runs off it.
+    /// </summary>
+    private readonly SemaphoreSlim _detectionGate = new(1, 1);
 
     public MainWindowViewModel(IGameDetectionService gameDetectionService, IBackloggdAuthService authService, IBackloggdBrowserService browserService, SettingsService settingsService, ICredentialStorageService credentialStorageService, IAppLogger logger, GameDataService? gameDataService = null, AutostartService? autostartService = null)
     {
@@ -553,8 +558,18 @@ public partial class MainWindowViewModel : ViewModelBase
                     // the outcome of every other branch of this switch.
                     _logger?.Info("[MainWindowViewModel] Games database updated. Reloading the in-memory detection and lookup indexes.");
                     resultMessage = LocalizationService.Instance["Update_Success"];
-                    _gameDataService.ReloadDatabase();
-                    _gameDetectionService.ReloadDatabase();
+
+                    // The reload swaps the indexes a detection pass reads, so it waits for one to finish.
+                    await _detectionGate.WaitAsync();
+                    try
+                    {
+                        _gameDataService.ReloadDatabase();
+                        _gameDetectionService.ReloadDatabase();
+                    }
+                    finally
+                    {
+                        _detectionGate.Release();
+                    }
                     break;
                 case DetectableGamesUpdateResult.NotModified:
                     Console.WriteLine("[MainWindowViewModel] detectable_processed.json is already up to date. No reload needed.");
@@ -851,14 +866,12 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         if (IsGameRunning)
         {
-            _logger.Info($"[MainWindowViewModel] Update requested while timing '{_currentGameName}' ({PlayTime}). Discarding the session without registering it.");
+            _logger.Info($"[MainWindowViewModel] Update requested while timing '{_currentGame?.Name}' ({PlayTime}). Discarding the session without registering it.");
 
             _stopwatch.Reset();
             _displayTimer.Stop();
             IsGameRunning = false;
-            _currentGameName = null;
-            _currentProcessId = 0;
-            _currentIdIgdb = null;
+            _currentGame = null;
             GameName = string.Empty;
             PlayTime = "00:00:00";
             IsBackgroundImageVisible = false;
@@ -1117,20 +1130,28 @@ public partial class MainWindowViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void CheckGameStatus()
+    private async Task CheckGameStatus()
     {
-        if (_gameDetectionService.IsGameRunning(out string gameName, out uint processId, out string? idIgdb))
+        if (!await _detectionGate.WaitAsync(0)) return;
+
+        DetectedGame? detected;
+        try
         {
-            _currentGameName = gameName;
-            _currentProcessId = processId;
-            _currentIdIgdb = idIgdb;
-            GameStatus = $"Game Running: {gameName}";
+            detected = await Task.Run(() => _gameDetectionService.Detect());
+        }
+        finally
+        {
+            _detectionGate.Release();
+        }
+
+        if (detected != null)
+        {
+            _currentGame = detected;
+            GameStatus = $"Game Running: {detected.Name}";
         }
         else
         {
-            _currentGameName = null;
-            _currentProcessId = 0;
-            _currentIdIgdb = null;
+            _currentGame = null;
             GameStatus = "No Game Running";
         }
         RegisterGameCommand.NotifyCanExecuteChanged();
@@ -1138,7 +1159,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     private bool CanRegisterGame()
     {
-        return IsLoggedIn && !string.IsNullOrEmpty(_currentGameName);
+        return IsLoggedIn && !string.IsNullOrEmpty(_currentGame?.Name);
     }
 
     [RelayCommand]
@@ -1246,10 +1267,10 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand(CanExecute = nameof(CanRegisterGame))]
     private async Task RegisterGame()
     {
-        if (!string.IsNullOrEmpty(_currentGameName))
+        if (!string.IsNullOrEmpty(_currentGame?.Name))
         {
             // Manual registration if needed, though mostly handled by session flow now
-            // await _browserService.RegisterGame(_currentGameName, _authService.Cookies);
+            // await _browserService.RegisterGame(_currentGame.Name, _authService.Cookies);
         }
     }
 
@@ -1382,58 +1403,80 @@ public partial class MainWindowViewModel : ViewModelBase
     /// </summary>
     internal void OnPollingTick(object? sender, EventArgs e)
     {
+        _ = RunDetectionPassAsync();
+    }
+
+    /// <summary>
+    /// Only the scan leaves the UI thread; the await brings the decision back before anything
+    /// observable is touched, which is what keeps <see cref="StartNewGame"/>,
+    /// <see cref="StopRunningGame"/> and the timers on the thread they have always run on.
+    /// </summary>
+    private async Task RunDetectionPassAsync()
+    {
         if (IsGameDetectionPaused) return;
 
-        if (IsGameRunning)
-        {
-            bool isStillRunning = false;
-            if (_currentProcessId != 0)
-            {
-                try
-                {
-                    using (var process = Process.GetProcessById((int)_currentProcessId))
-                    {
-                        if (!process.HasExited)
-                        {
-                            isStillRunning = true;
-                        }
-                    }
-                }
-                catch
-                {
-                    // GetProcessById throws once the PID is gone, which is the normal way a session
-                    // ends: the game was closed.
-                }
-            }
+        // A slow pass (an API call on a bad connection) skips ticks instead of queueing them up.
+        if (!await _detectionGate.WaitAsync(0)) return;
 
-            if (!isStillRunning)
-            {
-                StopRunningGame();
-            }
-        }
-        else
+        try
         {
-            if (_gameDetectionService.IsGameRunning(out string detectedGame, out uint processId, out string? idIgdb))
+            if (IsGameRunning)
             {
-                StartNewGame(detectedGame, processId, idIgdb);
+                var game = _currentGame;
+                if (game == null)
+                {
+                    StopRunningGame();
+                    return;
+                }
+
+                bool stillRunning = await Task.Run(() => _gameDetectionService.IsStillRunning(game));
+
+                // The session may have been closed from the tray while the scan was running.
+                if (!IsGameRunning || !ReferenceEquals(_currentGame, game)) return;
+
+                if (!stillRunning)
+                {
+                    StopRunningGame();
+                }
             }
             else
             {
-                // Ensure text is correct when nothing is happening
-                string defaultText = IsGameDetectionPaused ? LocalizationService.Instance["Home_ResumeSearch"] : LocalizationService.Instance["Home_PauseSearch"];
-                if (TrayMenuActionText != defaultText)
+                var detected = await Task.Run(() => _gameDetectionService.Detect());
+
+                if (IsGameRunning || IsGameDetectionPaused) return;
+
+                if (detected != null)
                 {
-                    TrayMenuActionText = defaultText;
+                    StartNewGame(detected);
+                }
+                else
+                {
+                    // Ensure text is correct when nothing is happening
+                    string defaultText = IsGameDetectionPaused ? LocalizationService.Instance["Home_ResumeSearch"] : LocalizationService.Instance["Home_PauseSearch"];
+                    if (TrayMenuActionText != defaultText)
+                    {
+                        TrayMenuActionText = defaultText;
+                    }
                 }
             }
         }
+        catch (Exception ex)
+        {
+            // Nothing observes this task, so an escaping exception would take the process down.
+            _logger?.Error("[MainWindowViewModel] The detection pass failed. Skipping this tick.", ex);
+        }
+        finally
+        {
+            _detectionGate.Release();
+        }
     }
 
-    internal void StartNewGame(string gameName, uint processId, string? idIgdb = null)
+    internal void StartNewGame(DetectedGame game)
     {
-        _currentGameName = gameName;
-        _currentProcessId = processId;
-        _currentIdIgdb = idIgdb;
+        string gameName = game.Name;
+        string? idIgdb = game.IdIgdb;
+
+        _currentGame = game;
         GameName = gameName;
         IsGameRunning = true;
 
@@ -1510,17 +1553,15 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         // Snapshot everything before the reset below clears it, since the confirmation modal
         // outlives this method and still needs the values.
-        string? gameToRegister = _currentGameName;
-        string? currentIdIgdb = _currentIdIgdb;
+        string? gameToRegister = _currentGame?.Name;
+        string? currentIdIgdb = _currentGame?.IdIgdb;
         TimeSpan elapsed = _stopwatch.Elapsed;
         string finalPlayTime = PlayTime;
 
         _stopwatch.Stop();
         _displayTimer.Stop();
         IsGameRunning = false;
-        _currentGameName = null;
-        _currentProcessId = 0;
-        _currentIdIgdb = null;
+        _currentGame = null;
         GameName = string.Empty;
         UpdateTrayMenuText();
 
