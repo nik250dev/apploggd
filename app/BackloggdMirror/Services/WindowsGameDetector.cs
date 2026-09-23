@@ -292,8 +292,8 @@ internal class WindowsGameDetector : IGameDetectionStrategy
             "cmd", "powershell", "pwsh", "conhost", "csrss", "svchost", "RuntimeBroker",
             "LockApp", "Widgets", "Nvidia Share", "RadeonSoftware",
             
-            // Emulators handled by tier 1.5, whose menu would otherwise pass the fullscreen rule
-            "retroarch",
+            // Emulators handled by tier 1.5, whose menu or render window would otherwise pass the fullscreen rule
+            "retroarch", "dolphin",
 
             // Game Launchers (The launcher itself is not the game)
             "steam", "steamwebhelper", "EpicGamesLauncher", "EADesktop", "Origin",

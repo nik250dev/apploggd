@@ -26,11 +26,11 @@ internal static class RomNameCleaner
         @"^(.*?),\s+(The|A|An|El|La|Los|Las|Le|Les|Der|Die|Das|Il|Lo)(\s+-\s+|$)",
         RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
-    public static RomNames Clean(string archivePath, string? innerName, string? historyLabel = null)
+    public static RomNames Clean(string archivePath, string? innerName, string? label = null)
     {
         var names = new List<string>();
 
-        string? fromLabel = CleanOne(historyLabel);
+        string? fromLabel = CleanOne(label);
         if (fromLabel != null)
             AddVariants(names, fromLabel);
 

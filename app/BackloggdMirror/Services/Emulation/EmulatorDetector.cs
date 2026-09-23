@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using BackloggdMirror.Models;
+using BackloggdMirror.Services.Emulation.Dolphin;
 using BackloggdMirror.Services.Emulation.RetroArch;
 
 namespace BackloggdMirror.Services.Emulation;
@@ -22,7 +23,8 @@ internal sealed class EmulatorDetector
         var resolver = new EmulatedGameResolver(logger);
         _detectors = new IEmulatorDetector[]
         {
-            new RetroArchDetector(resolver, logger)
+            new RetroArchDetector(resolver, logger),
+            new DolphinDetector(resolver, logger)
         };
     }
 
