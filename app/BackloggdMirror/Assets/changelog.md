@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Fixed
+
+- The NVIDIA App overlay is no longer detected as a game
+
 ## 1.1.0 — 2026-09-10
 
 ### Added
