@@ -290,7 +290,7 @@ internal class WindowsGameDetector : IGameDetectionStrategy
             "explorer", "SearchApp", "TextInputHost", "SnippingTool", "Taskmgr",
             "SystemSettings", "ApplicationFrameHost", "Calculator", "Notepad", "notepad++",
             "cmd", "powershell", "pwsh", "conhost", "csrss", "svchost", "RuntimeBroker",
-            "LockApp", "Widgets", "Nvidia Share", "RadeonSoftware",
+            "LockApp", "Widgets", "Nvidia Share", "NVIDIA Overlay", "RadeonSoftware",
             
             // Game Launchers (The launcher itself is not the game)
             "steam", "steamwebhelper", "EpicGamesLauncher", "EADesktop", "Origin",
