@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using BackloggdMirror.Models;
+using BackloggdMirror.Services.Emulation.Cemu;
 using BackloggdMirror.Services.Emulation.Dolphin;
 using BackloggdMirror.Services.Emulation.RetroArch;
 
@@ -24,7 +25,8 @@ internal sealed class EmulatorDetector
         _detectors = new IEmulatorDetector[]
         {
             new RetroArchDetector(resolver, logger),
-            new DolphinDetector(resolver, logger)
+            new DolphinDetector(resolver, logger),
+            new CemuDetector(resolver, logger)
         };
     }
 

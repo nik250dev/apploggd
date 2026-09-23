@@ -86,6 +86,25 @@ internal sealed class EmulatedGameResolver
             }
         }
 
+        // Still an exact match once punctuation is gone, so it outranks any fuzzy one.
+        foreach (var platform in platforms)
+        {
+            if (!platform.HasLocalDatabase)
+                continue;
+
+            var index = EmulatedGamesDatabase.Instance.Get(platform.Key);
+
+            foreach (string name in names.Names)
+            {
+                string key = EmulatedGamesDatabase.LooseKey(IgdbResolverService.NormalizeTitle(name));
+                if (key.Length > 0 && index.LooseIndex.TryGetValue(key, out string? idIgdb))
+                {
+                    Log($"[EmulatedGameResolver] Local match on '{platform.Key}' ignoring punctuation: '{name}' (IGDB: {idIgdb}).");
+                    return idIgdb;
+                }
+            }
+        }
+
         if (bestId != null)
         {
             Log($"[EmulatedGameResolver] Fuzzy local match on '{bestPlatform}': '{names.Primary}' → '{bestName}' (length diff: {bestLengthDiff}, IGDB: {bestId}). A wrong game logged for this session would start here.");

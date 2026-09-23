@@ -29,6 +29,25 @@ public sealed class EmulatedGamesDatabase
     {
         public List<(string NormalizedName, string? IdIgdb)> NameIndex { get; } = new();
         public Dictionary<string, DetectableGame> IgdbIndex { get; } = new(StringComparer.OrdinalIgnoreCase);
+
+        /// <summary>Names reduced to <see cref="LooseKey"/>; the first game to claim a key keeps it.</summary>
+        public Dictionary<string, string> LooseIndex { get; } = new(StringComparer.Ordinal);
+    }
+
+    /// <summary>
+    /// Only letters and digits, lowered. Titles stored without their punctuation, like the Wii U's
+    /// "Family Party 30 Great Games Obstacle Arcade", then meet IGDB's "Family Party: 30 Great Games Obstacle Arcade".
+    /// </summary>
+    internal static string LooseKey(string name)
+    {
+        var key = new System.Text.StringBuilder(name.Length);
+        foreach (char c in name)
+        {
+            if (char.IsLetterOrDigit(c))
+                key.Append(char.ToLowerInvariant(c));
+        }
+
+        return key.ToString();
     }
 
     /// <summary>Loads a platform database on first use. Never throws: a failure means an empty index.</summary>
@@ -88,19 +107,13 @@ public sealed class EmulatedGamesDatabase
 
                 index.IgdbIndex.TryAdd(game.IdIgdb, game);
 
-                string normalizedName = IgdbResolverService.NormalizeTitle(game.Name);
-                if (!string.IsNullOrWhiteSpace(normalizedName))
-                    index.NameIndex.Add((normalizedName, game.IdIgdb));
+                AddName(index, game.Name, game.IdIgdb);
 
                 if (game.Aliases == null)
                     continue;
 
                 foreach (string alias in game.Aliases)
-                {
-                    string normalizedAlias = IgdbResolverService.NormalizeTitle(alias);
-                    if (!string.IsNullOrWhiteSpace(normalizedAlias))
-                        index.NameIndex.Add((normalizedAlias, game.IdIgdb));
-                }
+                    AddName(index, alias, game.IdIgdb);
             }
 
             Console.WriteLine($"[EmulatedGamesDatabase] Loaded '{key}' with {index.IgdbIndex.Count} games and {index.NameIndex.Count} searchable names.");
@@ -113,5 +126,18 @@ public sealed class EmulatedGamesDatabase
         }
 
         return index;
+    }
+
+    private static void AddName(PlatformIndex index, string name, string idIgdb)
+    {
+        string normalized = IgdbResolverService.NormalizeTitle(name);
+        if (string.IsNullOrWhiteSpace(normalized))
+            return;
+
+        index.NameIndex.Add((normalized, idIgdb));
+
+        string loose = LooseKey(normalized);
+        if (loose.Length > 0)
+            index.LooseIndex.TryAdd(loose, idIgdb);
     }
 }

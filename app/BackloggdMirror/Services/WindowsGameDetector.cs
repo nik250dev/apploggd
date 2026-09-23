@@ -293,7 +293,7 @@ internal class WindowsGameDetector : IGameDetectionStrategy
             "LockApp", "Widgets", "Nvidia Share", "RadeonSoftware",
             
             // Emulators handled by tier 1.5, whose menu or render window would otherwise pass the fullscreen rule
-            "retroarch", "dolphin",
+            "retroarch", "dolphin", "cemu",
 
             // Game Launchers (The launcher itself is not the game)
             "steam", "steamwebhelper", "EpicGamesLauncher", "EADesktop", "Origin",

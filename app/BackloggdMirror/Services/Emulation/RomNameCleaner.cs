@@ -26,13 +26,17 @@ internal static class RomNameCleaner
         @"^(.*?),\s+(The|A|An|El|La|Los|Las|Le|Les|Der|Die|Das|Il|Lo)(\s+-\s+|$)",
         RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
-    public static RomNames Clean(string archivePath, string? innerName, string? label = null)
+    /// <summary>The <paramref name="labels"/> go first, in order, and the file name after them.</summary>
+    public static RomNames Clean(string archivePath, string? innerName, params string?[] labels)
     {
         var names = new List<string>();
 
-        string? fromLabel = CleanOne(label);
-        if (fromLabel != null)
-            AddVariants(names, fromLabel);
+        foreach (string? label in labels)
+        {
+            string? fromLabel = CleanOne(label);
+            if (fromLabel != null)
+                AddVariants(names, fromLabel);
+        }
 
         string fileName = Path.GetFileNameWithoutExtension(innerName ?? archivePath) ?? string.Empty;
         string? fromFile = CleanOne(fileName);

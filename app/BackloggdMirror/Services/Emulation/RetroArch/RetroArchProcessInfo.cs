@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -87,30 +88,45 @@ internal sealed class RetroArchProcessInfo
         string? rootDir = string.IsNullOrEmpty(exePath) ? null : Path.GetDirectoryName(exePath);
         string appDataDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RetroArch");
 
-        string? configPath = null;
-        if (!string.IsNullOrEmpty(rootDir))
+        // The Microsoft Store build cannot write to its install folder, so its cfg, info and playlists
+        // live in the package's LocalState, which is also what "~" means there.
+        string? packageDir = QueryPackageDataDir(process.Id);
+        string? homeDir = packageDir ?? Environment.GetEnvironmentVariable("HOME");
+        string? dataDir = packageDir ?? rootDir;
+
+        var arguments = SplitArguments(QueryCommandLine(process.Id));
+
+        // RetroArch resolves a relative -c against its working directory, which frontends set to its folder.
+        string? configPath = FirstExisting(
+            OptionValues(arguments, 'c', "config").Select(value => ResolveArgument(value, rootDir, homeDir)).LastOrDefault(),
+            rootDir != null ? Path.Combine(rootDir, "retroarch.cfg") : null,
+            packageDir != null ? Path.Combine(packageDir, "retroarch.cfg") : null,
+            Path.Combine(appDataDir, "retroarch.cfg"));
+
+        var config = configPath != null ? RetroArchConfig.Parse(configPath) : new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+        // --appendconfig takes "a.cfg|b.cfg", each overriding the keys of the ones before.
+        foreach (string value in OptionValues(arguments, null, "appendconfig"))
         {
-            string portable = Path.Combine(rootDir, "retroarch.cfg");
-            if (File.Exists(portable))
-                configPath = portable;
+            foreach (string part in value.Split('|', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+            {
+                string? appendPath = ResolveArgument(part, rootDir, homeDir);
+                if (appendPath == null || !File.Exists(appendPath))
+                    continue;
+
+                foreach (var (key, appended) in RetroArchConfig.Parse(appendPath))
+                    config[key] = appended;
+            }
         }
-        if (configPath == null)
-        {
-            string installed = Path.Combine(appDataDir, "retroarch.cfg");
-            if (File.Exists(installed))
-                configPath = installed;
-        }
 
-        var config = configPath != null ? RetroArchConfig.Parse(configPath) : new Dictionary<string, string>();
+        string? infoDir = ResolvePath(config, "libretro_info_path", rootDir, homeDir)
+                          ?? (dataDir != null ? Path.Combine(dataDir, "info") : null);
 
-        string? infoDir = ResolvePath(config, "libretro_info_path", rootDir)
-                          ?? (rootDir != null ? Path.Combine(rootDir, "info") : null);
-
-        string? historyPath = ResolvePath(config, "content_history_path", rootDir);
+        string? historyPath = ResolvePath(config, "content_history_path", rootDir, homeDir);
         if (historyPath == null || !File.Exists(historyPath))
         {
-            string? defaultHistory = rootDir != null
-                ? Path.Combine(rootDir, "playlists", "builtin", "content_history.lpl")
+            string? defaultHistory = dataDir != null
+                ? Path.Combine(dataDir, "playlists", "builtin", "content_history.lpl")
                 : null;
 
             if (defaultHistory != null && File.Exists(defaultHistory))
@@ -159,7 +175,148 @@ internal sealed class RetroArchProcessInfo
         }
     }
 
+    /// <summary>With the same limited access as the exe path, so it works for an elevated RetroArch too.</summary>
+    private static string? QueryCommandLine(int processId)
+    {
+        IntPtr handle = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, false, processId);
+        if (handle == IntPtr.Zero)
+            return null;
+
+        IntPtr buffer = IntPtr.Zero;
+        try
+        {
+            NtQueryInformationProcess(handle, ProcessCommandLineInformation, IntPtr.Zero, 0, out int needed);
+            if (needed <= 0)
+                return null;
+
+            buffer = Marshal.AllocHGlobal(needed);
+            if (NtQueryInformationProcess(handle, ProcessCommandLineInformation, buffer, needed, out _) != 0)
+                return null;
+
+            // A UNICODE_STRING whose Buffer points just past it, inside the same allocation.
+            int length = (ushort)Marshal.ReadInt16(buffer);
+            IntPtr text = Marshal.ReadIntPtr(buffer, IntPtr.Size);
+            return text == IntPtr.Zero ? null : Marshal.PtrToStringUni(text, length / 2);
+        }
+        catch
+        {
+            return null;
+        }
+        finally
+        {
+            if (buffer != IntPtr.Zero)
+                Marshal.FreeHGlobal(buffer);
+            CloseHandle(handle);
+        }
+    }
+
+    /// <summary>The LocalState of the package, or null for any RetroArch not installed from the Microsoft Store.</summary>
+    private static string? QueryPackageDataDir(int processId)
+    {
+        IntPtr handle = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, false, processId);
+        if (handle == IntPtr.Zero)
+            return null;
+
+        try
+        {
+            var name = new StringBuilder(256);
+            uint length = (uint)name.Capacity;
+            if (GetPackageFamilyName(handle, ref length, name) != 0)
+                return null;
+
+            string localState = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Packages", name.ToString(), "LocalState");
+            return Directory.Exists(localState) ? localState : null;
+        }
+        catch
+        {
+            return null;
+        }
+        finally
+        {
+            CloseHandle(handle);
+        }
+    }
+
+    internal static IReadOnlyList<string> SplitArguments(string? commandLine)
+    {
+        if (string.IsNullOrWhiteSpace(commandLine))
+            return Array.Empty<string>();
+
+        IntPtr argv = CommandLineToArgvW(commandLine, out int count);
+        if (argv == IntPtr.Zero)
+            return Array.Empty<string>();
+
+        try
+        {
+            var arguments = new string[count];
+            for (int i = 0; i < count; i++)
+                arguments[i] = Marshal.PtrToStringUni(Marshal.ReadIntPtr(argv, i * IntPtr.Size)) ?? string.Empty;
+            return arguments;
+        }
+        finally
+        {
+            LocalFree(argv);
+        }
+    }
+
+    /// <summary>The values of an option in the forms getopt_long accepts: "-c x", "-cx", "--config x" and "--config=x".</summary>
+    internal static IEnumerable<string> OptionValues(IReadOnlyList<string> arguments, char? shortName, string longName)
+    {
+        string longForm = "--" + longName;
+        string? shortForm = shortName != null ? "-" + shortName : null;
+
+        for (int i = 1; i < arguments.Count; i++)
+        {
+            string argument = arguments[i];
+
+            if (argument == "--")
+                yield break;
+
+            if (argument == longForm || argument == shortForm)
+            {
+                if (i + 1 < arguments.Count)
+                    yield return arguments[++i];
+            }
+            else if (argument.StartsWith(longForm + "=", StringComparison.Ordinal))
+            {
+                yield return argument[(longForm.Length + 1)..];
+            }
+            else if (shortForm != null && argument.Length > 2 && argument.StartsWith(shortForm, StringComparison.Ordinal))
+            {
+                yield return argument[2..];
+            }
+        }
+    }
+
+    private static string? ResolveArgument(string value, string? rootDir, string? homeDir)
+    {
+        string? path = RetroArchConfig.ResolveRelative(value, rootDir, homeDir);
+        if (path == null || Path.IsPathRooted(path))
+            return path;
+
+        return rootDir != null ? Path.Combine(rootDir, path) : null;
+    }
+
+    private static string? FirstExisting(params string?[] paths)
+    {
+        return paths.FirstOrDefault(path => !string.IsNullOrEmpty(path) && File.Exists(path));
+    }
+
     private const uint PROCESS_QUERY_LIMITED_INFORMATION = 0x1000;
+    private const int ProcessCommandLineInformation = 60;
+
+    [DllImport("ntdll.dll")]
+    private static extern int NtQueryInformationProcess(IntPtr handle, int infoClass, IntPtr buffer, int length, out int returnLength);
+
+    [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
+    private static extern int GetPackageFamilyName(IntPtr handle, ref uint length, StringBuilder familyName);
+
+    [DllImport("shell32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+    private static extern IntPtr CommandLineToArgvW(string commandLine, out int count);
+
+    [DllImport("kernel32.dll")]
+    private static extern IntPtr LocalFree(IntPtr memory);
 
     [DllImport("kernel32.dll", SetLastError = true)]
     private static extern IntPtr OpenProcess(uint desiredAccess, bool inheritHandle, int processId);
@@ -172,12 +329,12 @@ internal sealed class RetroArchProcessInfo
     [return: MarshalAs(UnmanagedType.Bool)]
     private static extern bool QueryFullProcessImageName(IntPtr handle, uint flags, StringBuilder buffer, ref uint size);
 
-    private static string? ResolvePath(Dictionary<string, string> config, string key, string? rootDir)
+    private static string? ResolvePath(Dictionary<string, string> config, string key, string? rootDir, string? homeDir)
     {
         if (!config.TryGetValue(key, out string? value) || string.IsNullOrWhiteSpace(value))
             return null;
 
-        return RetroArchConfig.ResolveRelative(value, rootDir);
+        return RetroArchConfig.ResolveRelative(value, rootDir, homeDir);
     }
 }
 
@@ -215,22 +372,23 @@ internal static class RetroArchConfig
         return values;
     }
 
-    /// <summary>Expands RetroArch's ":\" prefix, which means "relative to the folder of the exe".</summary>
-    public static string? ResolveRelative(string value, string? rootDir)
+    /// <summary>
+    /// Expands RetroArch's prefixes: ":\" is the folder of the exe and "~\" the home folder, which is
+    /// the package's LocalState for the Microsoft Store build and %HOME% otherwise.
+    /// </summary>
+    public static string? ResolveRelative(string value, string? rootDir, string? homeDir = null)
     {
         if (string.IsNullOrWhiteSpace(value))
             return null;
 
-        if (value.StartsWith(":\\", StringComparison.Ordinal) || value.StartsWith(":/", StringComparison.Ordinal))
+        foreach (var (prefix, dir) in new[] { (':', rootDir), ('~', homeDir) })
         {
-            if (string.IsNullOrEmpty(rootDir))
-                return null;
+            if (value.Length >= 2 && value[0] == prefix && (value[1] == '\\' || value[1] == '/'))
+                return string.IsNullOrEmpty(dir) ? null : Path.Combine(dir, value[2..].Replace('/', '\\'));
 
-            return Path.Combine(rootDir, value[2..].Replace('/', '\\'));
+            if (value.Length == 1 && value[0] == prefix)
+                return string.IsNullOrEmpty(dir) ? null : dir;
         }
-
-        if (value == ":")
-            return rootDir;
 
         return value;
     }

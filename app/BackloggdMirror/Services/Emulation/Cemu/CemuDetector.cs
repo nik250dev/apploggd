@@ -7,43 +7,40 @@ using System.Runtime.InteropServices;
 using System.Text;
 using BackloggdMirror.Models;
 
-namespace BackloggdMirror.Services.Emulation.Dolphin;
+namespace BackloggdMirror.Services.Emulation.Cemu;
 
 /// <summary>
-/// Dolphin's detector. A session is bound to the pair (PID, game ID): the file name says little,
-/// while the ID in the emulated RAM names the game and its console, and changes disc 2 of the same
-/// game into nothing. Opening and closing need the same reading twice, as with RetroArch.
+/// Cemu's detector. A session is bound to the pair (PID, title ID). The window title names the game
+/// but outlives it, and the emulated memory proves a game is loaded but not which, so each reading
+/// needs both. Opening and closing need the same reading twice, as with RetroArch.
 /// </summary>
-internal sealed class DolphinDetector : IEmulatorDetector
+internal sealed class CemuDetector : IEmulatorDetector
 {
-    private const string ProcessName = "dolphin";
+    private const string ProcessName = "cemu";
     private const int RequiredReadings = 2;
 
-    // GameTDB prefixes of GameCube discs (retail, demo, promotional, Game Boy Player).
-    private const string GameCubeIdPrefixes = "GDPU";
-
-    private static readonly HashSet<string> DiscExtensions = new(StringComparer.OrdinalIgnoreCase)
+    private static readonly HashSet<string> ImageExtensions = new(StringComparer.OrdinalIgnoreCase)
     {
-        ".iso", ".gcm", ".tgc", ".rvz", ".wia", ".gcz", ".wbfs", ".ciso", ".nfs", ".dol", ".elf", ".wad"
+        ".wud", ".wux", ".wua", ".wuhb", ".rpx", ".elf"
     };
 
     private sealed class PidState
     {
         public long MemoryBase;
-        public string? LastGameId;
+        public string? LastTitleId;
         public int SameCount;
         public int MissCount;
         public bool DegradedWarningLogged;
         public bool CostLogged;
     }
 
-    public string Name => "Dolphin";
+    public string Name => "Cemu";
 
     private readonly Dictionary<int, PidState> _states = new();
     private readonly EmulatedGameResolver _resolver;
     private readonly IAppLogger? _logger;
 
-    public DolphinDetector(EmulatedGameResolver resolver, IAppLogger? logger = null)
+    public CemuDetector(EmulatedGameResolver resolver, IAppLogger? logger = null)
     {
         _resolver = resolver;
         _logger = logger;
@@ -64,12 +61,12 @@ internal sealed class DolphinDetector : IEmulatorDetector
 
             foreach (var process in processes)
             {
-                var disc = ReadDisc(process.Id);
+                var title = ReadTitle(process.Id);
 
-                if (!Observe(process.Id, disc?.GameId) || disc == null)
+                if (!Observe(process.Id, title?.TitleId) || title == null)
                     continue;
 
-                return Identify(process, disc);
+                return Identify(process, title);
             }
         }
         finally
@@ -85,7 +82,7 @@ internal sealed class DolphinDetector : IEmulatorDetector
         try
         {
             using var process = Process.GetProcessById((int)game.ProcessId);
-            if (process.HasExited || !IsDolphin(process))
+            if (process.HasExited || !IsCemu(process))
                 return Closed(game);
         }
         catch
@@ -93,10 +90,10 @@ internal sealed class DolphinDetector : IEmulatorDetector
             return Closed(game);
         }
 
-        var disc = ReadDisc((int)game.ProcessId);
+        var title = ReadTitle((int)game.ProcessId);
         var state = StateFor((int)game.ProcessId);
 
-        if (disc != null && string.Equals(disc.GameId, game.ContentKey, StringComparison.Ordinal))
+        if (title != null && string.Equals(title.TitleId, game.ContentKey, StringComparison.Ordinal))
         {
             state.MissCount = 0;
             return true;
@@ -106,12 +103,12 @@ internal sealed class DolphinDetector : IEmulatorDetector
         if (state.MissCount < RequiredReadings)
             return true;
 
-        _logger?.Info($"[DolphinDetector] Game '{game.ContentKey}' is no longer running in Dolphin (PID {game.ProcessId}). Ending the session.");
+        _logger?.Info($"[CemuDetector] Title '{game.ContentKey}' is no longer running in Cemu (PID {game.ProcessId}). Ending the session.");
         return Closed(game);
     }
 
     /// <summary>Windows reuses PIDs, so a live PID is not on its own proof that it is still the emulator.</summary>
-    private static bool IsDolphin(Process process)
+    private static bool IsCemu(Process process)
     {
         try
         {
@@ -129,75 +126,54 @@ internal sealed class DolphinDetector : IEmulatorDetector
         return false;
     }
 
-    /// <summary>Null when Dolphin sits in its game list.</summary>
-    private DolphinDisc? ReadDisc(int processId)
+    /// <summary>Null when Cemu sits in its game list, is loading, or has stopped the game.</summary>
+    private CemuTitle? ReadTitle(int processId)
     {
         var state = StateFor(processId);
 
-        try
+        bool walked = state.MemoryBase == 0;
+        var stopwatch = Stopwatch.StartNew();
+        bool? loaded = CemuMemory.IsGameLoaded(processId, ref state.MemoryBase);
+
+        if (loaded != null && walked && !state.CostLogged)
         {
-            bool walked = state.MemoryBase == 0;
-            var stopwatch = Stopwatch.StartNew();
-            var disc = DolphinMemoryReader.Read(processId, ref state.MemoryBase);
-
-            if (disc != null && walked && !state.CostLogged)
-            {
-                state.CostLogged = true;
-                _logger?.Info($"[DolphinDetector] Found the emulated RAM of Dolphin (PID {processId}) in {stopwatch.ElapsedMilliseconds} ms.");
-            }
-
-            return disc;
+            state.CostLogged = true;
+            _logger?.Info($"[CemuDetector] Found the emulated memory of Cemu (PID {processId}) in {stopwatch.ElapsedMilliseconds} ms.");
         }
-        catch (DolphinAccessDeniedException ex)
+
+        if (loaded == false)
+            return null;
+
+        var title = CemuWindowTitles.Find(processId);
+
+        if (title != null && loaded == null && !state.DegradedWarningLogged)
         {
-            if (!state.DegradedWarningLogged)
-            {
-                state.DegradedWarningLogged = true;
-                _logger?.Warning($"[DolphinDetector] {ex.Message} Falling back to the window title, which only names the game while Dolphin's \"Show Active Title in Window Title\" setting is on.");
-            }
-
-            return DolphinWindowTitles.FindDisc(processId);
+            state.DegradedWarningLogged = true;
+            _logger?.Warning($"[CemuDetector] Could not find the emulated memory of Cemu (PID {processId}). Relying on the window title alone, which Cemu does not reset on \"Stop emulation\": the session only ends when Cemu closes or loads another game.");
         }
+
+        return title;
     }
 
-    private DetectedGame Identify(Process process, DolphinDisc disc)
+    private DetectedGame Identify(Process process, CemuTitle title)
     {
-        string? dolphinDir = Path.GetDirectoryName(QueryImagePath(process.Id) ?? string.Empty);
-        string? titleName = DolphinTitleDatabase.FindName(dolphinDir, disc.GameId);
-        string? discPath = titleName == null ? ProcessOpenFiles.FindFirst(process.Id, DiscExtensions) : null;
+        string? cemuDir = Path.GetDirectoryName(QueryImagePath(process.Id) ?? string.Empty);
+        var labels = CemuTitleNames.Find(cemuDir, title.TitleId, title.Name);
+        string? imagePath = ProcessOpenFiles.FindFirst(process.Id, ImageExtensions);
 
-        var names = RomNameCleaner.Clean(discPath ?? string.Empty, null, titleName);
+        var names = RomNameCleaner.Clean(imagePath ?? string.Empty, null, labels.ToArray());
         if (names.Names.Count == 0)
-            names = RomNameCleaner.Clean(disc.GameId, null);
+            names = RomNameCleaner.Clean(title.TitleId, null);
 
-        var platforms = PlatformsFor(disc);
+        var platforms = new[] { EmulatedPlatformResolver.ByKey("wiiu") }.OfType<EmulatedPlatform>().ToList();
         string? idIgdb = _resolver.Resolve(platforms, names);
-
-        string? platformKey = platforms.Count > 0 ? platforms[0].Key : null;
         string name = EmulatedGamesDatabase.Instance.FindByIgdbId(idIgdb)?.Name ?? names.Primary;
 
-        string platformLabel = string.Join(", ", platforms.Select(p => p.Key));
-        string source = titleName != null ? "title database" : discPath != null ? $"file '{discPath}'" : "game ID only";
-        Console.WriteLine($"[DolphinDetector] Game '{disc.GameId}' → '{name}' (platform: {platformLabel}, name from: {source}, IGDB: {idIgdb ?? "null"})");
-        _logger?.Info($"[DolphinDetector] Dolphin (PID {process.Id}) is running '{name}' with game ID '{disc.GameId}' (platform: {platformLabel}, name from: {source}, IGDB: {idIgdb ?? "null"}).");
+        string sources = $"names: {string.Join(" | ", names.Names)}, file: {imagePath ?? "none"}";
+        Console.WriteLine($"[CemuDetector] Title '{title.TitleId}' → '{name}' ({sources}, IGDB: {idIgdb ?? "null"})");
+        _logger?.Info($"[CemuDetector] Cemu (PID {process.Id}) is running '{name}' with title ID '{title.TitleId}' ({sources}, IGDB: {idIgdb ?? "null"}).");
 
-        return new DetectedGame(name, (uint)process.Id, idIgdb, DetectionSource.Emulator, disc.GameId, platformKey, Name);
-    }
-
-    /// <summary>From the header magic when the RAM was read; guessed from the ID prefix otherwise, keeping both.</summary>
-    private static IReadOnlyList<EmulatedPlatform> PlatformsFor(DolphinDisc disc)
-    {
-        var gameCube = EmulatedPlatformResolver.ByKey("ngc");
-        var wii = EmulatedPlatformResolver.ByKey("wii");
-
-        var ordered = disc.IsWii switch
-        {
-            true => new[] { wii },
-            false => new[] { gameCube },
-            null => GameCubeIdPrefixes.Contains(disc.GameId[0]) ? new[] { gameCube, wii } : new[] { wii, gameCube }
-        };
-
-        return ordered.OfType<EmulatedPlatform>().ToList();
+        return new DetectedGame(name, (uint)process.Id, idIgdb, DetectionSource.Emulator, title.TitleId, platforms.FirstOrDefault()?.Key, Name);
     }
 
     private PidState StateFor(int processId)
@@ -211,21 +187,21 @@ internal sealed class DolphinDetector : IEmulatorDetector
         return state;
     }
 
-    private bool Observe(int processId, string? gameId)
+    private bool Observe(int processId, string? titleId)
     {
         var state = StateFor(processId);
 
-        if (string.Equals(state.LastGameId, gameId, StringComparison.Ordinal))
+        if (string.Equals(state.LastTitleId, titleId, StringComparison.Ordinal))
         {
             state.SameCount++;
         }
         else
         {
-            state.LastGameId = gameId;
+            state.LastTitleId = titleId;
             state.SameCount = 1;
         }
 
-        return gameId != null && state.SameCount >= RequiredReadings;
+        return titleId != null && state.SameCount >= RequiredReadings;
     }
 
     private void PruneStates(Process[] processes)
@@ -277,7 +253,7 @@ internal sealed class DolphinDetector : IEmulatorDetector
         }
     }
 
-    /// <summary>PROCESS_QUERY_LIMITED_INFORMATION crosses integrity levels, so this works for an elevated Dolphin too.</summary>
+    /// <summary>PROCESS_QUERY_LIMITED_INFORMATION crosses integrity levels, so this works for an elevated Cemu too.</summary>
     private static string? QueryImagePath(int processId)
     {
         IntPtr handle = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, false, processId);

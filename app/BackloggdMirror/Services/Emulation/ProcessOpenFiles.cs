@@ -4,14 +4,14 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace BackloggdMirror.Services.Emulation.Dolphin;
+namespace BackloggdMirror.Services.Emulation;
 
 /// <summary>
-/// The disc image Dolphin has open, found among its file handles. Only a fallback for naming a
-/// game the title database does not know (hacks, homebrew): it walks every handle in the system,
-/// so it runs once per identification and never on the polling path.
+/// The game image an emulator has open, found among its file handles. Only a fallback for naming a
+/// game: it walks every handle in the system, so it runs once per identification and never on the
+/// polling path.
 /// </summary>
-internal static class DolphinOpenFiles
+internal static class ProcessOpenFiles
 {
     private const int SystemExtendedHandleInformation = 64;
     private const int STATUS_INFO_LENGTH_MISMATCH = unchecked((int)0xC0000004);
@@ -19,11 +19,6 @@ internal static class DolphinOpenFiles
     private const uint PROCESS_DUP_HANDLE = 0x0040;
     private const uint DUPLICATE_SAME_ACCESS = 0x2;
     private const uint FILE_TYPE_DISK = 0x1;
-
-    private static readonly HashSet<string> DiscExtensions = new(StringComparer.OrdinalIgnoreCase)
-    {
-        ".iso", ".gcm", ".tgc", ".rvz", ".wia", ".gcz", ".wbfs", ".ciso", ".nfs", ".dol", ".elf", ".wad"
-    };
 
     [DllImport("ntdll.dll")]
     private static extern int NtQuerySystemInformation(int infoClass, IntPtr buffer, int length, out int returnLength);
@@ -49,7 +44,8 @@ internal static class DolphinOpenFiles
     [return: MarshalAs(UnmanagedType.Bool)]
     private static extern bool CloseHandle(IntPtr handle);
 
-    public static string? FindDiscImage(int processId)
+    /// <summary>The first open file of <paramref name="processId"/> with one of <paramref name="extensions"/>.</summary>
+    public static string? FindFirst(int processId, IReadOnlySet<string> extensions)
     {
         IntPtr process = OpenProcess(PROCESS_DUP_HANDLE, false, processId);
         if (process == IntPtr.Zero)
@@ -85,7 +81,7 @@ internal static class DolphinOpenFiles
                         continue;
 
                     string? path = FinalPath(duplicate);
-                    if (path != null && DiscExtensions.Contains(Path.GetExtension(path)))
+                    if (path != null && extensions.Contains(Path.GetExtension(path)))
                         return path;
                 }
                 finally
