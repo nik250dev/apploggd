@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Added
+
+- [Emulation] Support for RetroArch, Dolphin, Cemu
+- [Emulation] Support for Game Boy, Game Boy Color, Game Boy Advance, DS, 3DS, NES, SNES, Nintendo 64, GameCube, Wii, Wii U, Mega Drive, Game Gear, Dreamcast, PlayStation, PS2, PS3, PSP, PS Vita, Xbox and Xbox 360
+
 ### Fixed
 
 - The NVIDIA App overlay is no longer detected as a game

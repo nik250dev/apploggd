@@ -33,8 +33,8 @@ internal class IgdbResolverService
 
     /// <summary>
     /// Resolved window titles → id_igdb. Keyed on the raw title, so no normalization is repeated.
-    /// Failures are cached as null on purpose: detection polls every second, and an unidentifiable
-    /// game would otherwise hit the API once per second for as long as it stays open.
+    /// Failures are cached as null on purpose: detection polls every three seconds, and an
+    /// unidentifiable game would otherwise hit the API on every tick for as long as it stays open.
     /// </summary>
     private readonly Dictionary<string, string?> _resolvedCache = new(StringComparer.OrdinalIgnoreCase);
 
@@ -62,7 +62,8 @@ internal class IgdbResolverService
     /// <summary>
     /// Resolves the IGDB id for a window title, or null if it cannot be identified.
     /// Synchronous by necessity: the caller is <c>IGameDetectionStrategy.IsGameRunning</c>, which is
-    /// itself synchronous. Safe because the whole detection pass runs off the UI thread.
+    /// itself synchronous. Safe because the whole detection pass runs off the UI thread, inside the
+    /// gate that serializes it against the database reload.
     /// </summary>
     public string? ResolveIdIgdb(string windowTitle)
     {
@@ -127,58 +128,21 @@ internal class IgdbResolverService
         if (string.IsNullOrWhiteSpace(normalizedInput))
             return null;
 
-        // Pass 1: Exact match (case-insensitive, already lowered)
-        foreach (var (normalizedName, idIgdb) in _nameIndex)
+        var (idIgdb, matchedName, exact, lengthDiff) = NameMatcher.FindBest(_nameIndex, normalizedInput);
+
+        if (idIgdb == null)
+            return null;
+
+        if (exact)
         {
-            if (normalizedName.Equals(normalizedInput, StringComparison.OrdinalIgnoreCase))
-            {
-                Console.WriteLine($"[IgdbResolverService] Exact local match: '{windowTitle}' → '{normalizedName}' (IGDB: {idIgdb ?? "null"})");
-                _logger?.Info($"[IgdbResolverService] Exact local match: '{windowTitle}' → '{normalizedName}' (IGDB: {idIgdb ?? "null"}).");
-                return idIgdb;
-            }
+            Console.WriteLine($"[IgdbResolverService] Exact local match: '{windowTitle}' → '{matchedName}' (IGDB: {idIgdb})");
+            _logger?.Info($"[IgdbResolverService] Exact local match: '{windowTitle}' → '{matchedName}' (IGDB: {idIgdb}).");
+            return idIgdb;
         }
 
-        // Pass 2: containment, which catches the common shapes an exact match misses — a title
-        // carrying an edition suffix, or a window naming the current level after the game.
-        // The closest length wins, since that is the candidate with the least unexplained text.
-        string? bestIdIgdb = null;
-        int bestLengthDiff = int.MaxValue;
-        string? bestMatchName = null;
-
-        foreach (var (normalizedName, idIgdb) in _nameIndex)
-        {
-            string nameLower = normalizedName.ToLowerInvariant();
-
-            bool inputContainsName = normalizedInput.Contains(nameLower);
-            bool nameContainsInput = nameLower.Contains(normalizedInput);
-
-            if (inputContainsName || nameContainsInput)
-            {
-                int lengthDiff = Math.Abs(normalizedInput.Length - nameLower.Length);
-                int maxLength = Math.Max(normalizedInput.Length, nameLower.Length);
-
-                // Cap the unexplained text at 30% of the longer string. Without it, a short name
-                // like "Rust" would match any title that merely contains it.
-                if (maxLength > 0 && (double)lengthDiff / maxLength <= 0.30)
-                {
-                    if (lengthDiff < bestLengthDiff)
-                    {
-                        bestLengthDiff = lengthDiff;
-                        bestIdIgdb = idIgdb;
-                        bestMatchName = normalizedName;
-                    }
-                }
-            }
-        }
-
-        if (bestIdIgdb != null)
-        {
-            Console.WriteLine($"[IgdbResolverService] Fuzzy local match: '{windowTitle}' → '{bestMatchName}' (diff: {bestLengthDiff}, IGDB: {bestIdIgdb})");
-            _logger?.Info($"[IgdbResolverService] Fuzzy local match: '{windowTitle}' → '{bestMatchName}' (length diff: {bestLengthDiff}, IGDB: {bestIdIgdb}). A wrong game logged for this session would start here.");
-            return bestIdIgdb;
-        }
-
-        return null;
+        Console.WriteLine($"[IgdbResolverService] Fuzzy local match: '{windowTitle}' → '{matchedName}' (diff: {lengthDiff}, IGDB: {idIgdb})");
+        _logger?.Info($"[IgdbResolverService] Fuzzy local match: '{windowTitle}' → '{matchedName}' (length diff: {lengthDiff}, IGDB: {idIgdb}). A wrong game logged for this session would start here.");
+        return idIgdb;
     }
 
     /// <summary>
