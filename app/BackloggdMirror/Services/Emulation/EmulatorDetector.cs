@@ -16,7 +16,7 @@ internal sealed class EmulatorDetector
     private readonly IEmulatorDetector[] _detectors;
     private readonly IAppLogger? _logger;
 
-    public EmulatorDetector(IAppLogger? logger = null)
+    public EmulatorDetector(IAppLogger? logger = null, IDetectionBlacklist? blacklist = null)
     {
         _logger = logger;
         EmulatedGamesDatabase.Instance.Logger = logger;
@@ -24,9 +24,9 @@ internal sealed class EmulatorDetector
         var resolver = new EmulatedGameResolver(logger);
         _detectors = new IEmulatorDetector[]
         {
-            new RetroArchDetector(resolver, logger),
-            new DolphinDetector(resolver, logger),
-            new CemuDetector(resolver, logger)
+            new RetroArchDetector(resolver, logger, blacklist),
+            new DolphinDetector(resolver, logger, blacklist),
+            new CemuDetector(resolver, logger, blacklist)
         };
     }
 

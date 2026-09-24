@@ -37,7 +37,8 @@ public partial class App : Application
             var logger = new AppLogger();
             var authService = new BackloggdAuthService(logger);
             var browserService = new BackloggdBrowserService(logger);
-            var gameDetectionService = new GameDetectionService(logger);
+            var blacklistService = new BlacklistService(logger);
+            var gameDetectionService = new GameDetectionService(logger, blacklistService);
             var settingsService = new SettingsService(logger);
             var credentialStorageService = new CredentialStorageService(logger);
             var installService = new PlaywrightInstallService(logger);
@@ -90,7 +91,7 @@ public partial class App : Application
 
             loginVm.LoginSuccessful += () =>
             {
-                var mainWindowVm = new MainWindowViewModel(gameDetectionService, authService, browserService, settingsService, credentialStorageService, logger, autostartService: autostartService);
+                var mainWindowVm = new MainWindowViewModel(gameDetectionService, authService, browserService, settingsService, credentialStorageService, logger, autostartService: autostartService, blacklistService: blacklistService);
 
                 mainWindowVm.IsLoggedIn = true;
 

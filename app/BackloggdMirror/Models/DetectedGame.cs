@@ -8,7 +8,11 @@ public enum DetectionSource
     Window
 }
 
-/// <summary>A game detected as running. A null <see cref="IdIgdb"/> means detected but not identified.</summary>
+/// <summary>
+/// A game detected as running. A null <see cref="IdIgdb"/> means detected but not identified.
+/// <see cref="ExecutablePath"/> is read while the process is alive: once the session ends, its PID
+/// may already belong to something else.
+/// </summary>
 public sealed record DetectedGame(
     string Name,
     uint ProcessId,
@@ -16,4 +20,5 @@ public sealed record DetectedGame(
     DetectionSource Source,
     string? ContentKey = null,
     string? PlatformKey = null,
-    string? EmulatorName = null);
+    string? EmulatorName = null,
+    string? ExecutablePath = null);
