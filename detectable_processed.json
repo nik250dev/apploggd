@@ -172361,6 +172361,10 @@
       {
         "distributor": "steam",
         "id": "1104450"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.Giganticduck.Bombergrounds"
       }
     ],
     "id_igdb": "120852",
@@ -226875,7 +226879,7 @@
   },
   {
     "id": "1301606739875074068",
-    "name": "Soccer Manager 2026",
+    "name": "Soccer Manager 2027",
     "aliases": [],
     "executables": [
       {
@@ -239094,6 +239098,10 @@
       {
         "distributor": "steam",
         "id": "2756920"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NHQPX82SJR3"
       }
     ],
     "id_igdb": "310904",
@@ -283321,6 +283329,10 @@
       {
         "distributor": "steam",
         "id": "2365790"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N1519000H9H"
       }
     ],
     "id_igdb": "314389",
@@ -484239,8 +484251,10 @@
   },
   {
     "id": "1479320468090519593",
-    "name": "Crimson Desert",
-    "aliases": [],
+    "name": "Crimson Desert Enhanced",
+    "aliases": [
+      "Crimson Desert"
+    ],
     "executables": [],
     "third_party_skus": [
       {
@@ -484248,20 +484262,20 @@
         "id": "9NDMB2SMQ5Q7"
       },
       {
-        "distributor": "xbox",
-        "id": "9NG592G0W474"
-      },
-      {
         "distributor": "epic",
         "id": "302E7FC27B6C4F1987E500AA11B0C35A"
       },
       {
         "distributor": "xbox",
-        "id": "9PF7H9KVDBX3"
+        "id": "9NG592G0W474"
       },
       {
         "distributor": "steam",
         "id": "3321460"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PF7H9KVDBX3"
       }
     ],
     "id_igdb": "125633",
@@ -527155,8 +527169,10 @@
   },
   {
     "id": "1549993939354783785",
-    "name": "BLINDFOLD: Hide and Seek",
-    "aliases": [],
+    "name": "Blindfold: Hide and Seek",
+    "aliases": [
+      "BLINDFOLD: Sound Chase"
+    ],
     "executables": [],
     "third_party_skus": [
       {
@@ -527870,11 +527886,15 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9NSWRGZBQ2MC"
+        "id": "9PN8DJ8MRCC6"
       },
       {
         "distributor": "steam",
         "id": "1551980"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NSWRGZBQ2MC"
       },
       {
         "distributor": "xbox",
@@ -527895,6 +527915,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "epic",
+        "id": "8568810F0B3F4E09901EF44AB2DAFF4C"
+      },
       {
         "distributor": "steam",
         "id": "3333190"
@@ -528394,7 +528418,7 @@
   },
   {
     "id": "1552168588968984596",
-    "name": "Fireboy & Watergirl 3: The Ice Temple",
+    "name": "Fireboy and Watergirl in the Ice Temple",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -528662,5 +528686,379 @@
       "ar6laa"
     ],
     "url": "the-dandelion-endures"
+  },
+  {
+    "id": "1552427210013548626",
+    "name": "The Blood of Dawnwalker",
+    "aliases": [],
+    "executables": [
+      {
+        "name": "dawnwalker.exe",
+        "os": "win32",
+        "is_launcher": false
+      }
+    ],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3751260"
+      }
+    ],
+    "id_igdb": "282831",
+    "cover": "cocvi7",
+    "artwork": [
+      "ar6fap",
+      "ar6fae",
+      "ar6faf",
+      "ar5uwt",
+      "ar5uws",
+      "ar5uwu",
+      "ar5uwr",
+      "ar6jmb"
+    ],
+    "url": "the-blood-of-dawnwalker"
+  },
+  {
+    "id": "1552530437736243301",
+    "name": "HIPS N NOSES",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3574200"
+      }
+    ],
+    "id_igdb": "368826",
+    "cover": "coc3i8",
+    "artwork": [
+      "ar4931"
+    ],
+    "url": "hips-n-noses"
+  },
+  {
+    "id": "1552530449513844847",
+    "name": "Discipline Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4739040"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1552530468593737811",
+    "name": "Eldritch Escape",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3284450"
+      }
+    ],
+    "id_igdb": "330986",
+    "cover": "cocwue",
+    "artwork": [
+      "ar6lo3",
+      "ar6lo5"
+    ],
+    "url": "eldritch-escape"
+  },
+  {
+    "id": "1552530479570493571",
+    "name": "Culdcept Begins",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3322630"
+      }
+    ],
+    "id_igdb": "388451",
+    "cover": "cobfth",
+    "artwork": [
+      "ar58nc"
+    ],
+    "url": "culdcept-begins"
+  },
+  {
+    "id": "1552530496121212948",
+    "name": "Tomboy Adventure 2",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2896630"
+      }
+    ],
+    "id_igdb": "298096",
+    "cover": "co99i6",
+    "artwork": [
+      "ar2wqj"
+    ],
+    "url": "tomboy-adventure-2"
+  },
+  {
+    "id": "1552530535836819507",
+    "name": "SPLIT FPV: Drone Racing",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4348580"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1552530570553204747",
+    "name": "Ignitement",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3845350"
+      }
+    ],
+    "id_igdb": "407440",
+    "cover": "cocao4",
+    "artwork": [
+      "ar6jg8"
+    ],
+    "url": "ignitement"
+  },
+  {
+    "id": "1552530587401846844",
+    "name": "Fat Chance",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4891550"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1552530597912772619",
+    "name": "Old Market Restored",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4986890"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1552530604921200780",
+    "name": "Warpack",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5016130"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1552530619068846211",
+    "name": "Put Back Stuff",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5130150"
+      }
+    ],
+    "id_igdb": "415627",
+    "cover": "cocvf2",
+    "artwork": [
+      "ar6ioo"
+    ],
+    "url": "put-back-stuff"
+  },
+  {
+    "id": "1552530638261723206",
+    "name": "Screen Stocks",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4356780"
+      }
+    ],
+    "id_igdb": "416925",
+    "cover": "cocuuz",
+    "artwork": [
+      "ar6lkc"
+    ],
+    "url": "screen-stocks"
+  },
+  {
+    "id": "1552530654451736646",
+    "name": "DreadHaven: The Last Colony",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4244420"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1552530405343760395",
+    "name": "Silent Hill: Townfall",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "222342",
+    "cover": "ar5z7y",
+    "artwork": [
+      "ar5b7i",
+      "ar6gdw",
+      "ar5z7v",
+      "ar5z7x",
+      "ar5z7w",
+      "ar5z7y"
+    ],
+    "url": "silent-hill-townfall"
+  },
+  {
+    "id": "1552530411731685386",
+    "name": "Undefeated: Genesis",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "264303",
+    "cover": "co70lt",
+    "artwork": [
+      "ar2hrg"
+    ],
+    "url": "undefeated-genesis"
+  },
+  {
+    "id": "1552530429469261874",
+    "name": "Panzer Deck",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "371340",
+    "cover": "cocxjx",
+    "artwork": [
+      "ar4ct3"
+    ],
+    "url": "panzer-deck"
+  },
+  {
+    "id": "1552530465104203886",
+    "name": "Really Illegal Golf",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "419023",
+    "cover": "cocy4s",
+    "artwork": [
+      "ar6mk3"
+    ],
+    "url": "really-illegal-golf"
+  },
+  {
+    "id": "1552530582876065832",
+    "name": "Wavecrashers",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "391751",
+    "cover": "coc0wx",
+    "artwork": [
+      "ar5eu8"
+    ],
+    "url": "wavecrashers"
+  },
+  {
+    "id": "1552530646868697139",
+    "name": "The Hollowing",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "419039",
+    "cover": "cocy6h",
+    "artwork": null,
+    "url": "the-hollowing"
+  },
+  {
+    "id": "1552530660806361179",
+    "name": "Dressmaker",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "365465",
+    "cover": "cocxtp",
+    "artwork": [
+      "ar6b3n",
+      "ar6md5",
+      "ar6b3o"
+    ],
+    "url": "dressmaker--1"
+  },
+  {
+    "id": "1552530665281691700",
+    "name": "Yo-kai Watch 4",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "96246",
+    "cover": "co7l9s",
+    "artwork": null,
+    "url": "yo-kai-watch-4"
+  },
+  {
+    "id": "1552530678825099334",
+    "name": "Master Of Pottery",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "126808",
+    "cover": "co2hy2",
+    "artwork": [
+      "arfrn"
+    ],
+    "url": "master-of-pottery"
   }
 ]
