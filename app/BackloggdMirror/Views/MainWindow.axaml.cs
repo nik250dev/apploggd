@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform;
+using Avalonia.Platform.Storage;
 using Avalonia;
 using System;
 using Avalonia.Media;
@@ -10,6 +11,7 @@ using Avalonia.Markup.Xaml.MarkupExtensions;
 using BackloggdMirror.Services;
 using Avalonia.Threading;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace BackloggdMirror.Views;
 
@@ -168,6 +170,9 @@ public partial class MainWindow : Window
 
         vm.RequestCloseUpdateProgress -= CloseUpdateProgress;
         vm.RequestCloseUpdateProgress += CloseUpdateProgress;
+
+        vm.RequestPickExecutable -= PickExecutableAsync;
+        vm.RequestPickExecutable += PickExecutableAsync;
 
         vm.PropertyChanged -= OnViewModelPropertyChanged;
         vm.PropertyChanged += OnViewModelPropertyChanged;
@@ -452,6 +457,22 @@ public partial class MainWindow : Window
         _updateProgressWindow = null;
 
         _logger?.Info("[MainWindow] Update progress window closed without applying an update.");
+    }
+
+    private async Task<string?> PickExecutableAsync()
+    {
+        var loc = LocalizationService.Instance;
+        var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+        {
+            Title = loc["Settings_Blacklist_PickerTitle"],
+            AllowMultiple = false,
+            FileTypeFilter = new[]
+            {
+                new FilePickerFileType(loc["Settings_Blacklist_PickerFilter"]) { Patterns = new[] { "*.exe" } }
+            }
+        });
+
+        return files.Count > 0 ? files[0].TryGetLocalPath() : null;
     }
 
     /// <summary>

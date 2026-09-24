@@ -83,7 +83,7 @@ internal sealed class RetroArchProcessInfo
         }
 
         if (string.IsNullOrEmpty(exePath))
-            exePath = QueryImagePath(process.Id);
+            exePath = ProcessImagePath.TryGet(process.Id);
 
         string? rootDir = string.IsNullOrEmpty(exePath) ? null : Path.GetDirectoryName(exePath);
         string appDataDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RetroArch");
@@ -149,33 +149,7 @@ internal sealed class RetroArchProcessInfo
         return new RetroArchProcessInfo(process.Id, startTimeUtc, exePath, rootDir, configPath, infoDir, historyPath, historyEnabled);
     }
 
-    /// <summary>
-    /// The path of the exe without opening the process for reading, which is the only way to get it
-    /// when RetroArch runs elevated: PROCESS_QUERY_LIMITED_INFORMATION crosses integrity levels.
-    /// </summary>
-    private static string? QueryImagePath(int processId)
-    {
-        IntPtr handle = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, false, processId);
-        if (handle == IntPtr.Zero)
-            return null;
-
-        try
-        {
-            var buffer = new StringBuilder(1024);
-            uint size = (uint)buffer.Capacity;
-            return QueryFullProcessImageName(handle, 0, buffer, ref size) ? buffer.ToString() : null;
-        }
-        catch
-        {
-            return null;
-        }
-        finally
-        {
-            CloseHandle(handle);
-        }
-    }
-
-    /// <summary>With the same limited access as the exe path, so it works for an elevated RetroArch too.</summary>
+    /// <summary>With the same limited access as <see cref="ProcessImagePath"/>, so it works for an elevated RetroArch too.</summary>
     private static string? QueryCommandLine(int processId)
     {
         IntPtr handle = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, false, processId);
@@ -324,10 +298,6 @@ internal sealed class RetroArchProcessInfo
     [DllImport("kernel32.dll", SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
     private static extern bool CloseHandle(IntPtr handle);
-
-    [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "QueryFullProcessImageNameW")]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    private static extern bool QueryFullProcessImageName(IntPtr handle, uint flags, StringBuilder buffer, ref uint size);
 
     private static string? ResolvePath(Dictionary<string, string> config, string key, string? rootDir, string? homeDir)
     {

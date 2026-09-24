@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Avalonia.Threading;
 using System.Diagnostics;
 using System;
+using System.Linq;
 
 using BackloggdMirror.Models;
 
@@ -107,6 +108,7 @@ public partial class MainWindowViewModel : ViewModelBase
     private readonly IAppLogger _logger;
     private readonly GameDataService _gameDataService;
     private readonly AutostartService _autostartService;
+    private readonly BlacklistService _blacklistService;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsWaitingAnimationVisible))]
@@ -472,7 +474,7 @@ public partial class MainWindowViewModel : ViewModelBase
     /// </summary>
     private readonly SemaphoreSlim _detectionGate = new(1, 1);
 
-    public MainWindowViewModel(IGameDetectionService gameDetectionService, IBackloggdAuthService authService, IBackloggdBrowserService browserService, SettingsService settingsService, ICredentialStorageService credentialStorageService, IAppLogger logger, GameDataService? gameDataService = null, AutostartService? autostartService = null)
+    public MainWindowViewModel(IGameDetectionService gameDetectionService, IBackloggdAuthService authService, IBackloggdBrowserService browserService, SettingsService settingsService, ICredentialStorageService credentialStorageService, IAppLogger logger, GameDataService? gameDataService = null, AutostartService? autostartService = null, BlacklistService? blacklistService = null)
     {
         _authService = authService;
         _browserService = browserService;
@@ -482,7 +484,10 @@ public partial class MainWindowViewModel : ViewModelBase
         _logger = logger;
         _gameDataService = gameDataService ?? new GameDataService(logger);
         _autostartService = autostartService ?? new AutostartService(logger);
+        _blacklistService = blacklistService ?? new BlacklistService(logger);
         _changelogService = new ChangelogService(logger);
+
+        RefreshBlacklistEntries();
 
         _stopwatch = new Stopwatch();
 
@@ -867,14 +872,7 @@ public partial class MainWindowViewModel : ViewModelBase
         if (IsGameRunning)
         {
             _logger.Info($"[MainWindowViewModel] Update requested while timing '{_currentGame?.Name}' ({PlayTime}). Discarding the session without registering it.");
-
-            _stopwatch.Reset();
-            _displayTimer.Stop();
-            IsGameRunning = false;
-            _currentGame = null;
-            GameName = string.Empty;
-            PlayTime = "00:00:00";
-            IsBackgroundImageVisible = false;
+            DiscardRunningSession();
         }
         else
         {
@@ -1063,7 +1061,139 @@ public partial class MainWindowViewModel : ViewModelBase
         OnPropertyChanged(nameof(StartWithWindows));
         OnPropertyChanged(nameof(SelectedLanguageCode));
 
+        // Same trap as the settings: the file is gone, but detection keeps this instance.
+        _blacklistService.Reset();
+        RefreshBlacklistEntries();
+
         Logout();
+    }
+
+    #endregion
+
+    #region Blacklist
+
+    /// <summary>Asks the view for an executable to blacklist; null when the user cancels.</summary>
+    public event Func<Task<string?>>? RequestPickExecutable;
+
+    private static readonly TimeSpan UndoToastDuration = TimeSpan.FromSeconds(10);
+
+    /// <summary>Newest first: the entry just added is the one most likely to be looked for.</summary>
+    public ObservableCollection<BlacklistEntry> BlacklistEntries { get; } = new();
+
+    [ObservableProperty]
+    private bool _hasBlacklistEntries;
+
+    /// <summary>Switches the prompt next to the link: a ROM is a game, so "Not a game?" does not fit it.</summary>
+    [ObservableProperty]
+    private bool _isRunningGameEmulated;
+
+    [ObservableProperty]
+    private bool _isPendingGameEmulated;
+
+    // The detection result behind the modal, kept whole: the blacklist needs its path or content key.
+    internal DetectedGame? _pendingGame;
+    private string? _pendingGameDisplayName;
+
+    private void RefreshBlacklistEntries()
+    {
+        BlacklistEntries.Clear();
+        foreach (var entry in _blacklistService.Entries.OrderByDescending(e => e.AddedAt))
+        {
+            BlacklistEntries.Add(entry);
+        }
+
+        HasBlacklistEntries = BlacklistEntries.Count > 0;
+    }
+
+    /// <summary>Drops the session being timed without registering it or asking the user.</summary>
+    private void DiscardRunningSession()
+    {
+        _stopwatch.Reset();
+        _displayTimer.Stop();
+        IsGameRunning = false;
+        _currentGame = null;
+        GameName = string.Empty;
+        PlayTime = "00:00:00";
+        IsBackgroundImageVisible = false;
+        GameStatus = "No Game Running";
+        UpdateTrayMenuText();
+    }
+
+    [RelayCommand]
+    private void BlacklistRunningGame()
+    {
+        var game = _currentGame;
+        if (!IsGameRunning || game == null) return;
+
+        var entry = BlacklistService.ForDetectedGame(game, string.IsNullOrEmpty(GameName) ? game.Name : GameName);
+        _logger.Info($"[MainWindowViewModel] User action: blacklisted '{entry.DisplayName}' while timing it ({PlayTime}). The session is discarded.");
+
+        DiscardRunningSession();
+        AddToBlacklist(entry);
+    }
+
+    [RelayCommand]
+    private void BlacklistPendingGame()
+    {
+        var game = _pendingGame;
+        if (game == null) return;
+
+        var entry = BlacklistService.ForDetectedGame(game, _pendingGameDisplayName ?? game.Name);
+        _logger.Info($"[MainWindowViewModel] User action: blacklisted '{entry.DisplayName}' from the confirmation modal. The session is discarded.");
+
+        DiscardSession();
+        AddToBlacklist(entry);
+    }
+
+    [RelayCommand]
+    private async Task AddExecutableToBlacklist()
+    {
+        var pick = RequestPickExecutable;
+        if (pick == null) return;
+
+        string? path = await pick();
+        if (string.IsNullOrEmpty(path)) return;
+
+        var entry = BlacklistService.ForExecutable(path);
+
+        if (IsGameRunning && _currentGame is { } game && BlacklistService.Covers(entry, game))
+        {
+            _logger.Info($"[MainWindowViewModel] '{path}' was blacklisted while it was being timed. Discarding the session.");
+            DiscardRunningSession();
+        }
+
+        AddToBlacklist(entry);
+    }
+
+    [RelayCommand]
+    private void RemoveFromBlacklist(BlacklistEntry entry)
+    {
+        if (!_blacklistService.Remove(entry)) return;
+        RefreshBlacklistEntries();
+
+        var loc = LocalizationService.Instance;
+        ShowToast(string.Format(loc["Toast_BlacklistRemoved"], entry.DisplayName), ToastType.Success, UndoToastDuration, loc["Toast_Undo"], () =>
+        {
+            if (_blacklistService.Add(entry)) RefreshBlacklistEntries();
+        });
+    }
+
+    /// <summary>Undo only reverts the list: the time of a discarded session is not brought back.</summary>
+    private void AddToBlacklist(BlacklistEntry entry)
+    {
+        var loc = LocalizationService.Instance;
+
+        if (!_blacklistService.Add(entry))
+        {
+            ShowToast(string.Format(loc["Toast_BlacklistAlreadyListed"], entry.DisplayName), ToastType.Warning);
+            return;
+        }
+
+        RefreshBlacklistEntries();
+        ShowToast(string.Format(loc["Toast_BlacklistAdded"], entry.DisplayName), ToastType.Success, UndoToastDuration, loc["Toast_Undo"], () =>
+        {
+            if (_blacklistService.Remove(entry)) RefreshBlacklistEntries();
+        });
     }
 
     #endregion
@@ -1102,7 +1232,8 @@ public partial class MainWindowViewModel : ViewModelBase
                 // Attach handler for successful login to navigate back to MainWindow
                 loginVm.LoginSuccessful += () =>
                 {
-                    var mainWindowVm = new MainWindowViewModel(_gameDetectionService, newAuthService, newBrowserService, _settingsService, newCredentialStorageService, newLogger);
+                    // The blacklist is the instance detection reads; a new one would show a list that detection ignores.
+                    var mainWindowVm = new MainWindowViewModel(_gameDetectionService, newAuthService, newBrowserService, _settingsService, newCredentialStorageService, newLogger, blacklistService: _blacklistService);
 
                     mainWindowVm.IsLoggedIn = true;
 
@@ -1173,6 +1304,7 @@ public partial class MainWindowViewModel : ViewModelBase
         _pendingGameName = null;
         _pendingIdIgdb = null;
         _pendingGameUrl = null;
+        _pendingGame = null;
         _pendingSessionDuration = TimeSpan.Zero;
         IsBackgroundImageVisible = false;
         IsGameIdentified = true;
@@ -1221,6 +1353,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 _pendingGameName = null;
                 _pendingIdIgdb = null;
                 _pendingGameUrl = null;
+                _pendingGame = null;
                 _pendingSessionDuration = TimeSpan.Zero;
                 IsBackgroundImageVisible = false;
                 IsGameIdentified = true;
@@ -1441,9 +1574,13 @@ public partial class MainWindowViewModel : ViewModelBase
             }
             else
             {
+                long blacklistVersion = _blacklistService.Version;
                 var detected = await Task.Run(() => _gameDetectionService.Detect());
 
                 if (IsGameRunning || IsGameDetectionPaused) return;
+
+                // Scanned against a blacklist that has changed since, so it may be the game just blacklisted.
+                if (_blacklistService.Version != blacklistVersion) return;
 
                 if (detected != null)
                 {
@@ -1478,6 +1615,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
         _currentGame = game;
         GameName = gameName;
+        IsRunningGameEmulated = game.Source == DetectionSource.Emulator;
         IsGameRunning = true;
 
         _stopwatch.Restart();
@@ -1553,6 +1691,8 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         // Snapshot everything before the reset below clears it, since the confirmation modal
         // outlives this method and still needs the values.
+        var finishedGame = _currentGame;
+        string finishedDisplayName = GameName;
         string? gameToRegister = _currentGame?.Name;
         string? currentIdIgdb = _currentGame?.IdIgdb;
         TimeSpan elapsed = _stopwatch.Elapsed;
@@ -1584,6 +1724,9 @@ public partial class MainWindowViewModel : ViewModelBase
             _pendingGameName = gameToRegister;
             _pendingIdIgdb = currentIdIgdb;
             _pendingSessionDuration = elapsed;
+            _pendingGame = finishedGame;
+            _pendingGameDisplayName = finishedDisplayName;
+            IsPendingGameEmulated = finishedGame?.Source == DetectionSource.Emulator;
             SessionGameTitle = gameToRegister;
             SessionPlayTime = finalPlayTime;
 

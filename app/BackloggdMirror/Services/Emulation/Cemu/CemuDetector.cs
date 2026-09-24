@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
 using BackloggdMirror.Models;
 
 namespace BackloggdMirror.Services.Emulation.Cemu;
@@ -39,11 +37,13 @@ internal sealed class CemuDetector : IEmulatorDetector
     private readonly Dictionary<int, PidState> _states = new();
     private readonly EmulatedGameResolver _resolver;
     private readonly IAppLogger? _logger;
+    private readonly IDetectionBlacklist? _blacklist;
 
-    public CemuDetector(EmulatedGameResolver resolver, IAppLogger? logger = null)
+    public CemuDetector(EmulatedGameResolver resolver, IAppLogger? logger = null, IDetectionBlacklist? blacklist = null)
     {
         _resolver = resolver;
         _logger = logger;
+        _blacklist = blacklist;
     }
 
     public DetectedGame? Detect()
@@ -61,9 +61,15 @@ internal sealed class CemuDetector : IEmulatorDetector
 
             foreach (var process in processes)
             {
+                if (_blacklist?.IsApplicationBlocked(process.Id, ProcessName) == true)
+                    continue;
+
                 var title = ReadTitle(process.Id);
 
                 if (!Observe(process.Id, title?.TitleId) || title == null)
+                    continue;
+
+                if (_blacklist?.IsContentBlocked(Name, title.TitleId) == true)
                     continue;
 
                 return Identify(process, title);
@@ -157,7 +163,7 @@ internal sealed class CemuDetector : IEmulatorDetector
 
     private DetectedGame Identify(Process process, CemuTitle title)
     {
-        string? cemuDir = Path.GetDirectoryName(QueryImagePath(process.Id) ?? string.Empty);
+        string? cemuDir = Path.GetDirectoryName(ProcessImagePath.TryGet(process.Id) ?? string.Empty);
         var labels = CemuTitleNames.Find(cemuDir, title.TitleId, title.Name);
         string? imagePath = ProcessOpenFiles.FindFirst(process.Id, ImageExtensions);
 
@@ -252,40 +258,4 @@ internal sealed class CemuDetector : IEmulatorDetector
             try { process.Dispose(); } catch { }
         }
     }
-
-    /// <summary>PROCESS_QUERY_LIMITED_INFORMATION crosses integrity levels, so this works for an elevated Cemu too.</summary>
-    private static string? QueryImagePath(int processId)
-    {
-        IntPtr handle = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, false, processId);
-        if (handle == IntPtr.Zero)
-            return null;
-
-        try
-        {
-            var buffer = new StringBuilder(1024);
-            uint size = (uint)buffer.Capacity;
-            return QueryFullProcessImageName(handle, 0, buffer, ref size) ? buffer.ToString() : null;
-        }
-        catch
-        {
-            return null;
-        }
-        finally
-        {
-            CloseHandle(handle);
-        }
-    }
-
-    private const uint PROCESS_QUERY_LIMITED_INFORMATION = 0x1000;
-
-    [DllImport("kernel32.dll", SetLastError = true)]
-    private static extern IntPtr OpenProcess(uint desiredAccess, bool inheritHandle, int processId);
-
-    [DllImport("kernel32.dll", SetLastError = true)]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    private static extern bool CloseHandle(IntPtr handle);
-
-    [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "QueryFullProcessImageNameW")]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    private static extern bool QueryFullProcessImageName(IntPtr handle, uint flags, StringBuilder buffer, ref uint size);
 }

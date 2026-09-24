@@ -103,6 +103,12 @@
         <Style Selector="Button.link:pressed /template/ ContentPresenter">
             <Setter Property="Background" Value="Transparent"/>
         </Style>
+        <Style Selector="Button.link:disabled /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style Selector="Button.link:disabled TextBlock">
+            <Setter Property="Opacity" Value="0.5"/>
+        </Style>
 
         <!-- Circular Spinner Loader Animation. Look and animation are split on purpose: an
              Avalonia animation runs while its selector matches, on screen or not, so every
@@ -441,9 +447,10 @@
                                     <StackPanel.Effect>
                                         <DropShadowEffect Color="Black" BlurRadius="10" Opacity="1.0"/>
                                     </StackPanel.Effect>
-                                    <TextBlock Text="{Binding [Home_NotAGame], Source={x:Static services:LocalizationService.Instance}}" FontSize="13" Foreground="{DynamicResource TextSubtleBrush}" VerticalAlignment="Center"/>
-                                    <Button Classes="link">
-                                        <TextBlock Text="{Binding [Home_AddToBlacklist], Source={x:Static services:LocalizationService.Instance}}" FontSize="13"/>
+                                    <TextBlock Text="{Binding [Blacklist_NotAGame], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding !IsRunningGameEmulated}" FontSize="13" Foreground="{DynamicResource TextSubtleBrush}" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding [Blacklist_NotWanted], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding IsRunningGameEmulated}" FontSize="13" Foreground="{DynamicResource TextSubtleBrush}" VerticalAlignment="Center"/>
+                                    <Button Classes="link" Command="{Binding BlacklistRunningGameCommand}">
+                                        <TextBlock Text="{Binding [Blacklist_Add], Source={x:Static services:LocalizationService.Instance}}" FontSize="13"/>
                                     </Button>
                                 </StackPanel>
                             </StackPanel>
@@ -574,6 +581,24 @@
                             <Setter Property="Margin" Value="0,0,0,20"/>
                         </Style>
 
+                        <!-- Entry count next to a section heading. Same margins as TextBlock.h3 so both centre on one line. -->
+                        <Style Selector="Border.count-pill">
+                            <Setter Property="Background" Value="{DynamicResource PanelBackgroundBrush}"/>
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="Padding" Value="9,2"/>
+                            <Setter Property="Margin" Value="0,10,0,15"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+
+                        <Style Selector="Border.list-icon">
+                            <Setter Property="Width" Value="32"/>
+                            <Setter Property="Height" Value="32"/>
+                            <Setter Property="CornerRadius" Value="8"/>
+                            <Setter Property="Background" Value="{DynamicResource SurfaceDarkBrush}"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Margin" Value="0,0,12,0"/>
+                        </Style>
+
                         <!-- Primary action button for the update. Brand fill rather than outline so
                              it stands out against the other Settings buttons. -->
                         <Style Selector="Button.update-btn">
@@ -629,6 +654,88 @@
                                             </StackPanel>
                                             <ToggleSwitch Grid.Column="1" IsChecked="{Binding MinimizeToTray}" OnContent="" OffContent=""/>
                                         </Grid>
+                                    </StackPanel>
+                                </Border>
+
+                                <!-- Section: Blacklist. Rows sit inline with no scroll of their own: a
+                                     scroll viewer nested in the page's one is worse than a longer page. -->
+                                <StackPanel Orientation="Horizontal" Spacing="10">
+                                    <TextBlock Text="{Binding [Settings_Section_Blacklist], Source={x:Static services:LocalizationService.Instance}}" Classes="h3"/>
+                                    <Border Classes="count-pill" IsVisible="{Binding HasBlacklistEntries}">
+                                        <TextBlock Text="{Binding BlacklistEntries.Count}" FontSize="12" Foreground="{DynamicResource TextMutedBrush}"/>
+                                    </Border>
+                                </StackPanel>
+                                <Border Classes="setting-group">
+                                    <StackPanel Spacing="15">
+                                        <Grid ColumnDefinitions="*, Auto">
+                                            <StackPanel Spacing="2" Margin="0,0,15,0" VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding [Settings_Blacklist_Title], Source={x:Static services:LocalizationService.Instance}}" Classes="setting-label"/>
+                                                <TextBlock Text="{Binding [Settings_Blacklist_Desc], Source={x:Static services:LocalizationService.Instance}}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}" TextWrapping="Wrap"/>
+                                            </StackPanel>
+                                            <Button Grid.Column="1" Classes="subtle" VerticalAlignment="Center" Command="{Binding AddExecutableToBlacklistCommand}">
+                                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                                    <PathIcon Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Width="12" Height="12" VerticalAlignment="Center"/>
+                                                    <TextBlock Text="{Binding [Settings_Blacklist_AddExe], Source={x:Static services:LocalizationService.Instance}}" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                            </Button>
+                                        </Grid>
+
+                                        <!-- Empty state: says where the button is, since that is where entries come from. -->
+                                        <StackPanel Spacing="15" IsVisible="{Binding !HasBlacklistEntries}">
+                                            <Separator Background="{DynamicResource SeparatorBrush}" Height="1"/>
+                                            <StackPanel Spacing="4" HorizontalAlignment="Center" Margin="20,0,20,5">
+                                                <PathIcon Data="M12,2C17.5,2 22,6.5 22,12C22,17.5 17.5,22 12,22C6.5,22 2,17.5 2,12C2,6.5 6.5,2 12,2M12,4C10.1,4 8.4,4.6 7.1,5.7L18.3,16.9C19.3,15.5 20,13.8 20,12C20,7.6 16.4,4 12,4M16.9,18.3L5.7,7.1C4.6,8.4 4,10.1 4,12C4,16.4 7.6,20 12,20C13.9,20 15.6,19.4 16.9,18.3Z"
+                                                          Width="22" Height="22" Foreground="{DynamicResource IconDarkBrush}" HorizontalAlignment="Center" Margin="0,0,0,4"/>
+                                                <TextBlock Text="{Binding [Settings_Blacklist_EmptyTitle], Source={x:Static services:LocalizationService.Instance}}" FontSize="13" Foreground="{DynamicResource TextSecondaryBrush}" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="{Binding [Settings_Blacklist_EmptyHint], Source={x:Static services:LocalizationService.Instance}}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center"/>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <!-- Each row carries the separator above it, so the first one also divides it from the header. -->
+                                        <ItemsControl ItemsSource="{Binding BlacklistEntries}" IsVisible="{Binding HasBlacklistEntries}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <StackPanel Spacing="15"/>
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate x:DataType="models:BlacklistEntry">
+                                                    <StackPanel Spacing="15">
+                                                        <Separator Background="{DynamicResource SeparatorBrush}" Height="1"/>
+                                                        <Grid ColumnDefinitions="Auto, *, Auto">
+                                                            <Border Grid.Column="0" Classes="list-icon">
+                                                                <Panel>
+                                                                    <PathIcon IsVisible="{Binding IsApplication}"
+                                                                              Data="M19,4C20.11,4 21,4.9 21,6V18A2,2 0 0,1 19,20H5C3.89,20 3,19.1 3,18V6A2,2 0 0,1 5,4H19M19,18V8H5V18H19Z"
+                                                                              Width="16" Height="16" Foreground="{DynamicResource IconMediumBrush}"/>
+                                                                    <PathIcon IsVisible="{Binding IsEmulatedGame}"
+                                                                              Data="M7,6H17A6,6 0 0,1 23,12A6,6 0 0,1 17,18C15.22,18 13.63,17.23 12.53,16H11.47C10.37,17.23 8.78,18 7,18A6,6 0 0,1 1,12A6,6 0 0,1 7,6M6,9V11H4V13H6V15H8V13H10V11H8V9H6M15.5,12A1.5,1.5 0 0,0 14,13.5A1.5,1.5 0 0,0 15.5,15A1.5,1.5 0 0,0 17,13.5A1.5,1.5 0 0,0 15.5,12M18.5,9A1.5,1.5 0 0,0 17,10.5A1.5,1.5 0 0,0 18.5,12A1.5,1.5 0 0,0 20,10.5A1.5,1.5 0 0,0 18.5,9Z"
+                                                                              Width="18" Height="18" Foreground="{DynamicResource IconMediumBrush}"/>
+                                                                </Panel>
+                                                            </Border>
+
+                                                            <StackPanel Grid.Column="1" Spacing="2" VerticalAlignment="Center" Margin="0,0,15,0">
+                                                                <TextBlock Text="{Binding DisplayName}" Classes="setting-label" TextTrimming="CharacterEllipsis"/>
+                                                                <!-- Trimmed from the start: the end of the path (exe and its folders) is what tells two Game.exe apart. -->
+                                                                <TextBlock Text="{Binding ApplicationLabel}" IsVisible="{Binding IsApplication}"
+                                                                           FontSize="12" Foreground="{DynamicResource TextSubtleBrush}"
+                                                                           TextTrimming="LeadingCharacterEllipsis" ToolTip.Tip="{Binding Details}"/>
+                                                                <TextBlock IsVisible="{Binding IsEmulatedGame}" FontSize="12" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding Details}">
+                                                                    <Run Text="{Binding EmulatorName}" Foreground="{DynamicResource TextMutedBrush}"/>
+                                                                    <Run Text=" · " Foreground="{DynamicResource TextSubtleBrush}"/>
+                                                                    <Run Text="{Binding ContentLabel}" Foreground="{DynamicResource TextSubtleBrush}"/>
+                                                                </TextBlock>
+                                                            </StackPanel>
+
+                                                            <Button Grid.Column="2" Classes="subtle" VerticalAlignment="Center"
+                                                                    Content="{Binding [Settings_Blacklist_Remove], Source={x:Static services:LocalizationService.Instance}}"
+                                                                    Command="{Binding #Root.((vm:MainWindowViewModel)DataContext).RemoveFromBlacklistCommand}"
+                                                                    CommandParameter="{Binding}"/>
+                                                        </Grid>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
                                     </StackPanel>
                                 </Border>
 
@@ -1007,7 +1114,7 @@
             </Panel>
 
             <!-- Session Content -->
-            <Border Background="{DynamicResource AppBackgroundBrush}" CornerRadius="20" Width="400" Height="300" 
+            <Border Background="{DynamicResource AppBackgroundBrush}" CornerRadius="20" Width="400" Height="320" 
                     BoxShadow="0 0 50 0 #EA377A" BorderBrush="{DynamicResource BrandPrimaryBrush}" BorderThickness="1"
                     IsVisible="{Binding !IsGameSelectorVisible}">
                 <Grid RowDefinitions="*, Auto">
@@ -1118,6 +1225,15 @@
                                 <TextBlock Text="{Binding [Session_TotalTime], Source={x:Static services:LocalizationService.Instance}}" Foreground="{DynamicResource TextMutedBrush}" FontSize="14"/>
                                 <TextBlock Text="{Binding SessionPlayTime}" Foreground="{DynamicResource BrandPrimaryBrush}" FontWeight="Bold" FontSize="14"/>
                             </StackPanel>
+
+                            <!-- A WrapPanel so the link drops to its own line when the prompt leaves no room. -->
+                            <WrapPanel Margin="0,10,0,0">
+                                <TextBlock Text="{Binding [Blacklist_NotAGame], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding !IsPendingGameEmulated}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                <TextBlock Text="{Binding [Blacklist_NotWanted], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding IsPendingGameEmulated}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                <Button Classes="link" Command="{Binding BlacklistPendingGameCommand}" IsEnabled="{Binding AreButtonsEnabled}">
+                                    <TextBlock Text="{Binding [Blacklist_Add], Source={x:Static services:LocalizationService.Instance}}" FontSize="12"/>
+                                </Button>
+                            </WrapPanel>
                         </StackPanel>
                     </Grid>
                     

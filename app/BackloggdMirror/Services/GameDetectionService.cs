@@ -33,16 +33,18 @@ public class GameDetectionService : IGameDetectionService
     private Dictionary<string, List<ExeCandidate>> _exeIndex;
 
     private readonly IAppLogger? _logger;
+    private readonly IDetectionBlacklist? _blacklist;
 
-    public GameDetectionService(IAppLogger? logger = null)
+    public GameDetectionService(IAppLogger? logger = null, IDetectionBlacklist? blacklist = null)
     {
         _logger = logger;
+        _blacklist = blacklist;
 
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
             var igdbResolver = new IgdbResolverService(logger);
-            _strategy = new WindowsGameDetector(igdbResolver);
-            _emulatorDetector = new EmulatorDetector(logger);
+            _strategy = new WindowsGameDetector(igdbResolver, blacklist);
+            _emulatorDetector = new EmulatorDetector(logger, blacklist);
         }
         else
         {
@@ -64,7 +66,18 @@ public class GameDetectionService : IGameDetectionService
         _strategy.ReloadDatabase();
     }
 
+    /// <summary>
+    /// Blacklisted processes and content are skipped inside each tier rather than filtered out of
+    /// the result: every tier stops at its first hit, so a blacklisted app listed first would
+    /// otherwise hide a real game running alongside it on every tick.
+    /// </summary>
     public DetectedGame? Detect()
+    {
+        var game = DetectUnresolved();
+        return game == null ? null : game with { ExecutablePath = ProcessImagePath.TryGet((int)game.ProcessId) };
+    }
+
+    private DetectedGame? DetectUnresolved()
     {
         // Priority 1: Executable name matching against the JSON database
         if (TryDetectByExecutableName(out string exeName, out uint exePid, out string? exeIdIgdb))
@@ -270,6 +283,9 @@ public class GameDetectionService : IGameDetectionService
                     string processFileName = process.ProcessName + ".exe";
 
                     if (!_exeIndex.TryGetValue(processFileName.ToLowerInvariant(), out var candidates))
+                        continue;
+
+                    if (_blacklist?.IsApplicationBlocked(process.Id, process.ProcessName) == true)
                         continue;
 
                     foreach (var candidate in candidates)

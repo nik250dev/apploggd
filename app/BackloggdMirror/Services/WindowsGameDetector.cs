@@ -26,10 +26,12 @@ internal class WindowsGameDetector : IGameDetectionStrategy
     // barely changes. Keyed by PID and pruned below once the window is gone.
     private readonly Dictionary<uint, string> _processNameCache = new Dictionary<uint, string>();
     private readonly IgdbResolverService _igdbResolver;
+    private readonly IDetectionBlacklist? _blacklist;
 
-    public WindowsGameDetector(IgdbResolverService igdbResolver)
+    public WindowsGameDetector(IgdbResolverService igdbResolver, IDetectionBlacklist? blacklist = null)
     {
         _igdbResolver = igdbResolver;
+        _blacklist = blacklist;
     }
 
     public void ReloadDatabase()
@@ -105,7 +107,7 @@ internal class WindowsGameDetector : IGameDetectionStrategy
 
             if (IsKnownGameClass(className))
             {
-                if (!IsExcludedApp(hWnd, className))
+                if (!IsExcludedApp(hWnd, className) && !IsBlacklisted(currentWindowPid))
                 {
                     foundGameName = GetWindowTitle(hWnd);
                     GetWindowThreadProcessId(hWnd, out foundProcessId);
@@ -117,7 +119,7 @@ internal class WindowsGameDetector : IGameDetectionStrategy
             // 2. Check Fullscreen/Borderless
             if (IsFullscreen(hWnd))
             {
-                if (!IsExcludedApp(hWnd, className))
+                if (!IsExcludedApp(hWnd, className) && !IsBlacklisted(currentWindowPid))
                 {
                     foundGameName = GetWindowTitle(hWnd);
                     GetWindowThreadProcessId(hWnd, out foundProcessId);
@@ -261,23 +263,7 @@ internal class WindowsGameDetector : IGameDetectionStrategy
 
         // The class alone is not enough: Electron and Qt apps share their class with real games.
         GetWindowThreadProcessId(hWnd, out uint processId);
-
-        if (!_processNameCache.TryGetValue(processId, out string? processName) || processName == null)
-        {
-            try
-            {
-                using (var process = Process.GetProcessById((int)processId))
-                {
-                    processName = process.ProcessName ?? string.Empty;
-                }
-            }
-            catch
-            {
-                processName = string.Empty; // Ignore access errors
-            }
-            // Cached even when empty, so a denied process is not retried on every poll.
-            _processNameCache[processId] = processName;
-        }
+        string processName = GetProcessName(processId);
 
         // Unknown process name: nothing to exclude on, so let the class-based verdict stand.
         if (string.IsNullOrEmpty(processName)) return false;
@@ -315,5 +301,28 @@ internal class WindowsGameDetector : IGameDetectionStrategy
         }
 
         return false;
+    }
+
+    private bool IsBlacklisted(uint processId) =>
+        _blacklist?.IsApplicationBlocked((int)processId, GetProcessName(processId)) == true;
+
+    private string GetProcessName(uint processId)
+    {
+        if (_processNameCache.TryGetValue(processId, out string? processName) && processName != null)
+            return processName;
+
+        try
+        {
+            using var process = Process.GetProcessById((int)processId);
+            processName = process.ProcessName ?? string.Empty;
+        }
+        catch
+        {
+            processName = string.Empty; // Ignore access errors
+        }
+
+        // Cached even when empty, so a denied process is not retried on every poll.
+        _processNameCache[processId] = processName;
+        return processName;
     }
 }

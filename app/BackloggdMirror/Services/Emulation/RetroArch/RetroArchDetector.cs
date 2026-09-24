@@ -33,11 +33,13 @@ internal sealed class RetroArchDetector : IEmulatorDetector
     private readonly Dictionary<int, PidState> _states = new();
     private readonly EmulatedGameResolver _resolver;
     private readonly IAppLogger? _logger;
+    private readonly IDetectionBlacklist? _blacklist;
 
-    public RetroArchDetector(EmulatedGameResolver resolver, IAppLogger? logger = null)
+    public RetroArchDetector(EmulatedGameResolver resolver, IAppLogger? logger = null, IDetectionBlacklist? blacklist = null)
     {
         _resolver = resolver;
         _logger = logger;
+        _blacklist = blacklist;
     }
 
     public DetectedGame? Detect()
@@ -55,12 +57,19 @@ internal sealed class RetroArchDetector : IEmulatorDetector
 
             foreach (var process in processes)
             {
+                if (_blacklist?.IsApplicationBlocked(process.Id, ProcessName) == true)
+                    continue;
+
                 var content = ReadCurrentContent(process, null, out var processInfo, out var coreInfo);
 
                 if (!Observe(process.Id, content?.FullPath))
                     continue;
 
                 if (content == null || processInfo == null)
+                    continue;
+
+                // Before Identify, which may call the worker for a game that is going to be ignored.
+                if (_blacklist?.IsContentBlocked(Name, content.FullPath) == true)
                     continue;
 
                 return Identify(process, processInfo, coreInfo, content);
