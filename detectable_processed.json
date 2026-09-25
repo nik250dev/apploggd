@@ -20152,10 +20152,9 @@
   },
   {
     "id": "451132630390538270",
-    "name": "Bless Global",
+    "name": "BLESS GLOBAL",
     "aliases": [
-      "BLESS",
-      "BLESS GLOBAL"
+      "BLESS"
     ],
     "executables": [
       {
@@ -173491,9 +173490,10 @@
   },
   {
     "id": "1129504328848265387",
-    "name": "FIVE NIGHTS AT FREDDY'S: HELP WANTED",
+    "name": "Five Nights at Freddy's: Help Wanted",
     "aliases": [
-      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED"
+      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED",
+      "FIVE NIGHTS AT FREDDY'S: HELP WANTED"
     ],
     "executables": [
       {
@@ -173504,12 +173504,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9P731FVPM8WW"
-      },
-      {
         "distributor": "steam",
         "id": "732690"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P731FVPM8WW"
       }
     ],
     "id_igdb": "115304",
@@ -239947,6 +239947,11 @@
     ],
     "executables": [
       {
+        "name": "duneawakening/dunesandbox.exe",
+        "os": "win32",
+        "is_launcher": false
+      },
+      {
         "name": "launcher/funcomlauncher.exe",
         "os": "win32",
         "is_launcher": true
@@ -239957,17 +239962,12 @@
         "is_launcher": false
       },
       {
-        "name": "win64/dunesandbox-win64-test.exe",
-        "os": "win32",
-        "is_launcher": false
-      },
-      {
         "name": "win64/dunesandbox_be.exe",
         "os": "win32",
         "is_launcher": false
       },
       {
-        "name": "duneawakening/dunesandbox.exe",
+        "name": "win64/dunesandbox-win64-test.exe",
         "os": "win32",
         "is_launcher": false
       }
@@ -239975,15 +239975,19 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9PF687C7ZQ7D"
-      },
-      {
-        "distributor": "steam",
-        "id": "1172710"
+        "id": "9P2XQ2FTV8JZ"
       },
       {
         "distributor": "xbox",
-        "id": "9P2XQ2FTV8JZ"
+        "id": "9PD6PWP8KCD8"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MZGWXBP42NF"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PF687C7ZQ7D"
       },
       {
         "distributor": "xbox",
@@ -239992,6 +239996,10 @@
       {
         "distributor": "xbox",
         "id": "9NLSBC02BD5S"
+      },
+      {
+        "distributor": "steam",
+        "id": "1172710"
       }
     ],
     "id_igdb": "214394",
@@ -289393,10 +289401,9 @@
   },
   {
     "id": "1428182872589602867",
-    "name": "420Blaze It 2: Game of the Year",
+    "name": "420BLAZE IT 2: GAME OF THE YEAR",
     "aliases": [
-      "420 BLAZE IT 2: GAME OF THE YEAR",
-      "420BLAZE IT 2: GAME OF THE YEAR"
+      "420 BLAZE IT 2: GAME OF THE YEAR"
     ],
     "executables": [],
     "third_party_skus": [
@@ -325609,8 +325616,9 @@
   },
   {
     "id": "1440130398813159515",
-    "name": "THE JOY OF CREATION",
+    "name": "The Joy of Creation",
     "aliases": [
+      "THE JOY OF CREATION",
       "TJOC"
     ],
     "executables": [],
@@ -338746,6 +338754,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9MT63LSFZPDL"
+      },
+      {
         "distributor": "steam",
         "id": "3525060"
       }
@@ -340834,17 +340846,17 @@
   },
   {
     "id": "1440138592855916645",
-    "name": "Birdcage",
+    "name": "BIRDCAGE",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "2158550"
-      },
-      {
         "distributor": "xbox",
         "id": "9PJ8DRW67XTV"
+      },
+      {
+        "distributor": "steam",
+        "id": "2158550"
       }
     ],
     "id_igdb": "369520",
@@ -353120,12 +353132,7 @@
     "name": "Nirvana",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [
-      {
-        "distributor": "xbox",
-        "id": "9NQ83QFW1KVJ"
-      }
-    ],
+    "third_party_skus": [],
     "id_igdb": "199809",
     "cover": "co4pzs",
     "artwork": [
@@ -373857,20 +373864,19 @@
   },
   {
     "id": "1442715029052063765",
-    "name": "Snwbrd: Freestyle Snowboarding",
+    "name": "SNWBRD: Freestyle Snowboarding",
     "aliases": [
-      "SNWBRD",
-      "SNWBRD: Freestyle Snowboarding"
+      "SNWBRD"
     ],
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "1912130"
-      },
-      {
         "distributor": "xbox",
         "id": "9MWMGJFDZW4D"
+      },
+      {
+        "distributor": "steam",
+        "id": "1912130"
       }
     ],
     "id_igdb": "235196",
@@ -399492,9 +399498,10 @@
   },
   {
     "id": "1442727833993613332",
-    "name": "Arcade Archives: EXERION",
+    "name": "Arcade Archives: Exerion",
     "aliases": [
-      "Arcade Archives EXERION"
+      "Arcade Archives EXERION",
+      "Arcade Archives: EXERION"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -402816,9 +402823,10 @@
   },
   {
     "id": "1442728871614091295",
-    "name": "Arcade Archives: ARGUS",
+    "name": "Arcade Archives: Argus",
     "aliases": [
-      "Arcade Archives ARGUS"
+      "Arcade Archives ARGUS",
+      "Arcade Archives: ARGUS"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -410971,6 +410979,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NQ83QFW1KVJ"
+      },
       {
         "distributor": "steam",
         "id": "716680"
@@ -420394,9 +420406,10 @@
   },
   {
     "id": "1442734322128916531",
-    "name": "Arcade Archives: NAUGHTY BOY",
+    "name": "Arcade Archives: Naughty Boy",
     "aliases": [
-      "Arcade Archives NAUGHTY BOY"
+      "Arcade Archives NAUGHTY BOY",
+      "Arcade Archives: NAUGHTY BOY"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -528423,6 +528436,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.osloalbet.ice"
+      },
+      {
         "distributor": "steam",
         "id": "5085500"
       }
@@ -528943,10 +528960,19 @@
   },
   {
     "id": "1552530405343760395",
-    "name": "Silent Hill: Townfall",
+    "name": "SILENT HILL: townfall",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1636440"
+      },
+      {
+        "distributor": "epic",
+        "id": "2DDA192F245E4B87B7B45195B61F4FEC"
+      }
+    ],
     "id_igdb": "222342",
     "cover": "ar5z7y",
     "artwork": [
@@ -528964,7 +528990,12 @@
     "name": "Undefeated: Genesis",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2088020"
+      }
+    ],
     "id_igdb": "264303",
     "cover": "co70lt",
     "artwork": [
@@ -529027,7 +529058,12 @@
     "name": "Dressmaker",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4019220"
+      }
+    ],
     "id_igdb": "365465",
     "cover": "cocxtp",
     "artwork": [
@@ -529053,12 +529089,35 @@
     "name": "Master Of Pottery",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1160490"
+      }
+    ],
     "id_igdb": "126808",
     "cover": "co2hy2",
     "artwork": [
       "arfrn"
     ],
     "url": "master-of-pottery"
+  },
+  {
+    "id": "1552892758547505203",
+    "name": "Pop! Pachinko",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4437370"
+      }
+    ],
+    "id_igdb": "407158",
+    "cover": "coc9xf",
+    "artwork": [
+      "ar6cyp"
+    ],
+    "url": "pop-pachinko"
   }
 ]
