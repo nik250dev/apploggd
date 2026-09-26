@@ -210615,6 +210615,10 @@
       {
         "distributor": "steam",
         "id": "837880"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NCF3MRQ8480"
       }
     ],
     "id_igdb": "138884",
@@ -240132,11 +240136,15 @@
     "third_party_skus": [
       {
         "distributor": "steam",
-        "id": "2026820"
+        "id": "2428770"
       },
       {
         "distributor": "steam",
-        "id": "2428770"
+        "id": "2026820"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NQM8DW8T4QC"
       }
     ],
     "id_igdb": "147285",
@@ -275464,12 +275472,16 @@
         "id": "50253B34283C4F8FB644A47FBFBFB45E"
       },
       {
+        "distributor": "steam",
+        "id": "2582140"
+      },
+      {
         "distributor": "xbox",
         "id": "9PK5RK41WLH2"
       },
       {
-        "distributor": "steam",
-        "id": "2582140"
+        "distributor": "xbox",
+        "id": "9NM34NTCDZDN"
       }
     ],
     "id_igdb": "334351",
@@ -276343,6 +276355,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9P4VDWR5C732"
+      },
       {
         "distributor": "epic",
         "id": "5A5665AB559249C8A012B04ACFB4A7C9"
@@ -294888,6 +294904,10 @@
       {
         "distributor": "steam",
         "id": "3253530"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MW4MFG0192L"
       }
     ],
     "id_igdb": "321166",
@@ -337551,6 +337571,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9N1305CBLFT8"
+      },
       {
         "distributor": "steam",
         "id": "3326230"
@@ -397781,6 +397805,10 @@
     ],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "C4VQ205DNR53"
+      },
       {
         "distributor": "steam",
         "id": "374030"
@@ -500939,11 +500967,17 @@
     "id": "1511211414566731989",
     "name": "Bird Game 3",
     "aliases": [],
-    "executables": [],
+    "executables": [
+      {
+        "name": "birdgame3.exe",
+        "os": "win32",
+        "is_launcher": false
+      }
+    ],
     "third_party_skus": [
       {
         "distributor": "steam",
-        "id": "4218680"
+        "id": "4219010"
       }
     ],
     "id_igdb": "379730",
@@ -522046,7 +522080,7 @@
   },
   {
     "id": "1540571713539149854",
-    "name": "HYPERDROP: A Pachinko Roguelite",
+    "name": "HYPERDROP",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -527682,6 +527716,10 @@
       {
         "distributor": "steam",
         "id": "4404610"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.Gammes.DRDominoes"
       }
     ],
     "id_igdb": null,
@@ -529008,7 +529046,12 @@
     "name": "Panzer Deck",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3872650"
+      }
+    ],
     "id_igdb": "371340",
     "cover": "cocxjx",
     "artwork": [
@@ -529021,7 +529064,12 @@
     "name": "Really Illegal Golf",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4115520"
+      }
+    ],
     "id_igdb": "419023",
     "cover": "cocy4s",
     "artwork": [
@@ -529034,7 +529082,12 @@
     "name": "Wavecrashers",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3664090"
+      }
+    ],
     "id_igdb": "391751",
     "cover": "coc0wx",
     "artwork": [
@@ -529047,7 +529100,12 @@
     "name": "The Hollowing",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4882000"
+      }
+    ],
     "id_igdb": "419039",
     "cover": "cocy6h",
     "artwork": null,
@@ -529119,5 +529177,338 @@
       "ar6cyp"
     ],
     "url": "pop-pachinko"
+  },
+  {
+    "id": "1553254904313684088",
+    "name": "Black Vultures: Prey of Greed",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3622280"
+      }
+    ],
+    "id_igdb": "357100",
+    "cover": "coa69h",
+    "artwork": [
+      "ar3wk6"
+    ],
+    "url": "black-vultures-prey-of-greed--1"
+  },
+  {
+    "id": "1553254917093990502",
+    "name": "Farming Camp",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NZGTX06V7MD"
+      },
+      {
+        "distributor": "steam",
+        "id": "2985880"
+      }
+    ],
+    "id_igdb": "383138",
+    "cover": "coba9t",
+    "artwork": [
+      "ar6ew0",
+      "ar6ew1",
+      "ar6evz"
+    ],
+    "url": "farming-camp"
+  },
+  {
+    "id": "1553254940602925138",
+    "name": "Breakout Garage",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3445190"
+      }
+    ],
+    "id_igdb": "415047",
+    "cover": "cocrsp",
+    "artwork": [
+      "ar6j93"
+    ],
+    "url": "breakout-garage"
+  },
+  {
+    "id": "1553254957212508170",
+    "name": "DIG Raiders: Anomaly Extraction",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4368640"
+      }
+    ],
+    "id_igdb": "406661",
+    "cover": "coc9ki",
+    "artwork": [
+      "ar6lwe"
+    ],
+    "url": "dig-raiders-anomaly-extraction"
+  },
+  {
+    "id": "1553254977131118714",
+    "name": "Haele 3D: Portrait Studio - Pro",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3056390"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1553255010962513943",
+    "name": "ExoSpace Combat Engineer",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2876200"
+      }
+    ],
+    "id_igdb": "336824",
+    "cover": "co9kud",
+    "artwork": [
+      "ar3deb"
+    ],
+    "url": "exospace-combat-engineer"
+  },
+  {
+    "id": "1553255022781792276",
+    "name": "Farm & Feast",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4521650"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1553255037243887778",
+    "name": "Trivia Deal",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2820760"
+      }
+    ],
+    "id_igdb": "288551",
+    "cover": "coar9o",
+    "artwork": [
+      "ar2ruw"
+    ],
+    "url": "trivia-deal"
+  },
+  {
+    "id": "1553255062879338516",
+    "name": "Coin maker simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4156710"
+      }
+    ],
+    "id_igdb": "417119",
+    "cover": "cocvsi",
+    "artwork": null,
+    "url": "coin-maker-simulator"
+  },
+  {
+    "id": "1553255088305344573",
+    "name": "Monster Fantasy",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4713940"
+      }
+    ],
+    "id_igdb": "407994",
+    "cover": "cocb6l",
+    "artwork": [
+      "ar65jc"
+    ],
+    "url": "monster-fantasy"
+  },
+  {
+    "id": "1553255100208779314",
+    "name": "SuperReap",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4714820"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1553255112502149211",
+    "name": "Scam With Your Friends",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4954910"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1553255119829733406",
+    "name": "SCREENSIDE FISHER",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4270850"
+      }
+    ],
+    "id_igdb": "419423",
+    "cover": null,
+    "artwork": null,
+    "url": "screenside-fisher"
+  },
+  {
+    "id": "1553255137303076919",
+    "name": "Nighthawks",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1221950"
+      }
+    ],
+    "id_igdb": "109259",
+    "cover": "co2l14",
+    "artwork": [
+      "arls4"
+    ],
+    "url": "nighthawks"
+  },
+  {
+    "id": "1553255153635692557",
+    "name": "The Rhapsody of Zephyr Remastered",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5099430"
+      }
+    ],
+    "id_igdb": "416992",
+    "cover": "cocuyw",
+    "artwork": [
+      "ar6kut"
+    ],
+    "url": "the-rhapsody-of-zephyr-remastered"
+  },
+  {
+    "id": "1553255162443866172",
+    "name": "CONTROL Resonant",
+    "aliases": [
+      "CONTROL RESONANT"
+    ],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3669870"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P092299FSGW"
+      },
+      {
+        "distributor": "epic",
+        "id": "2DB42190F5704065809661FB9E4216EA"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PFPMMQPKCL6"
+      }
+    ],
+    "id_igdb": "225582",
+    "cover": "ar5z87",
+    "artwork": [
+      "ar5z7a",
+      "ar5z75",
+      "ar5z78",
+      "ar5z87",
+      "ar5z86",
+      "ar5z84",
+      "ar5z85"
+    ],
+    "url": "control-resonant--1"
+  },
+  {
+    "id": "1553234742529364018",
+    "name": "World of Warcraft: Forever",
+    "aliases": [],
+    "executables": [
+      {
+        "name": "wowb.exe",
+        "os": "win32",
+        "is_launcher": false
+      }
+    ],
+    "third_party_skus": [],
+    "id_igdb": "417650",
+    "cover": "cocxj2",
+    "artwork": [
+      "ar6lm7",
+      "ar6lm8"
+    ],
+    "url": "world-of-warcraft-forever"
+  },
+  {
+    "id": "1553255079681855671",
+    "name": "METAL GEAR SOLID: MASTER COLLECTION Vol.2",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
   }
 ]
