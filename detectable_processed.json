@@ -20152,9 +20152,10 @@
   },
   {
     "id": "451132630390538270",
-    "name": "BLESS GLOBAL",
+    "name": "Bless Global",
     "aliases": [
-      "BLESS"
+      "BLESS",
+      "BLESS GLOBAL"
     ],
     "executables": [
       {
@@ -124257,10 +124258,9 @@
   },
   {
     "id": "1124357342394335324",
-    "name": "Kill la Kill: If",
+    "name": "KILL la KILL: IF",
     "aliases": [
-      "KILL la KILL THE GAME: IF",
-      "KILL la KILL: IF"
+      "KILL la KILL THE GAME: IF"
     ],
     "executables": [
       {
@@ -173490,10 +173490,9 @@
   },
   {
     "id": "1129504328848265387",
-    "name": "Five Nights at Freddy's: Help Wanted",
+    "name": "FIVE NIGHTS AT FREDDY'S: HELP WANTED",
     "aliases": [
-      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED",
-      "FIVE NIGHTS AT FREDDY'S: HELP WANTED"
+      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED"
     ],
     "executables": [
       {
@@ -256941,9 +256940,9 @@
   },
   {
     "id": "1387990904194732154",
-    "name": "RAIDOU Remastered: The Mystery of the Soulless Army",
+    "name": "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY",
     "aliases": [
-      "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY"
+      "RAIDOU Remastered: The Mystery of the Soulless Army"
     ],
     "executables": [
       {
@@ -256953,6 +256952,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9P284W1H02KW"
+      },
       {
         "distributor": "steam",
         "id": "2288350"
@@ -256964,10 +256967,6 @@
       {
         "distributor": "xbox",
         "id": "9NX3566L9NH9"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9P284W1H02KW"
       }
     ],
     "id_igdb": "337024",
@@ -302833,6 +302832,10 @@
       {
         "distributor": "steam",
         "id": "3219410"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N585CXMVQ9Z"
       }
     ],
     "id_igdb": "345954",
@@ -344472,9 +344475,8 @@
   },
   {
     "id": "1440141099212738610",
-    "name": "Hackmud",
+    "name": "hackmud",
     "aliases": [
-      "hackmud",
       "ｈａｃｋｍｕｄ"
     ],
     "executables": [],
@@ -367472,9 +367474,10 @@
   },
   {
     "id": "1442713050993135749",
-    "name": "Arcade Archives: MAZINGER Z",
+    "name": "Arcade Archives: Mazinger Z",
     "aliases": [
-      "Arcade Archives MAZINGER Z"
+      "Arcade Archives MAZINGER Z",
+      "Arcade Archives: MAZINGER Z"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -420434,10 +420437,9 @@
   },
   {
     "id": "1442734322128916531",
-    "name": "Arcade Archives: Naughty Boy",
+    "name": "Arcade Archives: NAUGHTY BOY",
     "aliases": [
-      "Arcade Archives NAUGHTY BOY",
-      "Arcade Archives: NAUGHTY BOY"
+      "Arcade Archives NAUGHTY BOY"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -471613,10 +471615,6 @@
         "id": "60A36A8A594C49AB9FB58FA33BE6156E"
       },
       {
-        "distributor": "xbox",
-        "id": "9PH327N126WG"
-      },
-      {
         "distributor": "steam",
         "id": "4126040"
       },
@@ -471626,7 +471624,15 @@
       },
       {
         "distributor": "xbox",
+        "id": "9PH327N126WG"
+      },
+      {
+        "distributor": "xbox",
         "id": "9PK8PHLCQDF6"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.x.aniimos"
       }
     ],
     "id_igdb": "348202",
@@ -479073,6 +479079,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "epic",
+        "id": "69D0C6B5583C4D15BE07A2675E3BE84D"
+      },
       {
         "distributor": "steam",
         "id": "3222640"
@@ -526227,7 +526237,7 @@
   },
   {
     "id": "1548543872634720316",
-    "name": "Fireboy and Watergirl: The Light Temple",
+    "name": "Fireboy & Watergirl 2: The Light Temple",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -528419,7 +528429,7 @@
   },
   {
     "id": "1552168566617546923",
-    "name": "Detstvo",
+    "name": "DETSTVO",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -528469,7 +528479,7 @@
   },
   {
     "id": "1552168588968984596",
-    "name": "Fireboy and Watergirl in the Ice Temple",
+    "name": "Fireboy & Watergirl 3: The Ice Temple",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -529274,7 +529284,7 @@
   },
   {
     "id": "1553255010962513943",
-    "name": "ExoSpace Combat Engineer",
+    "name": "eXoSpace Combat Engineer",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
