@@ -1,17 +1,26 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
+using BackloggdMirror.Services.Platform.Linux;
 
 namespace BackloggdMirror.Services;
 
 /// <summary>
 /// The full path of a process's executable. Unlike <c>Process.MainModule</c>, it only needs
 /// PROCESS_QUERY_LIMITED_INFORMATION, which crosses integrity levels, so it also works for elevated processes.
+/// On Linux it comes from /proc instead (see <see cref="LinuxProcFs"/>).
 /// </summary>
 internal static class ProcessImagePath
 {
     public static string? TryGet(int processId)
     {
+        if (OperatingSystem.IsLinux())
+            return LinuxProcFs.TryGetImagePath(processId);
+
+        // kernel32 exists only on Windows.
+        if (!OperatingSystem.IsWindows())
+            return null;
+
         IntPtr handle = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, false, processId);
         if (handle == IntPtr.Zero)
             return null;

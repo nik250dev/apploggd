@@ -5,7 +5,8 @@ public enum DetectionSource
 {
     Executable,
     Emulator,
-    Window
+    Window,
+    SteamApp
 }
 
 /// <summary>

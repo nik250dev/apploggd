@@ -366,7 +366,7 @@ public partial class MainWindow : Window
             }
             else
             {
-                minimizeToTray = vm.MinimizeToTray;
+                minimizeToTray = vm.CanMinimizeToTray && vm.MinimizeToTray;
             }
         }
 

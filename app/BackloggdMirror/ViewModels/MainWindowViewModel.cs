@@ -131,6 +131,10 @@ public partial class MainWindowViewModel : ViewModelBase
     public bool IsBottomMessageLoading => BottomMessageType == BottomMessageType.Loading;
     public bool IsBottomMessageIconVisible => BottomMessageType == BottomMessageType.Success || BottomMessageType == BottomMessageType.Warning || BottomMessageType == BottomMessageType.Error;
 
+    // Many Linux desktops have no tray (WSLg, GNOME without AppIndicator, Steam Deck), and a window
+    // hidden there cannot be brought back, so on Linux the close button always quits.
+    public bool CanMinimizeToTray => !OperatingSystem.IsLinux();
+
     // The settings toggles write straight through to SettingsService and persist on every change:
     // there is no "Apply" button, so an unsaved change would be lost silently.
     public bool MinimizeToTray

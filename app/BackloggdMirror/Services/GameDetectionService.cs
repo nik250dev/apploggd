@@ -9,6 +9,8 @@ using System.Text.Json;
 using Avalonia.Platform;
 using BackloggdMirror.Models;
 using BackloggdMirror.Services.Emulation;
+using BackloggdMirror.Services.Platform;
+using BackloggdMirror.Services.Platform.Linux;
 
 namespace BackloggdMirror.Services;
 
@@ -19,11 +21,15 @@ namespace BackloggdMirror.Services;
 /// against the local database is exact and yields the IGDB id for free; the emulator tier is exact
 /// too but has to work out which ROM is loaded before it can name a game; and the window heuristic
 /// only produces a window <em>title</em> that still has to be identified afterwards.
+/// Linux adds a tier of its own between the first two, the Steam app id (see <see cref="LinuxSteamGameDetector"/>),
+/// has no emulator tier, and brings its own window heuristic (see <see cref="LinuxWindowGameDetector"/>).
 /// </summary>
 public class GameDetectionService : IGameDetectionService
 {
     private readonly IGameDetectionStrategy _strategy;
     private readonly EmulatorDetector? _emulatorDetector;
+    private readonly LinuxSteamGameDetector? _steamDetector;
+    private readonly IProcessIdentity _processIdentity;
 
     /// <summary>
     /// Index for quick lookup: exe name (lowercase) → list of candidate matches.
@@ -46,12 +52,19 @@ public class GameDetectionService : IGameDetectionService
             _strategy = new WindowsGameDetector(igdbResolver, blacklist);
             _emulatorDetector = new EmulatorDetector(logger, blacklist);
         }
+        else if (OperatingSystem.IsLinux())
+        {
+            _strategy = new LinuxWindowGameDetector(new IgdbResolverService(logger), blacklist, logger);
+            _steamDetector = new LinuxSteamGameDetector(logger, blacklist);
+        }
         else
         {
-            // The window heuristic is built on user32 P/Invoke, so it has no equivalent elsewhere.
-            // Tier 1 (executable name) still works, so the app degrades rather than breaks.
+            // No window heuristic for macOS. Tier 1 (executable name) still works, so the app degrades rather than breaks.
             _strategy = new NullGameDetector();
         }
+
+        // macOS keeps the Windows reading it had before Linux got its own; it is untested there.
+        _processIdentity = OperatingSystem.IsLinux() ? new LinuxProcessIdentity() : new WindowsProcessIdentity();
 
         _exeIndex = BuildExeIndex();
     }
@@ -85,6 +98,13 @@ public class GameDetectionService : IGameDetectionService
             return new DetectedGame(exeName, exePid, exeIdIgdb, DetectionSource.Executable);
         }
 
+        // Priority 1.2 (Linux): Steam games by app id, which is what finds native Linux builds
+        var steamGame = _steamDetector?.Detect();
+        if (steamGame != null)
+        {
+            return steamGame;
+        }
+
         // Priority 1.5: emulators, which run games the other two tiers cannot name
         var emulated = _emulatorDetector?.Detect();
         if (emulated != null)
@@ -108,24 +128,7 @@ public class GameDetectionService : IGameDetectionService
             return _emulatorDetector != null && _emulatorDetector.IsStillRunning(game);
         }
 
-        return IsProcessAlive(game.ProcessId);
-    }
-
-    private static bool IsProcessAlive(uint processId)
-    {
-        if (processId == 0)
-            return false;
-
-        try
-        {
-            using var process = Process.GetProcessById((int)processId);
-            return !process.HasExited;
-        }
-        catch
-        {
-            // GetProcessById throws once the PID is gone, which is the normal way a session ends.
-            return false;
-        }
+        return game.ProcessId != 0 && _processIdentity.IsAlive((int)game.ProcessId);
     }
 
     /// <summary>
@@ -176,21 +179,25 @@ public class GameDetectionService : IGameDetectionService
                 return index;
             }
 
+            // Built from the same parse: the file is ~10 MB.
+            _steamDetector?.Load(games);
+
             foreach (var game in games)
             {
                 if (game.Executables == null) continue;
 
                 foreach (var exe in game.Executables)
                 {
-                    // Only consider Windows executables
-                    if (!string.Equals(exe.Os, "win32", StringComparison.OrdinalIgnoreCase))
+                    if (!_processIdentity.CanRun(exe.Os))
                         continue;
 
                     // Skip launchers (e.g., project8.exe for Deadlock is a launcher, not the game)
                     if (exe.IsLauncher)
                         continue;
 
-                    string exeName = exe.Name;
+                    // Discord publishes a few malformed names, like `va-11 hall-a/runner"`, and the data
+                    // file is kept as published; no file name can hold a quote.
+                    string exeName = exe.Name.Replace("\"", "");
 
                     // Entries starting with '>' are Discord's argument-based matching syntax, which
                     // this app does not implement.
@@ -248,16 +255,8 @@ public class GameDetectionService : IGameDetectionService
         if (_exeIndex.Count == 0)
             return false;
 
-        int currentSessionId;
-        try
-        {
-            using var currentProcess = Process.GetCurrentProcess();
-            currentSessionId = currentProcess.SessionId;
-        }
-        catch
-        {
+        if (!_processIdentity.BeginScan())
             return false;
-        }
 
         Process[] processes;
         try
@@ -275,17 +274,17 @@ public class GameDetectionService : IGameDetectionService
             {
                 try
                 {
-                    // Only this desktop session: services and other users' processes cannot be the
-                    // game this user is playing, and reading them tends to be denied anyway.
-                    if (process.SessionId != currentSessionId)
+                    if (!_processIdentity.TryGetExecutable(process, out string processFileName, out string processName))
                         continue;
-
-                    string processFileName = process.ProcessName + ".exe";
 
                     if (!_exeIndex.TryGetValue(processFileName.ToLowerInvariant(), out var candidates))
                         continue;
 
-                    if (_blacklist?.IsApplicationBlocked(process.Id, process.ProcessName) == true)
+                    // After the index lookup, so only the few processes that match pay for it.
+                    if (!_processIdentity.IsOwnProcess(process))
+                        continue;
+
+                    if (_blacklist?.IsApplicationBlocked(process.Id, processName) == true)
                         continue;
 
                     foreach (var candidate in candidates)
@@ -304,12 +303,12 @@ public class GameDetectionService : IGameDetectionService
                         string? fullPath = null;
                         try
                         {
-                            fullPath = process.MainModule?.FileName;
+                            fullPath = _processIdentity.PathOf(process);
                         }
                         catch
                         {
-                            // MainModule is denied for elevated or protected processes. Without the
-                            // path the candidate cannot be confirmed, and guessing would risk
+                            // The path can be denied (MainModule, for elevated or protected processes).
+                            // Without it the candidate cannot be confirmed, and guessing would risk
                             // logging the wrong game.
                             continue;
                         }
