@@ -2200,7 +2200,7 @@
   },
   {
     "id": "359510680459673610",
-    "name": "Battlefield 4: Premium Edition",
+    "name": "Battlefield 4",
     "aliases": [
       "Battlefield 4™",
       "Battlefield 4™ (64 bit)",
@@ -2220,12 +2220,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "C3JM9MMHTGGJ"
-      },
-      {
         "distributor": "steam",
         "id": "1238860"
+      },
+      {
+        "distributor": "xbox",
+        "id": "C3JM9MMHTGGJ"
       },
       {
         "distributor": "xbox",
@@ -20152,10 +20152,9 @@
   },
   {
     "id": "451132630390538270",
-    "name": "Bless Global",
+    "name": "BLESS GLOBAL",
     "aliases": [
-      "BLESS",
-      "BLESS GLOBAL"
+      "BLESS"
     ],
     "executables": [
       {
@@ -107138,7 +107137,7 @@
   },
   {
     "id": "1124356067795685376",
-    "name": "Natsu no Kanata: Beyond Summer",
+    "name": "Natsuno-Kanata: Beyond Summer",
     "aliases": [],
     "executables": [
       {
@@ -107150,11 +107149,11 @@
     "third_party_skus": [
       {
         "distributor": "steam",
-        "id": "2597260"
+        "id": "1684660"
       },
       {
         "distributor": "steam",
-        "id": "1684660"
+        "id": "2597260"
       }
     ],
     "id_igdb": "171738",
@@ -124258,9 +124257,10 @@
   },
   {
     "id": "1124357342394335324",
-    "name": "KILL la KILL: IF",
+    "name": "Kill la Kill: If",
     "aliases": [
-      "KILL la KILL THE GAME: IF"
+      "KILL la KILL THE GAME: IF",
+      "KILL la KILL: IF"
     ],
     "executables": [
       {
@@ -173490,9 +173490,10 @@
   },
   {
     "id": "1129504328848265387",
-    "name": "FIVE NIGHTS AT FREDDY'S: HELP WANTED",
+    "name": "Five Nights at Freddy's: Help Wanted",
     "aliases": [
-      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED"
+      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED",
+      "FIVE NIGHTS AT FREDDY'S: HELP WANTED"
     ],
     "executables": [
       {
@@ -191208,7 +191209,7 @@
   },
   {
     "id": "1174042035276230686",
-    "name": "DOOM II: Hell on Earth",
+    "name": "Doom II: Hell on Earth",
     "aliases": [
       "DOOM II",
       "DOOM II: Hell on Earth"
@@ -215848,6 +215849,14 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.corrodinggames.rts"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.corrodinggames.rtsdemo"
+      },
       {
         "distributor": "steam",
         "id": "647960"
@@ -242971,6 +242980,10 @@
       {
         "distributor": "steam",
         "id": "1781350"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.osloalbet.fairytales"
       }
     ],
     "id_igdb": "195980",
@@ -256940,9 +256953,9 @@
   },
   {
     "id": "1387990904194732154",
-    "name": "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY",
+    "name": "RAIDOU Remastered: The Mystery of the Soulless Army",
     "aliases": [
-      "RAIDOU Remastered: The Mystery of the Soulless Army"
+      "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY"
     ],
     "executables": [
       {
@@ -256957,16 +256970,16 @@
         "id": "9P284W1H02KW"
       },
       {
-        "distributor": "steam",
-        "id": "2288350"
-      },
-      {
         "distributor": "xbox",
         "id": "9NB58STJ848G"
       },
       {
         "distributor": "xbox",
         "id": "9NX3566L9NH9"
+      },
+      {
+        "distributor": "steam",
+        "id": "2288350"
       }
     ],
     "id_igdb": "337024",
@@ -325639,9 +325652,8 @@
   },
   {
     "id": "1440130398813159515",
-    "name": "The Joy of Creation",
+    "name": "THE JOY OF CREATION",
     "aliases": [
-      "THE JOY OF CREATION",
       "TJOC"
     ],
     "executables": [],
@@ -344475,8 +344487,9 @@
   },
   {
     "id": "1440141099212738610",
-    "name": "hackmud",
+    "name": "Hackmud",
     "aliases": [
+      "hackmud",
       "ｈａｃｋｍｕｄ"
     ],
     "executables": [],
@@ -367474,10 +367487,9 @@
   },
   {
     "id": "1442713050993135749",
-    "name": "Arcade Archives: Mazinger Z",
+    "name": "Arcade Archives: MAZINGER Z",
     "aliases": [
-      "Arcade Archives MAZINGER Z",
-      "Arcade Archives: MAZINGER Z"
+      "Arcade Archives MAZINGER Z"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -373891,9 +373903,10 @@
   },
   {
     "id": "1442715029052063765",
-    "name": "SNWBRD: Freestyle Snowboarding",
+    "name": "Snwbrd: Freestyle Snowboarding",
     "aliases": [
-      "SNWBRD"
+      "SNWBRD",
+      "SNWBRD: Freestyle Snowboarding"
     ],
     "executables": [],
     "third_party_skus": [
@@ -402854,10 +402867,9 @@
   },
   {
     "id": "1442728871614091295",
-    "name": "Arcade Archives: Argus",
+    "name": "Arcade Archives: ARGUS",
     "aliases": [
-      "Arcade Archives ARGUS",
-      "Arcade Archives: ARGUS"
+      "Arcade Archives ARGUS"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -420437,9 +420449,10 @@
   },
   {
     "id": "1442734322128916531",
-    "name": "Arcade Archives: NAUGHTY BOY",
+    "name": "Arcade Archives: Naughty Boy",
     "aliases": [
-      "Arcade Archives NAUGHTY BOY"
+      "Arcade Archives NAUGHTY BOY",
+      "Arcade Archives: NAUGHTY BOY"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -427996,9 +428009,10 @@
   },
   {
     "id": "1442737663558811792",
-    "name": "Arcade Archives: THE ASTYANAX",
+    "name": "Arcade Archives: The Astyanax",
     "aliases": [
-      "Arcade Archives THE ASTYANAX"
+      "Arcade Archives THE ASTYANAX",
+      "Arcade Archives: THE ASTYANAX"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -526244,6 +526258,10 @@
       {
         "distributor": "steam",
         "id": "5085370"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.osloalbet.light"
       }
     ],
     "id_igdb": null,
@@ -527226,10 +527244,8 @@
   },
   {
     "id": "1549993939354783785",
-    "name": "Blindfold: Hide and Seek",
-    "aliases": [
-      "BLINDFOLD: Sound Chase"
-    ],
+    "name": "BLINDFOLD: Sound Chase",
+    "aliases": [],
     "executables": [],
     "third_party_skus": [
       {
@@ -527358,10 +527374,14 @@
   },
   {
     "id": "1550356092331229314",
-    "name": "Fireboy & Watergirl And Friends",
+    "name": "Fireboy & Watergirl and Friends",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.osloalbet.friends"
+      },
       {
         "distributor": "steam",
         "id": "4401160"
