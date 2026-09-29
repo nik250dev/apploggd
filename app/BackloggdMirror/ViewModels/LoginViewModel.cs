@@ -66,9 +66,27 @@ namespace BackloggdMirror.ViewModels
         [NotifyPropertyChangedFor(nameof(IsUiVisible))]
         private bool _isBrowserPromptVisible = false;
 
+        // Linux only: Chromium is on disk but the system lacks libraries to start it.
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(IsUiVisible))]
+        private bool _isMissingLibrariesPromptVisible = false;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(HasInstallDepsCommand))]
+        private string _installDepsCommand = string.Empty;
+
+        [ObservableProperty]
+        private string _missingLibrariesText = string.Empty;
+
+        [ObservableProperty]
+        private bool _isInstallDepsCommandCopied = false;
+
+        // Without apt, install-deps cannot work; the prompt then only lists the libraries.
+        public bool HasInstallDepsCommand => !string.IsNullOrEmpty(InstallDepsCommand);
+
         // The form is hidden rather than covered, so Tab focus and the Login button's IsDefault
         // binding cannot reach it while another phase owns the window.
-        public bool IsUiVisible => !IsCheckingSession && !IsBrowserPromptVisible;
+        public bool IsUiVisible => !IsCheckingSession && !IsBrowserPromptVisible && !IsMissingLibrariesPromptVisible;
 
         public bool CanLogin => !IsBusy && !IsBrowserUnavailable;
 
@@ -145,6 +163,12 @@ namespace BackloggdMirror.ViewModels
                         return;
                     }
 
+                    if (resolution == BrowserResolution.MissingSystemLibraries)
+                    {
+                        ShowMissingLibrariesPrompt();
+                        return;
+                    }
+
                     ContinueAfterBrowserReady();
                 });
             });
@@ -209,6 +233,13 @@ namespace BackloggdMirror.ViewModels
                         return;
                     }
 
+                    if (result == BrowserInstallResult.MissingSystemLibraries)
+                    {
+                        BrowserLaunch.Configure(BrowserSelection.Bundled);
+                        ShowMissingLibrariesPrompt();
+                        return;
+                    }
+
                     BrowserLaunch.Configure(BrowserSelection.Bundled);
                     ContinueAfterBrowserReady();
                 });
@@ -223,7 +254,52 @@ namespace BackloggdMirror.ViewModels
         {
             _logger.Info("[LoginViewModel] User declined the Chromium download. Shutting down.");
             IsBrowserPromptVisible = false;
+            CloseApp();
+        }
 
+        /// <summary>
+        /// Linux only: stops the startup here until the user installs the libraries Chromium needs
+        /// (install-deps requires sudo, so the app cannot run it itself).
+        /// </summary>
+        private void ShowMissingLibrariesPrompt()
+        {
+            var report = _installService.MissingDependencies;
+            _logger.Info("[LoginViewModel] Chromium is missing system libraries. Asking the user to install them.");
+            InstallDepsCommand = report?.InstallCommand ?? string.Empty;
+            MissingLibrariesText = report is { MissingLibraries.Count: > 0 }
+                ? string.Format(LocalizationService.Instance["Browser_Deps_Missing"], string.Join(", ", report.MissingLibraries))
+                : string.Empty;
+            IsInstallDepsCommandCopied = false;
+            IsBusy = false;
+            IsCheckingSession = false;
+            StatusMessage = string.Empty;
+            IsMissingLibrariesPromptVisible = true;
+            UserInputRequired?.Invoke();
+        }
+
+        /// <summary>
+        /// Missing-libraries prompt's "Retry": runs the whole startup gate again, probe included.
+        /// </summary>
+        [RelayCommand]
+        private void RetryBrowserCheck()
+        {
+            if (!IsMissingLibrariesPromptVisible) return;
+
+            _logger.Info("[LoginViewModel] User asked to retry the browser check.");
+            IsMissingLibrariesPromptVisible = false;
+            EnsureBrowserThenCheckSession();
+        }
+
+        [RelayCommand]
+        private void CloseFromMissingLibrariesPrompt()
+        {
+            _logger.Info("[LoginViewModel] User closed the missing-libraries prompt. Shutting down.");
+            IsMissingLibrariesPromptVisible = false;
+            CloseApp();
+        }
+
+        private void CloseApp()
+        {
             if (RequestClose != null)
             {
                 // LoginWindow.OnClosed turns this into desktop.Shutdown().

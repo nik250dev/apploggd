@@ -158,7 +158,14 @@ public class LocalizationService : INotifyPropertyChanged
             { "Browser_Prompt_ManualHint", "You can also get Chromium by installing the Google Chrome browser, which already includes it:" },
             { "Browser_Prompt_LinkText", "Download Google Chrome" },
             { "Browser_Prompt_Accept", "Accept" },
-            { "Browser_Prompt_Close", "Close" }
+            { "Browser_Prompt_Close", "Close" },
+            { "Browser_Deps_Title", "Missing system libraries" },
+            { "Browser_Deps_Body", "Chromium is installed, but it cannot start because your system is missing some libraries. Open a terminal and run this command (it will ask for your Linux user password):" },
+            { "Browser_Deps_BodyNoApt", "Chromium is installed, but it cannot start because your system is missing some libraries. Install them with your distribution's package manager." },
+            { "Browser_Deps_Missing", "Missing: {0}" },
+            { "Browser_Deps_Copy", "Copy command" },
+            { "Browser_Deps_Copied", "Copied" },
+            { "Browser_Deps_Retry", "Retry" }
         };
 
         _resources["es"] = new Dictionary<string, string>
@@ -298,7 +305,14 @@ public class LocalizationService : INotifyPropertyChanged
             { "Browser_Prompt_ManualHint", "También puedes obtener Chromium instalando el navegador Google Chrome, que ya lo incluye:" },
             { "Browser_Prompt_LinkText", "Descargar Google Chrome" },
             { "Browser_Prompt_Accept", "Aceptar" },
-            { "Browser_Prompt_Close", "Cerrar" }
+            { "Browser_Prompt_Close", "Cerrar" },
+            { "Browser_Deps_Title", "Faltan librerías del sistema" },
+            { "Browser_Deps_Body", "Chromium está instalado, pero no puede arrancar porque a tu sistema le faltan librerías. Abre una terminal y ejecuta este comando (te pedirá la contraseña de tu usuario de Linux):" },
+            { "Browser_Deps_BodyNoApt", "Chromium está instalado, pero no puede arrancar porque a tu sistema le faltan librerías. Instálalas con el gestor de paquetes de tu distribución." },
+            { "Browser_Deps_Missing", "Faltan: {0}" },
+            { "Browser_Deps_Copy", "Copiar comando" },
+            { "Browser_Deps_Copied", "Copiado" },
+            { "Browser_Deps_Retry", "Reintentar" }
         };
 
         // Initial load - default to what matches system or English

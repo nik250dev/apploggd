@@ -66,7 +66,9 @@
 
     <Border Padding="40">
         <StackPanel VerticalAlignment="Center" Spacing="20">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
+            <!-- Hidden for the missing-libraries prompt, which needs the whole height. -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20"
+                        IsVisible="{Binding !IsMissingLibrariesPromptVisible}">
                 <Border BorderBrush="{DynamicResource BrandSecondaryBorderBrush}" BorderThickness="0,0,0,5" VerticalAlignment="Bottom" Padding="4,0">
                     <TextBlock Text="A" 
                             FontSize="64" 
@@ -167,6 +169,77 @@
                             Classes="save-btn"
                             Command="{Binding AcceptBrowserDownloadCommand}">
                         <TextBlock Text="{Binding [Browser_Prompt_Accept], Source={x:Static services:LocalizationService.Instance}}"
+                                   Foreground="{DynamicResource TextPrimaryBrush}" FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                    </Button>
+                </Grid>
+            </StackPanel>
+
+            <!-- Linux only: Chromium is on disk but the system lacks libraries to start it. -->
+            <StackPanel x:Name="MissingLibrariesPanel"
+                        IsVisible="{Binding IsMissingLibrariesPromptVisible}"
+                        Spacing="10" HorizontalAlignment="Stretch">
+
+                <TextBlock Text="{Binding [Browser_Deps_Title], Source={x:Static services:LocalizationService.Instance}}"
+                           FontSize="18" FontWeight="Bold"
+                           Foreground="{DynamicResource TextPrimaryBrush}"
+                           TextWrapping="Wrap"/>
+
+                <TextBlock Text="{Binding [Browser_Deps_Body], Source={x:Static services:LocalizationService.Instance}}"
+                           IsVisible="{Binding HasInstallDepsCommand}"
+                           FontSize="13" LineHeight="18"
+                           Foreground="{DynamicResource TextSecondaryBrush}"
+                           TextWrapping="Wrap"/>
+
+                <TextBlock Text="{Binding [Browser_Deps_BodyNoApt], Source={x:Static services:LocalizationService.Instance}}"
+                           IsVisible="{Binding !HasInstallDepsCommand}"
+                           FontSize="13" LineHeight="18"
+                           Foreground="{DynamicResource TextSecondaryBrush}"
+                           TextWrapping="Wrap"/>
+
+                <StackPanel Spacing="4" IsVisible="{Binding HasInstallDepsCommand}">
+                    <Border Background="{DynamicResource InputBackgroundBrush}"
+                            BorderBrush="{DynamicResource InputBorderBrush}" BorderThickness="1"
+                            CornerRadius="5" Padding="8">
+                        <SelectableTextBlock x:Name="InstallDepsCommandText"
+                                             Text="{Binding InstallDepsCommand}"
+                                             FontFamily="DejaVu Sans Mono, Liberation Mono, Consolas, monospace"
+                                             FontSize="11"
+                                             Foreground="{DynamicResource TextPrimaryBrush}"
+                                             TextWrapping="Wrap"/>
+                    </Border>
+                    <Button x:Name="CopyInstallDepsButton"
+                            Click="OnCopyInstallDepsClick"
+                            HorizontalAlignment="Right" Padding="0,2"
+                            Background="Transparent" BorderThickness="0" Cursor="Hand">
+                        <Panel>
+                            <TextBlock Text="{Binding [Browser_Deps_Copy], Source={x:Static services:LocalizationService.Instance}}"
+                                       IsVisible="{Binding !IsInstallDepsCommandCopied}"
+                                       FontSize="12" Foreground="{DynamicResource BrandPrimaryBrush}"/>
+                            <TextBlock Text="{Binding [Browser_Deps_Copied], Source={x:Static services:LocalizationService.Instance}}"
+                                       IsVisible="{Binding IsInstallDepsCommandCopied}"
+                                       FontSize="12" Foreground="{DynamicResource TextMutedBrush}"/>
+                        </Panel>
+                    </Button>
+                </StackPanel>
+
+                <TextBlock Text="{Binding MissingLibrariesText}"
+                           FontSize="12"
+                           Foreground="{DynamicResource TextMutedBrush}"
+                           TextWrapping="Wrap"/>
+
+                <Grid ColumnDefinitions="*, 15, *" Margin="0,10,0,0">
+                    <Button Grid.Column="0" x:Name="MissingLibrariesCloseButton"
+                            Classes="discard-btn"
+                            Command="{Binding CloseFromMissingLibrariesPromptCommand}">
+                        <TextBlock Text="{Binding [Browser_Prompt_Close], Source={x:Static services:LocalizationService.Instance}}"
+                                   VerticalAlignment="Center"/>
+                    </Button>
+
+                    <Button Grid.Column="2" x:Name="MissingLibrariesRetryButton"
+                            Classes="save-btn"
+                            Command="{Binding RetryBrowserCheckCommand}">
+                        <TextBlock Text="{Binding [Browser_Deps_Retry], Source={x:Static services:LocalizationService.Instance}}"
                                    Foreground="{DynamicResource TextPrimaryBrush}" FontWeight="Bold"
                                    VerticalAlignment="Center"/>
                     </Button>
