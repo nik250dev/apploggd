@@ -83,6 +83,23 @@ public partial class MainWindow : Window
         });
     }
 
+    /// <summary>Linux silent start: without a tray to hide in, the window goes to the taskbar minimized instead of staying unreachable.</summary>
+    public async Task EnsureReachableAfterLinuxSilentStartAsync()
+    {
+        if (await LinuxTrayHost.WaitForHostAsync(TimeSpan.FromSeconds(15))) return;
+
+        Dispatcher.UIThread.Post(() =>
+        {
+            if (IsVisible || _canClose) return;
+
+            _logger?.Info("[MainWindow] Silent start with no tray: showing the window minimized.");
+            Show();
+
+            // X11 ignores a minimized state set before the window is mapped.
+            Dispatcher.UIThread.Post(() => WindowState = WindowState.Minimized, DispatcherPriority.Background);
+        });
+    }
+
     /// <summary>
     /// Drives the "animate" class the infinite animations of MainWindow.axaml hang off. Neither
     /// minimizing nor hiding to the tray stops an Avalonia animation on its own — that was ~7 % of

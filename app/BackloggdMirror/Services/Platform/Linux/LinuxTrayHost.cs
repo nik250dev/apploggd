@@ -16,11 +16,33 @@ internal static class LinuxTrayHost
     private static readonly SemaphoreSlim RefreshLock = new(1, 1);
     private static volatile bool _isAvailable;
     private static bool _hasChecked;
+    private static readonly TaskCompletionSource FirstCheck = new(TaskCreationOptions.RunContinuationsAsynchronously);
 
     public static bool IsAvailable => _isAvailable;
 
     /// <summary>Raised on a D-Bus thread, not the UI one.</summary>
     public static event Action? AvailabilityChanged;
+
+    /// <summary>At login the host may register a few seconds after the app starts, so a missing tray is only final after the timeout.</summary>
+    public static async Task<bool> WaitForHostAsync(TimeSpan timeout)
+    {
+        await FirstCheck.Task;
+        if (_isAvailable) return true;
+
+        var appeared = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        void OnChanged() { if (_isAvailable) appeared.TrySetResult(); }
+        AvailabilityChanged += OnChanged;
+        try
+        {
+            if (_isAvailable) return true;
+            await Task.WhenAny(appeared.Task, Task.Delay(timeout));
+            return _isAvailable;
+        }
+        finally
+        {
+            AvailabilityChanged -= OnChanged;
+        }
+    }
 
     public static async Task StartAsync(IAppLogger logger)
     {
@@ -31,6 +53,7 @@ internal static class LinuxTrayHost
             if (string.IsNullOrEmpty(address))
             {
                 logger.Warning("[LinuxTrayHost] No D-Bus session bus: assuming there is no tray, so closing the window quits the app.");
+                FirstCheck.TrySetResult();
                 return;
             }
 
@@ -46,6 +69,7 @@ internal static class LinuxTrayHost
         catch (Exception ex)
         {
             logger.Warning($"[LinuxTrayHost] Could not query the tray over D-Bus, assuming there is none: {ex.Message}");
+            FirstCheck.TrySetResult();
         }
     }
 
@@ -91,6 +115,7 @@ internal static class LinuxTrayHost
         _logger?.Info(available
             ? "[LinuxTrayHost] A tray host is available: \"Minimize to tray\" is offered."
             : "[LinuxTrayHost] No tray host: \"Minimize to tray\" is hidden and closing the window quits the app.");
+        FirstCheck.TrySetResult();
         if (changed) AvailabilityChanged?.Invoke();
     }
 

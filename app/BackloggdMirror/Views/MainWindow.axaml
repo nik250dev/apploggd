@@ -640,7 +640,7 @@
                                     <StackPanel Spacing="15">
                                         <Grid ColumnDefinitions="*, Auto">
                                             <StackPanel Spacing="2">
-                                                <TextBlock Text="{Binding [Settings_StartWithWindows], Source={x:Static services:LocalizationService.Instance}}" Classes="setting-label"/>
+                                                <TextBlock Text="{OnPlatform {Binding [Settings_StartWithWindows], Source={x:Static services:LocalizationService.Instance}}, Linux={Binding [Settings_StartWithSystem], Source={x:Static services:LocalizationService.Instance}}}" Classes="setting-label"/>
                                             </StackPanel>
                                             <ToggleSwitch Grid.Column="1" IsChecked="{Binding StartWithWindows}" OnContent="" OffContent=""/>
                                         </Grid>

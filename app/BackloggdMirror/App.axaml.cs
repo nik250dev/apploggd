@@ -75,7 +75,7 @@ public partial class App : Application
 
             if (silentStart)
             {
-                logger.Info("[App] Started by Windows autostart: keeping every window hidden.");
+                logger.Info("[App] Started by the system autostart: keeping every window hidden.");
 
                 // desktop.MainWindow is deliberately left unset: the lifetime shows whatever sits
                 // there when Start() runs. Both handlers below assign it, which is also what
@@ -124,6 +124,10 @@ public partial class App : Application
                 if (!silentStart)
                 {
                     mainWindow.Show();
+                }
+                else if (OperatingSystem.IsLinux())
+                {
+                    _ = mainWindow.EnsureReachableAfterLinuxSilentStartAsync();
                 }
 
                 loginWindow.Close();
