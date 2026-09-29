@@ -6543,15 +6543,19 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "BSMZH25V6V46"
+        "id": "9P27X1Z0SWVC"
       },
       {
         "distributor": "xbox",
-        "id": "9P27X1Z0SWVC"
+        "id": "BSMZH25V6V46"
       },
       {
         "distributor": "steam",
         "id": "477160"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.and.games505.humanfallflat"
       }
     ],
     "id_igdb": "16992",
@@ -189470,12 +189474,16 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "steam",
+        "id": "2216830"
+      },
+      {
         "distributor": "xbox",
         "id": "9P558FW2W073"
       },
       {
-        "distributor": "steam",
-        "id": "2216830"
+        "distributor": "google_play",
+        "id": "com.jackboxgames.tjpp10"
       }
     ],
     "id_igdb": "243869",
@@ -242956,6 +242964,14 @@
       {
         "distributor": "steam",
         "id": "3191030"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.mogdogblog.nnflite"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.mogdogblog.nnf"
       }
     ],
     "id_igdb": "324225",
@@ -254711,10 +254727,6 @@
     "third_party_skus": [
       {
         "distributor": "steam",
-        "id": "1125510\t"
-      },
-      {
-        "distributor": "steam",
         "id": "1125510"
       }
     ],
@@ -258955,6 +258967,10 @@
       {
         "distributor": "steam",
         "id": "3104970"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.pgp.bybb01"
       }
     ],
     "id_igdb": "348028",
@@ -269240,24 +269256,22 @@
         "is_launcher": false
       },
       {
-        "name": ">java",
-        "os": "darwin",
-        "is_launcher": false,
-        "arguments": "net.minecraft.client.main.Main"
-      },
-      {
-        "name": ">javaw.exe",
-        "os": "win32",
-        "is_launcher": false,
-        "arguments": "net.minecraft.client.main.Main"
-      },
-      {
         "name": "minecraft.windows.exe",
         "os": "win32",
         "is_launcher": false
       },
       {
+        "name": ">java",
+        "os": "darwin",
+        "is_launcher": false
+      },
+      {
         "name": "minecraft/runtime/jre-x64/1.8.0_25/bin/javaw.exe",
+        "os": "win32",
+        "is_launcher": false
+      },
+      {
+        "name": ">javaw.exe",
         "os": "win32",
         "is_launcher": false
       }
@@ -269265,23 +269279,11 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9NBLGGH537BL"
+        "id": "9NBLGGH2JHXJ"
       },
       {
         "distributor": "microsoft",
         "id": ""
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NBLGGH2JHXJ"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9MVXMVT8ZKWC"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9WZDNCRDZSBB"
       },
       {
         "distributor": "xbox",
@@ -269290,6 +269292,22 @@
       {
         "distributor": "xbox",
         "id": "9PGW18NPBZV5"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9WZDNCRDZSBB"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MVXMVT8ZKWC"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NBLGGH537BL"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.mojang.minecraftpe"
       }
     ],
     "id_igdb": "135400",
@@ -287068,6 +287086,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.VuVuu.TinyTerraces"
+      },
       {
         "distributor": "steam",
         "id": "3136330"
@@ -501145,12 +501167,19 @@
     "id": "1511443377927880775",
     "name": "Call of Duty: Modern Warfare 4",
     "aliases": [],
-    "executables": [],
-    "third_party_skus": [
+    "executables": [
       {
-        "distributor": "xbox",
-        "id": "9NWWNS0C3007"
+        "name": "sp26-cod.exe",
+        "os": "win32",
+        "is_launcher": false
       },
+      {
+        "name": "cod26-cod.exe",
+        "os": "win32",
+        "is_launcher": false
+      }
+    ],
+    "third_party_skus": [
       {
         "distributor": "steam",
         "id": "4435490"
@@ -501158,6 +501187,10 @@
       {
         "distributor": "xbox",
         "id": "9NCPSQQD1Z66"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NWWNS0C3007"
       }
     ],
     "id_igdb": "403310",
@@ -521693,17 +521726,7 @@
     "aliases": [],
     "executables": [
       {
-        "name": "sp26-cod.exe",
-        "os": "win32",
-        "is_launcher": false
-      },
-      {
         "name": "cod.exe",
-        "os": "win32",
-        "is_launcher": false
-      },
-      {
-        "name": "cod26-cod.exe",
         "os": "win32",
         "is_launcher": false
       }
@@ -527963,23 +527986,34 @@
     "id": "1552168352116641822",
     "name": "Clive Barker's Hellraiser: Revival",
     "aliases": [],
-    "executables": [],
+    "executables": [
+      {
+        "name": "hellraiser.exe",
+        "os": "win32",
+        "is_launcher": false
+      },
+      {
+        "name": "hellraiser-win64-shipping.exe",
+        "os": "win32",
+        "is_launcher": false
+      }
+    ],
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9PN8DJ8MRCC6"
+        "id": "9PN93T01JMSR"
       },
       {
-        "distributor": "steam",
-        "id": "1551980"
+        "distributor": "xbox",
+        "id": "9PN8DJ8MRCC6"
       },
       {
         "distributor": "xbox",
         "id": "9NSWRGZBQ2MC"
       },
       {
-        "distributor": "xbox",
-        "id": "9PN93T01JMSR"
+        "distributor": "steam",
+        "id": "1551980"
       }
     ],
     "id_igdb": "356552",
