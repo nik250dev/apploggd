@@ -1160,6 +1160,8 @@ public partial class MainWindowViewModel : ViewModelBase
         string? path = await pick();
         if (string.IsNullOrEmpty(path)) return;
 
+        if (OperatingSystem.IsLinux() && !CheckLinuxExecutable(path)) return;
+
         var entry = BlacklistService.ForExecutable(path);
 
         if (IsGameRunning && _currentGame is { } game && BlacklistService.Covers(entry, game))
@@ -1169,6 +1171,23 @@ public partial class MainWindowViewModel : ViewModelBase
         }
 
         AddToBlacklist(entry);
+    }
+
+    /// <summary>The Linux picker offers every file, so what Windows' *.exe filter rules out is caught here.</summary>
+    private bool CheckLinuxExecutable(string path)
+    {
+        string? key = LinuxBlacklistFile.Check(path) switch
+        {
+            LinuxBlacklistFile.Problem.Script => "Toast_BlacklistScript",
+            LinuxBlacklistFile.Problem.NotExecutable => "Toast_BlacklistNotExecutable",
+            _ => null
+        };
+
+        if (key == null) return true;
+
+        _logger.Info($"[MainWindowViewModel] Refused to blacklist '{path}' ({key}).");
+        ShowToast(string.Format(LocalizationService.Instance[key], System.IO.Path.GetFileName(path)), ToastType.Warning);
+        return false;
     }
 
     [RelayCommand]

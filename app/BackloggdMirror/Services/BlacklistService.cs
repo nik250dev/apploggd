@@ -8,6 +8,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using BackloggdMirror.Models;
+using BackloggdMirror.Services.Platform.Linux;
 
 namespace BackloggdMirror.Services;
 
@@ -178,20 +179,27 @@ public sealed class BlacklistService : IDetectionBlacklist
             };
         }
 
-        string? executableName = game.ExecutablePath != null ? Path.GetFileName(game.ExecutablePath) : ProcessFileName(game.ProcessId);
+        string? executablePath = game.ExecutablePath;
+        if (OperatingSystem.IsLinux() && executablePath != null)
+            executablePath = LinuxBlacklistFile.CanonicalPath(executablePath);
+
+        string? executableName = executablePath != null ? Path.GetFileName(executablePath) : ProcessFileName(game.ProcessId);
 
         return new BlacklistEntry
         {
             Kind = BlacklistEntryKind.Application,
             DisplayName = displayName,
             AddedAt = DateTime.Now,
-            ExecutablePath = game.ExecutablePath,
+            ExecutablePath = executablePath,
             ExecutableName = executableName
         };
     }
 
     public static BlacklistEntry ForExecutable(string path)
     {
+        if (OperatingSystem.IsLinux())
+            return ForLinuxExecutable(path);
+
         string? description = null;
         try
         {
@@ -210,6 +218,21 @@ public sealed class BlacklistService : IDetectionBlacklist
             AddedAt = DateTime.Now,
             ExecutablePath = path,
             ExecutableName = Path.GetFileName(path)
+        };
+    }
+
+    /// <summary>Linux files have no version resource; a Steam game gets its store name instead of its file name.</summary>
+    private static BlacklistEntry ForLinuxExecutable(string path)
+    {
+        string canonical = LinuxBlacklistFile.CanonicalPath(path);
+
+        return new BlacklistEntry
+        {
+            Kind = BlacklistEntryKind.Application,
+            DisplayName = LinuxBlacklistFile.SteamNameOf(canonical) ?? Path.GetFileNameWithoutExtension(canonical),
+            AddedAt = DateTime.Now,
+            ExecutablePath = canonical,
+            ExecutableName = Path.GetFileName(canonical)
         };
     }
 
@@ -287,7 +310,9 @@ public sealed class BlacklistService : IDetectionBlacklist
         }
     }
 
-    private static string NormalizePath(string path) => path.Replace('/', '\\');
+    // Linux also resolves symlinks, so a game reached through a linked Steam library still matches.
+    private static string NormalizePath(string path) =>
+        (OperatingSystem.IsLinux() ? LinuxBlacklistFile.CanonicalPath(path) : path).Replace('/', '\\');
 
     private static string ContentId(string emulatorName, string contentKey) => emulatorName + "|" + contentKey;
 }

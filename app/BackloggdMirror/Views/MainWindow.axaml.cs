@@ -505,7 +505,8 @@ public partial class MainWindow : Window
         {
             Title = loc["Settings_Blacklist_PickerTitle"],
             AllowMultiple = false,
-            FileTypeFilter = new[]
+            // Linux executables have no extension to filter by; the ViewModel checks the file instead.
+            FileTypeFilter = OperatingSystem.IsLinux() ? null : new[]
             {
                 new FilePickerFileType(loc["Settings_Blacklist_PickerFilter"]) { Patterns = new[] { "*.exe" } }
             }
