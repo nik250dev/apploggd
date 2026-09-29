@@ -9,6 +9,7 @@ using Avalonia.Media.Imaging;
 using Avalonia.Skia;
 using Avalonia.Markup.Xaml.MarkupExtensions;
 using BackloggdMirror.Services;
+using BackloggdMirror.Services.Platform.Linux;
 using Avalonia.Threading;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -19,6 +20,7 @@ public partial class MainWindow : Window
 {
     private bool _canClose = false;
     private TrayIcon? _trayIcon;
+    private NativeMenuItem? _trayOpenItem;
     private NativeMenuItem? _trayToggleItem;
     private NativeMenuItem? _trayExitItem;
     private TrayNotificationWindow? _trayNotificationWindow;
@@ -56,6 +58,29 @@ public partial class MainWindow : Window
         UpdateAnimationsEnabled();
         InitializeTrayIcons(); // Pre-render icons
         InitializeTrayIcon();
+
+        if (OperatingSystem.IsLinux())
+        {
+            LinuxTrayHost.AvailabilityChanged += OnLinuxTrayAvailabilityChanged;
+        }
+    }
+
+    private void OnLinuxTrayAvailabilityChanged()
+    {
+        Dispatcher.UIThread.Post(() =>
+        {
+            if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+            {
+                vm.NotifyTrayAvailabilityChanged();
+            }
+
+            // A window hidden in a tray that just vanished would be unreachable.
+            if (!LinuxTrayHost.IsAvailable && !IsVisible && !_canClose)
+            {
+                _logger?.Info("[MainWindow] The tray went away while the window was hidden in it; showing the window.");
+                ShowMainWindow();
+            }
+        });
     }
 
     /// <summary>
@@ -194,6 +219,15 @@ public partial class MainWindow : Window
             _trayIcon.Clicked += (s, e) => RestoreMainWindow();
 
             var menu = new NativeMenu();
+
+            // Some Linux hosts (GNOME's AppIndicator) open the menu on left click instead of activating the icon.
+            if (OperatingSystem.IsLinux())
+            {
+                _trayOpenItem = new NativeMenuItem(LocalizationService.Instance["Tray_Open"]);
+                _trayOpenItem.Click += (s, e) => RestoreMainWindow();
+                menu.Items.Add(_trayOpenItem);
+                menu.Items.Add(new NativeMenuItemSeparator());
+            }
 
             _trayToggleItem = new NativeMenuItem(LocalizationService.Instance["Home_PauseSearch"]);
             _trayToggleItem.Click += (s, e) =>
@@ -406,6 +440,11 @@ public partial class MainWindow : Window
 
         LocalizationService.Instance.PropertyChanged -= OnLocalizationPropertyChanged;
 
+        if (OperatingSystem.IsLinux())
+        {
+            LinuxTrayHost.AvailabilityChanged -= OnLinuxTrayAvailabilityChanged;
+        }
+
         // Under OnExplicitShutdown the process outlives its last window, so the shutdown has to be
         // explicit — except on a logout, where the login window is about to take over.
         if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
@@ -602,6 +641,8 @@ public partial class MainWindow : Window
                 {
                     if (_trayExitItem != null)
                         _trayExitItem.Header = LocalizationService.Instance["Tray_Exit"];
+                    if (_trayOpenItem != null)
+                        _trayOpenItem.Header = LocalizationService.Instance["Tray_Open"];
                 });
             }
         }

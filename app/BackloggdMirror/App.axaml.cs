@@ -8,6 +8,8 @@ using Avalonia.Markup.Xaml;
 using BackloggdMirror.ViewModels;
 using BackloggdMirror.Views;
 using BackloggdMirror.Services;
+using BackloggdMirror.Services.Platform.Linux;
+using System;
 
 using BackloggdMirror.Models;
 
@@ -43,6 +45,11 @@ public partial class App : Application
             var credentialStorageService = new CredentialStorageService(logger);
             var installService = new PlaywrightInstallService(logger);
             var autostartService = new AutostartService(logger);
+
+            if (OperatingSystem.IsLinux())
+            {
+                _ = LinuxTrayHost.StartAsync(logger);
+            }
 
             // Explicitly load settings here to avoid infinite recursion in constructor
             settingsService.Load();

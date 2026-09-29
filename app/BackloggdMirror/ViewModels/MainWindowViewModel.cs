@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using BackloggdMirror.Views;
 using BackloggdMirror.Services;
+using BackloggdMirror.Services.Platform.Linux;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
@@ -131,9 +132,10 @@ public partial class MainWindowViewModel : ViewModelBase
     public bool IsBottomMessageLoading => BottomMessageType == BottomMessageType.Loading;
     public bool IsBottomMessageIconVisible => BottomMessageType == BottomMessageType.Success || BottomMessageType == BottomMessageType.Warning || BottomMessageType == BottomMessageType.Error;
 
-    // Many Linux desktops have no tray (WSLg, GNOME without AppIndicator, Steam Deck), and a window
-    // hidden there cannot be brought back, so on Linux the close button always quits.
-    public bool CanMinimizeToTray => !OperatingSystem.IsLinux();
+    // On Linux only with a tray host: a window hidden without one could not be brought back.
+    public bool CanMinimizeToTray => !OperatingSystem.IsLinux() || LinuxTrayHost.IsAvailable;
+
+    public void NotifyTrayAvailabilityChanged() => OnPropertyChanged(nameof(CanMinimizeToTray));
 
     // The settings toggles write straight through to SettingsService and persist on every change:
     // there is no "Apply" button, so an unsaved change would be lost silently.
