@@ -49,6 +49,7 @@ public partial class App : Application
             if (OperatingSystem.IsLinux())
             {
                 _ = LinuxTrayHost.StartAsync(logger);
+                LinuxDesktopEntry.Install(logger);
             }
 
             // Explicitly load settings here to avoid infinite recursion in constructor

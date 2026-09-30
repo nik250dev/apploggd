@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Linq;
 using System.Text;
 
 namespace BackloggdMirror.Services.Platform.Linux;
@@ -10,18 +9,7 @@ internal static class LinuxAutostartEntry
 {
     private const string FileName = "apploggd.desktop";
 
-    private static string FilePath
-    {
-        get
-        {
-            string? configHome = Environment.GetEnvironmentVariable("XDG_CONFIG_HOME");
-            if (string.IsNullOrEmpty(configHome) || !Path.IsPathRooted(configHome))
-            {
-                configHome = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".config");
-            }
-            return Path.Combine(configHome, "autostart", FileName);
-        }
-    }
+    private static string FilePath => Path.Combine(LinuxDesktopFile.ConfigHome, "autostart", FileName);
 
     public static bool SetEnabled(bool enable, IAppLogger logger)
     {
@@ -84,7 +72,7 @@ internal static class LinuxAutostartEntry
             }
 
             string[] lines = File.ReadAllLines(path);
-            string? current = ReadKey(lines, "Exec");
+            string? current = LinuxDesktopFile.ReadKey(lines, "Exec");
             if (current != expected)
             {
                 logger.Warning($"[AutostartService] Autostart entry is stale. Was: {current} — now: {expected}. Rewriting it.");
@@ -117,73 +105,14 @@ internal static class LinuxAutostartEntry
 
     private static string? BuildExec(IAppLogger logger)
     {
-        string? path = ResolveLauncherPath();
-        if (string.IsNullOrEmpty(path))
-        {
-            logger.Error("[AutostartService] Environment.ProcessPath is empty, so there is no path to register.");
-            return null;
-        }
-
-        // Under "dotnet Apploggd.dll" the process is the shared host, which would open nothing at login.
-        if (Path.GetFileNameWithoutExtension(path) == "dotnet")
-        {
-            logger.Error($"[AutostartService] Running through the dotnet host ({path}), not the Apploggd executable; there is nothing to register.");
-            return null;
-        }
-
-        if (path.Any(char.IsControl))
-        {
-            logger.Error($"[AutostartService] The executable path contains control characters and cannot go in a desktop entry: {path}");
-            return null;
-        }
-
-        return $"{QuoteExecArgument(path)} {AutostartService.StartupArgument}";
-    }
-
-    /// <summary>Inside an AppImage the process runs from a mount that disappears on exit; the image itself is in APPIMAGE.</summary>
-    private static string? ResolveLauncherPath()
-    {
-        string? appImage = Environment.GetEnvironmentVariable("APPIMAGE");
-        if (!string.IsNullOrEmpty(appImage) && File.Exists(appImage)) return appImage;
-        return Environment.ProcessPath;
-    }
-
-    /// <summary>Desktop Entry spec quoting: Exec-level escapes, then string-level ones (a backslash becomes four), and % doubled.</summary>
-    private static string QuoteExecArgument(string value)
-    {
-        var sb = new StringBuilder("\"");
-        foreach (char c in value)
-        {
-            if (c is '"' or '`' or '$' or '\\') sb.Append('\\');
-            sb.Append(c);
-        }
-        sb.Append('"');
-        return sb.ToString().Replace("\\", "\\\\").Replace("%", "%%");
-    }
-
-    private static string? ReadKey(string[] lines, string key)
-    {
-        bool inMainGroup = false;
-        foreach (string raw in lines)
-        {
-            string line = raw.Trim();
-            if (line.StartsWith('['))
-            {
-                inMainGroup = line == "[Desktop Entry]";
-                continue;
-            }
-            if (!inMainGroup) continue;
-
-            int eq = line.IndexOf('=');
-            if (eq > 0 && line[..eq].TrimEnd() == key) return line[(eq + 1)..].TrimStart();
-        }
-        return null;
+        string? path = LinuxDesktopFile.ResolveExecutable(logger, "[AutostartService]");
+        return path == null ? null : $"{LinuxDesktopFile.QuoteExecArgument(path)} {AutostartService.StartupArgument}";
     }
 
     /// <summary>GNOME Tweaks writes X-GNOME-Autostart-enabled=false; the spec's Hidden=true means "treat as deleted".</summary>
     private static bool IsDisabledByDesktop(string[] lines)
     {
-        return string.Equals(ReadKey(lines, "X-GNOME-Autostart-enabled"), "false", StringComparison.OrdinalIgnoreCase)
-            || string.Equals(ReadKey(lines, "Hidden"), "true", StringComparison.OrdinalIgnoreCase);
+        return string.Equals(LinuxDesktopFile.ReadKey(lines, "X-GNOME-Autostart-enabled"), "false", StringComparison.OrdinalIgnoreCase)
+            || string.Equals(LinuxDesktopFile.ReadKey(lines, "Hidden"), "true", StringComparison.OrdinalIgnoreCase);
     }
 }
