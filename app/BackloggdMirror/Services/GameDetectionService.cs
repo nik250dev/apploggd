@@ -22,7 +22,7 @@ namespace BackloggdMirror.Services;
 /// too but has to work out which ROM is loaded before it can name a game; and the window heuristic
 /// only produces a window <em>title</em> that still has to be identified afterwards.
 /// Linux adds a tier of its own between the first two, the Steam app id (see <see cref="LinuxSteamGameDetector"/>),
-/// has no emulator tier, and brings its own window heuristic (see <see cref="LinuxWindowGameDetector"/>).
+/// has its own emulator detectors behind the same tier, and brings its own window heuristic (see <see cref="LinuxWindowGameDetector"/>).
 /// </summary>
 public class GameDetectionService : IGameDetectionService
 {
@@ -56,6 +56,7 @@ public class GameDetectionService : IGameDetectionService
         {
             _strategy = new LinuxWindowGameDetector(new IgdbResolverService(logger), blacklist, logger);
             _steamDetector = new LinuxSteamGameDetector(logger, blacklist);
+            _emulatorDetector = new EmulatorDetector(logger, blacklist);
         }
         else
         {

@@ -70,7 +70,7 @@ internal static class LinuxGameProcess
     /// <summary>
     /// Executable names, lowercased and without extension. Browsers and media players, which pass the
     /// library rule; stores and launchers, which are not the game they start; engine editors; the
-    /// emulators that Windows handles in its own tier, whose menu would pass too; and Wine's own programs.
+    /// emulators, which have their own tier and whose menus would pass too; and Wine's own programs.
     /// </summary>
     private static readonly HashSet<string> ExcludedNames = new(StringComparer.OrdinalIgnoreCase)
     {

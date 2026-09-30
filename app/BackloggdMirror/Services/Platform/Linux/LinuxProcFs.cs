@@ -100,6 +100,40 @@ internal static class LinuxProcFs
         }
     }
 
+    /// <summary>
+    /// Where each file descriptor points: a path ("/home/.../game.iso"), a deleted file ("/dev/shm/x (deleted)")
+    /// or a pseudo-file ("socket:[123]"). Paths are as the process sees them, which for a Flatpak is its own mount namespace.
+    /// </summary>
+    public static List<(int Fd, string Target)> ReadOpenFiles(int pid)
+    {
+        var files = new List<(int, string)>();
+        try
+        {
+            foreach (string entry in Directory.EnumerateFileSystemEntries($"/proc/{pid}/fd"))
+            {
+                if (!int.TryParse(Path.GetFileName(entry), out int fd))
+                    continue;
+
+                try
+                {
+                    string? target = new FileInfo(entry).LinkTarget;
+                    if (target != null)
+                        files.Add((fd, target));
+                }
+                catch
+                {
+                    // Closed mid-scan.
+                }
+            }
+        }
+        catch
+        {
+            // Gone, or not the user's.
+        }
+
+        return files;
+    }
+
     /// <summary>The last segment of a Linux or a Windows path.</summary>
     public static string FileNameOf(string path) => path[(path.LastIndexOfAny(Separators) + 1)..];
 

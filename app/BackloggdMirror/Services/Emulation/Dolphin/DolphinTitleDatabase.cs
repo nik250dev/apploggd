@@ -17,7 +17,13 @@ internal static class DolphinTitleDatabase
         if (string.IsNullOrEmpty(dolphinDir))
             return null;
 
-        string path = Path.Combine(dolphinDir, "Sys", FileName);
+        return FindNameInSys(Path.Combine(dolphinDir, "Sys"), gameId);
+    }
+
+    /// <summary>Linux installs keep Sys apart from the executable (share/dolphin-emu/sys).</summary>
+    public static string? FindNameInSys(string sysDir, string gameId)
+    {
+        string path = Path.Combine(sysDir, FileName);
         if (!File.Exists(path))
             return null;
 

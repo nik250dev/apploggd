@@ -20,7 +20,7 @@ internal sealed class DolphinDetector : IEmulatorDetector
     // GameTDB prefixes of GameCube discs (retail, demo, promotional, Game Boy Player).
     private const string GameCubeIdPrefixes = "GDPU";
 
-    private static readonly HashSet<string> DiscExtensions = new(StringComparer.OrdinalIgnoreCase)
+    internal static readonly HashSet<string> DiscExtensions = new(StringComparer.OrdinalIgnoreCase)
     {
         ".iso", ".gcm", ".tgc", ".rvz", ".wia", ".gcz", ".wbfs", ".ciso", ".nfs", ".dol", ".elf", ".wad"
     };
@@ -191,7 +191,7 @@ internal sealed class DolphinDetector : IEmulatorDetector
     }
 
     /// <summary>From the header magic when the RAM was read; guessed from the ID prefix otherwise, keeping both.</summary>
-    private static IReadOnlyList<EmulatedPlatform> PlatformsFor(DolphinDisc disc)
+    internal static IReadOnlyList<EmulatedPlatform> PlatformsFor(DolphinDisc disc)
     {
         var gameCube = EmulatedPlatformResolver.ByKey("ngc");
         var wii = EmulatedPlatformResolver.ByKey("wii");
