@@ -14803,6 +14803,10 @@
         "id": "9N0QFT016SGV"
       },
       {
+        "distributor": "xbox",
+        "id": "BTMS1PXLQ6P6"
+      },
+      {
         "distributor": "epic",
         "id": "FC3EC7982B584A4291D7943204EA424B"
       },
@@ -78143,9 +78147,10 @@
   },
   {
     "id": "1124353934623002726",
-    "name": "CRISIS CORE: FINAL FANTASY VII - REUNION",
+    "name": "Crisis Core: Final Fantasy VII - Reunion",
     "aliases": [
-      "CRISIS CORE -FINAL FANTASY VII- REUNION"
+      "CRISIS CORE -FINAL FANTASY VII- REUNION",
+      "CRISIS CORE: FINAL FANTASY VII - REUNION"
     ],
     "executables": [
       {
@@ -78156,16 +78161,16 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9P6J9NFKGJ68"
+      },
+      {
         "distributor": "steam",
         "id": "1608070"
       },
       {
         "distributor": "xbox",
         "id": "9PCWV3FWJZ18"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9P6J9NFKGJ68"
       }
     ],
     "id_igdb": "205201",
@@ -124261,10 +124266,9 @@
   },
   {
     "id": "1124357342394335324",
-    "name": "Kill la Kill: If",
+    "name": "KILL la KILL: IF",
     "aliases": [
-      "KILL la KILL THE GAME: IF",
-      "KILL la KILL: IF"
+      "KILL la KILL THE GAME: IF"
     ],
     "executables": [
       {
@@ -173494,10 +173498,9 @@
   },
   {
     "id": "1129504328848265387",
-    "name": "Five Nights at Freddy's: Help Wanted",
+    "name": "FIVE NIGHTS AT FREDDY'S: HELP WANTED",
     "aliases": [
-      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED",
-      "FIVE NIGHTS AT FREDDY'S: HELP WANTED"
+      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED"
     ],
     "executables": [
       {
@@ -173508,12 +173511,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "732690"
-      },
-      {
         "distributor": "xbox",
         "id": "9P731FVPM8WW"
+      },
+      {
+        "distributor": "steam",
+        "id": "732690"
       }
     ],
     "id_igdb": "115304",
@@ -250584,12 +250587,20 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "epic",
+        "id": "9BABBF152BD1428E9FDD8646934B0DA6"
+      },
+      {
         "distributor": "steam",
         "id": "3228590"
       },
       {
-        "distributor": "epic",
-        "id": "9BABBF152BD1428E9FDD8646934B0DA6"
+        "distributor": "xbox",
+        "id": "9NXZ4ZG619J8"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NJ98BLX9LTH"
       }
     ],
     "id_igdb": "316979",
@@ -254725,6 +254736,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1125510\t"
+      },
       {
         "distributor": "steam",
         "id": "1125510"
@@ -262582,7 +262597,15 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9NRXKRVCGRNM"
+        "id": "BX1XTXKC18QP"
+      },
+      {
+        "distributor": "xbox",
+        "id": "BVQ3V30ZXVT5"
+      },
+      {
+        "distributor": "uplay",
+        "id": "4932"
       },
       {
         "distributor": "epic",
@@ -262590,15 +262613,15 @@
       },
       {
         "distributor": "xbox",
-        "id": "BVQ3V30ZXVT5"
+        "id": "9NRXKRVCGRNM"
+      },
+      {
+        "distributor": "xbox",
+        "id": "BZQD437RJ0FX"
       },
       {
         "distributor": "steam",
         "id": "2221490"
-      },
-      {
-        "distributor": "uplay",
-        "id": "4932"
       }
     ],
     "id_igdb": "90099",
@@ -275508,6 +275531,14 @@
       {
         "distributor": "xbox",
         "id": "9PK5RK41WLH2"
+      },
+      {
+        "distributor": "steam",
+        "id": "1672637"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NRGRXDNBWRC"
       },
       {
         "distributor": "xbox",
@@ -289451,9 +289482,10 @@
   },
   {
     "id": "1428182872589602867",
-    "name": "420BLAZE IT 2: GAME OF THE YEAR",
+    "name": "420Blaze It 2: Game of the Year",
     "aliases": [
-      "420 BLAZE IT 2: GAME OF THE YEAR"
+      "420 BLAZE IT 2: GAME OF THE YEAR",
+      "420BLAZE IT 2: GAME OF THE YEAR"
     ],
     "executables": [],
     "third_party_skus": [
@@ -306957,12 +306989,20 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9PJBKF27C16M"
+        "distributor": "steam",
+        "id": "86832"
       },
       {
         "distributor": "steam",
         "id": "2934220"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PJBKF27C16M"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NBKGV5NZ7SL"
       }
     ],
     "id_igdb": "346956",
@@ -308062,11 +308102,26 @@
     "id": "1428223713928810496",
     "name": "March of Giants",
     "aliases": [],
-    "executables": [],
+    "executables": [
+      {
+        "name": "thelineclient.exe",
+        "os": "win32",
+        "is_launcher": false
+      },
+      {
+        "name": "thelineclient-win64-shipping.exe",
+        "os": "win32",
+        "is_launcher": false
+      }
+    ],
     "third_party_skus": [
       {
         "distributor": "steam",
         "id": "1924600"
+      },
+      {
+        "distributor": "steam",
+        "id": "3643930"
       }
     ],
     "id_igdb": "363900",
@@ -321161,6 +321216,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "epic",
+        "id": "1F14FFEFE12D4BD994020AF1E4C64B29"
+      },
       {
         "distributor": "steam",
         "id": "1739900"
@@ -373925,20 +373984,19 @@
   },
   {
     "id": "1442715029052063765",
-    "name": "Snwbrd: Freestyle Snowboarding",
+    "name": "SNWBRD: Freestyle Snowboarding",
     "aliases": [
-      "SNWBRD",
-      "SNWBRD: Freestyle Snowboarding"
+      "SNWBRD"
     ],
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9MWMGJFDZW4D"
-      },
-      {
         "distributor": "steam",
         "id": "1912130"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MWMGJFDZW4D"
       }
     ],
     "id_igdb": "235196",
@@ -402889,9 +402947,10 @@
   },
   {
     "id": "1442728871614091295",
-    "name": "Arcade Archives: ARGUS",
+    "name": "Arcade Archives: Argus",
     "aliases": [
-      "Arcade Archives ARGUS"
+      "Arcade Archives ARGUS",
+      "Arcade Archives: ARGUS"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -420471,10 +420530,9 @@
   },
   {
     "id": "1442734322128916531",
-    "name": "Arcade Archives: Naughty Boy",
+    "name": "Arcade Archives: NAUGHTY BOY",
     "aliases": [
-      "Arcade Archives NAUGHTY BOY",
-      "Arcade Archives: NAUGHTY BOY"
+      "Arcade Archives NAUGHTY BOY"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -428031,10 +428089,9 @@
   },
   {
     "id": "1442737663558811792",
-    "name": "Arcade Archives: The Astyanax",
+    "name": "Arcade Archives: THE ASTYANAX",
     "aliases": [
-      "Arcade Archives THE ASTYANAX",
-      "Arcade Archives: THE ASTYANAX"
+      "Arcade Archives THE ASTYANAX"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -443855,6 +443912,10 @@
       {
         "distributor": "steam",
         "id": "2425150"
+      },
+      {
+        "distributor": "epic",
+        "id": "551BA4D136C8474198BC726CCCBD1F0A"
       }
     ],
     "id_igdb": "295897",
@@ -476189,12 +476250,16 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "2502780"
+        "distributor": "xbox",
+        "id": "9PK70LXMQVHX"
       },
       {
         "distributor": "epic",
         "id": "0B8BD3DE06B44324A3B29498DC9FD7C2"
+      },
+      {
+        "distributor": "steam",
+        "id": "2502780"
       }
     ],
     "id_igdb": "366709",
@@ -501369,12 +501434,12 @@
     "aliases": [],
     "executables": [
       {
-        "name": "onimushawots_demo.exe",
+        "name": "onimushawots.exe",
         "os": "win32",
         "is_launcher": false
       },
       {
-        "name": "onimushawots.exe",
+        "name": "onimushawots_demo.exe",
         "os": "win32",
         "is_launcher": false
       }
@@ -501382,11 +501447,15 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9P50G4HDZJSH"
+        "id": "9NH6PQ3L7TTP"
       },
       {
         "distributor": "xbox",
-        "id": "9NH6PQ3L7TTP"
+        "id": "9PCW22CHJTNR"
+      },
+      {
+        "distributor": "steam",
+        "id": "2638890"
       },
       {
         "distributor": "epic",
@@ -501394,11 +501463,19 @@
       },
       {
         "distributor": "xbox",
+        "id": "9MX9ZXL643HM"
+      },
+      {
+        "distributor": "xbox",
         "id": "9PH7CL8KW2N2"
       },
       {
-        "distributor": "steam",
-        "id": "2638890"
+        "distributor": "xbox",
+        "id": "9P50G4HDZJSH"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PJMHTRC9WKB"
       }
     ],
     "id_igdb": "325602",
@@ -526491,7 +526568,7 @@
   },
   {
     "id": "1549993576686030928",
-    "name": "Algolemeth",
+    "name": "Dungeon Automata",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -529508,9 +529585,9 @@
   },
   {
     "id": "1553255162443866172",
-    "name": "CONTROL Resonant",
+    "name": "CONTROL RESONANT",
     "aliases": [
-      "CONTROL RESONANT"
+      "CONTROL Resonant"
     ],
     "executables": [],
     "third_party_skus": [
@@ -529519,16 +529596,16 @@
         "id": "3669870"
       },
       {
-        "distributor": "xbox",
-        "id": "9P092299FSGW"
-      },
-      {
         "distributor": "epic",
         "id": "2DB42190F5704065809661FB9E4216EA"
       },
       {
         "distributor": "xbox",
         "id": "9PFPMMQPKCL6"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P092299FSGW"
       }
     ],
     "id_igdb": "225582",
@@ -529574,5 +529651,738 @@
     "cover": null,
     "artwork": null,
     "url": null
+  },
+  {
+    "id": "1554704893292585100",
+    "name": "Curve Fever Pro",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1133700"
+      }
+    ],
+    "id_igdb": "63259",
+    "cover": "co2lf9",
+    "artwork": [
+      "arkym"
+    ],
+    "url": "curve-fever"
+  },
+  {
+    "id": "1554704913131642911",
+    "name": "Escape Toon Kingdom",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3198360"
+      }
+    ],
+    "id_igdb": "344820",
+    "cover": "coa4gd",
+    "artwork": [
+      "ar4wq9"
+    ],
+    "url": "escape-toon-kingdom"
+  },
+  {
+    "id": "1554704925492121670",
+    "name": "Dynasty Warriors 3: Complete Edition Remastered",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9P4DNKT4W66P"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PKWZ4N202MP"
+      },
+      {
+        "distributor": "steam",
+        "id": "3841510"
+      }
+    ],
+    "id_igdb": "369991",
+    "cover": "coajzb",
+    "artwork": [
+      "ar4ahy"
+    ],
+    "url": "dynasty-warriors-3-complete-edition-remastered"
+  },
+  {
+    "id": "1554704936871395423",
+    "name": "Alchemortis",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3967230"
+      }
+    ],
+    "id_igdb": "388779",
+    "cover": "ar5ysc",
+    "artwork": [
+      "ar5yse",
+      "ar5ysb",
+      "ar58jr"
+    ],
+    "url": "alchemortis"
+  },
+  {
+    "id": "1554704970685747200",
+    "name": "Mystery Egg Shop Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3850970"
+      }
+    ],
+    "id_igdb": "391526",
+    "cover": "ar63az",
+    "artwork": [
+      "ar63b0",
+      "ar63ay"
+    ],
+    "url": "mystery-egg-shop-simulator"
+  },
+  {
+    "id": "1554704999701938267",
+    "name": "Backrooms: Code Yellow",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4694270"
+      }
+    ],
+    "id_igdb": "416594",
+    "cover": "cocuaz",
+    "artwork": [
+      "ar6juc"
+    ],
+    "url": "backrooms-code-yellow"
+  },
+  {
+    "id": "1554705026545352704",
+    "name": "Doggy Don't Care",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2438180"
+      }
+    ],
+    "id_igdb": "251749",
+    "cover": "cocvhm",
+    "artwork": [
+      "ar3nml",
+      "ar2c38"
+    ],
+    "url": "doggy-dont-care"
+  },
+  {
+    "id": "1554705042869846037",
+    "name": "Hell Of War: Combined Arms",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3602640"
+      }
+    ],
+    "id_igdb": "411596",
+    "cover": "cocl0x",
+    "artwork": [
+      "ar6d33"
+    ],
+    "url": "hell-of-war-combined-arms"
+  },
+  {
+    "id": "1554705052508229713",
+    "name": "Take a Hint",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4297760"
+      }
+    ],
+    "id_igdb": "393928",
+    "cover": "cobpvj",
+    "artwork": [
+      "ar5iew"
+    ],
+    "url": "take-a-hint"
+  },
+  {
+    "id": "1554705064881561621",
+    "name": "The Undercut: Racing Manager",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4514930"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1554705074348101692",
+    "name": "Land of Glarefall",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3836120"
+      }
+    ],
+    "id_igdb": "352737",
+    "cover": "coa2ts",
+    "artwork": [
+      "ar6jea",
+      "ar6jeb"
+    ],
+    "url": "land-of-glarefall"
+  },
+  {
+    "id": "1554705088860393586",
+    "name": "Sigilfarer",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2436870"
+      },
+      {
+        "distributor": "epic",
+        "id": "74D48DD68BE249AAB319A2F9BCA2DC0E"
+      }
+    ],
+    "id_igdb": "314447",
+    "cover": "cocw6a",
+    "artwork": [
+      "ar33fr"
+    ],
+    "url": "sigilfarer"
+  },
+  {
+    "id": "1554705094644072571",
+    "name": "DERELIKT",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3810510"
+      }
+    ],
+    "id_igdb": "206842",
+    "cover": "coa07m",
+    "artwork": [
+      "ar3r94",
+      "ar3gwx"
+    ],
+    "url": "derelikt"
+  },
+  {
+    "id": "1554705109215219752",
+    "name": "Terrible Lizards",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9PKFL1XJT73S"
+      },
+      {
+        "distributor": "steam",
+        "id": "2920220"
+      }
+    ],
+    "id_igdb": "296564",
+    "cover": "ar5i4e",
+    "artwork": [
+      "ar5he2",
+      "ar5he4",
+      "ar5he5"
+    ],
+    "url": "terrible-lizards"
+  },
+  {
+    "id": "1554705122821677127",
+    "name": "Qliphah in Providence's Shadow",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "epic",
+        "id": "A1EDA54BB4734F73B05F1148874FC95A"
+      },
+      {
+        "distributor": "steam",
+        "id": "3882410"
+      }
+    ],
+    "id_igdb": "408068",
+    "cover": "cocbbz",
+    "artwork": [
+      "ar6jmk"
+    ],
+    "url": "qliphah-in-providences-shadow"
+  },
+  {
+    "id": "1554705130899906663",
+    "name": "Hit or Die",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4878690"
+      }
+    ],
+    "id_igdb": "418095",
+    "cover": "cocws5",
+    "artwork": [
+      "ar6lmz"
+    ],
+    "url": "dont-pick-up"
+  },
+  {
+    "id": "1554705139791699999",
+    "name": "Message From Aliens",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1858720"
+      }
+    ],
+    "id_igdb": "415077",
+    "cover": "cocrt3",
+    "artwork": [
+      "ar6hyx"
+    ],
+    "url": "message-from-aliens"
+  },
+  {
+    "id": "1554705159257587782",
+    "name": "Bloodmoney",
+    "aliases": [
+      "BLOODMONEY!"
+    ],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5044390"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1554705168065364088",
+    "name": "DinoBones: Tidy Up the Museum",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5064340"
+      }
+    ],
+    "id_igdb": "414637",
+    "cover": "cocqwl",
+    "artwork": [
+      "ar6j92"
+    ],
+    "url": "dinobones-tidy-up-the-museum"
+  },
+  {
+    "id": "1554705173715226684",
+    "name": "just volleyball",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5037200"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1554705186914836612",
+    "name": "CONCRETE BURIAL",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4810070"
+      }
+    ],
+    "id_igdb": "414555",
+    "cover": "cocqpw",
+    "artwork": [
+      "ar6gwe"
+    ],
+    "url": "concrete-burial"
+  },
+  {
+    "id": "1554705195147984916",
+    "name": "Japanese Ramen Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4968640"
+      }
+    ],
+    "id_igdb": "414484",
+    "cover": "cocz4j",
+    "artwork": [
+      "ar6lzz"
+    ],
+    "url": "japanese-ramen-simulator"
+  },
+  {
+    "id": "1554705203964412055",
+    "name": "Museologist: Tidy Up the Museum!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4964580"
+      }
+    ],
+    "id_igdb": "414758",
+    "cover": "cocxf6",
+    "artwork": [
+      "ar6m40",
+      "ar6m41",
+      "ar6m3z"
+    ],
+    "url": "museologist-tidy-up-the-museum"
+  },
+  {
+    "id": "1554705297925476412",
+    "name": "Bunker Tidy Up",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5212940"
+      }
+    ],
+    "id_igdb": "417324",
+    "cover": "cocvm4",
+    "artwork": [
+      "ar6kq1"
+    ],
+    "url": "bunker-tidy-up"
+  },
+  {
+    "id": "1554705322155843674",
+    "name": "Hit or Die",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5168130"
+      }
+    ],
+    "id_igdb": "418015",
+    "cover": "cocwm0",
+    "artwork": [
+      "ar6lih"
+    ],
+    "url": "hit-or-die"
+  },
+  {
+    "id": "1554705348521369610",
+    "name": "Lucid Cats",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4778540"
+      }
+    ],
+    "id_igdb": "419831",
+    "cover": "coczc5",
+    "artwork": [
+      "ar6ne8",
+      "ar6ne7",
+      "ar6ne4"
+    ],
+    "url": "lucid-cats"
+  },
+  {
+    "id": "1554704902972772362",
+    "name": "The Rabbit Haul",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "265277",
+    "cover": "coak4r",
+    "artwork": [
+      "ar2i9j"
+    ],
+    "url": "the-rabbit-haul"
+  },
+  {
+    "id": "1554704908706381854",
+    "name": "Isle of Reveries",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "311611",
+    "cover": "coc3jx",
+    "artwork": [
+      "ar32fh"
+    ],
+    "url": "isle-of-reveries"
+  },
+  {
+    "id": "1554704946312773675",
+    "name": "Cyber Cleaner Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "365974",
+    "cover": "cocsbl",
+    "artwork": [
+      "ar4608"
+    ],
+    "url": "cyber-cleaner-simulator"
+  },
+  {
+    "id": "1554704952381931591",
+    "name": "Dungeon Treaders",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "388401",
+    "cover": "coc709",
+    "artwork": [
+      "ar60p0"
+    ],
+    "url": "dungeon-treaders"
+  },
+  {
+    "id": "1554704962221514832",
+    "name": "Radiotext",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "392040",
+    "cover": "coblvr",
+    "artwork": [
+      "ar69q1"
+    ],
+    "url": "radiotext"
+  },
+  {
+    "id": "1554705100843520072",
+    "name": "Seaside Wash",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1554705104643424304",
+    "name": "RhythMania",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "327047",
+    "cover": "co97y5",
+    "artwork": [
+      "ar3g9o"
+    ],
+    "url": "rhythmania"
+  },
+  {
+    "id": "1554705116437942354",
+    "name": "The Only Droid",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "95810",
+    "cover": "co9dyr",
+    "artwork": null,
+    "url": "virtual-droid"
+  },
+  {
+    "id": "1554705155314950215",
+    "name": "Wand & Order: Tidy up the magic shop!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "411997",
+    "cover": "coclth",
+    "artwork": [
+      "ar6cw2"
+    ],
+    "url": "wand-and-order-tidy-up-the-magic-shop"
+  },
+  {
+    "id": "1554705183152537710",
+    "name": "Put Your Toys Away Together!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "416292",
+    "cover": "cocvtb",
+    "artwork": [
+      "ar6kwu"
+    ],
+    "url": "put-your-toys-away-together"
+  },
+  {
+    "id": "1554705216027234314",
+    "name": "Tank Battle Classic",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1554705221379162144",
+    "name": "771",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "416809",
+    "cover": "cocuoa",
+    "artwork": [
+      "ar6k1s"
+    ],
+    "url": "771"
+  },
+  {
+    "id": "1554705241713147986",
+    "name": "Dungeons & Dynasties",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "155267",
+    "cover": null,
+    "artwork": null,
+    "url": "dungeon-fighter-online-dynasty-guardian-pack"
+  },
+  {
+    "id": "1554705251821424711",
+    "name": "They Are Adorable",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "35342",
+    "cover": "co2vph",
+    "artwork": null,
+    "url": "adorables"
+  },
+  {
+    "id": "1554705288278577242",
+    "name": "Megastore Chaos",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "417018",
+    "cover": "cocxjl",
+    "artwork": [
+      "ar6kjc"
+    ],
+    "url": "megastore-chaos"
+  },
+  {
+    "id": "1554705335325958294",
+    "name": "Sill Sticks",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1554705344163352596",
+    "name": "C.U.B.E",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "365146",
+    "cover": "coaeas",
+    "artwork": [
+      "ar44m7"
+    ],
+    "url": "cube-cube-2"
+  },
+  {
+    "id": "1554705353537749012",
+    "name": "Elysium",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "408857",
+    "cover": "cocd83",
+    "artwork": [
+      "ar68ca",
+      "ar6n0f",
+      "ar6n0e"
+    ],
+    "url": "elysium--4"
+  },
+  {
+    "id": "1554705366607077387",
+    "name": "Ace Combat 6: Fires of Liberation",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "5476",
+    "cover": "co2sal",
+    "artwork": [
+      "ar1ii9"
+    ],
+    "url": "ace-combat-6-fires-of-liberation"
   }
 ]
