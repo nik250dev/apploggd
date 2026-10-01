@@ -59,6 +59,7 @@ public class LocalizationService : INotifyPropertyChanged
             { "Home_ErrorFetchingGames", "Error fetching recently played games" },
             { "Settings_Section_General", "General" },
             { "Settings_StartWithWindows", "Start AppLoggd with Windows" },
+            { "Settings_StartWithSystem", "Start AppLoggd when the computer starts" },
             { "Settings_MinimizeToTray", "Minimize to tray" },
             { "Settings_MinimizeToTrayDesc", "The application will continue running in the background." },
             { "Settings_Section_Blacklist", "Blacklist" },
@@ -126,6 +127,8 @@ public class LocalizationService : INotifyPropertyChanged
             { "Toast_BlacklistAdded", "\"{0}\" added to the blacklist" },
             { "Toast_BlacklistRemoved", "\"{0}\" removed from the blacklist" },
             { "Toast_BlacklistAlreadyListed", "\"{0}\" is already in the blacklist" },
+            { "Toast_BlacklistScript", "\"{0}\" is a launch script. Choose the executable it starts" },
+            { "Toast_BlacklistNotExecutable", "\"{0}\" is not an executable" },
             { "Toast_Undo", "Undo" },
             { "Toast_UpdateAvailable", "New Apploggd version available: {0}" },
             { "Toast_ErrorSaving", "An unexpected error occurred while saving the session." },
@@ -133,6 +136,7 @@ public class LocalizationService : INotifyPropertyChanged
             { "Toast_TimeoutError", "The operation timed out. Backloggd might be down or your connection is unstable." },
             { "Toast_UnexpectedError", "Unexpected error:\n{0}" },
             { "Toast_SessionTooShort", "Session not saved: duration was less than 1 minute." },
+            { "Tray_Open", "Open Apploggd" },
             { "Tray_Exit", "Exit" },
             { "Tray_Playing", "Playing {0} {1}" },
             { "Tray_WaitingConfirmation", "Waiting for session confirmation" },
@@ -158,7 +162,14 @@ public class LocalizationService : INotifyPropertyChanged
             { "Browser_Prompt_ManualHint", "You can also get Chromium by installing the Google Chrome browser, which already includes it:" },
             { "Browser_Prompt_LinkText", "Download Google Chrome" },
             { "Browser_Prompt_Accept", "Accept" },
-            { "Browser_Prompt_Close", "Close" }
+            { "Browser_Prompt_Close", "Close" },
+            { "Browser_Deps_Title", "Missing system libraries" },
+            { "Browser_Deps_Body", "Chromium is installed, but it cannot start because your system is missing some libraries. Open a terminal and run this command (it will ask for your Linux user password):" },
+            { "Browser_Deps_BodyNoApt", "Chromium is installed, but it cannot start because your system is missing some libraries. Install them with your distribution's package manager." },
+            { "Browser_Deps_Missing", "Missing: {0}" },
+            { "Browser_Deps_Copy", "Copy command" },
+            { "Browser_Deps_Copied", "Copied" },
+            { "Browser_Deps_Retry", "Retry" }
         };
 
         _resources["es"] = new Dictionary<string, string>
@@ -199,6 +210,7 @@ public class LocalizationService : INotifyPropertyChanged
             { "Home_ErrorFetchingGames", "Error obteniendo los últimos juegos registrados" },
             { "Settings_Section_General", "General" },
             { "Settings_StartWithWindows", "Ejecutar AppLoggd cuando se inicie el equipo" },
+            { "Settings_StartWithSystem", "Ejecutar AppLoggd cuando se inicie el equipo" },
             { "Settings_MinimizeToTray", "Minimizar a la bandeja" },
             { "Settings_MinimizeToTrayDesc", "La aplicación seguirá ejecutándose en segundo plano." },
             { "Settings_Section_Blacklist", "Lista negra" },
@@ -266,6 +278,8 @@ public class LocalizationService : INotifyPropertyChanged
             { "Toast_BlacklistAdded", "«{0}» añadido a la lista negra" },
             { "Toast_BlacklistRemoved", "«{0}» quitado de la lista negra" },
             { "Toast_BlacklistAlreadyListed", "«{0}» ya está en la lista negra" },
+            { "Toast_BlacklistScript", "«{0}» es un script de arranque. Elige el ejecutable que abre" },
+            { "Toast_BlacklistNotExecutable", "«{0}» no es un ejecutable" },
             { "Toast_Undo", "Deshacer" },
             { "Toast_UpdateAvailable", "Nueva versión de Apploggd disponible: {0}" },
             { "Toast_ErrorSaving", "Ha ocurrido un error inesperado al guardar la sesión." },
@@ -273,6 +287,7 @@ public class LocalizationService : INotifyPropertyChanged
             { "Toast_TimeoutError", "La operación ha tardado demasiado tiempo. Puede que Backloggd no esté funcionando correctamente o tu conexión sea inestable." },
             { "Toast_UnexpectedError", "Error inesperado:\n{0}" },
             { "Toast_SessionTooShort", "Sesión no registrada: duración inferior a 1 minuto." },
+            { "Tray_Open", "Abrir Apploggd" },
             { "Tray_Exit", "Salir" },
             { "Tray_Playing", "Jugando {0} {1}" },
             { "Tray_WaitingConfirmation", "Esperando confirmar/descartar sesión" },
@@ -298,7 +313,14 @@ public class LocalizationService : INotifyPropertyChanged
             { "Browser_Prompt_ManualHint", "También puedes obtener Chromium instalando el navegador Google Chrome, que ya lo incluye:" },
             { "Browser_Prompt_LinkText", "Descargar Google Chrome" },
             { "Browser_Prompt_Accept", "Aceptar" },
-            { "Browser_Prompt_Close", "Cerrar" }
+            { "Browser_Prompt_Close", "Cerrar" },
+            { "Browser_Deps_Title", "Faltan librerías del sistema" },
+            { "Browser_Deps_Body", "Chromium está instalado, pero no puede arrancar porque a tu sistema le faltan librerías. Abre una terminal y ejecuta este comando (te pedirá la contraseña de tu usuario de Linux):" },
+            { "Browser_Deps_BodyNoApt", "Chromium está instalado, pero no puede arrancar porque a tu sistema le faltan librerías. Instálalas con el gestor de paquetes de tu distribución." },
+            { "Browser_Deps_Missing", "Faltan: {0}" },
+            { "Browser_Deps_Copy", "Copiar comando" },
+            { "Browser_Deps_Copied", "Copiado" },
+            { "Browser_Deps_Retry", "Reintentar" }
         };
 
         // Initial load - default to what matches system or English

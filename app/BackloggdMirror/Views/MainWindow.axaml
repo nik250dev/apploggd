@@ -640,14 +640,14 @@
                                     <StackPanel Spacing="15">
                                         <Grid ColumnDefinitions="*, Auto">
                                             <StackPanel Spacing="2">
-                                                <TextBlock Text="{Binding [Settings_StartWithWindows], Source={x:Static services:LocalizationService.Instance}}" Classes="setting-label"/>
+                                                <TextBlock Text="{OnPlatform {Binding [Settings_StartWithWindows], Source={x:Static services:LocalizationService.Instance}}, Linux={Binding [Settings_StartWithSystem], Source={x:Static services:LocalizationService.Instance}}}" Classes="setting-label"/>
                                             </StackPanel>
                                             <ToggleSwitch Grid.Column="1" IsChecked="{Binding StartWithWindows}" OnContent="" OffContent=""/>
                                         </Grid>
                                         
-                                        <Separator Background="{DynamicResource SeparatorBrush}" Height="1"/>
+                                        <Separator Background="{DynamicResource SeparatorBrush}" Height="1" IsVisible="{Binding CanMinimizeToTray}"/>
 
-                                        <Grid ColumnDefinitions="*, Auto">
+                                        <Grid ColumnDefinitions="*, Auto" IsVisible="{Binding CanMinimizeToTray}">
                                             <StackPanel Spacing="2">
                                                 <TextBlock Text="{Binding [Settings_MinimizeToTray], Source={x:Static services:LocalizationService.Instance}}" Classes="setting-label"/>
                                                 <TextBlock Text="{Binding [Settings_MinimizeToTrayDesc], Source={x:Static services:LocalizationService.Instance}}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}"/>

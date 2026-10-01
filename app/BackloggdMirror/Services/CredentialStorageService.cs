@@ -1,3 +1,4 @@
+using BackloggdMirror.Services.Platform.Linux;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -18,6 +19,7 @@ namespace BackloggdMirror.Services
         private readonly IDataProtectionProvider _dataProtectionProvider;
         private readonly string _storagePath;
         private readonly IAppLogger _logger;
+        private readonly LinuxKeyringKeyProtection? _linuxKeyProtection;
 
         public CredentialStorageService(IAppLogger logger, string? customKeysDirectory = null, string? customStoragePath = null)
         {
@@ -31,15 +33,24 @@ namespace BackloggdMirror.Services
                 .SetApplicationName("Apploggd");
 
             // DPAPI ties the keys to the Windows user account, so a copied key file is useless
-            // elsewhere. There is no equivalent on Linux/macOS, where key secrecy falls back to
-            // file-system permissions.
+            // elsewhere. On Linux the system keyring plays that role; on macOS key secrecy falls
+            // back to file-system permissions.
             if (OperatingSystem.IsWindows())
             {
                 dataProtectionBuilder.ProtectKeysWithDpapi();
             }
+            else if (OperatingSystem.IsLinux())
+            {
+                LinuxKeyringKeyProtection.Configure(dataProtectionBuilder, logger);
+            }
 
             var serviceProvider = services.BuildServiceProvider();
             _dataProtectionProvider = serviceProvider.GetDataProtectionProvider();
+
+            if (OperatingSystem.IsLinux())
+            {
+                _linuxKeyProtection = new LinuxKeyringKeyProtection(keysDirectory, serviceProvider);
+            }
 
             _storagePath = customStoragePath ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Apploggd", "user.dat");
         }
@@ -64,22 +75,35 @@ namespace BackloggdMirror.Services
                 }
 
                 var json = JsonSerializer.Serialize(cookieDtos);
-                var protector = _dataProtectionProvider.CreateProtector("CookieStorage");
-                var protectedData = protector.Protect(json);
-
-                var directory = Path.GetDirectoryName(_storagePath);
-                if (!Directory.Exists(directory))
+                if (_linuxKeyProtection != null)
                 {
-                    Directory.CreateDirectory(directory);
+                    _linuxKeyProtection.Write(() => WriteProtected(json));
                 }
-
-                File.WriteAllText(_storagePath, protectedData);
+                else
+                {
+                    WriteProtected(json);
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"[CredentialStorageService] Failed to save cookies: {ex.Message}");
                 _logger.Error($"[CredentialStorageService] Failed to save cookies: {ex.Message}", ex);
             }
+        }
+
+        private string WriteProtected(string json)
+        {
+            var protector = _dataProtectionProvider.CreateProtector("CookieStorage");
+            var protectedData = protector.Protect(json);
+
+            var directory = Path.GetDirectoryName(_storagePath);
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
+            File.WriteAllText(_storagePath, protectedData);
+            return protectedData;
         }
 
         public List<Cookie> LoadCookies()
@@ -119,9 +143,19 @@ namespace BackloggdMirror.Services
             {
                 Console.WriteLine($"[CredentialStorageService] Failed to load cookies: {ex.Message}");
                 _logger.Error($"[CredentialStorageService] Failed to load cookies: {ex.Message}", ex);
+                if (_linuxKeyProtection != null && LinuxKeyringKeyProtection.DecryptionBlockedByKeyring)
+                {
+                    _logger.Warning("[CredentialStorageService] The keyring was unavailable, so the saved session is kept for the next start.");
+                    return cookies;
+                }
                 // Unprotect fails for good (lost or rotated keys, corrupted file), so the file is
                 // dead weight: dropping it degrades to a normal login instead of failing every start.
                 try { File.Delete(_storagePath); } catch { }
+            }
+
+            if (cookies.Count > 0 && _linuxKeyProtection?.CanMoveKeysToKeyring() == true)
+            {
+                SaveCookies(cookies);
             }
 
             return cookies;

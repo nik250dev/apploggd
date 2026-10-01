@@ -47,7 +47,7 @@ internal static class CemuTitleNames
         return Directory.Exists(roaming) ? roaming : null;
     }
 
-    private static string? FromTitleCache(string userDir, string titleId)
+    internal static string? FromTitleCache(string userDir, string titleId)
     {
         try
         {
@@ -68,7 +68,7 @@ internal static class CemuTitleNames
     }
 
     /// <summary>The first line of gameProfiles\default\&lt;titleId&gt;.ini, like "# Mario Kart 8 (JPN)".</summary>
-    private static string? FromGameProfile(string cemuDir, string titleId)
+    internal static string? FromGameProfile(string cemuDir, string titleId)
     {
         try
         {
@@ -90,7 +90,7 @@ internal static class CemuTitleNames
     }
 
     /// <summary>English unless settings.xml says otherwise; English is Cemu's default.</summary>
-    private static bool IsEnglishConsole(string? userDir)
+    internal static bool IsEnglishConsole(string? userDir)
     {
         if (userDir == null)
             return true;

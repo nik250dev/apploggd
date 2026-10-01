@@ -99,22 +99,25 @@ internal sealed class LibretroCoreInfo
     private static readonly object _cacheLock = new();
 
     /// <summary>Cached for the life of the process: the .info of a core does not change while it is loaded, and the detector asks once per tick.</summary>
-    public static LibretroCoreInfo Load(string moduleName, RetroArchProcessInfo processInfo)
+    public static LibretroCoreInfo Load(string moduleName, RetroArchProcessInfo processInfo) => Load(moduleName, processInfo.InfoDir);
+
+    /// <param name="moduleName">"vbam_libretro.dll", or without extension on Linux ("gambatte_libretro").</param>
+    public static LibretroCoreInfo Load(string moduleName, string? infoDir)
     {
-        string key = $"{processInfo.InfoDir}|{moduleName}";
+        string key = $"{infoDir}|{moduleName}";
 
         lock (_cacheLock)
         {
             if (_cache.TryGetValue(key, out var cached))
                 return cached;
 
-            var built = Build(moduleName, processInfo);
+            var built = Build(moduleName, infoDir);
             _cache[key] = built;
             return built;
         }
     }
 
-    private static LibretroCoreInfo Build(string moduleName, RetroArchProcessInfo processInfo)
+    private static LibretroCoreInfo Build(string moduleName, string? infoDir)
     {
         string baseName = moduleName.EndsWith(".dll", StringComparison.OrdinalIgnoreCase)
             ? moduleName[..^4]
@@ -129,7 +132,7 @@ internal sealed class LibretroCoreInfo
         var extensions = new List<string>();
         var databases = new List<string>();
 
-        string? infoPath = processInfo.InfoDir != null ? Path.Combine(processInfo.InfoDir, baseName + ".info") : null;
+        string? infoPath = infoDir != null ? Path.Combine(infoDir, baseName + ".info") : null;
 
         if (infoPath != null && File.Exists(infoPath))
         {

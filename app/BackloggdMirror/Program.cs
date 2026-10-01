@@ -27,7 +27,9 @@ sealed class Program
         // and both try to write the same session to Backloggd. The GUID keeps the name unique, and
         // holding the Mutex in a static field is what keeps it alive for the process lifetime.
         const string mutexName = "BackloggdMirror-SingleInstance-Mutex-5B9FA4A8-1E4D-4F2A-949B-510065EF9E76";
-        _mutex = new Mutex(true, mutexName, out bool createdNew);
+        // On Linux an unprefixed name is scoped to the Unix session, one per terminal or launcher, so
+        // a copy started from elsewhere would not see it; Global is machine-wide, hence the user name.
+        _mutex = new Mutex(true, OperatingSystem.IsLinux() ? $"Global\\{mutexName}-{Environment.UserName}" : mutexName, out bool createdNew);
 
         var logger = new AppLogger();
 

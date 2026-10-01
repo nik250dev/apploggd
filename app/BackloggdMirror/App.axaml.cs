@@ -8,6 +8,8 @@ using Avalonia.Markup.Xaml;
 using BackloggdMirror.ViewModels;
 using BackloggdMirror.Views;
 using BackloggdMirror.Services;
+using BackloggdMirror.Services.Platform.Linux;
+using System;
 
 using BackloggdMirror.Models;
 
@@ -44,6 +46,12 @@ public partial class App : Application
             var installService = new PlaywrightInstallService(logger);
             var autostartService = new AutostartService(logger);
 
+            if (OperatingSystem.IsLinux())
+            {
+                _ = LinuxTrayHost.StartAsync(logger);
+                LinuxDesktopEntry.Install(logger);
+            }
+
             // Explicitly load settings here to avoid infinite recursion in constructor
             settingsService.Load();
 
@@ -68,7 +76,7 @@ public partial class App : Application
 
             if (silentStart)
             {
-                logger.Info("[App] Started by Windows autostart: keeping every window hidden.");
+                logger.Info("[App] Started by the system autostart: keeping every window hidden.");
 
                 // desktop.MainWindow is deliberately left unset: the lifetime shows whatever sits
                 // there when Start() runs. Both handlers below assign it, which is also what
@@ -117,6 +125,10 @@ public partial class App : Application
                 if (!silentStart)
                 {
                     mainWindow.Show();
+                }
+                else if (OperatingSystem.IsLinux())
+                {
+                    _ = mainWindow.EnsureReachableAfterLinuxSilentStartAsync();
                 }
 
                 loginWindow.Close();

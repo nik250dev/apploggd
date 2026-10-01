@@ -4,12 +4,14 @@ using BackloggdMirror.Models;
 using BackloggdMirror.Services.Emulation.Cemu;
 using BackloggdMirror.Services.Emulation.Dolphin;
 using BackloggdMirror.Services.Emulation.RetroArch;
+using BackloggdMirror.Services.Platform.Linux.Emulation;
 
 namespace BackloggdMirror.Services.Emulation;
 
 /// <summary>
 /// Detection tier 1.5. An emulator is one executable that runs any number of games, so neither the
 /// executable database nor the window heuristic can name what is being played.
+/// Linux has detectors of its own (see <see cref="LinuxEmulatorDetectors"/>): the Windows ones read process memory, which Linux does not allow.
 /// </summary>
 internal sealed class EmulatorDetector
 {
@@ -22,12 +24,14 @@ internal sealed class EmulatorDetector
         EmulatedGamesDatabase.Instance.Logger = logger;
 
         var resolver = new EmulatedGameResolver(logger);
-        _detectors = new IEmulatorDetector[]
-        {
-            new RetroArchDetector(resolver, logger, blacklist),
-            new DolphinDetector(resolver, logger, blacklist),
-            new CemuDetector(resolver, logger, blacklist)
-        };
+        _detectors = OperatingSystem.IsLinux()
+            ? LinuxEmulatorDetectors.Create(resolver, logger, blacklist)
+            : new IEmulatorDetector[]
+            {
+                new RetroArchDetector(resolver, logger, blacklist),
+                new DolphinDetector(resolver, logger, blacklist),
+                new CemuDetector(resolver, logger, blacklist)
+            };
     }
 
     public DetectedGame? Detect()

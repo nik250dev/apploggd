@@ -17,7 +17,7 @@ internal sealed class CemuDetector : IEmulatorDetector
     private const string ProcessName = "cemu";
     private const int RequiredReadings = 2;
 
-    private static readonly HashSet<string> ImageExtensions = new(StringComparer.OrdinalIgnoreCase)
+    internal static readonly HashSet<string> ImageExtensions = new(StringComparer.OrdinalIgnoreCase)
     {
         ".wud", ".wux", ".wua", ".wuhb", ".rpx", ".elf"
     };

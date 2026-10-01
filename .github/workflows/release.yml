@@ -17,6 +17,9 @@ jobs:
   build-and-release:
     runs-on: windows-latest
 
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+
     permissions:
       # Required so the workflow can create the release and upload the packages
       contents: write
@@ -141,3 +144,95 @@ jobs:
           [System.IO.File]::WriteAllText((Join-Path $PWD "release-notes.md"), ($notes -join "`n"))
 
           gh release edit "${{ github.ref_name }}" --notes-file release-notes.md
+
+  # After the Windows job and not alongside it: both would otherwise race to create the release.
+  # Velopack names the Linux feed and packages after the "linux" channel, so they sit next to the
+  # Windows ones in the same release without clashing, and the app reads the one for its own OS.
+  build-linux:
+    needs: build-and-release
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Install the Velopack CLI
+        run: dotnet tool install -g vpk --version ${{ env.VPK_VERSION }}
+
+      - name: Publish (linux-x64, self-contained)
+        run: |
+          dotnet publish app/BackloggdMirror/BackloggdMirror.csproj \
+            -c Release \
+            -r linux-x64 \
+            --self-contained true \
+            -p:Version=${{ needs.build-and-release.outputs.version }} \
+            -o publish
+
+      # Same as on Windows: only needed for deltas, and the first Linux release has nothing to fetch.
+      - name: Download the previous release
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          vpk download github \
+            --repoUrl "https://github.com/${{ github.repository }}" \
+            --outputDir Releases \
+            --token "$GH_TOKEN"
+
+      - name: Pack with Velopack
+        run: |
+          # Without zstd vpk silently falls back to its legacy bsdiff deltas: 60x slower and fragile.
+          command -v zstd || sudo apt-get install -y zstd
+
+          vpk pack \
+            --packId ${{ env.PACK_ID }} \
+            --packVersion ${{ needs.build-and-release.outputs.version }} \
+            --packDir publish \
+            --mainExe Apploggd \
+            --packTitle Apploggd \
+            --packAuthors nik250dev \
+            --icon app/BackloggdMirror/Assets/app-logo.png \
+            --outputDir Releases
+
+          ls -la Releases
+
+      # Zipped under a versioned name inside an "Apploggd" folder, like the Windows bundle, so neither
+      # the folder nor the file inside carries a version that updates would make stale. Safe: the feed
+      # lists only the .nupkg files, and assets.linux.json is what vpk upload attaches.
+      - name: Zip the AppImage
+        run: |
+          name="${{ env.PACK_ID }}-${{ github.ref_name }}-linux-x64.zip"
+
+          mkdir -p "zip-stage/${{ env.PACK_ID }}"
+          mv "Releases/${{ env.PACK_ID }}.AppImage" "zip-stage/${{ env.PACK_ID }}/"
+
+          # Info-ZIP stores the Unix mode, so the AppImage comes out of the zip still executable.
+          (cd zip-stage && zip -r -X "../Releases/$name" "${{ env.PACK_ID }}")
+
+          jq --arg name "$name" 'map(if .Type == "Portable" then .RelativeFileName = $name else . end)' \
+            Releases/assets.linux.json > assets.tmp
+          mv assets.tmp Releases/assets.linux.json
+
+          grep -q "\"$name\"" Releases/assets.linux.json || { echo "assets.linux.json has no Portable entry"; exit 1; }
+          cat Releases/assets.linux.json
+
+      # --merge adds these assets to the draft the Windows job created instead of failing on it.
+      - name: Upload to the draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          vpk upload github \
+            --repoUrl "https://github.com/${{ github.repository }}" \
+            --outputDir Releases \
+            --tag ${{ github.ref_name }} \
+            --releaseName "Apploggd ${{ needs.build-and-release.outputs.version }}" \
+            --merge \
+            --token "$GH_TOKEN"

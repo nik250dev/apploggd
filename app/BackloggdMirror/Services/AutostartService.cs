@@ -1,3 +1,4 @@
+using BackloggdMirror.Services.Platform.Linux;
 using Microsoft.Win32;
 using System;
 using System.IO;
@@ -97,9 +98,11 @@ public class AutostartService
     /// </summary>
     public bool SetEnabled(bool enable)
     {
+        if (OperatingSystem.IsLinux()) return LinuxAutostartEntry.SetEnabled(enable, _logger);
+
         if (!IsSupported)
         {
-            // TODO: Linux (.desktop file in ~/.config/autostart/) and macOS (LaunchAgents plist).
+            // TODO: macOS (LaunchAgents plist).
             _logger.Warning($"[AutostartService] Autostart is not implemented for {RuntimeInformation.OSDescription}. The setting will have no effect.");
             return false;
         }
@@ -157,6 +160,12 @@ public class AutostartService
     /// </summary>
     public void Reconcile(bool shouldBeEnabled)
     {
+        if (OperatingSystem.IsLinux())
+        {
+            LinuxAutostartEntry.Reconcile(shouldBeEnabled, _logger);
+            return;
+        }
+
         if (!IsSupported) return;
 
         try

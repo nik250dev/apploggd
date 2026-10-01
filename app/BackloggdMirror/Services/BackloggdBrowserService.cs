@@ -297,6 +297,16 @@ namespace BackloggdMirror.Services
                 // Logged here rather than per branch below: every return that follows is this same
                 // failure, only translated into the reason the ViewModel shows the user.
                 _logger?.Error("[LoginAsync] The login flow threw before a session could be established.", ex);
+
+                // On Linux the browser binary can be present but fail to launch because the host
+                // is missing shared libraries (libnss3, libatk, ...). We do not auto-install OS
+                // dependencies (that would require root); instead we surface a clear message.
+                // Checked first: Playwright wraps it in a "browser has been closed" error.
+                if (Platform.Linux.LinuxBrowserDependencies.IsMissingLibrariesError(ex.Message))
+                {
+                    return (null, null, "BrowserDepsMissing");
+                }
+
                 if (ex.Message.Contains("Target closed", StringComparison.OrdinalIgnoreCase) ||
                     ex.Message.Contains("Browser has been closed", StringComparison.OrdinalIgnoreCase) ||
                     ex.Message.Contains("Target page, context or browser has been closed", StringComparison.OrdinalIgnoreCase))
@@ -324,16 +334,6 @@ namespace BackloggdMirror.Services
                     ex.Message.Contains("ERR_CONNECTION", StringComparison.OrdinalIgnoreCase))
                 {
                     return (null, null, "NetworkError");
-                }
-
-                // On Linux the browser binary can be present but fail to launch because the host
-                // is missing shared libraries (libnss3, libatk, ...). We do not auto-install OS
-                // dependencies (that would require root); instead we surface a clear message.
-                if (ex.Message.Contains("error while loading shared libraries", StringComparison.OrdinalIgnoreCase) ||
-                    ex.Message.Contains("cannot open shared object file", StringComparison.OrdinalIgnoreCase) ||
-                    ex.Message.Contains("Host system is missing dependencies", StringComparison.OrdinalIgnoreCase))
-                {
-                    return (null, null, "BrowserDepsMissing");
                 }
 
                 return (null, null, $"UnknownError: {ex}");

@@ -9,6 +9,7 @@ using Avalonia.Media.Imaging;
 using Avalonia.Skia;
 using Avalonia.Markup.Xaml.MarkupExtensions;
 using BackloggdMirror.Services;
+using BackloggdMirror.Services.Platform.Linux;
 using Avalonia.Threading;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -19,6 +20,7 @@ public partial class MainWindow : Window
 {
     private bool _canClose = false;
     private TrayIcon? _trayIcon;
+    private NativeMenuItem? _trayOpenItem;
     private NativeMenuItem? _trayToggleItem;
     private NativeMenuItem? _trayExitItem;
     private TrayNotificationWindow? _trayNotificationWindow;
@@ -56,6 +58,46 @@ public partial class MainWindow : Window
         UpdateAnimationsEnabled();
         InitializeTrayIcons(); // Pre-render icons
         InitializeTrayIcon();
+
+        if (OperatingSystem.IsLinux())
+        {
+            LinuxTrayHost.AvailabilityChanged += OnLinuxTrayAvailabilityChanged;
+        }
+    }
+
+    private void OnLinuxTrayAvailabilityChanged()
+    {
+        Dispatcher.UIThread.Post(() =>
+        {
+            if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+            {
+                vm.NotifyTrayAvailabilityChanged();
+            }
+
+            // A window hidden in a tray that just vanished would be unreachable.
+            if (!LinuxTrayHost.IsAvailable && !IsVisible && !_canClose)
+            {
+                _logger?.Info("[MainWindow] The tray went away while the window was hidden in it; showing the window.");
+                ShowMainWindow();
+            }
+        });
+    }
+
+    /// <summary>Linux silent start: without a tray to hide in, the window goes to the taskbar minimized instead of staying unreachable.</summary>
+    public async Task EnsureReachableAfterLinuxSilentStartAsync()
+    {
+        if (await LinuxTrayHost.WaitForHostAsync(TimeSpan.FromSeconds(15))) return;
+
+        Dispatcher.UIThread.Post(() =>
+        {
+            if (IsVisible || _canClose) return;
+
+            _logger?.Info("[MainWindow] Silent start with no tray: showing the window minimized.");
+            Show();
+
+            // X11 ignores a minimized state set before the window is mapped.
+            Dispatcher.UIThread.Post(() => WindowState = WindowState.Minimized, DispatcherPriority.Background);
+        });
     }
 
     /// <summary>
@@ -194,6 +236,15 @@ public partial class MainWindow : Window
             _trayIcon.Clicked += (s, e) => RestoreMainWindow();
 
             var menu = new NativeMenu();
+
+            // Some Linux hosts (GNOME's AppIndicator) open the menu on left click instead of activating the icon.
+            if (OperatingSystem.IsLinux())
+            {
+                _trayOpenItem = new NativeMenuItem(LocalizationService.Instance["Tray_Open"]);
+                _trayOpenItem.Click += (s, e) => RestoreMainWindow();
+                menu.Items.Add(_trayOpenItem);
+                menu.Items.Add(new NativeMenuItemSeparator());
+            }
 
             _trayToggleItem = new NativeMenuItem(LocalizationService.Instance["Home_PauseSearch"]);
             _trayToggleItem.Click += (s, e) =>
@@ -366,7 +417,7 @@ public partial class MainWindow : Window
             }
             else
             {
-                minimizeToTray = vm.MinimizeToTray;
+                minimizeToTray = vm.CanMinimizeToTray && vm.MinimizeToTray;
             }
         }
 
@@ -405,6 +456,11 @@ public partial class MainWindow : Window
         }
 
         LocalizationService.Instance.PropertyChanged -= OnLocalizationPropertyChanged;
+
+        if (OperatingSystem.IsLinux())
+        {
+            LinuxTrayHost.AvailabilityChanged -= OnLinuxTrayAvailabilityChanged;
+        }
 
         // Under OnExplicitShutdown the process outlives its last window, so the shutdown has to be
         // explicit — except on a logout, where the login window is about to take over.
@@ -466,7 +522,8 @@ public partial class MainWindow : Window
         {
             Title = loc["Settings_Blacklist_PickerTitle"],
             AllowMultiple = false,
-            FileTypeFilter = new[]
+            // Linux executables have no extension to filter by; the ViewModel checks the file instead.
+            FileTypeFilter = OperatingSystem.IsLinux() ? null : new[]
             {
                 new FilePickerFileType(loc["Settings_Blacklist_PickerFilter"]) { Patterns = new[] { "*.exe" } }
             }
@@ -602,6 +659,8 @@ public partial class MainWindow : Window
                 {
                     if (_trayExitItem != null)
                         _trayExitItem.Header = LocalizationService.Instance["Tray_Exit"];
+                    if (_trayOpenItem != null)
+                        _trayOpenItem.Header = LocalizationService.Instance["Tray_Open"];
                 });
             }
         }
