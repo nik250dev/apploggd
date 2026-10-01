@@ -5846,6 +5846,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.kongregate.mobile.realmgrinder.google"
+      },
+      {
         "distributor": "steam",
         "id": "610080"
       }
@@ -7368,17 +7372,21 @@
     "aliases": [],
     "executables": [
       {
-        "name": "dontstarve_steam.exe",
+        "name": "dontstarve.exe",
         "os": "win32",
         "is_launcher": false
       },
       {
-        "name": "dontstarve.exe",
+        "name": "dontstarve_steam.exe",
         "os": "win32",
         "is_launcher": false
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.kleientertainment.doNotStarvePocket"
+      },
       {
         "distributor": "steam",
         "id": "219740"
@@ -7929,10 +7937,6 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "BSZ576R612B0"
-      },
-      {
-        "distributor": "xbox",
         "id": "9MT6TG9CXR2H"
       },
       {
@@ -7940,8 +7944,16 @@
         "id": "91189432BBAD4478AFD611EDFF7F0339"
       },
       {
+        "distributor": "xbox",
+        "id": "BSZ576R612B0"
+      },
+      {
         "distributor": "steam",
         "id": "282070"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.elevenbitstudios.twommobile"
       }
     ],
     "id_igdb": "7706",
@@ -8156,6 +8168,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "net.wargaming.wot.blitz"
+      },
       {
         "distributor": "steam",
         "id": "444200"
@@ -13123,6 +13139,14 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.hg.townsmen7free"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.hg.townsmen7"
+      },
+      {
         "distributor": "steam",
         "id": "486540"
       }
@@ -16820,6 +16844,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.panicartstudios.herosiegepocket"
+      },
+      {
         "distributor": "steam",
         "id": "269210"
       }
@@ -17161,6 +17189,10 @@
       {
         "distributor": "steam",
         "id": "734750"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.fiveamp.pickcrafterapp"
       }
     ],
     "id_igdb": "76537",
@@ -17191,6 +17223,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.ea.games.nfs13_na"
+      },
       {
         "distributor": "xbox",
         "id": "9N7H29G7G485"
@@ -18342,7 +18378,7 @@
   },
   {
     "id": "443158085247303690",
-    "name": "The Jackbox Party Pack 3",
+    "name": "The Jackbox Party Pack",
     "aliases": [],
     "executables": [
       {
@@ -18353,16 +18389,28 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "434170"
+        "distributor": "google_play",
+        "id": "com.jackboxgames.JackboxPartyLoaderFull"
+      },
+      {
+        "distributor": "xbox",
+        "id": "BS30XKD3WZHR"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.jackboxgames.TJPP3Loader"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.jackboxgames.TJPP5Loader"
       },
       {
         "distributor": "epic",
         "id": "ORCHID"
       },
       {
-        "distributor": "xbox",
-        "id": "BS30XKD3WZHR"
+        "distributor": "steam",
+        "id": "434170"
       }
     ],
     "id_igdb": "19082",
@@ -21905,6 +21953,10 @@
         "id": "BSWL46TWR3QC"
       },
       {
+        "distributor": "google_play",
+        "id": "com.jackboxgames.JBPP2Loader"
+      },
+      {
         "distributor": "steam",
         "id": "397460"
       }
@@ -21964,16 +22016,20 @@
         "id": "9NSRJ872SGH7"
       },
       {
+        "distributor": "google_play",
+        "id": "com.feralinteractive.alienisolation_android"
+      },
+      {
+        "distributor": "steam",
+        "id": "214490"
+      },
+      {
         "distributor": "epic",
         "id": "DF37F065C3F14EADBF011177396E2966"
       },
       {
         "distributor": "xbox",
         "id": "C1H9V6SLK2K5"
-      },
-      {
-        "distributor": "steam",
-        "id": "214490"
       }
     ],
     "id_igdb": "4754",
@@ -22783,12 +22839,16 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "epic",
+        "id": "85C72A063B884D249A554FEE9F71125D"
+      },
+      {
         "distributor": "steam",
         "id": "361280"
       },
       {
-        "distributor": "epic",
-        "id": "85C72A063B884D249A554FEE9F71125D"
+        "distributor": "google_play",
+        "id": "com.ltgames.android.oil"
       }
     ],
     "id_igdb": "19438",
@@ -24275,16 +24335,20 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "steam",
+        "id": "610180"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.jackboxgames.TJPP4Loader"
+      },
+      {
         "distributor": "epic",
         "id": "SNOWDROP"
       },
       {
         "distributor": "xbox",
         "id": "C5150FZWS1K2"
-      },
-      {
-        "distributor": "steam",
-        "id": "610180"
       }
     ],
     "id_igdb": "28213",
@@ -24413,6 +24477,10 @@
       {
         "distributor": "steam",
         "id": "319510"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.scottgames.fivenightsatfreddys"
       }
     ],
     "id_igdb": "8499",
@@ -24935,6 +25003,10 @@
       {
         "distributor": "steam",
         "id": "4760"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.feralinteractive.rometw"
       }
     ],
     "id_igdb": "438",
@@ -25246,6 +25318,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.AvoCavo.Apocalypse60"
+      },
+      {
         "distributor": "steam",
         "id": "788770"
       }
@@ -25403,6 +25479,10 @@
       {
         "distributor": "steam",
         "id": "654880"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.gamegrumps.ddadds"
       }
     ],
     "id_igdb": "38045",
@@ -25958,6 +26038,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.beamdog.baldursgateenhancededition"
+      },
       {
         "distributor": "steam",
         "id": "228280"
@@ -27254,12 +27338,16 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9NBR2ZSD99FX"
+      },
+      {
         "distributor": "steam",
         "id": "332800"
       },
       {
-        "distributor": "xbox",
-        "id": "9NBR2ZSD99FX"
+        "distributor": "google_play",
+        "id": "com.scottgames.fnaf2"
       }
     ],
     "id_igdb": "9195",
@@ -34113,11 +34201,15 @@
     "third_party_skus": [
       {
         "distributor": "steam",
-        "id": "228200"
+        "id": "4560"
       },
       {
         "distributor": "steam",
-        "id": "4560"
+        "id": "228200"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.feralinteractive.companyofheroes_android"
       }
     ],
     "id_igdb": "654",
@@ -34145,16 +34237,20 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "247020"
-      },
-      {
         "distributor": "gog",
         "id": ""
       },
       {
         "distributor": "xbox",
         "id": "9P5B0LLQFDN3"
+      },
+      {
+        "distributor": "google_play",
+        "id": "net.vertigogaming.cookservedeliciousglp"
+      },
+      {
+        "distributor": "steam",
+        "id": "247020"
       }
     ],
     "id_igdb": "11238",
@@ -35676,12 +35772,16 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "362680"
-      },
-      {
         "distributor": "gog",
         "id": ""
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.KillmondayGamesAB.FranBow"
+      },
+      {
+        "distributor": "steam",
+        "id": "362680"
       },
       {
         "distributor": "xbox",
@@ -46673,6 +46773,10 @@
       {
         "distributor": "steam",
         "id": "667530"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.skutteoleg.dw2"
       }
     ],
     "id_igdb": "111223",
@@ -48221,8 +48325,8 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9NRVF2P89ZLX"
+        "distributor": "google_play",
+        "id": "com.jackboxgames.TJPP7Loader"
       },
       {
         "distributor": "epic",
@@ -48231,6 +48335,10 @@
       {
         "distributor": "steam",
         "id": "1211630"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NRVF2P89ZLX"
       }
     ],
     "id_igdb": "138375",
@@ -50509,8 +50617,9 @@
   },
   {
     "id": "1124351982908493894",
-    "name": "MIR 4",
+    "name": "Mir 4",
     "aliases": [
+      "MIR 4",
       "MIR4"
     ],
     "executables": [
@@ -51501,6 +51610,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.linegames.udg"
+      },
       {
         "distributor": "steam",
         "id": "1549250"
@@ -53074,6 +53187,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.scottgames.fnaf3"
+      },
       {
         "distributor": "steam",
         "id": "354140"
@@ -56843,6 +56960,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.CheesecakeDev.StreamerLifeSimulator"
+      },
+      {
         "distributor": "steam",
         "id": "1261040"
       }
@@ -57607,6 +57728,10 @@
       {
         "distributor": "steam",
         "id": "356570"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.tinybuild.PartyHardGO"
       }
     ],
     "id_igdb": "12070",
@@ -58251,6 +58376,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.SecretModeLimited.ALittletotheLeft"
+      },
+      {
         "distributor": "steam",
         "id": "1629520"
       },
@@ -58402,15 +58531,11 @@
     "third_party_skus": [
       {
         "distributor": "steam",
-        "id": "1335200 "
+        "id": "1335200"
       },
       {
         "distributor": "google_play",
         "id": "com.GREMORYGames.ActionTaimanin"
-      },
-      {
-        "distributor": "steam",
-        "id": "1335200"
       }
     ],
     "id_igdb": "139858",
@@ -59104,6 +59229,10 @@
       {
         "distributor": "steam",
         "id": "550010"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.manapotionstudios.happyroomlog"
       }
     ],
     "id_igdb": "26618",
@@ -65692,6 +65821,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.phatmojo.mrhoppsplayhouse"
+      },
+      {
         "distributor": "steam",
         "id": "1182370"
       }
@@ -68992,10 +69125,9 @@
   },
   {
     "id": "1124353236564983808",
-    "name": "Counterside",
+    "name": "CounterSide",
     "aliases": [
-      "Counter:Side",
-      "CounterSide"
+      "Counter:Side"
     ],
     "executables": [
       {
@@ -70553,6 +70685,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.vdimensionltd.animalrevoltbattlesimulator"
+      },
+      {
         "distributor": "steam",
         "id": "1215390"
       }
@@ -70677,6 +70813,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9WZDNCRFJ26T"
+      },
+      {
         "distributor": "steam",
         "id": "1173770"
       },
@@ -70685,8 +70825,8 @@
         "id": "9P20JCF7BV93"
       },
       {
-        "distributor": "xbox",
-        "id": "9WZDNCRFJ26T"
+        "distributor": "google_play",
+        "id": "com.square_enix.android_googleplay.FFPR"
       }
     ],
     "id_igdb": "158980",
@@ -73017,6 +73157,10 @@
       {
         "distributor": "steam",
         "id": "1188720"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.skutteoleg.drunkenwrestlers"
       }
     ],
     "id_igdb": "127803",
@@ -73697,6 +73841,10 @@
       {
         "distributor": "xbox",
         "id": "9P7ZR10P26RP"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.Devolver.ExittheGungeon"
       }
     ],
     "id_igdb": "122311",
@@ -74817,6 +74965,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "de.shugasu.itrtg"
+      },
+      {
         "distributor": "steam",
         "id": "466170"
       }
@@ -75317,6 +75469,10 @@
       {
         "distributor": "steam",
         "id": "755800"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.ParallelSpace.Cerberus"
       }
     ],
     "id_igdb": "56959",
@@ -76235,8 +76391,32 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "air.com.RustyLake.CubeEscapeHarveysBox"
+      },
+      {
+        "distributor": "google_play",
+        "id": "air.com.RustyLake.CubeEscapeCollection"
+      },
+      {
+        "distributor": "google_play",
+        "id": "air.com.RustyLake.CubeEscapeCase23"
+      },
+      {
+        "distributor": "google_play",
+        "id": "air.com.RustyLake.CubeEscapeTheatre"
+      },
+      {
+        "distributor": "google_play",
+        "id": "air.com.RustyLake.CubeEscapeTheCave"
+      },
+      {
         "distributor": "steam",
         "id": "1292940"
+      },
+      {
+        "distributor": "google_play",
+        "id": "air.com.RustyLake.CubeEscapeSeasons"
       }
     ],
     "id_igdb": "133416",
@@ -78147,10 +78327,9 @@
   },
   {
     "id": "1124353934623002726",
-    "name": "Crisis Core: Final Fantasy VII - Reunion",
+    "name": "CRISIS CORE: FINAL FANTASY VII - REUNION",
     "aliases": [
-      "CRISIS CORE -FINAL FANTASY VII- REUNION",
-      "CRISIS CORE: FINAL FANTASY VII - REUNION"
+      "CRISIS CORE -FINAL FANTASY VII- REUNION"
     ],
     "executables": [
       {
@@ -78165,12 +78344,12 @@
         "id": "9P6J9NFKGJ68"
       },
       {
-        "distributor": "steam",
-        "id": "1608070"
-      },
-      {
         "distributor": "xbox",
         "id": "9PCWV3FWJZ18"
+      },
+      {
+        "distributor": "steam",
+        "id": "1608070"
       }
     ],
     "id_igdb": "205201",
@@ -80413,6 +80592,10 @@
       {
         "distributor": "steam",
         "id": "1774100"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.alphaquest.pet"
       }
     ],
     "id_igdb": "189005",
@@ -81745,6 +81928,10 @@
       {
         "distributor": "steam",
         "id": "962400"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.dvloper.granny"
       }
     ],
     "id_igdb": "87514",
@@ -82046,12 +82233,16 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "epic",
+        "id": "53EF2F4592684C4C97D6D32E40467274"
+      },
+      {
         "distributor": "steam",
         "id": "250620"
       },
       {
-        "distributor": "epic",
-        "id": "53EF2F4592684C4C97D6D32E40467274"
+        "distributor": "google_play",
+        "id": "com.snapbreak.amongthesleep"
       }
     ],
     "id_igdb": "7642",
@@ -82858,12 +83049,16 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "BWJWR2H3R4MF"
-      },
-      {
         "distributor": "steam",
         "id": "522210"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.pid.serialcleaner"
+      },
+      {
+        "distributor": "xbox",
+        "id": "BWJWR2H3R4MF"
       }
     ],
     "id_igdb": "19450",
@@ -84152,19 +84347,23 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9NBLGGH4SQ91"
+        "id": "BQ2ZZ6WTZZJZ"
       },
       {
-        "distributor": "xbox",
-        "id": "BQ2ZZ6WTZZJZ"
+        "distributor": "google_play",
+        "id": "com.telltalegames.batman100"
+      },
+      {
+        "distributor": "steam",
+        "id": "498240"
       },
       {
         "distributor": "xbox",
         "id": "C4VVPDBXSH5P"
       },
       {
-        "distributor": "steam",
-        "id": "498240"
+        "distributor": "xbox",
+        "id": "9NBLGGH4SQ91"
       }
     ],
     "id_igdb": "14746",
@@ -89017,6 +89216,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.eastsidegames.trailerparkboys"
+      },
+      {
         "distributor": "steam",
         "id": "735850"
       }
@@ -89488,6 +89691,10 @@
       {
         "distributor": "steam",
         "id": "1048830"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.FoxieGames.HorseRidingTales"
       }
     ],
     "id_igdb": "116716",
@@ -91362,6 +91569,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.StefMorojna.SpaceflightSimulator"
+      },
       {
         "distributor": "steam",
         "id": "1718870"
@@ -97973,6 +98184,10 @@
       {
         "distributor": "steam",
         "id": "346750"
+      },
+      {
+        "distributor": "google_play",
+        "id": "bearface.games.merchant"
       }
     ],
     "id_igdb": "139231",
@@ -101542,6 +101757,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.disney.castleofillusion_goo"
+      },
+      {
         "distributor": "steam",
         "id": "227600"
       }
@@ -103181,7 +103400,7 @@
   },
   {
     "id": "1124355785351254126",
-    "name": "The Swords of Ditto: Mormo's Curse",
+    "name": "The Swords of Ditto",
     "aliases": [],
     "executables": [
       {
@@ -103194,6 +103413,10 @@
       {
         "distributor": "steam",
         "id": "619780"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.devolver.Swordsofditto"
       }
     ],
     "id_igdb": "36798",
@@ -103370,16 +103593,20 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "368390"
-      },
-      {
         "distributor": "xbox",
         "id": "9NRWNJS7JS6H"
       },
       {
+        "distributor": "steam",
+        "id": "368390"
+      },
+      {
         "distributor": "epic",
         "id": "29857990E5434B7DB5DD026EF18DBC96"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.spookydoorway.darkside.android"
       }
     ],
     "id_igdb": "35283",
@@ -106515,6 +106742,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.smgstudio.deathsquared"
+      },
+      {
         "distributor": "steam",
         "id": "471810"
       }
@@ -108035,16 +108266,20 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "1283190"
+        "distributor": "epic",
+        "id": "5D24ED888F9542A09DC406F66705631A"
       },
       {
         "distributor": "xbox",
         "id": "9NQBFK993V7C"
       },
       {
-        "distributor": "epic",
-        "id": "5D24ED888F9542A09DC406F66705631A"
+        "distributor": "google_play",
+        "id": "com.hg.NbFH"
+      },
+      {
+        "distributor": "steam",
+        "id": "1283190"
       }
     ],
     "id_igdb": "139447",
@@ -117907,6 +118142,10 @@
       {
         "distributor": "steam",
         "id": "1344740"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.HiFight.FOOTSIES_Rollback"
       }
     ],
     "id_igdb": "139359",
@@ -119873,6 +120112,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.badflyinteractive.deadeffect2"
+      },
       {
         "distributor": "steam",
         "id": "394760"
@@ -128256,6 +128499,10 @@
       {
         "distributor": "steam",
         "id": "649600"
+      },
+      {
+        "distributor": "google_play",
+        "id": "air.com.game.whiskeybarrelstudios.swordsandsandals2"
       }
     ],
     "id_igdb": "43131",
@@ -129598,6 +129845,10 @@
       {
         "distributor": "steam",
         "id": "345200"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.dingogames.tastyblue"
       }
     ],
     "id_igdb": "9081",
@@ -131008,12 +131259,16 @@
         "id": "9NBH78WD7XPQ"
       },
       {
-        "distributor": "epic",
-        "id": "A5C7F255D82B45C29D9AE3E3D2E5563A"
-      },
-      {
         "distributor": "steam",
         "id": "1677770"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.playstack.TheCaseOfTheGoldenIdol"
+      },
+      {
+        "distributor": "epic",
+        "id": "A5C7F255D82B45C29D9AE3E3D2E5563A"
       }
     ],
     "id_igdb": "166722",
@@ -141060,6 +141315,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.ldw.fishtycoon2"
+      },
+      {
         "distributor": "steam",
         "id": "845250"
       }
@@ -145128,6 +145387,10 @@
       {
         "distributor": "steam",
         "id": "821670"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.upjers_horsefarm"
       }
     ],
     "id_igdb": "105275",
@@ -145407,6 +145670,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.gametornado.short_life"
+      },
+      {
         "distributor": "steam",
         "id": "893570"
       }
@@ -145476,6 +145743,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.HomeNetGames.SpaceCommander"
+      },
       {
         "distributor": "steam",
         "id": "1449750"
@@ -152678,8 +152949,16 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "air.gd.sos.mcpixellite"
+      },
+      {
         "distributor": "steam",
         "id": "220860"
+      },
+      {
+        "distributor": "google_play",
+        "id": "air.gd.sos.mcpixel"
       }
     ],
     "id_igdb": "7553",
@@ -155184,6 +155463,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "air.com.technotal.shinobiwarfare"
+      },
+      {
         "distributor": "steam",
         "id": "1895300"
       }
@@ -155834,6 +156117,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.spilgames.a10.google.crashdrive2"
+      },
       {
         "distributor": "steam",
         "id": "343440"
@@ -157212,6 +157499,10 @@
       {
         "distributor": "xbox",
         "id": "9NPGTNQFC8B5"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.square_enix.FFIXww.android_googleplay"
       }
     ],
     "id_igdb": "340349",
@@ -168231,6 +168522,10 @@
       {
         "distributor": "steam",
         "id": "1590660"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.moonbit.mrhoppsplayhouse2"
       }
     ],
     "id_igdb": "152818",
@@ -173846,6 +174141,10 @@
       {
         "distributor": "steam",
         "id": "613830"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.square_enix.android_googleplay.chrono"
       }
     ],
     "id_igdb": "206320",
@@ -174279,8 +174578,8 @@
     "id": "1129504521626861732",
     "name": "Spiritfarer",
     "aliases": [
-      "Spiritfarer®: Farewell Edition",
-      "Spiritfarer®: Edição Farewell"
+      "Spiritfarer®: Edição Farewell",
+      "Spiritfarer®: Farewell Edition"
     ],
     "executables": [
       {
@@ -174289,7 +174588,12 @@
         "is_launcher": false
       }
     ],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.netflix.NGP.Spiritfarer"
+      }
+    ],
     "id_igdb": "119304",
     "cover": "co2fe7",
     "artwork": [
@@ -174955,12 +175259,16 @@
         "id": "462451248E9640F4A211294193034DDA"
       },
       {
-        "distributor": "xbox",
-        "id": "BV5GLFHZTHQH"
-      },
-      {
         "distributor": "steam",
         "id": "300380"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.PixelDashStudios.RoadRedemption"
+      },
+      {
+        "distributor": "xbox",
+        "id": "BV5GLFHZTHQH"
       }
     ],
     "id_igdb": "11602",
@@ -175477,6 +175785,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.WildWorks.AnimalJamPlayWild"
+      },
+      {
         "distributor": "steam",
         "id": "822240"
       }
@@ -175506,6 +175818,10 @@
       {
         "distributor": "steam",
         "id": "798420"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.MasterCode.ProfessionalFishing"
       }
     ],
     "id_igdb": "141801",
@@ -184221,6 +184537,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.ankama.waven"
+      },
+      {
         "distributor": "steam",
         "id": "2343650"
       }
@@ -184718,6 +185038,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.threebit.heartwoodonline"
+      },
       {
         "distributor": "steam",
         "id": "2180600"
@@ -187220,24 +187544,28 @@
     ],
     "executables": [
       {
-        "name": "fivenightsatfreddys4/halloweenedition.exe",
+        "name": "fivenightsatfreddys4/fivenightsatfreddys4.exe",
         "os": "win32",
         "is_launcher": false
       },
       {
-        "name": "fivenightsatfreddys4/fivenightsatfreddys4.exe",
+        "name": "fivenightsatfreddys4/halloweenedition.exe",
         "os": "win32",
         "is_launcher": false
       }
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "388090"
+        "distributor": "google_play",
+        "id": "com.scottgames.fnaf4"
       },
       {
         "distributor": "xbox",
         "id": "9PLDLMPLR7JV"
+      },
+      {
+        "distributor": "steam",
+        "id": "388090"
       }
     ],
     "id_igdb": "11583",
@@ -197120,6 +197448,10 @@
       {
         "distributor": "steam",
         "id": "2411360"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.fffungame.foodclicker"
       }
     ],
     "id_igdb": "262505",
@@ -197989,12 +198321,16 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "epic",
-        "id": "725DB51EE9BA4821A49C8E4C16BB2953"
+        "distributor": "google_play",
+        "id": "ahf.dummynation"
       },
       {
         "distributor": "steam",
         "id": "1892030"
+      },
+      {
+        "distributor": "epic",
+        "id": "725DB51EE9BA4821A49C8E4C16BB2953"
       }
     ],
     "id_igdb": "196265",
@@ -200382,6 +200718,10 @@
       {
         "distributor": "xbox",
         "id": "9N26VC8F7MZT"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.aurogon.Afterimage"
       }
     ],
     "id_igdb": "185642",
@@ -203308,6 +203648,10 @@
       {
         "distributor": "steam",
         "id": "2524890"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.pixel.gun3d"
       }
     ],
     "id_igdb": "261628",
@@ -207131,6 +207475,10 @@
       {
         "distributor": "steam",
         "id": "2358050"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.quattroplay.GraalEra"
       }
     ],
     "id_igdb": "55842",
@@ -212778,6 +213126,10 @@
       {
         "distributor": "steam",
         "id": "2529120"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.MDickie.OldSchool"
       }
     ],
     "id_igdb": "264914",
@@ -213864,6 +214216,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "dev.onhit.theyarecoming"
+      },
       {
         "distributor": "steam",
         "id": "2630080"
@@ -216569,11 +216925,15 @@
     "third_party_skus": [
       {
         "distributor": "steam",
-        "id": "2822370"
+        "id": "2822380"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N7WP4MCPJN0"
       },
       {
         "distributor": "steam",
-        "id": "2822380"
+        "id": "2822370"
       }
     ],
     "id_igdb": "293131",
@@ -221645,27 +222005,31 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9PGMQ7WTM74B"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9PJ8CKFDWWLF"
-      },
-      {
-        "distributor": "epic",
-        "id": "22600F09E936468C8ECFC22B5EAC7D7C"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9N77RQGB8ZHP"
+        "id": "9P4LSLG7B8CT"
       },
       {
         "distributor": "xbox",
         "id": "9NBV5QFW83WC"
       },
       {
+        "distributor": "google_play",
+        "id": "com.ubisoft.princeofpersia.thelostcrown.mobile.action.adventure.platform"
+      },
+      {
         "distributor": "xbox",
-        "id": "9P4LSLG7B8CT"
+        "id": "9PJ8CKFDWWLF"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PGMQ7WTM74B"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N77RQGB8ZHP"
+      },
+      {
+        "distributor": "epic",
+        "id": "22600F09E936468C8ECFC22B5EAC7D7C"
       },
       {
         "distributor": "steam",
@@ -224451,6 +224815,10 @@
       {
         "distributor": "steam",
         "id": "3170540"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.pgp.bybb97"
       }
     ],
     "id_igdb": "317717",
@@ -230123,7 +230491,7 @@
   },
   {
     "id": "1312146099141869690",
-    "name": "Fallen ~Makina and the City of Ruins~",
+    "name": "Fallen: Makina and the City of Ruins",
     "aliases": [],
     "executables": [
       {
@@ -230484,6 +230852,10 @@
       {
         "distributor": "steam",
         "id": "1769170"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.shatteredpixel.shatteredpixeldungeon"
       }
     ],
     "id_igdb": "130394",
@@ -233006,12 +233378,16 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "steam",
+        "id": "860860"
+      },
+      {
         "distributor": "xbox",
         "id": "9P3LHP0VRHTW"
       },
       {
-        "distributor": "steam",
-        "id": "860860"
+        "distributor": "google_play",
+        "id": "com.ChubbyPixel.SuicideGuySleepinDeeply"
       }
     ],
     "id_igdb": "102917",
@@ -236798,6 +237174,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.npckc.onsen"
+      },
       {
         "distributor": "steam",
         "id": "917680"
@@ -242554,6 +242934,10 @@
       {
         "distributor": "steam",
         "id": "2379740"
+      },
+      {
+        "distributor": "google_play",
+        "id": "jp.co.drecom.wizardry.daphne"
       }
     ],
     "id_igdb": "150013",
@@ -247260,6 +247644,10 @@
       {
         "distributor": "steam",
         "id": "3174070"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.kamagames.pokerist"
       }
     ],
     "id_igdb": "93646",
@@ -247699,6 +248087,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.nhn.dds"
+      },
       {
         "distributor": "steam",
         "id": "1548520"
@@ -254201,6 +254593,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.kamagames.blackjack"
+      },
+      {
         "distributor": "steam",
         "id": "3594780"
       }
@@ -257108,6 +257504,10 @@
       {
         "distributor": "steam",
         "id": "2581950"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.lunheim.tinyaquarium"
       }
     ],
     "id_igdb": "292329",
@@ -260414,7 +260814,7 @@
   },
   {
     "id": "1398168449724846100",
-    "name": "Parallel Experiment",
+    "name": "Parallel Lab",
     "aliases": [],
     "executables": [
       {
@@ -260427,6 +260827,10 @@
       {
         "distributor": "steam",
         "id": "2012320"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.elevenpuzzles.parallelexperiment"
       }
     ],
     "id_igdb": "198114",
@@ -261904,12 +262308,16 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "3446920"
-      },
-      {
         "distributor": "epic",
         "id": "663557CC7B6040338C8D3727FA5A7350"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.tentree.gp.un.mecharashi"
+      },
+      {
+        "distributor": "steam",
+        "id": "3446920"
       }
     ],
     "id_igdb": "302230",
@@ -263747,12 +264155,16 @@
         "id": null
       },
       {
-        "distributor": "xbox",
-        "id": "9NBLGGH51QT4"
+        "distributor": "google_play",
+        "id": "com.cdprojektred.gwent"
       },
       {
         "distributor": "steam",
         "id": "1284410"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NBLGGH51QT4"
       }
     ],
     "id_igdb": "19474",
@@ -268122,20 +268534,24 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "BR47R4J78FH8"
+        "distributor": "google_play",
+        "id": "com.PlausibleConcept.BadNorthFull"
       },
       {
-        "distributor": "xbox",
-        "id": "9N4T8VCMQVDT"
+        "distributor": "epic",
+        "id": "AA5EF9D2F8394731A034504C562E292C"
       },
       {
         "distributor": "steam",
         "id": "688420"
       },
       {
-        "distributor": "epic",
-        "id": "AA5EF9D2F8394731A034504C562E292C"
+        "distributor": "xbox",
+        "id": "9N4T8VCMQVDT"
+      },
+      {
+        "distributor": "xbox",
+        "id": "BR47R4J78FH8"
       }
     ],
     "id_igdb": "78550",
@@ -269135,12 +269551,7 @@
     ],
     "executables": [
       {
-        "name": "call of duty hq/cod22/cod22-cod.exe",
-        "os": "win32",
-        "is_launcher": false
-      },
-      {
-        "name": "_retail_/sp22/sp22-cod.exe",
+        "name": "call of duty hq/sp22/sp22-cod.exe",
         "os": "win32",
         "is_launcher": false
       },
@@ -269150,7 +269561,12 @@
         "is_launcher": false
       },
       {
-        "name": "call of duty hq/sp22/sp22-cod.exe",
+        "name": "_retail_/sp22/sp22-cod.exe",
+        "os": "win32",
+        "is_launcher": false
+      },
+      {
+        "name": "call of duty hq/cod22/cod22-cod.exe",
         "os": "win32",
         "is_launcher": false
       }
@@ -269158,11 +269574,7 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9NCL5M3V0RSH"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9PNGFSX7S117"
+        "id": "9P3V60BZVT4K"
       },
       {
         "distributor": "xbox",
@@ -269170,11 +269582,19 @@
       },
       {
         "distributor": "xbox",
-        "id": "9NDMF3RDFZ1K"
+        "id": "9PNGFSX7S117"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NCL5M3V0RSH"
       },
       {
         "distributor": "xbox",
         "id": "9N872NBW5XG5"
+      },
+      {
+        "distributor": "steam",
+        "id": "3595230"
       },
       {
         "distributor": "xbox",
@@ -269182,19 +269602,11 @@
       },
       {
         "distributor": "xbox",
-        "id": "9P3V60BZVT4K"
-      },
-      {
-        "distributor": "xbox",
         "id": "9P3RB3G1B17F"
       },
       {
         "distributor": "xbox",
-        "id": "9N201KQXS5BM"
-      },
-      {
-        "distributor": "steam",
-        "id": "3595230"
+        "id": "9NDMF3RDFZ1K"
       }
     ],
     "id_igdb": "200165",
@@ -271799,7 +272211,7 @@
   },
   {
     "id": "1406338135973171393",
-    "name": "Bendy: Lone Wolf",
+    "name": "Boris and the Dark Survival",
     "aliases": [],
     "executables": [
       {
@@ -271812,6 +272224,10 @@
       {
         "distributor": "xbox",
         "id": "9NC1PNSVWP55"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.jds.batds"
       },
       {
         "distributor": "steam",
@@ -276377,6 +276793,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.zachtronics.solitaire"
+      },
+      {
         "distributor": "steam",
         "id": "1988540"
       }
@@ -277566,7 +277986,7 @@
   },
   {
     "id": "1428172022873063434",
-    "name": "Is It Wrong to Try to Pick Up Girls in a Dungeon?: Battle Chronicle",
+    "name": "DanMachi Battle Chronicle",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -282954,6 +283374,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.nuts.atw.android.googleplay"
+      },
+      {
         "distributor": "steam",
         "id": "2994430"
       }
@@ -283789,6 +284213,10 @@
       {
         "distributor": "xbox",
         "id": "9NHQ5CB04K4P"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.cherrypopgames.snookerblitz"
       }
     ],
     "id_igdb": "315913",
@@ -287641,6 +288069,10 @@
       {
         "distributor": "steam",
         "id": "3094130"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.emagroups.ic2"
       }
     ],
     "id_igdb": "115308",
@@ -302897,6 +303329,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "epic",
+        "id": "1AD8A3FF1532449CBF3DEC8921F1CE04"
+      },
+      {
         "distributor": "steam",
         "id": "3219410"
       },
@@ -307050,10 +307486,14 @@
   },
   {
     "id": "1428223057889071205",
-    "name": "US Conflict: Tank Battles",
+    "name": "US Conflict",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.fourflash.usconflict"
+      },
       {
         "distributor": "xbox",
         "id": "9P31F9TGSRFN"
@@ -309032,10 +309472,14 @@
   },
   {
     "id": "1428224367162036244",
-    "name": "Pajama Sam: No Need to Hide When It's Dark Outside",
+    "name": "Pajama Sam In: No Need to Hide When It's Dark Outside",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.tommo.nggpepj1"
+      },
       {
         "distributor": "steam",
         "id": "283960"
@@ -313327,32 +313771,36 @@
     "aliases": [],
     "executables": [
       {
-        "name": "where winds meet.exe",
+        "name": "wwm.exe",
         "os": "win32",
         "is_launcher": false
       },
       {
-        "name": "wwm.exe",
+        "name": "where winds meet.exe",
         "os": "win32",
         "is_launcher": false
       }
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9N76QGDS5GJR"
+        "distributor": "epic",
+        "id": "where-winds-meet-58a176"
       },
       {
         "distributor": "epic",
         "id": "4806012311744989A5F96D97A42F7829"
       },
       {
-        "distributor": "epic",
-        "id": "where-winds-meet-58a176"
-      },
-      {
         "distributor": "steam",
         "id": "3564740"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.netease.yysls"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N76QGDS5GJR"
       }
     ],
     "id_igdb": "214414",
@@ -324501,6 +324949,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.dig.deep"
+      },
+      {
         "distributor": "xbox",
         "id": "9PJTP1JMJJDV"
       }
@@ -326641,6 +327093,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.MobEntertainment.PoppyPlaytimeChapter3"
+      },
       {
         "distributor": "xbox",
         "id": "9N2XTQT0D3PX"
@@ -336137,6 +336593,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "epic",
+        "id": "282117CC04A74CDEBE3CC72A3FF84232"
+      },
+      {
         "distributor": "steam",
         "id": "2924860"
       }
@@ -339120,12 +339580,16 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "3581600"
+        "distributor": "google_play",
+        "id": "com.igg.android.fatewar"
       },
       {
         "distributor": "epic",
         "id": "BCC18227DA77443C987A9A20A3C7B728"
+      },
+      {
+        "distributor": "steam",
+        "id": "3581600"
       }
     ],
     "id_igdb": "360916",
@@ -339514,6 +339978,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.kamagames.slotist"
+      },
       {
         "distributor": "steam",
         "id": "3673150"
@@ -344568,9 +345036,8 @@
   },
   {
     "id": "1440141099212738610",
-    "name": "Hackmud",
+    "name": "hackmud",
     "aliases": [
-      "hackmud",
       "ｈａｃｋｍｕｄ"
     ],
     "executables": [],
@@ -346303,102 +346770,6 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9NS056CFGRS1"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NVHD9BDVH2S"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9N8GK34GSDWZ"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9P06DGWTXNW0"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9MX3RCD64LK1"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9MVMMVRMZ30W"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9N379DS85P5H"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NRFLND98GBH"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9P6MC545J013"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NFS2TVT9MXQ"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9P3P6T7DXFLR"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NL1XSMV9B6Q"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9MW0PWZN4P8W"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NCN02RKS6LQ"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9MXGW35MCM8G"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9PNZGB1NZFQJ"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9P54N0VR6PVQ"
-      },
-      {
-        "distributor": "xbox",
-        "id": "BVT647C7WN7N"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NGXH4HXK5RR"
-      },
-      {
-        "distributor": "xbox",
-        "id": "C1ZT6N30L1WH"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9PFX17ZGX4L2"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NN6K2X1XQWK"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9PCWTRXGSHHJ"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NJBQ9JFM5NS"
-      },
-      {
-        "distributor": "xbox",
         "id": "9NTWM8PXNLD9"
       },
       {
@@ -346407,7 +346778,51 @@
       },
       {
         "distributor": "xbox",
+        "id": "9NGXH4HXK5RR"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PCWTRXGSHHJ"
+      },
+      {
+        "distributor": "steam",
+        "id": "2964090"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N379DS85P5H"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NJBQ9JFM5NS"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NFS2TVT9MXQ"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NVHD9BDVH2S"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MW0PWZN4P8W"
+      },
+      {
+        "distributor": "xbox",
+        "id": "BVT647C7WN7N"
+      },
+      {
+        "distributor": "xbox",
         "id": "9P77WCJQXNWN"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P54N0VR6PVQ"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MX3RCD64LK1"
       },
       {
         "distributor": "xbox",
@@ -346415,11 +346830,67 @@
       },
       {
         "distributor": "xbox",
+        "id": "9NN6K2X1XQWK"
+      },
+      {
+        "distributor": "xbox",
+        "id": "C1ZT6N30L1WH"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N8GK34GSDWZ"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NRFLND98GBH"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P3P6T7DXFLR"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P6MC545J013"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P06DGWTXNW0"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MXGW35MCM8G"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.wg.wowslegends"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NCN02RKS6LQ"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NS056CFGRS1"
+      },
+      {
+        "distributor": "xbox",
         "id": "9PMZ66VCN46S"
       },
       {
-        "distributor": "steam",
-        "id": "2964090"
+        "distributor": "xbox",
+        "id": "9PNZGB1NZFQJ"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PFX17ZGX4L2"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MVMMVRMZ30W"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NL1XSMV9B6Q"
       }
     ],
     "id_igdb": "107250",
@@ -347387,16 +347858,20 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.square_enix.android_googleplay.FFVIII"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P35DPLN1JCN"
+      },
+      {
         "distributor": "steam",
         "id": "1026680"
       },
       {
         "distributor": "xbox",
         "id": "9NNTSPSC35ZB"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9P35DPLN1JCN"
       }
     ],
     "id_igdb": "119374",
@@ -350216,63 +350691,7 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9NFB0Q076ZN9"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NLF1ZKQ269R\t"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9P6M888FRBS0"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9P0VF4BSN88L"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9PB5DX22HVVG"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9P6JBT365ZBK"
-      },
-      {
-        "distributor": "steam",
-        "id": "918570"
-      },
-      {
-        "distributor": "epic",
-        "id": "F698D5D792654AC99F47D67E93916BEF"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NZ47R1HNPQ1"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NZJHZ16G17J"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NW4T7GP9D8X"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9N0K0Q39X4NT"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NRMXFFD3K13"
-      },
-      {
-        "distributor": "xbox",
         "id": "9NLF1ZKQ269R"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NK53Q901G9P"
       },
       {
         "distributor": "google_play",
@@ -350280,11 +350699,63 @@
       },
       {
         "distributor": "xbox",
+        "id": "9NRMXFFD3K13"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PB5DX22HVVG"
+      },
+      {
+        "distributor": "xbox",
         "id": "9NRDQD2L0NLZ"
+      },
+      {
+        "distributor": "epic",
+        "id": "F698D5D792654AC99F47D67E93916BEF"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P0VF4BSN88L"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NK53Q901G9P"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P6JBT365ZBK"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NFB0Q076ZN9"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P6M888FRBS0"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NW4T7GP9D8X"
+      },
+      {
+        "distributor": "steam",
+        "id": "918570"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NZ47R1HNPQ1"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N0K0Q39X4NT"
       },
       {
         "distributor": "xbox",
         "id": "9PHJTVJZ429L"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NZJHZ16G17J"
       }
     ],
     "id_igdb": "141536",
@@ -350401,20 +350872,24 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "google_play",
-        "id": "com.netflix.NGP.PaperTrail"
+        "distributor": "epic",
+        "id": "44FDC5BEF2BB495981B03E358175B412"
+      },
+      {
+        "distributor": "steam",
+        "id": "1889740"
       },
       {
         "distributor": "xbox",
         "id": "9P4XM3TJ13QM"
       },
       {
-        "distributor": "xbox",
-        "id": "9PKKH2S8Q2V7"
+        "distributor": "google_play",
+        "id": "com.netflix.NGP.PaperTrail"
       },
       {
-        "distributor": "steam",
-        "id": "1889740"
+        "distributor": "xbox",
+        "id": "9PKKH2S8Q2V7"
       }
     ],
     "id_igdb": "142561",
@@ -350750,7 +351225,12 @@
     "name": "Dungeon Crusher: Soul Hunters",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.towardsmars.dungeoncrusher"
+      }
+    ],
     "id_igdb": "142999",
     "cover": "co2qsd",
     "artwork": [
@@ -352285,7 +352765,12 @@
     "name": "Grand Theft Auto III: The Definitive Edition",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.rockstargames.gta3.de"
+      }
+    ],
     "id_igdb": "178123",
     "cover": "co65yy",
     "artwork": [
@@ -354736,6 +355221,10 @@
       {
         "distributor": "steam",
         "id": "3882350"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.ujoy.reso"
       }
     ],
     "id_igdb": "375520",
@@ -358115,6 +358604,10 @@
       {
         "distributor": "google_play",
         "id": "com.crystal.usad"
+      },
+      {
+        "distributor": "steam",
+        "id": "3839850"
       }
     ],
     "id_igdb": "174674",
@@ -359664,12 +360157,16 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "steam",
+        "id": "440420"
+      },
+      {
         "distributor": "epic",
         "id": "52D9C5885CB54C9280D4B9B8CF32A7B9"
       },
       {
-        "distributor": "steam",
-        "id": "440420"
+        "distributor": "google_play",
+        "id": "com.Goblinz.TrueFear"
       },
       {
         "distributor": "xbox",
@@ -363997,10 +364494,15 @@
   },
   {
     "id": "1442711859017814106",
-    "name": "Bright Paw: Definitive Edition",
+    "name": "Bright Paw",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.rogue.brightpaw"
+      }
+    ],
     "id_igdb": "212285",
     "cover": "co51y3",
     "artwork": [
@@ -366528,10 +367030,15 @@
   },
   {
     "id": "1442712617339588768",
-    "name": "Block Blast",
+    "name": "Block Blast!",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.block.juggle"
+      }
+    ],
     "id_igdb": "130896",
     "cover": "co8i91",
     "artwork": null,
@@ -373984,9 +374491,10 @@
   },
   {
     "id": "1442715029052063765",
-    "name": "SNWBRD: Freestyle Snowboarding",
+    "name": "Snwbrd: Freestyle Snowboarding",
     "aliases": [
-      "SNWBRD"
+      "SNWBRD",
+      "SNWBRD: Freestyle Snowboarding"
     ],
     "executables": [],
     "third_party_skus": [
@@ -377960,6 +378468,10 @@
       {
         "distributor": "epic",
         "id": "24BE4B63C90949A0B0E49AE3085309C8"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.netmarble.tskgb"
       }
     ],
     "id_igdb": "366551",
@@ -381393,10 +381905,14 @@
   },
   {
     "id": "1442717089835253882",
-    "name": "O-Void: Console Edition",
+    "name": "O-Void",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.gearheadgames.ovoid"
+      },
       {
         "distributor": "xbox",
         "id": "9N6MFQRDB0HW"
@@ -386493,7 +387009,12 @@
     "name": "Cubic 2 3 4 Player Games",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.CubeCubeSports.Cubic234PlayerGames"
+      }
+    ],
     "id_igdb": "331902",
     "cover": "co9evb",
     "artwork": [
@@ -393207,10 +393728,15 @@
   },
   {
     "id": "1442720984678535198",
-    "name": "Fight Legends: Mortal Fighting",
+    "name": "Dark Steel",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.darkcurry.darksteel"
+      }
+    ],
     "id_igdb": "335187",
     "cover": "co9ix8",
     "artwork": [
@@ -394559,7 +395085,12 @@
     "name": "Good Coffee, Great Coffee",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.tapblaze.coffeebusiness"
+      }
+    ],
     "id_igdb": "327471",
     "cover": "co9jiz",
     "artwork": [
@@ -397110,7 +397641,12 @@
     "name": "Line of Defense Tactics",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.inc3000ad.lodtactics"
+      }
+    ],
     "id_igdb": "16894",
     "cover": null,
     "artwork": null,
@@ -399622,10 +400158,9 @@
   },
   {
     "id": "1442727833993613332",
-    "name": "Arcade Archives: Exerion",
+    "name": "Arcade Archives: EXERION",
     "aliases": [
-      "Arcade Archives EXERION",
-      "Arcade Archives: EXERION"
+      "Arcade Archives EXERION"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -401187,16 +401722,20 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "591630"
-      },
-      {
         "distributor": "xbox",
         "id": "BS95882KBB4F"
       },
       {
         "distributor": "xbox",
         "id": "BW89MHGPNF2F"
+      },
+      {
+        "distributor": "steam",
+        "id": "591630"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.spotlightor.candleman"
       }
     ],
     "id_igdb": "81247",
@@ -402947,10 +403486,9 @@
   },
   {
     "id": "1442728871614091295",
-    "name": "Arcade Archives: Argus",
+    "name": "Arcade Archives: ARGUS",
     "aliases": [
-      "Arcade Archives ARGUS",
-      "Arcade Archives: ARGUS"
+      "Arcade Archives ARGUS"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -405265,7 +405803,7 @@
   },
   {
     "id": "1442729566891147385",
-    "name": "Heroine Anthem: [Zero]",
+    "name": "Heroine Anthem Zero",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -416981,6 +417519,10 @@
       {
         "distributor": "steam",
         "id": "3985600"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.istomgames.redsiren"
       }
     ],
     "id_igdb": "111541",
@@ -423914,7 +424456,12 @@
     "name": "Hide & Dance!",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "air.jp.ne.hap.ushiro"
+      }
+    ],
     "id_igdb": "34572",
     "cover": "co29x3",
     "artwork": null,
@@ -428089,9 +428636,10 @@
   },
   {
     "id": "1442737663558811792",
-    "name": "Arcade Archives: THE ASTYANAX",
+    "name": "Arcade Archives: The Astyanax",
     "aliases": [
-      "Arcade Archives THE ASTYANAX"
+      "Arcade Archives THE ASTYANAX",
+      "Arcade Archives: THE ASTYANAX"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -439833,6 +440381,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.Goblinz.TrueFear2"
+      },
+      {
         "distributor": "epic",
         "id": "30F78A567F514A568604E852F5DED591"
       },
@@ -441604,12 +442156,20 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9NTF6CWQBSJ0"
+        "distributor": "google_play",
+        "id": "com.forwardxp.pdtaxr"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.escalationstudios.nuke"
       },
       {
         "distributor": "steam",
         "id": "529590"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NTF6CWQBSJ0"
       }
     ],
     "id_igdb": "31235",
@@ -444544,6 +445104,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "leagueofmonkeys.torquedrift"
+      },
+      {
         "distributor": "steam",
         "id": "1029550"
       }
@@ -446908,16 +447472,20 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9NB046DSM63B"
+      },
+      {
         "distributor": "steam",
         "id": "1356530"
       },
       {
-        "distributor": "xbox",
-        "id": "9NKTFFJ2ZHDF"
+        "distributor": "google_play",
+        "id": "com.crispapp.seekandfindgames.hiddenhotel"
       },
       {
         "distributor": "xbox",
-        "id": "9NB046DSM63B"
+        "id": "9NKTFFJ2ZHDF"
       }
     ],
     "id_igdb": "151452",
@@ -447012,7 +447580,12 @@
     "name": "Bash the Teacher! School Prank",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.chopperkhan.BashTeacher"
+      }
+    ],
     "cover": null,
     "artwork": null,
     "url": null
@@ -448866,8 +449439,16 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "epic",
+        "id": "711F6DCAA9B743FEB6A1591D7986FE21"
+      },
+      {
         "distributor": "steam",
         "id": "3744430"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NTNTC2V151G"
       }
     ],
     "id_igdb": "366607",
@@ -457362,7 +457943,12 @@
     "name": "Speed Intense Island",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.darie.speedintenseisland"
+      }
+    ],
     "id_igdb": "233514",
     "cover": null,
     "artwork": null,
@@ -460963,10 +461549,15 @@
   },
   {
     "id": "1445982778226380922",
-    "name": "Madfut 26",
+    "name": "MADFUT 26",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.trivela.madfut"
+      }
+    ],
     "cover": null,
     "artwork": null,
     "url": null
@@ -461742,7 +462333,12 @@
     "name": "Bleach: Soul Resonance",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.crunchyroll.bleachsoulres"
+      }
+    ],
     "id_igdb": "330121",
     "cover": "coavmb",
     "artwork": null,
@@ -465697,12 +466293,16 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "1373430"
-      },
-      {
         "distributor": "xbox",
         "id": "9P0L9HQ9TT2V"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.crazybunch.lslwetdreamsdrytwice"
+      },
+      {
+        "distributor": "steam",
+        "id": "1373430"
       }
     ],
     "id_igdb": "138756",
@@ -487772,7 +488372,12 @@
     "name": "StoneAge: Idle Adventure",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.netmarble.stonkey"
+      }
+    ],
     "cover": null,
     "artwork": null,
     "url": null
@@ -488170,7 +488775,11 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9PLGB8Q7JZ91"
+        "id": "9NXC2TH9R7HM"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MW47TV1Z5RZ"
       },
       {
         "distributor": "steam",
@@ -488182,7 +488791,7 @@
       },
       {
         "distributor": "xbox",
-        "id": "9MW47TV1Z5RZ"
+        "id": "9PLGB8Q7JZ91"
       }
     ],
     "id_igdb": "383019",
@@ -493645,12 +494254,16 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "steam",
+        "id": "1071130"
+      },
+      {
         "distributor": "xbox",
         "id": "9NW7S04QK7XV"
       },
       {
-        "distributor": "steam",
-        "id": "1071130"
+        "distributor": "epic",
+        "id": "F56D119F5F0042A28996A39676D74B71"
       }
     ],
     "id_igdb": "106985",
@@ -498142,12 +498755,16 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9N1WWHGKBX3P"
+        "distributor": "steam",
+        "id": "1172620"
       },
       {
         "distributor": "xbox",
         "id": "9NKD5GJTS6FH"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N1WWHGKBX3P"
       }
     ],
     "id_igdb": "11137",
@@ -501688,6 +502305,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.global.sea.slmmo"
+      },
+      {
         "distributor": "steam",
         "id": "4584110"
       }
@@ -502131,7 +502752,12 @@
     "name": "Last Origin R+",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.valofe.laotw"
+      }
+    ],
     "id_igdb": "401129",
     "cover": "coc4m6",
     "artwork": null,
@@ -503515,13 +504141,17 @@
   },
   {
     "id": "1515195902673813614",
-    "name": "Durak Online by Pokerist",
+    "name": "Durak Online",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
       {
         "distributor": "steam",
         "id": "4355340"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.kamagames.durak"
       }
     ],
     "id_igdb": null,
@@ -504296,7 +504926,12 @@
     "name": "Real Pool 3D 2",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.feamber.pool3"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -511574,7 +512209,12 @@
     "name": "Age of Empires Mobile: PC Edition",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.proximabeta.aoemobile"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -513137,10 +513777,15 @@
   },
   {
     "id": "1523176937764159558",
-    "name": "Grand Summoners - Anime RPG",
+    "name": "Grand Summoners",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "jp.goodsmile.grandsummonersglobal_android"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -513511,20 +514156,24 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9QV0KG716NH8"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9MZMF5VJX482"
-      },
-      {
         "distributor": "epic",
         "id": "3D258B63967A42EEA0A793F0A098E9E1"
       },
       {
         "distributor": "xbox",
+        "id": "9QV0KG716NH8"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.superfunsoft.thelegendoffireball"
+      },
+      {
+        "distributor": "xbox",
         "id": "9N4K5MN61DV2"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MZMF5VJX482"
       }
     ],
     "id_igdb": "408921",
@@ -519515,6 +520164,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.oharion"
+      },
       {
         "distributor": "steam",
         "id": "4739190"
@@ -528758,6 +529411,10 @@
       {
         "distributor": "steam",
         "id": "5166890"
+      },
+      {
+        "distributor": "steam",
+        "id": "5174540"
       }
     ],
     "id_igdb": null,
@@ -529585,9 +530242,9 @@
   },
   {
     "id": "1553255162443866172",
-    "name": "CONTROL RESONANT",
+    "name": "CONTROL Resonant",
     "aliases": [
-      "CONTROL Resonant"
+      "CONTROL RESONANT"
     ],
     "executables": [],
     "third_party_skus": [
@@ -529596,8 +530253,8 @@
         "id": "3669870"
       },
       {
-        "distributor": "epic",
-        "id": "2DB42190F5704065809661FB9E4216EA"
+        "distributor": "xbox",
+        "id": "9P092299FSGW"
       },
       {
         "distributor": "xbox",
@@ -529605,7 +530262,11 @@
       },
       {
         "distributor": "xbox",
-        "id": "9P092299FSGW"
+        "id": "9PFSDZ4Q5RBD"
+      },
+      {
+        "distributor": "epic",
+        "id": "2DB42190F5704065809661FB9E4216EA"
       }
     ],
     "id_igdb": "225582",
@@ -530153,7 +530814,12 @@
     "name": "The Rabbit Haul",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2514330"
+      }
+    ],
     "id_igdb": "265277",
     "cover": "coak4r",
     "artwork": [
@@ -530166,7 +530832,16 @@
     "name": "Isle of Reveries",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3100970"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P80HZ476J39"
+      }
+    ],
     "id_igdb": "311611",
     "cover": "coc3jx",
     "artwork": [
@@ -530179,7 +530854,12 @@
     "name": "Cyber Cleaner Simulator",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3807650"
+      }
+    ],
     "id_igdb": "365974",
     "cover": "cocsbl",
     "artwork": [
@@ -530192,7 +530872,12 @@
     "name": "Dungeon Treaders",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4165660"
+      }
+    ],
     "id_igdb": "388401",
     "cover": "coc709",
     "artwork": [
@@ -530205,7 +530890,12 @@
     "name": "Radiotext",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3418160"
+      }
+    ],
     "id_igdb": "392040",
     "cover": "coblvr",
     "artwork": [
@@ -530218,7 +530908,12 @@
     "name": "Seaside Wash",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4719020"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -530229,7 +530924,12 @@
     "name": "RhythMania",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2322070"
+      }
+    ],
     "id_igdb": "327047",
     "cover": "co97y5",
     "artwork": [
@@ -530242,7 +530942,12 @@
     "name": "The Only Droid",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4393370"
+      }
+    ],
     "id_igdb": "95810",
     "cover": "co9dyr",
     "artwork": null,
@@ -530250,10 +530955,15 @@
   },
   {
     "id": "1554705155314950215",
-    "name": "Wand & Order: Tidy up the magic shop!",
+    "name": "Wand & Order: Tidy Up the Magic Shop!",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4981570"
+      }
+    ],
     "id_igdb": "411997",
     "cover": "coclth",
     "artwork": [
@@ -530266,7 +530976,12 @@
     "name": "Put Your Toys Away Together!",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5041530"
+      }
+    ],
     "id_igdb": "416292",
     "cover": "cocvtb",
     "artwork": [
@@ -530279,7 +530994,12 @@
     "name": "Tank Battle Classic",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5086560"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -530290,7 +531010,12 @@
     "name": "771",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3916440"
+      }
+    ],
     "id_igdb": "416809",
     "cover": "cocuoa",
     "artwork": [
@@ -530303,7 +531028,12 @@
     "name": "Dungeons & Dynasties",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5101960"
+      }
+    ],
     "id_igdb": "155267",
     "cover": null,
     "artwork": null,
@@ -530314,7 +531044,12 @@
     "name": "They Are Adorable",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5009860"
+      }
+    ],
     "id_igdb": "35342",
     "cover": "co2vph",
     "artwork": null,
@@ -530325,7 +531060,12 @@
     "name": "Megastore Chaos",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5113530"
+      }
+    ],
     "id_igdb": "417018",
     "cover": "cocxjl",
     "artwork": [
@@ -530338,7 +531078,12 @@
     "name": "Sill Sticks",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4861510"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -530349,7 +531094,12 @@
     "name": "C.U.B.E",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4523340"
+      }
+    ],
     "id_igdb": "365146",
     "cover": "coaeas",
     "artwork": [
@@ -530362,7 +531112,12 @@
     "name": "Elysium",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2354810"
+      }
+    ],
     "id_igdb": "408857",
     "cover": "cocd83",
     "artwork": [
@@ -530384,5 +531139,111 @@
       "ar1ii9"
     ],
     "url": "ace-combat-6-fires-of-liberation"
+  },
+  {
+    "id": "1554947773751627928",
+    "name": "Minecraft Dungeons II",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1912410"
+      }
+    ],
+    "id_igdb": "395525",
+    "cover": "ar60u5",
+    "artwork": [
+      "ar5ks4"
+    ],
+    "url": "minecraft-dungeons-ii"
+  },
+  {
+    "id": "1555066955474534401",
+    "name": "Good Job",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4596990"
+      }
+    ],
+    "id_igdb": "416125",
+    "cover": "cocu5b",
+    "artwork": [
+      "ar6k59"
+    ],
+    "url": "good-job--2"
+  },
+  {
+    "id": "1555066973157720185",
+    "name": "Fireboy & Watergirl 4: The Crystal Temple",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5085510"
+      }
+    ],
+    "id_igdb": "122936",
+    "cover": "coczml",
+    "artwork": [
+      "ar6nli"
+    ],
+    "url": "fireboy-and-watergirl-4-the-crystal-temple"
+  },
+  {
+    "id": "1555066980963192852",
+    "name": "Garage: Tidy Up!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4930980"
+      }
+    ],
+    "id_igdb": "414762",
+    "cover": "cocr3q",
+    "artwork": [
+      "ar6h7s"
+    ],
+    "url": "garage-tidy-up"
+  },
+  {
+    "id": "1555066990027214918",
+    "name": "Augmented Yut",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4947900"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1555067015050436669",
+    "name": "Needle In A Haystack",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4772020"
+      }
+    ],
+    "id_igdb": "417153",
+    "cover": "cod0t3",
+    "artwork": [
+      "ar6kdk"
+    ],
+    "url": "needle-in-a-haystack--3"
   }
 ]
