@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Velopack;
+using Velopack.Locators;
 using Velopack.Sources;
 
 namespace BackloggdMirror.Services;
@@ -47,6 +48,39 @@ public sealed class AppUpdaterService
     public bool IsSupported => _manager?.IsInstalled == true;
 
     public string? PackagedVersion => _manager?.CurrentVersion?.ToString();
+
+    /// <summary>False when the update could not be written to the install folder; true when unsure.</summary>
+    public bool CanWriteInstallFolder()
+    {
+        var folder = GetInstallFolder();
+        if (folder is null) return true;
+
+        try
+        {
+            // A real write rather than reading ACLs, so read-only drives and shares are caught too.
+            var probe = Path.Combine(folder, $".write-test-{Guid.NewGuid():N}");
+            using (File.Create(probe, 1, FileOptions.DeleteOnClose)) { }
+        }
+        catch (Exception ex)
+        {
+            _logger.Warning($"[AppUpdaterService] The install folder '{folder}' is not writable: {ex.Message}");
+            return false;
+        }
+
+        return true;
+    }
+
+    /// <summary>The folder an update rewrites: the one with Update.exe on Windows, the AppImage's on Linux.</summary>
+    private static string? GetInstallFolder()
+    {
+        if (OperatingSystem.IsLinux())
+        {
+            var appImage = Environment.GetEnvironmentVariable("APPIMAGE");
+            return string.IsNullOrEmpty(appImage) ? null : Path.GetDirectoryName(appImage);
+        }
+
+        return VelopackLocator.IsCurrentSet ? VelopackLocator.Current.RootAppDir : null;
+    }
 
     private static IUpdateSource CreateSource(IAppLogger logger)
     {
