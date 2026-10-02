@@ -20208,9 +20208,10 @@
   },
   {
     "id": "451132630390538270",
-    "name": "BLESS GLOBAL",
+    "name": "Bless Global",
     "aliases": [
-      "BLESS"
+      "BLESS",
+      "BLESS GLOBAL"
     ],
     "executables": [
       {
@@ -33646,6 +33647,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.ea.gp.bej3"
+      },
       {
         "distributor": "steam",
         "id": "78000"
@@ -47600,6 +47605,10 @@
       {
         "distributor": "steam",
         "id": "774861"
+      },
+      {
+        "distributor": "epic",
+        "id": "788E00E07A364C4AB1A42708B6EA6E17"
       }
     ],
     "id_igdb": "111033",
@@ -50617,9 +50626,8 @@
   },
   {
     "id": "1124351982908493894",
-    "name": "Mir 4",
+    "name": "MIR 4",
     "aliases": [
-      "MIR 4",
       "MIR4"
     ],
     "executables": [
@@ -58529,6 +58537,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1335200 "
+      },
       {
         "distributor": "steam",
         "id": "1335200"
@@ -66945,6 +66957,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.the10tons.dysmantle"
+      },
+      {
         "distributor": "xbox",
         "id": "9NR6DRNCZS5Z"
       },
@@ -66953,8 +66969,8 @@
         "id": "846770"
       },
       {
-        "distributor": "google_play",
-        "id": "com.the10tons.dysmantle"
+        "distributor": "epic",
+        "id": "565F8F6620A74A01B37E280E8E0BABFE"
       }
     ],
     "id_igdb": "113998",
@@ -69125,9 +69141,10 @@
   },
   {
     "id": "1124353236564983808",
-    "name": "CounterSide",
+    "name": "Counterside",
     "aliases": [
-      "Counter:Side"
+      "Counter:Side",
+      "CounterSide"
     ],
     "executables": [
       {
@@ -78327,9 +78344,10 @@
   },
   {
     "id": "1124353934623002726",
-    "name": "CRISIS CORE: FINAL FANTASY VII - REUNION",
+    "name": "Crisis Core: Final Fantasy VII - Reunion",
     "aliases": [
-      "CRISIS CORE -FINAL FANTASY VII- REUNION"
+      "CRISIS CORE -FINAL FANTASY VII- REUNION",
+      "CRISIS CORE: FINAL FANTASY VII - REUNION"
     ],
     "executables": [
       {
@@ -78344,12 +78362,12 @@
         "id": "9P6J9NFKGJ68"
       },
       {
-        "distributor": "xbox",
-        "id": "9PCWV3FWJZ18"
-      },
-      {
         "distributor": "steam",
         "id": "1608070"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PCWV3FWJZ18"
       }
     ],
     "id_igdb": "205201",
@@ -111816,6 +111834,10 @@
       {
         "distributor": "steam",
         "id": "938560"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.hiddenlayergames.inmost"
       }
     ],
     "id_igdb": "107187",
@@ -115021,6 +115043,14 @@
       {
         "distributor": "xbox",
         "id": "9PBCZP9877D7"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.Sarepta.MyChildLebensborn"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.Sarepta.MyChild"
       }
     ],
     "id_igdb": "83852",
@@ -124509,9 +124539,10 @@
   },
   {
     "id": "1124357342394335324",
-    "name": "KILL la KILL: IF",
+    "name": "Kill la Kill: If",
     "aliases": [
-      "KILL la KILL THE GAME: IF"
+      "KILL la KILL THE GAME: IF",
+      "KILL la KILL: IF"
     ],
     "executables": [
       {
@@ -173793,9 +173824,10 @@
   },
   {
     "id": "1129504328848265387",
-    "name": "FIVE NIGHTS AT FREDDY'S: HELP WANTED",
+    "name": "Five Nights at Freddy's: Help Wanted",
     "aliases": [
-      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED"
+      "FIVE NIGHTS AT FREDDY'S VR: HELP WANTED",
+      "FIVE NIGHTS AT FREDDY'S: HELP WANTED"
     ],
     "executables": [
       {
@@ -178128,6 +178160,14 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.herocraft.game.tempest"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.herocraft.game.tempest.lite"
+      },
       {
         "distributor": "steam",
         "id": "418180"
@@ -229629,6 +229669,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9MVSQ629T2S8"
+      },
+      {
         "distributor": "steam",
         "id": "2408820"
       }
@@ -247154,6 +247198,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9PB1CHMGC0LS"
+      },
+      {
         "distributor": "steam",
         "id": "1732430"
       }
@@ -249066,6 +249114,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NN0FK211SWJ"
+      },
       {
         "distributor": "steam",
         "id": "2637940"
@@ -257376,9 +257428,9 @@
   },
   {
     "id": "1387990904194732154",
-    "name": "RAIDOU Remastered: The Mystery of the Soulless Army",
+    "name": "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY",
     "aliases": [
-      "RAIDOU Remastered: THE MYSTERY OF THE SOULLESS ARMY"
+      "RAIDOU Remastered: The Mystery of the Soulless Army"
     ],
     "executables": [
       {
@@ -257389,8 +257441,12 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "steam",
+        "id": "2288350"
+      },
+      {
         "distributor": "xbox",
-        "id": "9P284W1H02KW"
+        "id": "9NX3566L9NH9"
       },
       {
         "distributor": "xbox",
@@ -257398,11 +257454,7 @@
       },
       {
         "distributor": "xbox",
-        "id": "9NX3566L9NH9"
-      },
-      {
-        "distributor": "steam",
-        "id": "2288350"
+        "id": "9P284W1H02KW"
       }
     ],
     "id_igdb": "337024",
@@ -260287,6 +260339,10 @@
       {
         "distributor": "steam",
         "id": "2824490"
+      },
+      {
+        "distributor": "epic",
+        "id": "8B42748BDB8F4FEE8956592FF5A206C7"
       }
     ],
     "id_igdb": "312870",
@@ -269635,6 +269691,10 @@
       {
         "distributor": "steam",
         "id": "1547000"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.rockstargames.gtasa.de"
       }
     ],
     "id_igdb": "178126",
@@ -269932,6 +269992,10 @@
       {
         "distributor": "steam",
         "id": "1546990"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.rockstargames.gtavc.de"
       }
     ],
     "id_igdb": "178125",
@@ -284792,12 +284856,16 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "steam",
+        "id": "3198540"
+      },
+      {
         "distributor": "google_play",
         "id": "com.shiromofufactory.dungeon_antiqua_v2"
       },
       {
-        "distributor": "steam",
-        "id": "3198540"
+        "distributor": "xbox",
+        "id": "9P0BBHK9L3RR"
       }
     ],
     "id_igdb": "318329",
@@ -306147,7 +306215,7 @@
   },
   {
     "id": "1428212039494537397",
-    "name": "Hellmaster",
+    "name": "Hellmaster: The Legend of Dante",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -309875,7 +309943,7 @@
   },
   {
     "id": "1428246880214712451",
-    "name": "MySims: Kingdom",
+    "name": "MySims Kingdom",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -319745,6 +319813,10 @@
       {
         "distributor": "steam",
         "id": "39510"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NDW7NW3K662"
       }
     ],
     "id_igdb": "29207",
@@ -350691,31 +350763,7 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9NLF1ZKQ269R"
-      },
-      {
-        "distributor": "google_play",
-        "id": "com.Playwing.Century"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NRMXFFD3K13"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9PB5DX22HVVG"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NRDQD2L0NLZ"
-      },
-      {
-        "distributor": "epic",
-        "id": "F698D5D792654AC99F47D67E93916BEF"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9P0VF4BSN88L"
+        "id": "9N0K0Q39X4NT"
       },
       {
         "distributor": "xbox",
@@ -350727,19 +350775,19 @@
       },
       {
         "distributor": "xbox",
-        "id": "9NFB0Q076ZN9"
-      },
-      {
-        "distributor": "xbox",
         "id": "9P6M888FRBS0"
       },
       {
         "distributor": "xbox",
-        "id": "9NW4T7GP9D8X"
+        "id": "9NFB0Q076ZN9"
       },
       {
-        "distributor": "steam",
-        "id": "918570"
+        "distributor": "google_play",
+        "id": "com.Playwing.Century"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NRMXFFD3K13"
       },
       {
         "distributor": "xbox",
@@ -350747,11 +350795,39 @@
       },
       {
         "distributor": "xbox",
-        "id": "9N0K0Q39X4NT"
+        "id": "9NW4T7GP9D8X"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NLF1ZKQ269R"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NLF1ZKQ269R\t"
+      },
+      {
+        "distributor": "steam",
+        "id": "918570"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P0VF4BSN88L"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NRDQD2L0NLZ"
       },
       {
         "distributor": "xbox",
         "id": "9PHJTVJZ429L"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PB5DX22HVVG"
+      },
+      {
+        "distributor": "epic",
+        "id": "F698D5D792654AC99F47D67E93916BEF"
       },
       {
         "distributor": "xbox",
@@ -354805,6 +354881,10 @@
       {
         "distributor": "steam",
         "id": "2906280"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PLDPKB9R048"
       }
     ],
     "id_igdb": "375577",
@@ -368075,9 +368155,10 @@
   },
   {
     "id": "1442713050993135749",
-    "name": "Arcade Archives: MAZINGER Z",
+    "name": "Arcade Archives: Mazinger Z",
     "aliases": [
-      "Arcade Archives MAZINGER Z"
+      "Arcade Archives MAZINGER Z",
+      "Arcade Archives: MAZINGER Z"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -375825,7 +375906,12 @@
     "name": "Super Solitaire: Card Game",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.thebinaryfamily.supersolitaire"
+      }
+    ],
     "id_igdb": "277890",
     "cover": "co7fgq",
     "artwork": [
@@ -400158,9 +400244,10 @@
   },
   {
     "id": "1442727833993613332",
-    "name": "Arcade Archives: EXERION",
+    "name": "Arcade Archives: Exerion",
     "aliases": [
-      "Arcade Archives EXERION"
+      "Arcade Archives EXERION",
+      "Arcade Archives: EXERION"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -403486,9 +403573,10 @@
   },
   {
     "id": "1442728871614091295",
-    "name": "Arcade Archives: ARGUS",
+    "name": "Arcade Archives: Argus",
     "aliases": [
-      "Arcade Archives ARGUS"
+      "Arcade Archives ARGUS",
+      "Arcade Archives: ARGUS"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -421072,9 +421160,10 @@
   },
   {
     "id": "1442734322128916531",
-    "name": "Arcade Archives: NAUGHTY BOY",
+    "name": "Arcade Archives: Naughty Boy",
     "aliases": [
-      "Arcade Archives NAUGHTY BOY"
+      "Arcade Archives NAUGHTY BOY",
+      "Arcade Archives: NAUGHTY BOY"
     ],
     "executables": [],
     "third_party_skus": [],
@@ -431516,12 +431605,16 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9NWJ6ZCM4F14"
+      },
+      {
         "distributor": "steam",
         "id": "460430"
       },
       {
-        "distributor": "xbox",
-        "id": "9NWJ6ZCM4F14"
+        "distributor": "google_play",
+        "id": "com.yym.theletter"
       }
     ],
     "id_igdb": "33062",
@@ -442498,6 +442591,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.oddworld.Stranger"
+      },
+      {
         "distributor": "steam",
         "id": "15750"
       }
@@ -450259,6 +450356,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9PGTWQW5BPDW"
+      },
+      {
         "distributor": "steam",
         "id": "3809410"
       }
@@ -453102,10 +453203,15 @@
   },
   {
     "id": "1445977009376333864",
-    "name": "Neon Runners: Craft & Dash",
+    "name": "Neon Runners",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2785860"
+      }
+    ],
     "cover": null,
     "artwork": null,
     "url": null
@@ -461675,13 +461781,7 @@
     "id": "1445982809792708628",
     "name": "AION 2",
     "aliases": [],
-    "executables": [
-      {
-        "name": "aion2.exe",
-        "os": "win32",
-        "is_launcher": false
-      }
-    ],
+    "executables": [],
     "third_party_skus": [
       {
         "distributor": "steam",
@@ -469623,6 +469723,10 @@
       {
         "distributor": "steam",
         "id": "1933930"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PGN1LJJC210"
       }
     ],
     "id_igdb": "226223",
@@ -500647,12 +500751,16 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "steam",
+        "id": "1107300"
+      },
+      {
         "distributor": "epic",
         "id": "0558E58003AA447A8ACE48C3A0D53B54"
       },
       {
-        "distributor": "steam",
-        "id": "1107300"
+        "distributor": "google_play",
+        "id": "co.yakand.downinbermuda"
       },
       {
         "distributor": "xbox",
@@ -520777,6 +520885,10 @@
       {
         "distributor": "steam",
         "id": "3354200"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.AkhirPekan.BaksoSimulator2Official"
       }
     ],
     "id_igdb": "324721",
@@ -522209,7 +522321,16 @@
     "name": "Whoa Adventure",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.yzlmkr.google"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.yzlmus.google"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -530242,12 +530363,20 @@
   },
   {
     "id": "1553255162443866172",
-    "name": "CONTROL Resonant",
+    "name": "CONTROL RESONANT",
     "aliases": [
-      "CONTROL RESONANT"
+      "CONTROL Resonant"
     ],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9PFPMMQPKCL6"
+      },
+      {
+        "distributor": "epic",
+        "id": "2DB42190F5704065809661FB9E4216EA"
+      },
       {
         "distributor": "steam",
         "id": "3669870"
@@ -530258,15 +530387,7 @@
       },
       {
         "distributor": "xbox",
-        "id": "9PFPMMQPKCL6"
-      },
-      {
-        "distributor": "xbox",
         "id": "9PFSDZ4Q5RBD"
-      },
-      {
-        "distributor": "epic",
-        "id": "2DB42190F5704065809661FB9E4216EA"
       }
     ],
     "id_igdb": "225582",
@@ -531062,6 +531183,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "epic",
+        "id": "794F2C3D68524295BA73B37B1BED3BE5"
+      },
+      {
         "distributor": "steam",
         "id": "5113530"
       }
@@ -531245,5 +531370,112 @@
       "ar6kdk"
     ],
     "url": "needle-in-a-haystack--3"
+  },
+  {
+    "id": "1555429996472967269",
+    "name": "Ace Combat 8: Wings of Theve",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "381247",
+    "cover": "coctdk",
+    "artwork": [
+      "ar4v1z"
+    ],
+    "url": "ace-combat-8-wings-of-theve"
+  },
+  {
+    "id": "1555430024260100167",
+    "name": "Maid Cafe Coop",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "381636",
+    "cover": "cob1l5",
+    "artwork": [
+      "ar4w7k"
+    ],
+    "url": "maid-cafe-coop"
+  },
+  {
+    "id": "1555430051674071171",
+    "name": "Rust & Shine",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1555430066177970289",
+    "name": "Joint Venture",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "410221",
+    "cover": "cocim0",
+    "artwork": [
+      "ar6e9m"
+    ],
+    "url": "joint-venture"
+  },
+  {
+    "id": "1555430079805526146",
+    "name": "Acame",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1555430095882158212",
+    "name": "Everyone's Tier List!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1555430118405447810",
+    "name": "High Roller Penny",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "413416",
+    "cover": "cocops",
+    "artwork": [
+      "ar6f7s"
+    ],
+    "url": "high-roller-penny"
+  },
+  {
+    "id": "1555430138647412807",
+    "name": "A Place for Every Potion",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1555430167550099567",
+    "name": "Ace Combat Zero: The Belkan War",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "14754",
+    "cover": "cocpj8",
+    "artwork": null,
+    "url": "ace-combat-zero-the-belkan-war"
   }
 ]
