@@ -924,6 +924,17 @@ public partial class MainWindowViewModel : ViewModelBase
             return;
         }
 
+        // Before anything is torn down, or Update.exe would only fail once the app has closed.
+        if (!AppUpdater.CanWriteInstallFolder())
+        {
+            _logger.Warning("[MainWindowViewModel] 'Update Apploggd' pressed but the install folder is read-only. Refusing.");
+
+            // From the tray the window may be hidden, and the toast lives in it.
+            RequestShowMainWindow?.Invoke();
+            ShowToast(loc["AppUpdate_ReadOnlyFolder"], ToastType.Error, TimeSpan.FromSeconds(15));
+            return;
+        }
+
         IsApplyingUpdate = true;
         SuspendDetectionForUpdate();
 

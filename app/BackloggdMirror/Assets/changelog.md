@@ -12,6 +12,7 @@
 ### Fixed
 
 - The NVIDIA App overlay is no longer detected as a game
+- Updating from a read-only folder now warns to move the app instead of failing
 
 ## 1.1.0 — 2026-09-10
 
