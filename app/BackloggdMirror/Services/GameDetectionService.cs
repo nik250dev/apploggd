@@ -231,6 +231,11 @@ public class GameDetectionService : IGameDetectionService
                 }
             }
 
+            foreach (var key in index.Keys.ToList())
+            {
+                index[key] = OrderBySpecificity(index[key]);
+            }
+
             Console.WriteLine($"[GameDetectionService] Loaded exe index with {index.Count} unique executable names from detectable_processed.json.");
         }
         catch (Exception ex)
@@ -240,6 +245,30 @@ public class GameDetectionService : IGameDetectionService
         }
 
         return index;
+    }
+
+    /// <summary>
+    /// The first matching candidate wins, and one without folders matches any process with that exe
+    /// name, so in database order it hid every later game sharing the name (Garry's Mod's bare
+    /// "hl2.exe" took Portal, Counter-Strike: Source and ~30 more). Most folders go first and bare
+    /// entries last, as a fallback.
+    /// A bare entry is dropped when the name is shared and its game already has an entry with folders
+    /// for it: it adds nothing for that game and would claim every unlisted game on the same exe
+    /// (Half-Life 2 and Team Fortress 2 on hl2.exe), which the later tiers can name correctly.
+    /// </summary>
+    private static List<ExeCandidate> OrderBySpecificity(List<ExeCandidate> candidates)
+    {
+        if (candidates.Count < 2)
+            return candidates;
+
+        bool shared = candidates.Select(c => c.GameName).Distinct().Skip(1).Any();
+
+        return candidates
+            .Where(c => !shared
+                || c.ExpectedParentSegments.Length > 0
+                || !candidates.Any(o => o.GameName == c.GameName && o.ExpectedParentSegments.Length > 0))
+            .OrderByDescending(c => c.ExpectedParentSegments.Length)
+            .ToList();
     }
 
     /// <summary>
@@ -288,11 +317,14 @@ public class GameDetectionService : IGameDetectionService
                     if (_blacklist?.IsApplicationBlocked(process.Id, processName) == true)
                         continue;
 
+                    string? fullPath = null;
+                    bool pathRead = false;
+
+                    // Candidates come most folders first (see OrderBySpecificity), so a bare one is only reached as a fallback.
                     foreach (var candidate in candidates)
                     {
                         if (candidate.ExpectedParentSegments.Length == 0)
                         {
-                            // Unambiguous exe name: the match needs no path check.
                             gameName = candidate.GameName;
                             processId = (uint)process.Id;
                             idIgdb = candidate.IdIgdb;
@@ -301,17 +333,19 @@ public class GameDetectionService : IGameDetectionService
                             return true;
                         }
 
-                        string? fullPath = null;
-                        try
+                        if (!pathRead)
                         {
-                            fullPath = _processIdentity.PathOf(process);
-                        }
-                        catch
-                        {
-                            // The path can be denied (MainModule, for elevated or protected processes).
-                            // Without it the candidate cannot be confirmed, and guessing would risk
-                            // logging the wrong game.
-                            continue;
+                            pathRead = true;
+                            try
+                            {
+                                fullPath = _processIdentity.PathOf(process);
+                            }
+                            catch
+                            {
+                                // The path can be denied (MainModule, for elevated or protected processes).
+                                // Without it no candidate with folders can be confirmed, and guessing would
+                                // risk logging the wrong game.
+                            }
                         }
 
                         if (string.IsNullOrEmpty(fullPath))
