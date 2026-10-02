@@ -25,6 +25,7 @@
         <conv:ToastTypeToForegroundConverter x:Key="ToastTypeToForegroundConverter"/>
         <conv:BottomMessageTypeToIconConverter x:Key="BottomMessageTypeToIconConverter"/>
         <conv:BottomMessageTypeToBrushConverter x:Key="BottomMessageTypeToBrushConverter"/>
+        <StreamGeometry x:Key="GamepadIconData">M7,6H17A6,6 0 0,1 23,12A6,6 0 0,1 17,18C15.22,18 13.63,17.23 12.53,16H11.47C10.37,17.23 8.78,18 7,18A6,6 0 0,1 1,12A6,6 0 0,1 7,6M6,9V11H4V13H6V15H8V13H10V11H8V9H6M15.5,12A1.5,1.5 0 0,0 14,13.5A1.5,1.5 0 0,0 15.5,15A1.5,1.5 0 0,0 17,13.5A1.5,1.5 0 0,0 15.5,12M18.5,9A1.5,1.5 0 0,0 17,10.5A1.5,1.5 0 0,0 18.5,12A1.5,1.5 0 0,0 20,10.5A1.5,1.5 0 0,0 18.5,9Z</StreamGeometry>
     </Window.Resources>
 
     <Window.Styles>
@@ -313,6 +314,149 @@
         </Style>
         <Style Selector="Border.bottom-message.visible">
             <Setter Property="Margin" Value="0,0,0,0"/>
+        </Style>
+
+        <!-- Controller mode (class set by GamepadNavigator), console-style focus. TemplatedControl clips by default, cutting the shadow off. -->
+        <Style Selector="Window.gamepad Button">
+            <Setter Property="ClipToBounds" Value="False"/>
+            <Setter Property="FocusAdorner" Value="{x:Null}"/>
+            <Setter Property="RenderTransform" Value="scale(1)"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12" Easing="CubicEaseOut"/>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.12"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Window.gamepad Button:focus">
+            <Setter Property="RenderTransform" Value="scale(1.03)"/>
+            <Setter Property="ZIndex" Value="1"/>
+        </Style>
+        <Style Selector="Window.gamepad Button:focus /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="BoxShadow" Value="inset 0 0 0 2 #FFFFFF, 0 6 16 0 #8C000000"/>
+        </Style>
+        <!-- Covers hide an inset edge under their image, so theirs goes outside. -->
+        <Style Selector="Window.gamepad ItemsControl#GameSearchResultsList Button">
+            <Setter Property="CornerRadius" Value="8"/>
+        </Style>
+        <Style Selector="Window.gamepad ItemsControl#GameSearchResultsList.gp-dim Button">
+            <Setter Property="Opacity" Value="0.5"/>
+        </Style>
+        <Style Selector="Window.gamepad ItemsControl#GameSearchResultsList Button:focus">
+            <Setter Property="Opacity" Value="1"/>
+            <Setter Property="RenderTransform" Value="scale(1.08)"/>
+        </Style>
+        <Style Selector="Window.gamepad ItemsControl#GameSearchResultsList Button:focus /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="BoxShadow" Value="0 0 0 2 #FFFFFF, 0 8 18 0 #99000000"/>
+        </Style>
+        <!-- The session cover is scaled by its Viewbox, so the edge goes on its frame. -->
+        <Style Selector="Window.gamepad Button.gp-cover:focus">
+            <Setter Property="RenderTransform" Value="scale(1)"/>
+        </Style>
+        <Style Selector="Window.gamepad Button.gp-cover:focus /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="BoxShadow" Value="none"/>
+        </Style>
+        <Style Selector="Border.gp-cover-host">
+            <Setter Property="RenderTransform" Value="scale(1)"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12" Easing="CubicEaseOut"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Window.gamepad Border.gp-cover-host:focus-within">
+            <Setter Property="BoxShadow" Value="0 0 0 2 #FFFFFF, 0 8 18 0 #99000000"/>
+            <Setter Property="RenderTransform" Value="scale(1.06)"/>
+        </Style>
+        <!-- Links get a pill; the negative margin keeps the layout still, and no zoom to keep the prompt visible. -->
+        <Style Selector="Window.gamepad Button.link">
+            <Setter Property="Padding" Value="4,1"/>
+            <Setter Property="Margin" Value="-4,-1"/>
+            <Setter Property="CornerRadius" Value="5"/>
+        </Style>
+        <Style Selector="Window.gamepad Button.link:focus">
+            <Setter Property="RenderTransform" Value="scale(1)"/>
+        </Style>
+        <Style Selector="Window.gamepad Button.link:focus /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#24FFFFFF"/>
+            <Setter Property="BoxShadow" Value="none"/>
+        </Style>
+        <Style Selector="Window.gamepad Button.link:focus TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="Window.gamepad Button.icon-btn">
+            <Setter Property="CornerRadius" Value="12"/>
+        </Style>
+        <Style Selector="Window.gamepad Button.icon-btn:focus /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#24FFFFFF"/>
+            <Setter Property="BoxShadow" Value="none"/>
+        </Style>
+        <Style Selector="Window.gamepad Button.icon-btn:focus PathIcon">
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <!-- Press feedback; declared last to beat the focus zoom. -->
+        <Style Selector="Window.gamepad Button.gp-press">
+            <Setter Property="RenderTransform" Value="scale(0.97)"/>
+        </Style>
+        <Style Selector="Window.gamepad Border.gp-cover-host.gp-press">
+            <Setter Property="RenderTransform" Value="scale(0.97)"/>
+        </Style>
+
+
+        <Style Selector="Border.gp-hints">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="Margin" Value="0,0,0,28"/>
+            <Setter Property="Padding" Value="16,9"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="Background" Value="{DynamicResource PanelBackgroundBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource SidebarBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BoxShadow" Value="0 6 20 0 #80000000"/>
+            <Setter Property="Opacity" Value="0"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.15"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Window.gamepad Border.gp-hints">
+            <Setter Property="Opacity" Value="1"/>
+        </Style>
+        <Style Selector="TextBlock.gp-hint">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <!-- One glyph per controller family, picked by a window class (Xbox by default). -->
+        <Style Selector="Panel.gp-glyph > Border">
+            <Setter Property="Width" Value="22"/>
+            <Setter Property="Height" Value="22"/>
+            <Setter Property="CornerRadius" Value="11"/>
+            <Setter Property="Background" Value="{DynamicResource SurfaceDarkBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="IsVisible" Value="False"/>
+        </Style>
+        <Style Selector="Panel.gp-glyph TextBlock, Panel.gp-glyph Path, Panel.gp-glyph Ellipse">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="Panel.gp-glyph TextBlock">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style Selector="Panel.gp-glyph > Border.gp-xbox">
+            <Setter Property="IsVisible" Value="True"/>
+        </Style>
+        <Style Selector="Window.gp-ps Panel.gp-glyph > Border.gp-xbox, Window.gp-nintendo Panel.gp-glyph > Border.gp-xbox">
+            <Setter Property="IsVisible" Value="False"/>
+        </Style>
+        <Style Selector="Window.gp-ps Panel.gp-glyph > Border.gp-ps">
+            <Setter Property="IsVisible" Value="True"/>
+        </Style>
+        <Style Selector="Window.gp-nintendo Panel.gp-glyph > Border.gp-nintendo">
+            <Setter Property="IsVisible" Value="True"/>
         </Style>
     </Window.Styles>
 
@@ -653,6 +797,16 @@
                                                 <TextBlock Text="{Binding [Settings_MinimizeToTrayDesc], Source={x:Static services:LocalizationService.Instance}}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}"/>
                                             </StackPanel>
                                             <ToggleSwitch Grid.Column="1" IsChecked="{Binding MinimizeToTray}" OnContent="" OffContent=""/>
+                                        </Grid>
+
+                                        <Separator Background="{DynamicResource SeparatorBrush}" Height="1"/>
+
+                                        <Grid ColumnDefinitions="*, Auto">
+                                            <StackPanel Spacing="2">
+                                                <TextBlock Text="{Binding [Settings_Gamepad], Source={x:Static services:LocalizationService.Instance}}" Classes="setting-label"/>
+                                                <TextBlock Text="{Binding [Settings_GamepadDesc], Source={x:Static services:LocalizationService.Instance}}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}"/>
+                                            </StackPanel>
+                                            <ToggleSwitch Grid.Column="1" IsChecked="{Binding GamepadNavigationEnabled}" OnContent="" OffContent=""/>
                                         </Grid>
                                     </StackPanel>
                                 </Border>
@@ -1032,7 +1186,7 @@
         <Panel IsVisible="{Binding IsSessionConfirmationVisible}" Background="{DynamicResource OverlayMediumBrush}">
             <!-- Game Selector Overlay (On Top) -->
             <Panel IsVisible="{Binding IsGameSelectorVisible}" ZIndex="10">
-                <Border Background="{DynamicResource AppBackgroundBrush}" CornerRadius="20" Width="600" Height="500" 
+                <Border x:Name="GameSelectorDialog" Background="{DynamicResource AppBackgroundBrush}" CornerRadius="20" Width="600" Height="500"
                         BorderBrush="{DynamicResource PanelBackgroundBrush}" BorderThickness="1" ClipToBounds="True">
                     <Grid RowDefinitions="*, Auto">
                         <!-- Content Area -->
@@ -1080,7 +1234,7 @@
                                             </Path.Stroke>
                                         </Path>
                                      
-                                     <ItemsControl ItemsSource="{Binding GameSearchResults}" IsVisible="{Binding !IsGameSearchLoading}">
+                                     <ItemsControl x:Name="GameSearchResultsList" ItemsSource="{Binding GameSearchResults}" IsVisible="{Binding !IsGameSearchLoading}" Margin="6,12">
                                         <ItemsControl.ItemsPanel>
                                             <ItemsPanelTemplate>
                                                 <WrapPanel HorizontalAlignment="Center" />
@@ -1105,7 +1259,7 @@
 
                         <!-- Footer -->
                         <Border Grid.Row="1" Background="{DynamicResource PanelBackgroundBrush}" Height="60" Padding="20,0">
-                            <Button Content="{Binding [Session_Cancel], Source={x:Static services:LocalizationService.Instance}}" Command="{Binding CloseGameSelectorCommand}" 
+                            <Button x:Name="GameSelectorCancelButton" Content="{Binding [Session_Cancel], Source={x:Static services:LocalizationService.Instance}}" Command="{Binding CloseGameSelectorCommand}"  
                                     HorizontalAlignment="Right" VerticalAlignment="Center"
                                     Background="{DynamicResource ButtonCancelBrush}" Foreground="{DynamicResource TextPrimaryBrush}" CornerRadius="5" Padding="15,8" Cursor="Hand"/>
                         </Border>
@@ -1114,7 +1268,7 @@
             </Panel>
 
             <!-- Session Content -->
-            <Border Background="{DynamicResource AppBackgroundBrush}" CornerRadius="20" Width="400" Height="320" 
+            <Border x:Name="SessionDialog" Background="{DynamicResource AppBackgroundBrush}" CornerRadius="20" Width="400" Height="320"
                     BoxShadow="0 0 50 0 #EA377A" BorderBrush="{DynamicResource BrandPrimaryBrush}" BorderThickness="1"
                     IsVisible="{Binding !IsGameSelectorVisible}">
                 <Grid RowDefinitions="*, Auto">
@@ -1124,7 +1278,7 @@
                         
                         <!-- Info Icon and Tooltip -->
                         <Panel HorizontalAlignment="Right" VerticalAlignment="Center">
-                            <Button x:Name="InfoButton" Classes="icon-btn" PointerEntered="OnInfoIconPointerEntered" PointerExited="OnInfoIconPointerExited" Command="{Binding DismissForcedTooltipCommand}" Background="Transparent" BorderThickness="0" Padding="0">
+                            <Button x:Name="InfoButton" Classes="icon-btn" PointerEntered="OnInfoIconPointerEntered" PointerExited="OnInfoIconPointerExited" GotFocus="OnInfoButtonGotFocus" LostFocus="OnInfoButtonLostFocus"  Command="{Binding DismissForcedTooltipCommand}" Background="Transparent" BorderThickness="0" Padding="0">
                                 <PathIcon x:Name="InfoIcon" Data="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z" 
                                           Width="20" Height="20"/>
                             </Button>
@@ -1146,16 +1300,17 @@
                     </Grid>
                     
                     <Grid Grid.Row="1" ColumnDefinitions="100, *" Margin="0,0,0,20">
-                        <!-- Game Cover (Clickable) -->
-                        <Border Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                BorderBrush="#30394c" BorderThickness="1" CornerRadius="4" ClipToBounds="True">
+                        <!-- Game Cover (Clickable). The outer border carries the controller focus edge. -->
+                        <Border x:Name="SessionCoverHost" Grid.Column="0" Classes="gp-cover-host" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="4">
+                        <Border BorderBrush="#30394c" BorderThickness="1" CornerRadius="4" ClipToBounds="True">
                             <Panel Cursor="Hand">
                                 <!-- Helper Container for Aspect Ratio Scaling -->
                                 <Viewbox Stretch="Uniform">
                                 <Panel Width="528" Height="704">
-                                    <Button Command="{Binding OpenGameSelectorCommand}" IsEnabled="{Binding AreButtonsEnabled}"
+                                    <Button x:Name="SessionCoverButton" Classes="gp-cover" Command="{Binding OpenGameSelectorCommand}" IsEnabled="{Binding AreButtonsEnabled}"
                                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                             PointerEntered="OnCoverPointerEntered" PointerExited="OnCoverPointerExited"
+                                            GotFocus="OnCoverGotFocus" LostFocus="OnCoverLostFocus"
                                             Padding="0" BorderThickness="0" Background="Transparent" CornerRadius="10"
                                             ToolTip.Tip="{Binding [Session_ChangeGameTooltip], Source={x:Static services:LocalizationService.Instance}}">
                                         <Border CornerRadius="10" ClipToBounds="True">
@@ -1200,7 +1355,8 @@
                             </Path>
                         </Panel>
                     </Border>
-                        
+                        </Border>
+
                         <!-- Game Details -->
                         <StackPanel Grid.Column="1" Margin="15,0,0,0" VerticalAlignment="Center">
                             <Panel>
@@ -1247,7 +1403,7 @@
                             </Button>
                             
                             <Panel Grid.Column="2" Background="Transparent" PointerEntered="OnSaveButtonPointerEntered" PointerExited="OnSaveButtonPointerExited">
-                                <Button Classes="save-btn" Command="{Binding SaveSessionCommand}" IsEnabled="{Binding IsSaveEnabled}"
+                                <Button x:Name="SessionSaveButton" Classes="save-btn" Command="{Binding SaveSessionCommand}" IsEnabled="{Binding IsSaveEnabled}"
                                     ToolTip.Placement="Top" ToolTip.VerticalOffset="-10" ToolTip.ShowOnDisabled="True" ToolTip.ShowDelay="0"
                                     ToolTip.Tip="{Binding SaveButtonTooltip}">
                                 <Button.Styles>
@@ -1291,10 +1447,34 @@
                 </Grid>
             </Border>
 
+            <!-- Controller hints, shown only in controller mode. -->
+            <Border Classes="gp-hints" ZIndex="20" IsHitTestVisible="False">
+                <StackPanel Orientation="Horizontal" Spacing="18">
+                    <PathIcon Data="{StaticResource GamepadIconData}" Width="20" Height="20" Foreground="{DynamicResource BrandPrimaryLightBrush}" VerticalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Panel Classes="gp-glyph">
+                            <Border Classes="gp-xbox"><TextBlock Text="A" Foreground="#6CC24A"/></Border>
+                            <Border Classes="gp-ps"><Path Data="M0,0 L9,9 M9,0 L0,9" Stroke="#8AB4FF" StrokeThickness="2" StrokeLineCap="Round"/></Border>
+                            <Border Classes="gp-nintendo"><TextBlock Text="B"/></Border>
+                        </Panel>
+                        <TextBlock Classes="gp-hint" Text="{Binding [Gamepad_Select], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding !IsGameSelectorVisible}"/>
+                        <TextBlock Classes="gp-hint" Text="{Binding [Gamepad_Choose], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding IsGameSelectorVisible}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Spacing="8" IsVisible="{Binding IsGameSelectorVisible}">
+                        <Panel Classes="gp-glyph">
+                            <Border Classes="gp-xbox"><TextBlock Text="B" Foreground="#F0506E"/></Border>
+                            <Border Classes="gp-ps"><Ellipse Width="11" Height="11" Stroke="#FF6F86" StrokeThickness="2"/></Border>
+                            <Border Classes="gp-nintendo"><TextBlock Text="A"/></Border>
+                        </Panel>
+                        <TextBlock Classes="gp-hint" Text="{Binding [Gamepad_Cancel], Source={x:Static services:LocalizationService.Instance}}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
         </Panel>
 
         <!-- Toast Notifications Layer -->
-        <ItemsControl ItemsSource="{Binding ToastNotifications}" 
+        <ItemsControl x:Name="ToastsLayer" ItemsSource="{Binding ToastNotifications}"
                       HorizontalAlignment="Right" VerticalAlignment="Top"
                       Margin="0,30,30,0" Width="350"
                       ZIndex="100">

@@ -45,6 +45,7 @@
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.Extensions" Version="10.0.12" />
     <PackageReference Include="Microsoft.Playwright" Version="1.61.0" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
+    <PackageReference Include="Ultz.Native.SDL" Version="2.32.10" />
     <PackageReference Include="Velopack" Version="1.2.0" />
   </ItemGroup>
 </Project>

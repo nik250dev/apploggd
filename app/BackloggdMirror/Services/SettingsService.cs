@@ -21,6 +21,7 @@ public class SettingsService
     public bool HasSeenSessionDiscardWarningV3 { get; set; } = false;
     public bool MinimizeToTray { get; set; } = true;
     public bool StartWithWindows { get; set; } = false;
+    public bool GamepadNavigationEnabled { get; set; } = true;
     public string Language { get; set; } = "System";
 
     private static string DefaultFolder =>
@@ -65,6 +66,7 @@ public class SettingsService
                     HasSeenSessionDiscardWarningV3 = settings.HasSeenSessionDiscardWarningV3;
                     MinimizeToTray = settings.MinimizeToTray;
                     StartWithWindows = settings.StartWithWindows;
+                    GamepadNavigationEnabled = settings.GamepadNavigationEnabled;
                     Language = settings.Language ?? "System";
                 }
             }
@@ -86,6 +88,7 @@ public class SettingsService
         HasSeenSessionDiscardWarningV3 = false;
         MinimizeToTray = true;
         StartWithWindows = false;
+        GamepadNavigationEnabled = true;
         Language = "System";
     }
 

@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using BackloggdMirror.Views;
 using BackloggdMirror.Services;
+using BackloggdMirror.Services.Input;
 using BackloggdMirror.Services.Platform.Linux;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -110,6 +111,7 @@ public partial class MainWindowViewModel : ViewModelBase
     private readonly GameDataService _gameDataService;
     private readonly AutostartService _autostartService;
     private readonly BlacklistService _blacklistService;
+    private readonly GamepadService? _gamepadService;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsWaitingAnimationVisible))]
@@ -178,6 +180,23 @@ public partial class MainWindowViewModel : ViewModelBase
             OnPropertyChanged();
         }
     }
+
+    public bool GamepadNavigationEnabled
+    {
+        get => _settingsService.GamepadNavigationEnabled;
+        set
+        {
+            if (_settingsService.GamepadNavigationEnabled != value)
+            {
+                _settingsService.GamepadNavigationEnabled = value;
+                _settingsService.Save();
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    /// <summary>Shared for the whole process, like the blacklist: it outlives a logout.</summary>
+    internal GamepadService? Gamepad => _gamepadService;
 
     // Two properties for one setting: the ComboBox binds to the option object, while the code
     // (and settings.json) work with the language code. OnSelectedLanguageOptionChanged and the
@@ -480,7 +499,7 @@ public partial class MainWindowViewModel : ViewModelBase
     /// </summary>
     private readonly SemaphoreSlim _detectionGate = new(1, 1);
 
-    public MainWindowViewModel(IGameDetectionService gameDetectionService, IBackloggdAuthService authService, IBackloggdBrowserService browserService, SettingsService settingsService, ICredentialStorageService credentialStorageService, IAppLogger logger, GameDataService? gameDataService = null, AutostartService? autostartService = null, BlacklistService? blacklistService = null)
+    public MainWindowViewModel(IGameDetectionService gameDetectionService, IBackloggdAuthService authService, IBackloggdBrowserService browserService, SettingsService settingsService, ICredentialStorageService credentialStorageService, IAppLogger logger, GameDataService? gameDataService = null, AutostartService? autostartService = null, BlacklistService? blacklistService = null, GamepadService? gamepadService = null)
     {
         _authService = authService;
         _browserService = browserService;
@@ -491,6 +510,7 @@ public partial class MainWindowViewModel : ViewModelBase
         _gameDataService = gameDataService ?? new GameDataService(logger);
         _autostartService = autostartService ?? new AutostartService(logger);
         _blacklistService = blacklistService ?? new BlacklistService(logger);
+        _gamepadService = gamepadService;
         _changelogService = new ChangelogService(logger);
 
         RefreshBlacklistEntries();
@@ -1076,6 +1096,7 @@ public partial class MainWindowViewModel : ViewModelBase
         // Reset() bypasses the properties the UI is bound to, so the toggles need telling by hand.
         OnPropertyChanged(nameof(MinimizeToTray));
         OnPropertyChanged(nameof(StartWithWindows));
+        OnPropertyChanged(nameof(GamepadNavigationEnabled));
         OnPropertyChanged(nameof(SelectedLanguageCode));
 
         // Same trap as the settings: the file is gone, but detection keeps this instance.
@@ -1269,7 +1290,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 loginVm.LoginSuccessful += () =>
                 {
                     // The blacklist is the instance detection reads; a new one would show a list that detection ignores.
-                    var mainWindowVm = new MainWindowViewModel(_gameDetectionService, newAuthService, newBrowserService, _settingsService, newCredentialStorageService, newLogger, blacklistService: _blacklistService);
+                    var mainWindowVm = new MainWindowViewModel(_gameDetectionService, newAuthService, newBrowserService, _settingsService, newCredentialStorageService, newLogger, blacklistService: _blacklistService, gamepadService: _gamepadService);
 
                     mainWindowVm.IsLoggedIn = true;
 
