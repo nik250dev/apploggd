@@ -24,6 +24,12 @@ public class SettingsService
     public bool GamepadNavigationEnabled { get; set; } = true;
     public string Language { get; set; } = "System";
 
+    /// <summary>Whether the explained "still running in the tray" notice has already been shown once.</summary>
+    public bool HasSeenTrayIntro { get; set; } = false;
+
+    /// <summary>Version whose tray update notice the user closed; it is not announced from the tray again.</summary>
+    public string? DismissedUpdateNoticeVersion { get; set; }
+
     private static string DefaultFolder =>
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Apploggd");
 
@@ -68,6 +74,8 @@ public class SettingsService
                     StartWithWindows = settings.StartWithWindows;
                     GamepadNavigationEnabled = settings.GamepadNavigationEnabled;
                     Language = settings.Language ?? "System";
+                    HasSeenTrayIntro = settings.HasSeenTrayIntro;
+                    DismissedUpdateNoticeVersion = settings.DismissedUpdateNoticeVersion;
                 }
             }
         }
@@ -90,6 +98,8 @@ public class SettingsService
         StartWithWindows = false;
         GamepadNavigationEnabled = true;
         Language = "System";
+        HasSeenTrayIntro = false;
+        DismissedUpdateNoticeVersion = null;
     }
 
     public void Save()
