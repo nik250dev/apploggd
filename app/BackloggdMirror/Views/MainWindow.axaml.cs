@@ -9,6 +9,7 @@ using Avalonia.Media.Imaging;
 using Avalonia.Skia;
 using Avalonia.Markup.Xaml.MarkupExtensions;
 using BackloggdMirror.Services;
+using BackloggdMirror.Services.Input;
 using BackloggdMirror.Services.Platform.Linux;
 using Avalonia.Threading;
 using System.Reflection;
@@ -25,6 +26,7 @@ public partial class MainWindow : Window
     private NativeMenuItem? _trayExitItem;
     private TrayNotificationWindow? _trayNotificationWindow;
     private UpdateProgressWindow? _updateProgressWindow;
+    private GamepadNavigator? _gamepadNavigator;
 
     // Taken as a constructor argument rather than read off the DataContext: the tray icon is built
     // in the constructor, before any DataContext has been assigned, and its failures are exactly
@@ -176,10 +178,18 @@ public partial class MainWindow : Window
     protected override void OnDataContextChanged(EventArgs e)
     {
         base.OnDataContextChanged(e);
+        _gamepadNavigator?.Dispose();
+        _gamepadNavigator = null;
+
         if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
         {
             SubscribeToEvents(vm);
             UpdateTrayMenuState(vm);
+
+            if (vm.Gamepad != null)
+            {
+                _gamepadNavigator = new GamepadNavigator(this, vm, vm.Gamepad, _logger);
+            }
         }
     }
 
@@ -346,6 +356,9 @@ public partial class MainWindow : Window
         // leaving the window permanently pinned.
         Topmost = true;
         Topmost = false;
+
+        // Controller navigation needs the window active, which Windows may refuse to another process.
+        DispatcherTimer.RunOnce(() => _logger?.Info($"[MainWindow] Window shown; active: {IsActive}."), TimeSpan.FromMilliseconds(500));
     }
 
     /// <summary>
@@ -457,6 +470,9 @@ public partial class MainWindow : Window
 
         LocalizationService.Instance.PropertyChanged -= OnLocalizationPropertyChanged;
 
+        _gamepadNavigator?.Dispose();
+        _gamepadNavigator = null;
+
         if (OperatingSystem.IsLinux())
         {
             LinuxTrayHost.AvailabilityChanged -= OnLinuxTrayAvailabilityChanged;
@@ -474,6 +490,7 @@ public partial class MainWindow : Window
 
             if (!isLoggingOut)
             {
+                (DataContext as BackloggdMirror.ViewModels.MainWindowViewModel)?.Gamepad?.Dispose();
                 desktop.Shutdown();
             }
         }
@@ -561,6 +578,39 @@ public partial class MainWindow : Window
         if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
         {
             vm.OnInfoIconExited();
+        }
+    }
+
+    // With a controller, focus stands in for the hover on the info icon and the cover.
+    private void OnInfoButtonGotFocus(object? sender, Avalonia.Input.GotFocusEventArgs e)
+    {
+        if (_gamepadNavigator?.IsControllerMode == true && DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        {
+            vm.DismissForcedTooltip();
+        }
+    }
+
+    private void OnInfoButtonLostFocus(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        {
+            vm.OnInfoIconExited();
+        }
+    }
+
+    private void OnCoverGotFocus(object? sender, Avalonia.Input.GotFocusEventArgs e)
+    {
+        if (_gamepadNavigator?.IsControllerMode == true && DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        {
+            vm.OnCoverPointerEntered();
+        }
+    }
+
+    private void OnCoverLostFocus(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        {
+            vm.OnCoverPointerExited();
         }
     }
 

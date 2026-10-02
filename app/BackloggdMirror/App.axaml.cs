@@ -8,6 +8,7 @@ using Avalonia.Markup.Xaml;
 using BackloggdMirror.ViewModels;
 using BackloggdMirror.Views;
 using BackloggdMirror.Services;
+using BackloggdMirror.Services.Input;
 using BackloggdMirror.Services.Platform.Linux;
 using System;
 
@@ -45,6 +46,7 @@ public partial class App : Application
             var credentialStorageService = new CredentialStorageService(logger);
             var installService = new PlaywrightInstallService(logger);
             var autostartService = new AutostartService(logger);
+            var gamepadService = new GamepadService(logger);
 
             if (OperatingSystem.IsLinux())
             {
@@ -99,7 +101,7 @@ public partial class App : Application
 
             loginVm.LoginSuccessful += () =>
             {
-                var mainWindowVm = new MainWindowViewModel(gameDetectionService, authService, browserService, settingsService, credentialStorageService, logger, autostartService: autostartService, blacklistService: blacklistService);
+                var mainWindowVm = new MainWindowViewModel(gameDetectionService, authService, browserService, settingsService, credentialStorageService, logger, autostartService: autostartService, blacklistService: blacklistService, gamepadService: gamepadService);
 
                 mainWindowVm.IsLoggedIn = true;
 
