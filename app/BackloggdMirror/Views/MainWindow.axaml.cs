@@ -8,6 +8,7 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Skia;
 using Avalonia.Markup.Xaml.MarkupExtensions;
+using BackloggdMirror.Models;
 using BackloggdMirror.Services;
 using BackloggdMirror.Services.Platform.Linux;
 using Avalonia.Threading;
@@ -326,6 +327,10 @@ public partial class MainWindow : Window
     private void ShowMainWindow()
     {
         Console.WriteLine("[MainWindow] ShowMainWindow called.");
+
+        // Tray notices talk about a hidden window. The update one is not marked as dismissed, so the next silent start shows it again.
+        _trayNotificationWindow?.Close();
+
         if (!IsVisible)
         {
             Show();
@@ -481,14 +486,27 @@ public partial class MainWindow : Window
 
     private void ShowTrayNotification()
     {
-        if (_trayNotificationWindow != null)
-        {
-            _trayNotificationWindow.Close();
-        }
+        var notice = (DataContext as BackloggdMirror.ViewModels.MainWindowViewModel)?.BuildBackgroundNotice()
+            ?? new TrayNotice(TrayNoticeKind.Detecting, LocalizationService.Instance["TrayNotice_BackgroundTitle"], string.Empty);
 
-        _trayNotificationWindow = new TrayNotificationWindow(_logger);
-        _trayNotificationWindow.Closed += (s, ev) => _trayNotificationWindow = null;
-        _trayNotificationWindow.Show();
+        ShowTrayNotice(notice);
+    }
+
+    private void ShowTrayNotice(TrayNotice notice)
+    {
+        _trayNotificationWindow?.Close();
+
+        var window = new TrayNotificationWindow(notice, _logger);
+
+        // Checked against the field: a notice replaced mid-fade closes after its successor is already in place.
+        window.Closed += (s, ev) =>
+        {
+            if (_trayNotificationWindow == window) _trayNotificationWindow = null;
+        };
+        window.BodyClicked += ShowMainWindow;
+
+        _trayNotificationWindow = window;
+        window.Show();
     }
 
     /// <summary>
@@ -534,19 +552,9 @@ public partial class MainWindow : Window
 
     /// <summary>
     /// The new-version notice on a silent start, where the window was never shown and a toast would
-    /// expire unseen. Same window, placement and fade as the "still running" notice.
+    /// expire unseen.
     /// </summary>
-    private void ShowTrayUpdateNotice(string message, string actionText, Action action)
-    {
-        if (_trayNotificationWindow != null)
-        {
-            _trayNotificationWindow.Close();
-        }
-
-        _trayNotificationWindow = new TrayNotificationWindow(_logger, message, TimeSpan.FromSeconds(30), actionText, action);
-        _trayNotificationWindow.Closed += (s, ev) => _trayNotificationWindow = null;
-        _trayNotificationWindow.Show();
-    }
+    private void ShowTrayUpdateNotice(TrayNotice notice) => ShowTrayNotice(notice);
 
     private void OnInfoIconPointerEntered(object? sender, Avalonia.Input.PointerEventArgs e)
     {

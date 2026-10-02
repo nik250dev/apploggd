@@ -9,6 +9,10 @@
 - Apps and emulated games can be added to a blacklist, so they are no longer detected
 - Support for Linux
 
+### Changed
+
+- The tray notice is redesigned: it shows what detection is doing and appears next to the tray on any desktop layout
+
 ### Fixed
 
 - The NVIDIA App overlay is no longer detected as a game

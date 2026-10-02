@@ -23,6 +23,12 @@ public class SettingsService
     public bool StartWithWindows { get; set; } = false;
     public string Language { get; set; } = "System";
 
+    /// <summary>Whether the explained "still running in the tray" notice has already been shown once.</summary>
+    public bool HasSeenTrayIntro { get; set; } = false;
+
+    /// <summary>Version whose tray update notice the user closed; it is not announced from the tray again.</summary>
+    public string? DismissedUpdateNoticeVersion { get; set; }
+
     private static string DefaultFolder =>
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Apploggd");
 
@@ -66,6 +72,8 @@ public class SettingsService
                     MinimizeToTray = settings.MinimizeToTray;
                     StartWithWindows = settings.StartWithWindows;
                     Language = settings.Language ?? "System";
+                    HasSeenTrayIntro = settings.HasSeenTrayIntro;
+                    DismissedUpdateNoticeVersion = settings.DismissedUpdateNoticeVersion;
                 }
             }
         }
@@ -87,6 +95,8 @@ public class SettingsService
         MinimizeToTray = true;
         StartWithWindows = false;
         Language = "System";
+        HasSeenTrayIntro = false;
+        DismissedUpdateNoticeVersion = null;
     }
 
     public void Save()

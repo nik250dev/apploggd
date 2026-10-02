@@ -94,8 +94,8 @@ public partial class MainWindowViewModel : ViewModelBase
     public event Action? RequestShowMainWindow;
     public event Action? RequestCloseApplication;
 
-    /// <summary>Message, button label and action for the tray notice that replaces the toast on a silent start.</summary>
-    public event Action<string, string, Action>? RequestTrayUpdateNotice;
+    /// <summary>The tray notice that replaces the update toast on a silent start.</summary>
+    public event Action<TrayNotice>? RequestTrayUpdateNotice;
 
     public event Action? RequestShowUpdateProgress;
     public event Action? RequestCloseUpdateProgress;
@@ -798,17 +798,24 @@ public partial class MainWindowViewModel : ViewModelBase
                 RefreshAppUpdateTexts();
             });
 
-            // 30s rather than the usual 7: both notices carry an action, so they have to survive the
-            // user looking away.
+            var version = velopackUpdate.TargetFullRelease.Version.ToString();
+
             if (AutostartService.StartedSilently)
             {
-                _logger.Info("[MainWindowViewModel] Silent start, so the update is announced from the tray instead of a toast.");
-
                 // The window exists but was never shown, so a toast would count down unseen.
-                Dispatcher.UIThread.Post(() => RequestTrayUpdateNotice?.Invoke(message, actionText, RunUpdateCommand));
+                if (_settingsService.DismissedUpdateNoticeVersion == version)
+                {
+                    _logger.Info($"[MainWindowViewModel] Silent start with {version} available, but its tray notice was already dismissed; only the in-app notice remains.");
+                }
+                else
+                {
+                    _logger.Info("[MainWindowViewModel] Silent start, so the update is announced from the tray instead of a toast.");
+                    Dispatcher.UIThread.Post(() => RequestTrayUpdateNotice?.Invoke(BuildUpdateNotice(version)));
+                }
             }
             else
             {
+                // 30s rather than the usual 7: it carries an action, so it has to survive the user looking away.
                 ShowToast(message, ToastType.Warning, TimeSpan.FromSeconds(30), actionText, RunUpdateCommand);
             }
         }
@@ -866,6 +873,67 @@ public partial class MainWindowViewModel : ViewModelBase
 
     /// <summary>Lets the toast and the tray notice fire the same command their buttons bind to.</summary>
     private void RunUpdateCommand() => UpdateApploggdCommand.Execute(null);
+
+    /// <summary>No timer: it stays until the user updates, closes it or opens the window.</summary>
+    private TrayNotice BuildUpdateNotice(string version)
+    {
+        var loc = LocalizationService.Instance;
+        return new TrayNotice(TrayNoticeKind.Update, loc["TrayNotice_UpdateTitle"], loc["TrayNotice_UpdateBody"])
+        {
+            Kicker = "Apploggd",
+            Version = version,
+            ActionText = loc["TrayNotice_UpdateAction"],
+            Action = RunUpdateCommand,
+            Dismissed = () =>
+            {
+                _settingsService.DismissedUpdateNoticeVersion = version;
+                _settingsService.Save();
+                _logger.Info($"[MainWindowViewModel] Tray notice for {version} dismissed; later silent starts will not show it again.");
+            }
+        };
+    }
+
+    /// <summary>
+    /// The notice for a window just hidden in the tray, matching what detection is doing. The
+    /// explained version goes first, once, unless a session is waiting: that one asks for action.
+    /// </summary>
+    public TrayNotice BuildBackgroundNotice()
+    {
+        var loc = LocalizationService.Instance;
+        var title = loc["TrayNotice_BackgroundTitle"];
+
+        if (IsSessionConfirmationVisible)
+        {
+            return new TrayNotice(TrayNoticeKind.PendingSession, $"{SessionGameTitle} · {SessionPlayTime}", loc["TrayNotice_PendingBody"])
+            {
+                Kicker = loc["TrayNotice_PendingKicker"],
+                ActionText = loc["TrayNotice_PendingAction"],
+                Action = () => RequestShowMainWindow?.Invoke()
+            };
+        }
+
+        if (!_settingsService.HasSeenTrayIntro)
+        {
+            _settingsService.HasSeenTrayIntro = true;
+            _settingsService.Save();
+            return new TrayNotice(TrayNoticeKind.Intro, title, loc["TrayNotice_IntroBody"]);
+        }
+
+        if (IsGameRunning)
+        {
+            return new TrayNotice(TrayNoticeKind.Playing, string.IsNullOrEmpty(GameName) ? title : GameName, loc["TrayNotice_PlayingBody"])
+            {
+                LiveKicker = () => string.Format(loc["TrayNotice_PlayingKicker"], PlayTime)
+            };
+        }
+
+        if (IsGameDetectionPaused)
+        {
+            return new TrayNotice(TrayNoticeKind.Paused, title, loc["TrayNotice_PausedBody"]) { Kicker = loc["TrayNotice_PausedKicker"] };
+        }
+
+        return new TrayNotice(TrayNoticeKind.Detecting, title, loc["TrayNotice_DetectingBody"]) { Kicker = loc["TrayNotice_DetectingKicker"] };
+    }
 
     /// <summary>
     /// Stops detection before an update, so nothing starts a session while the process is being
