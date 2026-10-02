@@ -12,6 +12,7 @@
 ### Fixed
 
 - The NVIDIA App overlay is no longer detected as a game
+- Games that share an executable name with other games are now detected correctly
 
 ## 1.1.0 — 2026-09-10
 
