@@ -4,8 +4,8 @@
 
 ### Added
 
-- [Emulation] Support for RetroArch, Dolphin, Cemu
-- [Emulation] Support for Game Boy, Game Boy Color, Game Boy Advance, DS, 3DS, NES, SNES, Nintendo 64, GameCube, Wii, Wii U, Mega Drive, Game Gear, Dreamcast, PlayStation, PS2, PS3, PSP, PS Vita, Xbox and Xbox 360
+- Support for RetroArch, Dolphin, Cemu
+- Support for Game Boy, Game Boy Color, Game Boy Advance, DS, 3DS, NES, SNES, Nintendo 64, GameCube, Wii, Wii U, Mega Drive, Game Gear, Dreamcast, PlayStation, PS2, PS3, PSP, PS Vita, Xbox and Xbox 360
 - Apps and emulated games can be added to a blacklist, so they are no longer detected
 - Support for Linux
 - The session confirmation can be handled with a controller (Settings > General > Controller navigation)
