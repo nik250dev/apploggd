@@ -221061,7 +221061,7 @@
   },
   {
     "id": "1282445419770806365",
-    "name": "Monument Valley II: Panoramic Edition",
+    "name": "Monument Valley II",
     "aliases": [],
     "executables": [
       {
@@ -221074,6 +221074,14 @@
       {
         "distributor": "steam",
         "id": "1927740"
+      },
+      {
+        "distributor": "epic",
+        "id": "E6ABEBFDA00F45E2B3B9BA79970BC511"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NTXJP9733WK"
       }
     ],
     "id_igdb": "203388",
@@ -232347,6 +232355,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NL6BB89092T"
+      },
       {
         "distributor": "steam",
         "id": "3311740"
@@ -274445,6 +274457,10 @@
       {
         "distributor": "steam",
         "id": "1757300"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P95Q2BL6GS4"
       }
     ],
     "id_igdb": "130421",
@@ -308517,6 +308533,10 @@
       {
         "distributor": "steam",
         "id": "3067890"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NNWR22W9L8F"
       }
     ],
     "id_igdb": "316656",
@@ -464398,6 +464418,10 @@
       {
         "distributor": "steam",
         "id": "1799840"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N98V6N3PXKK"
       }
     ],
     "id_igdb": "258775",
@@ -480479,7 +480503,7 @@
   },
   {
     "id": "1477144191715901472",
-    "name": "Tape 101",
+    "name": "Tape 101: Liminal Descent",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -523041,6 +523065,10 @@
       {
         "distributor": "steam",
         "id": "4012810"
+      },
+      {
+        "distributor": "steam",
+        "id": "1707312"
       }
     ],
     "id_igdb": "320972",
@@ -531274,6 +531302,18 @@
       {
         "distributor": "steam",
         "id": "1912410"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MZV840NDMBM"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PM3J18QM4Q3"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P5786PJB9RP"
       }
     ],
     "id_igdb": "395525",
@@ -531373,10 +531413,23 @@
   },
   {
     "id": "1555429996472967269",
-    "name": "Ace Combat 8: Wings of Theve",
+    "name": "ACE COMBAT 8: WINGS OF THEVE",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2288340"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NT1N9ZVHXJK"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NQCCNW8HDGC"
+      }
+    ],
     "id_igdb": "381247",
     "cover": "coctdk",
     "artwork": [
@@ -531389,7 +531442,12 @@
     "name": "Maid Cafe Coop",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3887470"
+      }
+    ],
     "id_igdb": "381636",
     "cover": "cob1l5",
     "artwork": [
@@ -531402,7 +531460,12 @@
     "name": "Rust & Shine",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4857070"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -531413,7 +531476,12 @@
     "name": "Joint Venture",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4876820"
+      }
+    ],
     "id_igdb": "410221",
     "cover": "cocim0",
     "artwork": [
@@ -531426,7 +531494,12 @@
     "name": "Acame",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4890460"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -531437,7 +531510,12 @@
     "name": "Everyone's Tier List!",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4921660"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -531448,7 +531526,12 @@
     "name": "High Roller Penny",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4944410"
+      }
+    ],
     "id_igdb": "413416",
     "cover": "cocops",
     "artwork": [
@@ -531461,7 +531544,12 @@
     "name": "A Place for Every Potion",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5189500"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -531477,5 +531565,196 @@
     "cover": "cocpj8",
     "artwork": null,
     "url": "ace-combat-zero-the-belkan-war"
+  },
+  {
+    "id": "1555792280068034661",
+    "name": "Dungeons",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "57650"
+      }
+    ],
+    "id_igdb": "90477",
+    "cover": "co2flt",
+    "artwork": [
+      "arjod"
+    ],
+    "url": "dungeons-steam-special-edition"
+  },
+  {
+    "id": "1555792288339333168",
+    "name": "Crackheads",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4450600"
+      }
+    ],
+    "id_igdb": "396342",
+    "cover": "cobucf",
+    "artwork": [
+      "ar5m94"
+    ],
+    "url": "crackheads"
+  },
+  {
+    "id": "1555792301182291968",
+    "name": "HavenCraft",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2481240"
+      }
+    ],
+    "id_igdb": "404111",
+    "cover": "coc5uz",
+    "artwork": [
+      "ar5zct",
+      "ar5zcs"
+    ],
+    "url": "havencraft--1"
+  },
+  {
+    "id": "1555792311185711104",
+    "name": "Palisade",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4993270"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1555792317137289336",
+    "name": "Cactboy",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5022080"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1555792325215653978",
+    "name": "CoasterWorks",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5043180"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1555792330643079219",
+    "name": "Circuitra",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5095180"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1555792334933729280",
+    "name": "FailRooms",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5217440"
+      }
+    ],
+    "id_igdb": "417806",
+    "cover": "cocwf5",
+    "artwork": [
+      "ar6lau"
+    ],
+    "url": "failrooms"
+  },
+  {
+    "id": "1555792393784139828",
+    "name": "Nivalis Nights",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1488490"
+      },
+      {
+        "distributor": "epic",
+        "id": "CE644CD84F3A4AA688835A0CB79D59AD"
+      }
+    ],
+    "id_igdb": "203301",
+    "cover": "cocc6d",
+    "artwork": [
+      "ar6hya",
+      "ar6hy7",
+      "ar6hy9",
+      "ar6hy8"
+    ],
+    "url": "nivalis-nights"
+  },
+  {
+    "id": "1555792351212077107",
+    "name": "Meccha Paint",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NT2BTRH7VBG"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1555792379997585468",
+    "name": "Disney's Atlantis: The Lost Empire",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "9056",
+    "cover": "co25b0",
+    "artwork": [
+      "ar3ctz"
+    ],
+    "url": "disneys-atlantis-the-lost-empire"
   }
 ]
