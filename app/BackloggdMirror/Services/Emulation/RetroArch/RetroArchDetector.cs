@@ -31,12 +31,14 @@ internal sealed class RetroArchDetector : IEmulatorDetector
     public string Name => "RetroArch";
 
     private readonly Dictionary<int, PidState> _states = new();
+    private readonly EmulatorProcesses _processes;
     private readonly EmulatedGameResolver _resolver;
     private readonly IAppLogger? _logger;
     private readonly IDetectionBlacklist? _blacklist;
 
-    public RetroArchDetector(EmulatedGameResolver resolver, IAppLogger? logger = null, IDetectionBlacklist? blacklist = null)
+    public RetroArchDetector(EmulatorProcesses processes, EmulatedGameResolver resolver, IAppLogger? logger = null, IDetectionBlacklist? blacklist = null)
     {
+        _processes = processes;
         _resolver = resolver;
         _logger = logger;
         _blacklist = blacklist;
@@ -44,40 +46,33 @@ internal sealed class RetroArchDetector : IEmulatorDetector
 
     public DetectedGame? Detect()
     {
-        var processes = GetProcesses();
+        var processes = _processes.Find(IsRetroArch);
         if (processes.Length == 0)
         {
             _states.Clear();
             return null;
         }
 
-        try
+        PruneStates(processes);
+
+        foreach (var process in processes)
         {
-            PruneStates(processes);
+            if (_blacklist?.IsApplicationBlocked(process.Id, ProcessName) == true)
+                continue;
 
-            foreach (var process in processes)
-            {
-                if (_blacklist?.IsApplicationBlocked(process.Id, ProcessName) == true)
-                    continue;
+            var content = ReadCurrentContent(process, null, out var processInfo, out var coreInfo);
 
-                var content = ReadCurrentContent(process, null, out var processInfo, out var coreInfo);
+            if (!Observe(process.Id, content?.FullPath))
+                continue;
 
-                if (!Observe(process.Id, content?.FullPath))
-                    continue;
+            if (content == null || processInfo == null)
+                continue;
 
-                if (content == null || processInfo == null)
-                    continue;
+            // Before Identify, which may call the worker for a game that is going to be ignored.
+            if (_blacklist?.IsContentBlocked(Name, content.FullPath) == true)
+                continue;
 
-                // Before Identify, which may call the worker for a game that is going to be ignored.
-                if (_blacklist?.IsContentBlocked(Name, content.FullPath) == true)
-                    continue;
-
-                return Identify(process, processInfo, coreInfo, content);
-            }
-        }
-        finally
-        {
-            Release(processes);
+            return Identify(process, processInfo, coreInfo, content);
         }
 
         return null;
@@ -130,13 +125,16 @@ internal sealed class RetroArchDetector : IEmulatorDetector
     {
         try
         {
-            return string.Equals(process.ProcessName, ProcessName, StringComparison.OrdinalIgnoreCase);
+            return IsRetroArch(process.ProcessName);
         }
         catch
         {
             return false;
         }
     }
+
+    private static bool IsRetroArch(string processName) =>
+        string.Equals(processName, ProcessName, StringComparison.OrdinalIgnoreCase);
 
     private bool Closed(DetectedGame game)
     {
@@ -397,47 +395,6 @@ internal sealed class RetroArchDetector : IEmulatorDetector
         {
             _states.Remove(processId);
             RetroArchProcessInfo.Forget(processId);
-        }
-    }
-
-    private static Process[] GetProcesses()
-    {
-        try
-        {
-            int sessionId;
-            using (var current = Process.GetCurrentProcess())
-            {
-                sessionId = current.SessionId;
-            }
-
-            var found = Process.GetProcessesByName(ProcessName);
-            var mine = new List<Process>();
-
-            foreach (var process in found)
-            {
-                bool sameSession;
-                try { sameSession = process.SessionId == sessionId; }
-                catch { sameSession = false; }
-
-                if (sameSession)
-                    mine.Add(process);
-                else
-                    try { process.Dispose(); } catch { }
-            }
-
-            return mine.ToArray();
-        }
-        catch
-        {
-            return Array.Empty<Process>();
-        }
-    }
-
-    private static void Release(Process[] processes)
-    {
-        foreach (var process in processes)
-        {
-            try { process.Dispose(); } catch { }
         }
     }
 }

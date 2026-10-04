@@ -34,12 +34,14 @@ internal sealed class PpssppDetector : IEmulatorDetector
     public string Name => "PPSSPP";
 
     private readonly Dictionary<int, PidState> _states = new();
+    private readonly EmulatorProcesses _processes;
     private readonly EmulatedGameResolver _resolver;
     private readonly IAppLogger? _logger;
     private readonly IDetectionBlacklist? _blacklist;
 
-    public PpssppDetector(EmulatedGameResolver resolver, IAppLogger? logger = null, IDetectionBlacklist? blacklist = null)
+    public PpssppDetector(EmulatorProcesses processes, EmulatedGameResolver resolver, IAppLogger? logger = null, IDetectionBlacklist? blacklist = null)
     {
+        _processes = processes;
         _resolver = resolver;
         _logger = logger;
         _blacklist = blacklist;
@@ -47,36 +49,29 @@ internal sealed class PpssppDetector : IEmulatorDetector
 
     public DetectedGame? Detect()
     {
-        var processes = GetProcesses();
+        var processes = _processes.Find(IsPpsspp);
         if (processes.Length == 0)
         {
             _states.Clear();
             return null;
         }
 
-        try
+        PruneStates(processes);
+
+        foreach (var process in processes)
         {
-            PruneStates(processes);
+            if (_blacklist?.IsApplicationBlocked(process.Id, process.ProcessName) == true)
+                continue;
 
-            foreach (var process in processes)
-            {
-                if (_blacklist?.IsApplicationBlocked(process.Id, process.ProcessName) == true)
-                    continue;
+            var game = ReadGame(process.Id);
 
-                var game = ReadGame(process.Id);
+            if (!Observe(process.Id, game?.DiscId) || game == null)
+                continue;
 
-                if (!Observe(process.Id, game?.DiscId) || game == null)
-                    continue;
+            if (_blacklist?.IsContentBlocked(Name, game.DiscId) == true)
+                continue;
 
-                if (_blacklist?.IsContentBlocked(Name, game.DiscId) == true)
-                    continue;
-
-                return Identify(process, game);
-            }
-        }
-        finally
-        {
-            Release(processes);
+            return Identify(process, game);
         }
 
         return null;
@@ -117,13 +112,16 @@ internal sealed class PpssppDetector : IEmulatorDetector
     {
         try
         {
-            return process.ProcessName.StartsWith(ProcessNamePrefix, StringComparison.OrdinalIgnoreCase);
+            return IsPpsspp(process.ProcessName);
         }
         catch
         {
             return false;
         }
     }
+
+    private static bool IsPpsspp(string processName) =>
+        processName.StartsWith(ProcessNamePrefix, StringComparison.OrdinalIgnoreCase);
 
     private bool Closed(DetectedGame game)
     {
@@ -252,45 +250,5 @@ internal sealed class PpssppDetector : IEmulatorDetector
 
         foreach (int processId in _states.Keys.Where(id => !alive.Contains(id)).ToList())
             _states.Remove(processId);
-    }
-
-    private static Process[] GetProcesses()
-    {
-        try
-        {
-            int sessionId;
-            using (var current = Process.GetCurrentProcess())
-            {
-                sessionId = current.SessionId;
-            }
-
-            var mine = new List<Process>();
-
-            foreach (var process in Process.GetProcesses())
-            {
-                bool keep;
-                try { keep = IsPpsspp(process) && process.SessionId == sessionId; }
-                catch { keep = false; }
-
-                if (keep)
-                    mine.Add(process);
-                else
-                    try { process.Dispose(); } catch { }
-            }
-
-            return mine.ToArray();
-        }
-        catch
-        {
-            return Array.Empty<Process>();
-        }
-    }
-
-    private static void Release(Process[] processes)
-    {
-        foreach (var process in processes)
-        {
-            try { process.Dispose(); } catch { }
-        }
     }
 }
