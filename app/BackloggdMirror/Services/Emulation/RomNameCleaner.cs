@@ -77,6 +77,9 @@ internal static class RomNameCleaner
             Add(names, cleaned.Replace(" - ", ": ", StringComparison.Ordinal));
     }
 
+    /// <summary>False for titles in Japanese and other scripts that neither IGDB nor the search API know.</summary>
+    internal static bool IsLatinScript(string text) => text.All(c => !char.IsLetter(c) || c <= 'ɏ');
+
     private static void Add(List<string> names, string value)
     {
         if (!string.IsNullOrWhiteSpace(value) && !names.Contains(value, StringComparer.OrdinalIgnoreCase))

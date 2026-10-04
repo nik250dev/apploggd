@@ -4,6 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using BackloggdMirror.Services.Emulation.DuckStation;
+using BackloggdMirror.Services.Emulation.Pcsx2;
+using BackloggdMirror.Services.Emulation.Ppsspp;
 
 namespace BackloggdMirror.Services;
 
@@ -300,7 +303,10 @@ internal class WindowsGameDetector : IGameDetectionStrategy
                 return true;
         }
 
-        return false;
+        // Also tier 1.5; every build of PPSSPP, DuckStation and PCSX2 shares a prefix (PPSSPPWindows64, duckstation-qt-x64-ReleaseLTCG, pcsx2-qt...).
+        return processName.StartsWith(PpssppDetector.ProcessNamePrefix, StringComparison.OrdinalIgnoreCase)
+               || processName.StartsWith(DuckStationDetector.ProcessNamePrefix, StringComparison.OrdinalIgnoreCase)
+               || processName.StartsWith(Pcsx2Detector.ProcessNamePrefix, StringComparison.OrdinalIgnoreCase);
     }
 
     private bool IsBlacklisted(uint processId) =>

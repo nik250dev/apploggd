@@ -3,6 +3,9 @@ using System.Linq;
 using BackloggdMirror.Models;
 using BackloggdMirror.Services.Emulation.Cemu;
 using BackloggdMirror.Services.Emulation.Dolphin;
+using BackloggdMirror.Services.Emulation.DuckStation;
+using BackloggdMirror.Services.Emulation.Pcsx2;
+using BackloggdMirror.Services.Emulation.Ppsspp;
 using BackloggdMirror.Services.Emulation.RetroArch;
 using BackloggdMirror.Services.Platform.Linux.Emulation;
 
@@ -16,6 +19,7 @@ namespace BackloggdMirror.Services.Emulation;
 internal sealed class EmulatorDetector
 {
     private readonly IEmulatorDetector[] _detectors;
+    private readonly EmulatorProcesses? _processes;
     private readonly IAppLogger? _logger;
 
     public EmulatorDetector(IAppLogger? logger = null, IDetectionBlacklist? blacklist = null)
@@ -24,33 +28,49 @@ internal sealed class EmulatorDetector
         EmulatedGamesDatabase.Instance.Logger = logger;
 
         var resolver = new EmulatedGameResolver(logger);
-        _detectors = OperatingSystem.IsLinux()
-            ? LinuxEmulatorDetectors.Create(resolver, logger, blacklist)
-            : new IEmulatorDetector[]
+        if (OperatingSystem.IsLinux())
+        {
+            _detectors = LinuxEmulatorDetectors.Create(resolver, logger, blacklist);
+        }
+        else
+        {
+            _processes = new EmulatorProcesses();
+            _detectors = new IEmulatorDetector[]
             {
-                new RetroArchDetector(resolver, logger, blacklist),
-                new DolphinDetector(resolver, logger, blacklist),
-                new CemuDetector(resolver, logger, blacklist)
+                new RetroArchDetector(_processes, resolver, logger, blacklist),
+                new DolphinDetector(_processes, resolver, logger, blacklist),
+                new CemuDetector(_processes, resolver, logger, blacklist),
+                new PpssppDetector(_processes, resolver, logger, blacklist),
+                new DuckStationDetector(_processes, resolver, logger, blacklist),
+                new Pcsx2Detector(_processes, resolver, logger, blacklist)
             };
+        }
     }
 
     public DetectedGame? Detect()
     {
-        foreach (var detector in _detectors)
+        try
         {
-            try
+            foreach (var detector in _detectors)
             {
-                var game = detector.Detect();
-                if (game != null)
-                    return game;
+                try
+                {
+                    var game = detector.Detect();
+                    if (game != null)
+                        return game;
+                }
+                catch (Exception ex)
+                {
+                    _logger?.Error($"[EmulatorDetector] The {detector.Name} detector failed. Emulated sessions for it are not detected this tick.", ex);
+                }
             }
-            catch (Exception ex)
-            {
-                _logger?.Error($"[EmulatorDetector] The {detector.Name} detector failed. Emulated sessions for it are not detected this tick.", ex);
-            }
-        }
 
-        return null;
+            return null;
+        }
+        finally
+        {
+            _processes?.EndPass();
+        }
     }
 
     public bool IsStillRunning(DetectedGame game)

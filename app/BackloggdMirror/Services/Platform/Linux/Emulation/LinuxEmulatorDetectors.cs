@@ -22,12 +22,15 @@ internal static class LinuxEmulatorDetectors
         {
             new LinuxRetroArchDetector(processes, resolver, logger, blacklist),
             new LinuxDolphinDetector(processes, resolver, logger, blacklist),
-            new LinuxCemuDetector(processes, resolver, logger, blacklist)
+            new LinuxCemuDetector(processes, resolver, logger, blacklist),
+            new LinuxPpssppDetector(processes, resolver, logger, blacklist),
+            new LinuxDuckStationDetector(processes, resolver, logger, blacklist),
+            new LinuxPcsx2Detector(processes, resolver, logger, blacklist)
         };
     }
 }
 
-/// <summary>The user's emulator processes, found by their kernel name. One /proc scan serves the three detectors of a pass.</summary>
+/// <summary>The user's emulator processes, found by their kernel name. One /proc scan serves every detector of a pass.</summary>
 internal sealed class LinuxEmulatorProcesses
 {
     // Passes are seconds apart, so a scan is only ever shared within one.
@@ -36,8 +39,11 @@ internal sealed class LinuxEmulatorProcesses
     // The kernel cuts names to 15 characters: "dolphin-emu-nogui" is "dolphin-emu-nog".
     private static readonly HashSet<string> EmulatorNames = new(StringComparer.OrdinalIgnoreCase)
     {
-        "retroarch", "dolphin-emu", "dolphin-emu-nog", "cemu"
+        "retroarch", "dolphin-emu", "dolphin-emu-nog", "cemu", "PPSSPPSDL", "PPSSPPQt", "duckstation-qt", "duckstation-nog", "pcsx2-qt"
     };
+
+    // An AppImage runs its binary through a link named AppRun, which becomes the kernel name.
+    private const string AppImageEntryName = "AppRun";
 
     private readonly object _lock = new();
     private List<(int Pid, string Name)> _found = new();
@@ -67,7 +73,7 @@ internal sealed class LinuxEmulatorProcesses
 
         foreach (int pid in LinuxProcFs.ListProcessIds())
         {
-            string? name = LinuxProcFs.ReadComm(pid);
+            string? name = NameOf(pid);
             if (name == null || !EmulatorNames.Contains(name))
                 continue;
 
@@ -81,7 +87,32 @@ internal sealed class LinuxEmulatorProcesses
 
     /// <summary>PIDs get reused, so a live PID is not on its own proof that it is still the emulator.</summary>
     public static bool IsStillRunning(int pid, params string[] names) =>
-        LinuxProcFs.IsRunning(pid) && LinuxProcFs.ReadComm(pid) is { } name && names.Contains(name, StringComparer.OrdinalIgnoreCase);
+        LinuxProcFs.IsRunning(pid) && NameOf(pid) is { } name && names.Contains(name, StringComparer.OrdinalIgnoreCase);
+
+    /// <summary>Whether the process is an emulator this tier handles, so the window tier leaves it alone.</summary>
+    public static bool IsEmulator(int pid) => NameOf(pid) is { } name && EmulatorNames.Contains(name);
+
+    /// <summary>The kernel name, or for an AppImage the name of the binary it runs, cut the same way.</summary>
+    private static string? NameOf(int pid)
+    {
+        string? comm = LinuxProcFs.ReadComm(pid);
+        if (comm != AppImageEntryName)
+            return comm;
+
+        try
+        {
+            string? exe = new FileInfo($"/proc/{pid}/exe").LinkTarget;
+            if (exe == null)
+                return comm;
+
+            string name = LinuxProcFs.FileNameOf(exe.Replace(" (deleted)", ""));
+            return name.Length > 15 ? name[..15] : name;
+        }
+        catch
+        {
+            return comm;
+        }
+    }
 
     /// <summary>Without extension, as the blacklist compares it: "retroarch", "Cemu".</summary>
     public static string ExecutableName(int pid)
