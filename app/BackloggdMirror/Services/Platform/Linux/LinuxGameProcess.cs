@@ -81,7 +81,7 @@ internal static class LinuxGameProcess
         "vlc", "mpv", "mplayer", "ffplay", "totem", "celluloid", "smplayer", "haruna", "kodi", "kodi.bin", "obs",
         "discord", "slack", "teams", "zoom", "telegram-desktop", "signal-desktop", "soffice", "soffice.bin", "blender",
         "code", "godot", "unityhub", "unity", "unrealeditor", "ue4editor", "hammer", "hammerplusplus",
-        "retroarch", "dolphin-emu", "cemu", "ppssppsdl", "ppssppqt", "duckstation-qt", "duckstation-nogui",
+        "retroarch", "dolphin-emu", "cemu", "ppssppsdl", "ppssppqt", "duckstation-qt", "duckstation-nogui", "pcsx2-qt",
         "wine", "wine64", "wine-preloader", "wine64-preloader", "explorer", "services", "winedevice", "plugplay",
         "svchost", "rpcss", "conhost", "start", "xalia", "rundll32", "winecfg", "control", "tabtip"
     };

@@ -24,7 +24,8 @@ internal static class LinuxEmulatorDetectors
             new LinuxDolphinDetector(processes, resolver, logger, blacklist),
             new LinuxCemuDetector(processes, resolver, logger, blacklist),
             new LinuxPpssppDetector(processes, resolver, logger, blacklist),
-            new LinuxDuckStationDetector(processes, resolver, logger, blacklist)
+            new LinuxDuckStationDetector(processes, resolver, logger, blacklist),
+            new LinuxPcsx2Detector(processes, resolver, logger, blacklist)
         };
     }
 }
@@ -38,7 +39,7 @@ internal sealed class LinuxEmulatorProcesses
     // The kernel cuts names to 15 characters: "dolphin-emu-nogui" is "dolphin-emu-nog".
     private static readonly HashSet<string> EmulatorNames = new(StringComparer.OrdinalIgnoreCase)
     {
-        "retroarch", "dolphin-emu", "dolphin-emu-nog", "cemu", "PPSSPPSDL", "PPSSPPQt", "duckstation-qt", "duckstation-nog"
+        "retroarch", "dolphin-emu", "dolphin-emu-nog", "cemu", "PPSSPPSDL", "PPSSPPQt", "duckstation-qt", "duckstation-nog", "pcsx2-qt"
     };
 
     // An AppImage runs its binary through a link named AppRun, which becomes the kernel name.

@@ -195,7 +195,7 @@ internal sealed class DuckStationDetector : IEmulatorDetector
 
     private DuckStationGame? FromWindow(PidState state, int processId, string reason)
     {
-        string? title = DuckStationWindows.FindGameTitle(processId);
+        string? title = QtEmulatorWindows.FindGameTitle(processId, "DuckStation");
         if (title == null)
             return null;
 

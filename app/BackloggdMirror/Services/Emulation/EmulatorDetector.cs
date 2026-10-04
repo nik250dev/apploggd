@@ -4,6 +4,7 @@ using BackloggdMirror.Models;
 using BackloggdMirror.Services.Emulation.Cemu;
 using BackloggdMirror.Services.Emulation.Dolphin;
 using BackloggdMirror.Services.Emulation.DuckStation;
+using BackloggdMirror.Services.Emulation.Pcsx2;
 using BackloggdMirror.Services.Emulation.Ppsspp;
 using BackloggdMirror.Services.Emulation.RetroArch;
 using BackloggdMirror.Services.Platform.Linux.Emulation;
@@ -40,7 +41,8 @@ internal sealed class EmulatorDetector
                 new DolphinDetector(_processes, resolver, logger, blacklist),
                 new CemuDetector(_processes, resolver, logger, blacklist),
                 new PpssppDetector(_processes, resolver, logger, blacklist),
-                new DuckStationDetector(_processes, resolver, logger, blacklist)
+                new DuckStationDetector(_processes, resolver, logger, blacklist),
+                new Pcsx2Detector(_processes, resolver, logger, blacklist)
             };
         }
     }

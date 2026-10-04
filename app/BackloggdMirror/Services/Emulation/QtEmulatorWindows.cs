@@ -2,17 +2,16 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace BackloggdMirror.Services.Emulation.DuckStation;
+namespace BackloggdMirror.Services.Emulation;
 
 /// <summary>
-/// The running game's title as DuckStation shows it in the window that renders it: the main window
-/// while it renders inside it, a separate window covering the monitor in fullscreen. The rest of the
-/// time the main window reads "DuckStation 0.1-12070". Its other top-level windows (settings, memory
-/// cards, log) render nothing, so they hold no native child and never cover the monitor.
+/// The running game's title as DuckStation and PCSX2 show it in the window that renders it: the main
+/// window while it renders inside it, a separate window covering the monitor in fullscreen. The rest of
+/// the time the main window reads "DuckStation 0.1-12070" or "PCSX2 v2.9.96". Their other top-level
+/// windows (settings, memory cards, log) render nothing, so they hold no native child and never cover the monitor.
 /// </summary>
-internal static class DuckStationWindows
+internal static class QtEmulatorWindows
 {
-    private const string AppName = "DuckStation";
     private const uint GW_OWNER = 4;
     private const uint MONITOR_DEFAULTTONEAREST = 2;
 
@@ -69,7 +68,7 @@ internal static class DuckStationWindows
     private static extern bool GetMonitorInfo(IntPtr monitor, ref MONITORINFO info);
 
     /// <summary>Null while no game runs, or while it renders to a separate window that is not fullscreen.</summary>
-    public static string? FindGameTitle(int processId)
+    public static string? FindGameTitle(int processId, string appName)
     {
         string? found = null;
 
@@ -80,7 +79,7 @@ internal static class DuckStationWindows
                 return true;
 
             string title = Title(hWnd);
-            if (title.Length == 0 || IsAppTitle(title) || (!HasChild(hWnd) && !CoversMonitor(hWnd)))
+            if (title.Length == 0 || IsAppTitle(title, appName) || (!HasChild(hWnd) && !CoversMonitor(hWnd)))
                 return true;
 
             found = title;
@@ -90,9 +89,35 @@ internal static class DuckStationWindows
         return found;
     }
 
-    /// <summary>"DuckStation 0.1-12070", plus " [Devel]" and the like on development builds.</summary>
-    internal static bool IsAppTitle(string title) =>
-        title.Equals(AppName, StringComparison.Ordinal) || title.StartsWith(AppName + " ", StringComparison.Ordinal);
+    /// <summary>
+    /// True when any window of the emulator reads something other than its own name: a game, wherever it
+    /// renders, or one of its tool windows. False means no game runs, which makes it a cheap gate for costly checks.
+    /// Any window class counts: missing a game would cost more than a needless check.
+    /// </summary>
+    public static bool ShowsMoreThanApp(int processId, string appName)
+    {
+        bool found = false;
+
+        EnumWindows((hWnd, _) =>
+        {
+            GetWindowThreadProcessId(hWnd, out uint owner);
+            if (owner != processId || !IsWindowVisible(hWnd) || GetWindow(hWnd, GW_OWNER) != IntPtr.Zero)
+                return true;
+
+            string title = Title(hWnd);
+            if (title.Length == 0 || IsAppTitle(title, appName))
+                return true;
+
+            found = true;
+            return false;
+        }, IntPtr.Zero);
+
+        return found;
+    }
+
+    /// <summary>"DuckStation 0.1-12070" or "PCSX2 v2.9.96", plus " [Devel]" and the like on development builds.</summary>
+    internal static bool IsAppTitle(string title, string appName) =>
+        title.Equals(appName, StringComparison.Ordinal) || title.StartsWith(appName + " ", StringComparison.Ordinal);
 
     private static bool IsQtWindow(IntPtr hWnd)
     {

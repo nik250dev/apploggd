@@ -45,13 +45,31 @@ internal static class PsxDiscReader
             if (magic.AsSpan(0, 4).SequenceEqual("\0PBP"u8))
                 return new PsxDisc(FromPbp(PspImageReader.Read(path)?.DiscId));
 
-            var image = DiscImage.Open(stream, magic);
-            return image == null ? null : new PsxDisc(GameIdOf(image));
+            if (!TryReadSystemCnf(stream, magic, out string? systemCnf))
+                return null;
+
+            string? boot = systemCnf != null ? BootPathOf(systemCnf) : null;
+            return new PsxDisc(boot != null ? GameIdFromBootPath(boot) : null);
         }
         catch
         {
             return null;
         }
+    }
+
+    /// <summary>
+    /// SYSTEM.CNF of a raw or cooked image that starts with <paramref name="firstBytes"/>, PS2 discs included.
+    /// False when the file is no disc image; true with null when the disc has no SYSTEM.CNF.
+    /// </summary>
+    internal static bool TryReadSystemCnf(Stream stream, byte[] firstBytes, out string? systemCnf)
+    {
+        systemCnf = null;
+        var image = DiscImage.Open(stream, firstBytes);
+        if (image == null)
+            return false;
+
+        systemCnf = SystemCnfOf(image);
+        return true;
     }
 
     /// <summary>"cdrom:\SCUS_945.70;1" → "SCUS-94570", as DuckStation's GetGameDetailsFromImage does it.</summary>
@@ -112,7 +130,7 @@ internal static class PsxDiscReader
         return null;
     }
 
-    private static string? GameIdOf(DiscImage image)
+    private static string? SystemCnfOf(DiscImage image)
     {
         byte[]? volume = image.ReadSector(PrimaryVolumeSector);
         if (volume == null || volume[0] != 1 || !volume.AsSpan(1, 5).SequenceEqual("CD001"u8))
@@ -141,9 +159,7 @@ internal static class PsxDiscReader
                 {
                     uint fileSector = BinaryPrimitives.ReadUInt32LittleEndian(directory.AsSpan(offset + 2));
                     uint fileSize = BinaryPrimitives.ReadUInt32LittleEndian(directory.AsSpan(offset + 10));
-                    string? systemCnf = image.ReadFile(fileSector, (int)Math.Min(fileSize, MaxSystemCnfSize));
-                    string? boot = systemCnf != null ? BootPathOf(systemCnf) : null;
-                    return boot != null ? GameIdFromBootPath(boot) : null;
+                    return image.ReadFile(fileSector, (int)Math.Min(fileSize, MaxSystemCnfSize));
                 }
 
                 offset += length;
