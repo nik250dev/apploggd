@@ -29,6 +29,11 @@ public partial class MainWindow : Window
     private UpdateProgressWindow? _updateProgressWindow;
     private GamepadNavigator? _gamepadNavigator;
 
+    // Big Picture takes the foreground back ~2 s after its game exits, burying the confirmation behind it.
+    private static readonly TimeSpan ConfirmationHoldFront = TimeSpan.FromSeconds(10);
+    private DispatcherTimer? _holdFrontTimer;
+    private DateTime _holdFrontUntil;
+
     // Taken as a constructor argument rather than read off the DataContext: the tray icon is built
     // in the constructor, before any DataContext has been assigned, and its failures are exactly
     // the ones worth having in the log.
@@ -303,8 +308,45 @@ public partial class MainWindow : Window
             if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
             {
                 UpdateTrayMenuState(vm);
+
+                if (e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsSessionConfirmationVisible) && vm.IsSessionConfirmationVisible)
+                {
+                    StartHoldingFront();
+                }
             }
         }
+    }
+
+    private void StartHoldingFront()
+    {
+        _holdFrontUntil = DateTime.UtcNow + ConfirmationHoldFront;
+        if (_holdFrontTimer == null)
+        {
+            // Normal priority: Background timers can starve while the window sits behind another app.
+            _holdFrontTimer = new DispatcherTimer(DispatcherPriority.Normal) { Interval = TimeSpan.FromMilliseconds(500) };
+            _holdFrontTimer.Tick += OnHoldFrontTick;
+        }
+        _holdFrontTimer.Start();
+    }
+
+    private void OnHoldFrontTick(object? sender, EventArgs e)
+    {
+        // Minimized or sent to the tray by the user: they have seen it and chose to leave it.
+        bool stillWanted = DataContext is BackloggdMirror.ViewModels.MainWindowViewModel { IsSessionConfirmationVisible: true }
+            && DateTime.UtcNow < _holdFrontUntil
+            && IsVisible
+            && WindowState != WindowState.Minimized;
+
+        if (!stillWanted)
+        {
+            _holdFrontTimer?.Stop();
+            return;
+        }
+
+        if (OwnsForeground()) return;
+
+        _logger?.Info("[MainWindow] Another window took the foreground over the session confirmation; bringing it back.");
+        BringToFront();
     }
 
     private void UpdateTrayMenuState(BackloggdMirror.ViewModels.MainWindowViewModel vm)
@@ -354,13 +396,7 @@ public partial class MainWindow : Window
             WindowState = WindowState.Normal;
         }
 
-        Activate();
-
-        // Activate() alone does not raise the window when the foreground belongs to another process,
-        // which is exactly the case here (a game just exited). Toggling Topmost forces it up without
-        // leaving the window permanently pinned.
-        Topmost = true;
-        Topmost = false;
+        BringToFront();
 
         // Controller navigation needs the window active, which Windows may refuse to another process.
         DispatcherTimer.RunOnce(() => _logger?.Info($"[MainWindow] Window shown; active: {IsActive}."), TimeSpan.FromMilliseconds(500));
@@ -653,6 +689,68 @@ public partial class MainWindow : Window
             vm.OnSaveButtonPointerExited();
         }
     }
+
+    /// <summary>Windows refuses SetForegroundWindow to a background process unless it shares the foreground thread's input queue.</summary>
+    private void BringToFront()
+    {
+        var handle = OperatingSystem.IsWindows() ? TryGetPlatformHandle()?.Handle ?? IntPtr.Zero : IntPtr.Zero;
+        if (handle == IntPtr.Zero)
+        {
+            Activate();
+        }
+        else
+        {
+            uint foregroundThread = GetWindowThreadProcessId(GetForegroundWindow(), IntPtr.Zero);
+            uint thisThread = GetCurrentThreadId();
+            bool attached = foregroundThread != 0 && foregroundThread != thisThread && AttachThreadInput(thisThread, foregroundThread, true);
+            try
+            {
+                BringWindowToTop(handle);
+                SetForegroundWindow(handle);
+            }
+            finally
+            {
+                if (attached) AttachThreadInput(thisThread, foregroundThread, false);
+            }
+        }
+
+        Topmost = true;
+        Topmost = false;
+    }
+
+    // IsActive can lag behind on Windows, so ask the system who really has the foreground.
+    private bool OwnsForeground()
+    {
+        if (!OperatingSystem.IsWindows()) return IsActive;
+
+        uint foregroundProcess = 0;
+        GetWindowThreadProcessId(GetForegroundWindow(), ref foregroundProcess);
+        return foregroundProcess == (uint)Environment.ProcessId;
+    }
+
+    [System.Runtime.InteropServices.DllImport("user32.dll")]
+    private static extern IntPtr GetForegroundWindow();
+
+    [System.Runtime.InteropServices.DllImport("user32.dll")]
+    private static extern uint GetWindowThreadProcessId(IntPtr hWnd, ref uint lpdwProcessId);
+
+    [System.Runtime.InteropServices.DllImport("user32.dll")]
+    private static extern uint GetWindowThreadProcessId(IntPtr hWnd, IntPtr lpdwProcessId);
+
+    [System.Runtime.InteropServices.DllImport("kernel32.dll")]
+    private static extern uint GetCurrentThreadId();
+
+    [System.Runtime.InteropServices.DllImport("user32.dll")]
+    [return: System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.Bool)]
+    private static extern bool AttachThreadInput(uint idAttach, uint idAttachTo, [System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.Bool)] bool fAttach);
+
+    [System.Runtime.InteropServices.DllImport("user32.dll")]
+    [return: System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.Bool)]
+    private static extern bool BringWindowToTop(IntPtr hWnd);
+
+    [System.Runtime.InteropServices.DllImport("user32.dll")]
+    [return: System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.Bool)]
+    private static extern bool SetForegroundWindow(IntPtr hWnd);
 
     // P/Invoke for FlashWindowEx
     [System.Runtime.InteropServices.DllImport("user32.dll")]
