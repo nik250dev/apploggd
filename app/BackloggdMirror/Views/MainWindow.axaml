@@ -384,15 +384,51 @@
         <Style Selector="Window.gamepad Button.link:focus TextBlock">
             <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
         </Style>
-        <Style Selector="Window.gamepad Button.icon-btn">
+        <Style Selector="Window.gamepad Button.icon-btn, Window.gamepad Button.gp-icon">
             <Setter Property="CornerRadius" Value="12"/>
         </Style>
-        <Style Selector="Window.gamepad Button.icon-btn:focus /template/ ContentPresenter#PART_ContentPresenter">
+        <Style Selector="Window.gamepad Button.icon-btn:focus /template/ ContentPresenter#PART_ContentPresenter, Window.gamepad Button.gp-icon:focus /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="#24FFFFFF"/>
             <Setter Property="BoxShadow" Value="none"/>
         </Style>
-        <Style Selector="Window.gamepad Button.icon-btn:focus PathIcon">
+        <Style Selector="Window.gamepad Button.icon-btn:focus PathIcon, Window.gamepad Button.gp-icon:focus PathIcon">
             <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <!-- Sidebar: the hover look plus the edge, no zoom. -->
+        <Style Selector="Window.gamepad Button.sidebar:focus">
+            <Setter Property="RenderTransform" Value="scale(1)"/>
+        </Style>
+        <Style Selector="Window.gamepad Button.sidebar:focus /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SidebarBorderBrush}"/>
+        </Style>
+        <Style Selector="Window.gamepad Button.sidebar:not(.active):focus PathIcon">
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <!-- Switches: the edge goes around the track; only one of its two borders shows at a time. -->
+        <Style Selector="Window.gamepad ToggleSwitch">
+            <Setter Property="FocusAdorner" Value="{x:Null}"/>
+        </Style>
+        <Style Selector="Window.gamepad ToggleSwitch:focus /template/ Border#OuterBorder, Window.gamepad ToggleSwitch:focus /template/ Border#SwitchKnobBounds">
+            <Setter Property="BoxShadow" Value="0 0 0 2 #FFFFFF, 0 4 12 0 #8C000000"/>
+        </Style>
+        <Style Selector="Window.gamepad ComboBox">
+            <Setter Property="ClipToBounds" Value="False"/>
+            <Setter Property="FocusAdorner" Value="{x:Null}"/>
+        </Style>
+        <Style Selector="Window.gamepad ComboBox:focus-visible /template/ Border#HighlightBackground">
+            <Setter Property="IsVisible" Value="False"/>
+        </Style>
+        <Style Selector="Window.gamepad ComboBox /template/ DataValidationErrors">
+            <Setter Property="ClipToBounds" Value="False"/>
+        </Style>
+        <Style Selector="Window.gamepad ComboBox:focus /template/ Border#Background">
+            <Setter Property="BoxShadow" Value="inset 0 0 0 2 #FFFFFF, 0 6 16 0 #8C000000"/>
+        </Style>
+        <Style Selector="Window.gamepad ComboBoxItem">
+            <Setter Property="FocusAdorner" Value="{x:Null}"/>
+        </Style>
+        <Style Selector="Window.gamepad ComboBoxItem:focus /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="BoxShadow" Value="inset 0 0 0 2 #FFFFFF"/>
         </Style>
         <!-- Press feedback; declared last to beat the focus zoom. -->
         <Style Selector="Window.gamepad Button.gp-press">
@@ -462,14 +498,14 @@
 
     <Panel>
         <!-- Main App Content -->
-        <Grid ColumnDefinitions="80, *" Classes.blurred="{Binding IsAnyOverlayVisible}">
+        <Grid x:Name="MainContent" ColumnDefinitions="80, *" Classes.blurred="{Binding IsAnyOverlayVisible}">
             <!-- Sidebar -->
-            <Border Grid.Column="0" Background="{DynamicResource SidebarBackgroundBrush}" BorderBrush="{DynamicResource SidebarBorderBrush}" BorderThickness="0,0,1,0">
+            <Border x:Name="Sidebar" Grid.Column="0" Background="{DynamicResource SidebarBackgroundBrush}" BorderBrush="{DynamicResource SidebarBorderBrush}" BorderThickness="0,0,1,0">
                 <Grid RowDefinitions="Auto, *, Auto">
                     <!-- Top Icons -->
                     <StackPanel Grid.Row="0" Spacing="20" Margin="0,20,0,0">
                         <!-- Home Button -->
-                        <Button Classes="sidebar" Classes.active="{Binding IsHomeVisible}" Command="{Binding NavigateToHomeCommand}" Cursor="Hand">
+                        <Button x:Name="SidebarHomeButton" Classes="sidebar" Classes.active="{Binding IsHomeVisible}" Command="{Binding NavigateToHomeCommand}" Cursor="Hand">
                             <StackPanel Spacing="5" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <PathIcon Data="M 12 2.0996094 L 1 12 L 4 12 L 4 21 L 11 21 L 11 15 L 13 15 L 13 21 L 20 21 L 20 12 L 23 12 L 12 2.0996094 z M 12 4.7910156 L 18 10.191406 L 18 11 L 18 19 L 15 19 L 15 13 L 9 13 L 9 19 L 6 19 L 6 10.191406 L 12 4.7910156 z" />
                                 <TextBlock Text="{Binding [Sidebar_Home], Source={x:Static services:LocalizationService.Instance}}" FontSize="10" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
@@ -477,7 +513,7 @@
                         </Button>
 
                         <!-- Pending Sessions Button -->
-                        <Button Classes="sidebar" Classes.active="{Binding IsPendingVisible}" Command="{Binding NavigateToPendingCommand}" Cursor="Hand">
+                        <Button x:Name="SidebarPendingButton" Classes="sidebar" Classes.active="{Binding IsPendingVisible}" Command="{Binding NavigateToPendingCommand}" Cursor="Hand">
                             <StackPanel Spacing="5" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <Panel Width="40" Height="24">
                                     <PathIcon Data="M12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22C6.47,22 2,17.5 2,12A10,10 0 0,1 12,2M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z"/>
@@ -496,7 +532,7 @@
                         </Button>
 
                         <!-- Settings Button -->
-                        <Button Classes="sidebar" Classes.active="{Binding IsSettingsVisible}" Command="{Binding NavigateToSettingsCommand}" Cursor="Hand">
+                        <Button x:Name="SidebarSettingsButton" Classes="sidebar" Classes.active="{Binding IsSettingsVisible}" Command="{Binding NavigateToSettingsCommand}" Cursor="Hand">
                             <StackPanel Spacing="5" VerticalAlignment="Center" HorizontalAlignment="Center">
                                  <Panel Width="30" Height="24">
                                  <PathIcon Data="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.04 4.95,18.95L7.44,17.95C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.95L19.05,18.95C19.27,19.04 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
@@ -516,7 +552,7 @@
                     <!-- Bottom Icons -->
                     <StackPanel Grid.Row="2" Spacing="4" Margin="0,0,0,20">
                         <!-- Logout Button -->
-                        <Button Classes="sidebar" Command="{Binding LogoutCommand}" Cursor="Hand">
+                        <Button x:Name="SidebarLogoutButton" Classes="sidebar" Command="{Binding LogoutCommand}" Cursor="Hand">
                             <StackPanel Spacing="5" VerticalAlignment="Center" HorizontalAlignment="Center">
                                  <PathIcon Data="M 9 21 H 5 C 4.46957 21 3.96086 20.7893 3.58579 20.4142 C 3.21071 20.0391 3 19.5304 3 19 V 5 C 3 4.46957 3.21071 3.96086 3.58579 3.58579 C 3.96086 3.21071 4.46957 3 5 3 H 9 V 5 H 5 V 19 H 9 V 21 Z M 16 17 L 21 12 L 16 7 V 11 H 9 V 13 H 16 V 17 Z" 
                                        Foreground="{DynamicResource BrandPrimaryBrush}"/>
@@ -624,7 +660,7 @@
                     <Grid Grid.Row="1" Margin="20,0,20,20" RowDefinitions="Auto, *">
                         <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="10" Margin="0,0,0,10">
                             <TextBlock Text="{Binding [Home_RecentlyPlayed], Source={x:Static services:LocalizationService.Instance}}" Foreground="{DynamicResource TextHeadingBrush}" FontSize="18" FontWeight="Normal" LetterSpacing="0" VerticalAlignment="Center"/>
-                            <Button Command="{Binding ReloadRecentlyPlayedGamesCommand}" 
+                            <Button Classes="gp-icon" Command="{Binding ReloadRecentlyPlayedGamesCommand}" 
                                     IsVisible="{Binding !IsLastPlayedGamesLoading}"
                                     Background="Transparent" 
                                     BorderThickness="0" 
@@ -1246,7 +1282,7 @@
         <!-- Declared before the session confirmation so that one sits on top if a game closes while
              the changelog is open. -->
         <Panel IsVisible="{Binding IsChangelogVisible}" Background="{DynamicResource OverlayMediumBrush}">
-            <Border Background="{DynamicResource AppBackgroundBrush}" CornerRadius="20" Width="600" Height="500"
+            <Border x:Name="ChangelogDialog" Background="{DynamicResource AppBackgroundBrush}" CornerRadius="20" Width="600" Height="500"
                     BorderBrush="{DynamicResource PanelBackgroundBrush}" BorderThickness="1" ClipToBounds="True">
                 <Grid RowDefinitions="Auto, *, Auto">
                     <!-- Header -->
@@ -1327,7 +1363,7 @@
 
         <!-- Clear App Data Confirmation Overlay -->
         <Panel IsVisible="{Binding IsClearDataConfirmationVisible}" Background="{DynamicResource OverlayMediumBrush}">
-            <Border Background="{DynamicResource AppBackgroundBrush}" CornerRadius="20" Width="480"
+            <Border x:Name="ClearDataDialog" Background="{DynamicResource AppBackgroundBrush}" CornerRadius="20" Width="480"
                     HorizontalAlignment="Center" VerticalAlignment="Center"
                     BoxShadow="0 0 50 0 #EA377A" BorderBrush="{DynamicResource BrandPrimaryBrush}" BorderThickness="1"
                     ClipToBounds="True">
@@ -1357,7 +1393,7 @@
 
         <!-- No Browser Warning Overlay -->
         <Panel IsVisible="{Binding IsNoBrowserWarningVisible}" Background="{DynamicResource OverlayMediumBrush}">
-            <Border Background="{DynamicResource AppBackgroundBrush}" CornerRadius="20" Width="480"
+            <Border x:Name="NoBrowserDialog" Background="{DynamicResource AppBackgroundBrush}" CornerRadius="20" Width="480"
                     HorizontalAlignment="Center" VerticalAlignment="Center"
                     BoxShadow="0 0 50 0 #EA377A" BorderBrush="{DynamicResource BrandPrimaryBrush}" BorderThickness="1"
                     ClipToBounds="True">
@@ -1661,30 +1697,6 @@
                 </Grid>
             </Border>
 
-            <!-- Controller hints, shown only in controller mode. -->
-            <Border Classes="gp-hints" ZIndex="20" IsHitTestVisible="False">
-                <StackPanel Orientation="Horizontal" Spacing="18">
-                    <PathIcon Data="{StaticResource GamepadIconData}" Width="20" Height="20" Foreground="{DynamicResource BrandPrimaryLightBrush}" VerticalAlignment="Center"/>
-                    <StackPanel Orientation="Horizontal" Spacing="8">
-                        <Panel Classes="gp-glyph">
-                            <Border Classes="gp-xbox"><TextBlock Text="A" Foreground="#6CC24A"/></Border>
-                            <Border Classes="gp-ps"><Path Data="M0,0 L9,9 M9,0 L0,9" Stroke="#8AB4FF" StrokeThickness="2" StrokeLineCap="Round"/></Border>
-                            <Border Classes="gp-nintendo"><TextBlock Text="B"/></Border>
-                        </Panel>
-                        <TextBlock Classes="gp-hint" Text="{Binding [Gamepad_Select], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding !IsGameSelectorVisible}"/>
-                        <TextBlock Classes="gp-hint" Text="{Binding [Gamepad_Choose], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding IsGameSelectorVisible}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Spacing="8" IsVisible="{Binding IsGameSelectorVisible}">
-                        <Panel Classes="gp-glyph">
-                            <Border Classes="gp-xbox"><TextBlock Text="B" Foreground="#F0506E"/></Border>
-                            <Border Classes="gp-ps"><Ellipse Width="11" Height="11" Stroke="#FF6F86" StrokeThickness="2"/></Border>
-                            <Border Classes="gp-nintendo"><TextBlock Text="A"/></Border>
-                        </Panel>
-                        <TextBlock Classes="gp-hint" Text="{Binding [Gamepad_Cancel], Source={x:Static services:LocalizationService.Instance}}"/>
-                    </StackPanel>
-                </StackPanel>
-            </Border>
-
         </Panel>
 
         <!-- Toast Notifications Layer -->
@@ -1744,6 +1756,46 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+
+        <!-- Controller hints, shown only in controller mode. -->
+        <Border Classes="gp-hints" ZIndex="200" IsHitTestVisible="False">
+            <StackPanel Orientation="Horizontal" Spacing="18">
+                <PathIcon Data="{StaticResource GamepadIconData}" Width="20" Height="20" Foreground="{DynamicResource BrandPrimaryLightBrush}" VerticalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <Panel Classes="gp-glyph">
+                        <Border Classes="gp-xbox"><TextBlock Text="A" Foreground="#6CC24A"/></Border>
+                        <Border Classes="gp-ps"><Path Data="M0,0 L9,9 M9,0 L0,9" Stroke="#8AB4FF" StrokeThickness="2" StrokeLineCap="Round"/></Border>
+                        <Border Classes="gp-nintendo"><TextBlock Text="B"/></Border>
+                    </Panel>
+                    <TextBlock Classes="gp-hint" Text="{Binding [Gamepad_Select], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding !IsGameSelectorVisible}"/>
+                    <TextBlock Classes="gp-hint" Text="{Binding [Gamepad_Choose], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding IsGameSelectorVisible}"/>
+                </StackPanel>
+                <!-- Back never applies to the confirmation itself. -->
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <StackPanel.IsVisible>
+                        <MultiBinding Converter="{x:Static BoolConverters.Or}">
+                            <Binding Path="!IsSessionConfirmationVisible"/>
+                            <Binding Path="IsGameSelectorVisible"/>
+                        </MultiBinding>
+                    </StackPanel.IsVisible>
+                    <Panel Classes="gp-glyph">
+                        <Border Classes="gp-xbox"><TextBlock Text="B" Foreground="#F0506E"/></Border>
+                        <Border Classes="gp-ps"><Ellipse Width="11" Height="11" Stroke="#FF6F86" StrokeThickness="2"/></Border>
+                        <Border Classes="gp-nintendo"><TextBlock Text="A"/></Border>
+                    </Panel>
+                    <TextBlock Classes="gp-hint" Text="{Binding [Gamepad_Back], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding !IsGameSelectorVisible}"/>
+                    <TextBlock Classes="gp-hint" Text="{Binding [Gamepad_Cancel], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding IsGameSelectorVisible}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <Panel Classes="gp-glyph">
+                        <Border Classes="gp-xbox"><TextBlock Text="Y" Foreground="#F2C230"/></Border>
+                        <Border Classes="gp-ps"><Path Data="M5,0 L10,9 L0,9 Z" Stroke="#4FD1B0" StrokeThickness="1.6" StrokeJoin="Round"/></Border>
+                        <Border Classes="gp-nintendo"><TextBlock Text="X"/></Border>
+                    </Panel>
+                    <TextBlock Classes="gp-hint" Text="{Binding [Gamepad_Minimize], Source={x:Static services:LocalizationService.Instance}}"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
     </Panel>
 
 </Window>

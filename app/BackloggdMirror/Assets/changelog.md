@@ -8,7 +8,7 @@
 - Support for Game Boy, Game Boy Color, Game Boy Advance, DS, 3DS, NES, SNES, Nintendo 64, GameCube, Wii, Wii U, Mega Drive, Game Gear, Dreamcast, PlayStation, PS2, PS3, PSP, PS Vita, Xbox and Xbox 360
 - Apps and emulated games can be added to a blacklist, so they are no longer detected
 - Support for Linux
-- The session confirmation can be handled with a controller (Settings > General > Controller navigation)
+- The whole app can be used with a controller, and its top face button minimizes the window (Settings > General > Controller navigation)
 - Sessions can be left in the new Pending section to review later, from the clock button of the confirmation or the save error notice
 - New setting to send every session to Pending without asking (Settings > General)
 

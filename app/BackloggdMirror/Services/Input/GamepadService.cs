@@ -6,7 +6,7 @@ using Avalonia.Threading;
 
 namespace BackloggdMirror.Services.Input;
 
-public enum GamepadAction { Up, Down, Left, Right, Accept, Back }
+public enum GamepadAction { Up, Down, Left, Right, Accept, Back, Minimize }
 
 /// <summary>Decides which button glyphs the UI shows.</summary>
 public enum GamepadKind { Xbox, PlayStation, Nintendo }
@@ -138,7 +138,7 @@ public sealed class GamepadService : IDisposable
             Sdl2.SDL_SetHint("SDL_JOYSTICK_ALLOW_BACKGROUND_EVENTS", "1");
             // Without it no press ever arrives on Windows: nothing pumps SDL's input window messages.
             Sdl2.SDL_SetHint("SDL_JOYSTICK_THREAD", "1");
-            // Positional buttons: south accepts and east goes back on every layout, Nintendo included.
+            // Positional buttons: south accepts, east goes back and north minimizes on every layout, Nintendo included.
             Sdl2.SDL_SetHint("SDL_GAMECONTROLLER_USE_BUTTON_LABELS", "0");
             // Rumble or the LED switch DualShock/DualSense to a report mode the frontend no longer reads.
             Sdl2.SDL_SetHint("SDL_JOYSTICK_HIDAPI_PS4_RUMBLE", "0");
@@ -186,6 +186,7 @@ public sealed class GamepadService : IDisposable
                 if (!_controllers.TryGetValue(e.Which, out var controller)) break;
                 if (e.Button == Sdl2.ButtonA) Raise(GamepadAction.Accept, controller);
                 else if (e.Button == Sdl2.ButtonB) Raise(GamepadAction.Back, controller);
+                else if (e.Button == Sdl2.ButtonY) Raise(GamepadAction.Minimize, controller);
                 break;
         }
     }

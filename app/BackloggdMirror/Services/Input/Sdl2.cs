@@ -16,6 +16,7 @@ internal static class Sdl2
 
     public const int ButtonA = 0;
     public const int ButtonB = 1;
+    public const int ButtonY = 3;
     public const int ButtonDpadUp = 11;
     public const int ButtonDpadDown = 12;
     public const int ButtonDpadLeft = 13;
