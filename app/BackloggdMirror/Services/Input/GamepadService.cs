@@ -11,10 +11,11 @@ public enum GamepadAction { Up, Down, Left, Right, Accept, Back }
 /// <summary>Decides which button glyphs the UI shows.</summary>
 public enum GamepadKind { Xbox, PlayStation, Nintendo }
 
-/// <summary>Controller input through SDL2, loaded lazily and pumped only while listening; any failure leaves it inert.</summary>
+/// <summary>Controller input through SDL2, loaded lazily and only acted on while listening; any failure leaves it inert.</summary>
 public sealed class GamepadService : IDisposable
 {
     private const int PollIntervalMs = 16;
+    private const int IdlePumpIntervalMs = 250;
     private const long RepeatDelayMs = 400;
     private const long RepeatIntervalMs = 120;
     private const short StickThreshold = 16384;
@@ -87,7 +88,14 @@ public sealed class GamepadService : IDisposable
                 if (!_listening.IsSet)
                 {
                     wasListening = false;
-                    _listening.Wait();
+                    // Left unread while a controller keeps reporting, this thread's queue stalls the UI thread's timers.
+                    if (!_listening.Wait(IdlePumpIntervalMs))
+                    {
+                        while (Sdl2.SDL_PollEvent(out var idle) == 1)
+                        {
+                            HandleEvent(idle, resumed: true);
+                        }
+                    }
                     continue;
                 }
 
