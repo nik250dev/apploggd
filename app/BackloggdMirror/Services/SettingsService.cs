@@ -22,6 +22,10 @@ public class SettingsService
     public bool MinimizeToTray { get; set; } = true;
     public bool StartWithWindows { get; set; } = false;
     public bool GamepadNavigationEnabled { get; set; } = true;
+
+    /// <summary>Sends every finished session straight to the pending list instead of asking.</summary>
+    public bool AlwaysAddToPending { get; set; } = false;
+
     public string Language { get; set; } = "System";
 
     /// <summary>Whether the explained "still running in the tray" notice has already been shown once.</summary>
@@ -73,6 +77,7 @@ public class SettingsService
                     MinimizeToTray = settings.MinimizeToTray;
                     StartWithWindows = settings.StartWithWindows;
                     GamepadNavigationEnabled = settings.GamepadNavigationEnabled;
+                    AlwaysAddToPending = settings.AlwaysAddToPending;
                     Language = settings.Language ?? "System";
                     HasSeenTrayIntro = settings.HasSeenTrayIntro;
                     DismissedUpdateNoticeVersion = settings.DismissedUpdateNoticeVersion;
@@ -97,6 +102,7 @@ public class SettingsService
         MinimizeToTray = true;
         StartWithWindows = false;
         GamepadNavigationEnabled = true;
+        AlwaysAddToPending = false;
         Language = "System";
         HasSeenTrayIntro = false;
         DismissedUpdateNoticeVersion = null;

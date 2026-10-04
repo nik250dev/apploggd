@@ -475,7 +475,26 @@
                                 <TextBlock Text="{Binding [Sidebar_Home], Source={x:Static services:LocalizationService.Instance}}" FontSize="10" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
                             </StackPanel>
                         </Button>
-                        
+
+                        <!-- Pending Sessions Button -->
+                        <Button Classes="sidebar" Classes.active="{Binding IsPendingVisible}" Command="{Binding NavigateToPendingCommand}" Cursor="Hand">
+                            <StackPanel Spacing="5" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Panel Width="40" Height="24">
+                                    <PathIcon Data="M12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22C6.47,22 2,17.5 2,12A10,10 0 0,1 12,2M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z"/>
+                                    <Border IsVisible="{Binding HasPendingSessions}"
+                                            Background="{DynamicResource BrandPrimaryBrush}"
+                                            BorderBrush="{DynamicResource SidebarBackgroundBrush}" BorderThickness="2"
+                                            CornerRadius="9" MinWidth="18" Height="18" Padding="4,0"
+                                            HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-6,-2,0">
+                                        <TextBlock Text="{Binding PendingSessionsCount}" FontSize="10" FontWeight="Bold"
+                                                   Foreground="{DynamicResource TextPrimaryBrush}"
+                                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </Panel>
+                                <TextBlock Text="{Binding [Sidebar_Pending], Source={x:Static services:LocalizationService.Instance}}" FontSize="10" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
                         <!-- Settings Button -->
                         <Button Classes="sidebar" Classes.active="{Binding IsSettingsVisible}" Command="{Binding NavigateToSettingsCommand}" Cursor="Hand">
                             <StackPanel Spacing="5" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -618,7 +637,7 @@
                             </Button>
 
                         </StackPanel>
-                        
+
                         <Border Grid.Row="1" Background="{DynamicResource CardBackgroundBrush}" CornerRadius="20" IsVisible="{Binding IsLastPlayedGamesEmptyVisible}" Margin="0,0,0,15">
                             <TextBlock Text="{Binding [Home_NoGamesRegistered], Source={x:Static services:LocalizationService.Instance}}" 
                                        Foreground="{DynamicResource TextGrayBrush}" 
@@ -808,6 +827,16 @@
                                             </StackPanel>
                                             <ToggleSwitch Grid.Column="1" IsChecked="{Binding GamepadNavigationEnabled}" OnContent="" OffContent=""/>
                                         </Grid>
+
+                                        <Separator Background="{DynamicResource SeparatorBrush}" Height="1"/>
+
+                                        <Grid ColumnDefinitions="*, Auto">
+                                            <StackPanel Spacing="2">
+                                                <TextBlock Text="{Binding [Settings_AlwaysPending], Source={x:Static services:LocalizationService.Instance}}" Classes="setting-label"/>
+                                                <TextBlock Text="{Binding [Settings_AlwaysPendingDesc], Source={x:Static services:LocalizationService.Instance}}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}"/>
+                                            </StackPanel>
+                                            <ToggleSwitch Grid.Column="1" IsChecked="{Binding AlwaysAddToPending}" OnContent="" OffContent=""/>
+                                        </Grid>
                                     </StackPanel>
                                 </Border>
 
@@ -993,7 +1022,183 @@
                         </ScrollViewer>
                     </Grid>
                 </Panel>
-                
+
+                <!-- Pending Sessions View -->
+                <Panel IsVisible="{Binding IsPendingVisible}">
+                    <Panel.Styles>
+                        <Style Selector="Border.pending-card">
+                            <Setter Property="Background" Value="{DynamicResource PanelBackgroundBrush}"/>
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                        <Style Selector="Border.pending-tag">
+                            <Setter Property="Background" Value="{DynamicResource SurfaceDarkBrush}"/>
+                            <Setter Property="CornerRadius" Value="9"/>
+                            <Setter Property="Padding" Value="8,2"/>
+                            <Setter Property="Margin" Value="0,0,6,0"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+                        <Style Selector="Border.pending-tag TextBlock">
+                            <Setter Property="FontSize" Value="11"/>
+                            <Setter Property="Foreground" Value="{DynamicResource IconLightBrush}"/>
+                        </Style>
+                        <Style Selector="Border.pending-tag.error">
+                            <Setter Property="Background" Value="{DynamicResource SurfaceBrandPressedBrush}"/>
+                        </Style>
+                        <Style Selector="Border.pending-tag.error TextBlock">
+                            <Setter Property="Foreground" Value="{DynamicResource BrandPrimaryLightBrush}"/>
+                        </Style>
+                        <!-- Same look as Settings' update button: the brand fill marks the page's main action. -->
+                        <Style Selector="Button.pending-primary">
+                            <Setter Property="Background" Value="{DynamicResource BrandPrimaryBrush}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+                            <Setter Property="CornerRadius" Value="8"/>
+                            <Setter Property="Padding" Value="18,7"/>
+                            <Setter Property="FontWeight" Value="SemiBold"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Style>
+                        <Style Selector="Button.pending-primary:pointerover /template/ ContentPresenter">
+                            <Setter Property="Background" Value="{DynamicResource BrandPrimaryHoverBrush}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+                        </Style>
+                        <Style Selector="Button.pending-primary:pressed /template/ ContentPresenter">
+                            <Setter Property="Background" Value="{DynamicResource BrandPrimaryLightBrush}"/>
+                        </Style>
+                        <!-- Each row's Save: the same fill, sized like the subtle buttons beside it. -->
+                        <Style Selector="Button.pending-primary.compact">
+                            <Setter Property="Padding" Value="15,5"/>
+                        </Style>
+                        <!-- Hidden, not collapsed, so the button keeps its width while the spinner shows. -->
+                        <Style Selector="TextBlock.pending-label.saving">
+                            <Setter Property="Opacity" Value="0"/>
+                        </Style>
+                    </Panel.Styles>
+
+                    <Grid RowDefinitions="Auto, *" Margin="20,0,5,0">
+                        <!-- Header -->
+                        <Grid Grid.Row="0" ColumnDefinitions="*, Auto" Margin="0,20,20,15">
+                            <StackPanel Spacing="4" VerticalAlignment="Center" Margin="0,0,15,0">
+                                <TextBlock Text="{Binding [Pending_Title], Source={x:Static services:LocalizationService.Instance}}" FontSize="18" Foreground="{DynamicResource TextHeadingBrush}"/>
+                                <TextBlock Text="{Binding [Pending_Desc], Source={x:Static services:LocalizationService.Instance}}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}" TextWrapping="Wrap"/>
+                            </StackPanel>
+                            <Button Grid.Column="1" Classes="pending-primary" VerticalAlignment="Center"
+                                    IsVisible="{Binding HasPendingSessions}"
+                                    IsEnabled="{Binding !IsSavingPending}"
+                                    Command="{Binding SaveAllPendingSessionsCommand}">
+                                <Panel>
+                                    <TextBlock Classes="pending-label" Classes.saving="{Binding IsSavingAllPending}"
+                                               Text="{Binding [Pending_SaveAll], Source={x:Static services:LocalizationService.Instance}}"/>
+                                    <Path Classes="spinner" IsVisible="{Binding IsSavingAllPending}"
+                                          Data="M 25,0 A 25,25 0 1 1 0,25" StrokeThickness="2" Stretch="Uniform"
+                                          Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Path.Stroke>
+                                            <ConicGradientBrush>
+                                                <GradientStop Color="rgba(255, 255, 255, 0)" Offset="0"/>
+                                                <GradientStop Color="rgba(255, 255, 255, 1)" Offset="1"/>
+                                            </ConicGradientBrush>
+                                        </Path.Stroke>
+                                    </Path>
+                                </Panel>
+                            </Button>
+                        </Grid>
+
+                        <ScrollViewer Grid.Row="1" Padding="0,0,20,20">
+                            <Panel>
+                                <!-- Empty state: says where pending sessions come from. -->
+                                <Border Classes="pending-card" Padding="30" IsVisible="{Binding !HasPendingSessions}" VerticalAlignment="Top">
+                                    <StackPanel Spacing="4" HorizontalAlignment="Center">
+                                        <PathIcon Data="M12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22C6.47,22 2,17.5 2,12A10,10 0 0,1 12,2M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z"
+                                                  Width="22" Height="22" Foreground="{DynamicResource IconDarkBrush}" HorizontalAlignment="Center" Margin="0,0,0,4"/>
+                                        <TextBlock Text="{Binding [Pending_EmptyTitle], Source={x:Static services:LocalizationService.Instance}}" FontSize="13" Foreground="{DynamicResource TextSecondaryBrush}" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="{Binding [Pending_EmptyHint], Source={x:Static services:LocalizationService.Instance}}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <ItemsControl ItemsSource="{Binding PendingSessions}" IsVisible="{Binding HasPendingSessions}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Spacing="10"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate x:DataType="vm:PendingSessionViewModel">
+                                            <Border Classes="pending-card" Padding="15,12">
+                                                <Grid ColumnDefinitions="Auto, *, Auto">
+                                                    <Border Grid.Column="0" Width="60" Height="80" CornerRadius="4" ClipToBounds="True"
+                                                            Background="{DynamicResource SurfaceDarkBrush}" BorderBrush="#30394c" BorderThickness="1"
+                                                            VerticalAlignment="Center" Margin="0,0,15,0">
+                                                        <Panel>
+                                                            <Image Source="{Binding CoverBitmap}" Stretch="UniformToFill"/>
+                                                            <TextBlock Text="No cover" IsVisible="{Binding IsNoCoverVisible}"
+                                                                       FontSize="9" FontWeight="SemiBold" Foreground="{DynamicResource ButtonCancelBrush}"
+                                                                       TextAlignment="Center" TextWrapping="Wrap"
+                                                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        </Panel>
+                                                    </Border>
+
+                                                    <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center" Margin="0,0,15,0">
+                                                        <WrapPanel>
+                                                            <TextBlock Text="{Binding Title}" FontSize="15" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"
+                                                                       TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                                            <Border Classes="pending-tag" IsVisible="{Binding !IsIdentified}">
+                                                                <TextBlock Text="{Binding [Pending_Unidentified], Source={x:Static services:LocalizationService.Instance}}"/>
+                                                            </Border>
+                                                            <Border Classes="pending-tag error" IsVisible="{Binding SaveFailed}">
+                                                                <TextBlock Text="{Binding [Pending_SaveFailed], Source={x:Static services:LocalizationService.Instance}}"/>
+                                                            </Border>
+                                                        </WrapPanel>
+                                                        <TextBlock FontSize="12">
+                                                            <Run Text="{Binding WhenText}" Foreground="{DynamicResource TextSubtleBrush}"/>
+                                                            <Run Text=" · " Foreground="{DynamicResource TextSubtleBrush}"/>
+                                                            <Run Text="{Binding DurationText}" Foreground="{DynamicResource BrandPrimaryBrush}" FontWeight="Bold"/>
+                                                        </TextBlock>
+                                                    </StackPanel>
+
+                                                    <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                                                        <Button Classes="subtle" VerticalAlignment="Center"
+                                                                IsEnabled="{Binding !IsSaving}"
+                                                                Command="{Binding #Root.((vm:MainWindowViewModel)DataContext).ChangePendingSessionGameCommand}"
+                                                                CommandParameter="{Binding}">
+                                                            <Panel>
+                                                                <TextBlock Text="{Binding [Pending_ChangeGame], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding IsIdentified}"/>
+                                                                <TextBlock Text="{Binding [Pending_ChooseGame], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding !IsIdentified}"/>
+                                                            </Panel>
+                                                        </Button>
+                                                        <Button Classes="subtle" VerticalAlignment="Center"
+                                                                IsEnabled="{Binding !IsSaving}"
+                                                                Content="{Binding [Pending_Discard], Source={x:Static services:LocalizationService.Instance}}"
+                                                                Command="{Binding #Root.((vm:MainWindowViewModel)DataContext).DiscardPendingSessionCommand}"
+                                                                CommandParameter="{Binding}"/>
+                                                        <Button Classes="pending-primary compact" VerticalAlignment="Center"
+                                                                IsEnabled="{Binding CanSave}"
+                                                                ToolTip.Tip="{Binding SaveTooltip}" ToolTip.ShowOnDisabled="True"
+                                                                Command="{Binding #Root.((vm:MainWindowViewModel)DataContext).SavePendingSessionCommand}"
+                                                                CommandParameter="{Binding}">
+                                                            <Panel>
+                                                                <TextBlock Classes="pending-label" Classes.saving="{Binding IsSaving}"
+                                                                           Text="{Binding [Pending_Save], Source={x:Static services:LocalizationService.Instance}}"/>
+                                                                <Path Classes="spinner" IsVisible="{Binding IsSaving}"
+                                                                      Data="M 25,0 A 25,25 0 1 1 0,25" StrokeThickness="2" Stretch="Uniform"
+                                                                      Width="14" Height="14" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                                    <Path.Stroke>
+                                                                        <ConicGradientBrush>
+                                                                            <GradientStop Color="rgba(255, 255, 255, 0)" Offset="0"/>
+                                                                            <GradientStop Color="rgba(255, 255, 255, 1)" Offset="1"/>
+                                                                        </ConicGradientBrush>
+                                                                    </Path.Stroke>
+                                                                </Path>
+                                                            </Panel>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </Panel>
+                        </ScrollViewer>
+                    </Grid>
+                </Panel>
+
                 <!-- Bottom Message Bar -->
                 <Border Classes="bottom-message" 
                         Classes.visible="{Binding IsBottomMessageVisible}"
@@ -1183,7 +1388,7 @@
         </Panel>
 
         <!-- Session Confirmation Overlay -->
-        <Panel IsVisible="{Binding IsSessionConfirmationVisible}" Background="{DynamicResource OverlayMediumBrush}">
+        <Panel IsVisible="{Binding IsSessionOverlayVisible}" Background="{DynamicResource OverlayMediumBrush}">
             <!-- Game Selector Overlay (On Top) -->
             <Panel IsVisible="{Binding IsGameSelectorVisible}" ZIndex="10">
                 <Border x:Name="GameSelectorDialog" Background="{DynamicResource AppBackgroundBrush}" CornerRadius="20" Width="600" Height="500"
@@ -1397,12 +1602,21 @@
 
                     <!-- Buttons Footer -->
                     <Border Grid.Row="1" Background="{DynamicResource PanelBackgroundBrush}" Height="60" Padding="20,0" CornerRadius="0,0,20,20">
-                        <Grid ColumnDefinitions="*, 15, *">
-                            <Button Grid.Column="0" Classes="discard-btn" Command="{Binding DiscardSessionCommand}" IsEnabled="{Binding AreButtonsEnabled}">
+                        <Grid ColumnDefinitions="Auto, 15, *, 15, *">
+                            <Button x:Name="SessionPostponeButton" Grid.Column="0" Classes="discard-btn" Width="40" Padding="0"
+                                    Command="{Binding PostponeSessionCommand}" IsEnabled="{Binding IsPostponeEnabled}"
+                                    GotFocus="OnPostponeButtonGotFocus" LostFocus="OnPostponeButtonLostFocus"
+                                    ToolTip.Tip="{Binding [Session_PostponeTooltip], Source={x:Static services:LocalizationService.Instance}}"
+                                    ToolTip.Placement="Top" ToolTip.VerticalOffset="-10" ToolTip.ShowOnDisabled="True">
+                                <PathIcon Data="M12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22C6.47,22 2,17.5 2,12A10,10 0 0,1 12,2M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z"
+                                          Width="18" Height="18" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                            </Button>
+
+                            <Button Grid.Column="2" Classes="discard-btn" Command="{Binding DiscardSessionCommand}" IsEnabled="{Binding AreButtonsEnabled}">
                                 <TextBlock Text="{Binding [Session_Discard], Source={x:Static services:LocalizationService.Instance}}" VerticalAlignment="Center"/>
                             </Button>
                             
-                            <Panel Grid.Column="2" Background="Transparent" PointerEntered="OnSaveButtonPointerEntered" PointerExited="OnSaveButtonPointerExited">
+                            <Panel Grid.Column="4" Background="Transparent" PointerEntered="OnSaveButtonPointerEntered" PointerExited="OnSaveButtonPointerExited">
                                 <Button x:Name="SessionSaveButton" Classes="save-btn" Command="{Binding SaveSessionCommand}" IsEnabled="{Binding IsSaveEnabled}"
                                     ToolTip.Placement="Top" ToolTip.VerticalOffset="-10" ToolTip.ShowOnDisabled="True" ToolTip.ShowDelay="0"
                                     ToolTip.Tip="{Binding SaveButtonTooltip}">

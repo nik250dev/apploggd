@@ -9,6 +9,8 @@
 - Apps and emulated games can be added to a blacklist, so they are no longer detected
 - Support for Linux
 - The session confirmation can be handled with a controller (Settings > General > Controller navigation)
+- Sessions can be left in the new Pending section to review later, from the clock button of the confirmation or the save error notice
+- New setting to send every session to Pending without asking (Settings > General)
 
 ### Changed
 

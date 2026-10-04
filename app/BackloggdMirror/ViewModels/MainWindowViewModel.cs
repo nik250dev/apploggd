@@ -111,6 +111,7 @@ public partial class MainWindowViewModel : ViewModelBase
     private readonly GameDataService _gameDataService;
     private readonly AutostartService _autostartService;
     private readonly BlacklistService _blacklistService;
+    private readonly PendingSessionService _pendingSessionService;
     private readonly GamepadService? _gamepadService;
 
     [ObservableProperty]
@@ -119,6 +120,9 @@ public partial class MainWindowViewModel : ViewModelBase
 
     [ObservableProperty]
     private bool _isSettingsVisible = false;
+
+    [ObservableProperty]
+    private bool _isPendingVisible = false;
 
     [ObservableProperty]
     private bool _isBottomMessageVisible = false;
@@ -195,6 +199,21 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
+    public bool AlwaysAddToPending
+    {
+        get => _settingsService.AlwaysAddToPending;
+        set
+        {
+            if (_settingsService.AlwaysAddToPending != value)
+            {
+                _settingsService.AlwaysAddToPending = value;
+                _settingsService.Save();
+                _logger.Info($"[MainWindowViewModel] User action: 'Always add to pending' set to {value}.");
+                OnPropertyChanged();
+            }
+        }
+    }
+
     /// <summary>Shared for the whole process, like the blacklist: it outlives a logout.</summary>
     internal GamepadService? Gamepad => _gamepadService;
 
@@ -234,6 +253,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 // language change does not reach them on its own.
                 UpdateTrayMenuText();
                 RefreshAppUpdateTexts();
+                RefreshPendingTexts();
                 OnPropertyChanged();
 
                 var option = System.Linq.Enumerable.FirstOrDefault(LanguageOptions, x => x.Code == value);
@@ -269,7 +289,11 @@ public partial class MainWindowViewModel : ViewModelBase
     // #### Session Confirmation Properties
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsAnyOverlayVisible))]
+    [NotifyPropertyChangedFor(nameof(IsSessionOverlayVisible))]
     private bool _isSessionConfirmationVisible = false;
+
+    /// <summary>The game picker shares the session overlay, but also opens on its own from the pending view.</summary>
+    public bool IsSessionOverlayVisible => IsSessionConfirmationVisible || IsGameSelectorVisible;
 
     partial void OnIsSessionConfirmationVisibleChanged(bool value)
     {
@@ -304,6 +328,7 @@ public partial class MainWindowViewModel : ViewModelBase
     private bool _isSessionCoverLoading;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsPostponeEnabled))]
     private bool _isSessionTitleLoading;
 
     // The session awaiting confirmation. It survives here rather than in the detection state because
@@ -312,6 +337,12 @@ public partial class MainWindowViewModel : ViewModelBase
     internal string? _pendingGameName;
     internal string? _pendingIdIgdb;
     internal string? _pendingGameUrl;
+    private string? _pendingCoverUrl;
+    private DateTime _pendingEndedAt;
+    private bool _pendingSaveFailed;
+
+    // Bumped per confirmation, so a late toast action cannot act on a newer session.
+    private int _pendingSessionToken;
 
     /// <summary>Below this, a session is discarded rather than offered for confirmation.</summary>
     internal TimeSpan _minAllowedSession = TimeSpan.FromMinutes(1);
@@ -319,6 +350,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(AreButtonsEnabled))]
     [NotifyPropertyChangedFor(nameof(IsSaveEnabled))]
+    [NotifyPropertyChangedFor(nameof(IsPostponeEnabled))]
     private bool _isSavingSession;
 
     [ObservableProperty]
@@ -330,6 +362,9 @@ public partial class MainWindowViewModel : ViewModelBase
     public bool AreButtonsEnabled => !IsSavingSession;
 
     public bool IsSaveEnabled => !IsSavingSession && IsGameIdentified;
+
+    // Not while the title resolves: the pending entry would keep a half-identified game.
+    public bool IsPostponeEnabled => !IsSavingSession && !IsSessionTitleLoading;
 
     public string? SaveButtonTooltip => IsGameIdentified
         ? null
@@ -370,7 +405,12 @@ public partial class MainWindowViewModel : ViewModelBase
 
     // #### Game Selector Properties
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsAnyOverlayVisible))]
+    [NotifyPropertyChangedFor(nameof(IsSessionOverlayVisible))]
     private bool _isGameSelectorVisible = false;
+
+    /// <summary>The pending row the picker is choosing for; null when it serves the confirmation modal.</summary>
+    private PendingSessionViewModel? _selectorPendingTarget;
 
     [ObservableProperty]
     private string _gameSearchQuery = string.Empty;
@@ -383,8 +423,23 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void OpenGameSelector()
     {
+        _selectorPendingTarget = null;
+        ShowGameSelector(SessionGameTitle);
+    }
+
+    [RelayCommand]
+    private void ChangePendingSessionGame(PendingSessionViewModel item)
+    {
+        if (item == null) return;
+
+        _selectorPendingTarget = item;
+        ShowGameSelector(item.Title);
+    }
+
+    private void ShowGameSelector(string query)
+    {
         IsGameSelectorVisible = true;
-        GameSearchQuery = SessionGameTitle; // Default to current pending title
+        GameSearchQuery = query;
         GameSearchResults.Clear();
         if (!string.IsNullOrWhiteSpace(GameSearchQuery))
         {
@@ -396,6 +451,7 @@ public partial class MainWindowViewModel : ViewModelBase
     private void CloseGameSelector()
     {
         IsGameSelectorVisible = false;
+        _selectorPendingTarget = null;
     }
 
     [RelayCommand]
@@ -457,10 +513,30 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         if (selectedGame == null) return;
 
+        if (_selectorPendingTarget is { } item)
+        {
+            var session = item.Session;
+            session.GameName = selectedGame.Title;
+            session.GameUrl = selectedGame.RedirectLink;
+            session.IdIgdb = null;
+            session.CoverUrl = string.IsNullOrEmpty(selectedGame.CoverUrl) ? null : selectedGame.CoverUrl;
+            session.IsIdentified = true;
+            _pendingSessionService.Update(session);
+
+            item.CoverBitmap = selectedGame.CoverBitmap;
+            item.Refresh();
+            UpdatePendingSummary();
+
+            CloseGameSelector();
+            return;
+        }
+
         SessionGameTitle = selectedGame.Title;
         SessionGameCover = selectedGame.CoverBitmap;
         _pendingGameName = selectedGame.Title;
         _pendingGameUrl = selectedGame.RedirectLink;
+        _pendingIdIgdb = null;
+        _pendingCoverUrl = string.IsNullOrEmpty(selectedGame.CoverUrl) ? null : selectedGame.CoverUrl;
         IsGameIdentified = true;
 
         IsGameSelectorVisible = false;
@@ -499,7 +575,10 @@ public partial class MainWindowViewModel : ViewModelBase
     /// </summary>
     private readonly SemaphoreSlim _detectionGate = new(1, 1);
 
-    public MainWindowViewModel(IGameDetectionService gameDetectionService, IBackloggdAuthService authService, IBackloggdBrowserService browserService, SettingsService settingsService, ICredentialStorageService credentialStorageService, IAppLogger logger, GameDataService? gameDataService = null, AutostartService? autostartService = null, BlacklistService? blacklistService = null, GamepadService? gamepadService = null)
+    // One RegisterGame at a time: two on the same game and day would read the same total and one would overwrite the other.
+    private readonly SemaphoreSlim _registrationGate = new(1, 1);
+
+    public MainWindowViewModel(IGameDetectionService gameDetectionService, IBackloggdAuthService authService, IBackloggdBrowserService browserService, SettingsService settingsService, ICredentialStorageService credentialStorageService, IAppLogger logger, GameDataService? gameDataService = null, AutostartService? autostartService = null, BlacklistService? blacklistService = null, GamepadService? gamepadService = null, PendingSessionService? pendingSessionService = null)
     {
         _authService = authService;
         _browserService = browserService;
@@ -511,9 +590,11 @@ public partial class MainWindowViewModel : ViewModelBase
         _autostartService = autostartService ?? new AutostartService(logger);
         _blacklistService = blacklistService ?? new BlacklistService(logger);
         _gamepadService = gamepadService;
+        _pendingSessionService = pendingSessionService ?? new PendingSessionService(logger);
         _changelogService = new ChangelogService(logger);
 
         RefreshBlacklistEntries();
+        LoadPendingSessions();
 
         _stopwatch = new Stopwatch();
 
@@ -648,6 +729,7 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         IsHomeVisible = true;
         IsSettingsVisible = false;
+        IsPendingVisible = false;
     }
 
     [RelayCommand]
@@ -655,6 +737,18 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         IsHomeVisible = false;
         IsSettingsVisible = true;
+        IsPendingVisible = false;
+    }
+
+    [RelayCommand]
+    private void NavigateToPending()
+    {
+        IsHomeVisible = false;
+        IsSettingsVisible = false;
+        IsPendingVisible = true;
+
+        // "Today" and "Yesterday" go stale once the clock passes midnight.
+        RefreshPendingTexts();
     }
 
     #region About / Changelog
@@ -681,7 +775,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [NotifyPropertyChangedFor(nameof(IsAnyOverlayVisible))]
     private bool _isUpdateProgressVisible = false;
 
-    public bool IsAnyOverlayVisible => IsSessionConfirmationVisible || IsChangelogVisible || IsClearDataConfirmationVisible || IsNoBrowserWarningVisible || IsUpdateProgressVisible;
+    public bool IsAnyOverlayVisible => IsSessionConfirmationVisible || IsGameSelectorVisible || IsChangelogVisible || IsClearDataConfirmationVisible || IsNoBrowserWarningVisible || IsUpdateProgressVisible;
 
     public ObservableCollection<BackloggdMirror.Models.ChangelogBlock> ChangelogBlocks { get; } = new();
 
@@ -941,7 +1035,8 @@ public partial class MainWindowViewModel : ViewModelBase
 
         if (IsGameRunning)
         {
-            return new TrayNotice(TrayNoticeKind.Playing, string.IsNullOrEmpty(GameName) ? title : GameName, loc["TrayNotice_PlayingBody"])
+            return new TrayNotice(TrayNoticeKind.Playing, string.IsNullOrEmpty(GameName) ? title : GameName,
+                loc[_settingsService.AlwaysAddToPending ? "TrayNotice_PlayingBodyPending" : "TrayNotice_PlayingBody"])
             {
                 LiveKicker = () => string.Format(loc["TrayNotice_PlayingKicker"], PlayTime)
             };
@@ -1165,11 +1260,15 @@ public partial class MainWindowViewModel : ViewModelBase
         OnPropertyChanged(nameof(MinimizeToTray));
         OnPropertyChanged(nameof(StartWithWindows));
         OnPropertyChanged(nameof(GamepadNavigationEnabled));
+        OnPropertyChanged(nameof(AlwaysAddToPending));
         OnPropertyChanged(nameof(SelectedLanguageCode));
 
         // Same trap as the settings: the file is gone, but detection keeps this instance.
         _blacklistService.Reset();
         RefreshBlacklistEntries();
+
+        _pendingSessionService.Reset();
+        LoadPendingSessions();
 
         Logout();
     }
@@ -1297,7 +1396,7 @@ public partial class MainWindowViewModel : ViewModelBase
         RefreshBlacklistEntries();
 
         var loc = LocalizationService.Instance;
-        ShowToast(string.Format(loc["Toast_BlacklistRemoved"], entry.DisplayName), ToastType.Success, UndoToastDuration, loc["Toast_Undo"], () =>
+        ShowToast(string.Format(loc["Toast_BlacklistRemoved"], entry.DisplayName), ToastType.Warning, UndoToastDuration, loc["Toast_Undo"], () =>
         {
             if (_blacklistService.Add(entry)) RefreshBlacklistEntries();
         });
@@ -1315,10 +1414,312 @@ public partial class MainWindowViewModel : ViewModelBase
         }
 
         RefreshBlacklistEntries();
-        ShowToast(string.Format(loc["Toast_BlacklistAdded"], entry.DisplayName), ToastType.Success, UndoToastDuration, loc["Toast_Undo"], () =>
+        ShowToast(string.Format(loc["Toast_BlacklistAdded"], entry.DisplayName), ToastType.Warning, UndoToastDuration, loc["Toast_Undo"], () =>
         {
             if (_blacklistService.Remove(entry)) RefreshBlacklistEntries();
         });
+    }
+
+    #endregion
+
+    #region Pending sessions
+
+    /// <summary>Newest first, and only those of the account signed in.</summary>
+    public ObservableCollection<PendingSessionViewModel> PendingSessions { get; } = new();
+
+    [ObservableProperty]
+    private bool _hasPendingSessions;
+
+    [ObservableProperty]
+    private int _pendingSessionsCount;
+
+    private string? _pendingSessionsUser;
+
+    private void LoadPendingSessions()
+    {
+        _pendingSessionsUser = _authService.Username;
+        PendingSessions.Clear();
+
+        foreach (var session in _pendingSessionService.ForUser(_pendingSessionsUser).OrderByDescending(s => s.EndedAt))
+        {
+            var item = new PendingSessionViewModel(session);
+            PendingSessions.Add(item);
+            LoadPendingCover(item);
+        }
+
+        UpdatePendingSummary();
+    }
+
+    private void AddPendingSession(PendingSession session, Avalonia.Media.Imaging.Bitmap? cover = null)
+    {
+        _pendingSessionService.Add(session);
+        InsertPendingItem(new PendingSessionViewModel(session) { CoverBitmap = cover }, loadCover: cover == null);
+    }
+
+    private void InsertPendingItem(PendingSessionViewModel item, bool loadCover)
+    {
+        int index = 0;
+        while (index < PendingSessions.Count && PendingSessions[index].Session.EndedAt > item.Session.EndedAt) index++;
+        PendingSessions.Insert(index, item);
+
+        if (loadCover) LoadPendingCover(item);
+        UpdatePendingSummary();
+    }
+
+    private void LoadPendingCover(PendingSessionViewModel item)
+    {
+        var url = item.Session.CoverUrl;
+        if (string.IsNullOrEmpty(url)) return;
+
+        item.IsCoverLoading = true;
+        _ = Task.Run(async () =>
+        {
+            Avalonia.Media.Imaging.Bitmap? bitmap = null;
+            try
+            {
+                bitmap = await _browserService.DownloadImageAsync(url);
+            }
+            catch (Exception ex)
+            {
+                _logger.Warning($"[MainWindowViewModel] Could not download the cover of pending session '{item.Title}': {ex.Message}. It is shown without one.");
+            }
+
+            Dispatcher.UIThread.Post(() =>
+            {
+                item.CoverBitmap = bitmap;
+                item.IsCoverLoading = false;
+            });
+        });
+    }
+
+    private void UpdatePendingSummary()
+    {
+        int count = PendingSessions.Count;
+
+        PendingSessionsCount = count;
+        HasPendingSessions = count > 0;
+    }
+
+    private void RefreshPendingTexts()
+    {
+        foreach (var item in PendingSessions) item.Refresh();
+        UpdatePendingSummary();
+    }
+
+    /// <summary>
+    /// "Always add to pending": resolves the game the way the modal would, without the user, and
+    /// keeps the session for later. Detection is never paused for it.
+    /// </summary>
+    private async Task AddFinishedSessionToPendingAsync(string gameName, string? idIgdb, DateTime endedAt, TimeSpan duration)
+    {
+        var session = new PendingSession
+        {
+            Username = _authService.Username ?? string.Empty,
+            GameName = gameName,
+            IdIgdb = idIgdb,
+            StartedAt = endedAt - duration,
+            EndedAt = endedAt,
+            Duration = duration
+        };
+
+        if (!string.IsNullOrEmpty(idIgdb))
+        {
+            try
+            {
+                var lookup = _gameDataService.LookupByIgdbId(idIgdb);
+                if (lookup != null)
+                {
+                    session.GameName = lookup.Name;
+                }
+                else
+                {
+                    lookup = await _gameDataService.LookupByIgdbIdFromApiAsync(idIgdb);
+                }
+
+                if (lookup != null)
+                {
+                    session.GameUrl = lookup.BackloggdGameUrl;
+                    session.CoverUrl = lookup.CoverUrl;
+                    session.IsIdentified = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Warning($"[MainWindowViewModel] Could not resolve IGDB ID '{idIgdb}' for the pending session: {ex.Message}. It is kept as unidentified.");
+            }
+        }
+
+        _logger.Info($"[MainWindowViewModel] 'Always add to pending' is on: '{session.GameName}' ({PendingSessionViewModel.FormatDuration(duration)}) goes to the pending list without asking.");
+        AddPendingSession(session);
+
+        var loc = LocalizationService.Instance;
+        ShowToast(string.Format(loc["Toast_SessionPostponed"], session.GameName), ToastType.Warning, UndoToastDuration, loc["Toast_ViewPending"], NavigateToPending);
+    }
+
+    [RelayCommand]
+    private void DiscardPendingSession(PendingSessionViewModel item)
+    {
+        if (item == null || !_pendingSessionService.Remove(item.Session)) return;
+
+        _logger.Info($"[MainWindowViewModel] User action: discarded pending session '{item.Title}'.");
+        PendingSessions.Remove(item);
+        UpdatePendingSummary();
+
+        var loc = LocalizationService.Instance;
+        ShowToast(string.Format(loc["Toast_PendingDiscarded"], item.Title), ToastType.Warning, UndoToastDuration, loc["Toast_Undo"], () =>
+        {
+            if (PendingSessions.Contains(item)) return;
+            _pendingSessionService.Add(item.Session);
+            InsertPendingItem(item, loadCover: false);
+        });
+    }
+
+    /// <summary>True while any pending row is being saved or waits its turn.</summary>
+    [ObservableProperty]
+    private bool _isSavingPending;
+
+    /// <summary>Only for "Save all", which shows the spinner until the whole batch is done.</summary>
+    [ObservableProperty]
+    private bool _isSavingAllPending;
+
+    private int _pendingSavesInFlight;
+
+    private void SetPendingSaveInFlight(bool started)
+    {
+        _pendingSavesInFlight += started ? 1 : -1;
+        IsSavingPending = _pendingSavesInFlight > 0;
+    }
+
+    // Concurrent so another row can be queued meanwhile; _registrationGate runs them one by one.
+    [RelayCommand(AllowConcurrentExecutions = true)]
+    private async Task SavePendingSession(PendingSessionViewModel item)
+    {
+        if (item == null || !item.CanSave) return;
+
+        _logger.Info($"[MainWindowViewModel] User action: save pending session '{item.Title}' ({PendingSessionViewModel.FormatDuration(item.Session.Duration)}, played {item.Session.StartedAt:yyyy-MM-dd}).");
+
+        item.IsSaving = true;
+        SetPendingSaveInFlight(true);
+        try
+        {
+            var error = await RegisterPendingAsync(item);
+            if (error == null)
+            {
+                ReloadJournal();
+                ShowToast(LocalizationService.Instance["Toast_SessionSaved"], ToastType.Success);
+            }
+            else
+            {
+                ShowToast(FriendlySaveError(error), ToastType.Error);
+            }
+        }
+        finally
+        {
+            item.IsSaving = false;
+            SetPendingSaveInFlight(false);
+        }
+    }
+
+    /// <summary>
+    /// One at a time and oldest first; a failure does not stop the rest, and unidentified rows stay.
+    /// Every row in the batch is locked from the start, so none can be discarded or changed while it waits.
+    /// </summary>
+    [RelayCommand]
+    private async Task SaveAllPendingSessions()
+    {
+        if (IsSavingPending) return;
+
+        var items = PendingSessions.Where(p => p.CanSave).OrderBy(p => p.Session.StartedAt).ToList();
+        _logger.Info($"[MainWindowViewModel] User action: save all pending sessions ({items.Count} identified of {PendingSessions.Count}).");
+        if (items.Count == 0) return;
+
+        foreach (var item in items) item.IsSaving = true;
+        IsSavingAllPending = true;
+        SetPendingSaveInFlight(true);
+
+        int attempted = 0, saved = 0;
+        Exception? lastError = null;
+        try
+        {
+            foreach (var item in items)
+            {
+                // The list is reloaded on an account change.
+                if (!PendingSessions.Contains(item)) continue;
+
+                attempted++;
+                var error = await RegisterPendingAsync(item);
+                if (error == null) saved++;
+                else lastError = error;
+
+                item.IsSaving = false;
+            }
+        }
+        finally
+        {
+            foreach (var item in items) item.IsSaving = false;
+            IsSavingAllPending = false;
+            SetPendingSaveInFlight(false);
+        }
+
+        if (saved > 0) ReloadJournal();
+        if (attempted == 0) return;
+
+        var loc = LocalizationService.Instance;
+        if (saved == attempted)
+        {
+            ShowToast(saved == 1 ? loc["Toast_SessionSaved"] : string.Format(loc["Pending_SavedAll"], saved), ToastType.Success);
+        }
+        else if (attempted == 1)
+        {
+            ShowToast(FriendlySaveError(lastError!), ToastType.Error);
+        }
+        else
+        {
+            ShowToast(string.Format(loc["Pending_SavedSome"], saved, attempted), ToastType.Error);
+        }
+    }
+
+    /// <summary>Registers the row on the day it was played. Returns the error, or null once it is saved and gone from the list.</summary>
+    private async Task<Exception?> RegisterPendingAsync(PendingSessionViewModel item)
+    {
+        var session = item.Session;
+
+        await _registrationGate.WaitAsync();
+        try
+        {
+            // TotalHours, not Hours, which wraps at 24.
+            await _browserService.RegisterGame(session.GameName, _authService.Cookies, (int)session.Duration.TotalHours, session.Duration.Minutes, session.GameUrl, session.StartedAt.Date);
+
+            _logger.Info($"[MainWindowViewModel] Pending session registered on Backloggd: '{session.GameName}', {PendingSessionViewModel.FormatDuration(session.Duration)} on {session.StartedAt:yyyy-MM-dd}.");
+            _pendingSessionService.Remove(session);
+            PendingSessions.Remove(item);
+            UpdatePendingSummary();
+            return null;
+        }
+        catch (Exception ex)
+        {
+            _logger.Error($"[MainWindowViewModel] Registering pending session '{session.GameName}' ({PendingSessionViewModel.FormatDuration(session.Duration)}, {session.StartedAt:yyyy-MM-dd}) on Backloggd failed. It stays in Pending.", ex);
+            session.SaveFailed = true;
+            _pendingSessionService.Update(session);
+            item.Refresh();
+            return ex;
+        }
+        finally
+        {
+            _registrationGate.Release();
+        }
+    }
+
+    private void ReloadJournal()
+    {
+        if (_authService.Username != null)
+        {
+            _ = LoadData(_authService.Username);
+        }
+        else
+        {
+            _logger.Warning("[MainWindowViewModel] A session was registered but the username is null, so the recently played list could not be refreshed.");
+        }
     }
 
     #endregion
@@ -1358,7 +1759,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 loginVm.LoginSuccessful += () =>
                 {
                     // The blacklist is the instance detection reads; a new one would show a list that detection ignores.
-                    var mainWindowVm = new MainWindowViewModel(_gameDetectionService, newAuthService, newBrowserService, _settingsService, newCredentialStorageService, newLogger, blacklistService: _blacklistService, gamepadService: _gamepadService);
+                    var mainWindowVm = new MainWindowViewModel(_gameDetectionService, newAuthService, newBrowserService, _settingsService, newCredentialStorageService, newLogger, blacklistService: _blacklistService, gamepadService: _gamepadService, pendingSessionService: _pendingSessionService);
 
                     mainWindowVm.IsLoggedIn = true;
 
@@ -1421,16 +1822,61 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void DiscardSession()
     {
-        IsSessionConfirmationVisible = false;
         IsSessionWarningForcedVisible = false;
+        CloseSessionConfirmation();
+    }
+
+    /// <summary>The clock button: keeps the session in the pending list instead of saving or discarding it.</summary>
+    [RelayCommand]
+    private void PostponeSession()
+    {
+        if (!IsSessionConfirmationVisible || !IsPostponeEnabled) return;
+
+        var session = new PendingSession
+        {
+            Username = _authService.Username ?? string.Empty,
+            GameName = _pendingGameName ?? SessionGameTitle,
+            IdIgdb = _pendingIdIgdb,
+            GameUrl = string.IsNullOrEmpty(_pendingGameUrl) ? null : _pendingGameUrl,
+            CoverUrl = _pendingCoverUrl,
+            IsIdentified = IsGameIdentified,
+            SaveFailed = _pendingSaveFailed,
+            StartedAt = _pendingEndedAt - _pendingSessionDuration,
+            EndedAt = _pendingEndedAt,
+            Duration = _pendingSessionDuration
+        };
+
+        _logger.Info($"[MainWindowViewModel] User action: left '{session.GameName}' ({PendingSessionViewModel.FormatDuration(session.Duration)}) for later.");
+        AddPendingSession(session, SessionGameCover);
+
+        IsSessionWarningForcedVisible = false;
+        CloseSessionConfirmation();
+
+        var loc = LocalizationService.Instance;
+        ShowToast(string.Format(loc["Toast_SessionPostponed"], session.GameName), ToastType.Warning, UndoToastDuration, loc["Toast_ViewPending"], NavigateToPending);
+    }
+
+    /// <summary>The action of the save error toast; only for the session that failed, if it is still waiting.</summary>
+    private void PostponeAfterSaveFailure(int token)
+    {
+        if (token != _pendingSessionToken || IsSavingSession) return;
+        PostponeSession();
+    }
+
+    /// <summary>Closes the modal and forgets the session behind it, whatever the user chose.</summary>
+    private void CloseSessionConfirmation()
+    {
+        IsSessionConfirmationVisible = false;
         SessionGameCover = null;
         IsNoCoverPlaceholderVisible = false;
         IsSessionCoverLoading = false;
         _pendingGameName = null;
         _pendingIdIgdb = null;
         _pendingGameUrl = null;
+        _pendingCoverUrl = null;
         _pendingGame = null;
         _pendingSessionDuration = TimeSpan.Zero;
+        _pendingSaveFailed = false;
         IsBackgroundImageVisible = false;
         IsGameIdentified = true;
 
@@ -1453,6 +1899,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
         if (!string.IsNullOrEmpty(_pendingGameName))
         {
+            await _registrationGate.WaitAsync();
             try
             {
                 await _browserService.RegisterGame(_pendingGameName, _authService.Cookies, _pendingSessionDuration.Hours, _pendingSessionDuration.Minutes, _pendingGameUrl);
@@ -1460,34 +1907,9 @@ public partial class MainWindowViewModel : ViewModelBase
                 Console.WriteLine($"[SaveSession] Game registered successfully. Reloading data for user: '{_authService.Username}'");
                 _logger?.Info($"[SaveSession] Session registered on Backloggd: '{_pendingGameName}', {_pendingSessionDuration.Hours}h {_pendingSessionDuration.Minutes}m.");
 
-                // Refresh the list after saving
-                if (_authService.Username != null)
-                {
-                    LoadData(_authService.Username);
-                }
-                else
-                {
-                    Console.WriteLine($"[SaveSession] WARNING: Username is null, cannot reload data.");
-                    _logger?.Warning("[SaveSession] The session was registered but the username is null, so the recently played list could not be refreshed.");
-                }
+                ReloadJournal();
 
-                // Success - Close panel and cleanup
-                IsSessionConfirmationVisible = false;
-                SessionGameCover = null;
-                IsNoCoverPlaceholderVisible = false;
-                _pendingGameName = null;
-                _pendingIdIgdb = null;
-                _pendingGameUrl = null;
-                _pendingGame = null;
-                _pendingSessionDuration = TimeSpan.Zero;
-                IsBackgroundImageVisible = false;
-                IsGameIdentified = true;
-
-                IsGameDetectionPaused = false;
-                if (!IsGameRunning)
-                {
-                    GameStatus = "No Game Running";
-                }
+                CloseSessionConfirmation();
 
                 ShowToast(LocalizationService.Instance["Toast_SessionSaved"], ToastType.Success);
             }
@@ -1496,30 +1918,35 @@ public partial class MainWindowViewModel : ViewModelBase
                 Console.WriteLine($"Error registering game '{_pendingGameName}': {ex.Message}");
                 _logger?.Error($"[SaveSession] Registering '{_pendingGameName}' ({_pendingSessionDuration.Hours}h {_pendingSessionDuration.Minutes}m) on Backloggd failed. The play time was not recorded.", ex);
 
-                string friendlyMessage = LocalizationService.Instance["Toast_ErrorSaving"];
-
-                if (ex.Message.Contains("ERR_INTERNET_DISCONNECTED") ||
-                    ex.Message.Contains("ERR_NAME_NOT_RESOLVED") ||
-                    ex.Message.Contains("ERR_CONNECTION_REFUSED"))
-                {
-                    friendlyMessage = LocalizationService.Instance["Toast_ConnectionError"];
-                }
-                else if (ex.Message.Contains("Timeout"))
-                {
-                    friendlyMessage = LocalizationService.Instance["Toast_TimeoutError"];
-                }
-                else
-                {
-                    friendlyMessage = string.Format(LocalizationService.Instance["Toast_UnexpectedError"], ex.Message);
-                }
-
-                ShowToast(friendlyMessage, ToastType.Error);
+                _pendingSaveFailed = true;
+                int token = _pendingSessionToken;
+                ShowToast(FriendlySaveError(ex), ToastType.Error, UndoToastDuration, LocalizationService.Instance["Toast_AddToPending"], () => PostponeAfterSaveFailure(token));
             }
             finally
             {
+                _registrationGate.Release();
                 IsSavingSession = false;
             }
         }
+    }
+
+    private static string FriendlySaveError(Exception ex)
+    {
+        var loc = LocalizationService.Instance;
+
+        if (ex.Message.Contains("ERR_INTERNET_DISCONNECTED") ||
+            ex.Message.Contains("ERR_NAME_NOT_RESOLVED") ||
+            ex.Message.Contains("ERR_CONNECTION_REFUSED"))
+        {
+            return loc["Toast_ConnectionError"];
+        }
+
+        if (ex.Message.Contains("Timeout"))
+        {
+            return loc["Toast_TimeoutError"];
+        }
+
+        return string.Format(loc["Toast_UnexpectedError"], ex.Message);
     }
 
     [RelayCommand(CanExecute = nameof(CanRegisterGame))]
@@ -1534,6 +1961,11 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public async Task LoadData(string username)
     {
+        if (!string.Equals(_pendingSessionsUser, _authService.Username, StringComparison.OrdinalIgnoreCase))
+        {
+            LoadPendingSessions();
+        }
+
         IsLastPlayedGamesLoading = true;
         HasLastPlayedGamesError = false;
         try
@@ -1821,6 +2253,7 @@ public partial class MainWindowViewModel : ViewModelBase
         string? gameToRegister = _currentGame?.Name;
         string? currentIdIgdb = _currentGame?.IdIgdb;
         TimeSpan elapsed = _stopwatch.Elapsed;
+        DateTime endedAt = DateTime.Now;
         string finalPlayTime = PlayTime;
 
         _stopwatch.Stop();
@@ -1846,9 +2279,24 @@ public partial class MainWindowViewModel : ViewModelBase
                 return;
             }
 
+            if (_settingsService.AlwaysAddToPending)
+            {
+                _ = AddFinishedSessionToPendingAsync(gameToRegister, currentIdIgdb, endedAt, elapsed);
+                GameStatus = "No Game Running";
+                IsBackgroundImageVisible = false;
+                return;
+            }
+
+            // The confirmation goes first: a picker left open for a pending row would hide it.
+            if (_selectorPendingTarget != null) CloseGameSelector();
+
+            _pendingSessionToken++;
             _pendingGameName = gameToRegister;
             _pendingIdIgdb = currentIdIgdb;
             _pendingSessionDuration = elapsed;
+            _pendingEndedAt = endedAt;
+            _pendingCoverUrl = null;
+            _pendingSaveFailed = false;
             _pendingGame = finishedGame;
             _pendingGameDisplayName = finishedDisplayName;
             IsPendingGameEmulated = finishedGame?.Source == DetectionSource.Emulator;
@@ -1898,6 +2346,7 @@ public partial class MainWindowViewModel : ViewModelBase
                     SessionGameTitle = lookupResult.Name;
                     _pendingGameName = lookupResult.Name;
                     _pendingGameUrl = lookupResult.BackloggdGameUrl;
+                    _pendingCoverUrl = lookupResult.CoverUrl;
                     IsGameIdentified = true;
                     IsSessionTitleLoading = false;
 
@@ -1946,6 +2395,7 @@ public partial class MainWindowViewModel : ViewModelBase
                             {
                                 // API resolved the game — mark as identified
                                 _pendingGameUrl = apiResult.BackloggdGameUrl;
+                                _pendingCoverUrl = apiResult.CoverUrl;
                                 IsGameIdentified = true;
                                 IsSessionTitleLoading = false;
 
