@@ -21,6 +21,7 @@
 - The NVIDIA App overlay is no longer detected as a game
 - Updating from a read-only folder now warns to move the app instead of failing
 - Games that share an executable name with other games are now detected correctly
+- The session confirmation no longer stays hidden behind Steam Big Picture after closing a game
 
 ## 1.1.0 — 2026-09-10
 
