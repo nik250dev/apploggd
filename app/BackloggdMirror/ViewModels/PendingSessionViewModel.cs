@@ -24,11 +24,17 @@ public partial class PendingSessionViewModel : ViewModelBase
     [NotifyPropertyChangedFor(nameof(IsNoCoverVisible))]
     private bool _isCoverLoading;
 
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanSave))]
+    private bool _isSaving;
+
     public bool IsNoCoverVisible => CoverBitmap == null && !IsCoverLoading;
 
     public string Title => Session.GameName;
 
     public bool IsIdentified => Session.IsIdentified;
+
+    public bool CanSave => IsIdentified && !IsSaving;
 
     public bool SaveFailed => Session.SaveFailed;
 

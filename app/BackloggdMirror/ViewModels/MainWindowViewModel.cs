@@ -575,6 +575,9 @@ public partial class MainWindowViewModel : ViewModelBase
     /// </summary>
     private readonly SemaphoreSlim _detectionGate = new(1, 1);
 
+    // One RegisterGame at a time: two on the same game and day would read the same total and one would overwrite the other.
+    private readonly SemaphoreSlim _registrationGate = new(1, 1);
+
     public MainWindowViewModel(IGameDetectionService gameDetectionService, IBackloggdAuthService authService, IBackloggdBrowserService browserService, SettingsService settingsService, ICredentialStorageService credentialStorageService, IAppLogger logger, GameDataService? gameDataService = null, AutostartService? autostartService = null, BlacklistService? blacklistService = null, GamepadService? gamepadService = null, PendingSessionService? pendingSessionService = null)
     {
         _authService = authService;
@@ -1571,18 +1574,152 @@ public partial class MainWindowViewModel : ViewModelBase
         });
     }
 
-    // TODO: register on the day it was played; Backloggd's calendar navigation still has to be worked out.
-    [RelayCommand]
-    private void SavePendingSession(PendingSessionViewModel item)
+    /// <summary>True while any pending row is being saved or waits its turn.</summary>
+    [ObservableProperty]
+    private bool _isSavingPending;
+
+    /// <summary>Only for "Save all", which shows the spinner until the whole batch is done.</summary>
+    [ObservableProperty]
+    private bool _isSavingAllPending;
+
+    private int _pendingSavesInFlight;
+
+    private void SetPendingSaveInFlight(bool started)
     {
-        _logger.Info($"[MainWindowViewModel] User action: save pending session '{item?.Title}'. Not implemented yet.");
+        _pendingSavesInFlight += started ? 1 : -1;
+        IsSavingPending = _pendingSavesInFlight > 0;
     }
 
-    // TODO: same as SavePendingSession, for every identified row.
-    [RelayCommand]
-    private void SaveAllPendingSessions()
+    // Concurrent so another row can be queued meanwhile; _registrationGate runs them one by one.
+    [RelayCommand(AllowConcurrentExecutions = true)]
+    private async Task SavePendingSession(PendingSessionViewModel item)
     {
-        _logger.Info($"[MainWindowViewModel] User action: save all {PendingSessions.Count} pending sessions. Not implemented yet.");
+        if (item == null || !item.CanSave) return;
+
+        _logger.Info($"[MainWindowViewModel] User action: save pending session '{item.Title}' ({PendingSessionViewModel.FormatDuration(item.Session.Duration)}, played {item.Session.StartedAt:yyyy-MM-dd}).");
+
+        item.IsSaving = true;
+        SetPendingSaveInFlight(true);
+        try
+        {
+            var error = await RegisterPendingAsync(item);
+            if (error == null)
+            {
+                ReloadJournal();
+                ShowToast(LocalizationService.Instance["Toast_SessionSaved"], ToastType.Success);
+            }
+            else
+            {
+                ShowToast(FriendlySaveError(error), ToastType.Error);
+            }
+        }
+        finally
+        {
+            item.IsSaving = false;
+            SetPendingSaveInFlight(false);
+        }
+    }
+
+    /// <summary>
+    /// One at a time and oldest first; a failure does not stop the rest, and unidentified rows stay.
+    /// Every row in the batch is locked from the start, so none can be discarded or changed while it waits.
+    /// </summary>
+    [RelayCommand]
+    private async Task SaveAllPendingSessions()
+    {
+        if (IsSavingPending) return;
+
+        var items = PendingSessions.Where(p => p.CanSave).OrderBy(p => p.Session.StartedAt).ToList();
+        _logger.Info($"[MainWindowViewModel] User action: save all pending sessions ({items.Count} identified of {PendingSessions.Count}).");
+        if (items.Count == 0) return;
+
+        foreach (var item in items) item.IsSaving = true;
+        IsSavingAllPending = true;
+        SetPendingSaveInFlight(true);
+
+        int attempted = 0, saved = 0;
+        Exception? lastError = null;
+        try
+        {
+            foreach (var item in items)
+            {
+                // The list is reloaded on an account change.
+                if (!PendingSessions.Contains(item)) continue;
+
+                attempted++;
+                var error = await RegisterPendingAsync(item);
+                if (error == null) saved++;
+                else lastError = error;
+
+                item.IsSaving = false;
+            }
+        }
+        finally
+        {
+            foreach (var item in items) item.IsSaving = false;
+            IsSavingAllPending = false;
+            SetPendingSaveInFlight(false);
+        }
+
+        if (saved > 0) ReloadJournal();
+        if (attempted == 0) return;
+
+        var loc = LocalizationService.Instance;
+        if (saved == attempted)
+        {
+            ShowToast(saved == 1 ? loc["Toast_SessionSaved"] : string.Format(loc["Pending_SavedAll"], saved), ToastType.Success);
+        }
+        else if (attempted == 1)
+        {
+            ShowToast(FriendlySaveError(lastError!), ToastType.Error);
+        }
+        else
+        {
+            ShowToast(string.Format(loc["Pending_SavedSome"], saved, attempted), ToastType.Error);
+        }
+    }
+
+    /// <summary>Registers the row on the day it was played. Returns the error, or null once it is saved and gone from the list.</summary>
+    private async Task<Exception?> RegisterPendingAsync(PendingSessionViewModel item)
+    {
+        var session = item.Session;
+
+        await _registrationGate.WaitAsync();
+        try
+        {
+            // TotalHours, not Hours, which wraps at 24.
+            await _browserService.RegisterGame(session.GameName, _authService.Cookies, (int)session.Duration.TotalHours, session.Duration.Minutes, session.GameUrl, session.StartedAt.Date);
+
+            _logger.Info($"[MainWindowViewModel] Pending session registered on Backloggd: '{session.GameName}', {PendingSessionViewModel.FormatDuration(session.Duration)} on {session.StartedAt:yyyy-MM-dd}.");
+            _pendingSessionService.Remove(session);
+            PendingSessions.Remove(item);
+            UpdatePendingSummary();
+            return null;
+        }
+        catch (Exception ex)
+        {
+            _logger.Error($"[MainWindowViewModel] Registering pending session '{session.GameName}' ({PendingSessionViewModel.FormatDuration(session.Duration)}, {session.StartedAt:yyyy-MM-dd}) on Backloggd failed. It stays in Pending.", ex);
+            session.SaveFailed = true;
+            _pendingSessionService.Update(session);
+            item.Refresh();
+            return ex;
+        }
+        finally
+        {
+            _registrationGate.Release();
+        }
+    }
+
+    private void ReloadJournal()
+    {
+        if (_authService.Username != null)
+        {
+            _ = LoadData(_authService.Username);
+        }
+        else
+        {
+            _logger.Warning("[MainWindowViewModel] A session was registered but the username is null, so the recently played list could not be refreshed.");
+        }
     }
 
     #endregion
@@ -1762,6 +1899,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
         if (!string.IsNullOrEmpty(_pendingGameName))
         {
+            await _registrationGate.WaitAsync();
             try
             {
                 await _browserService.RegisterGame(_pendingGameName, _authService.Cookies, _pendingSessionDuration.Hours, _pendingSessionDuration.Minutes, _pendingGameUrl);
@@ -1769,16 +1907,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 Console.WriteLine($"[SaveSession] Game registered successfully. Reloading data for user: '{_authService.Username}'");
                 _logger?.Info($"[SaveSession] Session registered on Backloggd: '{_pendingGameName}', {_pendingSessionDuration.Hours}h {_pendingSessionDuration.Minutes}m.");
 
-                // Refresh the list after saving
-                if (_authService.Username != null)
-                {
-                    LoadData(_authService.Username);
-                }
-                else
-                {
-                    Console.WriteLine($"[SaveSession] WARNING: Username is null, cannot reload data.");
-                    _logger?.Warning("[SaveSession] The session was registered but the username is null, so the recently played list could not be refreshed.");
-                }
+                ReloadJournal();
 
                 CloseSessionConfirmation();
 
@@ -1789,32 +1918,35 @@ public partial class MainWindowViewModel : ViewModelBase
                 Console.WriteLine($"Error registering game '{_pendingGameName}': {ex.Message}");
                 _logger?.Error($"[SaveSession] Registering '{_pendingGameName}' ({_pendingSessionDuration.Hours}h {_pendingSessionDuration.Minutes}m) on Backloggd failed. The play time was not recorded.", ex);
 
-                string friendlyMessage = LocalizationService.Instance["Toast_ErrorSaving"];
-
-                if (ex.Message.Contains("ERR_INTERNET_DISCONNECTED") ||
-                    ex.Message.Contains("ERR_NAME_NOT_RESOLVED") ||
-                    ex.Message.Contains("ERR_CONNECTION_REFUSED"))
-                {
-                    friendlyMessage = LocalizationService.Instance["Toast_ConnectionError"];
-                }
-                else if (ex.Message.Contains("Timeout"))
-                {
-                    friendlyMessage = LocalizationService.Instance["Toast_TimeoutError"];
-                }
-                else
-                {
-                    friendlyMessage = string.Format(LocalizationService.Instance["Toast_UnexpectedError"], ex.Message);
-                }
-
                 _pendingSaveFailed = true;
                 int token = _pendingSessionToken;
-                ShowToast(friendlyMessage, ToastType.Error, UndoToastDuration, LocalizationService.Instance["Toast_AddToPending"], () => PostponeAfterSaveFailure(token));
+                ShowToast(FriendlySaveError(ex), ToastType.Error, UndoToastDuration, LocalizationService.Instance["Toast_AddToPending"], () => PostponeAfterSaveFailure(token));
             }
             finally
             {
+                _registrationGate.Release();
                 IsSavingSession = false;
             }
         }
+    }
+
+    private static string FriendlySaveError(Exception ex)
+    {
+        var loc = LocalizationService.Instance;
+
+        if (ex.Message.Contains("ERR_INTERNET_DISCONNECTED") ||
+            ex.Message.Contains("ERR_NAME_NOT_RESOLVED") ||
+            ex.Message.Contains("ERR_CONNECTION_REFUSED"))
+        {
+            return loc["Toast_ConnectionError"];
+        }
+
+        if (ex.Message.Contains("Timeout"))
+        {
+            return loc["Toast_TimeoutError"];
+        }
+
+        return string.Format(loc["Toast_UnexpectedError"], ex.Message);
     }
 
     [RelayCommand(CanExecute = nameof(CanRegisterGame))]

@@ -1063,6 +1063,14 @@
                         <Style Selector="Button.pending-primary:pressed /template/ ContentPresenter">
                             <Setter Property="Background" Value="{DynamicResource BrandPrimaryLightBrush}"/>
                         </Style>
+                        <!-- Each row's Save: the same fill, sized like the subtle buttons beside it. -->
+                        <Style Selector="Button.pending-primary.compact">
+                            <Setter Property="Padding" Value="15,5"/>
+                        </Style>
+                        <!-- Hidden, not collapsed, so the button keeps its width while the spinner shows. -->
+                        <Style Selector="TextBlock.pending-label.saving">
+                            <Setter Property="Opacity" Value="0"/>
+                        </Style>
                     </Panel.Styles>
 
                     <Grid RowDefinitions="Auto, *" Margin="20,0,5,0">
@@ -1074,8 +1082,23 @@
                             </StackPanel>
                             <Button Grid.Column="1" Classes="pending-primary" VerticalAlignment="Center"
                                     IsVisible="{Binding HasPendingSessions}"
-                                    Content="{Binding [Pending_SaveAll], Source={x:Static services:LocalizationService.Instance}}"
-                                    Command="{Binding SaveAllPendingSessionsCommand}"/>
+                                    IsEnabled="{Binding !IsSavingPending}"
+                                    Command="{Binding SaveAllPendingSessionsCommand}">
+                                <Panel>
+                                    <TextBlock Classes="pending-label" Classes.saving="{Binding IsSavingAllPending}"
+                                               Text="{Binding [Pending_SaveAll], Source={x:Static services:LocalizationService.Instance}}"/>
+                                    <Path Classes="spinner" IsVisible="{Binding IsSavingAllPending}"
+                                          Data="M 25,0 A 25,25 0 1 1 0,25" StrokeThickness="2" Stretch="Uniform"
+                                          Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Path.Stroke>
+                                            <ConicGradientBrush>
+                                                <GradientStop Color="rgba(255, 255, 255, 0)" Offset="0"/>
+                                                <GradientStop Color="rgba(255, 255, 255, 1)" Offset="1"/>
+                                            </ConicGradientBrush>
+                                        </Path.Stroke>
+                                    </Path>
+                                </Panel>
+                            </Button>
                         </Grid>
 
                         <ScrollViewer Grid.Row="1" Padding="0,0,20,20">
@@ -1100,7 +1123,7 @@
                                         <DataTemplate x:DataType="vm:PendingSessionViewModel">
                                             <Border Classes="pending-card" Padding="15,12">
                                                 <Grid ColumnDefinitions="Auto, *, Auto">
-                                                    <Border Grid.Column="0" Width="45" Height="60" CornerRadius="4" ClipToBounds="True"
+                                                    <Border Grid.Column="0" Width="60" Height="80" CornerRadius="4" ClipToBounds="True"
                                                             Background="{DynamicResource SurfaceDarkBrush}" BorderBrush="#30394c" BorderThickness="1"
                                                             VerticalAlignment="Center" Margin="0,0,15,0">
                                                         <Panel>
@@ -1132,6 +1155,7 @@
 
                                                     <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
                                                         <Button Classes="subtle" VerticalAlignment="Center"
+                                                                IsEnabled="{Binding !IsSaving}"
                                                                 Command="{Binding #Root.((vm:MainWindowViewModel)DataContext).ChangePendingSessionGameCommand}"
                                                                 CommandParameter="{Binding}">
                                                             <Panel>
@@ -1140,15 +1164,30 @@
                                                             </Panel>
                                                         </Button>
                                                         <Button Classes="subtle" VerticalAlignment="Center"
+                                                                IsEnabled="{Binding !IsSaving}"
                                                                 Content="{Binding [Pending_Discard], Source={x:Static services:LocalizationService.Instance}}"
                                                                 Command="{Binding #Root.((vm:MainWindowViewModel)DataContext).DiscardPendingSessionCommand}"
                                                                 CommandParameter="{Binding}"/>
-                                                        <Button Classes="subtle" VerticalAlignment="Center"
-                                                                IsEnabled="{Binding IsIdentified}"
+                                                        <Button Classes="pending-primary compact" VerticalAlignment="Center"
+                                                                IsEnabled="{Binding CanSave}"
                                                                 ToolTip.Tip="{Binding SaveTooltip}" ToolTip.ShowOnDisabled="True"
-                                                                Content="{Binding [Pending_Save], Source={x:Static services:LocalizationService.Instance}}"
                                                                 Command="{Binding #Root.((vm:MainWindowViewModel)DataContext).SavePendingSessionCommand}"
-                                                                CommandParameter="{Binding}"/>
+                                                                CommandParameter="{Binding}">
+                                                            <Panel>
+                                                                <TextBlock Classes="pending-label" Classes.saving="{Binding IsSaving}"
+                                                                           Text="{Binding [Pending_Save], Source={x:Static services:LocalizationService.Instance}}"/>
+                                                                <Path Classes="spinner" IsVisible="{Binding IsSaving}"
+                                                                      Data="M 25,0 A 25,25 0 1 1 0,25" StrokeThickness="2" Stretch="Uniform"
+                                                                      Width="14" Height="14" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                                    <Path.Stroke>
+                                                                        <ConicGradientBrush>
+                                                                            <GradientStop Color="rgba(255, 255, 255, 0)" Offset="0"/>
+                                                                            <GradientStop Color="rgba(255, 255, 255, 1)" Offset="1"/>
+                                                                        </ConicGradientBrush>
+                                                                    </Path.Stroke>
+                                                                </Path>
+                                                            </Panel>
+                                                        </Button>
                                                     </StackPanel>
                                                 </Grid>
                                             </Border>

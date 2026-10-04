@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System;
 using System.Text.RegularExpressions;
+using System.Globalization;
 
 using Avalonia.Controls;
 using Avalonia.Media.Imaging;
@@ -359,17 +360,24 @@ namespace BackloggdMirror.Services
         /// Writes a play session into the user's Backloggd journal, by driving the site's own log
         /// editor rather than any API.
         ///
-        /// The time is ACCUMULATED onto whatever today's playthrough already holds, never
+        /// The time is ACCUMULATED onto whatever that day's playthrough already holds, never
         /// overwritten — see the sum below. That is what makes several sessions of the same game in
         /// one day add up instead of each replacing the last.
+        ///
+        /// The day is today unless <paramref name="playDate"/> is an earlier one (a pending session).
+        /// The calendar is in the browser's local time zone, the same as the system's, so a local
+        /// date matches the cell's data-date.
         ///
         /// Errors propagate to the caller, which turns them into a toast; the catch here only
         /// enriches the log.
         /// </summary>
-        public async Task RegisterGame(string gameName, System.Net.CookieContainer cookieContainer, int gamePlayDateHours, int gamePlayDateMinutes, string? gameUrl = null)
+        public async Task RegisterGame(string gameName, System.Net.CookieContainer cookieContainer, int gamePlayDateHours, int gamePlayDateMinutes, string? gameUrl = null, DateTime? playDate = null)
         {
+            DateTime today = DateTime.Today;
+            DateTime? pastDate = playDate?.Date < today ? playDate.Value.Date : null;
+
             Console.WriteLine($"[RegisterGame] Starting registration for {gameName} (URL: {gameUrl ?? "search"})...");
-            _logger?.Info($"[RegisterGame] Starting registration for {gameName} (URL: {gameUrl ?? "search"})...");
+            _logger?.Info($"[RegisterGame] Starting registration for {gameName} (URL: {gameUrl ?? "search"}, target date: {(pastDate?.ToString("yyyy-MM-dd") ?? "today")})...");
 
             using var playwright = await Playwright.CreateAsync();
             await using var browser = await playwright.Chromium.LaunchAsync(BrowserLaunch.HiddenOptions());
@@ -429,26 +437,42 @@ namespace BackloggdMirror.Services
                 await page.ClickAsync("#journal-nav");
                 Console.WriteLine($"[RegisterGame] Clicked journal-nav");
 
+                // The calendar opens on the month of the last play date, not the current one.
                 await page.ClickAsync("#jump-to-today");
 
-                await page.WaitForSelectorAsync(".fc-day-today", new PageWaitForSelectorOptions { State = WaitForSelectorState.Visible });
+                string daySelector = ".fc-day-today";
 
-                await page.Locator(".fc-day-today").ClickAsync(new LocatorClickOptions { Force = true });
-                Console.WriteLine($"[RegisterGame] Clicked today in calendar");
+                if (pastDate is DateTime date)
+                {
+                    // Days of the neighbouring months that fill the grid carry .fc-day-other.
+                    daySelector = $"td.fc-daygrid-day[data-date='{date.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)}']:not(.fc-day-other)";
 
-                // The first click sometimes only selects the day without opening the playthrough
-                // modal, so give it a moment and click again if it did not appear.
+                    int monthsBack = (today.Year - date.Year) * 12 + today.Month - date.Month;
+                    for (int i = 0; i < monthsBack; i++)
+                    {
+                        await page.ClickAsync("#month-prev");
+                    }
+                    Console.WriteLine($"[RegisterGame] Went back {monthsBack} months to {date:yyyy-MM-dd}");
+                }
+
+                await page.WaitForSelectorAsync(daySelector, new PageWaitForSelectorOptions { State = WaitForSelectorState.Visible });
+
+                await page.Locator(daySelector).ClickAsync(new LocatorClickOptions { Force = true });
+                Console.WriteLine($"[RegisterGame] Clicked the day in calendar");
+
+                // On a day with nothing logged the first click only creates the "Played" entry, and
+                // Backloggd ignores a second one within 200 ms; the next click opens the modal.
                 await page.WaitForTimeoutAsync(500);
 
                 if (!await page.IsVisibleAsync("#playthrough-modal-content"))
                 {
-                    await page.Locator(".fc-day-today").ClickAsync(new LocatorClickOptions { Force = true });
-                    Console.WriteLine($"[RegisterGame] Clicked span today Played");
+                    await page.Locator(daySelector).ClickAsync(new LocatorClickOptions { Force = true });
+                    Console.WriteLine($"[RegisterGame] Clicked the day's Played entry");
                 }
 
                 await page.WaitForSelectorAsync("#playthrough-modal-content", new PageWaitForSelectorOptions { State = WaitForSelectorState.Visible });
 
-                // Read what today's playthrough already holds. These fields are empty on a first
+                // Read what the day's playthrough already holds. These fields are empty on a first
                 // session and carry the running total on any later one.
                 string currentPlayDateHours = await page.InputValueAsync("#play_date_hours");
                 string currentPlayDateMinutes = await page.InputValueAsync("#play_date_minutes");
