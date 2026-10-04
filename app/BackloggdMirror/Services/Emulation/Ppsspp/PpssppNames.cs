@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Linq;
 
 namespace BackloggdMirror.Services.Emulation.Ppsspp;
 
@@ -15,12 +14,10 @@ internal static class PpssppNames
             imagePath = null;
 
         // Japanese discs keep their title in Japanese, which neither IGDB nor the search API know; dumps are named in romaji.
-        var names = title != null && !IsLatinScript(title)
+        var names = title != null && !RomNameCleaner.IsLatinScript(title)
             ? RomNameCleaner.Clean(string.Empty, null, imagePath != null ? Path.GetFileNameWithoutExtension(imagePath) : null, title)
             : RomNameCleaner.Clean(imagePath ?? string.Empty, null, title);
 
         return names.Names.Count > 0 ? names : RomNameCleaner.Clean(fallback, null);
     }
-
-    internal static bool IsLatinScript(string text) => text.All(c => !char.IsLetter(c) || c <= 'ɏ');
 }

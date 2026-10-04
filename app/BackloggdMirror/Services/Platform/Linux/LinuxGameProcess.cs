@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using BackloggdMirror.Services.Platform.Linux.Emulation;
 
 namespace BackloggdMirror.Services.Platform.Linux;
 
@@ -80,7 +81,7 @@ internal static class LinuxGameProcess
         "vlc", "mpv", "mplayer", "ffplay", "totem", "celluloid", "smplayer", "haruna", "kodi", "kodi.bin", "obs",
         "discord", "slack", "teams", "zoom", "telegram-desktop", "signal-desktop", "soffice", "soffice.bin", "blender",
         "code", "godot", "unityhub", "unity", "unrealeditor", "ue4editor", "hammer", "hammerplusplus",
-        "retroarch", "dolphin-emu", "cemu", "ppssppsdl", "ppssppqt",
+        "retroarch", "dolphin-emu", "cemu", "ppssppsdl", "ppssppqt", "duckstation-qt", "duckstation-nogui",
         "wine", "wine64", "wine-preloader", "wine64-preloader", "explorer", "services", "winedevice", "plugplay",
         "svchost", "rpcss", "conhost", "start", "xalia", "rundll32", "winecfg", "control", "tabtip"
     };
@@ -96,6 +97,10 @@ internal static class LinuxGameProcess
         string name = executablePath == null ? string.Empty : Path.GetFileNameWithoutExtension(LinuxProcFs.FileNameOf(executablePath));
         if (ExcludedNames.Contains(name))
             return new Verdict(false, null, "excluded by name");
+
+        // An emulator packed as an AppImage is named after the AppImage file, which the list cannot know.
+        if (LinuxEmulatorProcesses.IsEmulator(pid))
+            return new Verdict(false, null, "emulator");
 
         var mapped = LinuxProcFs.ReadMappedFileNames(pid);
         if (mapped == null)
