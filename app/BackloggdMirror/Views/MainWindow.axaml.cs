@@ -622,6 +622,23 @@ public partial class MainWindow : Window
         }
     }
 
+    // An icon alone says little, so with a controller the focus shows its tooltip.
+    private void OnPostponeButtonGotFocus(object? sender, Avalonia.Input.GotFocusEventArgs e)
+    {
+        if (_gamepadNavigator?.IsControllerMode == true && sender is Control button)
+        {
+            ToolTip.SetIsOpen(button, true);
+        }
+    }
+
+    private void OnPostponeButtonLostFocus(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        if (sender is Control button)
+        {
+            ToolTip.SetIsOpen(button, false);
+        }
+    }
+
     private void OnCoverPointerEntered(object? sender, Avalonia.Input.PointerEventArgs e)
     {
         if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)

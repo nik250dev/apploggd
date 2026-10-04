@@ -41,6 +41,7 @@ public partial class App : Application
             var authService = new BackloggdAuthService(logger);
             var browserService = new BackloggdBrowserService(logger);
             var blacklistService = new BlacklistService(logger);
+            var pendingSessionService = new PendingSessionService(logger);
             var gameDetectionService = new GameDetectionService(logger, blacklistService);
             var settingsService = new SettingsService(logger);
             var credentialStorageService = new CredentialStorageService(logger);
@@ -101,7 +102,7 @@ public partial class App : Application
 
             loginVm.LoginSuccessful += () =>
             {
-                var mainWindowVm = new MainWindowViewModel(gameDetectionService, authService, browserService, settingsService, credentialStorageService, logger, autostartService: autostartService, blacklistService: blacklistService, gamepadService: gamepadService);
+                var mainWindowVm = new MainWindowViewModel(gameDetectionService, authService, browserService, settingsService, credentialStorageService, logger, autostartService: autostartService, blacklistService: blacklistService, gamepadService: gamepadService, pendingSessionService: pendingSessionService);
 
                 mainWindowVm.IsLoggedIn = true;
 

@@ -299,7 +299,7 @@ internal sealed class GamepadNavigator : IDisposable
             {
                 invoker.Invoke();
             }
-            // Pending decision: after Save or Discard, maybe hide to the tray so the frontend regains the foreground.
+            // Pending decision: after Save, Discard or Later, maybe hide to the tray so the frontend regains the foreground.
         }, TimeSpan.FromMilliseconds(90));
     }
 
