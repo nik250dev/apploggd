@@ -397279,10 +397279,18 @@
   },
   {
     "id": "1442726783165399162",
-    "name": "Nightmares from the Deep: The Cursed Heart",
+    "name": "Nightmares from the Deep: The Cursed Heart - Collector's Edition",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.g5e.nightmaresdeep.android"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.g5e.nightmares2.android"
+      },
       {
         "distributor": "steam",
         "id": "259740"
@@ -397290,14 +397298,6 @@
       {
         "distributor": "google_play",
         "id": "com.g5e.nightmares3.android"
-      },
-      {
-        "distributor": "google_play",
-        "id": "com.g5e.nightmares2.android"
-      },
-      {
-        "distributor": "google_play",
-        "id": "com.g5e.nightmaresdeep.android"
       }
     ],
     "id_igdb": "16779",
@@ -517927,7 +517927,7 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9PH4M2J4680F"
+        "id": "9NJ2N85T2ZGS"
       },
       {
         "distributor": "steam",
@@ -517936,6 +517936,14 @@
       {
         "distributor": "xbox",
         "id": "9P3HXLRJS31T"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NNFX161JGRJ"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PH4M2J4680F"
       },
       {
         "distributor": "epic",
@@ -517948,10 +517956,6 @@
       {
         "distributor": "xbox",
         "id": "9P3ZNFV5PHF1"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NJ2N85T2ZGS"
       }
     ],
     "id_igdb": "408819",
