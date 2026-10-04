@@ -3,6 +3,7 @@ using System.Linq;
 using BackloggdMirror.Models;
 using BackloggdMirror.Services.Emulation.Cemu;
 using BackloggdMirror.Services.Emulation.Dolphin;
+using BackloggdMirror.Services.Emulation.Ppsspp;
 using BackloggdMirror.Services.Emulation.RetroArch;
 using BackloggdMirror.Services.Platform.Linux.Emulation;
 
@@ -30,7 +31,8 @@ internal sealed class EmulatorDetector
             {
                 new RetroArchDetector(resolver, logger, blacklist),
                 new DolphinDetector(resolver, logger, blacklist),
-                new CemuDetector(resolver, logger, blacklist)
+                new CemuDetector(resolver, logger, blacklist),
+                new PpssppDetector(resolver, logger, blacklist)
             };
     }
 

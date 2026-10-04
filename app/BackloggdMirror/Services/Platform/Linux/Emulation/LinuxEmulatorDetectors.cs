@@ -22,12 +22,13 @@ internal static class LinuxEmulatorDetectors
         {
             new LinuxRetroArchDetector(processes, resolver, logger, blacklist),
             new LinuxDolphinDetector(processes, resolver, logger, blacklist),
-            new LinuxCemuDetector(processes, resolver, logger, blacklist)
+            new LinuxCemuDetector(processes, resolver, logger, blacklist),
+            new LinuxPpssppDetector(processes, resolver, logger, blacklist)
         };
     }
 }
 
-/// <summary>The user's emulator processes, found by their kernel name. One /proc scan serves the three detectors of a pass.</summary>
+/// <summary>The user's emulator processes, found by their kernel name. One /proc scan serves every detector of a pass.</summary>
 internal sealed class LinuxEmulatorProcesses
 {
     // Passes are seconds apart, so a scan is only ever shared within one.
@@ -36,7 +37,7 @@ internal sealed class LinuxEmulatorProcesses
     // The kernel cuts names to 15 characters: "dolphin-emu-nogui" is "dolphin-emu-nog".
     private static readonly HashSet<string> EmulatorNames = new(StringComparer.OrdinalIgnoreCase)
     {
-        "retroarch", "dolphin-emu", "dolphin-emu-nog", "cemu"
+        "retroarch", "dolphin-emu", "dolphin-emu-nog", "cemu", "PPSSPPSDL", "PPSSPPQt"
     };
 
     private readonly object _lock = new();

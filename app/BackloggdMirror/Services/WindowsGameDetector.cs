@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using BackloggdMirror.Services.Emulation.Ppsspp;
 
 namespace BackloggdMirror.Services;
 
@@ -300,7 +301,8 @@ internal class WindowsGameDetector : IGameDetectionStrategy
                 return true;
         }
 
-        return false;
+        // Also tier 1.5; every build of PPSSPP shares the prefix (PPSSPPWindows64, PPSSPPWindowsARM64...).
+        return processName.StartsWith(PpssppDetector.ProcessNamePrefix, StringComparison.OrdinalIgnoreCase);
     }
 
     private bool IsBlacklisted(uint processId) =>
