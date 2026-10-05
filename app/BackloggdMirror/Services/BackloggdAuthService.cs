@@ -14,7 +14,7 @@ namespace BackloggdMirror.Services
     /// <see cref="LoginAsync"/> is the original HttpClient + CSRF implementation and is kept for
     /// reference only: the anti-bot layer now answers plain HTTP clients with a block page, so the
     /// real login runs through <see cref="IBackloggdBrowserService"/>. Session restore, in contrast,
-    /// still lives here — see <see cref="ResolveUsernameFromSession"/>, which does drive a browser.
+    /// still lives here — see <see cref="CheckSessionAsync"/>, which does drive a browser.
     /// </summary>
     public class BackloggdAuthService : IBackloggdAuthService
     {
@@ -174,13 +174,15 @@ namespace BackloggdMirror.Services
         /// <summary>
         /// Validates the stored cookies by loading Backloggd with them and reading back who we are.
         /// This is the only way to know a session is still alive: expiry happens server-side without
-        /// any local trace. Returns the username, or null if the session is no longer valid.
+        /// any local trace. Only a real Backloggd page without the welcome banner counts as expired;
+        /// anything that keeps that page from arriving is <see cref="SessionCheckStatus.Unreachable"/>,
+        /// so a network outage or an anti-bot screen never costs the user a saved session.
         /// </summary>
-        public async Task<string?> ResolveUsernameFromSession()
+        public async Task<SessionCheckResult> CheckSessionAsync()
         {
             try
             {
-                if (Cookies.Count == 0) return null;
+                if (Cookies.Count == 0) return new SessionCheckResult(SessionCheckStatus.Expired);
 
                 using var playwright = await Playwright.CreateAsync();
                 await using var browser = await playwright.Chromium.LaunchAsync(BrowserLaunch.HiddenOptions());
@@ -193,7 +195,6 @@ namespace BackloggdMirror.Services
                 await context.AddCookiesAsync(CookieConversion.ToPlaywright(Cookies));
 
                 var page = await context.NewPageAsync();
-                Console.WriteLine("[BackloggdAuthService] Navigating to backloggd.com to resolve username from session...");
                 _logger?.Info("[BackloggdAuthService] Validating the stored session by loading backloggd.com with its cookies.");
                 await page.GotoAsync("https://backloggd.com/");
 
@@ -203,11 +204,13 @@ namespace BackloggdMirror.Services
                 {
                     await page.WaitForSelectorAsync("#nav-bar-search", new PageWaitForSelectorOptions { Timeout = 15000 });
                 }
-                catch
+                catch (Exception)
                 {
-                    Console.WriteLine("[BackloggdAuthService] Timeout waiting for '#nav-bar-search'. We might still be blocked by Bunny Shield or the page failed to load.");
-                    _logger?.Warning("[BackloggdAuthService] backloggd.com never rendered its navbar within 15 s. The page is most likely the anti-bot challenge, so the stored session is reported as invalid and the user is sent back to the login.");
-                    return null;
+                    var block = await AntiBotDetection.DetectAsync(page);
+                    _logger?.Warning(block != null
+                        ? $"[BackloggdAuthService] Could not validate the stored session: {block}. The session is kept."
+                        : "[BackloggdAuthService] backloggd.com never rendered its navbar within 15 s. The session could not be validated and is kept.");
+                    return new SessionCheckResult(SessionCheckStatus.Unreachable);
                 }
 
                 // The welcome banner is only rendered for a logged-in visitor, so finding it doubles
@@ -222,7 +225,7 @@ namespace BackloggdMirror.Services
                         if (match.Success)
                         {
                             Username = match.Groups[1].Value;
-                            Console.WriteLine($"[BackloggdAuthService] Successfully resolved username from session: {Username}");
+                            _logger?.Info($"[BackloggdAuthService] Stored session is valid for '{Username}'.");
 
                             // Adopt the cookies the browser ends up with: the visit itself rotates
                             // and extends them, so keeping the stale set would shorten the session.
@@ -234,22 +237,21 @@ namespace BackloggdMirror.Services
                             }
                             Cookies = updatedCookies;
 
-                            return Username;
+                            return new SessionCheckResult(SessionCheckStatus.Valid, Username);
                         }
                     }
                 }
 
-                Console.WriteLine("[BackloggdAuthService] Welcome banner not found. Session might be expired or invalid.");
                 _logger?.Warning("[BackloggdAuthService] The page loaded but showed no welcome banner, so nobody is logged in: the stored session has expired server-side.");
-                return null;
+                return new SessionCheckResult(SessionCheckStatus.Expired);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[BackloggdAuthService] Failed to resolve username from session: {ex.Message}");
-                _logger?.Error("[BackloggdAuthService] Validating the stored session threw. It is treated as invalid, so the user has to log in again.", ex);
-                return null;
+                _logger?.Error("[BackloggdAuthService] Validating the stored session threw (network error or browser failure). The session is kept.", ex);
+                return new SessionCheckResult(SessionCheckStatus.Unreachable);
             }
         }
+
         public void Logout()
         {
             Cookies = new System.Net.CookieContainer();

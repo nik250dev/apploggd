@@ -11,6 +11,7 @@
 - The whole app can be used with a controller, and its top face button minimizes the window (Settings > General > Controller navigation)
 - Sessions can be left in the new Pending section to review later, from the clock button of the confirmation or the save error notice
 - New setting to send every session to Pending without asking (Settings > General)
+- Offline mode: with a remembered session the app keeps working without a connection and reconnects on its own
 
 ### Changed
 
@@ -22,6 +23,7 @@
 - Updating from a read-only folder now warns to move the app instead of failing
 - Games that share an executable name with other games are now detected correctly
 - The session confirmation no longer stays hidden behind Steam Big Picture after closing a game
+- Starting without a connection no longer logs out a remembered session
 
 ## 1.1.0 — 2026-09-10
 

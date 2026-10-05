@@ -55,6 +55,10 @@
         <SolidColorBrush x:Key="IconLightBrush" Color="#cbd4dc"/>
         <SolidColorBrush x:Key="IconMediumBrush" Color="#888888"/>
         <SolidColorBrush x:Key="IconDarkBrush" Color="#666666"/>
+
+        <!-- === Status === -->
+        <SolidColorBrush x:Key="OfflineBrush" Color="#F0B429"/>
+        <SolidColorBrush x:Key="OfflineBackgroundBrush" Color="#2EF0B429"/>
         
         <!-- === Overlays === -->
         <SolidColorBrush x:Key="OverlayDarkBrush" Color="#CC000000"/>

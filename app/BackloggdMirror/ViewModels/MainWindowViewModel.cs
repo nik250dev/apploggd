@@ -351,29 +351,37 @@ public partial class MainWindowViewModel : ViewModelBase
     [NotifyPropertyChangedFor(nameof(AreButtonsEnabled))]
     [NotifyPropertyChangedFor(nameof(IsSaveEnabled))]
     [NotifyPropertyChangedFor(nameof(IsPostponeEnabled))]
+    [NotifyPropertyChangedFor(nameof(IsGameSelectorEnabled))]
     private bool _isSavingSession;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(AreButtonsEnabled))]
     [NotifyPropertyChangedFor(nameof(IsSaveEnabled))]
     [NotifyPropertyChangedFor(nameof(SaveButtonTooltip))]
+    [NotifyPropertyChangedFor(nameof(IsSaveTooltipVisible))]
     private bool _isGameIdentified = true;
 
     public bool AreButtonsEnabled => !IsSavingSession;
 
-    public bool IsSaveEnabled => !IsSavingSession && IsGameIdentified;
+    // The picker searches Backloggd, so it is useless offline.
+    public bool IsGameSelectorEnabled => !IsSavingSession && !IsOffline;
+
+    public bool IsSaveEnabled => !IsSavingSession && IsGameIdentified && !IsOffline;
 
     // Not while the title resolves: the pending entry would keep a half-identified game.
     public bool IsPostponeEnabled => !IsSavingSession && !IsSessionTitleLoading;
 
-    public string? SaveButtonTooltip => IsGameIdentified
-        ? null
-        : LocalizationService.Instance["Session_UnidentifiedGame"];
+    public string? SaveButtonTooltip => IsOffline
+        ? LocalizationService.Instance["Session_OfflineSaveTooltip"]
+        : IsGameIdentified ? null : LocalizationService.Instance["Session_UnidentifiedGame"];
+
+    public bool IsSaveTooltipVisible => IsOffline || !IsGameIdentified;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsLastPlayedGamesListVisible))]
     [NotifyPropertyChangedFor(nameof(IsLastPlayedGamesEmptyVisible))]
     [NotifyPropertyChangedFor(nameof(IsLastPlayedGamesErrorVisible))]
+    [NotifyPropertyChangedFor(nameof(IsLastPlayedGamesOfflineVisible))]
     private bool _isLastPlayedGamesLoading;
 
     [ObservableProperty]
@@ -395,7 +403,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [NotifyPropertyChangedFor(nameof(IsRecycleOverlayVisible))]
     private bool _isSaveButtonHovered = false;
 
-    public bool IsRecycleOverlayVisible => IsInfoIconHovered || IsCoverHovered || (IsSaveButtonHovered && !IsGameIdentified);
+    public bool IsRecycleOverlayVisible => IsInfoIconHovered || (!IsOffline && (IsCoverHovered || (IsSaveButtonHovered && !IsGameIdentified)));
 
     [ObservableProperty]
     private Avalonia.Media.Imaging.Bitmap? _gameBackgroundImage;
@@ -423,6 +431,8 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void OpenGameSelector()
     {
+        if (IsOffline) return;
+
         _selectorPendingTarget = null;
         ShowGameSelector(SessionGameTitle);
     }
@@ -430,7 +440,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void ChangePendingSessionGame(PendingSessionViewModel item)
     {
-        if (item == null) return;
+        if (item == null || IsOffline) return;
 
         _selectorPendingTarget = item;
         ShowGameSelector(item.Title);
@@ -555,11 +565,27 @@ public partial class MainWindowViewModel : ViewModelBase
     [NotifyPropertyChangedFor(nameof(IsLastPlayedGamesErrorVisible))]
     private bool _hasLastPlayedGamesError;
 
-    public bool IsLastPlayedGamesListVisible => !IsLastPlayedGamesLoading && HasLastPlayedGames && !HasLastPlayedGamesError;
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsLastPlayedGamesListVisible))]
+    [NotifyPropertyChangedFor(nameof(IsLastPlayedGamesEmptyVisible))]
+    [NotifyPropertyChangedFor(nameof(IsLastPlayedGamesErrorVisible))]
+    [NotifyPropertyChangedFor(nameof(IsLastPlayedGamesOfflineVisible))]
+    [NotifyPropertyChangedFor(nameof(IsSaveEnabled))]
+    [NotifyPropertyChangedFor(nameof(SaveButtonTooltip))]
+    [NotifyPropertyChangedFor(nameof(IsSaveTooltipVisible))]
+    [NotifyPropertyChangedFor(nameof(IsSaveAllPendingEnabled))]
+    [NotifyPropertyChangedFor(nameof(SaveAllPendingTooltip))]
+    [NotifyPropertyChangedFor(nameof(IsGameSelectorEnabled))]
+    [NotifyPropertyChangedFor(nameof(IsRecycleOverlayVisible))]
+    private bool _isOffline;
 
-    public bool IsLastPlayedGamesEmptyVisible => !IsLastPlayedGamesLoading && !HasLastPlayedGames && !HasLastPlayedGamesError;
+    public bool IsLastPlayedGamesListVisible => !IsLastPlayedGamesLoading && !IsOffline && HasLastPlayedGames && !HasLastPlayedGamesError;
 
-    public bool IsLastPlayedGamesErrorVisible => !IsLastPlayedGamesLoading && HasLastPlayedGamesError;
+    public bool IsLastPlayedGamesEmptyVisible => !IsLastPlayedGamesLoading && !IsOffline && !HasLastPlayedGames && !HasLastPlayedGamesError;
+
+    public bool IsLastPlayedGamesErrorVisible => !IsLastPlayedGamesLoading && !IsOffline && HasLastPlayedGamesError;
+
+    public bool IsLastPlayedGamesOfflineVisible => !IsLastPlayedGamesLoading && IsOffline;
 
     public ObservableCollection<BackloggdMirror.Models.JournalEntry> LastPlayedGames { get; } = new();
 
@@ -610,6 +636,8 @@ public partial class MainWindowViewModel : ViewModelBase
             Interval = TimeSpan.FromSeconds(1)
         };
         _displayTimer.Tick += OnDisplayTick;
+
+        StartConnectionMonitor();
 
         // Initialize SelectedLanguageOption based on loaded settings
         _selectedLanguageOption = System.Linq.Enumerable.FirstOrDefault(LanguageOptions, x => x.Code == _settingsService.Language) ?? LanguageOptions[0];
@@ -1442,7 +1470,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
         foreach (var session in _pendingSessionService.ForUser(_pendingSessionsUser).OrderByDescending(s => s.EndedAt))
         {
-            var item = new PendingSessionViewModel(session);
+            var item = new PendingSessionViewModel(session) { IsOffline = IsOffline };
             PendingSessions.Add(item);
             LoadPendingCover(item);
         }
@@ -1453,7 +1481,7 @@ public partial class MainWindowViewModel : ViewModelBase
     private void AddPendingSession(PendingSession session, Avalonia.Media.Imaging.Bitmap? cover = null)
     {
         _pendingSessionService.Add(session);
-        InsertPendingItem(new PendingSessionViewModel(session) { CoverBitmap = cover }, loadCover: cover == null);
+        InsertPendingItem(new PendingSessionViewModel(session) { CoverBitmap = cover, IsOffline = IsOffline }, loadCover: cover == null);
     }
 
     private void InsertPendingItem(PendingSessionViewModel item, bool loadCover)
@@ -1576,6 +1604,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     /// <summary>True while any pending row is being saved or waits its turn.</summary>
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsSaveAllPendingEnabled))]
     private bool _isSavingPending;
 
     /// <summary>Only for "Save all", which shows the spinner until the whole batch is done.</summary>
@@ -1594,7 +1623,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand(AllowConcurrentExecutions = true)]
     private async Task SavePendingSession(PendingSessionViewModel item)
     {
-        if (item == null || !item.CanSave) return;
+        if (item == null || !item.CanSave || IsOffline) return;
 
         _logger.Info($"[MainWindowViewModel] User action: save pending session '{item.Title}' ({PendingSessionViewModel.FormatDuration(item.Session.Duration)}, played {item.Session.StartedAt:yyyy-MM-dd}).");
 
@@ -1624,10 +1653,14 @@ public partial class MainWindowViewModel : ViewModelBase
     /// One at a time and oldest first; a failure does not stop the rest, and unidentified rows stay.
     /// Every row in the batch is locked from the start, so none can be discarded or changed while it waits.
     /// </summary>
+    public bool IsSaveAllPendingEnabled => !IsSavingPending && !IsOffline;
+
+    public string? SaveAllPendingTooltip => IsOffline ? LocalizationService.Instance["Pending_OfflineSaveTooltip"] : null;
+
     [RelayCommand]
     private async Task SaveAllPendingSessions()
     {
-        if (IsSavingPending) return;
+        if (IsSavingPending || IsOffline) return;
 
         var items = PendingSessions.Where(p => p.CanSave).OrderBy(p => p.Session.StartedAt).ToList();
         _logger.Info($"[MainWindowViewModel] User action: save all pending sessions ({items.Count} identified of {PendingSessions.Count}).");
@@ -1652,6 +1685,9 @@ public partial class MainWindowViewModel : ViewModelBase
                 else lastError = error;
 
                 item.IsSaving = false;
+
+                // The rest would only fail the same way, each one launching a browser first.
+                if (IsOffline) break;
             }
         }
         finally
@@ -1702,6 +1738,7 @@ public partial class MainWindowViewModel : ViewModelBase
             session.SaveFailed = true;
             _pendingSessionService.Update(session);
             item.Refresh();
+            await EnterOfflineModeIfUnreachableAsync("a pending session could not be saved");
             return ex;
         }
         finally
@@ -1733,7 +1770,10 @@ public partial class MainWindowViewModel : ViewModelBase
     /// rather than reused, so no cookie or username from the previous account can leak into the next.
     /// </summary>
     [RelayCommand]
-    private void Logout()
+    private void Logout() => PerformLogout(null);
+
+    /// <param name="loginMessage">Shown on the login form, as the reason it came back.</param>
+    private void PerformLogout(string? loginMessage)
     {
         IsLoggingOut = true;
         StopTimers();
@@ -1753,7 +1793,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 var newBrowserService = new BackloggdBrowserService(newLogger);
                 var newCredentialStorageService = new CredentialStorageService(newLogger);
                 var newInstallService = new PlaywrightInstallService(newLogger);
-                var loginVm = new LoginViewModel(newAuthService, newBrowserService, newCredentialStorageService, newLogger, newInstallService);
+                var loginVm = new LoginViewModel(newAuthService, newBrowserService, newCredentialStorageService, newLogger, newInstallService, loginMessage);
 
                 // Attach handler for successful login to navigate back to MainWindow
                 loginVm.LoginSuccessful += () =>
@@ -1894,6 +1934,8 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private async Task SaveSession()
     {
+        if (IsOffline) return;
+
         IsSavingSession = true;
         IsSessionWarningForcedVisible = false;
 
@@ -1919,6 +1961,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 _logger?.Error($"[SaveSession] Registering '{_pendingGameName}' ({_pendingSessionDuration.Hours}h {_pendingSessionDuration.Minutes}m) on Backloggd failed. The play time was not recorded.", ex);
 
                 _pendingSaveFailed = true;
+                await EnterOfflineModeIfUnreachableAsync("the session could not be saved");
                 int token = _pendingSessionToken;
                 ShowToast(FriendlySaveError(ex), ToastType.Error, UndoToastDuration, LocalizationService.Instance["Toast_AddToPending"], () => PostponeAfterSaveFailure(token));
             }
@@ -1930,9 +1973,14 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
-    private static string FriendlySaveError(Exception ex)
+    private string FriendlySaveError(Exception ex)
     {
         var loc = LocalizationService.Instance;
+
+        if (IsOffline)
+        {
+            return loc["Toast_ConnectionError"];
+        }
 
         if (ex.Message.Contains("ERR_INTERNET_DISCONNECTED") ||
             ex.Message.Contains("ERR_NAME_NOT_RESOLVED") ||
@@ -1976,6 +2024,7 @@ public partial class MainWindowViewModel : ViewModelBase
             {
                 HasLastPlayedGamesError = true;
                 HasLastPlayedGames = false;
+                await EnterOfflineModeIfUnreachableAsync("the recently played list could not be loaded");
             }
             else
             {
@@ -2004,6 +2053,7 @@ public partial class MainWindowViewModel : ViewModelBase
             _logger?.Error($"[MainWindowViewModel] Could not load the journal of '{username}'. The recently played list shows its error state.", ex);
             HasLastPlayedGamesError = true;
             HasLastPlayedGames = false;
+            await EnterOfflineModeIfUnreachableAsync("the recently played list could not be loaded");
         }
         finally
         {
@@ -2017,6 +2067,12 @@ public partial class MainWindowViewModel : ViewModelBase
     private void ReloadRecentlyPlayedGames()
     {
         _logger?.Info("[MainWindowViewModel] User action: reloaded recently played games.");
+        if (IsOffline)
+        {
+            _ = CheckConnectionAsync(manual: true, force: true);
+            return;
+        }
+
         if (!string.IsNullOrEmpty(_authService.Username))
         {
             _ = LoadData(_authService.Username);
@@ -2093,6 +2149,13 @@ public partial class MainWindowViewModel : ViewModelBase
     /// </summary>
     internal void OnPollingTick(object? sender, EventArgs e)
     {
+        if (_logoutWhenIdle && !IsSessionInProgress)
+        {
+            _logoutWhenIdle = false;
+            LogoutForExpiredSession();
+            return;
+        }
+
         _ = RunDetectionPassAsync();
     }
 
@@ -2514,6 +2577,230 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         _pollingTimer.Stop();
         _displayTimer.Stop();
+        _offlineTimer?.Stop();
+        StopConnectionMonitor();
         _stopwatch.Stop();
     }
+
+    #region Offline mode
+
+    // Pinging is cheap; validating the session launches a whole browser, so that waits for a ping
+    // to answer and then runs no more often than the second interval.
+    private static readonly TimeSpan OfflinePingInterval = TimeSpan.FromSeconds(30);
+    private static readonly TimeSpan OfflinePageCheckInterval = TimeSpan.FromMinutes(2);
+
+    private DispatcherTimer? _offlineTimer;
+    private DateTime _nextOfflinePageCheck;
+    private bool _isCheckingConnection;
+
+    /// <summary>
+    /// After a failed call to Backloggd: only a failed ping turns it into offline mode, so an
+    /// anti-bot screen or a changed selector keeps showing its own error.
+    /// </summary>
+    private async Task EnterOfflineModeIfUnreachableAsync(string reason)
+    {
+        if (IsOffline || IsLoggingOut) return;
+        if (await BackloggdConnectivity.IsReachableAsync()) return;
+
+        EnterOfflineMode($"{reason} and backloggd.com does not answer a ping");
+    }
+
+    public void EnterOfflineMode(string reason)
+    {
+        if (IsOffline || IsLoggingOut) return;
+
+        _logger.Warning($"[MainWindowViewModel] Entering offline mode: {reason}.");
+        IsOffline = true;
+        LastPlayedGames.Clear();
+        HasLastPlayedGames = false;
+        HasLastPlayedGamesError = false;
+        foreach (var item in PendingSessions) item.IsOffline = true;
+
+        _onlinePingTimer?.Stop();
+        _failedPings = 0;
+
+        _nextOfflinePageCheck = DateTime.MinValue;
+        if (_offlineTimer == null)
+        {
+            _offlineTimer = new DispatcherTimer { Interval = OfflinePingInterval };
+            _offlineTimer.Tick += (_, _) => _ = CheckConnectionAsync(manual: false);
+        }
+        _offlineTimer.Start();
+    }
+
+    private void ExitOfflineMode()
+    {
+        _offlineTimer?.Stop();
+        _failedPings = 0;
+        if (_onlinePingTimer != null)
+        {
+            _onlinePingTimer.Interval = OnlinePingInterval;
+            _onlinePingTimer.Start();
+        }
+        IsOffline = false;
+        foreach (var item in PendingSessions) item.IsOffline = false;
+        ReloadJournal();
+    }
+
+    /// <summary>
+    /// A ping first, then a real page load: only Backloggd's logged-in page ends offline mode, so a
+    /// captive portal or an anti-bot screen that answers the ping does not count as being back.
+    /// </summary>
+    /// <param name="manual">The reload button: shows the spinner.</param>
+    /// <param name="force">Skips the wait between page checks (manual retries and network changes).</param>
+    private async Task CheckConnectionAsync(bool manual, bool force = false)
+    {
+        if (_isCheckingConnection || !IsOffline) return;
+        _isCheckingConnection = true;
+        if (manual) IsLastPlayedGamesLoading = true;
+
+        try
+        {
+            if (!await BackloggdConnectivity.IsReachableAsync()) return;
+            if (!manual && !force && DateTime.UtcNow < _nextOfflinePageCheck) return;
+            _nextOfflinePageCheck = DateTime.UtcNow + OfflinePageCheckInterval;
+
+            _logger.Info("[MainWindowViewModel] backloggd.com answers a ping again. Validating the session with a page load.");
+            var result = await Task.Run(() => _authService.CheckSessionAsync());
+            if (!IsOffline || IsLoggingOut) return;
+
+            switch (result.Status)
+            {
+                case SessionCheckStatus.Valid:
+                    _logger.Info("[MainWindowViewModel] Backloggd is reachable and the session is valid. Leaving offline mode.");
+                    ExitOfflineMode();
+                    break;
+
+                case SessionCheckStatus.Expired:
+                    _offlineTimer?.Stop();
+                    LogoutForExpiredSession();
+                    break;
+
+                default:
+                    _logger.Info($"[MainWindowViewModel] The ping answered but Backloggd did not serve its page. Staying offline; next page check after {_nextOfflinePageCheck.ToLocalTime():HH:mm:ss}.");
+                    break;
+            }
+        }
+        finally
+        {
+            _isCheckingConnection = false;
+            // Once back online the journal reload owns the spinner.
+            if (manual && IsOffline) IsLastPlayedGamesLoading = false;
+        }
+    }
+
+    // Online, a ping per minute catches a connection that drops while nothing talks to Backloggd. One
+    // lost ping is not enough: a second one follows sooner, and only two failures in a row go offline.
+    private static readonly TimeSpan OnlinePingInterval = TimeSpan.FromSeconds(60);
+    private static readonly TimeSpan OnlinePingRetryInterval = TimeSpan.FromSeconds(10);
+
+    // Network changes arrive in bursts while an adapter comes up (address, DNS, routes); this waits for them to settle.
+    private static readonly TimeSpan NetworkChangeSettleDelay = TimeSpan.FromSeconds(3);
+
+    private DispatcherTimer? _onlinePingTimer;
+    private DispatcherTimer? _networkChangeTimer;
+    private int _failedPings;
+    private bool _isPinging;
+
+    private void StartConnectionMonitor()
+    {
+        _onlinePingTimer = new DispatcherTimer { Interval = OnlinePingInterval };
+        _onlinePingTimer.Tick += (_, _) => _ = PingWhileOnlineAsync();
+        _onlinePingTimer.Start();
+
+        _networkChangeTimer = new DispatcherTimer { Interval = NetworkChangeSettleDelay };
+        _networkChangeTimer.Tick += (_, _) => OnNetworkSettled();
+
+        System.Net.NetworkInformation.NetworkChange.NetworkAddressChanged += OnNetworkAddressChanged;
+        System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged += OnNetworkAvailabilityChanged;
+    }
+
+    // The events are static: a view model left subscribed after a logout would keep reacting.
+    private void StopConnectionMonitor()
+    {
+        System.Net.NetworkInformation.NetworkChange.NetworkAddressChanged -= OnNetworkAddressChanged;
+        System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged -= OnNetworkAvailabilityChanged;
+        _onlinePingTimer?.Stop();
+        _networkChangeTimer?.Stop();
+    }
+
+    // Both raised on a pool thread. They only bring the next check forward: the ping always decides.
+    private void OnNetworkAddressChanged(object? sender, EventArgs e) => Dispatcher.UIThread.Post(RestartNetworkChangeTimer);
+
+    private void OnNetworkAvailabilityChanged(object? sender, System.Net.NetworkInformation.NetworkAvailabilityEventArgs e) => Dispatcher.UIThread.Post(RestartNetworkChangeTimer);
+
+    private void RestartNetworkChangeTimer()
+    {
+        if (IsLoggingOut || _networkChangeTimer == null) return;
+        _networkChangeTimer.Stop();
+        _networkChangeTimer.Start();
+    }
+
+    private void OnNetworkSettled()
+    {
+        _networkChangeTimer?.Stop();
+        if (IsLoggingOut) return;
+
+        _logger.Info($"[MainWindowViewModel] The network changed; checking the connection ({(IsOffline ? "offline" : "online")}).");
+        if (IsOffline) _ = CheckConnectionAsync(manual: false, force: true);
+        else _ = PingWhileOnlineAsync();
+    }
+
+    private async Task PingWhileOnlineAsync()
+    {
+        if (IsOffline || IsLoggingOut || _isPinging) return;
+        _isPinging = true;
+
+        try
+        {
+            bool reachable = await BackloggdConnectivity.IsReachableAsync();
+            if (IsOffline || IsLoggingOut || _onlinePingTimer == null) return;
+
+            if (reachable)
+            {
+                _failedPings = 0;
+                _onlinePingTimer.Interval = OnlinePingInterval;
+                return;
+            }
+
+            _failedPings++;
+            if (_failedPings >= 2)
+            {
+                EnterOfflineMode("backloggd.com did not answer two pings in a row");
+            }
+            else
+            {
+                _logger.Info($"[MainWindowViewModel] backloggd.com did not answer a ping. Trying again in {OnlinePingRetryInterval.TotalSeconds:0} s before going offline.");
+                _onlinePingTimer.Interval = OnlinePingRetryInterval;
+            }
+        }
+        finally
+        {
+            _isPinging = false;
+        }
+    }
+
+    // Set when the session expires mid-game: the logout waits so the session can still go to Pending.
+    private bool _logoutWhenIdle;
+
+    private bool IsSessionInProgress => IsGameRunning || IsSessionConfirmationVisible || IsSavingPending;
+
+    /// <summary>
+    /// Back to the login with the expired notice. Offline mode stays on until then, which keeps Save
+    /// disabled: with dead cookies it could only fail.
+    /// </summary>
+    private void LogoutForExpiredSession()
+    {
+        if (IsSessionInProgress)
+        {
+            _logger.Warning("[MainWindowViewModel] Backloggd is reachable but the saved session has expired. Logging out once the current session is resolved.");
+            _logoutWhenIdle = true;
+            return;
+        }
+
+        _logger.Warning("[MainWindowViewModel] Backloggd is reachable but the saved session has expired. Logging out.");
+        PerformLogout(LocalizationService.Instance["Login_Status_SessionExpired"]);
+    }
+
+    #endregion
 }

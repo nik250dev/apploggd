@@ -106,10 +106,17 @@ namespace BackloggdMirror.ViewModels
         // Canonical username as Backloggd spells it, which need not match what was typed.
         public string ResolvedUsername { get; private set; } = string.Empty;
 
+        // The saved session could not be validated because Backloggd was unreachable.
+        public bool StartedOffline { get; private set; }
 
 
-        public LoginViewModel(IBackloggdAuthService authService, IBackloggdBrowserService browserService, ICredentialStorageService credentialStorageService, IAppLogger logger, IBrowserProvisioner installService)
+
+        // Shown once the form is reached with no saved session, e.g. after an expired session logged the user out.
+        private readonly string? _initialStatusMessage;
+
+        public LoginViewModel(IBackloggdAuthService authService, IBackloggdBrowserService browserService, ICredentialStorageService credentialStorageService, IAppLogger logger, IBrowserProvisioner installService, string? initialStatusMessage = null)
         {
+            _initialStatusMessage = initialStatusMessage;
             _authService = authService;
             _browserService = browserService;
             _credentialStorageService = credentialStorageService;
@@ -321,75 +328,99 @@ namespace BackloggdMirror.ViewModels
         /// Skips the form when a "Remember me" session is still valid. Cookies alone cannot be
         /// trusted — they expire server-side with nothing written to disk — so validity is decided
         /// by actually loading Backloggd and seeing whether it answers with a logged-in page.
-        /// Falls through to the form on failure; no saved session at all is not an error.
+        /// When Backloggd cannot be reached the session is neither trusted nor thrown away: with a
+        /// stored username the app starts offline, and without one the form shows a network error.
         /// </summary>
         private void CheckSavedSession()
         {
-            var cookies = _credentialStorageService.LoadCookies();
-            if (cookies != null && cookies.Count > 0)
-            {
-                foreach (var c in cookies)
-                {
-                    _authService.Cookies.Add(c);
-                }
-
-                IsBusy = true;
-                IsCheckingSession = true;
-                StatusMessage = LocalizationService.Instance["Login_Status_Restoring"];
-
-                Task.Run(async () =>
-                {
-                    try
-                    {
-                        var username = await _authService.ResolveUsernameFromSession();
-                        if (!string.IsNullOrEmpty(username))
-                        {
-                            // Success!
-                            _logger.Info($"[LoginViewModel] Session restored successfully for user: {username}. User is already logged in.");
-                            Avalonia.Threading.Dispatcher.UIThread.Invoke(() =>
-                            {
-                                // Assigned inside the UI thread callback: LoginSuccessful subscribers
-                                // read it the moment the event fires, so it must be set BEFORE the
-                                // line below.
-                                ResolvedUsername = username;
-                                IsBusy = false;
-                                IsCheckingSession = false;
-                                LoginSuccessful?.Invoke();
-                            });
-                        }
-                        else
-                        {
-                            // Cookies invalid or expired
-                            _logger.Info("[LoginViewModel] Saved session was invalid or expired.");
-                            _credentialStorageService.ClearCookies();
-                            Avalonia.Threading.Dispatcher.UIThread.Invoke(() =>
-                            {
-                                StatusMessage = LocalizationService.Instance["Login_Status_SessionExpired"];
-                                IsBusy = false;
-                                IsCheckingSession = false;
-                                UserInputRequired?.Invoke();
-                            });
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        _logger.Error("[LoginViewModel] Failed to restore session.", ex);
-                        System.Diagnostics.Debug.WriteLine($"Failed to restore session: {ex.Message}");
-                        Avalonia.Threading.Dispatcher.UIThread.Invoke(() =>
-                       {
-                           StatusMessage = "";
-                           IsBusy = false;
-                           IsCheckingSession = false;
-                           UserInputRequired?.Invoke();
-                       });
-                    }
-                });
-            }
-            else
+            var stored = _credentialStorageService.LoadSession();
+            if (stored.Cookies.Count == 0)
             {
                 // Nothing saved to restore, so the form is the whole flow from here.
+                if (_initialStatusMessage != null) StatusMessage = _initialStatusMessage;
                 UserInputRequired?.Invoke();
+                return;
             }
+
+            // CookieContainer drops expired cookies on Add, so an empty container is a dead session
+            // that no connection could revive.
+            foreach (var c in stored.Cookies)
+            {
+                _authService.Cookies.Add(c);
+            }
+
+            IsBusy = true;
+            IsCheckingSession = true;
+            StatusMessage = LocalizationService.Instance["Login_Status_Restoring"];
+
+            Task.Run(async () =>
+            {
+                SessionCheckResult result;
+                if (_authService.Cookies.Count == 0)
+                {
+                    result = new SessionCheckResult(SessionCheckStatus.Expired);
+                }
+                else if (!await BackloggdConnectivity.IsReachableAsync())
+                {
+                    _logger.Warning("[LoginViewModel] backloggd.com does not answer a ping. The saved session cannot be validated.");
+                    result = new SessionCheckResult(SessionCheckStatus.Unreachable);
+                }
+                else
+                {
+                    result = await _authService.CheckSessionAsync();
+                }
+
+                Avalonia.Threading.Dispatcher.UIThread.Post(() => FinishSessionCheck(result, stored.Username));
+            });
+        }
+
+        private void FinishSessionCheck(SessionCheckResult result, string? storedUsername)
+        {
+            IsBusy = false;
+            IsCheckingSession = false;
+
+            switch (result.Status)
+            {
+                case SessionCheckStatus.Valid:
+                    _logger.Info($"[LoginViewModel] Session restored for user: {result.Username}.");
+                    // Persists the refreshed cookies, and the username for files saved before it was stored.
+                    _credentialStorageService.SaveSession(BackloggdCookies(_authService.Cookies), result.Username);
+                    // Set before the event: LoginSuccessful subscribers read it the moment it fires.
+                    ResolvedUsername = result.Username!;
+                    LoginSuccessful?.Invoke();
+                    break;
+
+                case SessionCheckStatus.Expired:
+                    _logger.Info("[LoginViewModel] Saved session was invalid or expired.");
+                    _credentialStorageService.ClearCookies();
+                    StatusMessage = LocalizationService.Instance["Login_Status_SessionExpired"];
+                    UserInputRequired?.Invoke();
+                    break;
+
+                default:
+                    if (!string.IsNullOrEmpty(storedUsername))
+                    {
+                        _logger.Info($"[LoginViewModel] Backloggd is unreachable. Starting offline as '{storedUsername}' with the saved session.");
+                        _authService.SetUsername(storedUsername);
+                        ResolvedUsername = storedUsername;
+                        StartedOffline = true;
+                        LoginSuccessful?.Invoke();
+                    }
+                    else
+                    {
+                        _logger.Warning("[LoginViewModel] Backloggd is unreachable and the saved session has no username (older file), so the app cannot start offline. The session is kept for the next start.");
+                        StatusMessage = LocalizationService.Instance["Login_Status_NetworkError"];
+                        UserInputRequired?.Invoke();
+                    }
+                    break;
+            }
+        }
+
+        private static System.Collections.Generic.List<System.Net.Cookie> BackloggdCookies(System.Net.CookieContainer container)
+        {
+            var list = new System.Collections.Generic.List<System.Net.Cookie>();
+            foreach (System.Net.Cookie c in container.GetCookies(new Uri("https://backloggd.com"))) list.Add(c);
+            return list;
         }
 
         [RelayCommand]
@@ -437,7 +468,7 @@ namespace BackloggdMirror.ViewModels
                     {
                         var cookieList = new System.Collections.Generic.List<System.Net.Cookie>();
                         foreach (System.Net.Cookie c in cookieCollection) cookieList.Add(c);
-                        _credentialStorageService.SaveCookies(cookieList);
+                        _credentialStorageService.SaveSession(cookieList, resolvedUsername);
                     }
                     else
                     {

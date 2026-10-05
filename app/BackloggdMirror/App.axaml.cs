@@ -106,7 +106,11 @@ public partial class App : Application
 
                 mainWindowVm.IsLoggedIn = true;
 
-                if (!string.IsNullOrEmpty(loginVm.ResolvedUsername))
+                if (loginVm.StartedOffline)
+                {
+                    mainWindowVm.EnterOfflineMode("Backloggd was unreachable while restoring the saved session");
+                }
+                else if (!string.IsNullOrEmpty(loginVm.ResolvedUsername))
                 {
                     // Fire and forget: errors are handled inside the ViewModel, and the window must
                     // not wait on a network round-trip to appear.

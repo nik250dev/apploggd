@@ -26,7 +26,14 @@ public partial class PendingSessionViewModel : ViewModelBase
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanSave))]
+    [NotifyPropertyChangedFor(nameof(CanChangeGame))]
     private bool _isSaving;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanSave))]
+    [NotifyPropertyChangedFor(nameof(SaveTooltip))]
+    [NotifyPropertyChangedFor(nameof(CanChangeGame))]
+    private bool _isOffline;
 
     public bool IsNoCoverVisible => CoverBitmap == null && !IsCoverLoading;
 
@@ -34,11 +41,16 @@ public partial class PendingSessionViewModel : ViewModelBase
 
     public bool IsIdentified => Session.IsIdentified;
 
-    public bool CanSave => IsIdentified && !IsSaving;
+    public bool CanSave => IsIdentified && !IsSaving && !IsOffline;
+
+    // The game picker searches Backloggd.
+    public bool CanChangeGame => !IsSaving && !IsOffline;
 
     public bool SaveFailed => Session.SaveFailed;
 
-    public string? SaveTooltip => IsIdentified ? null : LocalizationService.Instance["Pending_UnidentifiedTooltip"];
+    public string? SaveTooltip => !IsIdentified ? LocalizationService.Instance["Pending_UnidentifiedTooltip"]
+        : IsOffline ? LocalizationService.Instance["Pending_OfflineSaveTooltip"]
+        : null;
 
     public string DurationText => FormatDuration(Session.Duration);
 
