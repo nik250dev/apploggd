@@ -340341,13 +340341,17 @@
   },
   {
     "id": "1440138055569903738",
-    "name": "Narrow One",
+    "name": "Narrow.One",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
       {
         "distributor": "steam",
         "id": "3788170"
+      },
+      {
+        "distributor": "google_play",
+        "id": "co.pelicanparty.narrowone"
       }
     ],
     "id_igdb": "364991",
@@ -524998,6 +525002,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.ludo.gameplay"
+      },
       {
         "distributor": "steam",
         "id": "5053820"
