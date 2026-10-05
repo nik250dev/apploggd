@@ -246,6 +246,12 @@ internal sealed class GamepadNavigator : IDisposable
 
         if (_vm.IsSessionConfirmationVisible)
         {
+            // Offline nothing can be saved, and the game selector needs Backloggd too.
+            if (_vm.IsOffline)
+            {
+                return candidates.FirstOrDefault(b => b == _window.SessionPostponeButton) ?? candidates[0];
+            }
+
             // An unidentified game cannot be saved; picking it is the way forward.
             return candidates.FirstOrDefault(b => b == _window.SessionSaveButton)
                 ?? candidates.FirstOrDefault(b => b == _window.SessionCoverButton)

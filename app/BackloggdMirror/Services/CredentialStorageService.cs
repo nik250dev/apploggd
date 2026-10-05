@@ -18,6 +18,7 @@ namespace BackloggdMirror.Services
     {
         private readonly IDataProtectionProvider _dataProtectionProvider;
         private readonly string _storagePath;
+        private readonly string _usernamePath;
         private readonly IAppLogger _logger;
         private readonly LinuxKeyringKeyProtection? _linuxKeyProtection;
 
@@ -53,9 +54,10 @@ namespace BackloggdMirror.Services
             }
 
             _storagePath = customStoragePath ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Apploggd", "user.dat");
+            _usernamePath = Path.ChangeExtension(_storagePath, ".name");
         }
 
-        public void SaveCookies(IEnumerable<Cookie> cookies)
+        public void SaveSession(IEnumerable<Cookie> cookies, string? username)
         {
             try
             {
@@ -83,6 +85,10 @@ namespace BackloggdMirror.Services
                 {
                     WriteProtected(json);
                 }
+
+                // Kept beside user.dat, not inside it, so older versions can still read the cookies.
+                if (string.IsNullOrEmpty(username)) DeleteUsername();
+                else File.WriteAllText(_usernamePath, username);
             }
             catch (Exception ex)
             {
@@ -106,13 +112,14 @@ namespace BackloggdMirror.Services
             return protectedData;
         }
 
-        public List<Cookie> LoadCookies()
+        public StoredSession LoadSession()
         {
             var cookies = new List<Cookie>();
+            string? username = null;
 
             if (!File.Exists(_storagePath))
             {
-                return cookies;
+                return new StoredSession(cookies, username);
             }
 
             try
@@ -146,19 +153,30 @@ namespace BackloggdMirror.Services
                 if (_linuxKeyProtection != null && LinuxKeyringKeyProtection.DecryptionBlockedByKeyring)
                 {
                     _logger.Warning("[CredentialStorageService] The keyring was unavailable, so the saved session is kept for the next start.");
-                    return cookies;
+                    return new StoredSession(cookies, username);
                 }
                 // Unprotect fails for good (lost or rotated keys, corrupted file), so the file is
                 // dead weight: dropping it degrades to a normal login instead of failing every start.
                 try { File.Delete(_storagePath); } catch { }
+                DeleteUsername();
+                return new StoredSession(cookies, null);
+            }
+
+            try
+            {
+                if (File.Exists(_usernamePath)) username = File.ReadAllText(_usernamePath).Trim();
+            }
+            catch (Exception ex)
+            {
+                _logger.Warning($"[CredentialStorageService] Could not read the saved username: {ex.Message}. The app will not be able to start offline.");
             }
 
             if (cookies.Count > 0 && _linuxKeyProtection?.CanMoveKeysToKeyring() == true)
             {
-                SaveCookies(cookies);
+                SaveSession(cookies, username);
             }
 
-            return cookies;
+            return new StoredSession(cookies, username);
         }
 
         public void ClearCookies()
@@ -167,6 +185,12 @@ namespace BackloggdMirror.Services
             {
                 File.Delete(_storagePath);
             }
+            DeleteUsername();
+        }
+
+        private void DeleteUsername()
+        {
+            try { if (File.Exists(_usernamePath)) File.Delete(_usernamePath); } catch { }
         }
 
         private class CookieDto
