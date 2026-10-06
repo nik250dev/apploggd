@@ -25,6 +25,47 @@
         <conv:ToastTypeToForegroundConverter x:Key="ToastTypeToForegroundConverter"/>
         <conv:BottomMessageTypeToIconConverter x:Key="BottomMessageTypeToIconConverter"/>
         <conv:BottomMessageTypeToBrushConverter x:Key="BottomMessageTypeToBrushConverter"/>
+        <conv:LanguageCodeToFlagConverter x:Key="LanguageCodeToFlagConverter">
+            <conv:LanguageCodeToFlagConverter.System>
+                <DrawingImage>
+                    <DrawingGroup>
+                        <GeometryDrawing Brush="{StaticResource SidebarBorderBrush}" Geometry="M0,0 H24 V24 H0 Z"/>
+                        <DrawingGroup>
+                            <DrawingGroup.Transform>
+                                <MatrixTransform Matrix="0.55,0,0,0.55,5.4,5.4"/>
+                            </DrawingGroup.Transform>
+                            <GeometryDrawing Brush="{StaticResource IconLightBrush}"
+                                             Geometry="M21,16H3V4H21M21,2H3C1.89,2 1,2.89 1,4V16A2,2 0 0,0 3,18H10V20H8V22H16V20H14V18H21A2,2 0 0,0 23,16V4C23,2.89 22.1,2 21,2Z"/>
+                        </DrawingGroup>
+                    </DrawingGroup>
+                </DrawingImage>
+            </conv:LanguageCodeToFlagConverter.System>
+            <conv:LanguageCodeToFlagConverter.Spanish>
+                <DrawingImage>
+                    <DrawingGroup>
+                        <GeometryDrawing Brush="#AA151B" Geometry="M0,0 H30 V20 H0 Z"/>
+                        <GeometryDrawing Brush="#F1BF00" Geometry="M0,5 H30 V15 H0 Z"/>
+                    </DrawingGroup>
+                </DrawingImage>
+            </conv:LanguageCodeToFlagConverter.Spanish>
+            <conv:LanguageCodeToFlagConverter.English>
+                <DrawingImage>
+                    <DrawingGroup ClipGeometry="M0,0 H60 V30 H0 Z">
+                        <GeometryDrawing Brush="#012169" Geometry="M0,0 H60 V30 H0 Z"/>
+                        <GeometryDrawing Geometry="M0,0 L60,30 M60,0 L0,30">
+                            <GeometryDrawing.Pen><Pen Brush="White" Thickness="6"/></GeometryDrawing.Pen>
+                        </GeometryDrawing>
+                        <DrawingGroup ClipGeometry="M30,15 L60,15 L60,30 Z M30,15 L30,30 L0,30 Z M30,15 L0,15 L0,0 Z M30,15 L30,0 L60,0 Z">
+                            <GeometryDrawing Geometry="M0,0 L60,30 M60,0 L0,30">
+                                <GeometryDrawing.Pen><Pen Brush="#C8102E" Thickness="4"/></GeometryDrawing.Pen>
+                            </GeometryDrawing>
+                        </DrawingGroup>
+                        <GeometryDrawing Brush="White" Geometry="M25,0 H35 V10 H60 V20 H35 V30 H25 V20 H0 V10 H25 Z"/>
+                        <GeometryDrawing Brush="#C8102E" Geometry="M27,0 H33 V12 H60 V18 H33 V30 H27 V18 H0 V12 H27 Z"/>
+                    </DrawingGroup>
+                </DrawingImage>
+            </conv:LanguageCodeToFlagConverter.English>
+        </conv:LanguageCodeToFlagConverter>
         <StreamGeometry x:Key="GamepadIconData">M7,6H17A6,6 0 0,1 23,12A6,6 0 0,1 17,18C15.22,18 13.63,17.23 12.53,16H11.47C10.37,17.23 8.78,18 7,18A6,6 0 0,1 1,12A6,6 0 0,1 7,6M6,9V11H4V13H6V15H8V13H10V11H8V9H6M15.5,12A1.5,1.5 0 0,0 14,13.5A1.5,1.5 0 0,0 15.5,15A1.5,1.5 0 0,0 17,13.5A1.5,1.5 0 0,0 15.5,12M18.5,9A1.5,1.5 0 0,0 17,10.5A1.5,1.5 0 0,0 18.5,12A1.5,1.5 0 0,0 20,10.5A1.5,1.5 0 0,0 18.5,9Z</StreamGeometry>
     </Window.Resources>
 
@@ -1005,10 +1046,20 @@
                                     <StackPanel Spacing="15">
                                         <Grid ColumnDefinitions="*, 200">
                                             <TextBlock Text="{Binding [Settings_Language], Source={x:Static services:LocalizationService.Instance}}" Classes="setting-label"/>
-                                            <ComboBox Grid.Column="1" SelectedItem="{Binding SelectedLanguageOption}" ItemsSource="{Binding LanguageOptions}" HorizontalAlignment="Stretch">
+                                            <ComboBox Grid.Column="1" SelectedItem="{Binding SelectedLanguageOption}" ItemsSource="{Binding LanguageOptions}" HorizontalAlignment="Stretch" Padding="12,0,0,0" VerticalContentAlignment="Center">
                                                 <ComboBox.ItemTemplate>
                                                     <DataTemplate>
-                                                        <TextBlock Text="{Binding DisplayName}" VerticalAlignment="Center"/>
+                                                        <!-- Even height so the 18 px circle centers on whole pixels. -->
+                                                        <StackPanel Orientation="Horizontal" Spacing="10" Height="20">
+                                                            <Grid Width="18" Height="18" VerticalAlignment="Center">
+                                                                <Border CornerRadius="9" ClipToBounds="True">
+                                                                    <Image Source="{Binding Code, Converter={StaticResource LanguageCodeToFlagConverter}}" Stretch="UniformToFill"/>
+                                                                </Border>
+                                                                <!-- Inner ring so the flag edge reads on the dark background. -->
+                                                                <Border CornerRadius="9" BorderThickness="1" BorderBrush="#33FFFFFF"/>
+                                                            </Grid>
+                                                            <TextBlock Text="{Binding DisplayName}" VerticalAlignment="Center"/>
+                                                        </StackPanel>
                                                     </DataTemplate>
                                                 </ComboBox.ItemTemplate>
                                             </ComboBox>
