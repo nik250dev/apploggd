@@ -9,12 +9,33 @@ namespace BackloggdMirror.ViewModels;
 /// <summary>One row of the pending sessions view.</summary>
 public partial class PendingSessionViewModel : ViewModelBase
 {
-    public PendingSessionViewModel(PendingSession session)
+    private readonly Action<PendingSessionViewModel>? _marksChanged;
+
+    public PendingSessionViewModel(PendingSession session, Action<PendingSessionViewModel>? marksChanged = null)
     {
         Session = session;
+        _marksChanged = marksChanged;
     }
 
     public PendingSession Session { get; }
+
+    public bool MarkedStarted
+    {
+        get => Session.MarkedStarted;
+        set
+        {
+            if (SetProperty(Session.MarkedStarted, value, Session, (s, v) => s.MarkedStarted = v)) _marksChanged?.Invoke(this);
+        }
+    }
+
+    public bool MarkedFinished
+    {
+        get => Session.MarkedFinished;
+        set
+        {
+            if (SetProperty(Session.MarkedFinished, value, Session, (s, v) => s.MarkedFinished = v)) _marksChanged?.Invoke(this);
+        }
+    }
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsNoCoverVisible))]

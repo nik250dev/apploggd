@@ -67,6 +67,8 @@
             </conv:LanguageCodeToFlagConverter.English>
         </conv:LanguageCodeToFlagConverter>
         <StreamGeometry x:Key="GamepadIconData">M7,6H17A6,6 0 0,1 23,12A6,6 0 0,1 17,18C15.22,18 13.63,17.23 12.53,16H11.47C10.37,17.23 8.78,18 7,18A6,6 0 0,1 1,12A6,6 0 0,1 7,6M6,9V11H4V13H6V15H8V13H10V11H8V9H6M15.5,12A1.5,1.5 0 0,0 14,13.5A1.5,1.5 0 0,0 15.5,15A1.5,1.5 0 0,0 17,13.5A1.5,1.5 0 0,0 15.5,12M18.5,9A1.5,1.5 0 0,0 17,10.5A1.5,1.5 0 0,0 18.5,12A1.5,1.5 0 0,0 20,10.5A1.5,1.5 0 0,0 18.5,9Z</StreamGeometry>
+        <StreamGeometry x:Key="MarkStartedIconData">M8,5.14V19.14L19,12.14L8,5.14Z</StreamGeometry>
+        <StreamGeometry x:Key="MarkFinishedIconData">M14.4,6L14,4H5V21H7V14H12.6L13,16H20V6H14.4Z</StreamGeometry>
     </Window.Resources>
 
     <Window.Styles>
@@ -226,6 +228,55 @@
             <Setter Property="Background" Value="{DynamicResource SidebarBorderBrush}"/>
             <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderHoverBrush}"/>
             <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+
+        <!-- Backloggd's "Started" / "Finished" marks: an outlined pill that fills with the brand colour when on. -->
+        <Style Selector="ToggleButton.mark-chip">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource SidebarBorderBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="8,2"/>
+            <Setter Property="MinHeight" Value="0"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="ToggleButton.mark-chip PathIcon">
+            <Setter Property="Width" Value="9"/>
+            <Setter Property="Height" Value="9"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="ToggleButton.mark-chip /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource SidebarBorderBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}"/>
+        </Style>
+        <Style Selector="ToggleButton.mark-chip:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SurfaceDarkBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="ToggleButton.mark-chip:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SidebarBorderBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="ToggleButton.mark-chip:checked /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource BrandPrimaryBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BrandPrimaryBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="ToggleButton.mark-chip:checked:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource BrandPrimaryHoverBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BrandPrimaryHoverBrush}"/>
+        </Style>
+        <Style Selector="ToggleButton.mark-chip:checked:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SurfaceBrandPressedBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BrandPrimaryBrush}"/>
+        </Style>
+        <Style Selector="ToggleButton.mark-chip:disabled /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Opacity" Value="0.5"/>
         </Style>
 
         <!-- Action button inside a toast. Translucent white instead of a themed brush: it sits on the
@@ -450,6 +501,14 @@
         </Style>
         <Style Selector="Window.gamepad Button.sidebar:not(.active):focus PathIcon">
             <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <!-- Mark chips are ToggleButtons, which the Button styles above don't reach: the edge goes outside the pill, no zoom. -->
+        <Style Selector="Window.gamepad ToggleButton.mark-chip">
+            <Setter Property="ClipToBounds" Value="False"/>
+            <Setter Property="FocusAdorner" Value="{x:Null}"/>
+        </Style>
+        <Style Selector="Window.gamepad ToggleButton.mark-chip:focus /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="BoxShadow" Value="0 0 0 2 #FFFFFF, 0 4 12 0 #8C000000"/>
         </Style>
         <!-- Switches: the edge goes around the track; only one of its two borders shows at a time. -->
         <Style Selector="Window.gamepad ToggleSwitch">
@@ -1280,6 +1339,22 @@
                                                             <Run Text=" · " Foreground="{DynamicResource TextSubtleBrush}"/>
                                                             <Run Text="{Binding DurationText}" Foreground="{DynamicResource BrandPrimaryBrush}" FontWeight="Bold"/>
                                                         </TextBlock>
+                                                        <StackPanel Orientation="Horizontal" Spacing="6" Margin="0,4,0,0">
+                                                            <ToggleButton Classes="mark-chip" IsChecked="{Binding MarkedStarted}" IsEnabled="{Binding !IsSaving}"
+                                                                          ToolTip.Placement="Top" ToolTip.VerticalOffset="-6" ToolTip.Tip="{Binding [Session_MarkStartedTooltip], Source={x:Static services:LocalizationService.Instance}}">
+                                                                <StackPanel Orientation="Horizontal" Spacing="4">
+                                                                    <PathIcon Data="{StaticResource MarkStartedIconData}"/>
+                                                                    <TextBlock Text="{Binding [Session_MarkStarted], Source={x:Static services:LocalizationService.Instance}}" VerticalAlignment="Center"/>
+                                                                </StackPanel>
+                                                            </ToggleButton>
+                                                            <ToggleButton Classes="mark-chip" IsChecked="{Binding MarkedFinished}" IsEnabled="{Binding !IsSaving}"
+                                                                          ToolTip.Placement="Top" ToolTip.VerticalOffset="-6" ToolTip.Tip="{Binding [Session_MarkFinishedTooltip], Source={x:Static services:LocalizationService.Instance}}">
+                                                                <StackPanel Orientation="Horizontal" Spacing="4">
+                                                                    <PathIcon Data="{StaticResource MarkFinishedIconData}"/>
+                                                                    <TextBlock Text="{Binding [Session_MarkFinished], Source={x:Static services:LocalizationService.Instance}}" VerticalAlignment="Center"/>
+                                                                </StackPanel>
+                                                            </ToggleButton>
+                                                        </StackPanel>
                                                     </StackPanel>
 
                                                     <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
@@ -1602,7 +1677,7 @@
             </Panel>
 
             <!-- Session Content -->
-            <Border x:Name="SessionDialog" Background="{DynamicResource AppBackgroundBrush}" CornerRadius="20" Width="400" Height="320"
+            <Border x:Name="SessionDialog" Background="{DynamicResource AppBackgroundBrush}" CornerRadius="20" Width="400" MinHeight="320" VerticalAlignment="Center"
                     BoxShadow="0 0 50 0 #EA377A" BorderBrush="{DynamicResource BrandPrimaryBrush}" BorderThickness="1"
                     IsVisible="{Binding !IsGameSelectorVisible}">
                 <Grid RowDefinitions="*, Auto">
@@ -1716,8 +1791,25 @@
                                 <TextBlock Text="{Binding SessionPlayTime}" Foreground="{DynamicResource BrandPrimaryBrush}" FontWeight="Bold" FontSize="14"/>
                             </StackPanel>
 
+                                <StackPanel Orientation="Horizontal" Spacing="6" Margin="0,8,0,0">
+                                    <ToggleButton Classes="mark-chip" IsChecked="{Binding IsSessionMarkedStarted}" IsEnabled="{Binding AreButtonsEnabled}"
+                                                  ToolTip.Placement="Top" ToolTip.VerticalOffset="-6" ToolTip.Tip="{Binding [Session_MarkStartedTooltip], Source={x:Static services:LocalizationService.Instance}}">
+                                        <StackPanel Orientation="Horizontal" Spacing="4">
+                                            <PathIcon Data="{StaticResource MarkStartedIconData}"/>
+                                            <TextBlock Text="{Binding [Session_MarkStarted], Source={x:Static services:LocalizationService.Instance}}" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </ToggleButton>
+                                    <ToggleButton Classes="mark-chip" IsChecked="{Binding IsSessionMarkedFinished}" IsEnabled="{Binding AreButtonsEnabled}"
+                                                  ToolTip.Placement="Top" ToolTip.VerticalOffset="-6" ToolTip.Tip="{Binding [Session_MarkFinishedTooltip], Source={x:Static services:LocalizationService.Instance}}">
+                                        <StackPanel Orientation="Horizontal" Spacing="4">
+                                            <PathIcon Data="{StaticResource MarkFinishedIconData}"/>
+                                            <TextBlock Text="{Binding [Session_MarkFinished], Source={x:Static services:LocalizationService.Instance}}" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </ToggleButton>
+                                </StackPanel>
+
                             <!-- A WrapPanel so the link drops to its own line when the prompt leaves no room. -->
-                            <WrapPanel Margin="0,10,0,0">
+                            <WrapPanel Margin="0,8,0,0">
                                 <TextBlock Text="{Binding [Blacklist_NotAGame], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding !IsPendingGameEmulated}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}" VerticalAlignment="Center" Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding [Blacklist_NotWanted], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding IsPendingGameEmulated}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}" VerticalAlignment="Center" Margin="0,0,5,0"/>
                                 <Button Classes="link" Command="{Binding BlacklistPendingGameCommand}" IsEnabled="{Binding AreButtonsEnabled}">
