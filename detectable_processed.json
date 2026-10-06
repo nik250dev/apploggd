@@ -361963,7 +361963,12 @@
     "name": "Microsoft Jigsaw",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9wzdncrfj9x2"
+      }
+    ],
     "id_igdb": "60378",
     "cover": "co6eca",
     "artwork": null,
@@ -461679,7 +461684,7 @@
   },
   {
     "id": "1445982778226380922",
-    "name": "MADFUT 26",
+    "name": "MADFUT 27",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -463155,7 +463160,12 @@
     "name": "Froggin' Around",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4005900"
+      }
+    ],
     "id_igdb": "265777",
     "cover": "co73q3",
     "artwork": [
@@ -464952,12 +464962,16 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "3731020"
+        "distributor": "google_play",
+        "id": "com.storytaco.pc04mclient"
       },
       {
         "distributor": "epic",
         "id": "A52A6F1223994925814E7D8D22CDC312"
+      },
+      {
+        "distributor": "steam",
+        "id": "3731020"
       }
     ],
     "id_igdb": "370971",
@@ -518064,7 +518078,12 @@
     "name": "Bomb Farm",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4892010"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
