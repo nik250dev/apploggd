@@ -16,6 +16,7 @@
 ### Changed
 
 - The tray notice is redesigned: it shows what detection is doing and appears next to the tray on any desktop layout
+- The language picker shows a flag next to each language
 
 ### Fixed
 
