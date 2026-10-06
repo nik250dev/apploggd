@@ -1470,7 +1470,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
         foreach (var session in _pendingSessionService.ForUser(_pendingSessionsUser).OrderByDescending(s => s.EndedAt))
         {
-            var item = new PendingSessionViewModel(session) { IsOffline = IsOffline };
+            var item = new PendingSessionViewModel(session, OnPendingMarksChanged) { IsOffline = IsOffline };
             PendingSessions.Add(item);
             LoadPendingCover(item);
         }
@@ -1481,7 +1481,13 @@ public partial class MainWindowViewModel : ViewModelBase
     private void AddPendingSession(PendingSession session, Avalonia.Media.Imaging.Bitmap? cover = null)
     {
         _pendingSessionService.Add(session);
-        InsertPendingItem(new PendingSessionViewModel(session) { CoverBitmap = cover, IsOffline = IsOffline }, loadCover: cover == null);
+        InsertPendingItem(new PendingSessionViewModel(session, OnPendingMarksChanged) { CoverBitmap = cover, IsOffline = IsOffline }, loadCover: cover == null);
+    }
+
+    private void OnPendingMarksChanged(PendingSessionViewModel item)
+    {
+        _logger.Info($"[MainWindowViewModel] User action: marks of pending session '{item.Title}' set to started: {item.MarkedStarted}, finished: {item.MarkedFinished}.");
+        _pendingSessionService.Update(item.Session);
     }
 
     private void InsertPendingItem(PendingSessionViewModel item, bool loadCover)
@@ -1724,7 +1730,7 @@ public partial class MainWindowViewModel : ViewModelBase
         try
         {
             // TotalHours, not Hours, which wraps at 24.
-            await _browserService.RegisterGame(session.GameName, _authService.Cookies, (int)session.Duration.TotalHours, session.Duration.Minutes, session.GameUrl, session.StartedAt.Date);
+            await _browserService.RegisterGame(session.GameName, _authService.Cookies, (int)session.Duration.TotalHours, session.Duration.Minutes, session.GameUrl, session.StartedAt.Date, session.MarkedStarted, session.MarkedFinished);
 
             _logger.Info($"[MainWindowViewModel] Pending session registered on Backloggd: '{session.GameName}', {PendingSessionViewModel.FormatDuration(session.Duration)} on {session.StartedAt:yyyy-MM-dd}.");
             _pendingSessionService.Remove(session);
@@ -1859,6 +1865,13 @@ public partial class MainWindowViewModel : ViewModelBase
         return IsLoggedIn && !string.IsNullOrEmpty(_currentGame?.Name);
     }
 
+    /// <summary>Backloggd's "Started" and "Finished" marks, chosen in the confirmation.</summary>
+    [ObservableProperty]
+    private bool _isSessionMarkedStarted;
+
+    [ObservableProperty]
+    private bool _isSessionMarkedFinished;
+
     [RelayCommand]
     private void DiscardSession()
     {
@@ -1881,6 +1894,8 @@ public partial class MainWindowViewModel : ViewModelBase
             CoverUrl = _pendingCoverUrl,
             IsIdentified = IsGameIdentified,
             SaveFailed = _pendingSaveFailed,
+            MarkedStarted = IsSessionMarkedStarted,
+            MarkedFinished = IsSessionMarkedFinished,
             StartedAt = _pendingEndedAt - _pendingSessionDuration,
             EndedAt = _pendingEndedAt,
             Duration = _pendingSessionDuration
@@ -1917,6 +1932,8 @@ public partial class MainWindowViewModel : ViewModelBase
         _pendingGame = null;
         _pendingSessionDuration = TimeSpan.Zero;
         _pendingSaveFailed = false;
+        IsSessionMarkedStarted = false;
+        IsSessionMarkedFinished = false;
         IsBackgroundImageVisible = false;
         IsGameIdentified = true;
 
@@ -1944,7 +1961,7 @@ public partial class MainWindowViewModel : ViewModelBase
             await _registrationGate.WaitAsync();
             try
             {
-                await _browserService.RegisterGame(_pendingGameName, _authService.Cookies, _pendingSessionDuration.Hours, _pendingSessionDuration.Minutes, _pendingGameUrl);
+                await _browserService.RegisterGame(_pendingGameName, _authService.Cookies, _pendingSessionDuration.Hours, _pendingSessionDuration.Minutes, _pendingGameUrl, markStarted: IsSessionMarkedStarted, markFinished: IsSessionMarkedFinished);
 
                 Console.WriteLine($"[SaveSession] Game registered successfully. Reloading data for user: '{_authService.Username}'");
                 _logger?.Info($"[SaveSession] Session registered on Backloggd: '{_pendingGameName}', {_pendingSessionDuration.Hours}h {_pendingSessionDuration.Minutes}m.");

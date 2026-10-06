@@ -13,7 +13,7 @@ namespace BackloggdMirror.Services
         /// </summary>
         Task<(string? username, System.Net.CookieContainer? cookies, string? errorMessage)> LoginAsync(string username, string password, bool rememberMe);
         Task PerformLogin();
-        Task RegisterGame(string gameName, System.Net.CookieContainer cookieContainer, int gamePlayDateHours, int gamePlayDateMinutes, string? gameUrl = null, System.DateTime? playDate = null);
+        Task RegisterGame(string gameName, System.Net.CookieContainer cookieContainer, int gamePlayDateHours, int gamePlayDateMinutes, string? gameUrl = null, System.DateTime? playDate = null, bool markStarted = false, bool markFinished = false);
         Task<List<BackloggdMirror.Models.JournalEntry>?> GetLastPlayedGames(string username, System.Net.CookieContainer cookieContainer);
         Task<(string? Title, Bitmap? Cover)> GetGameCoverAsync(string gameName);
         Task<List<BackloggdMirror.Models.GameSearchResult>> SearchGamesAsync(string query);

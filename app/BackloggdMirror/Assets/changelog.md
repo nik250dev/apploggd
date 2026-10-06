@@ -12,6 +12,7 @@
 - Sessions can be left in the new Pending section to review later, from the clock button of the confirmation or the save error notice
 - New setting to send every session to Pending without asking (Settings > General)
 - Offline mode: with a remembered session the app keeps working without a connection and reconnects on its own
+- Sessions can be marked as started or finished
 
 ### Changed
 

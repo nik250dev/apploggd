@@ -368,16 +368,19 @@ namespace BackloggdMirror.Services
         /// The calendar is in the browser's local time zone, the same as the system's, so a local
         /// date matches the cell's data-date.
         ///
+        /// The "Started" and "Finished" marks are only ever added: one the day already has, or one
+        /// not asked for, is left as Backloggd has it.
+        ///
         /// Errors propagate to the caller, which turns them into a toast; the catch here only
         /// enriches the log.
         /// </summary>
-        public async Task RegisterGame(string gameName, System.Net.CookieContainer cookieContainer, int gamePlayDateHours, int gamePlayDateMinutes, string? gameUrl = null, DateTime? playDate = null)
+        public async Task RegisterGame(string gameName, System.Net.CookieContainer cookieContainer, int gamePlayDateHours, int gamePlayDateMinutes, string? gameUrl = null, DateTime? playDate = null, bool markStarted = false, bool markFinished = false)
         {
             DateTime today = DateTime.Today;
             DateTime? pastDate = playDate?.Date < today ? playDate.Value.Date : null;
 
             Console.WriteLine($"[RegisterGame] Starting registration for {gameName} (URL: {gameUrl ?? "search"})...");
-            _logger?.Info($"[RegisterGame] Starting registration for {gameName} (URL: {gameUrl ?? "search"}, target date: {(pastDate?.ToString("yyyy-MM-dd") ?? "today")})...");
+            _logger?.Info($"[RegisterGame] Starting registration for {gameName} (URL: {gameUrl ?? "search"}, target date: {(pastDate?.ToString("yyyy-MM-dd") ?? "today")}, started: {markStarted}, finished: {markFinished})...");
 
             using var playwright = await Playwright.CreateAsync();
             await using var browser = await playwright.Chromium.LaunchAsync(BrowserLaunch.HiddenOptions());
@@ -457,20 +460,7 @@ namespace BackloggdMirror.Services
 
                 await page.WaitForSelectorAsync(daySelector, new PageWaitForSelectorOptions { State = WaitForSelectorState.Visible });
 
-                await page.Locator(daySelector).ClickAsync(new LocatorClickOptions { Force = true });
-                Console.WriteLine($"[RegisterGame] Clicked the day in calendar");
-
-                // On a day with nothing logged the first click only creates the "Played" entry, and
-                // Backloggd ignores a second one within 200 ms; the next click opens the modal.
-                await page.WaitForTimeoutAsync(500);
-
-                if (!await page.IsVisibleAsync("#playthrough-modal-content"))
-                {
-                    await page.Locator(daySelector).ClickAsync(new LocatorClickOptions { Force = true });
-                    Console.WriteLine($"[RegisterGame] Clicked the day's Played entry");
-                }
-
-                await page.WaitForSelectorAsync("#playthrough-modal-content", new PageWaitForSelectorOptions { State = WaitForSelectorState.Visible });
+                await OpenPlayDateModalAsync(page, daySelector);
 
                 // Read what the day's playthrough already holds. These fields are empty on a first
                 // session and carry the running total on any later one.
@@ -506,9 +496,16 @@ namespace BackloggdMirror.Services
                 await page.FillAsync("#play_date_hours", gameTotalHours.ToString());
                 await page.FillAsync("#play_date_minutes", gameTotalMinutes.ToString());
 
+                if (markStarted) await CheckMarkAsync(page, StartedMarkId);
+
                 await page.ClickAsync("#play-date-update");
 
                 await page.WaitForSelectorAsync("#playthrough-modal-content", new PageWaitForSelectorOptions { State = WaitForSelectorState.Hidden });
+
+                if (markStarted || markFinished)
+                {
+                    await ApplyMarksAsync(page, daySelector, pastDate ?? today, markStarted, markFinished, gameName);
+                }
 
                 await page.ClickAsync("#btn-save-log");
 
@@ -535,6 +532,86 @@ namespace BackloggdMirror.Services
 
                 throw;
             }
+        }
+
+        private const string StartedMarkId = "is_start_session";
+        private const string FinishedMarkId = "is_finish_session";
+
+        /// <summary>
+        /// Opens the play session modal of a calendar day. On a day with nothing logged the first click
+        /// only creates the "Played" entry, and Backloggd ignores a second one within 200 ms; the next
+        /// click opens the modal.
+        /// </summary>
+        private static async Task OpenPlayDateModalAsync(IPage page, string daySelector)
+        {
+            await page.Locator(daySelector).ClickAsync(new LocatorClickOptions { Force = true });
+            Console.WriteLine($"[RegisterGame] Clicked the day in calendar");
+
+            await page.WaitForTimeoutAsync(500);
+
+            if (!await page.IsVisibleAsync("#playthrough-modal-content"))
+            {
+                await page.Locator(daySelector).ClickAsync(new LocatorClickOptions { Force = true });
+                Console.WriteLine($"[RegisterGame] Clicked the day's Played entry");
+            }
+
+            await page.WaitForSelectorAsync("#playthrough-modal-content", new PageWaitForSelectorOptions { State = WaitForSelectorState.Visible });
+        }
+
+        /// <summary>
+        /// Ticks a mark in the open play session modal, unless the day already has it. Backloggd disables
+        /// Started on a day after the current finish, and Finished on a day before the current start;
+        /// those are left for <see cref="ApplyMarksAsync"/>, as clicking them would only time out.
+        /// </summary>
+        private static async Task CheckMarkAsync(IPage page, string markId)
+        {
+            // The checkbox is hidden; its label is the button.
+            if (!await page.IsCheckedAsync($"#{markId}") && await page.IsEnabledAsync($"#{markId}"))
+            {
+                await page.ClickAsync($"label[for='{markId}']");
+            }
+        }
+
+        /// <summary>
+        /// Makes sure the marks asked for landed on the day. Backloggd keeps one start and one finish per
+        /// playthrough (marking a day moves them from any other), and its "Started on" / "Finished on"
+        /// pickers silently refuse a start after the current finish or a finish before the current start.
+        /// So Finished goes in a pass of its own once Started has moved, and Started is retried after it.
+        /// </summary>
+        private async Task ApplyMarksAsync(IPage page, string daySelector, DateTime day, bool markStarted, bool markFinished, string gameName)
+        {
+            if (markFinished && !await IsMarkedOnAsync(page, "#finished-on-datepicker", day))
+            {
+                await ApplyMarkAsync(page, daySelector, FinishedMarkId);
+            }
+
+            if (markStarted && !await IsMarkedOnAsync(page, "#started-on-datepicker", day))
+            {
+                await ApplyMarkAsync(page, daySelector, StartedMarkId);
+            }
+
+            bool startedLanded = !markStarted || await IsMarkedOnAsync(page, "#started-on-datepicker", day);
+            bool finishedLanded = !markFinished || await IsMarkedOnAsync(page, "#finished-on-datepicker", day);
+
+            if (!startedLanded || !finishedLanded)
+            {
+                _logger?.Warning($"[RegisterGame] Backloggd did not take every mark for '{gameName}' on {day:yyyy-MM-dd} (started: {startedLanded}, finished: {finishedLanded}). The play time is saved anyway.");
+            }
+        }
+
+        private static async Task ApplyMarkAsync(IPage page, string daySelector, string markId)
+        {
+            await OpenPlayDateModalAsync(page, daySelector);
+            await CheckMarkAsync(page, markId);
+            await page.ClickAsync("#play-date-update");
+            await page.WaitForSelectorAsync("#playthrough-modal-content", new PageWaitForSelectorOptions { State = WaitForSelectorState.Hidden });
+        }
+
+        /// <summary>Whether the playthrough's date picker holds the day. Backloggd writes it as "Oct 4, 2026".</summary>
+        private static async Task<bool> IsMarkedOnAsync(IPage page, string pickerSelector, DateTime day)
+        {
+            string value = await page.InputValueAsync(pickerSelector);
+            return DateTime.TryParseExact(value.Trim(), "MMM d, yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out var date) && date == day;
         }
 
 

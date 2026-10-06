@@ -25,6 +25,10 @@ public sealed class PendingSession
     /// <summary>True when it got here after Backloggd refused to save it.</summary>
     public bool SaveFailed { get; set; }
 
+    /// <summary>Backloggd's "Started" and "Finished" marks for the play date.</summary>
+    public bool MarkedStarted { get; set; }
+    public bool MarkedFinished { get; set; }
+
     public DateTime StartedAt { get; set; }
     public DateTime EndedAt { get; set; }
     public TimeSpan Duration { get; set; }
