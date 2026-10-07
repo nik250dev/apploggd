@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using BackloggdMirror.Services.Platform.Linux;
 using Microsoft.Playwright;
 
 namespace BackloggdMirror.Services;
@@ -38,6 +39,9 @@ public class PlaywrightInstallService : IBrowserProvisioner
         _systemBrowserDetector = systemBrowserDetector ?? new SystemBrowserDetector(logger);
     }
 
+    /// <inheritdoc />
+    public BrowserDependencyReport? MissingDependencies { get; private set; }
+
     /// <summary>
     /// Decides which browser the process will use, as a cascade and without downloading anything:
     /// <list type="number">
@@ -59,6 +63,10 @@ public class PlaywrightInstallService : IBrowserProvisioner
         {
             _logger.Info("[PlaywrightInstallService] Using Playwright's bundled Chromium.");
             BrowserLaunch.Configure(BrowserSelection.Bundled);
+            if (OperatingSystem.IsLinux() && await HasMissingLinuxDependenciesAsync())
+            {
+                return BrowserResolution.MissingSystemLibraries;
+            }
             return BrowserResolution.PlaywrightChromium;
         }
 
@@ -218,6 +226,11 @@ public class PlaywrightInstallService : IBrowserProvisioner
             }
 
             _logger.Info("[PlaywrightInstallService] Chromium installed successfully.");
+            // The install only warns about missing libraries and still exits 0.
+            if (OperatingSystem.IsLinux() && await HasMissingLinuxDependenciesAsync())
+            {
+                return BrowserInstallResult.MissingSystemLibraries;
+            }
             return BrowserInstallResult.Installed;
         }
         catch (Exception ex)
@@ -225,6 +238,17 @@ public class PlaywrightInstallService : IBrowserProvisioner
             _logger.Error("[PlaywrightInstallService] Unexpected error while installing Chromium.", ex);
             return BrowserInstallResult.Failed;
         }
+    }
+
+    /// <summary>
+    /// Linux only: launches the bundled Chromium once, since a fresh distro may lack the libraries it
+    /// needs and neither the download nor the on-disk check notice.
+    /// </summary>
+    private async Task<bool> HasMissingLinuxDependenciesAsync()
+    {
+        var (nodePath, cliPath) = LocateDriver();
+        MissingDependencies = await LinuxBrowserDependencies.CheckAsync(_logger, nodePath, cliPath);
+        return MissingDependencies != null;
     }
 
     /// <summary>
@@ -442,7 +466,10 @@ public enum BrowserResolution
     SystemBrowser,
 
     /// <summary>Nothing usable; the user has to be asked before downloading.</summary>
-    NoBrowserAvailable
+    NoBrowserAvailable,
+
+    /// <summary>Linux only: the bundled Chromium is on disk but the system lacks libraries to run it.</summary>
+    MissingSystemLibraries
 }
 
 /// <summary>
@@ -453,6 +480,9 @@ public interface IBrowserProvisioner
     Task<BrowserResolution> ResolveBrowserAsync(Action<string>? onProgress = null);
 
     Task<BrowserInstallResult> EnsureChromiumInstalledAsync(Action<string>? onProgress = null);
+
+    /// <summary>Set when the last check returned <c>MissingSystemLibraries</c> (Linux only).</summary>
+    BrowserDependencyReport? MissingDependencies { get; }
 }
 
 /// <summary>
@@ -467,5 +497,8 @@ public enum BrowserInstallResult
     Installed,
 
     /// <summary>The install failed (network error, permissions, unexpected error, etc.).</summary>
-    Failed
+    Failed,
+
+    /// <summary>Linux only: downloaded fine, but the system lacks libraries to run it.</summary>
+    MissingSystemLibraries
 }

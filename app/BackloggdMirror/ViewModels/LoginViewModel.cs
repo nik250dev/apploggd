@@ -66,9 +66,27 @@ namespace BackloggdMirror.ViewModels
         [NotifyPropertyChangedFor(nameof(IsUiVisible))]
         private bool _isBrowserPromptVisible = false;
 
+        // Linux only: Chromium is on disk but the system lacks libraries to start it.
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(IsUiVisible))]
+        private bool _isMissingLibrariesPromptVisible = false;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(HasInstallDepsCommand))]
+        private string _installDepsCommand = string.Empty;
+
+        [ObservableProperty]
+        private string _missingLibrariesText = string.Empty;
+
+        [ObservableProperty]
+        private bool _isInstallDepsCommandCopied = false;
+
+        // Without apt, install-deps cannot work; the prompt then only lists the libraries.
+        public bool HasInstallDepsCommand => !string.IsNullOrEmpty(InstallDepsCommand);
+
         // The form is hidden rather than covered, so Tab focus and the Login button's IsDefault
         // binding cannot reach it while another phase owns the window.
-        public bool IsUiVisible => !IsCheckingSession && !IsBrowserPromptVisible;
+        public bool IsUiVisible => !IsCheckingSession && !IsBrowserPromptVisible && !IsMissingLibrariesPromptVisible;
 
         public bool CanLogin => !IsBusy && !IsBrowserUnavailable;
 
@@ -88,10 +106,17 @@ namespace BackloggdMirror.ViewModels
         // Canonical username as Backloggd spells it, which need not match what was typed.
         public string ResolvedUsername { get; private set; } = string.Empty;
 
+        // The saved session could not be validated because Backloggd was unreachable.
+        public bool StartedOffline { get; private set; }
 
 
-        public LoginViewModel(IBackloggdAuthService authService, IBackloggdBrowserService browserService, ICredentialStorageService credentialStorageService, IAppLogger logger, IBrowserProvisioner installService)
+
+        // Shown once the form is reached with no saved session, e.g. after an expired session logged the user out.
+        private readonly string? _initialStatusMessage;
+
+        public LoginViewModel(IBackloggdAuthService authService, IBackloggdBrowserService browserService, ICredentialStorageService credentialStorageService, IAppLogger logger, IBrowserProvisioner installService, string? initialStatusMessage = null)
         {
+            _initialStatusMessage = initialStatusMessage;
             _authService = authService;
             _browserService = browserService;
             _credentialStorageService = credentialStorageService;
@@ -142,6 +167,12 @@ namespace BackloggdMirror.ViewModels
                         StatusMessage = string.Empty;
                         IsBrowserPromptVisible = true;
                         UserInputRequired?.Invoke();
+                        return;
+                    }
+
+                    if (resolution == BrowserResolution.MissingSystemLibraries)
+                    {
+                        ShowMissingLibrariesPrompt();
                         return;
                     }
 
@@ -209,6 +240,13 @@ namespace BackloggdMirror.ViewModels
                         return;
                     }
 
+                    if (result == BrowserInstallResult.MissingSystemLibraries)
+                    {
+                        BrowserLaunch.Configure(BrowserSelection.Bundled);
+                        ShowMissingLibrariesPrompt();
+                        return;
+                    }
+
                     BrowserLaunch.Configure(BrowserSelection.Bundled);
                     ContinueAfterBrowserReady();
                 });
@@ -223,7 +261,52 @@ namespace BackloggdMirror.ViewModels
         {
             _logger.Info("[LoginViewModel] User declined the Chromium download. Shutting down.");
             IsBrowserPromptVisible = false;
+            CloseApp();
+        }
 
+        /// <summary>
+        /// Linux only: stops the startup here until the user installs the libraries Chromium needs
+        /// (install-deps requires sudo, so the app cannot run it itself).
+        /// </summary>
+        private void ShowMissingLibrariesPrompt()
+        {
+            var report = _installService.MissingDependencies;
+            _logger.Info("[LoginViewModel] Chromium is missing system libraries. Asking the user to install them.");
+            InstallDepsCommand = report?.InstallCommand ?? string.Empty;
+            MissingLibrariesText = report is { MissingLibraries.Count: > 0 }
+                ? string.Format(LocalizationService.Instance["Browser_Deps_Missing"], string.Join(", ", report.MissingLibraries))
+                : string.Empty;
+            IsInstallDepsCommandCopied = false;
+            IsBusy = false;
+            IsCheckingSession = false;
+            StatusMessage = string.Empty;
+            IsMissingLibrariesPromptVisible = true;
+            UserInputRequired?.Invoke();
+        }
+
+        /// <summary>
+        /// Missing-libraries prompt's "Retry": runs the whole startup gate again, probe included.
+        /// </summary>
+        [RelayCommand]
+        private void RetryBrowserCheck()
+        {
+            if (!IsMissingLibrariesPromptVisible) return;
+
+            _logger.Info("[LoginViewModel] User asked to retry the browser check.");
+            IsMissingLibrariesPromptVisible = false;
+            EnsureBrowserThenCheckSession();
+        }
+
+        [RelayCommand]
+        private void CloseFromMissingLibrariesPrompt()
+        {
+            _logger.Info("[LoginViewModel] User closed the missing-libraries prompt. Shutting down.");
+            IsMissingLibrariesPromptVisible = false;
+            CloseApp();
+        }
+
+        private void CloseApp()
+        {
             if (RequestClose != null)
             {
                 // LoginWindow.OnClosed turns this into desktop.Shutdown().
@@ -245,75 +328,99 @@ namespace BackloggdMirror.ViewModels
         /// Skips the form when a "Remember me" session is still valid. Cookies alone cannot be
         /// trusted — they expire server-side with nothing written to disk — so validity is decided
         /// by actually loading Backloggd and seeing whether it answers with a logged-in page.
-        /// Falls through to the form on failure; no saved session at all is not an error.
+        /// When Backloggd cannot be reached the session is neither trusted nor thrown away: with a
+        /// stored username the app starts offline, and without one the form shows a network error.
         /// </summary>
         private void CheckSavedSession()
         {
-            var cookies = _credentialStorageService.LoadCookies();
-            if (cookies != null && cookies.Count > 0)
-            {
-                foreach (var c in cookies)
-                {
-                    _authService.Cookies.Add(c);
-                }
-
-                IsBusy = true;
-                IsCheckingSession = true;
-                StatusMessage = LocalizationService.Instance["Login_Status_Restoring"];
-
-                Task.Run(async () =>
-                {
-                    try
-                    {
-                        var username = await _authService.ResolveUsernameFromSession();
-                        if (!string.IsNullOrEmpty(username))
-                        {
-                            // Success!
-                            _logger.Info($"[LoginViewModel] Session restored successfully for user: {username}. User is already logged in.");
-                            Avalonia.Threading.Dispatcher.UIThread.Invoke(() =>
-                            {
-                                // Assigned inside the UI thread callback: LoginSuccessful subscribers
-                                // read it the moment the event fires, so it must be set BEFORE the
-                                // line below.
-                                ResolvedUsername = username;
-                                IsBusy = false;
-                                IsCheckingSession = false;
-                                LoginSuccessful?.Invoke();
-                            });
-                        }
-                        else
-                        {
-                            // Cookies invalid or expired
-                            _logger.Info("[LoginViewModel] Saved session was invalid or expired.");
-                            _credentialStorageService.ClearCookies();
-                            Avalonia.Threading.Dispatcher.UIThread.Invoke(() =>
-                            {
-                                StatusMessage = LocalizationService.Instance["Login_Status_SessionExpired"];
-                                IsBusy = false;
-                                IsCheckingSession = false;
-                                UserInputRequired?.Invoke();
-                            });
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        _logger.Error("[LoginViewModel] Failed to restore session.", ex);
-                        System.Diagnostics.Debug.WriteLine($"Failed to restore session: {ex.Message}");
-                        Avalonia.Threading.Dispatcher.UIThread.Invoke(() =>
-                       {
-                           StatusMessage = "";
-                           IsBusy = false;
-                           IsCheckingSession = false;
-                           UserInputRequired?.Invoke();
-                       });
-                    }
-                });
-            }
-            else
+            var stored = _credentialStorageService.LoadSession();
+            if (stored.Cookies.Count == 0)
             {
                 // Nothing saved to restore, so the form is the whole flow from here.
+                if (_initialStatusMessage != null) StatusMessage = _initialStatusMessage;
                 UserInputRequired?.Invoke();
+                return;
             }
+
+            // CookieContainer drops expired cookies on Add, so an empty container is a dead session
+            // that no connection could revive.
+            foreach (var c in stored.Cookies)
+            {
+                _authService.Cookies.Add(c);
+            }
+
+            IsBusy = true;
+            IsCheckingSession = true;
+            StatusMessage = LocalizationService.Instance["Login_Status_Restoring"];
+
+            Task.Run(async () =>
+            {
+                SessionCheckResult result;
+                if (_authService.Cookies.Count == 0)
+                {
+                    result = new SessionCheckResult(SessionCheckStatus.Expired);
+                }
+                else if (!await BackloggdConnectivity.IsReachableAsync())
+                {
+                    _logger.Warning("[LoginViewModel] backloggd.com does not answer a ping. The saved session cannot be validated.");
+                    result = new SessionCheckResult(SessionCheckStatus.Unreachable);
+                }
+                else
+                {
+                    result = await _authService.CheckSessionAsync();
+                }
+
+                Avalonia.Threading.Dispatcher.UIThread.Post(() => FinishSessionCheck(result, stored.Username));
+            });
+        }
+
+        private void FinishSessionCheck(SessionCheckResult result, string? storedUsername)
+        {
+            IsBusy = false;
+            IsCheckingSession = false;
+
+            switch (result.Status)
+            {
+                case SessionCheckStatus.Valid:
+                    _logger.Info($"[LoginViewModel] Session restored for user: {result.Username}.");
+                    // Persists the refreshed cookies, and the username for files saved before it was stored.
+                    _credentialStorageService.SaveSession(BackloggdCookies(_authService.Cookies), result.Username);
+                    // Set before the event: LoginSuccessful subscribers read it the moment it fires.
+                    ResolvedUsername = result.Username!;
+                    LoginSuccessful?.Invoke();
+                    break;
+
+                case SessionCheckStatus.Expired:
+                    _logger.Info("[LoginViewModel] Saved session was invalid or expired.");
+                    _credentialStorageService.ClearCookies();
+                    StatusMessage = LocalizationService.Instance["Login_Status_SessionExpired"];
+                    UserInputRequired?.Invoke();
+                    break;
+
+                default:
+                    if (!string.IsNullOrEmpty(storedUsername))
+                    {
+                        _logger.Info($"[LoginViewModel] Backloggd is unreachable. Starting offline as '{storedUsername}' with the saved session.");
+                        _authService.SetUsername(storedUsername);
+                        ResolvedUsername = storedUsername;
+                        StartedOffline = true;
+                        LoginSuccessful?.Invoke();
+                    }
+                    else
+                    {
+                        _logger.Warning("[LoginViewModel] Backloggd is unreachable and the saved session has no username (older file), so the app cannot start offline. The session is kept for the next start.");
+                        StatusMessage = LocalizationService.Instance["Login_Status_NetworkError"];
+                        UserInputRequired?.Invoke();
+                    }
+                    break;
+            }
+        }
+
+        private static System.Collections.Generic.List<System.Net.Cookie> BackloggdCookies(System.Net.CookieContainer container)
+        {
+            var list = new System.Collections.Generic.List<System.Net.Cookie>();
+            foreach (System.Net.Cookie c in container.GetCookies(new Uri("https://backloggd.com"))) list.Add(c);
+            return list;
         }
 
         [RelayCommand]
@@ -361,7 +468,7 @@ namespace BackloggdMirror.ViewModels
                     {
                         var cookieList = new System.Collections.Generic.List<System.Net.Cookie>();
                         foreach (System.Net.Cookie c in cookieCollection) cookieList.Add(c);
-                        _credentialStorageService.SaveCookies(cookieList);
+                        _credentialStorageService.SaveSession(cookieList, resolvedUsername);
                     }
                     else
                     {

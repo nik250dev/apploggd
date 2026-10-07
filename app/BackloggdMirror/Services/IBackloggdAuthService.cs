@@ -12,7 +12,7 @@ namespace BackloggdMirror.Services
         string? Username { get; }
         void SetUsername(string username);
         Task<string?> LoginAsync(string username, string password);
-        Task<string?> ResolveUsernameFromSession();
+        Task<SessionCheckResult> CheckSessionAsync();
         void Logout();
     }
 }

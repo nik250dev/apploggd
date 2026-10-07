@@ -1,0 +1,7591 @@
+[
+  {
+    "name": "Air Nights",
+    "aliases": [
+      "Air NiGHTS"
+    ],
+    "id_igdb": "145516",
+    "cover": "co2xak",
+    "artwork": [],
+    "url": "air-nights"
+  },
+  {
+    "name": "Guilty Gear X: Ver 1.5",
+    "aliases": [
+      "Giruti Gia Zekusu Bāshon 1.5",
+      "GGX: v1.5",
+      "Guilty Gear X: Version 1.5",
+      "Guilty Gear X: v1.5"
+    ],
+    "id_igdb": "134303",
+    "cover": "co7360",
+    "artwork": [],
+    "url": "guilty-gear-x-ver-1-dot-5"
+  },
+  {
+    "name": "Snow",
+    "aliases": [
+      "SNOW"
+    ],
+    "id_igdb": "166450",
+    "cover": "coawny",
+    "artwork": [],
+    "url": "snow--2"
+  },
+  {
+    "name": "Atari Anniversary Edition",
+    "aliases": [],
+    "id_igdb": "6311",
+    "cover": "co2z7k",
+    "artwork": [],
+    "url": "atari-anniversary-edition"
+  },
+  {
+    "name": "DCA3",
+    "aliases": [
+      "DCA 3",
+      "DCA III"
+    ],
+    "id_igdb": "327237",
+    "cover": "co98fl",
+    "artwork": [],
+    "url": "dca3"
+  },
+  {
+    "name": "Dancing Blade Katteni Momotenshi!",
+    "aliases": [
+      "Dancing Blade Katte ni Momotenshi! Kanzenban"
+    ],
+    "id_igdb": "64856",
+    "cover": "co5xwk",
+    "artwork": [],
+    "url": "dancing-blade-katteni-momotenshi"
+  },
+  {
+    "name": "Reel Fishing: Wild",
+    "aliases": [
+      "Fish Eyes Wild"
+    ],
+    "id_igdb": "45836",
+    "cover": "co4383",
+    "artwork": [],
+    "url": "reel-fishing-wild"
+  },
+  {
+    "name": "POD SpeedZone",
+    "aliases": [
+      "POD 2"
+    ],
+    "id_igdb": "84320",
+    "cover": "co4of8",
+    "artwork": [],
+    "url": "pod-speedzone"
+  },
+  {
+    "name": "Roadsters",
+    "aliases": [],
+    "id_igdb": "3590",
+    "cover": "co43a0",
+    "artwork": [],
+    "url": "roadsters"
+  },
+  {
+    "name": "Jump Runner",
+    "aliases": [],
+    "id_igdb": "200543",
+    "cover": "co4qgj",
+    "artwork": [
+      "ar1mnp",
+      "ar1mnq",
+      "ar1mnr"
+    ],
+    "url": "jump-runner"
+  },
+  {
+    "name": "Sega Marine Fishing",
+    "aliases": [],
+    "id_igdb": "45838",
+    "cover": "coat4p",
+    "artwork": [],
+    "url": "sega-marine-fishing"
+  },
+  {
+    "name": "Pandora no Yume",
+    "aliases": [
+      "Dream in Pandora's Box",
+      "パンドラの夢",
+      "潘多拉之梦",
+      "Pandora zhi Meng"
+    ],
+    "id_igdb": "372435",
+    "cover": "cobti7",
+    "artwork": [],
+    "url": "pandora-no-yume--1"
+  },
+  {
+    "name": "Snk's Cool Cool Toon",
+    "aliases": [],
+    "id_igdb": "45820",
+    "cover": "ygohqro3kolymigv2idm",
+    "artwork": [],
+    "url": "snks-cool-cool-toon"
+  },
+  {
+    "name": "Treasure Strike",
+    "aliases": [],
+    "id_igdb": "62110",
+    "cover": "co5s3v",
+    "artwork": [],
+    "url": "treasure-strike"
+  },
+  {
+    "name": "Hoyle Casino",
+    "aliases": [],
+    "id_igdb": "138362",
+    "cover": "co40o0",
+    "artwork": [],
+    "url": "hoyle-casino"
+  },
+  {
+    "name": "Fast Striker",
+    "aliases": [],
+    "id_igdb": "9125",
+    "cover": "co8gy2",
+    "artwork": [
+      "ar1d53"
+    ],
+    "url": "fast-striker"
+  },
+  {
+    "name": "Sanity: Aiken's Artifact",
+    "aliases": [],
+    "id_igdb": "90142",
+    "cover": "co5x7m",
+    "artwork": [],
+    "url": "sanity-aikens-artifact"
+  },
+  {
+    "name": "Aqua Panic",
+    "aliases": [],
+    "id_igdb": "364355",
+    "cover": "",
+    "artwork": [],
+    "url": "aqua-panic--1"
+  },
+  {
+    "name": "Mobile Suit Gundam: Federation vs. Zeon DX",
+    "aliases": [
+      "Gundam DX",
+      "連ジDX",
+      "連ジ",
+      "Kidou Senshi Gundam: Renpou vs. Zeon DX",
+      "機動戦士ガンダム 連邦VS.ジオン&DX",
+      "Mobile Suit Gundam: Federation vs. Zeon"
+    ],
+    "id_igdb": "43205",
+    "cover": "co2ki6",
+    "artwork": [],
+    "url": "mobile-suit-gundam-federation-vs-zeon-dx"
+  },
+  {
+    "name": "Missing Parts 2: The Tantei Stories",
+    "aliases": [],
+    "id_igdb": "64673",
+    "cover": "co31ql",
+    "artwork": [],
+    "url": "missing-parts-2-the-tantei-stories"
+  },
+  {
+    "name": "Sydney 2000",
+    "aliases": [],
+    "id_igdb": "8333",
+    "cover": "co960i",
+    "artwork": [],
+    "url": "sydney-2000"
+  },
+  {
+    "name": "Seireiki Rayblade",
+    "aliases": [],
+    "id_igdb": "311290",
+    "cover": "coa3ig",
+    "artwork": [],
+    "url": "seireiki-rayblade"
+  },
+  {
+    "name": "Monaco Grand Prix",
+    "aliases": [
+      "Monaco Grand Prix: Racing Simulation 2",
+      "Racing Simulation 2"
+    ],
+    "id_igdb": "3413",
+    "cover": "co2fgi",
+    "artwork": [],
+    "url": "monaco-grand-prix"
+  },
+  {
+    "name": "Sorcerian: Shichisei Mahou no Shito",
+    "aliases": [
+      "Sorcerian: Apprentice of Seven Star Magic"
+    ],
+    "id_igdb": "71670",
+    "cover": "co5xxx",
+    "artwork": [],
+    "url": "sorcerian-shichisei-mahou-no-shito"
+  },
+  {
+    "name": "Andro Dunos II",
+    "aliases": [
+      "andro dunos ii.EXE"
+    ],
+    "id_igdb": "145610",
+    "cover": "co4oit",
+    "artwork": [
+      "ar1j5k"
+    ],
+    "url": "andro-dunos-ii"
+  },
+  {
+    "name": "Hello Kitty no Garden Panic",
+    "aliases": [],
+    "id_igdb": "267503",
+    "cover": "co73uj",
+    "artwork": [],
+    "url": "hello-kitty-no-garden-panic"
+  },
+  {
+    "name": "SakaTsuku Tokudai-gou 2: J.League Pro Soccer Club wo Tsukurou!",
+    "aliases": [
+      "SakaTsuku Tokudaigou 2",
+      "J. League Pro Soccer Club o Tsukurou! SakaTsuku Tokudaigou 2"
+    ],
+    "id_igdb": "392777",
+    "cover": "cobnin",
+    "artwork": [
+      "ar5gnt"
+    ],
+    "url": "sakatsuku-tokudai-gou-2-jleague-pro-soccer-club-wo-tsukurou"
+  },
+  {
+    "name": "Grauen no Torikago: Kapitel 4 - Kaikou",
+    "aliases": [
+      "グラウエンの鳥籠 Kapitel 4 「邂逅」",
+      "Grauen no Torikago Kapitel 4 「Kaikou」",
+      "Birdcage of Horrors: Chapter 4 - Encounter"
+    ],
+    "id_igdb": "318052",
+    "cover": "co8v5e",
+    "artwork": [],
+    "url": "grauen-no-torikago-kapitel-4-kaikou"
+  },
+  {
+    "name": "Marie & Elie no Atelier: Salburg no Renkinjutsushi 1-2",
+    "aliases": [],
+    "id_igdb": "130822",
+    "cover": "co31mq",
+    "artwork": [],
+    "url": "marie-and-elie-no-atelier-salburg-no-renkinjutsushi-1-2"
+  },
+  {
+    "name": "Rune Caster",
+    "aliases": [],
+    "id_igdb": "75149",
+    "cover": "co7ngd",
+    "artwork": [],
+    "url": "rune-caster"
+  },
+  {
+    "name": "Rune Jade",
+    "aliases": [],
+    "id_igdb": "77572",
+    "cover": "co8kyy",
+    "artwork": [],
+    "url": "rune-jade"
+  },
+  {
+    "name": "Airforce Delta",
+    "aliases": [
+      "Deadly Skies"
+    ],
+    "id_igdb": "3710",
+    "cover": "co40f4",
+    "artwork": [],
+    "url": "airforce-delta"
+  },
+  {
+    "name": "Sengoku Turb",
+    "aliases": [
+      "戦国TURB"
+    ],
+    "id_igdb": "22811",
+    "cover": "coa0zt",
+    "artwork": [],
+    "url": "sengoku-turb--1"
+  },
+  {
+    "name": "Evolution 2: Far Off Promise",
+    "aliases": [],
+    "id_igdb": "45858",
+    "cover": "cob8da",
+    "artwork": [],
+    "url": "evolution-2-far-off-promise"
+  },
+  {
+    "name": "Last Hope",
+    "aliases": [],
+    "id_igdb": "46865",
+    "cover": "co4mj7",
+    "artwork": [],
+    "url": "last-hope"
+  },
+  {
+    "name": "Omoide ni Kawaru Kimi: Memories Off",
+    "aliases": [
+      "想い出にかわる君 〜Memories Off〜",
+      "You That Became a Memory: Memories Off"
+    ],
+    "id_igdb": "68241",
+    "cover": "co2wl4",
+    "artwork": [
+      "ar7ks"
+    ],
+    "url": "omoide-ni-kawaru-kimi-memories-off"
+  },
+  {
+    "name": "NFL 2K1",
+    "aliases": [
+      "NFL2K1"
+    ],
+    "id_igdb": "8843",
+    "cover": "co40uf",
+    "artwork": [],
+    "url": "nfl-2k1"
+  },
+  {
+    "name": "Galleon",
+    "aliases": [],
+    "id_igdb": "5843",
+    "cover": "co7jtl",
+    "artwork": [],
+    "url": "galleon"
+  },
+  {
+    "name": "Sega Smash Pack Volume 1",
+    "aliases": [],
+    "id_igdb": "46373",
+    "cover": "co8m0y",
+    "artwork": [],
+    "url": "sega-smash-pack-volume-1"
+  },
+  {
+    "name": "Omikron: The Nomad Soul",
+    "aliases": [
+      "Omikron 1"
+    ],
+    "id_igdb": "1982",
+    "cover": "co41ao",
+    "artwork": [
+      "ar7vr",
+      "ar23qq"
+    ],
+    "url": "omikron-the-nomad-soul"
+  },
+  {
+    "name": "Prince of Persia 3D",
+    "aliases": [],
+    "id_igdb": "3165",
+    "cover": "co2qzv",
+    "artwork": [],
+    "url": "prince-of-persia-3d"
+  },
+  {
+    "name": "Missing Parts: The Tantei Stories",
+    "aliases": [],
+    "id_igdb": "64674",
+    "cover": "co31qk",
+    "artwork": [],
+    "url": "missing-parts-the-tantei-stories"
+  },
+  {
+    "name": "Sonic Adventure: Limited Edition",
+    "aliases": [],
+    "id_igdb": "45786",
+    "cover": "co5jaf",
+    "artwork": [
+      "ar1nm1"
+    ],
+    "url": "sonic-adventure-limited-edition"
+  },
+  {
+    "name": "Giant Gram 2000: All Japan Pro Wrestling 3",
+    "aliases": [],
+    "id_igdb": "45827",
+    "cover": "c0heqamshgwzhrkxqsvy",
+    "artwork": [],
+    "url": "giant-gram-2000-all-japan-pro-wrestling-3"
+  },
+  {
+    "name": "Tee Off",
+    "aliases": [],
+    "id_igdb": "46379",
+    "cover": "co5xxl",
+    "artwork": [],
+    "url": "tee-off"
+  },
+  {
+    "name": "Industrial Spy: Operation Espionage",
+    "aliases": [],
+    "id_igdb": "45851",
+    "cover": "co5xwz",
+    "artwork": [],
+    "url": "industrial-spy-operation-espionage"
+  },
+  {
+    "name": "SnoCross Championship Racing",
+    "aliases": [
+      "Sno-Cross Championship Racing"
+    ],
+    "id_igdb": "45035",
+    "cover": "co3yw1",
+    "artwork": [],
+    "url": "snocross-championship-racing"
+  },
+  {
+    "name": "Eldorado Gate Volume 7",
+    "aliases": [
+      "Eldorado Gate Vol. 7"
+    ],
+    "id_igdb": "5558",
+    "cover": "co5tt3",
+    "artwork": [],
+    "url": "eldorado-gate-volume-7"
+  },
+  {
+    "name": "Net Versus Hanafuda",
+    "aliases": [
+      "Net Versus - Hanafuda"
+    ],
+    "id_igdb": "62387",
+    "cover": "flymn8xtjafungsj2ldv",
+    "artwork": [],
+    "url": "net-versus-hanafuda"
+  },
+  {
+    "name": "Breakers",
+    "aliases": [],
+    "id_igdb": "72533",
+    "cover": "co53ge",
+    "artwork": [],
+    "url": "breakers--1"
+  },
+  {
+    "name": "World Series Baseball 2K2",
+    "aliases": [
+      "SEGA SPORTS World Series Baseball 2K2"
+    ],
+    "id_igdb": "6240",
+    "cover": "co3uwu",
+    "artwork": [],
+    "url": "world-series-baseball-2k2"
+  },
+  {
+    "name": "NBA 2K",
+    "aliases": [
+      "NBA2K",
+      "Sega Sports: NBA 2000",
+      "NBA 2000"
+    ],
+    "id_igdb": "8832",
+    "cover": "co5xx3",
+    "artwork": [],
+    "url": "nba-2k"
+  },
+  {
+    "name": "Tom Clancy's Rainbow Six: Rogue Spear",
+    "aliases": [],
+    "id_igdb": "1843",
+    "cover": "co8yzi",
+    "artwork": [],
+    "url": "tom-clancy-s-rainbow-six-rogue-spear"
+  },
+  {
+    "name": "WWF Attitude",
+    "aliases": [],
+    "id_igdb": "3643",
+    "cover": "co5xsn",
+    "artwork": [],
+    "url": "wwf-attitude"
+  },
+  {
+    "name": "The King of Fighters 2001",
+    "aliases": [
+      "kof2001",
+      "KOF '01",
+      "拳皇01",
+      "The King of Fighters VIII",
+      "The King of Fighters 8"
+    ],
+    "id_igdb": "15432",
+    "cover": "co4zxo",
+    "artwork": [
+      "ar3nrm",
+      "ar3nrn"
+    ],
+    "url": "the-king-of-fighters-2001"
+  },
+  {
+    "name": "Marionette Company",
+    "aliases": [
+      "Ren'ou Qingyuan",
+      "人偶情缘",
+      "Doll Romance"
+    ],
+    "id_igdb": "130709",
+    "cover": "co2gt1",
+    "artwork": [
+      "ar4pzf"
+    ],
+    "url": "marionette-company"
+  },
+  {
+    "name": "Bass Rush Dream",
+    "aliases": [],
+    "id_igdb": "67301",
+    "cover": "b3vfzvdgwrpywn1u21yv",
+    "artwork": [],
+    "url": "bass-rush-dream"
+  },
+  {
+    "name": "Panzer Front",
+    "aliases": [],
+    "id_igdb": "22008",
+    "cover": "co2chf",
+    "artwork": [],
+    "url": "panzer-front"
+  },
+  {
+    "name": "Pier Solar and the Great Architects",
+    "aliases": [
+      "Pier Solar HD",
+      "Pier Solar to Idainaru Kenchikuka",
+      "pier solar and the great architects"
+    ],
+    "id_igdb": "4512",
+    "cover": "co76u3",
+    "artwork": [
+      "ar1csn"
+    ],
+    "url": "pier-solar-and-the-great-architects"
+  },
+  {
+    "name": "Sakura Taisen 3: Paris ha Moeteiru ka?",
+    "aliases": [
+      "Sakura Wars 3: Is Paris Burning?",
+      "Sakura Wars 3: Paris wa Moete Iru ka?",
+      "Sakura Taisen 3",
+      "Sakura Wars 3",
+      "Sakura Wars 3: Paris ha Moete Iru ka?"
+    ],
+    "id_igdb": "80143",
+    "cover": "co8kz3",
+    "artwork": [],
+    "url": "sakura-taisen-3-paris-ha-moeteiru-ka"
+  },
+  {
+    "name": "Giga Wing 2",
+    "aliases": [],
+    "id_igdb": "9163",
+    "cover": "co53gn",
+    "artwork": [],
+    "url": "giga-wing-2"
+  },
+  {
+    "name": "Mr. Driller",
+    "aliases": [
+      "미스터 드릴러"
+    ],
+    "id_igdb": "21840",
+    "cover": "co5dk4",
+    "artwork": [
+      "ar1p8a"
+    ],
+    "url": "mr-driller"
+  },
+  {
+    "name": "Shirotsume Souwa: Episode of the Clovers",
+    "aliases": [],
+    "id_igdb": "354005",
+    "cover": "coa3wn",
+    "artwork": [],
+    "url": "shirotsume-souwa-episode-of-the-clovers--4"
+  },
+  {
+    "name": "Rainbow Cotton",
+    "aliases": [],
+    "id_igdb": "46368",
+    "cover": "co526h",
+    "artwork": [],
+    "url": "rainbow-cotton"
+  },
+  {
+    "name": "Soul Fighter",
+    "aliases": [],
+    "id_igdb": "45840",
+    "cover": "co43am",
+    "artwork": [],
+    "url": "soul-fighter"
+  },
+  {
+    "name": "Blue Submarine No. 6: Time and Tide",
+    "aliases": [
+      "Ao no 6-gou - Saigetsu Hito o Matazu - Time and Tide"
+    ],
+    "id_igdb": "66288",
+    "cover": "co6il0",
+    "artwork": [],
+    "url": "blue-submarine-no-6-time-and-tide"
+  },
+  {
+    "name": "Undercover AD2025 Kei",
+    "aliases": [
+      "アンダーカバー Ａ．Ｄ．２０２５ Ｋｅｉ"
+    ],
+    "id_igdb": "86084",
+    "cover": "co5xxq",
+    "artwork": [],
+    "url": "undercover-ad2025-kei"
+  },
+  {
+    "name": "What's Shenmue?",
+    "aliases": [],
+    "id_igdb": "93595",
+    "cover": "cobxlc",
+    "artwork": [],
+    "url": "whats-shenmue"
+  },
+  {
+    "name": "Shanghai: Dynasty",
+    "aliases": [
+      "上海 DYNASTY"
+    ],
+    "id_igdb": "343910",
+    "cover": "co9tgh",
+    "artwork": [],
+    "url": "shanghai-dynasty--2"
+  },
+  {
+    "name": "Arcatera: The Dark Brotherhood",
+    "aliases": [
+      "Arcatera: Mroczne Bractwo",
+      "Arcatera: La Confrérie des Ombres",
+      "Arcatera: Die Dunkle Bruderschaft",
+      "Arcatera"
+    ],
+    "id_igdb": "24134",
+    "cover": "co9jcf",
+    "artwork": [],
+    "url": "arcatera-the-dark-brotherhood"
+  },
+  {
+    "name": "European Super League",
+    "aliases": [],
+    "id_igdb": "4363",
+    "cover": "co40g5",
+    "artwork": [],
+    "url": "european-super-league"
+  },
+  {
+    "name": "Fade to Black",
+    "aliases": [
+      "Crossfire",
+      "Project Morphs"
+    ],
+    "id_igdb": "12427",
+    "cover": "co2j7x",
+    "artwork": [],
+    "url": "fade-to-black"
+  },
+  {
+    "name": "Heavy Metal: Geomatrix",
+    "aliases": [
+      "Hebī Metaru Jiomatorikkusu"
+    ],
+    "id_igdb": "45854",
+    "cover": "coawt1",
+    "artwork": [],
+    "url": "heavy-metal-geomatrix"
+  },
+  {
+    "name": "Simple 1500 Series Vol. 36: The Renai Simulation - Natsu-iro Celebration",
+    "aliases": [
+      "The Love Simulation ~Summer Color Celebration~",
+      "The Renai Simulation - Natsu Iro Celebration",
+      "Simple 2000 DC Series Vol. 2: The Renai Simulation: Natsuiro Celebration",
+      "SIMPLE1500シリーズ Vol.36 THE 恋愛シュミレーション～夏色セレブレーション～",
+      "Simple 1500 Series Vol. 36: The Ren'ai Simulation: Natsuiro Celebration",
+      "SIMPLE2000シリーズDC Vol.02 夏色セレブレーション THE恋愛シミュレーション"
+    ],
+    "id_igdb": "203021",
+    "cover": "coauo9",
+    "artwork": [],
+    "url": "simple-1500-series-vol-36-the-renai-simulation-natsu-iro-celebration"
+  },
+  {
+    "name": "Tsuki ha Higashi ni Hi ha Nishi ni: Operation Sanctuary",
+    "aliases": [
+      "Tsuki wa Higashi ni Hi wa Nishi ni ~Operation Sanctuary~"
+    ],
+    "id_igdb": "165566",
+    "cover": "co3qjb",
+    "artwork": [],
+    "url": "tsuki-ha-higashi-ni-hi-ha-nishi-ni-operation-sanctuary"
+  },
+  {
+    "name": "NFL Quarterback Club 2000",
+    "aliases": [],
+    "id_igdb": "3559",
+    "cover": "co5xwx",
+    "artwork": [],
+    "url": "nfl-quarterback-club-2000"
+  },
+  {
+    "name": "Tantei Shinshi Dash!",
+    "aliases": [
+      "Tantei Shinshi DASH!"
+    ],
+    "id_igdb": "122873",
+    "cover": "co9opm",
+    "artwork": [],
+    "url": "tantei-shinshi-dash"
+  },
+  {
+    "name": "Gakkyuu-ou Yamazaki: Yamazaki Oukoku Daifunsou!",
+    "aliases": [
+      "Gakkyuu-ou Yamazaki - Yamazaki Oukoku Daifunsou!"
+    ],
+    "id_igdb": "130351",
+    "cover": "co48lz",
+    "artwork": [],
+    "url": "gakkyuu-ou-yamazaki-yamazaki-oukoku-daifunsou"
+  },
+  {
+    "name": "Chocolat: Maid Cafe \"Curio\"",
+    "aliases": [
+      "Chocolat ~Maid Cafe \"Curio\"~"
+    ],
+    "id_igdb": "194712",
+    "cover": "co4kw6",
+    "artwork": [],
+    "url": "chocolat-maid-cafe-curio"
+  },
+  {
+    "name": "Sakura Taisen",
+    "aliases": [
+      "Войны Сакуры",
+      "Sakura Wars"
+    ],
+    "id_igdb": "132067",
+    "cover": "co2nbf",
+    "artwork": [],
+    "url": "sakura-taisen--1"
+  },
+  {
+    "name": "Princess Maker Collection",
+    "aliases": [],
+    "id_igdb": "78302",
+    "cover": "co7p0t",
+    "artwork": [],
+    "url": "princess-maker-collection"
+  },
+  {
+    "name": "Propeller Arena: Aviation Battle Championship",
+    "aliases": [
+      "Propeller Head Online",
+      "Propeller Arena"
+    ],
+    "id_igdb": "46555",
+    "cover": "co6ild",
+    "artwork": [],
+    "url": "propeller-arena-aviation-battle-championship"
+  },
+  {
+    "name": "Marionette Handler 2",
+    "aliases": [],
+    "id_igdb": "77567",
+    "cover": "co7nw0",
+    "artwork": [],
+    "url": "marionette-handler-2"
+  },
+  {
+    "name": "WWF Royal Rumble",
+    "aliases": [],
+    "id_igdb": "76766",
+    "cover": "cocck4",
+    "artwork": [],
+    "url": "wwf-royal-rumble--1"
+  },
+  {
+    "name": "Di Gi Charat Fantasy",
+    "aliases": [
+      "DiGi Charat Fantasy"
+    ],
+    "id_igdb": "109070",
+    "cover": "co4u22",
+    "artwork": [],
+    "url": "di-gi-charat-fantasy"
+  },
+  {
+    "name": "Gundam Side Story 0079: Rise From the Ashes",
+    "aliases": [
+      "Mobile Suit Gundam Side Story 0079:  Rise from the Ashes"
+    ],
+    "id_igdb": "45859",
+    "cover": "co3gxd",
+    "artwork": [],
+    "url": "gundam-side-story-0079-rise-from-the-ashes"
+  },
+  {
+    "name": "Netto Golf",
+    "aliases": [
+      "Nettou Golf"
+    ],
+    "id_igdb": "63475",
+    "cover": "co829b",
+    "artwork": [],
+    "url": "netto-golf"
+  },
+  {
+    "name": "Missing Parts 3: The Tantei Stories",
+    "aliases": [],
+    "id_igdb": "64675",
+    "cover": "co31qm",
+    "artwork": [],
+    "url": "missing-parts-3-the-tantei-stories"
+  },
+  {
+    "name": "Another World for Dreamcast",
+    "aliases": [
+      "AW/DC",
+      "Another World"
+    ],
+    "id_igdb": "343875",
+    "cover": "co9tda",
+    "artwork": [
+      "ar3lar"
+    ],
+    "url": "another-world-for-dreamcast"
+  },
+  {
+    "name": "Super Robot Taisen Alpha for Dreamcast",
+    "aliases": [
+      "スーパーロボット大戦α for Dreamcast",
+      "Super Robot Taisen α for Dreamcast"
+    ],
+    "id_igdb": "241829",
+    "cover": "co69h4",
+    "artwork": [
+      "ar5r9o"
+    ],
+    "url": "super-robot-taisen-alpha-for-dreamcast"
+  },
+  {
+    "name": "Alone in the Dark: The New Nightmare",
+    "aliases": [
+      "Alone in the Dark 4",
+      "鬼屋魔影4",
+      "AITD:TNN",
+      "Alone in the Dark 4: По ту сторону кошмара",
+      "Alone in the Dark: Koszmar Powraca",
+      "鬼屋魔影4：惡夢之夜"
+    ],
+    "id_igdb": "266501",
+    "cover": "co7ldv",
+    "artwork": [
+      "ar2w7d"
+    ],
+    "url": "alone-in-the-dark-the-new-nightmare--2"
+  },
+  {
+    "name": "Happy Lesson",
+    "aliases": [],
+    "id_igdb": "78643",
+    "cover": "co7nw7",
+    "artwork": [],
+    "url": "happy-lesson"
+  },
+  {
+    "name": "Eldorado Gate Volume 4",
+    "aliases": [
+      "Eldorado Gate Vol. 4"
+    ],
+    "id_igdb": "5556",
+    "cover": "co5tsz",
+    "artwork": [],
+    "url": "eldorado-gate-volume-4"
+  },
+  {
+    "name": "AeroWings 2: Airstrike",
+    "aliases": [
+      "Aero Dancing F"
+    ],
+    "id_igdb": "3708",
+    "cover": "co40dv",
+    "artwork": [],
+    "url": "aerowings-2-airstrike"
+  },
+  {
+    "name": "Frontier",
+    "aliases": [],
+    "id_igdb": "362171",
+    "cover": "coabc0",
+    "artwork": [
+      "ar41nt"
+    ],
+    "url": "frontier--5"
+  },
+  {
+    "name": "Jeremy McGrath Supercross 2000",
+    "aliases": [],
+    "id_igdb": "3523",
+    "cover": "co40o7",
+    "artwork": [],
+    "url": "jeremy-mcgrath-supercross-2000"
+  },
+  {
+    "name": "World Series Baseball 2K1",
+    "aliases": [],
+    "id_igdb": "45849",
+    "cover": "co45rq",
+    "artwork": [],
+    "url": "world-series-baseball-2k1"
+  },
+  {
+    "name": "Millennium Racer: Y2K Fighters",
+    "aliases": [
+      "Millenium Racer - Y2K Fighters"
+    ],
+    "id_igdb": "79897",
+    "cover": "co2iyt",
+    "artwork": [],
+    "url": "millennium-racer-y2k-fighters"
+  },
+  {
+    "name": "Jet Set Radio",
+    "aliases": [
+      "JSR"
+    ],
+    "id_igdb": "398453",
+    "cover": "cobxjl",
+    "artwork": [],
+    "url": "jet-set-radio--2"
+  },
+  {
+    "name": "Battle Beaster 2",
+    "aliases": [],
+    "id_igdb": "376728",
+    "cover": "",
+    "artwork": [],
+    "url": "battle-beaster-2"
+  },
+  {
+    "name": "Fast Striker 1.5",
+    "aliases": [],
+    "id_igdb": "45787",
+    "cover": "co2ez9",
+    "artwork": [],
+    "url": "fast-striker-1-dot-5"
+  },
+  {
+    "name": "Dreamstudio",
+    "aliases": [
+      "dreamstudio",
+      "Dream Studio"
+    ],
+    "id_igdb": "61860",
+    "cover": "co6y0d",
+    "artwork": [],
+    "url": "dreamstudio"
+  },
+  {
+    "name": "Super Runabout: San Francisco Edition",
+    "aliases": [
+      "Super Runabout: The Golden State ",
+      "Super Runabout: San Francisco",
+      "Super Runabout: San Francisco (The Golden State)"
+    ],
+    "id_igdb": "45804",
+    "cover": "co7sxx",
+    "artwork": [],
+    "url": "super-runabout-san-francisco-edition"
+  },
+  {
+    "name": "Close to: Inori no Oka",
+    "aliases": [
+      "Close to ~Inori no Oka~"
+    ],
+    "id_igdb": "196027",
+    "cover": "co4m9j",
+    "artwork": [],
+    "url": "close-to-inori-no-oka"
+  },
+  {
+    "name": "Sturmwind",
+    "aliases": [],
+    "id_igdb": "9126",
+    "cover": "co4mkh",
+    "artwork": [],
+    "url": "sturmwind"
+  },
+  {
+    "name": "Worms World Party",
+    "aliases": [],
+    "id_igdb": "6294",
+    "cover": "co1xjg",
+    "artwork": [],
+    "url": "worms-world-party"
+  },
+  {
+    "name": "Kiss: Psycho Circus - The Nightmare Child",
+    "aliases": [],
+    "id_igdb": "9096",
+    "cover": "co40po",
+    "artwork": [],
+    "url": "kiss-psycho-circus-the-nightmare-child"
+  },
+  {
+    "name": "Pro Yakyuu Team de Asobou Net!",
+    "aliases": [
+      "プロ野球チームであそぼうネット!"
+    ],
+    "id_igdb": "125932",
+    "cover": "co2f05",
+    "artwork": [],
+    "url": "pro-yakyuu-team-de-asobou-net"
+  },
+  {
+    "name": "Jimmy White's 2: Cueball",
+    "aliases": [],
+    "id_igdb": "45852",
+    "cover": "co8rhz",
+    "artwork": [],
+    "url": "jimmy-whites-2-cueball"
+  },
+  {
+    "name": "Headhunter",
+    "aliases": [],
+    "id_igdb": "4350",
+    "cover": "co87sb",
+    "artwork": [],
+    "url": "headhunter"
+  },
+  {
+    "name": "Battle Beaster",
+    "aliases": [],
+    "id_igdb": "77563",
+    "cover": "coatii",
+    "artwork": [
+      "ar4njk"
+    ],
+    "url": "battle-beaster"
+  },
+  {
+    "name": "Duke Nukem Forever",
+    "aliases": [
+      "Duke Nukem Forever 2001"
+    ],
+    "id_igdb": "200875",
+    "cover": "co4qu0",
+    "artwork": [],
+    "url": "duke-nukem-forever--1"
+  },
+  {
+    "name": "2D House of Terror",
+    "aliases": [],
+    "id_igdb": "94164",
+    "cover": "",
+    "artwork": [],
+    "url": "2d-house-of-terror"
+  },
+  {
+    "name": "Confidential Mission",
+    "aliases": [],
+    "id_igdb": "6726",
+    "cover": "co40f6",
+    "artwork": [],
+    "url": "confidential-mission"
+  },
+  {
+    "name": "Yukawa Motosenmu no Otakara Sagashi",
+    "aliases": [
+      "Yukawa Moto Senmu no Otakara Sagashi"
+    ],
+    "id_igdb": "72475",
+    "cover": "cri9or1ubnt8a5seh207",
+    "artwork": [],
+    "url": "yukawa-motosenmu-no-otakara-sagashi"
+  },
+  {
+    "name": "Gorkamorka",
+    "aliases": [],
+    "id_igdb": "32667",
+    "cover": "co3hho",
+    "artwork": [],
+    "url": "gorkamorka"
+  },
+  {
+    "name": "The House of the Dead 2",
+    "aliases": [
+      "THOTD2",
+      "House of the Dead 2",
+      "House of the Dead II",
+      "The House of the Dead II"
+    ],
+    "id_igdb": "13777",
+    "cover": "co5nra",
+    "artwork": [],
+    "url": "the-house-of-the-dead-2"
+  },
+  {
+    "name": "Project Neon",
+    "aliases": [
+      "プロジェクト・ネオン"
+    ],
+    "id_igdb": "330134",
+    "cover": "co9cqm",
+    "artwork": [
+      "ar6hdk",
+      "ar6hdl"
+    ],
+    "url": "project-neon"
+  },
+  {
+    "name": "Super Magnetic Neo",
+    "aliases": [
+      "スーパーマグネチックニュウニュウ"
+    ],
+    "id_igdb": "45863",
+    "cover": "co2v4d",
+    "artwork": [],
+    "url": "super-magnetic-neo"
+  },
+  {
+    "name": "Sakura Taisen 2: Kimi, Shinitamou Koto Nakare",
+    "aliases": [
+      "Yinghua Dazhan 2",
+      "櫻花大戰2",
+      "サクラ大戦２　～君、死にたもうことなかれ～",
+      "樱花大战2",
+      "Sakura Wars 2: Thou Shalt Not Die",
+      "Sakura Wars 2",
+      "Sakura Taisen 2",
+      "Войны Сакуры 2",
+      "Sakura Wars 2: Kimi, Shinitamou Koto Nakare"
+    ],
+    "id_igdb": "50214",
+    "cover": "coc043",
+    "artwork": [
+      "ar5zpp"
+    ],
+    "url": "sakura-taisen-2-kimi-shinitamou-koto-nakare--1"
+  },
+  {
+    "name": "Xump: The Final Run",
+    "aliases": [
+      "XUMP Remake"
+    ],
+    "id_igdb": "153828",
+    "cover": "co3c9w",
+    "artwork": [],
+    "url": "xump-the-final-run--1"
+  },
+  {
+    "name": "Baldr Force Exe",
+    "aliases": [
+      "Baldr Force EXE"
+    ],
+    "id_igdb": "44622",
+    "cover": "co4gmk",
+    "artwork": [],
+    "url": "baldr-force-exe"
+  },
+  {
+    "name": "Time Stalkers",
+    "aliases": [
+      "Climax Landers"
+    ],
+    "id_igdb": "45846",
+    "cover": "co44xt",
+    "artwork": [
+      "ar313k",
+      "ar313l"
+    ],
+    "url": "time-stalkers"
+  },
+  {
+    "name": "Last Hope: Pink Bullets",
+    "aliases": [],
+    "id_igdb": "45817",
+    "cover": "co4mna",
+    "artwork": [],
+    "url": "last-hope-pink-bullets"
+  },
+  {
+    "name": "Sports Jam",
+    "aliases": [],
+    "id_igdb": "45841",
+    "cover": "co43ay",
+    "artwork": [
+      "ar3a81"
+    ],
+    "url": "sports-jam"
+  },
+  {
+    "name": "Charge 'n Blast",
+    "aliases": [],
+    "id_igdb": "45822",
+    "cover": "co40ev",
+    "artwork": [],
+    "url": "charge-n-blast"
+  },
+  {
+    "name": "Taxi 2",
+    "aliases": [
+      "Taxi 2: The Game",
+      "Taxi 2: Le Jeu"
+    ],
+    "id_igdb": "50041",
+    "cover": "co44u2",
+    "artwork": [],
+    "url": "taxi-2"
+  },
+  {
+    "name": "Toy Racer",
+    "aliases": [],
+    "id_igdb": "46369",
+    "cover": "co44y8",
+    "artwork": [],
+    "url": "toy-racer"
+  },
+  {
+    "name": "Evil Twin: Cyprien's Chronicles",
+    "aliases": [],
+    "id_igdb": "18332",
+    "cover": "co2q3z",
+    "artwork": [],
+    "url": "evil-twin-cypriens-chronicles"
+  },
+  {
+    "name": "Tokyo Xtreme Racer 2",
+    "aliases": [
+      "Shutokou Battle 2"
+    ],
+    "id_igdb": "4359",
+    "cover": "co44y2",
+    "artwork": [],
+    "url": "tokyo-xtreme-racer-2"
+  },
+  {
+    "name": "Love Hina: Smile Again",
+    "aliases": [],
+    "id_igdb": "72582",
+    "cover": "qspkhq00wiqlipsi3ouq",
+    "artwork": [],
+    "url": "love-hina-smile-again"
+  },
+  {
+    "name": "Doki-doki Idol Star Seeker Remix",
+    "aliases": [
+      "どきどきアイドルスターシーカー Remix"
+    ],
+    "id_igdb": "200796",
+    "cover": "co4qow",
+    "artwork": [],
+    "url": "doki-doki-idol-star-seeker-remix"
+  },
+  {
+    "name": "Exodus Guilty Neos",
+    "aliases": [],
+    "id_igdb": "71305",
+    "cover": "co9whl",
+    "artwork": [],
+    "url": "exodus-guilty-neos"
+  },
+  {
+    "name": "Alien Front Online",
+    "aliases": [
+      "Alienfront Online"
+    ],
+    "id_igdb": "3711",
+    "cover": "coawt0",
+    "artwork": [],
+    "url": "alien-front-online"
+  },
+  {
+    "name": "F1 Racing Championship",
+    "aliases": [],
+    "id_igdb": "3495",
+    "cover": "co5xxz",
+    "artwork": [],
+    "url": "f1-racing-championship"
+  },
+  {
+    "name": "FX-Unit Yuki: The Henshin Engine",
+    "aliases": [],
+    "id_igdb": "108121",
+    "cover": "co7lhl",
+    "artwork": [
+      "ar2k8x",
+      "ar2kax"
+    ],
+    "url": "fx-unit-yuki-the-henshin-engine"
+  },
+  {
+    "name": "Akolyte",
+    "aliases": [],
+    "id_igdb": "364152",
+    "cover": "",
+    "artwork": [],
+    "url": "akolyte"
+  },
+  {
+    "name": "Fish Life",
+    "aliases": [
+      "Sega's Fish Life"
+    ],
+    "id_igdb": "119209",
+    "cover": "co1lr0",
+    "artwork": [],
+    "url": "fish-life"
+  },
+  {
+    "name": "Frame Gride",
+    "aliases": [],
+    "id_igdb": "10908",
+    "cover": "co5vby",
+    "artwork": [],
+    "url": "frame-gride"
+  },
+  {
+    "name": "Pop'n Music 4: Append Disc",
+    "aliases": [
+      "Pop'n Music 4"
+    ],
+    "id_igdb": "283737",
+    "cover": "co7nzr",
+    "artwork": [],
+    "url": "popn-music-4-append-disc"
+  },
+  {
+    "name": "Dragon's Crown",
+    "aliases": [],
+    "id_igdb": "3002",
+    "cover": "co3wc6",
+    "artwork": [],
+    "url": "dragon-s-crown"
+  },
+  {
+    "name": "Railroad Tycoon II",
+    "aliases": [
+      "Railroad Tycoon 2"
+    ],
+    "id_igdb": "285",
+    "cover": "co5xsm",
+    "artwork": [],
+    "url": "railroad-tycoon-ii"
+  },
+  {
+    "name": "Star Wars: Episode I - Racer",
+    "aliases": [
+      "Episode 1 Racer",
+      "Star Wars: Episódio I - Racer",
+      "SWEP1RCR.EXE"
+    ],
+    "id_igdb": "154",
+    "cover": "co3wj7",
+    "artwork": [
+      "ar8f0"
+    ],
+    "url": "star-wars-episode-i-racer"
+  },
+  {
+    "name": "Marionette Company 2 Chu!",
+    "aliases": [
+      "人偶情缘2",
+      "Ren'ou Qingyuan 2"
+    ],
+    "id_igdb": "130710",
+    "cover": "co2gt3",
+    "artwork": [],
+    "url": "marionette-company-2-chu"
+  },
+  {
+    "name": "Fighting Vipers 2",
+    "aliases": [
+      "FV2"
+    ],
+    "id_igdb": "39447",
+    "cover": "coclqb",
+    "artwork": [
+      "ar6cmz",
+      "ar6cn0",
+      "ar6cn1",
+      "ar6cn2",
+      "ar6cn3",
+      "ar6cn4",
+      "ar6cn5",
+      "ar6cn6",
+      "ar6cn7",
+      "ar6cn8",
+      "ar6cn9"
+    ],
+    "url": "fighting-vipers-2"
+  },
+  {
+    "name": "Nijuuei",
+    "aliases": [
+      "Nijyuei",
+      "Double Shadow",
+      "Shadow and Shadow"
+    ],
+    "id_igdb": "204499",
+    "cover": "co4uuo",
+    "artwork": [],
+    "url": "nijuuei"
+  },
+  {
+    "name": "Derby Tsuku 2",
+    "aliases": [
+      "Dabitsuku 2",
+      "Dabi Tsuku 2"
+    ],
+    "id_igdb": "283369",
+    "cover": "co7ngb",
+    "artwork": [],
+    "url": "derby-tsuku-2"
+  },
+  {
+    "name": "Sentimental Graffiti 2",
+    "aliases": [],
+    "id_igdb": "130632",
+    "cover": "co6evu",
+    "artwork": [],
+    "url": "sentimental-graffiti-2"
+  },
+  {
+    "name": "Ready 2 Rumble Boxing",
+    "aliases": [],
+    "id_igdb": "3586",
+    "cover": "co3b87",
+    "artwork": [],
+    "url": "ready-2-rumble-boxing"
+  },
+  {
+    "name": "Ogami Ichiro Funtouki: Sakura Taisen Kayou Show - Benitokage Yori",
+    "aliases": [
+      "Oogami Ichirou Funtou-ki - Sakura Taisen Kayou Show Beni Tokage yori"
+    ],
+    "id_igdb": "62127",
+    "cover": "co48kg",
+    "artwork": [],
+    "url": "ogami-ichiro-funtouki-sakura-taisen-kayou-show-benitokage-yori"
+  },
+  {
+    "name": "Okinawa Rush",
+    "aliases": [
+      "沖縄ラッシュ (Okinawa Rush)",
+      "OkinawaRush.exe"
+    ],
+    "id_igdb": "69375",
+    "cover": "co2lc0",
+    "artwork": [
+      "arvvc"
+    ],
+    "url": "okinawa-rush"
+  },
+  {
+    "name": "Maximum Pool",
+    "aliases": [],
+    "id_igdb": "45815",
+    "cover": "co40p7",
+    "artwork": [],
+    "url": "maximum-pool"
+  },
+  {
+    "name": "Giant Killers",
+    "aliases": [],
+    "id_igdb": "4354",
+    "cover": "sj8ggdtxv6tno618l4sz",
+    "artwork": [],
+    "url": "giant-killers"
+  },
+  {
+    "name": "Air",
+    "aliases": [
+      "AIR"
+    ],
+    "id_igdb": "270403",
+    "cover": "co76vx",
+    "artwork": [],
+    "url": "air--2"
+  },
+  {
+    "name": "Yuukyuu Gensoukyoku 3: Perpetual Blue",
+    "aliases": [
+      "Yukyu Gensoukyoku 3 - Perpetual Blue"
+    ],
+    "id_igdb": "112575",
+    "cover": "co5xxd",
+    "artwork": [],
+    "url": "yuukyuu-gensoukyoku-3-perpetual-blue"
+  },
+  {
+    "name": "Romance of the Three Kingdoms VI with Power Up Kit",
+    "aliases": [
+      "San6WPK_Launcher.exe"
+    ],
+    "id_igdb": "91184",
+    "cover": "co7o9g",
+    "artwork": [],
+    "url": "romance-of-the-three-kingdoms-vi-with-power-up-kit"
+  },
+  {
+    "name": "Rocketron",
+    "aliases": [],
+    "id_igdb": "125487",
+    "cover": "co1wx3",
+    "artwork": [
+      "argy1"
+    ],
+    "url": "rocketron"
+  },
+  {
+    "name": "Doom 64 for Dreamcast",
+    "aliases": [],
+    "id_igdb": "346123",
+    "cover": "co9vsi",
+    "artwork": [],
+    "url": "doom-64-for-dreamcast"
+  },
+  {
+    "name": "Real Sound: Kaze no Regret",
+    "aliases": [
+      "Real Sound: The Wind's Regret",
+      "Riaru Saundo ~ Kaze no Riguretto"
+    ],
+    "id_igdb": "66624",
+    "cover": "co300b",
+    "artwork": [],
+    "url": "real-sound-kaze-no-regret"
+  },
+  {
+    "name": "Super Mario 64 Port: PSP Port of PC",
+    "aliases": [
+      "Super Mario 64 Port",
+      "Super Mario 64 PSP Port"
+    ],
+    "id_igdb": "307319",
+    "cover": "co998i",
+    "artwork": [],
+    "url": "super-mario-64-port-psp-port-of-pc"
+  },
+  {
+    "name": "Virtua Fighter 3tb",
+    "aliases": [
+      "Virtua Fighter 3: Team Battle"
+    ],
+    "id_igdb": "203161",
+    "cover": "co4t3y",
+    "artwork": [
+      "ar3oo2"
+    ],
+    "url": "virtua-fighter-3tb"
+  },
+  {
+    "name": "For Symphony: With All One's Heart",
+    "aliases": [
+      "For Symphony ~With All One's Heart~"
+    ],
+    "id_igdb": "202609",
+    "cover": "co4s8h",
+    "artwork": [],
+    "url": "for-symphony-with-all-ones-heart"
+  },
+  {
+    "name": "Metropolis Street Racer",
+    "aliases": [
+      "MSR ",
+      "MSR: Metropolis Street Racer",
+      "Crimson",
+      "Metropolis"
+    ],
+    "id_igdb": "3319",
+    "cover": "co9aei",
+    "artwork": [
+      "ar3ts8"
+    ],
+    "url": "metropolis-street-racer"
+  },
+  {
+    "name": "Alex: Virus Composer",
+    "aliases": [
+      "ALEX ~Virus Composer"
+    ],
+    "id_igdb": "364154",
+    "cover": "",
+    "artwork": [],
+    "url": "alex-virus-composer"
+  },
+  {
+    "name": "Alexander: The Road to Percia",
+    "aliases": [],
+    "id_igdb": "364155",
+    "cover": "",
+    "artwork": [],
+    "url": "alexander-the-road-to-percia"
+  },
+  {
+    "name": "Kita he: White Illumination",
+    "aliases": [
+      "Kita he. ~White Illumination~",
+      "北へ。～White Illumination～"
+    ],
+    "id_igdb": "237433",
+    "cover": "cobgga",
+    "artwork": [],
+    "url": "kita-he-white-illumination--1"
+  },
+  {
+    "name": "Baldur's Gate",
+    "aliases": [],
+    "id_igdb": "376722",
+    "cover": "coati0",
+    "artwork": [],
+    "url": "baldurs-gate"
+  },
+  {
+    "name": "Black & White",
+    "aliases": [],
+    "id_igdb": "376747",
+    "cover": "coatjn",
+    "artwork": [
+      "ar4nlu"
+    ],
+    "url": "black-and-white--2"
+  },
+  {
+    "name": "Armada 2: Exodus",
+    "aliases": [],
+    "id_igdb": "364362",
+    "cover": "coadcn",
+    "artwork": [],
+    "url": "armada-2-exodus"
+  },
+  {
+    "name": "Bikkuriman 2000 Kamereon Zantei no Inbou",
+    "aliases": [],
+    "id_igdb": "376733",
+    "cover": "",
+    "artwork": [],
+    "url": "bikkuriman-2000-kamereon-zantei-no-inbou"
+  },
+  {
+    "name": "The Storied Sword",
+    "aliases": [
+      "StoriedSword.exe"
+    ],
+    "id_igdb": "327462",
+    "cover": "co9uzt",
+    "artwork": [
+      "ar3e5w"
+    ],
+    "url": "the-storied-sword"
+  },
+  {
+    "name": "Silver",
+    "aliases": [
+      "silver.exe"
+    ],
+    "id_igdb": "7042",
+    "cover": "coaltz",
+    "artwork": [
+      "ar4cmy",
+      "ar4cmz",
+      "ar5lko"
+    ],
+    "url": "silver"
+  },
+  {
+    "name": "Web Mystery: Yochimu wo Miru Neko",
+    "aliases": [
+      "Web Mystery - Yochimu o Miru Neko"
+    ],
+    "id_igdb": "59815",
+    "cover": "co5xwr",
+    "artwork": [],
+    "url": "web-mystery-yochimu-wo-miru-neko"
+  },
+  {
+    "name": "Streets of Rage 4",
+    "aliases": [],
+    "id_igdb": "241863",
+    "cover": "",
+    "artwork": [],
+    "url": "streets-of-rage-4--1"
+  },
+  {
+    "name": "3D Ultra Lionel Traintown",
+    "aliases": [
+      "3D Ultra Lionel Traintown Deluxe"
+    ],
+    "id_igdb": "10735",
+    "cover": "co2xal",
+    "artwork": [],
+    "url": "3d-ultra-lionel-traintown"
+  },
+  {
+    "name": "Black Screen",
+    "aliases": [],
+    "id_igdb": "377179",
+    "cover": "coazc6",
+    "artwork": [
+      "ar4o6x"
+    ],
+    "url": "black-screen--1"
+  },
+  {
+    "name": "Jahmong",
+    "aliases": [
+      "jah-mong"
+    ],
+    "id_igdb": "327412",
+    "cover": "co98rt",
+    "artwork": [],
+    "url": "jahmong--1"
+  },
+  {
+    "name": "Kao the Kangaroo",
+    "aliases": [
+      "Kangurek Kao",
+      "Denis the Kangaroo",
+      "袋鼠小天王"
+    ],
+    "id_igdb": "36745",
+    "cover": "co292m",
+    "artwork": [
+      "ar11vf"
+    ],
+    "url": "kao-the-kangaroo"
+  },
+  {
+    "name": "Pop'n Music 3 Append Disc",
+    "aliases": [
+      "Poppunmyūjikku 3 apendodisuku"
+    ],
+    "id_igdb": "280791",
+    "cover": "co96cp",
+    "artwork": [],
+    "url": "popn-music-3-append-disc"
+  },
+  {
+    "name": "The Ring: Terror's Realm",
+    "aliases": [],
+    "id_igdb": "45832",
+    "cover": "co439w",
+    "artwork": [],
+    "url": "the-ring-terrors-realm"
+  },
+  {
+    "name": "Overserved: Food Fighters!",
+    "aliases": [],
+    "id_igdb": "398995",
+    "cover": "cocr9m",
+    "artwork": [
+      "ar6hcp"
+    ],
+    "url": "overserved-food-fighters"
+  },
+  {
+    "name": "Slave Zero",
+    "aliases": [
+      "SlaveZero.exe"
+    ],
+    "id_igdb": "8341",
+    "cover": "co2e3x",
+    "artwork": [],
+    "url": "slave-zero"
+  },
+  {
+    "name": "The Next Tetris On-Line Edition",
+    "aliases": [],
+    "id_igdb": "45789",
+    "cover": "co40u4",
+    "artwork": [],
+    "url": "the-next-tetris-on-line-edition"
+  },
+  {
+    "name": "Urban Chaos",
+    "aliases": [],
+    "id_igdb": "8469",
+    "cover": "co2b6v",
+    "artwork": [],
+    "url": "urban-chaos"
+  },
+  {
+    "name": "Sega Kara for Dreamcast",
+    "aliases": [],
+    "id_igdb": "331023",
+    "cover": "co9dt0",
+    "artwork": [],
+    "url": "sega-kara-for-dreamcast"
+  },
+  {
+    "name": "Test Drive 6",
+    "aliases": [
+      "Le Mans 24 Hours"
+    ],
+    "id_igdb": "4111",
+    "cover": "co4zlc",
+    "artwork": [],
+    "url": "test-drive-6"
+  },
+  {
+    "name": "Eldorado Gate Volume 6",
+    "aliases": [
+      "Eldorado Gate Vol. 6"
+    ],
+    "id_igdb": "4351",
+    "cover": "co5tt0",
+    "artwork": [],
+    "url": "eldorado-gate-volume-6"
+  },
+  {
+    "name": "Expendable",
+    "aliases": [
+      "Seitai Heiki Expendable",
+      "Expendable.exe"
+    ],
+    "id_igdb": "54012",
+    "cover": "co40gw",
+    "artwork": [],
+    "url": "expendable"
+  },
+  {
+    "name": "Wind: A Breath of Heart",
+    "aliases": [
+      "Wind -A Breath of Heart-"
+    ],
+    "id_igdb": "161174",
+    "cover": "co4hq7",
+    "artwork": [],
+    "url": "wind-a-breath-of-heart"
+  },
+  {
+    "name": "Ms. Pac-Man: Maze Madness",
+    "aliases": [
+      "Ms. Pac-Man Maze Madness"
+    ],
+    "id_igdb": "3338",
+    "cover": "co2ivx",
+    "artwork": [],
+    "url": "ms-pac-man-maze-madness"
+  },
+  {
+    "name": "Conflict Zone",
+    "aliases": [
+      "Conflict Zone: Modern War Strategy"
+    ],
+    "id_igdb": "6727",
+    "cover": "coausb",
+    "artwork": [],
+    "url": "conflict-zone"
+  },
+  {
+    "name": "Flag to Flag",
+    "aliases": [
+      "Super Speed Racing"
+    ],
+    "id_igdb": "6721",
+    "cover": "co2fgk",
+    "artwork": [],
+    "url": "flag-to-flag"
+  },
+  {
+    "name": "NHL 2K",
+    "aliases": [
+      "NHL2K"
+    ],
+    "id_igdb": "8839",
+    "cover": "co5xxu",
+    "artwork": [],
+    "url": "nhl-2k"
+  },
+  {
+    "name": "Animastar Puzzle",
+    "aliases": [],
+    "id_igdb": "364354",
+    "cover": "",
+    "artwork": [],
+    "url": "animastar-puzzle"
+  },
+  {
+    "name": "Spirit of Speed 1937",
+    "aliases": [],
+    "id_igdb": "16303",
+    "cover": "co43ax",
+    "artwork": [],
+    "url": "spirit-of-speed-1937"
+  },
+  {
+    "name": "Half-Life",
+    "aliases": [],
+    "id_igdb": "228891",
+    "cover": "co7zzj",
+    "artwork": [],
+    "url": "half-life--1"
+  },
+  {
+    "name": "Blue-Sky-Blue(s): Sora o Mau Tsubasa",
+    "aliases": [],
+    "id_igdb": "318594",
+    "cover": "co8vzs",
+    "artwork": [],
+    "url": "blue-sky-blue-s-sora-o-mau-tsubasa--1"
+  },
+  {
+    "name": "NBA Hoopz",
+    "aliases": [],
+    "id_igdb": "10634",
+    "cover": "gs5wpud4vvdv7pv1grwb",
+    "artwork": [],
+    "url": "nba-hoopz"
+  },
+  {
+    "name": "Tetris 4D",
+    "aliases": [],
+    "id_igdb": "70207",
+    "cover": "co3a73",
+    "artwork": [],
+    "url": "tetris-4d"
+  },
+  {
+    "name": "D2",
+    "aliases": [],
+    "id_igdb": "36736",
+    "cover": "co84eb",
+    "artwork": [],
+    "url": "d2"
+  },
+  {
+    "name": "Sega Worldwide Soccer 2000",
+    "aliases": [],
+    "id_igdb": "45790",
+    "cover": "co5xx2",
+    "artwork": [],
+    "url": "sega-worldwide-soccer-2000"
+  },
+  {
+    "name": "Pro Pinball: Trilogy",
+    "aliases": [
+      "Pro Pinball Trilogy"
+    ],
+    "id_igdb": "46372",
+    "cover": "co6vkm",
+    "artwork": [],
+    "url": "pro-pinball-trilogy"
+  },
+  {
+    "name": "Ecco 2: Sentinels of the Universe",
+    "aliases": [
+      "Ecco II: Sentinels of the Universe",
+      "Ecco the Dolphin 2 DC Dreamcast"
+    ],
+    "id_igdb": "19682",
+    "cover": "co2xbg",
+    "artwork": [],
+    "url": "ecco-2-sentinels-of-the-universe"
+  },
+  {
+    "name": "Atsumare! Guru Guru Onsen BB",
+    "aliases": [],
+    "id_igdb": "283323",
+    "cover": "co7ndm",
+    "artwork": [],
+    "url": "atsumare-guru-guru-onsen-bb"
+  },
+  {
+    "name": "Ecco the Dolphin: Defender of the Future",
+    "aliases": [],
+    "id_igdb": "9188",
+    "cover": "co53la",
+    "artwork": [],
+    "url": "ecco-the-dolphin-defender-of-the-future"
+  },
+  {
+    "name": "Giana's Return",
+    "aliases": [],
+    "id_igdb": "4365",
+    "cover": "",
+    "artwork": [],
+    "url": "giana-s-return"
+  },
+  {
+    "name": "Power Stone",
+    "aliases": [],
+    "id_igdb": "4355",
+    "cover": "co1w5b",
+    "artwork": [],
+    "url": "power-stone"
+  },
+  {
+    "name": "Alice's Mom's Rescue",
+    "aliases": [
+      "AliceMomRescue.exe"
+    ],
+    "id_igdb": "34504",
+    "cover": "co6a1w",
+    "artwork": [],
+    "url": "alices-moms-rescue"
+  },
+  {
+    "name": "Bomberman Online",
+    "aliases": [],
+    "id_igdb": "6716",
+    "cover": "co30fo",
+    "artwork": [],
+    "url": "bomberman-online"
+  },
+  {
+    "name": "Godzilla Generations Maximum Impact",
+    "aliases": [
+      "Gojira Jenereeshonzu Makishimamu Inpakuto"
+    ],
+    "id_igdb": "45823",
+    "cover": "co5xxg",
+    "artwork": [],
+    "url": "godzilla-generations-maximum-impact"
+  },
+  {
+    "name": "Incoming: The Final Conflict",
+    "aliases": [
+      "Incoming: Tulnukate Rünnak",
+      "Вторжение ",
+      "异形追杀令"
+    ],
+    "id_igdb": "25120",
+    "cover": "cobvet",
+    "artwork": [
+      "ar3931"
+    ],
+    "url": "incoming-the-final-conflict"
+  },
+  {
+    "name": "Grauen no Torikago: Kapitel 1 - Keiyaku",
+    "aliases": [
+      "Birdcage of Horrors: Chapter 1 - Contract",
+      "グラウエンの鳥籠 Kapitel 1 「契約」"
+    ],
+    "id_igdb": "313975",
+    "cover": "co8v3s",
+    "artwork": [],
+    "url": "grauen-no-torikago-kapitel-1-keiyaku"
+  },
+  {
+    "name": "Karous",
+    "aliases": [
+      "Crows"
+    ],
+    "id_igdb": "45818",
+    "cover": "co4gj9",
+    "artwork": [
+      "ar4xbb"
+    ],
+    "url": "karous"
+  },
+  {
+    "name": "L.O.L.: Lack of Love",
+    "aliases": [],
+    "id_igdb": "45799",
+    "cover": "co2tqs",
+    "artwork": [],
+    "url": "l-dot-o-l-dot-lack-of-love"
+  },
+  {
+    "name": "UEFA Dream Soccer",
+    "aliases": [],
+    "id_igdb": "45803",
+    "cover": "co4523",
+    "artwork": [
+      "ar6dow",
+      "ar6dox",
+      "ar6doy",
+      "ar6doz"
+    ],
+    "url": "uefa-dream-soccer"
+  },
+  {
+    "name": "Street Fighter III: Double Impact",
+    "aliases": [
+      "Street Fighter 3: Double Impact",
+      "Street Fighter III: W Impact"
+    ],
+    "id_igdb": "45194",
+    "cover": "co8ixb",
+    "artwork": [],
+    "url": "street-fighter-iii-double-impact"
+  },
+  {
+    "name": "Beats of Rage",
+    "aliases": [],
+    "id_igdb": "46623",
+    "cover": "co5ah7",
+    "artwork": [],
+    "url": "beats-of-rage"
+  },
+  {
+    "name": "Evolution: The World of Sacred Device",
+    "aliases": [
+      "Evolution"
+    ],
+    "id_igdb": "23132",
+    "cover": "co40gv",
+    "artwork": [],
+    "url": "evolution-the-world-of-sacred-device"
+  },
+  {
+    "name": "Rippin' Riders Snowboarding",
+    "aliases": [
+      "Snow Surfers",
+      "Cool Boarders Burrrn"
+    ],
+    "id_igdb": "26132",
+    "cover": "co5xwv",
+    "artwork": [],
+    "url": "rippin-riders-snowboarding"
+  },
+  {
+    "name": "Renegade Racers",
+    "aliases": [
+      "Wild Water World Championships"
+    ],
+    "id_igdb": "44978",
+    "cover": "coabdb",
+    "artwork": [],
+    "url": "renegade-racers"
+  },
+  {
+    "name": "Super Puzzle Fighter II X for Matching Service",
+    "aliases": [],
+    "id_igdb": "73946",
+    "cover": "co85g6",
+    "artwork": [],
+    "url": "super-puzzle-fighter-ii-x-for-matching-service"
+  },
+  {
+    "name": "Fire Pro Wrestling D",
+    "aliases": [],
+    "id_igdb": "46364",
+    "cover": "co8iot",
+    "artwork": [],
+    "url": "fire-pro-wrestling-d"
+  },
+  {
+    "name": "Nightmare Creatures II",
+    "aliases": [
+      "Nightmare Creatures 2"
+    ],
+    "id_igdb": "45860",
+    "cover": "co250m",
+    "artwork": [],
+    "url": "nightmare-creatures-ii"
+  },
+  {
+    "name": "Dance Dance Revolution Club Version Dreamcast Edition",
+    "aliases": [
+      "Dance Dance Revolution 2ndMix Dreamcast Edition",
+      "DDR 2ndMIX DC",
+      "Dance Dance Revolution CLUB VERSION Dreamcast Edition"
+    ],
+    "id_igdb": "79697",
+    "cover": "co5u8a",
+    "artwork": [],
+    "url": "dance-dance-revolution-club-version-dreamcast-edition"
+  },
+  {
+    "name": "Time Crisis II",
+    "aliases": [
+      "Time Crisis 2",
+      "Taimu Kuraishisu Tsuu"
+    ],
+    "id_igdb": "13893",
+    "cover": "co1p35",
+    "artwork": [
+      "ar8l7"
+    ],
+    "url": "time-crisis-ii"
+  },
+  {
+    "name": "Biohazard Code: Veronica - Limited Edition",
+    "aliases": [],
+    "id_igdb": "407337",
+    "cover": "coca68",
+    "artwork": [
+      "ar64x3"
+    ],
+    "url": "biohazard-code-veronica-limited-edition"
+  },
+  {
+    "name": "Kita e. Photo Memories",
+    "aliases": [],
+    "id_igdb": "239082",
+    "cover": "co66op",
+    "artwork": [],
+    "url": "kita-e-photo-memories"
+  },
+  {
+    "name": "onEscapee",
+    "aliases": [],
+    "id_igdb": "93044",
+    "cover": "co3bp9",
+    "artwork": [],
+    "url": "onescapee"
+  },
+  {
+    "name": "Gunbird 2",
+    "aliases": [
+      "건버드 2",
+      "ガンバード２ for Nintendo Switch",
+      "GunBird 2"
+    ],
+    "id_igdb": "40150",
+    "cover": "co2evg",
+    "artwork": [
+      "ar12mf"
+    ],
+    "url": "gunbird-2"
+  },
+  {
+    "name": "Xenocider",
+    "aliases": [],
+    "id_igdb": "57313",
+    "cover": "co5y0t",
+    "artwork": [],
+    "url": "xenocider"
+  },
+  {
+    "name": "Agartha",
+    "aliases": [
+      "Agartha Dreamcast DC"
+    ],
+    "id_igdb": "145519",
+    "cover": "co2xav",
+    "artwork": [],
+    "url": "agartha--2"
+  },
+  {
+    "name": "Kenju",
+    "aliases": [
+      "KenJu"
+    ],
+    "id_igdb": "39440",
+    "cover": "co4985",
+    "artwork": [],
+    "url": "kenju"
+  },
+  {
+    "name": "Bikkuriman 2000: Viva! Festival!",
+    "aliases": [
+      "BikkuriMan 2000 - Viva! Festiva!"
+    ],
+    "id_igdb": "122564",
+    "cover": "coatj6",
+    "artwork": [
+      "ar4nlp"
+    ],
+    "url": "bikkuriman-2000-viva-festival"
+  },
+  {
+    "name": "First Kiss Story II",
+    "aliases": [
+      "First Kiss * Monogatari 2"
+    ],
+    "id_igdb": "125206",
+    "cover": "co8is4",
+    "artwork": [],
+    "url": "first-kiss-story-ii"
+  },
+  {
+    "name": "Paranoia",
+    "aliases": [
+      "PARANOIA",
+      "Half-Life: Paranoia"
+    ],
+    "id_igdb": "165050",
+    "cover": "co3kml",
+    "artwork": [],
+    "url": "paranoia--2"
+  },
+  {
+    "name": "Ikaruga",
+    "aliases": [
+      "斑鳩 ",
+      "game.exe"
+    ],
+    "id_igdb": "200996",
+    "cover": "co4zp5",
+    "artwork": [
+      "ar1qh3",
+      "ar1qh4",
+      "ar1qh5"
+    ],
+    "url": "ikaruga--1"
+  },
+  {
+    "name": "Angel Wish: Kimi no Egao ni Chu!",
+    "aliases": [
+      "AngelWish〜君の笑顔にチュッ!〜"
+    ],
+    "id_igdb": "68259",
+    "cover": "coa6cf",
+    "artwork": [],
+    "url": "angel-wish-kimi-no-egao-ni-chu"
+  },
+  {
+    "name": "Bangai-O",
+    "aliases": [
+      "Bakuretsu Muteki Bangai-O",
+      "Explosive Invincible Bangai-O"
+    ],
+    "id_igdb": "3443",
+    "cover": "co9ks6",
+    "artwork": [
+      "ar3db9"
+    ],
+    "url": "bangai-o"
+  },
+  {
+    "name": "Golem no Maigo",
+    "aliases": [
+      "The Lost Golem"
+    ],
+    "id_igdb": "64705",
+    "cover": "co3kd1",
+    "artwork": [],
+    "url": "golem-no-maigo"
+  },
+  {
+    "name": "Chou Hatsumei Boy Kani Pan: Bousou Roboto no Nazo!?",
+    "aliases": [
+      "Chou Hatsumei Boy Kanipan - Bousou Robot no Nazo!"
+    ],
+    "id_igdb": "97335",
+    "cover": "co7kxe",
+    "artwork": [],
+    "url": "chou-hatsumei-boy-kani-pan-bousou-roboto-no-nazo"
+  },
+  {
+    "name": "Konohana: True Report",
+    "aliases": [
+      "KONOHANA:TrueReport",
+      "SuperLite 1500 シリーズ 此花 トゥルーリポート",
+      "SuperLite 1500 Series: Konohana - TrueReport"
+    ],
+    "id_igdb": "213703",
+    "cover": "co53e1",
+    "artwork": [],
+    "url": "konohana-true-report"
+  },
+  {
+    "name": "Irides: Master of Blocks",
+    "aliases": [],
+    "id_igdb": "4362",
+    "cover": "embxbzch2ooqdqhsfzzr",
+    "artwork": [],
+    "url": "irides-master-of-blocks"
+  },
+  {
+    "name": "Dux",
+    "aliases": [],
+    "id_igdb": "68409",
+    "cover": "co9ovn",
+    "artwork": [],
+    "url": "dux"
+  },
+  {
+    "name": "Yu Suzuki Game Works Vol. 1",
+    "aliases": [],
+    "id_igdb": "56453",
+    "cover": "jor5hjidx2ccnhom7t1r",
+    "artwork": [],
+    "url": "yu-suzuki-game-works-vol-1"
+  },
+  {
+    "name": "Cafe Little Wish: Mahou no Recipe",
+    "aliases": [
+      "カフェ・リトルウィッシュ ～魔法のレシピ～"
+    ],
+    "id_igdb": "269393",
+    "cover": "coc0sp",
+    "artwork": [
+      "ar60wm"
+    ],
+    "url": "cafe-little-wish-mahou-no-recipe"
+  },
+  {
+    "name": "Polyko's Super Jelly Bean Quest in the Sketchbook of Illusion",
+    "aliases": [],
+    "id_igdb": "130777",
+    "cover": "co2wkd",
+    "artwork": [],
+    "url": "polykos-super-jelly-bean-quest-in-the-sketchbook-of-illusion"
+  },
+  {
+    "name": "Stunt GP",
+    "aliases": [],
+    "id_igdb": "9122",
+    "cover": "co44uq",
+    "artwork": [],
+    "url": "stunt-gp"
+  },
+  {
+    "name": "Golf Shiyou yo 2: Aratanaru Chousen",
+    "aliases": [
+      "ゴルフしようよ　２　～新たなる挑戦～"
+    ],
+    "id_igdb": "317349",
+    "cover": "co8ua6",
+    "artwork": [],
+    "url": "golf-shiyou-yo-2-aratanaru-chousen"
+  },
+  {
+    "name": "Pop'n music",
+    "aliases": [
+      "pop'n music"
+    ],
+    "id_igdb": "186652",
+    "cover": "co5xwj",
+    "artwork": [],
+    "url": "popn-music--1"
+  },
+  {
+    "name": "Sushi Bar",
+    "aliases": [],
+    "id_igdb": "298874",
+    "cover": "co84al",
+    "artwork": [],
+    "url": "sushi-bar"
+  },
+  {
+    "name": "Kanon",
+    "aliases": [],
+    "id_igdb": "290848",
+    "cover": "co7vsj",
+    "artwork": [],
+    "url": "kanon--1"
+  },
+  {
+    "name": "July",
+    "aliases": [],
+    "id_igdb": "62243",
+    "cover": "co4cj8",
+    "artwork": [],
+    "url": "july"
+  },
+  {
+    "name": "HarleQuest!",
+    "aliases": [],
+    "id_igdb": "246111",
+    "cover": "co6e8u",
+    "artwork": [],
+    "url": "harlequest"
+  },
+  {
+    "name": "NBA 2K1",
+    "aliases": [
+      "Sega Sports: NBA 2K1",
+      "NBA2K1",
+      "NBA 2001"
+    ],
+    "id_igdb": "28836",
+    "cover": "co3kcu",
+    "artwork": [],
+    "url": "nba-2k1"
+  },
+  {
+    "name": "Roommania #203",
+    "aliases": [
+      "ROOMMANIA#203"
+    ],
+    "id_igdb": "94027",
+    "cover": "coabu3",
+    "artwork": [],
+    "url": "roommania-number-203"
+  },
+  {
+    "name": "Yukigatari",
+    "aliases": [
+      "Yuki Gatari"
+    ],
+    "id_igdb": "268663",
+    "cover": "co751k",
+    "artwork": [],
+    "url": "yukigatari--1"
+  },
+  {
+    "name": "Neppachi: 10-renchan de Las Vegas Ryokou",
+    "aliases": [
+      "Neppachi - 10-ren Chan de Las Vegas Ryokou"
+    ],
+    "id_igdb": "272455",
+    "cover": "co78z8",
+    "artwork": [],
+    "url": "neppachi-10-renchan-de-las-vegas-ryokou"
+  },
+  {
+    "name": "Wetrix+",
+    "aliases": [],
+    "id_igdb": "45847",
+    "cover": "co45kb",
+    "artwork": [],
+    "url": "wetrix-plus"
+  },
+  {
+    "name": "ESPN NBA 2Night",
+    "aliases": [],
+    "id_igdb": "78678",
+    "cover": "jsvqlvfgjn5gj7xltsyt",
+    "artwork": [],
+    "url": "espn-nba-2night"
+  },
+  {
+    "name": "Pro Yakyuu Team de Asobou!",
+    "aliases": [],
+    "id_igdb": "136708",
+    "cover": "co2f04",
+    "artwork": [],
+    "url": "pro-yakyuu-team-de-asobou"
+  },
+  {
+    "name": "Trizeal",
+    "aliases": [],
+    "id_igdb": "93063",
+    "cover": "co3gb6",
+    "artwork": [],
+    "url": "trizeal"
+  },
+  {
+    "name": "21: Two One",
+    "aliases": [
+      "21-TwoOne-"
+    ],
+    "id_igdb": "283250",
+    "cover": "cocp7v",
+    "artwork": [],
+    "url": "21-two-one"
+  },
+  {
+    "name": "Aero Dancing: Secret Mission Disk",
+    "aliases": [
+      "Aero Dancing: Torodoki Taichou no Himitsu Disc"
+    ],
+    "id_igdb": "242383",
+    "cover": "co6a9p",
+    "artwork": [],
+    "url": "aero-dancing-secret-mission-disk"
+  },
+  {
+    "name": "Sister Princess",
+    "aliases": [],
+    "id_igdb": "58446",
+    "cover": "cocnb0",
+    "artwork": [],
+    "url": "sister-princess"
+  },
+  {
+    "name": "Sega Bass Fishing Challenge",
+    "aliases": [],
+    "id_igdb": "39433",
+    "cover": "",
+    "artwork": [],
+    "url": "sega-bass-fishing-challenge"
+  },
+  {
+    "name": "Weakness Hero Torauman DC",
+    "aliases": [],
+    "id_igdb": "77564",
+    "cover": "fuj5kjdnoplgiib18q8a",
+    "artwork": [],
+    "url": "weakness-hero-torauman-dc"
+  },
+  {
+    "name": "Netto de Para",
+    "aliases": [
+      "Net de Para",
+      "Booking Paradise"
+    ],
+    "id_igdb": "267584",
+    "cover": "co73xi",
+    "artwork": [],
+    "url": "netto-de-para"
+  },
+  {
+    "name": "Inoue Ryouko: Roommate",
+    "aliases": [
+      "井上涼子 〜ルームメイト〜",
+      "Inoue Ryoko: Roommate"
+    ],
+    "id_igdb": "362824",
+    "cover": "coac0r",
+    "artwork": [
+      "ar42bg"
+    ],
+    "url": "inoue-ryouko-roommate"
+  },
+  {
+    "name": "Harusame Youbi",
+    "aliases": [],
+    "id_igdb": "71191",
+    "cover": "c7obtu3jewycvfzh3itg",
+    "artwork": [],
+    "url": "harusame-youbi"
+  },
+  {
+    "name": "Gundam Battle Online",
+    "aliases": [],
+    "id_igdb": "107166",
+    "cover": "co9dcv",
+    "artwork": [],
+    "url": "gundam-battle-online"
+  },
+  {
+    "name": "Kimi ga Nozomu Eien",
+    "aliases": [
+      "Kiminozo",
+      "Rumbling Hearts",
+      "Kimibou"
+    ],
+    "id_igdb": "84324",
+    "cover": "co3dog",
+    "artwork": [],
+    "url": "kimi-ga-nozomu-eien"
+  },
+  {
+    "name": "Idol Janshi wo Tsukucchaou",
+    "aliases": [
+      "Idol Janshi o Tsukucchaou"
+    ],
+    "id_igdb": "92138",
+    "cover": "co6f2a",
+    "artwork": [],
+    "url": "idol-janshi-wo-tsukucchaou"
+  },
+  {
+    "name": "Intrepid Izzy",
+    "aliases": [
+      "Intrepid-Izzy.exe"
+    ],
+    "id_igdb": "135822",
+    "cover": "co2p9e",
+    "artwork": [
+      "arxf0"
+    ],
+    "url": "intrepid-izzy"
+  },
+  {
+    "name": "Musapey's Choco Marker",
+    "aliases": [],
+    "id_igdb": "45831",
+    "cover": "co8gk3",
+    "artwork": [],
+    "url": "musapeys-choco-marker"
+  },
+  {
+    "name": "Dejiko no Maibura",
+    "aliases": [],
+    "id_igdb": "67544",
+    "cover": "dle37i3eci4wcasu4w5h",
+    "artwork": [],
+    "url": "dejiko-no-maibura"
+  },
+  {
+    "name": "Elysion: Eien no Sanctuary",
+    "aliases": [
+      "Elysion ~Eternal Sanctuary~",
+      "Elysion ~Eien no Sanctuary~",
+      "エリュシオン ～永遠のサンクチュアリ～"
+    ],
+    "id_igdb": "337855",
+    "cover": "coc5cl",
+    "artwork": [],
+    "url": "elysion-eien-no-sanctuary--1"
+  },
+  {
+    "name": "F-1 World Grand Prix for Dreamcast",
+    "aliases": [
+      "F-1 World Grand Prix"
+    ],
+    "id_igdb": "248742",
+    "cover": "co6na4",
+    "artwork": [],
+    "url": "f-1-world-grand-prix-for-dreamcast"
+  },
+  {
+    "name": "Pro Yakyuu: Greatest Nine 98",
+    "aliases": [],
+    "id_igdb": "275140",
+    "cover": "co7m6b",
+    "artwork": [],
+    "url": "pro-yakyuu-greatest-nine-98"
+  },
+  {
+    "name": "Love Hina: Totsuzen no Engeji Happening",
+    "aliases": [
+      "Love Hina - Totsuzen no Engage Happening"
+    ],
+    "id_igdb": "46375",
+    "cover": "co5vrv",
+    "artwork": [],
+    "url": "love-hina-totsuzen-no-engeji-happening"
+  },
+  {
+    "name": "Milky Season",
+    "aliases": [
+      "MILKY SEASON"
+    ],
+    "id_igdb": "166582",
+    "cover": "co3rsr",
+    "artwork": [],
+    "url": "milky-season"
+  },
+  {
+    "name": "Net Versus Reversi",
+    "aliases": [],
+    "id_igdb": "62388",
+    "cover": "oczrixcfchuvll8eeh8f",
+    "artwork": [],
+    "url": "net-versus-reversi"
+  },
+  {
+    "name": "Striker Pro 2000",
+    "aliases": [],
+    "id_igdb": "22676",
+    "cover": "co44qu",
+    "artwork": [],
+    "url": "striker-pro-2000"
+  },
+  {
+    "name": "Shenmue",
+    "aliases": [
+      "シェンムー",
+      "Project Berkley",
+      "Shenmue: Isshou - Yokosuka",
+      "シェンムー　一章：横須賀",
+      "莎木 第一章 橫須賀",
+      "Virtua Fighter RPG"
+    ],
+    "id_igdb": "1217",
+    "cover": "co3wmr",
+    "artwork": [
+      "ar5zz8",
+      "ar5zzc",
+      "ar5zzd",
+      "ar5zze",
+      "ar6ct4",
+      "ar6ct5",
+      "ar6ct6",
+      "ar6ct8",
+      "ar6ct9",
+      "ar6cta",
+      "ar6ctb",
+      "ar6ctc",
+      "ar6cte",
+      "ar6ctf",
+      "ar6ctg",
+      "ar6cth",
+      "ar6cti",
+      "ar6ctk",
+      "ar6ctl"
+    ],
+    "url": "shenmue"
+  },
+  {
+    "name": "Sweet Season",
+    "aliases": [],
+    "id_igdb": "268656",
+    "cover": "co751e",
+    "artwork": [],
+    "url": "sweet-season--1"
+  },
+  {
+    "name": "Jet Coaster Dream 2",
+    "aliases": [],
+    "id_igdb": "69383",
+    "cover": "co7o96",
+    "artwork": [],
+    "url": "jet-coaster-dream-2"
+  },
+  {
+    "name": "Zusar Vasar",
+    "aliases": [],
+    "id_igdb": "58167",
+    "cover": "u5c51yosyzqkrgbfvgye",
+    "artwork": [],
+    "url": "zusar-vasar"
+  },
+  {
+    "name": "Yume no Tsubasa",
+    "aliases": [
+      "Yume No Tsubasa: Fate of the Heart",
+      "夢のつばさ 〜フエイトオブハート〜"
+    ],
+    "id_igdb": "166390",
+    "cover": "co6vz3",
+    "artwork": [],
+    "url": "yume-no-tsubasa"
+  },
+  {
+    "name": "Capcom vs. SNK: Millennium Fight 2000",
+    "aliases": [
+      "CVS",
+      "Capcom Vs. SNK"
+    ],
+    "id_igdb": "39593",
+    "cover": "co9gwf",
+    "artwork": [],
+    "url": "capcom-vs-snk-millennium-fight-2000"
+  },
+  {
+    "name": "Maqiupai",
+    "aliases": [],
+    "id_igdb": "92993",
+    "cover": "co810y",
+    "artwork": [],
+    "url": "maqiupai"
+  },
+  {
+    "name": "Slow Mole",
+    "aliases": [],
+    "id_igdb": "191431",
+    "cover": "co4hd7",
+    "artwork": [],
+    "url": "slow-mole"
+  },
+  {
+    "name": "Sakura Taisen Online: Paris no Yuuga na Hibi",
+    "aliases": [],
+    "id_igdb": "221783",
+    "cover": "co5vyl",
+    "artwork": [],
+    "url": "sakura-taisen-online-paris-no-yuuga-na-hibi"
+  },
+  {
+    "name": "Tricolore Crise",
+    "aliases": [
+      "Tricolore Crisis"
+    ],
+    "id_igdb": "58170",
+    "cover": "co5d1s",
+    "artwork": [],
+    "url": "tricolore-crise"
+  },
+  {
+    "name": "Communication Logic Battle Daisessen",
+    "aliases": [],
+    "id_igdb": "55001",
+    "cover": "b3orffufhxidtiqkl0rw",
+    "artwork": [],
+    "url": "communication-logic-battle-daisessen"
+  },
+  {
+    "name": "Walt Disney World Quest: Magical Racing Tour",
+    "aliases": [],
+    "id_igdb": "8129",
+    "cover": "co2ru5",
+    "artwork": [],
+    "url": "walt-disney-world-quest-magical-racing-tour"
+  },
+  {
+    "name": "StarLancer",
+    "aliases": [],
+    "id_igdb": "11230",
+    "cover": "co2jps",
+    "artwork": [],
+    "url": "starlancer"
+  },
+  {
+    "name": "Dynamite Cop",
+    "aliases": [
+      "Dynamite Deka 2"
+    ],
+    "id_igdb": "36737",
+    "cover": "co4lkr",
+    "artwork": [
+      "ar3ol5",
+      "ar3ol7"
+    ],
+    "url": "dynamite-cop"
+  },
+  {
+    "name": "Net Versus Shogi",
+    "aliases": [],
+    "id_igdb": "78078",
+    "cover": "co7nvm",
+    "artwork": [],
+    "url": "net-versus-shogi"
+  },
+  {
+    "name": "Sakura Momoko Gekijou: Kojikoji",
+    "aliases": [],
+    "id_igdb": "96493",
+    "cover": "rnife7bmlo7majkzis7n",
+    "artwork": [],
+    "url": "sakura-momoko-gekijou-kojikoji"
+  },
+  {
+    "name": "Armada",
+    "aliases": [],
+    "id_igdb": "6713",
+    "cover": "co40ee",
+    "artwork": [],
+    "url": "armada"
+  },
+  {
+    "name": "Speed Devils",
+    "aliases": [],
+    "id_igdb": "23609",
+    "cover": "co43as",
+    "artwork": [],
+    "url": "speed-devils"
+  },
+  {
+    "name": "Mizuiro",
+    "aliases": [
+      "みずいろ"
+    ],
+    "id_igdb": "345428",
+    "cover": "coat3p",
+    "artwork": [],
+    "url": "mizuiro"
+  },
+  {
+    "name": "F-1 World Grand Prix II",
+    "aliases": [
+      "F1 World Grand Prix II",
+      "F1 World Grand Prix II for Dreamcast"
+    ],
+    "id_igdb": "3488",
+    "cover": "co39v8",
+    "artwork": [],
+    "url": "f-1-world-grand-prix-ii"
+  },
+  {
+    "name": "Happy Pong",
+    "aliases": [],
+    "id_igdb": "352380",
+    "cover": "coa2nu",
+    "artwork": [],
+    "url": "happy-pong--1"
+  },
+  {
+    "name": "Rez",
+    "aliases": [
+      "K-Project",
+      "Project Eden",
+      "Vibes",
+      "The Sound Project"
+    ],
+    "id_igdb": "11244",
+    "cover": "cobyl9",
+    "artwork": [
+      "ar5rec",
+      "ar5ree",
+      "ar5ref",
+      "ar5reh",
+      "ar5rej"
+    ],
+    "url": "rez"
+  },
+  {
+    "name": "Driving Strikers",
+    "aliases": [
+      "driving-strikers.exe"
+    ],
+    "id_igdb": "255303",
+    "cover": "co7guj",
+    "artwork": [
+      "ar2dp8"
+    ],
+    "url": "driving-strikers"
+  },
+  {
+    "name": "Plus Plumb",
+    "aliases": [],
+    "id_igdb": "263957",
+    "cover": "co706w",
+    "artwork": [],
+    "url": "plus-plumb"
+  },
+  {
+    "name": "Kurt Warner's Arena Football Unleashed",
+    "aliases": [
+      "Arena Football Dreamcast",
+      "KWAFU",
+      "Kurt Warner's Arena League Unleashed"
+    ],
+    "id_igdb": "43721",
+    "cover": "co2xma",
+    "artwork": [],
+    "url": "kurt-warners-arena-football-unleashed"
+  },
+  {
+    "name": "Top Classic Plaigarized",
+    "aliases": [],
+    "id_igdb": "319095",
+    "cover": "co8wsv",
+    "artwork": [],
+    "url": "top-classic-plaigarized"
+  },
+  {
+    "name": "Bust-a-Move 4",
+    "aliases": [
+      "Puzzle Bobble 4",
+      "Simple 1500 Series Vol. 93: The Puzzle Bobble - Puzzle Bobble 4",
+      "SIMPLE1500シリーズ Vol.93 THE パズルボブル パズルボブル4"
+    ],
+    "id_igdb": "6826",
+    "cover": "coa36f",
+    "artwork": [
+      "ar3tty",
+      "ar3ttz",
+      "ar3tu0",
+      "ar3tu1",
+      "ar3tu3"
+    ],
+    "url": "bust-a-move-4"
+  },
+  {
+    "name": "Resident Evil 2",
+    "aliases": [
+      "Biohazard 2 Value Plus",
+      "RE2",
+      "惡靈古堡2",
+      "Обитель зла 2",
+      "Resident Evil 2 Platinum",
+      "Biohazard 2"
+    ],
+    "id_igdb": "880",
+    "cover": "co2vz0",
+    "artwork": [
+      "ar3ue9",
+      "ar3ueb",
+      "ar6jmd"
+    ],
+    "url": "resident-evil-2"
+  },
+  {
+    "name": "Suigetsu: Mayoi-Gokoro",
+    "aliases": [],
+    "id_igdb": "396592",
+    "cover": "cocqhq",
+    "artwork": [],
+    "url": "suigetsu-mayoi-gokoro"
+  },
+  {
+    "name": "Championship Surfer",
+    "aliases": [],
+    "id_igdb": "6722",
+    "cover": "co40f5",
+    "artwork": [],
+    "url": "championship-surfer"
+  },
+  {
+    "name": "Castle Shikigami 2",
+    "aliases": [
+      "Castle Shikigami 2: War of the Worlds",
+      "Shikigami no Shiro 2",
+      "Shikigami no Shiro II"
+    ],
+    "id_igdb": "4149",
+    "cover": "co8iyf",
+    "artwork": [],
+    "url": "castle-shikigami-2"
+  },
+  {
+    "name": "Marionette Handler",
+    "aliases": [],
+    "id_igdb": "77566",
+    "cover": "co7nvz",
+    "artwork": [],
+    "url": "marionette-handler"
+  },
+  {
+    "name": "Border Down",
+    "aliases": [],
+    "id_igdb": "6717",
+    "cover": "co23kq",
+    "artwork": [],
+    "url": "border-down"
+  },
+  {
+    "name": "Radirgy",
+    "aliases": [
+      "Rajirugi",
+      "Radilgy",
+      "Radio Allergy"
+    ],
+    "id_igdb": "4077",
+    "cover": "co1w2c",
+    "artwork": [],
+    "url": "radirgy"
+  },
+  {
+    "name": "Princess Maker 3: Fairy Tales Come True",
+    "aliases": [
+      "Princess Maker Faery Tales Come True",
+      "PRINCESS MAKER -FAERY TALES COME TRUE-"
+    ],
+    "id_igdb": "43184",
+    "cover": "co1v68",
+    "artwork": [
+      "arb4f"
+    ],
+    "url": "princess-maker-3-fairy-tales-come-true"
+  },
+  {
+    "name": "Eldorado Gate Volume 5",
+    "aliases": [
+      "Eldorado Gate Vol. 5"
+    ],
+    "id_igdb": "5557",
+    "cover": "co5tt1",
+    "artwork": [],
+    "url": "eldorado-gate-volume-5"
+  },
+  {
+    "name": "Rush Rush Rally Racing",
+    "aliases": [],
+    "id_igdb": "4357",
+    "cover": "vxelzux6rrcrmqt0hwlz",
+    "artwork": [],
+    "url": "rush-rush-rally-racing"
+  },
+  {
+    "name": "Guilty Gear X",
+    "aliases": [
+      "GGX",
+      "Giruti Gia Zekusu",
+      "By Your Side"
+    ],
+    "id_igdb": "9141",
+    "cover": "co2vu3",
+    "artwork": [],
+    "url": "guilty-gear-x"
+  },
+  {
+    "name": "Sega Worldwide Soccer 2000: Euro Edition",
+    "aliases": [],
+    "id_igdb": "46554",
+    "cover": "co43ai",
+    "artwork": [],
+    "url": "sega-worldwide-soccer-2000-euro-edition"
+  },
+  {
+    "name": "Tako no Marine",
+    "aliases": [],
+    "id_igdb": "107647",
+    "cover": "co3kpe",
+    "artwork": [],
+    "url": "tako-no-marine"
+  },
+  {
+    "name": "Kiteretsu Boy's Gangagan",
+    "aliases": [
+      "機天烈少年'S ガンガガン"
+    ],
+    "id_igdb": "54927",
+    "cover": "co5y0s",
+    "artwork": [],
+    "url": "kiteretsu-boys-gangagan"
+  },
+  {
+    "name": "deSpiria",
+    "aliases": [],
+    "id_igdb": "92865",
+    "cover": "co97je",
+    "artwork": [],
+    "url": "despiria"
+  },
+  {
+    "name": "Metal Wolf",
+    "aliases": [
+      "メタルウルフ"
+    ],
+    "id_igdb": "109171",
+    "cover": "co74d0",
+    "artwork": [],
+    "url": "metal-wolf"
+  },
+  {
+    "name": "Sakura Taisen 4: Koi seyo, Otome",
+    "aliases": [
+      "Sakura Wars 4: Fall in Love, Maidens",
+      "Sakura Taisen 4",
+      "Sakura Wars 4",
+      "Sakura Wars 4: Koi seyo, Otome"
+    ],
+    "id_igdb": "93261",
+    "cover": "co2vtl",
+    "artwork": [],
+    "url": "sakura-taisen-4-koi-seyo-otome"
+  },
+  {
+    "name": "Toy Commander",
+    "aliases": [
+      "突撃！てけてけ!!トイ・レンジャー"
+    ],
+    "id_igdb": "10125",
+    "cover": "co450b",
+    "artwork": [],
+    "url": "toy-commander"
+  },
+  {
+    "name": "Hanagumi Taisen Columns 2",
+    "aliases": [
+      "花組対戦コラムス2"
+    ],
+    "id_igdb": "81567",
+    "cover": "co5bxd",
+    "artwork": [],
+    "url": "hanagumi-taisen-columns-2"
+  },
+  {
+    "name": "Macross M3",
+    "aliases": [],
+    "id_igdb": "45809",
+    "cover": "cocjbv",
+    "artwork": [],
+    "url": "macross-m3"
+  },
+  {
+    "name": "Postal",
+    "aliases": [
+      "The Last Nail",
+      "Postal 1",
+      "The Postman Always Shoots Twice",
+      "Postal Plus.exe"
+    ],
+    "id_igdb": "2000",
+    "cover": "co7yfg",
+    "artwork": [
+      "arkba"
+    ],
+    "url": "postal"
+  },
+  {
+    "name": "Dance Dance Revolution 2nd Mix: Dreamcast Edition",
+    "aliases": [],
+    "id_igdb": "268647",
+    "cover": "co7515",
+    "artwork": [],
+    "url": "dance-dance-revolution-2nd-mix-dreamcast-edition"
+  },
+  {
+    "name": "Mobile Suit Gundam Federation vs. Zeon",
+    "aliases": [
+      "Gundam VS",
+      "連ジ"
+    ],
+    "id_igdb": "43311",
+    "cover": "co2yas",
+    "artwork": [],
+    "url": "mobile-suit-gundam-federation-vs-zeon"
+  },
+  {
+    "name": "Boku no Tennis Jinsei",
+    "aliases": [
+      "ぼくのテニス人生"
+    ],
+    "id_igdb": "69362",
+    "cover": "co1wim",
+    "artwork": [],
+    "url": "boku-no-tennis-jinsei"
+  },
+  {
+    "name": "Namco Museum",
+    "aliases": [],
+    "id_igdb": "177623",
+    "cover": "co40pk",
+    "artwork": [],
+    "url": "namco-museum--4"
+  },
+  {
+    "name": "Viva Soccer",
+    "aliases": [
+      "20 Reiki Striker Retsuden",
+      "Absolute Football",
+      "20 Seiki Striker Retsuden",
+      "Viva Fussball",
+      "20-seiki Striker Retsuden: The 20th Century's Real Strikers"
+    ],
+    "id_igdb": "47084",
+    "cover": "coabca",
+    "artwork": [],
+    "url": "viva-soccer"
+  },
+  {
+    "name": "Space Griffon",
+    "aliases": [
+      "Bluesteel Variable Formula - Space Griffon",
+      "Soukou no Kihei: Space Griffon ",
+      "Blue Steel Cavalryman",
+      "Sōkō no Kihei: Space Griffon",
+      "Aoi Hagane no Kihei: Space Griffon"
+    ],
+    "id_igdb": "20661",
+    "cover": "cob9c2",
+    "artwork": [],
+    "url": "space-griffon"
+  },
+  {
+    "name": "Redux: Dark Matters",
+    "aliases": [
+      "Redux_Starter.exe"
+    ],
+    "id_igdb": "36093",
+    "cover": "co4vld",
+    "artwork": [
+      "ar4kjv"
+    ],
+    "url": "redux-dark-matters"
+  },
+  {
+    "name": "Miss Moonlight",
+    "aliases": [],
+    "id_igdb": "305354",
+    "cover": "co8e9d",
+    "artwork": [],
+    "url": "miss-moonlight--1"
+  },
+  {
+    "name": "UEFA Striker",
+    "aliases": [],
+    "id_igdb": "46370",
+    "cover": "co5xxk",
+    "artwork": [],
+    "url": "uefa-striker"
+  },
+  {
+    "name": "Virtua Tennis",
+    "aliases": [
+      "Sega Professional Tennis",
+      "Power Smash"
+    ],
+    "id_igdb": "6291",
+    "cover": "co2f1k",
+    "artwork": [],
+    "url": "virtua-tennis"
+  },
+  {
+    "name": "Sapphire Hotel: The Little Tales of",
+    "aliases": [],
+    "id_igdb": "267220",
+    "cover": "co73kl",
+    "artwork": [],
+    "url": "sapphire-hotel-the-little-tales-of"
+  },
+  {
+    "name": "MoHo",
+    "aliases": [
+      "Ball Breakers"
+    ],
+    "id_igdb": "176877",
+    "cover": "co40ef",
+    "artwork": [],
+    "url": "moho"
+  },
+  {
+    "name": "Puyo Puyo~n",
+    "aliases": [
+      "Pocket Puyo Puyo~n",
+      "Puyo Puyo 4",
+      "Puyo Puyo~n Party",
+      "Puyo Puyoon Party"
+    ],
+    "id_igdb": "3579",
+    "cover": "co2zkx",
+    "artwork": [],
+    "url": "puyo-puyo-n"
+  },
+  {
+    "name": "Exhibition of Speed",
+    "aliases": [
+      "E.O.S.: Exhibition of Speed"
+    ],
+    "id_igdb": "46365",
+    "cover": "co40gx",
+    "artwork": [],
+    "url": "exhibition-of-speed"
+  },
+  {
+    "name": "Cool Herders",
+    "aliases": [],
+    "id_igdb": "45813",
+    "cover": "co6iqg",
+    "artwork": [],
+    "url": "cool-herders"
+  },
+  {
+    "name": "The King of Fighters: Dream Match 1999",
+    "aliases": [],
+    "id_igdb": "45861",
+    "cover": "co4afy",
+    "artwork": [],
+    "url": "the-king-of-fighters-dream-match-1999"
+  },
+  {
+    "name": "Wolflame",
+    "aliases": [
+      "WOLFLAME.exe"
+    ],
+    "id_igdb": "19305",
+    "cover": "co7ipb",
+    "artwork": [
+      "arcrq"
+    ],
+    "url": "wolflame"
+  },
+  {
+    "name": "Maze Final Challenge",
+    "aliases": [],
+    "id_igdb": "227747",
+    "cover": "",
+    "artwork": [],
+    "url": "maze-final-challenge"
+  },
+  {
+    "name": "Sega Swirl",
+    "aliases": [],
+    "id_igdb": "46374",
+    "cover": "xpaqs2sljnvpqwmifynv",
+    "artwork": [],
+    "url": "sega-swirl"
+  },
+  {
+    "name": "Austin Powers: Mojo Rally",
+    "aliases": [],
+    "id_igdb": "218797",
+    "cover": "co8wnc",
+    "artwork": [],
+    "url": "austin-powers-mojo-rally"
+  },
+  {
+    "name": "Sea-Doo HydroCross",
+    "aliases": [],
+    "id_igdb": "45055",
+    "cover": "coa4zm",
+    "artwork": [],
+    "url": "sea-doo-hydrocross"
+  },
+  {
+    "name": "Q*bert",
+    "aliases": [],
+    "id_igdb": "100023",
+    "cover": "co5xx4",
+    "artwork": [],
+    "url": "q-star-bert"
+  },
+  {
+    "name": "Hello Kitty no Waku-waku Quiz",
+    "aliases": [
+      "Hello Kitty's Thrilling Quiz"
+    ],
+    "id_igdb": "61677",
+    "cover": "ceydjdulfgnabdioxtvl",
+    "artwork": [],
+    "url": "hello-kitty-no-waku-waku-quiz"
+  },
+  {
+    "name": "Shinseiki Evangelion: Typing Hokan Keikaku",
+    "aliases": [
+      "Neon Genesis Evangelion: Typing Hokan Keikaku"
+    ],
+    "id_igdb": "209939",
+    "cover": "co4zon",
+    "artwork": [],
+    "url": "shinseiki-evangelion-typing-hokan-keikaku"
+  },
+  {
+    "name": "Kaen Seibo: The Virgin on Megiddo",
+    "aliases": [],
+    "id_igdb": "70269",
+    "cover": "co8hb2",
+    "artwork": [],
+    "url": "kaen-seibo-the-virgin-on-megiddo"
+  },
+  {
+    "name": "Christmas Seaman: Omoi o Tsutaeru Mou Hitotsu no Houhou",
+    "aliases": [
+      "Christmas Seaman"
+    ],
+    "id_igdb": "283108",
+    "cover": "co7nar",
+    "artwork": [],
+    "url": "christmas-seaman-omoi-o-tsutaeru-mou-hitotsu-no-houhou"
+  },
+  {
+    "name": "Culdcept II",
+    "aliases": [
+      "Culdcept Second"
+    ],
+    "id_igdb": "137524",
+    "cover": "co9oy4",
+    "artwork": [],
+    "url": "culdcept-ii"
+  },
+  {
+    "name": "Doguu Senki: Haou",
+    "aliases": [],
+    "id_igdb": "77570",
+    "cover": "oooecycb9kj54gad3i55",
+    "artwork": [],
+    "url": "doguu-senki-haou"
+  },
+  {
+    "name": "Golf Shiyouyo",
+    "aliases": [],
+    "id_igdb": "113530",
+    "cover": "co5xx9",
+    "artwork": [],
+    "url": "golf-shiyouyo"
+  },
+  {
+    "name": "Tennis 2K2",
+    "aliases": [
+      "Power Smash 2",
+      "Virtua Tennis 2",
+      "Virtua Tennis 2K2"
+    ],
+    "id_igdb": "45843",
+    "cover": "co90z3",
+    "artwork": [],
+    "url": "tennis-2k2"
+  },
+  {
+    "name": "TrickStyle",
+    "aliases": [
+      "Play TrickStyle.exe"
+    ],
+    "id_igdb": "8229",
+    "cover": "co44xj",
+    "artwork": [],
+    "url": "trickstyle"
+  },
+  {
+    "name": "Inhabitants",
+    "aliases": [],
+    "id_igdb": "69675",
+    "cover": "deb82p3dbcwbmzbbbwkw",
+    "artwork": [],
+    "url": "inhabitants"
+  },
+  {
+    "name": "Cherry Blossom",
+    "aliases": [
+      "Cherryblossom"
+    ],
+    "id_igdb": "109101",
+    "cover": "co4ufd",
+    "artwork": [],
+    "url": "cherry-blossom"
+  },
+  {
+    "name": "Martian Successor Nadesico: Nadesico the Mission",
+    "aliases": [
+      "Kidou Senkan Nadesico - Nadesico the Mission"
+    ],
+    "id_igdb": "125366",
+    "cover": "co4it3",
+    "artwork": [],
+    "url": "martian-successor-nadesico-nadesico-the-mission"
+  },
+  {
+    "name": "Boku Yume No Tatsujin",
+    "aliases": [
+      "Bokomu no tatsujin"
+    ],
+    "id_igdb": "178221",
+    "cover": "co4tqi",
+    "artwork": [],
+    "url": "boku-yume-no-tatsujin"
+  },
+  {
+    "name": "Alien Breed: Conflict",
+    "aliases": [],
+    "id_igdb": "364345",
+    "cover": "",
+    "artwork": [],
+    "url": "alien-breed-conflict"
+  },
+  {
+    "name": "Happy Lesson: First Lesson",
+    "aliases": [],
+    "id_igdb": "64753",
+    "cover": "co7nw8",
+    "artwork": [],
+    "url": "happy-lesson-first-lesson"
+  },
+  {
+    "name": "Feet of Fury",
+    "aliases": [],
+    "id_igdb": "73890",
+    "cover": "co810w",
+    "artwork": [],
+    "url": "feet-of-fury"
+  },
+  {
+    "name": "Kuon no Kizuna: Sairinshou",
+    "aliases": [],
+    "id_igdb": "64659",
+    "cover": "cobqpc",
+    "artwork": [],
+    "url": "kuon-no-kizuna-sairinshou"
+  },
+  {
+    "name": "240p Test Suite",
+    "aliases": [],
+    "id_igdb": "292078",
+    "cover": "co9895",
+    "artwork": [],
+    "url": "240p-test-suite"
+  },
+  {
+    "name": "Surf Rocket Racers",
+    "aliases": [
+      "Jet Racing 2001"
+    ],
+    "id_igdb": "45842",
+    "cover": "co44rl",
+    "artwork": [],
+    "url": "surf-rocket-racers"
+  },
+  {
+    "name": "Guru Guru Onsen 3",
+    "aliases": [],
+    "id_igdb": "283478",
+    "cover": "co7nl8",
+    "artwork": [],
+    "url": "guru-guru-onsen-3"
+  },
+  {
+    "name": "Guru Guru Onsen 2",
+    "aliases": [
+      "Guru Guru Onsen 2 for Windows"
+    ],
+    "id_igdb": "283477",
+    "cover": "co7nl7",
+    "artwork": [],
+    "url": "guru-guru-onsen-2"
+  },
+  {
+    "name": "4 Wheel Thunder",
+    "aliases": [],
+    "id_igdb": "3701",
+    "cover": "co40d6",
+    "artwork": [],
+    "url": "4-wheel-thunder"
+  },
+  {
+    "name": "World Neverland: Olerud Oukoku Monogatari",
+    "aliases": [
+      "World Neverland Plus: Olerud Oukoku Monogatari",
+      "World Neverland - The Nalulu Kingdom Stories",
+      "ワールド・ネバーランド 〜オルルド王国物語〜"
+    ],
+    "id_igdb": "77514",
+    "cover": "coaaub",
+    "artwork": [
+      "ar5735"
+    ],
+    "url": "world-neverland-olerud-oukoku-monogatari"
+  },
+  {
+    "name": "Kaitou Apricot",
+    "aliases": [],
+    "id_igdb": "202589",
+    "cover": "co4s8v",
+    "artwork": [],
+    "url": "kaitou-apricot"
+  },
+  {
+    "name": "Bleemcast! for Metal Gear Solid",
+    "aliases": [],
+    "id_igdb": "315682",
+    "cover": "co8rwl",
+    "artwork": [],
+    "url": "bleemcast-for-metal-gear-solid"
+  },
+  {
+    "name": "Denpa Shonen-teki Kenshoseikatsu Soft Nasubi no Heya",
+    "aliases": [
+      " Denpa Shounen-teki Kenshou Seikatsu Soft: Nasubi no Heya "
+    ],
+    "id_igdb": "283472",
+    "cover": "co7nl1",
+    "artwork": [],
+    "url": "denpa-shonen-teki-kenshoseikatsu-soft-nasubi-no-heya"
+  },
+  {
+    "name": "JoJo's Bizarre Adventure",
+    "aliases": [
+      "JoJo no Kimyouna Bouken - Miraie no Isan"
+    ],
+    "id_igdb": "75963",
+    "cover": "co5xx1",
+    "artwork": [],
+    "url": "jojos-bizarre-adventure--2"
+  },
+  {
+    "name": "My Merry Maybe",
+    "aliases": [],
+    "id_igdb": "247509",
+    "cover": "co6fgc",
+    "artwork": [],
+    "url": "my-merry-maybe"
+  },
+  {
+    "name": "UEFA 2001",
+    "aliases": [],
+    "id_igdb": "237507",
+    "cover": "",
+    "artwork": [],
+    "url": "uefa-2001"
+  },
+  {
+    "name": "Interlude",
+    "aliases": [],
+    "id_igdb": "80037",
+    "cover": "co62mk",
+    "artwork": [],
+    "url": "interlude--1"
+  },
+  {
+    "name": "Revive... Sosei",
+    "aliases": [
+      "Revive 〜蘇生〜"
+    ],
+    "id_igdb": "94374",
+    "cover": "cobbwl",
+    "artwork": [],
+    "url": "revive-dot-dot-dot-sosei"
+  },
+  {
+    "name": "The Textorcist: The Story of Ray Bibbia",
+    "aliases": [
+      "Textorcist",
+      "The Textorcist",
+      "Textorcist.exe"
+    ],
+    "id_igdb": "107178",
+    "cover": "co2kft",
+    "artwork": [
+      "arowl"
+    ],
+    "url": "the-textorcist-the-story-of-ray-bibbia"
+  },
+  {
+    "name": "MagForce Racing",
+    "aliases": [
+      "Killer Loop",
+      "Magforce Racing"
+    ],
+    "id_igdb": "45806",
+    "cover": "co40og",
+    "artwork": [],
+    "url": "magforce-racing"
+  },
+  {
+    "name": "J.League Pro Soccer Club wo Tsukurou!",
+    "aliases": [],
+    "id_igdb": "406604",
+    "cover": "",
+    "artwork": [],
+    "url": "jleague-pro-soccer-club-wo-tsukurou"
+  },
+  {
+    "name": "SakaTsuku Tokudai-gou: J. League Pro Soccer Club wo Tsukurou!",
+    "aliases": [],
+    "id_igdb": "406611",
+    "cover": "",
+    "artwork": [],
+    "url": "sakatsuku-tokudai-gou-j-league-pro-soccer-club-wo-tsukurou"
+  },
+  {
+    "name": "Aero Dancing F: Todoroki Tsubasa no Hatsu Hikou",
+    "aliases": [],
+    "id_igdb": "267381",
+    "cover": "co73nq",
+    "artwork": [],
+    "url": "aero-dancing-f-todoroki-tsubasa-no-hatsu-hikou"
+  },
+  {
+    "name": "Aero Dancing I",
+    "aliases": [],
+    "id_igdb": "267380",
+    "cover": "co73np",
+    "artwork": [],
+    "url": "aero-dancing-i--1"
+  },
+  {
+    "name": "Aero Dancing I: Jikai Saku made Matemasen",
+    "aliases": [
+      "Aero Dancing i - Jikai-saku made Matemasen"
+    ],
+    "id_igdb": "267382",
+    "cover": "co73nr",
+    "artwork": [],
+    "url": "aero-dancing-i-jikai-saku-made-matemasen"
+  },
+  {
+    "name": "Densha de GO! 2 3000",
+    "aliases": [
+      "Densha de Go! 2 Kōsoku-hen 3000",
+      "Densha De Go! 2 Kousokuhen 3000",
+      "Densha de Go! 2 Kousoku-hen 3000-bandai",
+      "Let's Go by (electric) Train! 2: High-speed Volume Taking Turns 3000",
+      "Go by Train 2"
+    ],
+    "id_igdb": "80270",
+    "cover": "co5xxp",
+    "artwork": [
+      "ar7z0",
+      "ar7z1"
+    ],
+    "url": "densha-de-go-2-3000"
+  },
+  {
+    "name": "Cool Cool Toon",
+    "aliases": [],
+    "id_igdb": "6728",
+    "cover": "co6aw9",
+    "artwork": [],
+    "url": "cool-cool-toon"
+  },
+  {
+    "name": "Army Men: Sarge's Heroes",
+    "aliases": [],
+    "id_igdb": "3440",
+    "cover": "co2pgd",
+    "artwork": [],
+    "url": "army-men-sarge-s-heroes"
+  },
+  {
+    "name": "Spec Ops II: Omega Squad",
+    "aliases": [],
+    "id_igdb": "9344",
+    "cover": "co43at",
+    "artwork": [],
+    "url": "spec-ops-ii-omega-squad"
+  },
+  {
+    "name": "Mat Hoffman's Pro BMX",
+    "aliases": [],
+    "id_igdb": "3994",
+    "cover": "co3gfr",
+    "artwork": [],
+    "url": "mat-hoffman-s-pro-bmx"
+  },
+  {
+    "name": "Gunvalkyrie",
+    "aliases": [
+      "Ganvuărukirī",
+      "Gun Valkyrie"
+    ],
+    "id_igdb": "10234",
+    "cover": "co7jvd",
+    "artwork": [
+      "ar1do8"
+    ],
+    "url": "gunvalkyrie"
+  },
+  {
+    "name": "Mortal Kombat Gold",
+    "aliases": [
+      "MK Gold",
+      "MKG"
+    ],
+    "id_igdb": "45155",
+    "cover": "co20ny",
+    "artwork": [],
+    "url": "mortal-kombat-gold"
+  },
+  {
+    "name": "Frog Feast",
+    "aliases": [],
+    "id_igdb": "4474",
+    "cover": "co9v5d",
+    "artwork": [],
+    "url": "frog-feast"
+  },
+  {
+    "name": "Langrisser Millennium",
+    "aliases": [
+      "ラングリッサーミレニアム"
+    ],
+    "id_igdb": "45800",
+    "cover": "co5y0r",
+    "artwork": [],
+    "url": "langrisser-millennium"
+  },
+  {
+    "name": "4x4 EVO",
+    "aliases": [],
+    "id_igdb": "584",
+    "cover": "co292q",
+    "artwork": [],
+    "url": "4x4-evo"
+  },
+  {
+    "name": "Giant Gram: All Japan Pro Wrestling 2",
+    "aliases": [],
+    "id_igdb": "45828",
+    "cover": "co4x3w",
+    "artwork": [],
+    "url": "giant-gram-all-japan-pro-wrestling-2"
+  },
+  {
+    "name": "Razor Freestyle Scooter",
+    "aliases": [
+      "Freestyle Scooter"
+    ],
+    "id_igdb": "3584",
+    "cover": "co6pre",
+    "artwork": [
+      "ar2dtb"
+    ],
+    "url": "razor-freestyle-scooter"
+  },
+  {
+    "name": "NFL QB Club 2001",
+    "aliases": [
+      "NFL Quarterback Club 2001"
+    ],
+    "id_igdb": "3560",
+    "cover": "co3bey",
+    "artwork": [],
+    "url": "nfl-qb-club-2001"
+  },
+  {
+    "name": "Sakura Taisen Online: Teito no Nagai Hibi",
+    "aliases": [
+      "Sakura Taisen Online - Teito no Nagai Hibi"
+    ],
+    "id_igdb": "63132",
+    "cover": "co508k",
+    "artwork": [],
+    "url": "sakura-taisen-online-teito-no-nagai-hibi"
+  },
+  {
+    "name": "Max Steel: Covert Missions",
+    "aliases": [],
+    "id_igdb": "4352",
+    "cover": "co40p3",
+    "artwork": [],
+    "url": "max-steel-covert-missions"
+  },
+  {
+    "name": "NHL 2K2",
+    "aliases": [],
+    "id_igdb": "8840",
+    "cover": "co417s",
+    "artwork": [],
+    "url": "nhl-2k2"
+  },
+  {
+    "name": "Red Dog: Superior Firepower",
+    "aliases": [],
+    "id_igdb": "45835",
+    "cover": "co8zdk",
+    "artwork": [],
+    "url": "red-dog-superior-firepower"
+  },
+  {
+    "name": "Star Wars: Episode I - Jedi Power Battles",
+    "aliases": [],
+    "id_igdb": "301490",
+    "cover": "co87v4",
+    "artwork": [],
+    "url": "star-wars-episode-i-jedi-power-battles--2"
+  },
+  {
+    "name": "Ultimate Fighting Championship",
+    "aliases": [],
+    "id_igdb": "24176",
+    "cover": "co3g8w",
+    "artwork": [],
+    "url": "ultimate-fighting-championship"
+  },
+  {
+    "name": "Bang! Gunship Elite",
+    "aliases": [
+      "BANG! Gunship Elite",
+      "DANGEROUS DUELS.exe"
+    ],
+    "id_igdb": "1861",
+    "cover": "co2ei6",
+    "artwork": [],
+    "url": "bang-gunship-elite"
+  },
+  {
+    "name": "Hello Kitty Magical Block",
+    "aliases": [
+      "Hello Kitty no Magical Block"
+    ],
+    "id_igdb": "267504",
+    "cover": "co73uk",
+    "artwork": [],
+    "url": "hello-kitty-magical-block"
+  },
+  {
+    "name": "Canary: Kono Omoi wo Uta ni Nosete",
+    "aliases": [
+      "カナリア ～この想いを歌に乗せて～",
+      "Canary - Kono Omoi o Uta ni Nosete"
+    ],
+    "id_igdb": "269412",
+    "cover": "co75s2",
+    "artwork": [],
+    "url": "canary-kono-omoi-wo-uta-ni-nosete"
+  },
+  {
+    "name": "Godzilla Generations",
+    "aliases": [],
+    "id_igdb": "45824",
+    "cover": "co6amy",
+    "artwork": [],
+    "url": "godzilla-generations"
+  },
+  {
+    "name": "Taisen Net Gimmick: Capcom & Psikyo All Stars",
+    "aliases": [],
+    "id_igdb": "79738",
+    "cover": "co960j",
+    "artwork": [],
+    "url": "taisen-net-gimmick-capcom-and-psikyo-all-stars"
+  },
+  {
+    "name": "Wind and Water: Puzzle Battles",
+    "aliases": [
+      "時空五行-風水大戰",
+      "时空五行-风水大战"
+    ],
+    "id_igdb": "72824",
+    "cover": "cob42t",
+    "artwork": [
+      "ar4z4g"
+    ],
+    "url": "wind-and-water-puzzle-battles"
+  },
+  {
+    "name": "Record of Lodoss War",
+    "aliases": [
+      "Record of Lodoss War: Advent of Cardice"
+    ],
+    "id_igdb": "69656",
+    "cover": "co8fm0",
+    "artwork": [],
+    "url": "record-of-lodoss-war--1"
+  },
+  {
+    "name": "Sega Bass Fishing 2",
+    "aliases": [],
+    "id_igdb": "45837",
+    "cover": "co3kcx",
+    "artwork": [],
+    "url": "sega-bass-fishing-2"
+  },
+  {
+    "name": "Cosmic Smash",
+    "aliases": [],
+    "id_igdb": "6729",
+    "cover": "co4e7i",
+    "artwork": [],
+    "url": "cosmic-smash"
+  },
+  {
+    "name": "TNN Motorsports Hardcore Heat",
+    "aliases": [
+      "Buggy Heat"
+    ],
+    "id_igdb": "45845",
+    "cover": "co40ei",
+    "artwork": [],
+    "url": "tnn-motorsports-hardcore-heat"
+  },
+  {
+    "name": "Happy Breeding",
+    "aliases": [
+      "Happy Breeding: Cheerful Party",
+      "はっぴーぶりーでぃんぐ 〜Cheerful Party〜"
+    ],
+    "id_igdb": "92696",
+    "cover": "co99s2",
+    "artwork": [],
+    "url": "happy-breeding"
+  },
+  {
+    "name": "Midway's Greatest Arcade Hits: Volume 1",
+    "aliases": [],
+    "id_igdb": "47679",
+    "cover": "co40pb",
+    "artwork": [],
+    "url": "midways-greatest-arcade-hits-volume-1"
+  },
+  {
+    "name": "Opening Night",
+    "aliases": [],
+    "id_igdb": "68975",
+    "cover": "bwjfkmcxu7kki2ylca19",
+    "artwork": [],
+    "url": "opening-night"
+  },
+  {
+    "name": "The Typing of the Dead",
+    "aliases": [
+      "Za taipingu Obu za deddo Zonbipanikku",
+      "Typing of the Dead",
+      "The Typing of the Dead: Zombie Panic",
+      "Za taipingu Obu za deddo"
+    ],
+    "id_igdb": "11605",
+    "cover": "co3tq7",
+    "artwork": [],
+    "url": "the-typing-of-the-dead"
+  },
+  {
+    "name": "AeroWings",
+    "aliases": [
+      "Aero Dancing featuring Blue Impulse"
+    ],
+    "id_igdb": "3709",
+    "cover": "co5xwq",
+    "artwork": [],
+    "url": "aerowings"
+  },
+  {
+    "name": "Simple 1500 Series Vol. 71: The Renai Simulation 2",
+    "aliases": [
+      "The Renai Simulation 2",
+      "Simple 2000 DC Series Vol. 3: The Renai Simulation 2: Fureai ",
+      "SIMPLE1500シリーズ Vol.71 THE 恋愛シミュレーション2 〜ふれあい〜",
+      "Simple 1500 Series Vol. 71: The Ren'ai Simulation 2: Fureai",
+      "Simple 2000 シリーズ DC Vol.03 ふれあい",
+      "恋愛シミュレーション2ふれあい",
+      "Simple 2000 Series DC Vol.03: Fureai: The Re'nai Simulation"
+    ],
+    "id_igdb": "203067",
+    "cover": "co8oxq",
+    "artwork": [
+      "ar4p5h",
+      "ar4p5i"
+    ],
+    "url": "simple-1500-series-vol-71-the-renai-simulation-2"
+  },
+  {
+    "name": "Skies of Arcadia",
+    "aliases": [
+      "Eternal Arcadia",
+      "Etaanaru Arukadia"
+    ],
+    "id_igdb": "19007",
+    "cover": "co2ojm",
+    "artwork": [],
+    "url": "skies-of-arcadia"
+  },
+  {
+    "name": "Test Drive Cycles",
+    "aliases": [],
+    "id_igdb": "362222",
+    "cover": "coabd9",
+    "artwork": [],
+    "url": "test-drive-cycles--1"
+  },
+  {
+    "name": "NFL 2K2",
+    "aliases": [],
+    "id_igdb": "8845",
+    "cover": "co39ss",
+    "artwork": [],
+    "url": "nfl-2k2"
+  },
+  {
+    "name": "The Flintstones in Viva Rock Vegas",
+    "aliases": [],
+    "id_igdb": "316930",
+    "cover": "co8tnz",
+    "artwork": [],
+    "url": "the-flintstones-in-viva-rock-vegas--1"
+  },
+  {
+    "name": "Ever17: The Out of Infinity",
+    "aliases": [
+      "Ever17 -The Out of Infinity-",
+      "Ever 17",
+      "Ever 17: The Out of Infinity",
+      "Ever17: Out of Infinity",
+      "Ever17 -forGREE-"
+    ],
+    "id_igdb": "18037",
+    "cover": "co2q3u",
+    "artwork": [
+      "ar3a0x",
+      "ar3a0z",
+      "ar3a11"
+    ],
+    "url": "ever17-the-out-of-infinity"
+  },
+  {
+    "name": "Giga Wing",
+    "aliases": [
+      "ギガウイング"
+    ],
+    "id_igdb": "9162",
+    "cover": "co40i0",
+    "artwork": [],
+    "url": "giga-wing"
+  },
+  {
+    "name": "Get!! Colonies",
+    "aliases": [],
+    "id_igdb": "67082",
+    "cover": "co8iu8",
+    "artwork": [],
+    "url": "get-colonies"
+  },
+  {
+    "name": "Stupid Invaders",
+    "aliases": [],
+    "id_igdb": "8078",
+    "cover": "co5xc1",
+    "artwork": [],
+    "url": "stupid-invaders"
+  },
+  {
+    "name": "Mortal Kombat: Special Forces",
+    "aliases": [],
+    "id_igdb": "1623",
+    "cover": "co1y24",
+    "artwork": [],
+    "url": "mortal-kombat-special-forces"
+  },
+  {
+    "name": "The King of Fighters: Evolution",
+    "aliases": [
+      "KOF '99 Evo",
+      "The King of Fighters 6: Evolution",
+      "格鬥天王-進化版",
+      "The King of Fighters '99 Evolution"
+    ],
+    "id_igdb": "4361",
+    "cover": "co40oi",
+    "artwork": [],
+    "url": "the-king-of-fighters-evolution"
+  },
+  {
+    "name": "Tokusatsu Bouken Katsugeki Super Hero Retsuden",
+    "aliases": [],
+    "id_igdb": "58778",
+    "cover": "qxqh1cuolmpxbuaftcwj",
+    "artwork": [],
+    "url": "tokusatsu-bouken-katsugeki-super-hero-retsuden"
+  },
+  {
+    "name": "After... Wasureenu Kizuna",
+    "aliases": [],
+    "id_igdb": "283252",
+    "cover": "coawk2",
+    "artwork": [],
+    "url": "after-dot-dot-dot-wasureenu-kizuna--1"
+  },
+  {
+    "name": "Grauen no Torikago: Kapitel 6 - Senritsu",
+    "aliases": [
+      "グラウエンの鳥籠 Kapitel 6 「戦慄」",
+      "Grauen no Torikago Kapitel 6 「Senritsu」",
+      "Birdcage of Horrors: Chapter 6 - Tremor"
+    ],
+    "id_igdb": "315063",
+    "cover": "co8v5a",
+    "artwork": [],
+    "url": "grauen-no-torikago-kapitel-6-senritsu"
+  },
+  {
+    "name": "Akihabara Dennou-gumi Pata Pies!",
+    "aliases": [],
+    "id_igdb": "247573",
+    "cover": "co6fkj",
+    "artwork": [],
+    "url": "akihabara-dennou-gumi-pata-pies"
+  },
+  {
+    "name": "Cardcaptor Sakura: Tomoyo no Video Daisakusen",
+    "aliases": [
+      "Cardcaptor Sakura: Tomoyo's Video Campaign",
+      "Cardcaptor Sakura: Tomoyo's Video War"
+    ],
+    "id_igdb": "66251",
+    "cover": "co5tmz",
+    "artwork": [],
+    "url": "cardcaptor-sakura-tomoyo-no-video-daisakusen"
+  },
+  {
+    "name": "Plasma Sword: Nightmare of Bilstein",
+    "aliases": [
+      "Star Gladiator 2: Nightmare of Bilstein"
+    ],
+    "id_igdb": "14679",
+    "cover": "co5xwf",
+    "artwork": [],
+    "url": "plasma-sword-nightmare-of-bilstein"
+  },
+  {
+    "name": "Sword of the Berserk: Guts' Rage",
+    "aliases": [
+      "Berserk—Millennium Falcon Arc: Lost Flowers Chapter"
+    ],
+    "id_igdb": "28840",
+    "cover": "co7a3x",
+    "artwork": [],
+    "url": "sword-of-the-berserk-guts-rage"
+  },
+  {
+    "name": "Space Invaders",
+    "aliases": [
+      "Space Invaders X",
+      "太空侵略者"
+    ],
+    "id_igdb": "18133",
+    "cover": "coaadg",
+    "artwork": [
+      "ar40vf",
+      "ar40vg"
+    ],
+    "url": "space-invaders--1"
+  },
+  {
+    "name": "Super Producers",
+    "aliases": [
+      "Super Producers - Mezase Show Biz Kai"
+    ],
+    "id_igdb": "98008",
+    "cover": "co95jq",
+    "artwork": [],
+    "url": "super-producers"
+  },
+  {
+    "name": "Psyvariar 2: The Will to Fabricate",
+    "aliases": [
+      "Psyvariar 2"
+    ],
+    "id_igdb": "5993",
+    "cover": "ps4ceh9kll9gu1xjbjwl",
+    "artwork": [],
+    "url": "psyvariar-2-the-will-to-fabricate"
+  },
+  {
+    "name": "Mars Matrix",
+    "aliases": [],
+    "id_igdb": "4356",
+    "cover": "co25gc",
+    "artwork": [],
+    "url": "mars-matrix"
+  },
+  {
+    "name": "Virtua Athlete 2000",
+    "aliases": [
+      "Virtua Athlete 2K"
+    ],
+    "id_igdb": "24159",
+    "cover": "cocm5y",
+    "artwork": [],
+    "url": "virtua-athlete-2000"
+  },
+  {
+    "name": "Street Fighter III: New Generation",
+    "aliases": [
+      "Street Fighter 3: New Generation",
+      "Street Fighter III"
+    ],
+    "id_igdb": "6708",
+    "cover": "co1w4q",
+    "artwork": [
+      "ar4w4z"
+    ],
+    "url": "street-fighter-iii-new-generation"
+  },
+  {
+    "name": "Geist Force",
+    "aliases": [],
+    "id_igdb": "62131",
+    "cover": "co6pj0",
+    "artwork": [],
+    "url": "geist-force"
+  },
+  {
+    "name": "Death Crimson OX",
+    "aliases": [],
+    "id_igdb": "40106",
+    "cover": "co40f0",
+    "artwork": [],
+    "url": "death-crimson-ox"
+  },
+  {
+    "name": "Sunrise Eiyuutan",
+    "aliases": [],
+    "id_igdb": "274293",
+    "cover": "cocdr3",
+    "artwork": [],
+    "url": "sunrise-eiyuutan"
+  },
+  {
+    "name": "Mobile Suit Gundam Gihren's Greed: Blood of Zeon",
+    "aliases": [
+      "Gihren's Greed: Blood of Zeon",
+      "Zeon no Keifu",
+      "Kidou Senshi Gundam: Gihren no Yabou - Zeon no Keifu"
+    ],
+    "id_igdb": "75726",
+    "cover": "co9deh",
+    "artwork": [],
+    "url": "mobile-suit-gundam-gihrens-greed-blood-of-zeon"
+  },
+  {
+    "name": "O.To.I.Re: Dreamcast Sequencer",
+    "aliases": [
+      "O-to-i-re - Dreamcast Sequencer"
+    ],
+    "id_igdb": "283303",
+    "cover": "cobxkv",
+    "artwork": [
+      "ar5q53"
+    ],
+    "url": "o-dot-to-dot-i-re-dreamcast-sequencer"
+  },
+  {
+    "name": "Frogger 2: Swampy's Revenge",
+    "aliases": [
+      "Frogger 2"
+    ],
+    "id_igdb": "11466",
+    "cover": "co2q73",
+    "artwork": [],
+    "url": "frogger-2-swampys-revenge"
+  },
+  {
+    "name": "Alice Dreams Tournament",
+    "aliases": [],
+    "id_igdb": "59532",
+    "cover": "co81i2",
+    "artwork": [],
+    "url": "alice-dreams-tournament"
+  },
+  {
+    "name": "Hello Kitty Lovely Fruit Park",
+    "aliases": [
+      "Hello Kitty: Lovely Fruit Park"
+    ],
+    "id_igdb": "36741",
+    "cover": "co7xoc",
+    "artwork": [],
+    "url": "hello-kitty-lovely-fruit-park"
+  },
+  {
+    "name": "Pia Carrot he Youkoso!! 2",
+    "aliases": [
+      "Pia Carrot e Youkoso!! 2"
+    ],
+    "id_igdb": "194720",
+    "cover": "cocj7j",
+    "artwork": [],
+    "url": "pia-carrot-he-youkoso-2"
+  },
+  {
+    "name": "Derby Tsuku: Derby Uma wo Tsukurou!",
+    "aliases": [
+      "Dabi Tsuku: Derby Uma o Tsukurou!",
+      "Derby Tsuku: Derby Ba wo Tsukurou!",
+      "Derby Tsuku: Derby-ba o Tsukurou!",
+      "Dabi Tsuku - Derby-ba o Tsukurou!"
+    ],
+    "id_igdb": "283370",
+    "cover": "co7ngc",
+    "artwork": [],
+    "url": "derby-tsuku-derby-uma-wo-tsukurou"
+  },
+  {
+    "name": "Tokyo Bus Guide",
+    "aliases": [
+      "Tokyo Bus Annai"
+    ],
+    "id_igdb": "72903",
+    "cover": "co4aeu",
+    "artwork": [],
+    "url": "tokyo-bus-guide"
+  },
+  {
+    "name": "Disney's Dinosaur",
+    "aliases": [
+      "Dinosaur"
+    ],
+    "id_igdb": "46446",
+    "cover": "co4vtf",
+    "artwork": [],
+    "url": "disneys-dinosaur"
+  },
+  {
+    "name": "Tokyo Xtreme Racer",
+    "aliases": [
+      "Tokyo Highway Challenge",
+      "Shutokou Battle"
+    ],
+    "id_igdb": "20710",
+    "cover": "co5a1y",
+    "artwork": [],
+    "url": "tokyo-xtreme-racer"
+  },
+  {
+    "name": "Deep Fighter",
+    "aliases": [],
+    "id_igdb": "8230",
+    "cover": "co22ld",
+    "artwork": [],
+    "url": "deep-fighter"
+  },
+  {
+    "name": "Climax Landers: Motte ke! Minige Campaign",
+    "aliases": [
+      "Time Stalkers: Bring it! Minigame Campaign"
+    ],
+    "id_igdb": "283331",
+    "cover": "co7ne7",
+    "artwork": [],
+    "url": "climax-landers-motte-ke-minige-campaign"
+  },
+  {
+    "name": "CR Hissatsu Shigotonin Pachitte Chonmage @ VPACHI",
+    "aliases": [
+      "CR Hissatsu Shigotonin - Pachitte Chonmage @ VP@CHI"
+    ],
+    "id_igdb": "283332",
+    "cover": "co7ne8",
+    "artwork": [],
+    "url": "cr-hissatsu-shigotonin-pachitte-chonmage-at-vpachi"
+  },
+  {
+    "name": "Picassio",
+    "aliases": [],
+    "id_igdb": "309584",
+    "cover": "",
+    "artwork": [],
+    "url": "picassio"
+  },
+  {
+    "name": "ESPN International Track & Field",
+    "aliases": [],
+    "id_igdb": "71419",
+    "cover": "co9t0f",
+    "artwork": [],
+    "url": "espn-international-track-and-field"
+  },
+  {
+    "name": "Cyber Troopers Virtual-On Oratorio Tangram",
+    "aliases": [
+      "VOOT"
+    ],
+    "id_igdb": "9190",
+    "cover": "co45rz",
+    "artwork": [],
+    "url": "cyber-troopers-virtual-on-oratorio-tangram"
+  },
+  {
+    "name": "Age of Empires II: The Age of Kings",
+    "aliases": [
+      "帝国时代II：帝王时代",
+      "世紀帝國 II：帝王世紀",
+      "Age of Empires 2: The Age of Kings",
+      "AoE2",
+      "AoEII",
+      "AoK",
+      "Age of Empires 2"
+    ],
+    "id_igdb": "327",
+    "cover": "co55xo",
+    "artwork": [
+      "ar7qh",
+      "ar7qi",
+      "ar7qj"
+    ],
+    "url": "age-of-empires-ii-the-age-of-kings"
+  },
+  {
+    "name": "Konohana 2: Todokanai Requiem",
+    "aliases": [
+      "Konohana 2 ~Todokanai Requiem~"
+    ],
+    "id_igdb": "213827",
+    "cover": "co53jo",
+    "artwork": [],
+    "url": "konohana-2-todokanai-requiem"
+  },
+  {
+    "name": "Dengen Tenshi Taisen Mahjong Shangri-La",
+    "aliases": [
+      "Shangri-La Cyber Angel Mahjong Battle"
+    ],
+    "id_igdb": "131571",
+    "cover": "co4uu3",
+    "artwork": [],
+    "url": "dengen-tenshi-taisen-mahjong-shangri-la"
+  },
+  {
+    "name": "The Simpsons: Bug Squad!",
+    "aliases": [],
+    "id_igdb": "307953",
+    "cover": "co8gt2",
+    "artwork": [],
+    "url": "the-simpsons-bug-squad"
+  },
+  {
+    "name": "Resident Evil 3: Nemesis",
+    "aliases": [
+      "Resident Evil 3",
+      "Biohazard 3",
+      "RE3",
+      "Biohazard: Gaiden",
+      "Обитель зла 3: Немезис",
+      "惡靈古堡3",
+      "生化危机3",
+      "Biohazard 3: Last Escape",
+      "Baiohazado 3 Rasutoesukepu"
+    ],
+    "id_igdb": "966",
+    "cover": "co2vvb",
+    "artwork": [],
+    "url": "resident-evil-3-nemesis"
+  },
+  {
+    "name": "Dolphin Blue",
+    "aliases": [],
+    "id_igdb": "3114",
+    "cover": "co2uml",
+    "artwork": [],
+    "url": "dolphin-blue"
+  },
+  {
+    "name": "Street Fighter III: 3rd Strike",
+    "aliases": [
+      "Street Fighter III: 3rd Strike - Fight for the Future",
+      "Street Fighter III: Third Strike - Fight for the Future"
+    ],
+    "id_igdb": "243237",
+    "cover": "co6beh",
+    "artwork": [],
+    "url": "street-fighter-iii-3rd-strike--1"
+  },
+  {
+    "name": "Resident Evil Code: Veronica",
+    "aliases": [
+      "RE Code: Veronica",
+      "BIOHAZARD CODE: Veronica"
+    ],
+    "id_igdb": "968",
+    "cover": "co2vzn",
+    "artwork": [],
+    "url": "resident-evil-code-veronica"
+  },
+  {
+    "name": "Nippon Pro Mahjong Renmei Kounin: Tetsuman",
+    "aliases": [
+      "Nihon Pro Mahjong Renmei Kounin: Tetsuman"
+    ],
+    "id_igdb": "82261",
+    "cover": "co7pye",
+    "artwork": [],
+    "url": "nippon-pro-mahjong-renmei-kounin-tetsuman"
+  },
+  {
+    "name": "Shenmue II",
+    "aliases": [
+      "Shenmue 2"
+    ],
+    "id_igdb": "1218",
+    "cover": "co2raf",
+    "artwork": [
+      "ar5zyu",
+      "ar5zyx",
+      "ar5zyy",
+      "ar5zyz",
+      "ar5zz2",
+      "ar5zz3",
+      "ar5zz4"
+    ],
+    "url": "shenmue-ii"
+  },
+  {
+    "name": "Shinseiki Evangelion: Typing E-Keikaku",
+    "aliases": [
+      "Neon Genesis Evangelion: Typing E-Keikaku"
+    ],
+    "id_igdb": "61671",
+    "cover": "co2wl1",
+    "artwork": [],
+    "url": "shinseiki-evangelion-typing-e-keikaku"
+  },
+  {
+    "name": "Sqrxz III",
+    "aliases": [],
+    "id_igdb": "62640",
+    "cover": "co291u",
+    "artwork": [],
+    "url": "sqrxz-iii"
+  },
+  {
+    "name": "Evil Dead: Hail to the King",
+    "aliases": [
+      "Evil Dead: Ashes 2 Ashes"
+    ],
+    "id_igdb": "47078",
+    "cover": "co2mfq",
+    "artwork": [],
+    "url": "evil-dead-hail-to-the-king"
+  },
+  {
+    "name": "Tenohira wo, Taiyou ni: Eikyuu no Kizuna",
+    "aliases": [],
+    "id_igdb": "415613",
+    "cover": "cocsim",
+    "artwork": [],
+    "url": "tenohira-wo-taiyou-ni-eikyuu-no-kizuna"
+  },
+  {
+    "name": "Robo-Ninja Climb",
+    "aliases": [],
+    "id_igdb": "134354",
+    "cover": "co9uz5",
+    "artwork": [],
+    "url": "robo-ninja-climb"
+  },
+  {
+    "name": "Run=Dim as Black Soul",
+    "aliases": [
+      "RUN=DIM As Black Soul"
+    ],
+    "id_igdb": "119205",
+    "cover": "co5ud1",
+    "artwork": [],
+    "url": "run-equals-dim-as-black-soul"
+  },
+  {
+    "name": "Resident Evil Code: Veronica X",
+    "aliases": [
+      "Resident Evil CODE: Veronica X HD",
+      "RECVX",
+      "Biohazard CODE: Veronica Complete",
+      "Biohazard CODE: Veronica X",
+      "Biohazard - Code Veronica - Kanzenban"
+    ],
+    "id_igdb": "24369",
+    "cover": "co2vzv",
+    "artwork": [
+      "ar1cio"
+    ],
+    "url": "resident-evil-code-veronica-x"
+  },
+  {
+    "name": "Microsoft Combat Flight Simulator: WWII Europe Series",
+    "aliases": [],
+    "id_igdb": "243975",
+    "cover": "co6ck7",
+    "artwork": [],
+    "url": "microsoft-combat-flight-simulator-wwii-europe-series--1"
+  },
+  {
+    "name": "Marvel vs. Capcom 2: New Age of Heroes",
+    "aliases": [
+      "MVC2"
+    ],
+    "id_igdb": "8247",
+    "cover": "co870e",
+    "artwork": [
+      "ar57mz",
+      "ar5yz9",
+      "ar5yzd",
+      "ar5yzj",
+      "ar5yzk",
+      "ar5yzl",
+      "ar5yzm",
+      "ar5yzn",
+      "ar5yzr",
+      "ar5yzs"
+    ],
+    "url": "marvel-vs-capcom-2-new-age-of-heroes"
+  },
+  {
+    "name": "Dino Crisis",
+    "aliases": [
+      "Dino Crisis: Нашествие тварей",
+      "ไดโนไครซิส: ผ่าวิกฤตไดโนเสาร์",
+      "恐龍危機",
+      "恐龙危机"
+    ],
+    "id_igdb": "3027",
+    "cover": "co530k",
+    "artwork": [
+      "ar3ky5"
+    ],
+    "url": "dino-crisis"
+  },
+  {
+    "name": "Suzuki Alstare Extreme Racing",
+    "aliases": [
+      "Redline Racer"
+    ],
+    "id_igdb": "24153",
+    "cover": "co3xsf",
+    "artwork": [],
+    "url": "suzuki-alstare-extreme-racing"
+  },
+  {
+    "name": "Gauntlet Legends",
+    "aliases": [],
+    "id_igdb": "322269",
+    "cover": "co91oe",
+    "artwork": [],
+    "url": "gauntlet-legends--3"
+  },
+  {
+    "name": "Memories Off 2nd",
+    "aliases": [
+      "メモリーズオフ2nd"
+    ],
+    "id_igdb": "78209",
+    "cover": "cobv3l",
+    "artwork": [
+      "ar7kl"
+    ],
+    "url": "memories-off-2nd"
+  },
+  {
+    "name": "Advanced Daisenryaku 2001",
+    "aliases": [],
+    "id_igdb": "60805",
+    "cover": "cocpeq",
+    "artwork": [],
+    "url": "advanced-daisenryaku-2001"
+  },
+  {
+    "name": "Hello Kitty no 'Otonaru' Mail",
+    "aliases": [
+      "Hello Kitty no Onnaru Mail",
+      "Hello Kitty's Sound-Becoming Mail"
+    ],
+    "id_igdb": "279598",
+    "cover": "co7h6y",
+    "artwork": [],
+    "url": "hello-kitty-no-otonaru-mail"
+  },
+  {
+    "name": "Capcom vs. SNK: Millennium Fight 2000 Pro",
+    "aliases": [
+      "Capcom vs. SNK: Pro",
+      "CVS: Pro"
+    ],
+    "id_igdb": "45829",
+    "cover": "co9gwc",
+    "artwork": [],
+    "url": "capcom-vs-snk-millennium-fight-2000-pro"
+  },
+  {
+    "name": "Planet Ring",
+    "aliases": [],
+    "id_igdb": "45805",
+    "cover": "co42p7",
+    "artwork": [],
+    "url": "planet-ring"
+  },
+  {
+    "name": "Mercurius Pretty: End of the Century",
+    "aliases": [],
+    "id_igdb": "66277",
+    "cover": "cobnqz",
+    "artwork": [],
+    "url": "mercurius-pretty-end-of-the-century"
+  },
+  {
+    "name": "Ball Breakers",
+    "aliases": [
+      "Moho"
+    ],
+    "id_igdb": "45231",
+    "cover": "co7ye9",
+    "artwork": [],
+    "url": "ball-breakers"
+  },
+  {
+    "name": "Vampire Chronicle For Matching Service",
+    "aliases": [],
+    "id_igdb": "93310",
+    "cover": "co8eyh",
+    "artwork": [
+      "ar5lh4"
+    ],
+    "url": "vampire-chronicle-for-matching-service"
+  },
+  {
+    "name": "Vermilion Desert",
+    "aliases": [],
+    "id_igdb": "69316",
+    "cover": "co5ryb",
+    "artwork": [],
+    "url": "vermilion-desert"
+  },
+  {
+    "name": "Aikagi: Hidamari to Kanojo no Heyagi",
+    "aliases": [],
+    "id_igdb": "58098",
+    "cover": "cobqu8",
+    "artwork": [
+      "ar5j4f"
+    ],
+    "url": "aikagi-hidamari-to-kanojo-no-heyagi"
+  },
+  {
+    "name": "ECW Anarchy Rulz",
+    "aliases": [
+      "ECW"
+    ],
+    "id_igdb": "72029",
+    "cover": "co9866",
+    "artwork": [],
+    "url": "ecw-anarchy-rulz"
+  },
+  {
+    "name": "Shin Nippon Pro Wrestling: Toukon Retsuden 4",
+    "aliases": [
+      "Shin Nihon Pro Wrestling: Toukon Retsuden 4"
+    ],
+    "id_igdb": "45801",
+    "cover": "co7nuw",
+    "artwork": [],
+    "url": "shin-nippon-pro-wrestling-toukon-retsuden-4"
+  },
+  {
+    "name": "F355 Challenge",
+    "aliases": [
+      "F355 Challenge: Passione Rossa",
+      "Ferrari F355 Challenge"
+    ],
+    "id_igdb": "10348",
+    "cover": "co40hf",
+    "artwork": [],
+    "url": "f355-challenge"
+  },
+  {
+    "name": "NBA Showtime: NBA on NBC",
+    "aliases": [
+      "NBA Showtime"
+    ],
+    "id_igdb": "3554",
+    "cover": "co3bb6",
+    "artwork": [],
+    "url": "nba-showtime-nba-on-nbc"
+  },
+  {
+    "name": "Chaos Field",
+    "aliases": [
+      "Chaosfield",
+      "Kaosufiirudo"
+    ],
+    "id_igdb": "124006",
+    "cover": "co1yvi",
+    "artwork": [],
+    "url": "chaos-field"
+  },
+  {
+    "name": "Dead or Alive 2: Limited Edition",
+    "aliases": [],
+    "id_igdb": "46362",
+    "cover": "co49mr",
+    "artwork": [
+      "ar4pc8"
+    ],
+    "url": "dead-or-alive-2-limited-edition"
+  },
+  {
+    "name": "Jikkyou Pawafuru Puroyakyu: Dreamcast Edition",
+    "aliases": [
+      "Jikkyou Powerful Pro Yakyuu: Dreamcast Edition"
+    ],
+    "id_igdb": "229577",
+    "cover": "co9697",
+    "artwork": [],
+    "url": "jikkyou-pawafuru-puroyakyu-dreamcast-edition"
+  },
+  {
+    "name": "Speed Devils: Online Racing",
+    "aliases": [],
+    "id_igdb": "46371",
+    "cover": "co43au",
+    "artwork": [],
+    "url": "speed-devils-online-racing"
+  },
+  {
+    "name": "Magic: The Gathering",
+    "aliases": [
+      "Magic: The Gathering - Sega"
+    ],
+    "id_igdb": "136558",
+    "cover": "co2erv",
+    "artwork": [],
+    "url": "magic-the-gathering--1"
+  },
+  {
+    "name": "Unreal Tournament",
+    "aliases": [
+      "UT ",
+      "UT Classic",
+      "UT99",
+      "Unreal Tournament 99",
+      "Нереален Турнир"
+    ],
+    "id_igdb": "272",
+    "cover": "co2k3b",
+    "artwork": [],
+    "url": "unreal-tournament"
+  },
+  {
+    "name": "Midway's Greatest Arcade Hits: Volume 2",
+    "aliases": [],
+    "id_igdb": "4360",
+    "cover": "co40pa",
+    "artwork": [],
+    "url": "midways-greatest-arcade-hits-volume-2"
+  },
+  {
+    "name": "Omikron 2: Nomad Soul Exodus",
+    "aliases": [
+      "Omikron 2: Exodus",
+      "Omikron 2",
+      "Nomad Soul: Exodus"
+    ],
+    "id_igdb": "67717",
+    "cover": "co2xpg",
+    "artwork": [],
+    "url": "omikron-2-nomad-soul-exodus"
+  },
+  {
+    "name": "Typing of the Date",
+    "aliases": [],
+    "id_igdb": "138656",
+    "cover": "co3rlv",
+    "artwork": [],
+    "url": "typing-of-the-date"
+  },
+  {
+    "name": "Eisei Meijin III: Game Creator Yoshimura Nobuhiro no Zunou",
+    "aliases": [
+      "Eisei Meijin III - Game Creator Yoshimura Nobuhiro no Zunou"
+    ],
+    "id_igdb": "283253",
+    "cover": "co7nch",
+    "artwork": [],
+    "url": "eisei-meijin-iii-game-creator-yoshimura-nobuhiro-no-zunou"
+  },
+  {
+    "name": "Boku to, Bokura no Natsu",
+    "aliases": [],
+    "id_igdb": "283324",
+    "cover": "co7ndn",
+    "artwork": [],
+    "url": "boku-to-bokura-no-natsu"
+  },
+  {
+    "name": "Card of Destiny: Hikari to Yami no Tougousha",
+    "aliases": [
+      "Card of Destiny - Hikari to Yami no Tougousha",
+      "Card of Destiny: Hikari to Yami no Tougoumono",
+      "Card of Destiny: Hikari to Yami no Tougou Mono"
+    ],
+    "id_igdb": "283328",
+    "cover": "co7ne4",
+    "artwork": [],
+    "url": "card-of-destiny-hikari-to-yami-no-tougousha--1"
+  },
+  {
+    "name": "Candy Stripe: Minarai Tenshi",
+    "aliases": [],
+    "id_igdb": "283327",
+    "cover": "co7ne3",
+    "artwork": [],
+    "url": "candy-stripe-minarai-tenshi"
+  },
+  {
+    "name": "Digital Keiba Shinbun: My Trackman",
+    "aliases": [
+      "My Trackman",
+      "Digital Keiba Shinbun - My Trackman"
+    ],
+    "id_igdb": "283300",
+    "cover": "co7nck",
+    "artwork": [],
+    "url": "digital-keiba-shinbun-my-trackman"
+  },
+  {
+    "name": "Ducati World: Racing Challenge",
+    "aliases": [
+      "Ducati World Racing Tour"
+    ],
+    "id_igdb": "45856",
+    "cover": "co7yeh",
+    "artwork": [],
+    "url": "ducati-world-racing-challenge"
+  },
+  {
+    "name": "Railroad Tycoon II: Gold Edition",
+    "aliases": [],
+    "id_igdb": "45834",
+    "cover": "co42xx",
+    "artwork": [],
+    "url": "railroad-tycoon-ii-gold-edition"
+  },
+  {
+    "name": "Eldorado Gate Volume 1",
+    "aliases": [
+      "Eldorado Gate Vol. 1"
+    ],
+    "id_igdb": "5553",
+    "cover": "co5tsw",
+    "artwork": [],
+    "url": "eldorado-gate-volume-1"
+  },
+  {
+    "name": "World Neverland 2: Pluto Kyouwakoku Monogatari",
+    "aliases": [
+      "World Neverland 2 Plus: Pluto Kyouwakoku Monogatari"
+    ],
+    "id_igdb": "77505",
+    "cover": "co5xxm",
+    "artwork": [],
+    "url": "world-neverland-2-pluto-kyouwakoku-monogatari"
+  },
+  {
+    "name": "Tom Clancy's Rainbow Six",
+    "aliases": [
+      "톰클랜시스 레인보우 식스",
+      "彩虹六号",
+      "World Greatest Hits Series Vol. 4: Tom Clancy's Rainbow Six",
+      "Black Ops",
+      "HRT",
+      "Rainbow 6"
+    ],
+    "id_igdb": "1842",
+    "cover": "co1ygo",
+    "artwork": [
+      "ar8hx",
+      "ar8hy"
+    ],
+    "url": "tom-clancy-s-rainbow-six"
+  },
+  {
+    "name": "Remute: Generations",
+    "aliases": [],
+    "id_igdb": "321798",
+    "cover": "co90yu",
+    "artwork": [],
+    "url": "remute-generations"
+  },
+  {
+    "name": "Oukahouzin: Ouka Sakishi Toki",
+    "aliases": [],
+    "id_igdb": "77528",
+    "cover": "co5xxb",
+    "artwork": [],
+    "url": "oukahouzin-ouka-sakishi-toki"
+  },
+  {
+    "name": "Puyo Puyo Da!",
+    "aliases": [
+      "Puyo Pop Da!",
+      "ぷよぷよDA!",
+      "Puyo Puyo Da! featuring Ellena System"
+    ],
+    "id_igdb": "4353",
+    "cover": "co5xxj",
+    "artwork": [],
+    "url": "puyo-puyo-da"
+  },
+  {
+    "name": "Virtua Striker 2",
+    "aliases": [
+      "Virtua Striker 2 Ver. 2000.1",
+      "Virtua Striker 2 DC"
+    ],
+    "id_igdb": "39472",
+    "cover": "co45k7",
+    "artwork": [
+      "ar5c2k",
+      "ar5c2l",
+      "ar5c2p",
+      "ar5c2r"
+    ],
+    "url": "virtua-striker-2"
+  },
+  {
+    "name": "Escape 2042: The Truth Defenders",
+    "aliases": [
+      "esc2042.exe"
+    ],
+    "id_igdb": "29373",
+    "cover": "co2mjx",
+    "artwork": [
+      "ar2or9"
+    ],
+    "url": "escape-2042-the-truth-defenders"
+  },
+  {
+    "name": "Virtua Cop 2",
+    "aliases": [
+      "VCop 2",
+      "Virtua Squad 2"
+    ],
+    "id_igdb": "2470",
+    "cover": "co9fqj",
+    "artwork": [],
+    "url": "virtua-cop-2"
+  },
+  {
+    "name": "Eldorado Gate Volume 3",
+    "aliases": [
+      "Eldorado Gate Vol. 3"
+    ],
+    "id_igdb": "5555",
+    "cover": "co6t3k",
+    "artwork": [],
+    "url": "eldorado-gate-volume-3"
+  },
+  {
+    "name": "Marvel vs. Capcom: Clash of Super Heroes",
+    "aliases": [
+      "MvC",
+      "MVSC"
+    ],
+    "id_igdb": "8246",
+    "cover": "co8r3z",
+    "artwork": [],
+    "url": "marvel-vs-capcom-clash-of-super-heroes"
+  },
+  {
+    "name": "After the Fall",
+    "aliases": [],
+    "id_igdb": "203158",
+    "cover": "co4t29",
+    "artwork": [],
+    "url": "after-the-fall--2"
+  },
+  {
+    "name": "Xeno Crisis",
+    "aliases": [
+      "Xeno Crisis.exe"
+    ],
+    "id_igdb": "80010",
+    "cover": "co1uh0",
+    "artwork": [
+      "ar4oq",
+      "ar8k6"
+    ],
+    "url": "xeno-crisis"
+  },
+  {
+    "name": "Prismaticallization",
+    "aliases": [
+      "SuperLite 1500 Series: Prismaticallization"
+    ],
+    "id_igdb": "108832",
+    "cover": "co2ge2",
+    "artwork": [],
+    "url": "prismaticallization"
+  },
+  {
+    "name": "Hidden & Dangerous",
+    "aliases": [
+      "Hidden and Dangerous"
+    ],
+    "id_igdb": "294",
+    "cover": "coav0b",
+    "artwork": [],
+    "url": "hidden-dangerous"
+  },
+  {
+    "name": "Arcade Racing Legends",
+    "aliases": [],
+    "id_igdb": "120565",
+    "cover": "co1mu3",
+    "artwork": [
+      "ar5yy"
+    ],
+    "url": "arcade-racing-legends"
+  },
+  {
+    "name": "Space Channel 5",
+    "aliases": [
+      "Supēsu Channeru Faibu"
+    ],
+    "id_igdb": "6602",
+    "cover": "cobzal",
+    "artwork": [],
+    "url": "space-channel-5"
+  },
+  {
+    "name": "Capcom vs. SNK 2: Mark of the Millennium 2001",
+    "aliases": [
+      "Capcom vs. SNK 2: Millionaire Fighting 2001",
+      "CVS2",
+      "CVS2 Millionaire Fighting 2001",
+      "Capcom vs. SNK 2 EO"
+    ],
+    "id_igdb": "3846",
+    "cover": "co9djp",
+    "artwork": [
+      "ar3nqe"
+    ],
+    "url": "capcom-vs-snk-2-mark-of-the-millennium-2001"
+  },
+  {
+    "name": "Grauen no Torikago: Kapitel 2 - Torikago",
+    "aliases": [
+      "グラウエンの鳥籠 Kapitel 2 「鳥籠」",
+      "Grauen no Torikago Kapitel 2 「Torikago」",
+      "Birdcage of Horrors: Chapter 2 - Birdcage"
+    ],
+    "id_igdb": "318050",
+    "cover": "co8v5c",
+    "artwork": [],
+    "url": "grauen-no-torikago-kapitel-2-torikago"
+  },
+  {
+    "name": "Elansar",
+    "aliases": [
+      "Elansar.exe"
+    ],
+    "id_igdb": "33705",
+    "cover": "co887r",
+    "artwork": [],
+    "url": "elansar"
+  },
+  {
+    "name": "Grauen no Torikago: Kapitel 5 - Shokuzai",
+    "aliases": [
+      "グラウエンの鳥籠 Kapitel 5 「贖罪」",
+      "Grauen no Torikago Kapitel 5 「Shokuzai」",
+      "Birdcage of Horrors: Chapter 5 - Atonement"
+    ],
+    "id_igdb": "318054",
+    "cover": "co8v5g",
+    "artwork": [],
+    "url": "grauen-no-torikago-kapitel-5-shokuzai"
+  },
+  {
+    "name": "Quake III Arena",
+    "aliases": [
+      "Q3",
+      "Q3A",
+      "Quake 3 Arena",
+      "Quake 3: Arena",
+      "Quake III"
+    ],
+    "id_igdb": "355",
+    "cover": "co1ybj",
+    "artwork": [
+      "ar37v7",
+      "ar37v8"
+    ],
+    "url": "quake-iii-arena"
+  },
+  {
+    "name": "Suika",
+    "aliases": [
+      "Water Summer",
+      "Wet Summer Days",
+      "Suika: Regular Edition",
+      "Suika: All Ages Edition"
+    ],
+    "id_igdb": "132085",
+    "cover": "cobbws",
+    "artwork": [],
+    "url": "suika"
+  },
+  {
+    "name": "Jinsei Game for Dreamcast",
+    "aliases": [
+      "The Game of Life for Dreamcast"
+    ],
+    "id_igdb": "131569",
+    "cover": "co48lx",
+    "artwork": [],
+    "url": "jinsei-game-for-dreamcast"
+  },
+  {
+    "name": "Baldr Force",
+    "aliases": [],
+    "id_igdb": "6714",
+    "cover": "co2wfv",
+    "artwork": [],
+    "url": "baldr-force"
+  },
+  {
+    "name": "Force Five",
+    "aliases": [],
+    "id_igdb": "39441",
+    "cover": "co986c",
+    "artwork": [],
+    "url": "force-five"
+  },
+  {
+    "name": "Grauen no Torikago: Kapitel 3 - Kansei",
+    "aliases": [
+      "グラウエンの鳥籠 Kapitel 3 「陥穽」",
+      "Grauen no Torikago Kapitel 3 「Kansei」",
+      "Birdcage of Horrors: Chapter 3 - Completion"
+    ],
+    "id_igdb": "318051",
+    "cover": "co8v5d",
+    "artwork": [],
+    "url": "grauen-no-torikago-kapitel-3-kansei"
+  },
+  {
+    "name": "Test Drive: Off-Road 3",
+    "aliases": [
+      "4x4 World Trophy",
+      "Test Drive: 4x4 World Trophy"
+    ],
+    "id_igdb": "49905",
+    "cover": "cobslh",
+    "artwork": [
+      "ar5kat",
+      "ar5kau"
+    ],
+    "url": "test-drive-off-road-3"
+  },
+  {
+    "name": "Under Defeat",
+    "aliases": [],
+    "id_igdb": "21015",
+    "cover": "co2pog",
+    "artwork": [],
+    "url": "under-defeat"
+  },
+  {
+    "name": "Netto de Tennis",
+    "aliases": [
+      "Net de Tennis",
+      "Tennis with the Net"
+    ],
+    "id_igdb": "58169",
+    "cover": "co9615",
+    "artwork": [],
+    "url": "netto-de-tennis"
+  },
+  {
+    "name": "Psychic Force",
+    "aliases": [],
+    "id_igdb": "20140",
+    "cover": "co5xui",
+    "artwork": [],
+    "url": "psychic-force"
+  },
+  {
+    "name": "Space Channel 5: Part 2",
+    "aliases": [
+      "Supēsu Chaneru Faibu Pāto Tsū"
+    ],
+    "id_igdb": "6603",
+    "cover": "co1mw1",
+    "artwork": [
+      "arrjr"
+    ],
+    "url": "space-channel-5-part-2"
+  },
+  {
+    "name": "Flea!",
+    "aliases": [
+      "Flea.exe"
+    ],
+    "id_igdb": "150517",
+    "cover": "co3hix",
+    "artwork": [
+      "arn9v"
+    ],
+    "url": "flea"
+  },
+  {
+    "name": "Dee Dee Planet",
+    "aliases": [],
+    "id_igdb": "210790",
+    "cover": "co50ox",
+    "artwork": [],
+    "url": "dee-dee-planet"
+  },
+  {
+    "name": "Quiz Aa! Megami-sama: Tatakau Tsubasa to Tomoni",
+    "aliases": [
+      "Ah! My Goddess ~Stay With Fighting Wings~ ",
+      "クイズ ああっ女神さまっ ～闘う翼とともに～"
+    ],
+    "id_igdb": "131572",
+    "cover": "co9bnw",
+    "artwork": [],
+    "url": "quiz-aa-megami-sama-tatakau-tsubasa-to-tomoni"
+  },
+  {
+    "name": "Prince of Persia: Arabian Nights",
+    "aliases": [
+      "Arabian NIghts: Prince of Persia"
+    ],
+    "id_igdb": "143442",
+    "cover": "co2sxo",
+    "artwork": [],
+    "url": "prince-of-persia-arabian-nights"
+  },
+  {
+    "name": "Tomb Raider: The Last Revelation",
+    "aliases": [
+      "Tomb Raider 4",
+      "TR4",
+      "TRLR",
+      "TRIV",
+      "TLR",
+      "Tomb Raider : La Révélation Finale",
+      "古墓奇兵：末世啟示錄",
+      "Tomb Raider: Последнее откровение",
+      "Tomb Raider IV: Last Revelation",
+      "Tomb Raider IV: The Last Revelation",
+      "Tomb Raider IV"
+    ],
+    "id_igdb": "1158",
+    "cover": "co3hbt",
+    "artwork": [
+      "arlc6"
+    ],
+    "url": "tomb-raider-the-last-revelation"
+  },
+  {
+    "name": "Silent Scope",
+    "aliases": [],
+    "id_igdb": "49182",
+    "cover": "co7sxy",
+    "artwork": [],
+    "url": "silent-scope"
+  },
+  {
+    "name": "The King of Fighters 2002",
+    "aliases": [
+      "KOF '02",
+      "KOF '02 Be the fighter!",
+      "The King of Fighters 2002: Challenge to Ultimate Battle",
+      "ザ・キング・オブ・ファイターズ 2002 ツーサウザンドツー チャレンジ トゥ アルティメットバトル",
+      "kof2002",
+      "The King of Fighters IX",
+      "The King of Fighters 9"
+    ],
+    "id_igdb": "5884",
+    "cover": "co3xw1",
+    "artwork": [
+      "ar3o6e",
+      "ar3o6f"
+    ],
+    "url": "the-king-of-fighters-2002"
+  },
+  {
+    "name": "Moekan",
+    "aliases": [
+      "モエかん ～萌えっ娘島へようこそ～ 通常版",
+      "Moekan ~Moekkojima e Youkoso~ Regular Edition",
+      "Moekan: Moekko Company"
+    ],
+    "id_igdb": "253125",
+    "cover": "cocn8e",
+    "artwork": [],
+    "url": "moekan--2"
+  },
+  {
+    "name": "Aqua GT",
+    "aliases": [],
+    "id_igdb": "3714",
+    "cover": "co7yes",
+    "artwork": [],
+    "url": "aqua-gt"
+  },
+  {
+    "name": "Grand Theft Auto 2",
+    "aliases": [
+      "GTA2",
+      "侠盗车手2",
+      "GTA 2 Беспредел"
+    ],
+    "id_igdb": "819",
+    "cover": "co2lb2",
+    "artwork": [
+      "arpug"
+    ],
+    "url": "grand-theft-auto-2"
+  },
+  {
+    "name": "Outtrigger",
+    "aliases": [],
+    "id_igdb": "39605",
+    "cover": "cocls1",
+    "artwork": [
+      "ar6csk",
+      "ar6csl",
+      "ar6csm",
+      "ar6csn",
+      "ar6cso",
+      "ar6csp",
+      "ar6csq",
+      "ar6csr",
+      "ar6css"
+    ],
+    "url": "outtrigger"
+  },
+  {
+    "name": "Big2Small",
+    "aliases": [
+      "BIG2SMALL"
+    ],
+    "id_igdb": "252646",
+    "cover": "co6lpu",
+    "artwork": [],
+    "url": "big2small"
+  },
+  {
+    "name": "My Merry May",
+    "aliases": [],
+    "id_igdb": "247400",
+    "cover": "co7fsj",
+    "artwork": [],
+    "url": "my-merry-may"
+  },
+  {
+    "name": "Pen Pen TriIcelon",
+    "aliases": [
+      "PenPen TriIcelon",
+      "Pen Pen ToraiAisuron"
+    ],
+    "id_igdb": "14708",
+    "cover": "co42p5",
+    "artwork": [
+      "ar5tvg",
+      "ar5tvh",
+      "ar5tvi",
+      "ar5tvj",
+      "ar5tvk"
+    ],
+    "url": "pen-pen-triicelon"
+  },
+  {
+    "name": "Toy Story 2: Buzz Lightyear to the Rescue!",
+    "aliases": [
+      "Toy Story 2: Captain Buzz Lightyear auf Rettungsmission!",
+      "Toy Story 2: Buzz l'Eclair a la rescousse!",
+      "Disney's Toy Story 2",
+      "Toy Story 2: Buzz Lightyear em ação!",
+      "Toy Story 2: Buzz Lightyear eilt zur Hilfe!",
+      "Disney-Pixar Toy Story 2 - Buzz Lightyear eilt zur Hilfe!"
+    ],
+    "id_igdb": "3619",
+    "cover": "co3wv5",
+    "artwork": [
+      "ar1p88",
+      "ar1p89"
+    ],
+    "url": "toy-story-2-buzz-lightyear-to-the-rescue"
+  },
+  {
+    "name": "Super Street Fighter II X for Matching Service",
+    "aliases": [],
+    "id_igdb": "307486",
+    "cover": "co8fu8",
+    "artwork": [],
+    "url": "super-street-fighter-ii-x-for-matching-service--1"
+  },
+  {
+    "name": "Garou: Mark of the Wolves",
+    "aliases": [
+      "Fatal Fury: Mark of the Wolves",
+      "Garou.exe"
+    ],
+    "id_igdb": "10605",
+    "cover": "co2eya",
+    "artwork": [],
+    "url": "garou-mark-of-the-wolves"
+  },
+  {
+    "name": "D+Vine[Luv]",
+    "aliases": [
+      "D+Vine",
+      "Divine Love",
+      "D+Vine[Luv]: Shokai Genteiban"
+    ],
+    "id_igdb": "283301",
+    "cover": "co9kky",
+    "artwork": [],
+    "url": "d-plus-vine-luv"
+  },
+  {
+    "name": "Xtreme Sports",
+    "aliases": [
+      "Sega Extreme Sports with 55DSL",
+      "Maximum Sports Extreme",
+      " Off-Piste with Six Extreme Sports"
+    ],
+    "id_igdb": "127512",
+    "cover": "co53gm",
+    "artwork": [
+      "ar6d7q",
+      "ar6d7r",
+      "ar6d7s",
+      "ar6d7t"
+    ],
+    "url": "xtreme-sports--1"
+  },
+  {
+    "name": "Es",
+    "aliases": [
+      "es"
+    ],
+    "id_igdb": "131273",
+    "cover": "co7wg1",
+    "artwork": [],
+    "url": "es"
+  },
+  {
+    "name": "Chicken Run",
+    "aliases": [],
+    "id_igdb": "248769",
+    "cover": "co99ka",
+    "artwork": [],
+    "url": "chicken-run--3"
+  },
+  {
+    "name": "Sega Tetris",
+    "aliases": [],
+    "id_igdb": "131318",
+    "cover": "co2v4u",
+    "artwork": [],
+    "url": "sega-tetris"
+  },
+  {
+    "name": "Hundred Swords",
+    "aliases": [],
+    "id_igdb": "12435",
+    "cover": "co2w79",
+    "artwork": [],
+    "url": "hundred-swords"
+  },
+  {
+    "name": "Prism Heart",
+    "aliases": [
+      "Prism Heart: Gaiden Disc - Ken ni Kometa Omoi"
+    ],
+    "id_igdb": "283127",
+    "cover": "coawhj",
+    "artwork": [],
+    "url": "prism-heart"
+  },
+  {
+    "name": "Castle Fantasia: Seima Taisen",
+    "aliases": [
+      "Castle Fantasia - Seima Taisen"
+    ],
+    "id_igdb": "283329",
+    "cover": "coccg1",
+    "artwork": [],
+    "url": "castle-fantasia-seima-taisen"
+  },
+  {
+    "name": "Neon Genesis Evangelion: Ayanami Raising Project",
+    "aliases": [
+      "Shin Seiki Evangelion: Ayanami Ikusei Keikaku"
+    ],
+    "id_igdb": "27099",
+    "cover": "co2wkn",
+    "artwork": [],
+    "url": "neon-genesis-evangelion-ayanami-raising-project"
+  },
+  {
+    "name": "Tony Hawk's Pro Skater",
+    "aliases": [
+      "THPS",
+      "SuperLite1500シリーズトニー・ホークのプロ・スケーター",
+      "SuperLite 1500 Series: Tony Hawk's Pro Skater",
+      "托尼霍克职业滑板 "
+    ],
+    "id_igdb": "6692",
+    "cover": "co1y79",
+    "artwork": [
+      "ar5021",
+      "ar5024",
+      "ar5025"
+    ],
+    "url": "tony-hawk-s-pro-skater"
+  },
+  {
+    "name": "Street Fighter Alpha 3",
+    "aliases": [
+      "Street Fighter Zero 3: Saikyou-ryu Doujou",
+      "Street Fighter Alpha 3: Saikyo Dojo",
+      "SFA3"
+    ],
+    "id_igdb": "242650",
+    "cover": "co6akr",
+    "artwork": [],
+    "url": "street-fighter-alpha-3--1"
+  },
+  {
+    "name": "Sqrxz 4: Cold Cash",
+    "aliases": [],
+    "id_igdb": "61803",
+    "cover": "coa0pk",
+    "artwork": [],
+    "url": "sqrxz-4-cold-cash"
+  },
+  {
+    "name": "Harley-Davidson & L.A. Riders",
+    "aliases": [
+      "Harley Davidson and LA Riders"
+    ],
+    "id_igdb": "39479",
+    "cover": "co4934",
+    "artwork": [],
+    "url": "harley-davidson-and-la-riders"
+  },
+  {
+    "name": "Lake Masters Pro",
+    "aliases": [
+      "Lake Masters Pro - Dreamcast Plus!"
+    ],
+    "id_igdb": "67300",
+    "cover": "co7nw6",
+    "artwork": [],
+    "url": "lake-masters-pro"
+  },
+  {
+    "name": "Star Wars: Demolition",
+    "aliases": [
+      "Star Wars Demolition"
+    ],
+    "id_igdb": "143",
+    "cover": "co5vyd",
+    "artwork": [],
+    "url": "star-wars-demolition"
+  },
+  {
+    "name": "Worms Pinball",
+    "aliases": [],
+    "id_igdb": "9335",
+    "cover": "co1xjc",
+    "artwork": [
+      "arn20"
+    ],
+    "url": "worms-pinball"
+  },
+  {
+    "name": "Age of Empires II: The Conquerors",
+    "aliases": [
+      "AOC"
+    ],
+    "id_igdb": "599",
+    "cover": "co1xya",
+    "artwork": [],
+    "url": "age-of-empires-ii-the-conquerors"
+  },
+  {
+    "name": "Pop'n Music 2",
+    "aliases": [
+      "pop'n music 2"
+    ],
+    "id_igdb": "78975",
+    "cover": "co5xwp",
+    "artwork": [],
+    "url": "popn-music-2"
+  },
+  {
+    "name": "Neo XYX",
+    "aliases": [],
+    "id_igdb": "45814",
+    "cover": "co7j0e",
+    "artwork": [],
+    "url": "neo-xyx"
+  },
+  {
+    "name": "Illbleed",
+    "aliases": [
+      "勇闖鬼界"
+    ],
+    "id_igdb": "26450",
+    "cover": "co3vxs",
+    "artwork": [],
+    "url": "illbleed"
+  },
+  {
+    "name": "Nanatsu no Hikan: Senritsu no Bishou",
+    "aliases": [
+      "Seven Mysterious Mansions: Shivery Smile"
+    ],
+    "id_igdb": "108772",
+    "cover": "co2t1r",
+    "artwork": [],
+    "url": "nanatsu-no-hikan-senritsu-no-bishou"
+  },
+  {
+    "name": "Death Crimson 2: Meranito no Saidan",
+    "aliases": [
+      "Death Crimson 2: Altar of Melanito "
+    ],
+    "id_igdb": "60497",
+    "cover": "coatds",
+    "artwork": [],
+    "url": "death-crimson-2-meranito-no-saidan"
+  },
+  {
+    "name": "Virtua Golf",
+    "aliases": [
+      "Dynamic Golf"
+    ],
+    "id_igdb": "131345",
+    "cover": "cob81i",
+    "artwork": [
+      "ar527q"
+    ],
+    "url": "virtua-golf"
+  },
+  {
+    "name": "Winning Post 4: Program 2000",
+    "aliases": [],
+    "id_igdb": "63595",
+    "cover": "co9991",
+    "artwork": [],
+    "url": "winning-post-4-program-2000"
+  },
+  {
+    "name": "White Creek",
+    "aliases": [],
+    "id_igdb": "411214",
+    "cover": "cockaj",
+    "artwork": [
+      "ar6bcj"
+    ],
+    "url": "white-creek"
+  },
+  {
+    "name": "South Park: Chef's Luv Shack",
+    "aliases": [],
+    "id_igdb": "1258",
+    "cover": "co5xx0",
+    "artwork": [],
+    "url": "south-park-chef-s-luv-shack"
+  },
+  {
+    "name": "Seaman",
+    "aliases": [
+      "Shiiman: Kindan no Pet - Gaze Hakushi no Jikken Shima",
+      "Seaman ~Forbidden Pets~ Dr. Gazeer's Experimental Island",
+      "シーマン~禁断のペット~ガゼー博士の実験島",
+      "Seaman: Forbidden Pets - Dr. Gazeer's Experimental Island"
+    ],
+    "id_igdb": "9130",
+    "cover": "co9q1c",
+    "artwork": [],
+    "url": "seaman"
+  },
+  {
+    "name": "18 Wheeler: American Pro Trucker",
+    "aliases": [
+      "18 Wheeler"
+    ],
+    "id_igdb": "3706",
+    "cover": "co7swu",
+    "artwork": [],
+    "url": "18-wheeler-american-pro-trucker"
+  },
+  {
+    "name": "Sonic Adventure 2",
+    "aliases": [
+      "SA2"
+    ],
+    "id_igdb": "7858",
+    "cover": "cobqpd",
+    "artwork": [
+      "ar48hk",
+      "ar48hp",
+      "ar48hs"
+    ],
+    "url": "sonic-adventure-2"
+  },
+  {
+    "name": "Fragrance Tale",
+    "aliases": [],
+    "id_igdb": "58175",
+    "cover": "co4ur5",
+    "artwork": [],
+    "url": "fragrance-tale"
+  },
+  {
+    "name": "Sega GT",
+    "aliases": [],
+    "id_igdb": "28838",
+    "cover": "co43a4",
+    "artwork": [
+      "ar6dp9",
+      "ar6dpa",
+      "ar6dpb",
+      "ar6dpc",
+      "ar6dpd",
+      "ar6dpe",
+      "ar6dpf",
+      "ar6dpg",
+      "ar6dph",
+      "ar6dpi",
+      "ar6dpj",
+      "ar6dpk",
+      "ar6dpl",
+      "ar6dpm",
+      "ar6dpn",
+      "ar6dpo",
+      "ar6dpp",
+      "ar6dpq",
+      "ar6dpr",
+      "ar6dps"
+    ],
+    "url": "sega-gt"
+  },
+  {
+    "name": "NFL 2K",
+    "aliases": [
+      "NFL2K"
+    ],
+    "id_igdb": "8842",
+    "cover": "co5xwy",
+    "artwork": [],
+    "url": "nfl-2k"
+  },
+  {
+    "name": "Disney's 102 Dalmatians: Puppies to the Rescue",
+    "aliases": [
+      "Les 102 Dalmatiens à la rescousse !",
+      "Disneys 102 Dalmatiner - Valpar till undsättning",
+      "102 далматинца. Пятнистые спасатели"
+    ],
+    "id_igdb": "2361",
+    "cover": "co86yp",
+    "artwork": [],
+    "url": "disneys-102-dalmatians-puppies-to-the-rescue"
+  },
+  {
+    "name": "Never7: The End of Infinity",
+    "aliases": [
+      "Never 7: The End of Infinity"
+    ],
+    "id_igdb": "18018",
+    "cover": "co2271",
+    "artwork": [
+      "ar3a0w",
+      "ar3a0y",
+      "ar3a10"
+    ],
+    "url": "never7-the-end-of-infinity"
+  },
+  {
+    "name": "Volgarr the Viking",
+    "aliases": [
+      "Völgarr the Viking",
+      "Volgarr.exe"
+    ],
+    "id_igdb": "8465",
+    "cover": "co3wns",
+    "artwork": [],
+    "url": "volgarr-the-viking"
+  },
+  {
+    "name": "Triggerheart Exelica",
+    "aliases": [],
+    "id_igdb": "21850",
+    "cover": "co2h26",
+    "artwork": [
+      "ar2vof"
+    ],
+    "url": "triggerheart-exelica"
+  },
+  {
+    "name": "NBA 2K2",
+    "aliases": [
+      "Sega Sports NBA2k2",
+      "NBA 2002"
+    ],
+    "id_igdb": "4029",
+    "cover": "co2gn5",
+    "artwork": [],
+    "url": "nba-2k2"
+  },
+  {
+    "name": "Tony Hawk's Pro Skater 2",
+    "aliases": [
+      "Tony Hawk 2",
+      "THPS 2",
+      "SK8: Tony Hawk no Pro Skater 2",
+      "托尼霍克职业滑板2"
+    ],
+    "id_igdb": "913",
+    "cover": "co1y77",
+    "artwork": [],
+    "url": "tony-hawk-s-pro-skater-2"
+  },
+  {
+    "name": "Resident Evil 2: Special Edition",
+    "aliases": [],
+    "id_igdb": "280755",
+    "cover": "co7po3",
+    "artwork": [],
+    "url": "resident-evil-2-special-edition"
+  },
+  {
+    "name": "Legacy of Kain: Soul Reaver",
+    "aliases": [
+      "Soul Reaver"
+    ],
+    "id_igdb": "4122",
+    "cover": "co1yal",
+    "artwork": [
+      "are0c"
+    ],
+    "url": "legacy-of-kain-soul-reaver"
+  },
+  {
+    "name": "Fushigi no Dungeon: Fuurai no Shiren Gaiden - Onna Kenshi Asuka Kenzan!",
+    "aliases": [
+      "Mysterious Dungeon: Shiren the Wanderer Side Story - Swordswoman Asuka Arrives!"
+    ],
+    "id_igdb": "80485",
+    "cover": "co49l9",
+    "artwork": [],
+    "url": "fushigi-no-dungeon-fuurai-no-shiren-gaiden-onna-kenshi-asuka-kenzan"
+  },
+  {
+    "name": "EVE Zero: Ark of the Matter",
+    "aliases": [],
+    "id_igdb": "71277",
+    "cover": "co31j2",
+    "artwork": [],
+    "url": "eve-zero-ark-of-the-matter"
+  },
+  {
+    "name": "Zombie Revenge",
+    "aliases": [],
+    "id_igdb": "24798",
+    "cover": "co2mse",
+    "artwork": [],
+    "url": "zombie-revenge"
+  },
+  {
+    "name": "ECW Hardcore Revolution",
+    "aliases": [
+      "ECW"
+    ],
+    "id_igdb": "3483",
+    "cover": "co40g0",
+    "artwork": [],
+    "url": "ecw-hardcore-revolution"
+  },
+  {
+    "name": "Who Wants to Be a Millionaire",
+    "aliases": [
+      "Chi vuol essere miliardario",
+      "Chi vuol essere milionario",
+      "Wer wird Millionär",
+      "Qui Veut Gagner des Millions",
+      "Who Wants To Be A Millionaire: UK Edition",
+      "クイズ$ミリオネア",
+      "Who Wants To Be A Millionaire",
+      "Wer wird Millionaer"
+    ],
+    "id_igdb": "243",
+    "cover": "co5j7t",
+    "artwork": [],
+    "url": "who-wants-to-be-a-millionaire"
+  },
+  {
+    "name": "Spider-Man",
+    "aliases": [
+      "Spider-Man 2000",
+      "SuperLite 1500 シリーズ スパイダーマン",
+      "SuperLite 1500 Series: Spider-Man"
+    ],
+    "id_igdb": "3603",
+    "cover": "co2xxq",
+    "artwork": [
+      "ar5068"
+    ],
+    "url": "spider-man--5"
+  },
+  {
+    "name": "Sailor Moon RevengeX",
+    "aliases": [],
+    "id_igdb": "279589",
+    "cover": "co7t4y",
+    "artwork": [],
+    "url": "sailor-moon-revengex"
+  },
+  {
+    "name": "Advanced Daisenryaku: Europe no Arashi - Doitsu Dengeki Sakusen",
+    "aliases": [
+      "アドバンスド大戦略～ヨーロッパの嵐･ドイツ電撃作戦～",
+      "アドバンスド大戦略DC",
+      "Advanced Daisenryaku DC",
+      "Advanced Daisenryaku: Sturm über Europa - Der deutsche Blitzkrieg"
+    ],
+    "id_igdb": "60804",
+    "cover": "co8i5m",
+    "artwork": [],
+    "url": "advanced-daisenryaku-europe-no-arashi-doitsu-dengeki-sakusen"
+  },
+  {
+    "name": "Fragmented Almanac",
+    "aliases": [],
+    "id_igdb": "313285",
+    "cover": "co8rq4",
+    "artwork": [],
+    "url": "fragmented-almanac"
+  },
+  {
+    "name": "RedLine Racer",
+    "aliases": [
+      "Suzuki Alstare Exteme Racing"
+    ],
+    "id_igdb": "39508",
+    "cover": "co29qt",
+    "artwork": [],
+    "url": "redline-racer"
+  },
+  {
+    "name": "Eldorado Gate Volume 2",
+    "aliases": [
+      "Eldorado Gate Vol. 2"
+    ],
+    "id_igdb": "5554",
+    "cover": "co5tsv",
+    "artwork": [],
+    "url": "eldorado-gate-volume-2"
+  },
+  {
+    "name": "90 Minutes: Sega Championship Football",
+    "aliases": [
+      "J. League Spectacle Soccer"
+    ],
+    "id_igdb": "45802",
+    "cover": "co40dj",
+    "artwork": [],
+    "url": "90-minutes-sega-championship-football"
+  },
+  {
+    "name": "ChuChu Rocket!",
+    "aliases": [
+      "ChūChū Roketto!"
+    ],
+    "id_igdb": "6347",
+    "cover": "co21su",
+    "artwork": [],
+    "url": "chuchu-rocket"
+  },
+  {
+    "name": "Neo Golden Logres",
+    "aliases": [],
+    "id_igdb": "218154",
+    "cover": "co6v8j",
+    "artwork": [],
+    "url": "neo-golden-logres"
+  },
+  {
+    "name": "Test Drive: Le Mans",
+    "aliases": [
+      "24 Heures Du Mans ",
+      "Le Mans 24 Ore"
+    ],
+    "id_igdb": "27556",
+    "cover": "co5xwg",
+    "artwork": [],
+    "url": "test-drive-le-mans--1"
+  },
+  {
+    "name": "Gunlord",
+    "aliases": [
+      "Gun Lord"
+    ],
+    "id_igdb": "9124",
+    "cover": "r4k1r7tuwyakl7jkydd4",
+    "artwork": [],
+    "url": "gunlord"
+  },
+  {
+    "name": "Test Drive V-Rally",
+    "aliases": [
+      "V-Rally 2"
+    ],
+    "id_igdb": "45844",
+    "cover": "co2fgj",
+    "artwork": [],
+    "url": "test-drive-v-rally"
+  },
+  {
+    "name": "The Eye of Typhoon: Tsunami Edition/Saiki",
+    "aliases": [
+      "TeoT",
+      "The Eye of Typhoon [Tsunami Edition]",
+      "The Eye of Typhoon [Saiki]"
+    ],
+    "id_igdb": "279834",
+    "cover": "co7yr8",
+    "artwork": [],
+    "url": "the-eye-of-typhoon-tsunami-edition-slash-saiki"
+  },
+  {
+    "name": "South Park Rally",
+    "aliases": [],
+    "id_igdb": "1259",
+    "cover": "co3b86",
+    "artwork": [],
+    "url": "south-park-rally"
+  },
+  {
+    "name": "Vigilante 8: 2nd Offense",
+    "aliases": [
+      "Vigilante 12",
+      "Vigilante 8: ~Second Battle~"
+    ],
+    "id_igdb": "3333",
+    "cover": "co3b84",
+    "artwork": [],
+    "url": "vigilante-8-2nd-offense"
+  },
+  {
+    "name": "Dancing Blade Katteni Momotenshi II: Tears of Eden",
+    "aliases": [
+      "Dancing Blade Katte ni Momotenshi II - Tears of Eden Kanzenban"
+    ],
+    "id_igdb": "64858",
+    "cover": "co2fzm",
+    "artwork": [],
+    "url": "dancing-blade-katteni-momotenshi-ii-tears-of-eden"
+  },
+  {
+    "name": "Coaster Works",
+    "aliases": [
+      "Jet Coaster Dream",
+      "JetCosterDream",
+      "Jet Coster Dream"
+    ],
+    "id_igdb": "6725",
+    "cover": "co5xx8",
+    "artwork": [],
+    "url": "coaster-works"
+  },
+  {
+    "name": "Rhapsody of Zephyr",
+    "aliases": [
+      "서풍의 광시곡"
+    ],
+    "id_igdb": "70961",
+    "cover": "co5xuh",
+    "artwork": [],
+    "url": "rhapsody-of-zephyr"
+  },
+  {
+    "name": "Sakura Taisen: Kinematron Hanagumi Mail",
+    "aliases": [
+      "Sakura Wars: Kinematron Hanagumi Mail"
+    ],
+    "id_igdb": "62122",
+    "cover": "co48ki",
+    "artwork": [],
+    "url": "sakura-taisen-kinematron-hanagumi-mail"
+  },
+  {
+    "name": "Floigan Bros.",
+    "aliases": [
+      "Floigan Brothers",
+      "Floigan Bros. - Episode 1"
+    ],
+    "id_igdb": "22050",
+    "cover": "co40hu",
+    "artwork": [],
+    "url": "floigan-bros"
+  },
+  {
+    "name": "Rayman 2: The Great Escape",
+    "aliases": [
+      "Rayman 2 Dreamcast",
+      "Rayman: Kaizokusen kara no Dasshutsu"
+    ],
+    "id_igdb": "193314",
+    "cover": "coawt4",
+    "artwork": [],
+    "url": "rayman-2-the-great-escape--2"
+  },
+  {
+    "name": "Sonic Shuffle",
+    "aliases": [
+      "ソニックシャッフル"
+    ],
+    "id_igdb": "21969",
+    "cover": "co1ztr",
+    "artwork": [],
+    "url": "sonic-shuffle"
+  },
+  {
+    "name": "Ready 2 Rumble Boxing: Round 2",
+    "aliases": [],
+    "id_igdb": "3587",
+    "cover": "coatcf",
+    "artwork": [],
+    "url": "ready-2-rumble-boxing-round-2"
+  },
+  {
+    "name": "Chew Chew Mimic",
+    "aliases": [],
+    "id_igdb": "281006",
+    "cover": "co9a8v",
+    "artwork": [
+      "ar2s1g"
+    ],
+    "url": "chew-chew-mimic"
+  },
+  {
+    "name": "Sega Bass Fishing",
+    "aliases": [
+      "세가 배스 피싱"
+    ],
+    "id_igdb": "5147",
+    "cover": "co40xx",
+    "artwork": [
+      "arrgs"
+    ],
+    "url": "sega-bass-fishing"
+  },
+  {
+    "name": "Elemental Gimmick Gear",
+    "aliases": [
+      "EGG: Elemental Gimmick Gear",
+      "EGG"
+    ],
+    "id_igdb": "45862",
+    "cover": "co2nvx",
+    "artwork": [],
+    "url": "elemental-gimmick-gear"
+  },
+  {
+    "name": "Nobunaga's Ambition: Shouseiroku with Power Up Kit",
+    "aliases": [
+      "NOBUNAGA'S AMBITION: Shouseiroku with Power Up Kit",
+      "Nobunaga no Yabou: Shouseiroku with Power Up Kit",
+      "Nobunaga7WPK_Launcher.exe"
+    ],
+    "id_igdb": "91187",
+    "cover": "cobfi0",
+    "artwork": [],
+    "url": "nobunagas-ambition-shouseiroku-with-power-up-kit"
+  },
+  {
+    "name": "Dave Mirra Freestyle BMX",
+    "aliases": [],
+    "id_igdb": "26012",
+    "cover": "co7cqz",
+    "artwork": [],
+    "url": "dave-mirra-freestyle-bmx"
+  },
+  {
+    "name": "Ghost Blade",
+    "aliases": [],
+    "id_igdb": "23442",
+    "cover": "co810x",
+    "artwork": [],
+    "url": "ghost-blade"
+  },
+  {
+    "name": "Wacky Races Starring Dastardly & Muttley",
+    "aliases": [
+      "Wacky Races"
+    ],
+    "id_igdb": "43447",
+    "cover": "co5rwi",
+    "artwork": [],
+    "url": "wacky-races-starring-dastardly-and-muttley"
+  },
+  {
+    "name": "Nobunaga's Ambition: Reppuden",
+    "aliases": [
+      "Nobunaga's Ambition: Tales of the Storms",
+      "Nobunaga no Yabou: Reppuuden"
+    ],
+    "id_igdb": "60093",
+    "cover": "coambo",
+    "artwork": [],
+    "url": "nobunagas-ambition-reppuden"
+  },
+  {
+    "name": "Boku, Doraemon",
+    "aliases": [
+      "I, Doraemon"
+    ],
+    "id_igdb": "66134",
+    "cover": "hv6kjtiyo3vwdgyl4lsb",
+    "artwork": [],
+    "url": "boku-doraemon"
+  },
+  {
+    "name": "Looney Tunes: Space Race",
+    "aliases": [],
+    "id_igdb": "8136",
+    "cover": "co7xg0",
+    "artwork": [],
+    "url": "looney-tunes-space-race"
+  },
+  {
+    "name": "The King of Fighters XI",
+    "aliases": [
+      "KOFXI",
+      "King of Fighters 11",
+      "KOF XI",
+      "KOF11",
+      "KOFXI DC",
+      "The King of Fighters 2004"
+    ],
+    "id_igdb": "348044",
+    "cover": "co9xqr",
+    "artwork": [
+      "ar3ops"
+    ],
+    "url": "the-king-of-fighters-xi--1"
+  },
+  {
+    "name": "Comic Party",
+    "aliases": [
+      "こみっくパーティー"
+    ],
+    "id_igdb": "80719",
+    "cover": "co6k31",
+    "artwork": [],
+    "url": "comic-party"
+  },
+  {
+    "name": "Grandia II",
+    "aliases": [
+      "Grandia 2",
+      "格兰蒂亚II"
+    ],
+    "id_igdb": "9580",
+    "cover": "co2sb2",
+    "artwork": [],
+    "url": "grandia-ii"
+  },
+  {
+    "name": "Super Mario War",
+    "aliases": [],
+    "id_igdb": "87815",
+    "cover": "co3q6q",
+    "artwork": [],
+    "url": "super-mario-war"
+  },
+  {
+    "name": "Samba de Amigo",
+    "aliases": [],
+    "id_igdb": "70087",
+    "cover": "co7l0w",
+    "artwork": [
+      "ar43io",
+      "ar43ip"
+    ],
+    "url": "samba-de-amigo--1"
+  },
+  {
+    "name": "Maken X",
+    "aliases": [
+      "魔剣X"
+    ],
+    "id_igdb": "46378",
+    "cover": "co2ygi",
+    "artwork": [],
+    "url": "maken-x"
+  },
+  {
+    "name": "Maboroshi Tsukiyo",
+    "aliases": [
+      "Maboroshi Tsukiyo ~Tsukiyo no Kitan~",
+      "Maborosi Tukiyo",
+      "まぼろし月夜 〜月夜野綺譚〜"
+    ],
+    "id_igdb": "128379",
+    "cover": "co2gqj",
+    "artwork": [
+      "ar4p74"
+    ],
+    "url": "maboroshi-tsukiyo"
+  },
+  {
+    "name": "Sengoku Turb: Fanfan I Heart Me Dunce-Doublentendre",
+    "aliases": [
+      "Sengoku Turb F.I.D.",
+      "Sengoku TURB Fanfan I♥me Dunce-doublentendre",
+      "Sengoku Turb: Fanfan I love me Dance-doubletendre"
+    ],
+    "id_igdb": "142401",
+    "cover": "co5xxf",
+    "artwork": [],
+    "url": "sengoku-turb-fanfan-i-heart-me-dunce-doublentendre"
+  },
+  {
+    "name": "Iris",
+    "aliases": [],
+    "id_igdb": "283479",
+    "cover": "cobugs",
+    "artwork": [
+      "ar5me0"
+    ],
+    "url": "iris--2"
+  },
+  {
+    "name": "The Last Blade 2",
+    "aliases": [
+      "The Last Blade 2: Heart of the Samurai",
+      "LastBlade2App.exe"
+    ],
+    "id_igdb": "76045",
+    "cover": "co23d7",
+    "artwork": [
+      "arm8l"
+    ],
+    "url": "the-last-blade-2"
+  },
+  {
+    "name": "Twinkle Star Sprites",
+    "aliases": [
+      "Twinklestar Sprites"
+    ],
+    "id_igdb": "35378",
+    "cover": "co9a5h",
+    "artwork": [
+      "ar39jy"
+    ],
+    "url": "twinkle-star-sprites"
+  },
+  {
+    "name": "Who Wants to Beat Up a Millionaire",
+    "aliases": [],
+    "id_igdb": "45848",
+    "cover": "co5xxr",
+    "artwork": [],
+    "url": "who-wants-to-beat-up-a-millionaire"
+  },
+  {
+    "name": "Aliens versus Predator",
+    "aliases": [
+      "Aliens vs. Predator",
+      "AVP",
+      "Aliens vs. Predator (1999)"
+    ],
+    "id_igdb": "9979",
+    "cover": "co4l1t",
+    "artwork": [],
+    "url": "aliens-versus-predator"
+  },
+  {
+    "name": "Napple Tale: Arsia in Daydream",
+    "aliases": [
+      "Napple Tale"
+    ],
+    "id_igdb": "28152",
+    "cover": "co7k8m",
+    "artwork": [],
+    "url": "napple-tale-arsia-in-daydream"
+  },
+  {
+    "name": "NFL Blitz 2000",
+    "aliases": [],
+    "id_igdb": "4366",
+    "cover": "co5xwu",
+    "artwork": [],
+    "url": "nfl-blitz-2000"
+  },
+  {
+    "name": "Draconus: Cult of the Wyrm",
+    "aliases": [
+      "Dragon's Blood"
+    ],
+    "id_igdb": "9189",
+    "cover": "co40f1",
+    "artwork": [],
+    "url": "draconus-cult-of-the-wyrm"
+  },
+  {
+    "name": "Phantasy Star Online",
+    "aliases": [
+      "PSO1",
+      "PSO"
+    ],
+    "id_igdb": "21968",
+    "cover": "co6f12",
+    "artwork": [
+      "ar6dux",
+      "ar6duy",
+      "ar6duz"
+    ],
+    "url": "phantasy-star-online"
+  },
+  {
+    "name": "Nekojiru-pm: The Balkan Dream",
+    "aliases": [],
+    "id_igdb": "408600",
+    "cover": "",
+    "artwork": [],
+    "url": "nekojiru-pm-the-balkan-dream"
+  },
+  {
+    "name": "Spawn: In the Demon's Hand",
+    "aliases": [
+      "Supoun In za Deimonzu Hando"
+    ],
+    "id_igdb": "4358",
+    "cover": "co5mvt",
+    "artwork": [
+      "ar3oh6"
+    ],
+    "url": "spawn-in-the-demon-s-hand"
+  },
+  {
+    "name": "Shadow Man",
+    "aliases": [
+      "Shadow Man - Rette deine Seele"
+    ],
+    "id_igdb": "3598",
+    "cover": "co25wt",
+    "artwork": [
+      "ar1qgg"
+    ],
+    "url": "shadow-man"
+  },
+  {
+    "name": "Buzz Lightyear of Star Command",
+    "aliases": [
+      "Les Aventures de Buzz l'Éclair"
+    ],
+    "id_igdb": "19675",
+    "cover": "co3zbj",
+    "artwork": [],
+    "url": "buzz-lightyear-of-star-command"
+  },
+  {
+    "name": "Gaia Master",
+    "aliases": [
+      "GaiaMaster: Kamigami no Board Game",
+      "GaiaMaster: Kessen! Seiki-ou Densetsu",
+      "Gaia Master: Kessen! Seikiou Densetsu",
+      "Gaia Master: Kamigami no Board Game",
+      "ガイアマスター 決戦！世紀王伝説",
+      "ガイアマスター",
+      "ガイアマスター ~神々のボードゲーム~"
+    ],
+    "id_igdb": "59153",
+    "cover": "cobyz1",
+    "artwork": [
+      "ar5rnk",
+      "ar5rnm",
+      "ar5rno"
+    ],
+    "url": "gaia-master"
+  },
+  {
+    "name": "Nakoruru: Anohito kara no Okurimono",
+    "aliases": [
+      "Nakoruru: Ano Hito kara no Okurimono",
+      "ナコルル〜あのひとからのおくりもの〜"
+    ],
+    "id_igdb": "57624",
+    "cover": "cobzxw",
+    "artwork": [],
+    "url": "nakoruru-anohito-kara-no-okurimono"
+  },
+  {
+    "name": "The War of Genesis Side Story I: Rhapsody of Zephyr",
+    "aliases": [],
+    "id_igdb": "47016",
+    "cover": "co2xhe",
+    "artwork": [],
+    "url": "the-war-of-genesis-side-story-i-rhapsody-of-zephyr"
+  },
+  {
+    "name": "Castlevania: Resurrection",
+    "aliases": [
+      "Castlevania DC",
+      "Castlevania Dreamcast"
+    ],
+    "id_igdb": "67824",
+    "cover": "co52x4",
+    "artwork": [
+      "ar8f5",
+      "ar8f6"
+    ],
+    "url": "castlevania-resurrection"
+  },
+  {
+    "name": "Mortal Kombat 4",
+    "aliases": [
+      "MK4",
+      "MKIV"
+    ],
+    "id_igdb": "1622",
+    "cover": "co53gp",
+    "artwork": [
+      "aru8q"
+    ],
+    "url": "mortal-kombat-4"
+  },
+  {
+    "name": "The King of Fighters 2000",
+    "aliases": [
+      "KOF2K",
+      "KOF '00",
+      "KOF 2000",
+      "The King of Fighters VII",
+      "The King of Fighters 7",
+      "拳皇2000"
+    ],
+    "id_igdb": "15431",
+    "cover": "co9elj",
+    "artwork": [
+      "ar3nqp",
+      "ar3nqs",
+      "ar3nqt",
+      "ar3nqu",
+      "ar3nqv",
+      "ar3nqw",
+      "ar3nrk"
+    ],
+    "url": "the-king-of-fighters-2000"
+  },
+  {
+    "name": "Crazy Taxi 2",
+    "aliases": [],
+    "id_igdb": "1806",
+    "cover": "coaszp",
+    "artwork": [],
+    "url": "crazy-taxi-2"
+  },
+  {
+    "name": "Shobon no Action",
+    "aliases": [
+      "Shobon no Akushon",
+      "Open Syobon Action",
+      "Cat Mario",
+      "Syobon Action"
+    ],
+    "id_igdb": "78662",
+    "cover": "co2dxj",
+    "artwork": [
+      "ar1y1j"
+    ],
+    "url": "shobon-no-action"
+  },
+  {
+    "name": "Dragon Riders: Chronicles of Pern",
+    "aliases": [],
+    "id_igdb": "132134",
+    "cover": "co6irp",
+    "artwork": [],
+    "url": "dragon-riders-chronicles-of-pern"
+  },
+  {
+    "name": "Fur Fighters",
+    "aliases": [
+      "Fur Fighters: Viggo's Revenge"
+    ],
+    "id_igdb": "14700",
+    "cover": "co9nzg",
+    "artwork": [],
+    "url": "fur-fighters"
+  },
+  {
+    "name": "Soldier of Fortune",
+    "aliases": [
+      "SoF",
+      "命运战士"
+    ],
+    "id_igdb": "3111",
+    "cover": "co5xso",
+    "artwork": [],
+    "url": "soldier-of-fortune"
+  },
+  {
+    "name": "Psychic Force 2012",
+    "aliases": [
+      "Psychic Force 2"
+    ],
+    "id_igdb": "22849",
+    "cover": "coaaa6",
+    "artwork": [
+      "ar40s0",
+      "ar40s4"
+    ],
+    "url": "psychic-force-2012"
+  },
+  {
+    "name": "MTV Sports Skateboarding",
+    "aliases": [
+      "MTV Sports: Skateboarding featuring Andy Macdonald"
+    ],
+    "id_igdb": "45810",
+    "cover": "co3g94",
+    "artwork": [],
+    "url": "mtv-sports-skateboarding"
+  },
+  {
+    "name": "Bounty Hunter Sara: Holy Mountain no Teiou",
+    "aliases": [
+      "Bounty Hunter Sara: Holy Mountain no Teiō",
+      "Bounty Hunter Sara"
+    ],
+    "id_igdb": "94481",
+    "cover": "co2kcn",
+    "artwork": [],
+    "url": "bounty-hunter-sara-holy-mountain-no-teiou"
+  },
+  {
+    "name": "NFL Blitz 2001",
+    "aliases": [],
+    "id_igdb": "47752",
+    "cover": "co6wq1",
+    "artwork": [],
+    "url": "nfl-blitz-2001"
+  },
+  {
+    "name": "NCAA College Football 2K2",
+    "aliases": [
+      "NCAA College Football 2K2 - Road to the Rose Bowl"
+    ],
+    "id_igdb": "46380",
+    "cover": "co40rc",
+    "artwork": [],
+    "url": "ncaa-college-football-2k2"
+  },
+  {
+    "name": "Alien Resurrection",
+    "aliases": [
+      "Alien: La Résurrection",
+      "Alien: Die Wiedergeburt"
+    ],
+    "id_igdb": "44995",
+    "cover": "coaszn",
+    "artwork": [],
+    "url": "alien-resurrection"
+  },
+  {
+    "name": "Vanishing Point",
+    "aliases": [
+      "VP"
+    ],
+    "id_igdb": "33969",
+    "cover": "co28f6",
+    "artwork": [],
+    "url": "vanishing-point"
+  },
+  {
+    "name": "Street Fighter III 2nd Impact: Giant Attack",
+    "aliases": [
+      "Street Fighter 3: 2nd Impact"
+    ],
+    "id_igdb": "6709",
+    "cover": "co55ev",
+    "artwork": [],
+    "url": "street-fighter-iii-2nd-impact-giant-attack"
+  },
+  {
+    "name": "San Francisco Rush 2049",
+    "aliases": [],
+    "id_igdb": "3596",
+    "cover": "co3wo8",
+    "artwork": [],
+    "url": "san-francisco-rush-2049"
+  },
+  {
+    "name": "Shirotsume Souwa Bangai-hen: Tsunakawa-sanchi no Christmas",
+    "aliases": [
+      "Shirotsume Souwa Extra: Christmas of Mr.Tsunagawa's Family"
+    ],
+    "id_igdb": "376706",
+    "cover": "coath4",
+    "artwork": [],
+    "url": "shirotsume-souwa-bangai-hen-tsunakawa-sanchi-no-christmas"
+  },
+  {
+    "name": "Power Stone 2",
+    "aliases": [
+      "パワーストーン 2"
+    ],
+    "id_igdb": "13106",
+    "cover": "cobr7h",
+    "artwork": [
+      "ar3nx4"
+    ],
+    "url": "power-stone-2"
+  },
+  {
+    "name": "Phantasy Star Online Ver. 2",
+    "aliases": [
+      "PSO v2",
+      "PSO Ver.2"
+    ],
+    "id_igdb": "45812",
+    "cover": "co41br",
+    "artwork": [],
+    "url": "phantasy-star-online-ver-2"
+  },
+  {
+    "name": "Wild Metal Country",
+    "aliases": [
+      "Wild Metal"
+    ],
+    "id_igdb": "20132",
+    "cover": "ynxsax9nlw0toxfstm8g",
+    "artwork": [],
+    "url": "wild-metal-country"
+  },
+  {
+    "name": "Simple 2000 Series: The Renai Adventure - Bittersweet Fools",
+    "aliases": [
+      "Bittersweet Fools",
+      "Simple 2000 Series Vol.9 - The Renai Adventure - Bittersweet Fools",
+      "Simple 2000 Series Vol.01 - The Renai Adventure - Bittersweet Fools",
+      "SIMPLE2000シリーズ Vol.9 THE恋愛アドベンチャー BITTERSWEET FOOLS",
+      "SIMPLE2000シリーズ DC Vol.01 BITTERSWEET FOOLS THE 恋愛アドベンチャー"
+    ],
+    "id_igdb": "70559",
+    "cover": "cocag3",
+    "artwork": [
+      "ar1gmo",
+      "ar64pu"
+    ],
+    "url": "simple-2000-series-the-renai-adventure-bittersweet-fools"
+  },
+  {
+    "name": "Project Justice",
+    "aliases": [
+      "Moero! Justice Gakuen"
+    ],
+    "id_igdb": "13096",
+    "cover": "coawt2",
+    "artwork": [
+      "ar57jy",
+      "ar57jz",
+      "ar57k2",
+      "ar57k4"
+    ],
+    "url": "project-justice"
+  },
+  {
+    "name": "Blue Stinger",
+    "aliases": [],
+    "id_igdb": "6715",
+    "cover": "coauxf",
+    "artwork": [],
+    "url": "blue-stinger"
+  },
+  {
+    "name": "Zero Gunner 2",
+    "aliases": [
+      "제로 거너2",
+      "제로 거너2-(ZERO GUNNER 2-)",
+      "Zero Gunner 2.exe"
+    ],
+    "id_igdb": "21014",
+    "cover": "co4vl4",
+    "artwork": [
+      "ar140r"
+    ],
+    "url": "zero-gunner-2"
+  },
+  {
+    "name": "Cannon Spike",
+    "aliases": [
+      "Gunspike",
+      "Gun Spike"
+    ],
+    "id_igdb": "6719",
+    "cover": "co8ix8",
+    "artwork": [
+      "ar4clw",
+      "ar4clx",
+      "ar4cm0"
+    ],
+    "url": "cannon-spike"
+  },
+  {
+    "name": "Wild Metal",
+    "aliases": [
+      "Wild Metal: Reclaim the Future",
+      "Wild Metal Country"
+    ],
+    "id_igdb": "80092",
+    "cover": "co2gh6",
+    "artwork": [],
+    "url": "wild-metal"
+  },
+  {
+    "name": "Re-Volt",
+    "aliases": [
+      "ReVolt",
+      "revolt.exe"
+    ],
+    "id_igdb": "3585",
+    "cover": "co1n29",
+    "artwork": [
+      "ar1ryx"
+    ],
+    "url": "re-volt"
+  },
+  {
+    "name": "Seventh Cross Evolution",
+    "aliases": [],
+    "id_igdb": "45788",
+    "cover": "co43aj",
+    "artwork": [],
+    "url": "seventh-cross-evolution"
+  },
+  {
+    "name": "Hellgate",
+    "aliases": [
+      "HellGate",
+      "Hell's Gate"
+    ],
+    "id_igdb": "125403",
+    "cover": "co2xmk",
+    "artwork": [],
+    "url": "hellgate"
+  },
+  {
+    "name": "Rent-A-Hero No. 1",
+    "aliases": [
+      "Rent-A-Hero Remake",
+      "Rent a Hero Xbox Dreamcast",
+      "Rent a Hero #1 SEGA",
+      "Renta Hiirou Naabaa Wan",
+      "Rent a Hero No.1"
+    ],
+    "id_igdb": "6002",
+    "cover": "co2xaa",
+    "artwork": [
+      "ar7ps",
+      "ar7pt",
+      "ar7pu",
+      "ar7pv",
+      "ar7pw"
+    ],
+    "url": "rent-a-hero-no-1"
+  },
+  {
+    "name": "Bomber Hehhe",
+    "aliases": [
+      "Bomber Hehhe!"
+    ],
+    "id_igdb": "46363",
+    "cover": "co3bzz",
+    "artwork": [],
+    "url": "bomber-hehhe"
+  },
+  {
+    "name": "Ooga Booga",
+    "aliases": [],
+    "id_igdb": "10961",
+    "cover": "co3kct",
+    "artwork": [],
+    "url": "ooga-booga"
+  },
+  {
+    "name": "Fighting Force 2",
+    "aliases": [],
+    "id_igdb": "11615",
+    "cover": "co5xx7",
+    "artwork": [],
+    "url": "fighting-force-2"
+  },
+  {
+    "name": "Black/Matrix Advanced",
+    "aliases": [
+      "Black/Matrix AD",
+      "Black-Matrix Advanced",
+      "Black/Matrix A/D"
+    ],
+    "id_igdb": "93013",
+    "cover": "coatdy",
+    "artwork": [],
+    "url": "black-slash-matrix-advanced"
+  },
+  {
+    "name": "Woody Woodpecker Racing",
+    "aliases": [
+      "Woody Woodpecker no Go! Go! Racing"
+    ],
+    "id_igdb": "8013",
+    "cover": "co5u7o",
+    "artwork": [],
+    "url": "woody-woodpecker-racing"
+  },
+  {
+    "name": "Simple 1500 Series Vol. 81: The Renai Adventure - Okaeri!",
+    "aliases": [
+      "The Renai Adventure - Okaeri!",
+      "The Love Adventure: Welcome Home!",
+      "Simple 2000 DC Series Vol. 4: The Renai Adventure: Okaeri!",
+      "SIMPLE 2000シリーズDC Vol.04 おかえり! THE恋愛アドベンチャー"
+    ],
+    "id_igdb": "166387",
+    "cover": "cob3c7",
+    "artwork": [
+      "ar4y70",
+      "ar4y71"
+    ],
+    "url": "simple-1500-series-vol-81-the-renai-adventure-okaeri"
+  },
+  {
+    "name": "The Grinch",
+    "aliases": [],
+    "id_igdb": "15487",
+    "cover": "co7t1v",
+    "artwork": [],
+    "url": "the-grinch"
+  },
+  {
+    "name": "Samba de Amigo ver. 2000",
+    "aliases": [
+      "Samba de Amigo Ver. 2001"
+    ],
+    "id_igdb": "85768",
+    "cover": "co6w5p",
+    "artwork": [],
+    "url": "samba-de-amigo-ver-2000"
+  },
+  {
+    "name": "Tech Romancer",
+    "aliases": [
+      "Choukou Senki Kikaiou",
+      "Chronicle of Super Steel Warrior Kikaioh"
+    ],
+    "id_igdb": "39313",
+    "cover": "co4wa3",
+    "artwork": [],
+    "url": "tech-romancer"
+  },
+  {
+    "name": "Sonic Adventure",
+    "aliases": [
+      "SA1",
+      "Sonic Adventure International ",
+      "SA"
+    ],
+    "id_igdb": "7860",
+    "cover": "co5jac",
+    "artwork": [
+      "ar4zl1",
+      "ar4zl2",
+      "ar4zl3",
+      "ar4zl4",
+      "ar4zl5",
+      "ar4zl6",
+      "ar4zsp"
+    ],
+    "url": "sonic-adventure"
+  },
+  {
+    "name": "Centipede",
+    "aliases": [
+      "Centipede 3D"
+    ],
+    "id_igdb": "2237",
+    "cover": "co5cr4",
+    "artwork": [
+      "ar3cu0"
+    ],
+    "url": "centipede--2"
+  },
+  {
+    "name": "SoulCalibur",
+    "aliases": [
+      "灵魂能力",
+      "SC",
+      "Soul Calibur"
+    ],
+    "id_igdb": "1564",
+    "cover": "co1x6g",
+    "artwork": [
+      "ar10x7"
+    ],
+    "url": "soulcalibur"
+  },
+  {
+    "name": "Wipeout",
+    "aliases": [
+      "WipE'out\"",
+      "WipEout"
+    ],
+    "id_igdb": "351100",
+    "cover": "coa1f0",
+    "artwork": [
+      "ar3sj2",
+      "ar3sj3"
+    ],
+    "url": "wipeout--3"
+  },
+  {
+    "name": "Caesars Palace 2000: Millennium Gold Edition",
+    "aliases": [
+      "Caesars Palace 2000"
+    ],
+    "id_igdb": "45807",
+    "cover": "co2uqy",
+    "artwork": [],
+    "url": "caesars-palace-2000-millennium-gold-edition"
+  },
+  {
+    "name": "Sega Rally 2",
+    "aliases": [
+      "Sega Rally 2 Championship",
+      "Sega Rally 2: Sega Rally Championship"
+    ],
+    "id_igdb": "1572",
+    "cover": "cob3fw",
+    "artwork": [
+      "ar4ycx",
+      "ar4ycy",
+      "ar4ycz",
+      "ar4yd0"
+    ],
+    "url": "sega-rally-2"
+  },
+  {
+    "name": "Worms Armageddon",
+    "aliases": [
+      "Wormageddon ",
+      "WA",
+      "Worms: Armageddon",
+      "WA.exe"
+    ],
+    "id_igdb": "948",
+    "cover": "co1rkc",
+    "artwork": [],
+    "url": "worms-armageddon"
+  },
+  {
+    "name": "Crazy Taxi",
+    "aliases": [],
+    "id_igdb": "1805",
+    "cover": "co7jt6",
+    "artwork": [
+      "ar7mh"
+    ],
+    "url": "crazy-taxi"
+  },
+  {
+    "name": "MDK2",
+    "aliases": [
+      "孤胆枪手2"
+    ],
+    "id_igdb": "218",
+    "cover": "co255w",
+    "artwork": [],
+    "url": "mdk2"
+  },
+  {
+    "name": "Segagaga",
+    "aliases": [
+      "SGGG",
+      "Sega Simulation: SGGG"
+    ],
+    "id_igdb": "28151",
+    "cover": "co6yxb",
+    "artwork": [],
+    "url": "segagaga"
+  },
+  {
+    "name": "Carrier",
+    "aliases": [],
+    "id_igdb": "6720",
+    "cover": "co40ek",
+    "artwork": [],
+    "url": "carrier"
+  },
+  {
+    "name": "Animastar",
+    "aliases": [],
+    "id_igdb": "6712",
+    "cover": "co4tqj",
+    "artwork": [],
+    "url": "animastar"
+  },
+  {
+    "name": "Cleopatra Fortune",
+    "aliases": [
+      "Cleopatra's Fortune"
+    ],
+    "id_igdb": "40283",
+    "cover": "co6v3z",
+    "artwork": [],
+    "url": "cleopatra-fortune"
+  },
+  {
+    "name": "Iron Aces",
+    "aliases": [
+      "Imperial no Taka: Fighter of Zero",
+      "Iron Aces: High Speed WWII Aerial Combat"
+    ],
+    "id_igdb": "45853",
+    "cover": "co40o5",
+    "artwork": [],
+    "url": "iron-aces"
+  },
+  {
+    "name": "Dousoukai 2: Again & Refrain",
+    "aliases": [
+      "同窓会2 again & refrain"
+    ],
+    "id_igdb": "97576",
+    "cover": "co6uhm",
+    "artwork": [],
+    "url": "dousoukai-2-again-and-refrain"
+  },
+  {
+    "name": "Disney's Donald Duck: Goin' Quackers",
+    "aliases": [
+      "Quack Attack",
+      "Paperino: Operazione Papero",
+      "Goin' Quackers",
+      "Disney's Donald Duck: Daisy wo Tsukue!",
+      "Disney's Donald Duck: Goin'*! \"Qu@ckers\"",
+      "Donald Duck: Goin'*! \"Qu@ckers\"",
+      "Donald Duck: Goin' Quackers",
+      "Disney's Donald Duck: Quack Attack"
+    ],
+    "id_igdb": "360",
+    "cover": "co434q",
+    "artwork": [],
+    "url": "disneys-donald-duck-goin-quackers--1"
+  },
+  {
+    "name": "Daytona USA",
+    "aliases": [],
+    "id_igdb": "22007",
+    "cover": "co5v40",
+    "artwork": [],
+    "url": "daytona-usa--3"
+  },
+  {
+    "name": "Puyo Pop Fever",
+    "aliases": [
+      "Puyo Puyo Fībā",
+      "Puyo Puyo Fever",
+      "Puyo Puyo 5"
+    ],
+    "id_igdb": "4075",
+    "cover": "co85z9",
+    "artwork": [],
+    "url": "puyo-pop-fever"
+  },
+  {
+    "name": "Demolition Racer: No Exit",
+    "aliases": [
+      "Demolition Racer 2"
+    ],
+    "id_igdb": "46376",
+    "cover": "co2fgl",
+    "artwork": [],
+    "url": "demolition-racer-no-exit"
+  },
+  {
+    "name": "Angel Present",
+    "aliases": [],
+    "id_igdb": "267405",
+    "cover": "co73p2",
+    "artwork": [],
+    "url": "angel-present"
+  },
+  {
+    "name": "Dead or Alive 2",
+    "aliases": [
+      "DOA2"
+    ],
+    "id_igdb": "1388",
+    "cover": "co6t3o",
+    "artwork": [],
+    "url": "dead-or-alive-2"
+  },
+  {
+    "name": "Hydro Thunder",
+    "aliases": [],
+    "id_igdb": "3370",
+    "cover": "co3baz",
+    "artwork": [
+      "ar10tm"
+    ],
+    "url": "hydro-thunder"
+  },
+  {
+    "name": "Jet Grind Radio",
+    "aliases": [
+      "JSR",
+      "JGR",
+      "Jet Set Radio",
+      "De La Jet Set Radio"
+    ],
+    "id_igdb": "1569",
+    "cover": "co3rjd",
+    "artwork": [
+      "arsgi",
+      "ar6d09",
+      "ar6d0a",
+      "ar6d0b",
+      "ar6d0c",
+      "ar6d0d",
+      "ar6d0e",
+      "ar6d0f",
+      "ar6d0g",
+      "ar6d0h",
+      "ar6d0i",
+      "ar6d0j",
+      "ar6d0k"
+    ],
+    "url": "jet-grind-radio"
+  },
+  {
+    "name": "Tomb Raider: Chronicles",
+    "aliases": [
+      "TRC",
+      "Tomb Raider V",
+      "TR5",
+      "Tomb Raider : Sur les traces de Lara Croft",
+      "Tomb Raider: Хроники",
+      "Tomb Raider: Die Chronik",
+      "Tomb Raider Chronicles: La leggenda di Lara Croft",
+      "古墓奇兵5：回憶錄",
+      "古墓丽影：历代记",
+      "Tomb Raider 5: Chronicles"
+    ],
+    "id_igdb": "1160",
+    "cover": "co3h20",
+    "artwork": [
+      "ar2gch"
+    ],
+    "url": "tomb-raider-chronicles"
+  }
+]

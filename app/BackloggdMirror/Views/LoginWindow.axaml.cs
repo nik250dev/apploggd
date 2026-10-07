@@ -1,5 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input.Platform;
+using Avalonia.Interactivity;
 using BackloggdMirror.ViewModels;
 using System;
 
@@ -18,6 +20,21 @@ namespace BackloggdMirror.Views
             if (DataContext is LoginViewModel vm)
             {
                 vm.RequestClose += Close;
+            }
+        }
+
+        private async void OnCopyInstallDepsClick(object? sender, RoutedEventArgs e)
+        {
+            if (DataContext is not LoginViewModel vm || Clipboard == null) return;
+
+            try
+            {
+                await Clipboard.SetTextAsync(vm.InstallDepsCommand);
+                vm.IsInstallDepsCommandCopied = true;
+            }
+            catch
+            {
+                // The command stays selectable, so copying by hand is still possible.
             }
         }
 

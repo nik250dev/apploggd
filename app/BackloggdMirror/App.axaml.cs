@@ -8,6 +8,9 @@ using Avalonia.Markup.Xaml;
 using BackloggdMirror.ViewModels;
 using BackloggdMirror.Views;
 using BackloggdMirror.Services;
+using BackloggdMirror.Services.Input;
+using BackloggdMirror.Services.Platform.Linux;
+using System;
 
 using BackloggdMirror.Models;
 
@@ -37,11 +40,20 @@ public partial class App : Application
             var logger = new AppLogger();
             var authService = new BackloggdAuthService(logger);
             var browserService = new BackloggdBrowserService(logger);
-            var gameDetectionService = new GameDetectionService(logger);
+            var blacklistService = new BlacklistService(logger);
+            var pendingSessionService = new PendingSessionService(logger);
+            var gameDetectionService = new GameDetectionService(logger, blacklistService);
             var settingsService = new SettingsService(logger);
             var credentialStorageService = new CredentialStorageService(logger);
             var installService = new PlaywrightInstallService(logger);
             var autostartService = new AutostartService(logger);
+            var gamepadService = new GamepadService(logger);
+
+            if (OperatingSystem.IsLinux())
+            {
+                _ = LinuxTrayHost.StartAsync(logger);
+                LinuxDesktopEntry.Install(logger);
+            }
 
             // Explicitly load settings here to avoid infinite recursion in constructor
             settingsService.Load();
@@ -67,7 +79,7 @@ public partial class App : Application
 
             if (silentStart)
             {
-                logger.Info("[App] Started by Windows autostart: keeping every window hidden.");
+                logger.Info("[App] Started by the system autostart: keeping every window hidden.");
 
                 // desktop.MainWindow is deliberately left unset: the lifetime shows whatever sits
                 // there when Start() runs. Both handlers below assign it, which is also what
@@ -90,11 +102,15 @@ public partial class App : Application
 
             loginVm.LoginSuccessful += () =>
             {
-                var mainWindowVm = new MainWindowViewModel(gameDetectionService, authService, browserService, settingsService, credentialStorageService, logger, autostartService: autostartService);
+                var mainWindowVm = new MainWindowViewModel(gameDetectionService, authService, browserService, settingsService, credentialStorageService, logger, autostartService: autostartService, blacklistService: blacklistService, gamepadService: gamepadService, pendingSessionService: pendingSessionService);
 
                 mainWindowVm.IsLoggedIn = true;
 
-                if (!string.IsNullOrEmpty(loginVm.ResolvedUsername))
+                if (loginVm.StartedOffline)
+                {
+                    mainWindowVm.EnterOfflineMode("Backloggd was unreachable while restoring the saved session");
+                }
+                else if (!string.IsNullOrEmpty(loginVm.ResolvedUsername))
                 {
                     // Fire and forget: errors are handled inside the ViewModel, and the window must
                     // not wait on a network round-trip to appear.
@@ -116,6 +132,10 @@ public partial class App : Application
                 if (!silentStart)
                 {
                     mainWindow.Show();
+                }
+                else if (OperatingSystem.IsLinux())
+                {
+                    _ = mainWindow.EnsureReachableAfterLinuxSilentStartAsync();
                 }
 
                 loginWindow.Close();

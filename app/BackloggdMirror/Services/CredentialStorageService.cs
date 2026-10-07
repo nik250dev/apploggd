@@ -1,3 +1,4 @@
+using BackloggdMirror.Services.Platform.Linux;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -17,7 +18,9 @@ namespace BackloggdMirror.Services
     {
         private readonly IDataProtectionProvider _dataProtectionProvider;
         private readonly string _storagePath;
+        private readonly string _usernamePath;
         private readonly IAppLogger _logger;
+        private readonly LinuxKeyringKeyProtection? _linuxKeyProtection;
 
         public CredentialStorageService(IAppLogger logger, string? customKeysDirectory = null, string? customStoragePath = null)
         {
@@ -31,20 +34,30 @@ namespace BackloggdMirror.Services
                 .SetApplicationName("Apploggd");
 
             // DPAPI ties the keys to the Windows user account, so a copied key file is useless
-            // elsewhere. There is no equivalent on Linux/macOS, where key secrecy falls back to
-            // file-system permissions.
+            // elsewhere. On Linux the system keyring plays that role; on macOS key secrecy falls
+            // back to file-system permissions.
             if (OperatingSystem.IsWindows())
             {
                 dataProtectionBuilder.ProtectKeysWithDpapi();
+            }
+            else if (OperatingSystem.IsLinux())
+            {
+                LinuxKeyringKeyProtection.Configure(dataProtectionBuilder, logger);
             }
 
             var serviceProvider = services.BuildServiceProvider();
             _dataProtectionProvider = serviceProvider.GetDataProtectionProvider();
 
+            if (OperatingSystem.IsLinux())
+            {
+                _linuxKeyProtection = new LinuxKeyringKeyProtection(keysDirectory, serviceProvider);
+            }
+
             _storagePath = customStoragePath ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Apploggd", "user.dat");
+            _usernamePath = Path.ChangeExtension(_storagePath, ".name");
         }
 
-        public void SaveCookies(IEnumerable<Cookie> cookies)
+        public void SaveSession(IEnumerable<Cookie> cookies, string? username)
         {
             try
             {
@@ -64,16 +77,18 @@ namespace BackloggdMirror.Services
                 }
 
                 var json = JsonSerializer.Serialize(cookieDtos);
-                var protector = _dataProtectionProvider.CreateProtector("CookieStorage");
-                var protectedData = protector.Protect(json);
-
-                var directory = Path.GetDirectoryName(_storagePath);
-                if (!Directory.Exists(directory))
+                if (_linuxKeyProtection != null)
                 {
-                    Directory.CreateDirectory(directory);
+                    _linuxKeyProtection.Write(() => WriteProtected(json));
+                }
+                else
+                {
+                    WriteProtected(json);
                 }
 
-                File.WriteAllText(_storagePath, protectedData);
+                // Kept beside user.dat, not inside it, so older versions can still read the cookies.
+                if (string.IsNullOrEmpty(username)) DeleteUsername();
+                else File.WriteAllText(_usernamePath, username);
             }
             catch (Exception ex)
             {
@@ -82,13 +97,29 @@ namespace BackloggdMirror.Services
             }
         }
 
-        public List<Cookie> LoadCookies()
+        private string WriteProtected(string json)
+        {
+            var protector = _dataProtectionProvider.CreateProtector("CookieStorage");
+            var protectedData = protector.Protect(json);
+
+            var directory = Path.GetDirectoryName(_storagePath);
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
+            File.WriteAllText(_storagePath, protectedData);
+            return protectedData;
+        }
+
+        public StoredSession LoadSession()
         {
             var cookies = new List<Cookie>();
+            string? username = null;
 
             if (!File.Exists(_storagePath))
             {
-                return cookies;
+                return new StoredSession(cookies, username);
             }
 
             try
@@ -119,12 +150,33 @@ namespace BackloggdMirror.Services
             {
                 Console.WriteLine($"[CredentialStorageService] Failed to load cookies: {ex.Message}");
                 _logger.Error($"[CredentialStorageService] Failed to load cookies: {ex.Message}", ex);
+                if (_linuxKeyProtection != null && LinuxKeyringKeyProtection.DecryptionBlockedByKeyring)
+                {
+                    _logger.Warning("[CredentialStorageService] The keyring was unavailable, so the saved session is kept for the next start.");
+                    return new StoredSession(cookies, username);
+                }
                 // Unprotect fails for good (lost or rotated keys, corrupted file), so the file is
                 // dead weight: dropping it degrades to a normal login instead of failing every start.
                 try { File.Delete(_storagePath); } catch { }
+                DeleteUsername();
+                return new StoredSession(cookies, null);
             }
 
-            return cookies;
+            try
+            {
+                if (File.Exists(_usernamePath)) username = File.ReadAllText(_usernamePath).Trim();
+            }
+            catch (Exception ex)
+            {
+                _logger.Warning($"[CredentialStorageService] Could not read the saved username: {ex.Message}. The app will not be able to start offline.");
+            }
+
+            if (cookies.Count > 0 && _linuxKeyProtection?.CanMoveKeysToKeyring() == true)
+            {
+                SaveSession(cookies, username);
+            }
+
+            return new StoredSession(cookies, username);
         }
 
         public void ClearCookies()
@@ -133,6 +185,12 @@ namespace BackloggdMirror.Services
             {
                 File.Delete(_storagePath);
             }
+            DeleteUsername();
+        }
+
+        private void DeleteUsername()
+        {
+            try { if (File.Exists(_usernamePath)) File.Delete(_usernamePath); } catch { }
         }
 
         private class CookieDto

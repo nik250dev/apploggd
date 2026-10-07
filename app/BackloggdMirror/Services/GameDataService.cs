@@ -59,7 +59,12 @@ public class GameDataService
             return null;
 
         if (!_igdbIndex.TryGetValue(idIgdb, out var game))
-            return null;
+        {
+            // Emulated games live in their own per-platform databases, loaded only when used.
+            game = Emulation.EmulatedGamesDatabase.Instance.FindByIgdbId(idIgdb);
+            if (game == null)
+                return null;
+        }
 
         // Build cover URL
         string? coverUrl = null;

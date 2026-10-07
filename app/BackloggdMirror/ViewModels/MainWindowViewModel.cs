@@ -2,13 +2,17 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using BackloggdMirror.Views;
 using BackloggdMirror.Services;
+using BackloggdMirror.Services.Input;
+using BackloggdMirror.Services.Platform.Linux;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Threading;
 using System.Diagnostics;
 using System;
+using System.Linq;
 
 using BackloggdMirror.Models;
 
@@ -91,8 +95,8 @@ public partial class MainWindowViewModel : ViewModelBase
     public event Action? RequestShowMainWindow;
     public event Action? RequestCloseApplication;
 
-    /// <summary>Message, button label and action for the tray notice that replaces the toast on a silent start.</summary>
-    public event Action<string, string, Action>? RequestTrayUpdateNotice;
+    /// <summary>The tray notice that replaces the update toast on a silent start.</summary>
+    public event Action<TrayNotice>? RequestTrayUpdateNotice;
 
     public event Action? RequestShowUpdateProgress;
     public event Action? RequestCloseUpdateProgress;
@@ -106,6 +110,9 @@ public partial class MainWindowViewModel : ViewModelBase
     private readonly IAppLogger _logger;
     private readonly GameDataService _gameDataService;
     private readonly AutostartService _autostartService;
+    private readonly BlacklistService _blacklistService;
+    private readonly PendingSessionService _pendingSessionService;
+    private readonly GamepadService? _gamepadService;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsWaitingAnimationVisible))]
@@ -113,6 +120,9 @@ public partial class MainWindowViewModel : ViewModelBase
 
     [ObservableProperty]
     private bool _isSettingsVisible = false;
+
+    [ObservableProperty]
+    private bool _isPendingVisible = false;
 
     [ObservableProperty]
     private bool _isBottomMessageVisible = false;
@@ -127,6 +137,11 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public bool IsBottomMessageLoading => BottomMessageType == BottomMessageType.Loading;
     public bool IsBottomMessageIconVisible => BottomMessageType == BottomMessageType.Success || BottomMessageType == BottomMessageType.Warning || BottomMessageType == BottomMessageType.Error;
+
+    // On Linux only with a tray host: a window hidden without one could not be brought back.
+    public bool CanMinimizeToTray => !OperatingSystem.IsLinux() || LinuxTrayHost.IsAvailable;
+
+    public void NotifyTrayAvailabilityChanged() => OnPropertyChanged(nameof(CanMinimizeToTray));
 
     // The settings toggles write straight through to SettingsService and persist on every change:
     // there is no "Apply" button, so an unsaved change would be lost silently.
@@ -170,6 +185,38 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
+    public bool GamepadNavigationEnabled
+    {
+        get => _settingsService.GamepadNavigationEnabled;
+        set
+        {
+            if (_settingsService.GamepadNavigationEnabled != value)
+            {
+                _settingsService.GamepadNavigationEnabled = value;
+                _settingsService.Save();
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public bool AlwaysAddToPending
+    {
+        get => _settingsService.AlwaysAddToPending;
+        set
+        {
+            if (_settingsService.AlwaysAddToPending != value)
+            {
+                _settingsService.AlwaysAddToPending = value;
+                _settingsService.Save();
+                _logger.Info($"[MainWindowViewModel] User action: 'Always add to pending' set to {value}.");
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    /// <summary>Shared for the whole process, like the blacklist: it outlives a logout.</summary>
+    internal GamepadService? Gamepad => _gamepadService;
+
     // Two properties for one setting: the ComboBox binds to the option object, while the code
     // (and settings.json) work with the language code. OnSelectedLanguageOptionChanged and the
     // SelectedLanguageCode setter keep them in sync in both directions.
@@ -206,6 +253,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 // language change does not reach them on its own.
                 UpdateTrayMenuText();
                 RefreshAppUpdateTexts();
+                RefreshPendingTexts();
                 OnPropertyChanged();
 
                 var option = System.Linq.Enumerable.FirstOrDefault(LanguageOptions, x => x.Code == value);
@@ -241,7 +289,11 @@ public partial class MainWindowViewModel : ViewModelBase
     // #### Session Confirmation Properties
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsAnyOverlayVisible))]
+    [NotifyPropertyChangedFor(nameof(IsSessionOverlayVisible))]
     private bool _isSessionConfirmationVisible = false;
+
+    /// <summary>The game picker shares the session overlay, but also opens on its own from the pending view.</summary>
+    public bool IsSessionOverlayVisible => IsSessionConfirmationVisible || IsGameSelectorVisible;
 
     partial void OnIsSessionConfirmationVisibleChanged(bool value)
     {
@@ -276,6 +328,7 @@ public partial class MainWindowViewModel : ViewModelBase
     private bool _isSessionCoverLoading;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsPostponeEnabled))]
     private bool _isSessionTitleLoading;
 
     // The session awaiting confirmation. It survives here rather than in the detection state because
@@ -284,6 +337,12 @@ public partial class MainWindowViewModel : ViewModelBase
     internal string? _pendingGameName;
     internal string? _pendingIdIgdb;
     internal string? _pendingGameUrl;
+    private string? _pendingCoverUrl;
+    private DateTime _pendingEndedAt;
+    private bool _pendingSaveFailed;
+
+    // Bumped per confirmation, so a late toast action cannot act on a newer session.
+    private int _pendingSessionToken;
 
     /// <summary>Below this, a session is discarded rather than offered for confirmation.</summary>
     internal TimeSpan _minAllowedSession = TimeSpan.FromMinutes(1);
@@ -291,26 +350,38 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(AreButtonsEnabled))]
     [NotifyPropertyChangedFor(nameof(IsSaveEnabled))]
+    [NotifyPropertyChangedFor(nameof(IsPostponeEnabled))]
+    [NotifyPropertyChangedFor(nameof(IsGameSelectorEnabled))]
     private bool _isSavingSession;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(AreButtonsEnabled))]
     [NotifyPropertyChangedFor(nameof(IsSaveEnabled))]
     [NotifyPropertyChangedFor(nameof(SaveButtonTooltip))]
+    [NotifyPropertyChangedFor(nameof(IsSaveTooltipVisible))]
     private bool _isGameIdentified = true;
 
     public bool AreButtonsEnabled => !IsSavingSession;
 
-    public bool IsSaveEnabled => !IsSavingSession && IsGameIdentified;
+    // The picker searches Backloggd, so it is useless offline.
+    public bool IsGameSelectorEnabled => !IsSavingSession && !IsOffline;
 
-    public string? SaveButtonTooltip => IsGameIdentified
-        ? null
-        : LocalizationService.Instance["Session_UnidentifiedGame"];
+    public bool IsSaveEnabled => !IsSavingSession && IsGameIdentified && !IsOffline;
+
+    // Not while the title resolves: the pending entry would keep a half-identified game.
+    public bool IsPostponeEnabled => !IsSavingSession && !IsSessionTitleLoading;
+
+    public string? SaveButtonTooltip => IsOffline
+        ? LocalizationService.Instance["Session_OfflineSaveTooltip"]
+        : IsGameIdentified ? null : LocalizationService.Instance["Session_UnidentifiedGame"];
+
+    public bool IsSaveTooltipVisible => IsOffline || !IsGameIdentified;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsLastPlayedGamesListVisible))]
     [NotifyPropertyChangedFor(nameof(IsLastPlayedGamesEmptyVisible))]
     [NotifyPropertyChangedFor(nameof(IsLastPlayedGamesErrorVisible))]
+    [NotifyPropertyChangedFor(nameof(IsLastPlayedGamesOfflineVisible))]
     private bool _isLastPlayedGamesLoading;
 
     [ObservableProperty]
@@ -332,7 +403,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [NotifyPropertyChangedFor(nameof(IsRecycleOverlayVisible))]
     private bool _isSaveButtonHovered = false;
 
-    public bool IsRecycleOverlayVisible => IsInfoIconHovered || IsCoverHovered || (IsSaveButtonHovered && !IsGameIdentified);
+    public bool IsRecycleOverlayVisible => IsInfoIconHovered || (!IsOffline && (IsCoverHovered || (IsSaveButtonHovered && !IsGameIdentified)));
 
     [ObservableProperty]
     private Avalonia.Media.Imaging.Bitmap? _gameBackgroundImage;
@@ -342,7 +413,12 @@ public partial class MainWindowViewModel : ViewModelBase
 
     // #### Game Selector Properties
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsAnyOverlayVisible))]
+    [NotifyPropertyChangedFor(nameof(IsSessionOverlayVisible))]
     private bool _isGameSelectorVisible = false;
+
+    /// <summary>The pending row the picker is choosing for; null when it serves the confirmation modal.</summary>
+    private PendingSessionViewModel? _selectorPendingTarget;
 
     [ObservableProperty]
     private string _gameSearchQuery = string.Empty;
@@ -355,8 +431,25 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void OpenGameSelector()
     {
+        if (IsOffline) return;
+
+        _selectorPendingTarget = null;
+        ShowGameSelector(SessionGameTitle);
+    }
+
+    [RelayCommand]
+    private void ChangePendingSessionGame(PendingSessionViewModel item)
+    {
+        if (item == null || IsOffline) return;
+
+        _selectorPendingTarget = item;
+        ShowGameSelector(item.Title);
+    }
+
+    private void ShowGameSelector(string query)
+    {
         IsGameSelectorVisible = true;
-        GameSearchQuery = SessionGameTitle; // Default to current pending title
+        GameSearchQuery = query;
         GameSearchResults.Clear();
         if (!string.IsNullOrWhiteSpace(GameSearchQuery))
         {
@@ -368,6 +461,7 @@ public partial class MainWindowViewModel : ViewModelBase
     private void CloseGameSelector()
     {
         IsGameSelectorVisible = false;
+        _selectorPendingTarget = null;
     }
 
     [RelayCommand]
@@ -429,10 +523,30 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         if (selectedGame == null) return;
 
+        if (_selectorPendingTarget is { } item)
+        {
+            var session = item.Session;
+            session.GameName = selectedGame.Title;
+            session.GameUrl = selectedGame.RedirectLink;
+            session.IdIgdb = null;
+            session.CoverUrl = string.IsNullOrEmpty(selectedGame.CoverUrl) ? null : selectedGame.CoverUrl;
+            session.IsIdentified = true;
+            _pendingSessionService.Update(session);
+
+            item.CoverBitmap = selectedGame.CoverBitmap;
+            item.Refresh();
+            UpdatePendingSummary();
+
+            CloseGameSelector();
+            return;
+        }
+
         SessionGameTitle = selectedGame.Title;
         SessionGameCover = selectedGame.CoverBitmap;
         _pendingGameName = selectedGame.Title;
         _pendingGameUrl = selectedGame.RedirectLink;
+        _pendingIdIgdb = null;
+        _pendingCoverUrl = string.IsNullOrEmpty(selectedGame.CoverUrl) ? null : selectedGame.CoverUrl;
         IsGameIdentified = true;
 
         IsGameSelectorVisible = false;
@@ -451,23 +565,46 @@ public partial class MainWindowViewModel : ViewModelBase
     [NotifyPropertyChangedFor(nameof(IsLastPlayedGamesErrorVisible))]
     private bool _hasLastPlayedGamesError;
 
-    public bool IsLastPlayedGamesListVisible => !IsLastPlayedGamesLoading && HasLastPlayedGames && !HasLastPlayedGamesError;
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsLastPlayedGamesListVisible))]
+    [NotifyPropertyChangedFor(nameof(IsLastPlayedGamesEmptyVisible))]
+    [NotifyPropertyChangedFor(nameof(IsLastPlayedGamesErrorVisible))]
+    [NotifyPropertyChangedFor(nameof(IsLastPlayedGamesOfflineVisible))]
+    [NotifyPropertyChangedFor(nameof(IsSaveEnabled))]
+    [NotifyPropertyChangedFor(nameof(SaveButtonTooltip))]
+    [NotifyPropertyChangedFor(nameof(IsSaveTooltipVisible))]
+    [NotifyPropertyChangedFor(nameof(IsSaveAllPendingEnabled))]
+    [NotifyPropertyChangedFor(nameof(SaveAllPendingTooltip))]
+    [NotifyPropertyChangedFor(nameof(IsGameSelectorEnabled))]
+    [NotifyPropertyChangedFor(nameof(IsRecycleOverlayVisible))]
+    private bool _isOffline;
 
-    public bool IsLastPlayedGamesEmptyVisible => !IsLastPlayedGamesLoading && !HasLastPlayedGames && !HasLastPlayedGamesError;
+    public bool IsLastPlayedGamesListVisible => !IsLastPlayedGamesLoading && !IsOffline && HasLastPlayedGames && !HasLastPlayedGamesError;
 
-    public bool IsLastPlayedGamesErrorVisible => !IsLastPlayedGamesLoading && HasLastPlayedGamesError;
+    public bool IsLastPlayedGamesEmptyVisible => !IsLastPlayedGamesLoading && !IsOffline && !HasLastPlayedGames && !HasLastPlayedGamesError;
+
+    public bool IsLastPlayedGamesErrorVisible => !IsLastPlayedGamesLoading && !IsOffline && HasLastPlayedGamesError;
+
+    public bool IsLastPlayedGamesOfflineVisible => !IsLastPlayedGamesLoading && IsOffline;
 
     public ObservableCollection<BackloggdMirror.Models.JournalEntry> LastPlayedGames { get; } = new();
 
-    internal string? _currentGameName;
-    internal uint _currentProcessId;
-    internal string? _currentIdIgdb;
+    internal DetectedGame? _currentGame;
     private readonly DispatcherTimer _pollingTimer;
     private readonly DispatcherTimer _displayTimer;
     private readonly Stopwatch _stopwatch;
 
+    /// <summary>
+    /// Serializes everything that touches the detection services. They keep unsynchronized caches
+    /// (exe and name indexes, resolved ids, per-PID emulator state) that used to be safe only
+    /// because every caller happened to be the UI thread; the scan now runs off it.
+    /// </summary>
+    private readonly SemaphoreSlim _detectionGate = new(1, 1);
 
-    public MainWindowViewModel(IGameDetectionService gameDetectionService, IBackloggdAuthService authService, IBackloggdBrowserService browserService, SettingsService settingsService, ICredentialStorageService credentialStorageService, IAppLogger logger, GameDataService? gameDataService = null, AutostartService? autostartService = null)
+    // One RegisterGame at a time: two on the same game and day would read the same total and one would overwrite the other.
+    private readonly SemaphoreSlim _registrationGate = new(1, 1);
+
+    public MainWindowViewModel(IGameDetectionService gameDetectionService, IBackloggdAuthService authService, IBackloggdBrowserService browserService, SettingsService settingsService, ICredentialStorageService credentialStorageService, IAppLogger logger, GameDataService? gameDataService = null, AutostartService? autostartService = null, BlacklistService? blacklistService = null, GamepadService? gamepadService = null, PendingSessionService? pendingSessionService = null)
     {
         _authService = authService;
         _browserService = browserService;
@@ -477,7 +614,13 @@ public partial class MainWindowViewModel : ViewModelBase
         _logger = logger;
         _gameDataService = gameDataService ?? new GameDataService(logger);
         _autostartService = autostartService ?? new AutostartService(logger);
+        _blacklistService = blacklistService ?? new BlacklistService(logger);
+        _gamepadService = gamepadService;
+        _pendingSessionService = pendingSessionService ?? new PendingSessionService(logger);
         _changelogService = new ChangelogService(logger);
+
+        RefreshBlacklistEntries();
+        LoadPendingSessions();
 
         _stopwatch = new Stopwatch();
 
@@ -493,6 +636,8 @@ public partial class MainWindowViewModel : ViewModelBase
             Interval = TimeSpan.FromSeconds(1)
         };
         _displayTimer.Tick += OnDisplayTick;
+
+        StartConnectionMonitor();
 
         // Initialize SelectedLanguageOption based on loaded settings
         _selectedLanguageOption = System.Linq.Enumerable.FirstOrDefault(LanguageOptions, x => x.Code == _settingsService.Language) ?? LanguageOptions[0];
@@ -553,8 +698,18 @@ public partial class MainWindowViewModel : ViewModelBase
                     // the outcome of every other branch of this switch.
                     _logger?.Info("[MainWindowViewModel] Games database updated. Reloading the in-memory detection and lookup indexes.");
                     resultMessage = LocalizationService.Instance["Update_Success"];
-                    _gameDataService.ReloadDatabase();
-                    _gameDetectionService.ReloadDatabase();
+
+                    // The reload swaps the indexes a detection pass reads, so it waits for one to finish.
+                    await _detectionGate.WaitAsync();
+                    try
+                    {
+                        _gameDataService.ReloadDatabase();
+                        _gameDetectionService.ReloadDatabase();
+                    }
+                    finally
+                    {
+                        _detectionGate.Release();
+                    }
                     break;
                 case DetectableGamesUpdateResult.NotModified:
                     Console.WriteLine("[MainWindowViewModel] detectable_processed.json is already up to date. No reload needed.");
@@ -602,6 +757,7 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         IsHomeVisible = true;
         IsSettingsVisible = false;
+        IsPendingVisible = false;
     }
 
     [RelayCommand]
@@ -609,6 +765,18 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         IsHomeVisible = false;
         IsSettingsVisible = true;
+        IsPendingVisible = false;
+    }
+
+    [RelayCommand]
+    private void NavigateToPending()
+    {
+        IsHomeVisible = false;
+        IsSettingsVisible = false;
+        IsPendingVisible = true;
+
+        // "Today" and "Yesterday" go stale once the clock passes midnight.
+        RefreshPendingTexts();
     }
 
     #region About / Changelog
@@ -635,7 +803,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [NotifyPropertyChangedFor(nameof(IsAnyOverlayVisible))]
     private bool _isUpdateProgressVisible = false;
 
-    public bool IsAnyOverlayVisible => IsSessionConfirmationVisible || IsChangelogVisible || IsClearDataConfirmationVisible || IsNoBrowserWarningVisible || IsUpdateProgressVisible;
+    public bool IsAnyOverlayVisible => IsSessionConfirmationVisible || IsGameSelectorVisible || IsChangelogVisible || IsClearDataConfirmationVisible || IsNoBrowserWarningVisible || IsUpdateProgressVisible;
 
     public ObservableCollection<BackloggdMirror.Models.ChangelogBlock> ChangelogBlocks { get; } = new();
 
@@ -772,17 +940,24 @@ public partial class MainWindowViewModel : ViewModelBase
                 RefreshAppUpdateTexts();
             });
 
-            // 30s rather than the usual 7: both notices carry an action, so they have to survive the
-            // user looking away.
+            var version = velopackUpdate.TargetFullRelease.Version.ToString();
+
             if (AutostartService.StartedSilently)
             {
-                _logger.Info("[MainWindowViewModel] Silent start, so the update is announced from the tray instead of a toast.");
-
                 // The window exists but was never shown, so a toast would count down unseen.
-                Dispatcher.UIThread.Post(() => RequestTrayUpdateNotice?.Invoke(message, actionText, RunUpdateCommand));
+                if (_settingsService.DismissedUpdateNoticeVersion == version)
+                {
+                    _logger.Info($"[MainWindowViewModel] Silent start with {version} available, but its tray notice was already dismissed; only the in-app notice remains.");
+                }
+                else
+                {
+                    _logger.Info("[MainWindowViewModel] Silent start, so the update is announced from the tray instead of a toast.");
+                    Dispatcher.UIThread.Post(() => RequestTrayUpdateNotice?.Invoke(BuildUpdateNotice(version)));
+                }
             }
             else
             {
+                // 30s rather than the usual 7: it carries an action, so it has to survive the user looking away.
                 ShowToast(message, ToastType.Warning, TimeSpan.FromSeconds(30), actionText, RunUpdateCommand);
             }
         }
@@ -841,6 +1016,68 @@ public partial class MainWindowViewModel : ViewModelBase
     /// <summary>Lets the toast and the tray notice fire the same command their buttons bind to.</summary>
     private void RunUpdateCommand() => UpdateApploggdCommand.Execute(null);
 
+    /// <summary>No timer: it stays until the user updates, closes it or opens the window.</summary>
+    private TrayNotice BuildUpdateNotice(string version)
+    {
+        var loc = LocalizationService.Instance;
+        return new TrayNotice(TrayNoticeKind.Update, loc["TrayNotice_UpdateTitle"], loc["TrayNotice_UpdateBody"])
+        {
+            Kicker = "Apploggd",
+            Version = version,
+            ActionText = loc["TrayNotice_UpdateAction"],
+            Action = RunUpdateCommand,
+            Dismissed = () =>
+            {
+                _settingsService.DismissedUpdateNoticeVersion = version;
+                _settingsService.Save();
+                _logger.Info($"[MainWindowViewModel] Tray notice for {version} dismissed; later silent starts will not show it again.");
+            }
+        };
+    }
+
+    /// <summary>
+    /// The notice for a window just hidden in the tray, matching what detection is doing. The
+    /// explained version goes first, once, unless a session is waiting: that one asks for action.
+    /// </summary>
+    public TrayNotice BuildBackgroundNotice()
+    {
+        var loc = LocalizationService.Instance;
+        var title = loc["TrayNotice_BackgroundTitle"];
+
+        if (IsSessionConfirmationVisible)
+        {
+            return new TrayNotice(TrayNoticeKind.PendingSession, $"{SessionGameTitle} · {SessionPlayTime}", loc["TrayNotice_PendingBody"])
+            {
+                Kicker = loc["TrayNotice_PendingKicker"],
+                ActionText = loc["TrayNotice_PendingAction"],
+                Action = () => RequestShowMainWindow?.Invoke()
+            };
+        }
+
+        if (!_settingsService.HasSeenTrayIntro)
+        {
+            _settingsService.HasSeenTrayIntro = true;
+            _settingsService.Save();
+            return new TrayNotice(TrayNoticeKind.Intro, title, loc["TrayNotice_IntroBody"]);
+        }
+
+        if (IsGameRunning)
+        {
+            return new TrayNotice(TrayNoticeKind.Playing, string.IsNullOrEmpty(GameName) ? title : GameName,
+                loc[_settingsService.AlwaysAddToPending ? "TrayNotice_PlayingBodyPending" : "TrayNotice_PlayingBody"])
+            {
+                LiveKicker = () => string.Format(loc["TrayNotice_PlayingKicker"], PlayTime)
+            };
+        }
+
+        if (IsGameDetectionPaused)
+        {
+            return new TrayNotice(TrayNoticeKind.Paused, title, loc["TrayNotice_PausedBody"]) { Kicker = loc["TrayNotice_PausedKicker"] };
+        }
+
+        return new TrayNotice(TrayNoticeKind.Detecting, title, loc["TrayNotice_DetectingBody"]) { Kicker = loc["TrayNotice_DetectingKicker"] };
+    }
+
     /// <summary>
     /// Stops detection before an update, so nothing starts a session while the process is being
     /// replaced. A session already being timed is <b>discarded</b>, not registered: the confirmation
@@ -851,17 +1088,8 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         if (IsGameRunning)
         {
-            _logger.Info($"[MainWindowViewModel] Update requested while timing '{_currentGameName}' ({PlayTime}). Discarding the session without registering it.");
-
-            _stopwatch.Reset();
-            _displayTimer.Stop();
-            IsGameRunning = false;
-            _currentGameName = null;
-            _currentProcessId = 0;
-            _currentIdIgdb = null;
-            GameName = string.Empty;
-            PlayTime = "00:00:00";
-            IsBackgroundImageVisible = false;
+            _logger.Info($"[MainWindowViewModel] Update requested while timing '{_currentGame?.Name}' ({PlayTime}). Discarding the session without registering it.");
+            DiscardRunningSession();
         }
         else
         {
@@ -904,6 +1132,17 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             _logger.Warning("[MainWindowViewModel] 'Update Apploggd' pressed while a session is awaiting confirmation. Refusing until it is resolved.");
             ShowToast(loc["AppUpdate_SessionPending"], ToastType.Warning);
+            return;
+        }
+
+        // Before anything is torn down, or Update.exe would only fail once the app has closed.
+        if (!AppUpdater.CanWriteInstallFolder())
+        {
+            _logger.Warning("[MainWindowViewModel] 'Update Apploggd' pressed but the install folder is read-only. Refusing.");
+
+            // From the tray the window may be hidden, and the toast lives in it.
+            RequestShowMainWindow?.Invoke();
+            ShowToast(loc["AppUpdate_ReadOnlyFolder"], ToastType.Error, TimeSpan.FromSeconds(15));
             return;
         }
 
@@ -1048,9 +1287,482 @@ public partial class MainWindowViewModel : ViewModelBase
         // Reset() bypasses the properties the UI is bound to, so the toggles need telling by hand.
         OnPropertyChanged(nameof(MinimizeToTray));
         OnPropertyChanged(nameof(StartWithWindows));
+        OnPropertyChanged(nameof(GamepadNavigationEnabled));
+        OnPropertyChanged(nameof(AlwaysAddToPending));
         OnPropertyChanged(nameof(SelectedLanguageCode));
 
+        // Same trap as the settings: the file is gone, but detection keeps this instance.
+        _blacklistService.Reset();
+        RefreshBlacklistEntries();
+
+        _pendingSessionService.Reset();
+        LoadPendingSessions();
+
         Logout();
+    }
+
+    #endregion
+
+    #region Blacklist
+
+    /// <summary>Asks the view for an executable to blacklist; null when the user cancels.</summary>
+    public event Func<Task<string?>>? RequestPickExecutable;
+
+    private static readonly TimeSpan UndoToastDuration = TimeSpan.FromSeconds(10);
+
+    /// <summary>Newest first: the entry just added is the one most likely to be looked for.</summary>
+    public ObservableCollection<BlacklistEntry> BlacklistEntries { get; } = new();
+
+    [ObservableProperty]
+    private bool _hasBlacklistEntries;
+
+    /// <summary>Switches the prompt next to the link: a ROM is a game, so "Not a game?" does not fit it.</summary>
+    [ObservableProperty]
+    private bool _isRunningGameEmulated;
+
+    [ObservableProperty]
+    private bool _isPendingGameEmulated;
+
+    // The detection result behind the modal, kept whole: the blacklist needs its path or content key.
+    internal DetectedGame? _pendingGame;
+    private string? _pendingGameDisplayName;
+
+    private void RefreshBlacklistEntries()
+    {
+        BlacklistEntries.Clear();
+        foreach (var entry in _blacklistService.Entries.OrderByDescending(e => e.AddedAt))
+        {
+            BlacklistEntries.Add(entry);
+        }
+
+        HasBlacklistEntries = BlacklistEntries.Count > 0;
+    }
+
+    /// <summary>Drops the session being timed without registering it or asking the user.</summary>
+    private void DiscardRunningSession()
+    {
+        _stopwatch.Reset();
+        _displayTimer.Stop();
+        IsGameRunning = false;
+        _currentGame = null;
+        GameName = string.Empty;
+        PlayTime = "00:00:00";
+        IsBackgroundImageVisible = false;
+        GameStatus = "No Game Running";
+        UpdateTrayMenuText();
+    }
+
+    [RelayCommand]
+    private void BlacklistRunningGame()
+    {
+        var game = _currentGame;
+        if (!IsGameRunning || game == null) return;
+
+        var entry = BlacklistService.ForDetectedGame(game, string.IsNullOrEmpty(GameName) ? game.Name : GameName);
+        _logger.Info($"[MainWindowViewModel] User action: blacklisted '{entry.DisplayName}' while timing it ({PlayTime}). The session is discarded.");
+
+        DiscardRunningSession();
+        AddToBlacklist(entry);
+    }
+
+    [RelayCommand]
+    private void BlacklistPendingGame()
+    {
+        var game = _pendingGame;
+        if (game == null) return;
+
+        var entry = BlacklistService.ForDetectedGame(game, _pendingGameDisplayName ?? game.Name);
+        _logger.Info($"[MainWindowViewModel] User action: blacklisted '{entry.DisplayName}' from the confirmation modal. The session is discarded.");
+
+        DiscardSession();
+        AddToBlacklist(entry);
+    }
+
+    [RelayCommand]
+    private async Task AddExecutableToBlacklist()
+    {
+        var pick = RequestPickExecutable;
+        if (pick == null) return;
+
+        string? path = await pick();
+        if (string.IsNullOrEmpty(path)) return;
+
+        if (OperatingSystem.IsLinux() && !CheckLinuxExecutable(path)) return;
+
+        var entry = BlacklistService.ForExecutable(path);
+
+        if (IsGameRunning && _currentGame is { } game && BlacklistService.Covers(entry, game))
+        {
+            _logger.Info($"[MainWindowViewModel] '{path}' was blacklisted while it was being timed. Discarding the session.");
+            DiscardRunningSession();
+        }
+
+        AddToBlacklist(entry);
+    }
+
+    /// <summary>The Linux picker offers every file, so what Windows' *.exe filter rules out is caught here.</summary>
+    private bool CheckLinuxExecutable(string path)
+    {
+        string? key = LinuxBlacklistFile.Check(path) switch
+        {
+            LinuxBlacklistFile.Problem.Script => "Toast_BlacklistScript",
+            LinuxBlacklistFile.Problem.NotExecutable => "Toast_BlacklistNotExecutable",
+            _ => null
+        };
+
+        if (key == null) return true;
+
+        _logger.Info($"[MainWindowViewModel] Refused to blacklist '{path}' ({key}).");
+        ShowToast(string.Format(LocalizationService.Instance[key], System.IO.Path.GetFileName(path)), ToastType.Warning);
+        return false;
+    }
+
+    [RelayCommand]
+    private void RemoveFromBlacklist(BlacklistEntry entry)
+    {
+        if (!_blacklistService.Remove(entry)) return;
+        RefreshBlacklistEntries();
+
+        var loc = LocalizationService.Instance;
+        ShowToast(string.Format(loc["Toast_BlacklistRemoved"], entry.DisplayName), ToastType.Warning, UndoToastDuration, loc["Toast_Undo"], () =>
+        {
+            if (_blacklistService.Add(entry)) RefreshBlacklistEntries();
+        });
+    }
+
+    /// <summary>Undo only reverts the list: the time of a discarded session is not brought back.</summary>
+    private void AddToBlacklist(BlacklistEntry entry)
+    {
+        var loc = LocalizationService.Instance;
+
+        if (!_blacklistService.Add(entry))
+        {
+            ShowToast(string.Format(loc["Toast_BlacklistAlreadyListed"], entry.DisplayName), ToastType.Warning);
+            return;
+        }
+
+        RefreshBlacklistEntries();
+        ShowToast(string.Format(loc["Toast_BlacklistAdded"], entry.DisplayName), ToastType.Warning, UndoToastDuration, loc["Toast_Undo"], () =>
+        {
+            if (_blacklistService.Remove(entry)) RefreshBlacklistEntries();
+        });
+    }
+
+    #endregion
+
+    #region Pending sessions
+
+    /// <summary>Newest first, and only those of the account signed in.</summary>
+    public ObservableCollection<PendingSessionViewModel> PendingSessions { get; } = new();
+
+    [ObservableProperty]
+    private bool _hasPendingSessions;
+
+    [ObservableProperty]
+    private int _pendingSessionsCount;
+
+    private string? _pendingSessionsUser;
+
+    private void LoadPendingSessions()
+    {
+        _pendingSessionsUser = _authService.Username;
+        PendingSessions.Clear();
+
+        foreach (var session in _pendingSessionService.ForUser(_pendingSessionsUser).OrderByDescending(s => s.EndedAt))
+        {
+            var item = new PendingSessionViewModel(session, OnPendingMarksChanged) { IsOffline = IsOffline };
+            PendingSessions.Add(item);
+            LoadPendingCover(item);
+        }
+
+        UpdatePendingSummary();
+    }
+
+    private void AddPendingSession(PendingSession session, Avalonia.Media.Imaging.Bitmap? cover = null)
+    {
+        _pendingSessionService.Add(session);
+        InsertPendingItem(new PendingSessionViewModel(session, OnPendingMarksChanged) { CoverBitmap = cover, IsOffline = IsOffline }, loadCover: cover == null);
+    }
+
+    private void OnPendingMarksChanged(PendingSessionViewModel item)
+    {
+        _logger.Info($"[MainWindowViewModel] User action: marks of pending session '{item.Title}' set to started: {item.MarkedStarted}, finished: {item.MarkedFinished}.");
+        _pendingSessionService.Update(item.Session);
+    }
+
+    private void InsertPendingItem(PendingSessionViewModel item, bool loadCover)
+    {
+        int index = 0;
+        while (index < PendingSessions.Count && PendingSessions[index].Session.EndedAt > item.Session.EndedAt) index++;
+        PendingSessions.Insert(index, item);
+
+        if (loadCover) LoadPendingCover(item);
+        UpdatePendingSummary();
+    }
+
+    private void LoadPendingCover(PendingSessionViewModel item)
+    {
+        var url = item.Session.CoverUrl;
+        if (string.IsNullOrEmpty(url)) return;
+
+        item.IsCoverLoading = true;
+        _ = Task.Run(async () =>
+        {
+            Avalonia.Media.Imaging.Bitmap? bitmap = null;
+            try
+            {
+                bitmap = await _browserService.DownloadImageAsync(url);
+            }
+            catch (Exception ex)
+            {
+                _logger.Warning($"[MainWindowViewModel] Could not download the cover of pending session '{item.Title}': {ex.Message}. It is shown without one.");
+            }
+
+            Dispatcher.UIThread.Post(() =>
+            {
+                item.CoverBitmap = bitmap;
+                item.IsCoverLoading = false;
+            });
+        });
+    }
+
+    private void UpdatePendingSummary()
+    {
+        int count = PendingSessions.Count;
+
+        PendingSessionsCount = count;
+        HasPendingSessions = count > 0;
+    }
+
+    private void RefreshPendingTexts()
+    {
+        foreach (var item in PendingSessions) item.Refresh();
+        UpdatePendingSummary();
+    }
+
+    /// <summary>
+    /// "Always add to pending": resolves the game the way the modal would, without the user, and
+    /// keeps the session for later. Detection is never paused for it.
+    /// </summary>
+    private async Task AddFinishedSessionToPendingAsync(string gameName, string? idIgdb, DateTime endedAt, TimeSpan duration)
+    {
+        var session = new PendingSession
+        {
+            Username = _authService.Username ?? string.Empty,
+            GameName = gameName,
+            IdIgdb = idIgdb,
+            StartedAt = endedAt - duration,
+            EndedAt = endedAt,
+            Duration = duration
+        };
+
+        if (!string.IsNullOrEmpty(idIgdb))
+        {
+            try
+            {
+                var lookup = _gameDataService.LookupByIgdbId(idIgdb);
+                if (lookup != null)
+                {
+                    session.GameName = lookup.Name;
+                }
+                else
+                {
+                    lookup = await _gameDataService.LookupByIgdbIdFromApiAsync(idIgdb);
+                }
+
+                if (lookup != null)
+                {
+                    session.GameUrl = lookup.BackloggdGameUrl;
+                    session.CoverUrl = lookup.CoverUrl;
+                    session.IsIdentified = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Warning($"[MainWindowViewModel] Could not resolve IGDB ID '{idIgdb}' for the pending session: {ex.Message}. It is kept as unidentified.");
+            }
+        }
+
+        _logger.Info($"[MainWindowViewModel] 'Always add to pending' is on: '{session.GameName}' ({PendingSessionViewModel.FormatDuration(duration)}) goes to the pending list without asking.");
+        AddPendingSession(session);
+
+        var loc = LocalizationService.Instance;
+        ShowToast(string.Format(loc["Toast_SessionPostponed"], session.GameName), ToastType.Warning, UndoToastDuration, loc["Toast_ViewPending"], NavigateToPending);
+    }
+
+    [RelayCommand]
+    private void DiscardPendingSession(PendingSessionViewModel item)
+    {
+        if (item == null || !_pendingSessionService.Remove(item.Session)) return;
+
+        _logger.Info($"[MainWindowViewModel] User action: discarded pending session '{item.Title}'.");
+        PendingSessions.Remove(item);
+        UpdatePendingSummary();
+
+        var loc = LocalizationService.Instance;
+        ShowToast(string.Format(loc["Toast_PendingDiscarded"], item.Title), ToastType.Warning, UndoToastDuration, loc["Toast_Undo"], () =>
+        {
+            if (PendingSessions.Contains(item)) return;
+            _pendingSessionService.Add(item.Session);
+            InsertPendingItem(item, loadCover: false);
+        });
+    }
+
+    /// <summary>True while any pending row is being saved or waits its turn.</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsSaveAllPendingEnabled))]
+    private bool _isSavingPending;
+
+    /// <summary>Only for "Save all", which shows the spinner until the whole batch is done.</summary>
+    [ObservableProperty]
+    private bool _isSavingAllPending;
+
+    private int _pendingSavesInFlight;
+
+    private void SetPendingSaveInFlight(bool started)
+    {
+        _pendingSavesInFlight += started ? 1 : -1;
+        IsSavingPending = _pendingSavesInFlight > 0;
+    }
+
+    // Concurrent so another row can be queued meanwhile; _registrationGate runs them one by one.
+    [RelayCommand(AllowConcurrentExecutions = true)]
+    private async Task SavePendingSession(PendingSessionViewModel item)
+    {
+        if (item == null || !item.CanSave || IsOffline) return;
+
+        _logger.Info($"[MainWindowViewModel] User action: save pending session '{item.Title}' ({PendingSessionViewModel.FormatDuration(item.Session.Duration)}, played {item.Session.StartedAt:yyyy-MM-dd}).");
+
+        item.IsSaving = true;
+        SetPendingSaveInFlight(true);
+        try
+        {
+            var error = await RegisterPendingAsync(item);
+            if (error == null)
+            {
+                ReloadJournal();
+                ShowToast(LocalizationService.Instance["Toast_SessionSaved"], ToastType.Success);
+            }
+            else
+            {
+                ShowToast(FriendlySaveError(error), ToastType.Error);
+            }
+        }
+        finally
+        {
+            item.IsSaving = false;
+            SetPendingSaveInFlight(false);
+        }
+    }
+
+    /// <summary>
+    /// One at a time and oldest first; a failure does not stop the rest, and unidentified rows stay.
+    /// Every row in the batch is locked from the start, so none can be discarded or changed while it waits.
+    /// </summary>
+    public bool IsSaveAllPendingEnabled => !IsSavingPending && !IsOffline;
+
+    public string? SaveAllPendingTooltip => IsOffline ? LocalizationService.Instance["Pending_OfflineSaveTooltip"] : null;
+
+    [RelayCommand]
+    private async Task SaveAllPendingSessions()
+    {
+        if (IsSavingPending || IsOffline) return;
+
+        var items = PendingSessions.Where(p => p.CanSave).OrderBy(p => p.Session.StartedAt).ToList();
+        _logger.Info($"[MainWindowViewModel] User action: save all pending sessions ({items.Count} identified of {PendingSessions.Count}).");
+        if (items.Count == 0) return;
+
+        foreach (var item in items) item.IsSaving = true;
+        IsSavingAllPending = true;
+        SetPendingSaveInFlight(true);
+
+        int attempted = 0, saved = 0;
+        Exception? lastError = null;
+        try
+        {
+            foreach (var item in items)
+            {
+                // The list is reloaded on an account change.
+                if (!PendingSessions.Contains(item)) continue;
+
+                attempted++;
+                var error = await RegisterPendingAsync(item);
+                if (error == null) saved++;
+                else lastError = error;
+
+                item.IsSaving = false;
+
+                // The rest would only fail the same way, each one launching a browser first.
+                if (IsOffline) break;
+            }
+        }
+        finally
+        {
+            foreach (var item in items) item.IsSaving = false;
+            IsSavingAllPending = false;
+            SetPendingSaveInFlight(false);
+        }
+
+        if (saved > 0) ReloadJournal();
+        if (attempted == 0) return;
+
+        var loc = LocalizationService.Instance;
+        if (saved == attempted)
+        {
+            ShowToast(saved == 1 ? loc["Toast_SessionSaved"] : string.Format(loc["Pending_SavedAll"], saved), ToastType.Success);
+        }
+        else if (attempted == 1)
+        {
+            ShowToast(FriendlySaveError(lastError!), ToastType.Error);
+        }
+        else
+        {
+            ShowToast(string.Format(loc["Pending_SavedSome"], saved, attempted), ToastType.Error);
+        }
+    }
+
+    /// <summary>Registers the row on the day it was played. Returns the error, or null once it is saved and gone from the list.</summary>
+    private async Task<Exception?> RegisterPendingAsync(PendingSessionViewModel item)
+    {
+        var session = item.Session;
+
+        await _registrationGate.WaitAsync();
+        try
+        {
+            // TotalHours, not Hours, which wraps at 24.
+            await _browserService.RegisterGame(session.GameName, _authService.Cookies, (int)session.Duration.TotalHours, session.Duration.Minutes, session.GameUrl, session.StartedAt.Date, session.MarkedStarted, session.MarkedFinished);
+
+            _logger.Info($"[MainWindowViewModel] Pending session registered on Backloggd: '{session.GameName}', {PendingSessionViewModel.FormatDuration(session.Duration)} on {session.StartedAt:yyyy-MM-dd}.");
+            _pendingSessionService.Remove(session);
+            PendingSessions.Remove(item);
+            UpdatePendingSummary();
+            return null;
+        }
+        catch (Exception ex)
+        {
+            _logger.Error($"[MainWindowViewModel] Registering pending session '{session.GameName}' ({PendingSessionViewModel.FormatDuration(session.Duration)}, {session.StartedAt:yyyy-MM-dd}) on Backloggd failed. It stays in Pending.", ex);
+            session.SaveFailed = true;
+            _pendingSessionService.Update(session);
+            item.Refresh();
+            await EnterOfflineModeIfUnreachableAsync("a pending session could not be saved");
+            return ex;
+        }
+        finally
+        {
+            _registrationGate.Release();
+        }
+    }
+
+    private void ReloadJournal()
+    {
+        if (_authService.Username != null)
+        {
+            _ = LoadData(_authService.Username);
+        }
+        else
+        {
+            _logger.Warning("[MainWindowViewModel] A session was registered but the username is null, so the recently played list could not be refreshed.");
+        }
     }
 
     #endregion
@@ -1064,7 +1776,10 @@ public partial class MainWindowViewModel : ViewModelBase
     /// rather than reused, so no cookie or username from the previous account can leak into the next.
     /// </summary>
     [RelayCommand]
-    private void Logout()
+    private void Logout() => PerformLogout(null);
+
+    /// <param name="loginMessage">Shown on the login form, as the reason it came back.</param>
+    private void PerformLogout(string? loginMessage)
     {
         IsLoggingOut = true;
         StopTimers();
@@ -1084,12 +1799,13 @@ public partial class MainWindowViewModel : ViewModelBase
                 var newBrowserService = new BackloggdBrowserService(newLogger);
                 var newCredentialStorageService = new CredentialStorageService(newLogger);
                 var newInstallService = new PlaywrightInstallService(newLogger);
-                var loginVm = new LoginViewModel(newAuthService, newBrowserService, newCredentialStorageService, newLogger, newInstallService);
+                var loginVm = new LoginViewModel(newAuthService, newBrowserService, newCredentialStorageService, newLogger, newInstallService, loginMessage);
 
                 // Attach handler for successful login to navigate back to MainWindow
                 loginVm.LoginSuccessful += () =>
                 {
-                    var mainWindowVm = new MainWindowViewModel(_gameDetectionService, newAuthService, newBrowserService, _settingsService, newCredentialStorageService, newLogger);
+                    // The blacklist is the instance detection reads; a new one would show a list that detection ignores.
+                    var mainWindowVm = new MainWindowViewModel(_gameDetectionService, newAuthService, newBrowserService, _settingsService, newCredentialStorageService, newLogger, blacklistService: _blacklistService, gamepadService: _gamepadService, pendingSessionService: _pendingSessionService);
 
                     mainWindowVm.IsLoggedIn = true;
 
@@ -1117,20 +1833,28 @@ public partial class MainWindowViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void CheckGameStatus()
+    private async Task CheckGameStatus()
     {
-        if (_gameDetectionService.IsGameRunning(out string gameName, out uint processId, out string? idIgdb))
+        if (!await _detectionGate.WaitAsync(0)) return;
+
+        DetectedGame? detected;
+        try
         {
-            _currentGameName = gameName;
-            _currentProcessId = processId;
-            _currentIdIgdb = idIgdb;
-            GameStatus = $"Game Running: {gameName}";
+            detected = await Task.Run(() => _gameDetectionService.Detect());
+        }
+        finally
+        {
+            _detectionGate.Release();
+        }
+
+        if (detected != null)
+        {
+            _currentGame = detected;
+            GameStatus = $"Game Running: {detected.Name}";
         }
         else
         {
-            _currentGameName = null;
-            _currentProcessId = 0;
-            _currentIdIgdb = null;
+            _currentGame = null;
             GameStatus = "No Game Running";
         }
         RegisterGameCommand.NotifyCanExecuteChanged();
@@ -1138,21 +1862,78 @@ public partial class MainWindowViewModel : ViewModelBase
 
     private bool CanRegisterGame()
     {
-        return IsLoggedIn && !string.IsNullOrEmpty(_currentGameName);
+        return IsLoggedIn && !string.IsNullOrEmpty(_currentGame?.Name);
     }
+
+    /// <summary>Backloggd's "Started" and "Finished" marks, chosen in the confirmation.</summary>
+    [ObservableProperty]
+    private bool _isSessionMarkedStarted;
+
+    [ObservableProperty]
+    private bool _isSessionMarkedFinished;
 
     [RelayCommand]
     private void DiscardSession()
     {
-        IsSessionConfirmationVisible = false;
         IsSessionWarningForcedVisible = false;
+        CloseSessionConfirmation();
+    }
+
+    /// <summary>The clock button: keeps the session in the pending list instead of saving or discarding it.</summary>
+    [RelayCommand]
+    private void PostponeSession()
+    {
+        if (!IsSessionConfirmationVisible || !IsPostponeEnabled) return;
+
+        var session = new PendingSession
+        {
+            Username = _authService.Username ?? string.Empty,
+            GameName = _pendingGameName ?? SessionGameTitle,
+            IdIgdb = _pendingIdIgdb,
+            GameUrl = string.IsNullOrEmpty(_pendingGameUrl) ? null : _pendingGameUrl,
+            CoverUrl = _pendingCoverUrl,
+            IsIdentified = IsGameIdentified,
+            SaveFailed = _pendingSaveFailed,
+            MarkedStarted = IsSessionMarkedStarted,
+            MarkedFinished = IsSessionMarkedFinished,
+            StartedAt = _pendingEndedAt - _pendingSessionDuration,
+            EndedAt = _pendingEndedAt,
+            Duration = _pendingSessionDuration
+        };
+
+        _logger.Info($"[MainWindowViewModel] User action: left '{session.GameName}' ({PendingSessionViewModel.FormatDuration(session.Duration)}) for later.");
+        AddPendingSession(session, SessionGameCover);
+
+        IsSessionWarningForcedVisible = false;
+        CloseSessionConfirmation();
+
+        var loc = LocalizationService.Instance;
+        ShowToast(string.Format(loc["Toast_SessionPostponed"], session.GameName), ToastType.Warning, UndoToastDuration, loc["Toast_ViewPending"], NavigateToPending);
+    }
+
+    /// <summary>The action of the save error toast; only for the session that failed, if it is still waiting.</summary>
+    private void PostponeAfterSaveFailure(int token)
+    {
+        if (token != _pendingSessionToken || IsSavingSession) return;
+        PostponeSession();
+    }
+
+    /// <summary>Closes the modal and forgets the session behind it, whatever the user chose.</summary>
+    private void CloseSessionConfirmation()
+    {
+        IsSessionConfirmationVisible = false;
         SessionGameCover = null;
         IsNoCoverPlaceholderVisible = false;
         IsSessionCoverLoading = false;
         _pendingGameName = null;
         _pendingIdIgdb = null;
         _pendingGameUrl = null;
+        _pendingCoverUrl = null;
+        _pendingGame = null;
         _pendingSessionDuration = TimeSpan.Zero;
+        _pendingSaveFailed = false;
+        IsSessionMarkedStarted = false;
+        IsSessionMarkedFinished = false;
         IsBackgroundImageVisible = false;
         IsGameIdentified = true;
 
@@ -1170,45 +1951,24 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private async Task SaveSession()
     {
+        if (IsOffline) return;
+
         IsSavingSession = true;
         IsSessionWarningForcedVisible = false;
 
         if (!string.IsNullOrEmpty(_pendingGameName))
         {
+            await _registrationGate.WaitAsync();
             try
             {
-                await _browserService.RegisterGame(_pendingGameName, _authService.Cookies, _pendingSessionDuration.Hours, _pendingSessionDuration.Minutes, _pendingGameUrl);
+                await _browserService.RegisterGame(_pendingGameName, _authService.Cookies, _pendingSessionDuration.Hours, _pendingSessionDuration.Minutes, _pendingGameUrl, markStarted: IsSessionMarkedStarted, markFinished: IsSessionMarkedFinished);
 
                 Console.WriteLine($"[SaveSession] Game registered successfully. Reloading data for user: '{_authService.Username}'");
                 _logger?.Info($"[SaveSession] Session registered on Backloggd: '{_pendingGameName}', {_pendingSessionDuration.Hours}h {_pendingSessionDuration.Minutes}m.");
 
-                // Refresh the list after saving
-                if (_authService.Username != null)
-                {
-                    LoadData(_authService.Username);
-                }
-                else
-                {
-                    Console.WriteLine($"[SaveSession] WARNING: Username is null, cannot reload data.");
-                    _logger?.Warning("[SaveSession] The session was registered but the username is null, so the recently played list could not be refreshed.");
-                }
+                ReloadJournal();
 
-                // Success - Close panel and cleanup
-                IsSessionConfirmationVisible = false;
-                SessionGameCover = null;
-                IsNoCoverPlaceholderVisible = false;
-                _pendingGameName = null;
-                _pendingIdIgdb = null;
-                _pendingGameUrl = null;
-                _pendingSessionDuration = TimeSpan.Zero;
-                IsBackgroundImageVisible = false;
-                IsGameIdentified = true;
-
-                IsGameDetectionPaused = false;
-                if (!IsGameRunning)
-                {
-                    GameStatus = "No Game Running";
-                }
+                CloseSessionConfirmation();
 
                 ShowToast(LocalizationService.Instance["Toast_SessionSaved"], ToastType.Success);
             }
@@ -1217,44 +1977,60 @@ public partial class MainWindowViewModel : ViewModelBase
                 Console.WriteLine($"Error registering game '{_pendingGameName}': {ex.Message}");
                 _logger?.Error($"[SaveSession] Registering '{_pendingGameName}' ({_pendingSessionDuration.Hours}h {_pendingSessionDuration.Minutes}m) on Backloggd failed. The play time was not recorded.", ex);
 
-                string friendlyMessage = LocalizationService.Instance["Toast_ErrorSaving"];
-
-                if (ex.Message.Contains("ERR_INTERNET_DISCONNECTED") ||
-                    ex.Message.Contains("ERR_NAME_NOT_RESOLVED") ||
-                    ex.Message.Contains("ERR_CONNECTION_REFUSED"))
-                {
-                    friendlyMessage = LocalizationService.Instance["Toast_ConnectionError"];
-                }
-                else if (ex.Message.Contains("Timeout"))
-                {
-                    friendlyMessage = LocalizationService.Instance["Toast_TimeoutError"];
-                }
-                else
-                {
-                    friendlyMessage = string.Format(LocalizationService.Instance["Toast_UnexpectedError"], ex.Message);
-                }
-
-                ShowToast(friendlyMessage, ToastType.Error);
+                _pendingSaveFailed = true;
+                await EnterOfflineModeIfUnreachableAsync("the session could not be saved");
+                int token = _pendingSessionToken;
+                ShowToast(FriendlySaveError(ex), ToastType.Error, UndoToastDuration, LocalizationService.Instance["Toast_AddToPending"], () => PostponeAfterSaveFailure(token));
             }
             finally
             {
+                _registrationGate.Release();
                 IsSavingSession = false;
             }
         }
     }
 
+    private string FriendlySaveError(Exception ex)
+    {
+        var loc = LocalizationService.Instance;
+
+        if (IsOffline)
+        {
+            return loc["Toast_ConnectionError"];
+        }
+
+        if (ex.Message.Contains("ERR_INTERNET_DISCONNECTED") ||
+            ex.Message.Contains("ERR_NAME_NOT_RESOLVED") ||
+            ex.Message.Contains("ERR_CONNECTION_REFUSED"))
+        {
+            return loc["Toast_ConnectionError"];
+        }
+
+        if (ex.Message.Contains("Timeout"))
+        {
+            return loc["Toast_TimeoutError"];
+        }
+
+        return string.Format(loc["Toast_UnexpectedError"], ex.Message);
+    }
+
     [RelayCommand(CanExecute = nameof(CanRegisterGame))]
     private async Task RegisterGame()
     {
-        if (!string.IsNullOrEmpty(_currentGameName))
+        if (!string.IsNullOrEmpty(_currentGame?.Name))
         {
             // Manual registration if needed, though mostly handled by session flow now
-            // await _browserService.RegisterGame(_currentGameName, _authService.Cookies);
+            // await _browserService.RegisterGame(_currentGame.Name, _authService.Cookies);
         }
     }
 
     public async Task LoadData(string username)
     {
+        if (!string.Equals(_pendingSessionsUser, _authService.Username, StringComparison.OrdinalIgnoreCase))
+        {
+            LoadPendingSessions();
+        }
+
         IsLastPlayedGamesLoading = true;
         HasLastPlayedGamesError = false;
         try
@@ -1265,6 +2041,7 @@ public partial class MainWindowViewModel : ViewModelBase
             {
                 HasLastPlayedGamesError = true;
                 HasLastPlayedGames = false;
+                await EnterOfflineModeIfUnreachableAsync("the recently played list could not be loaded");
             }
             else
             {
@@ -1293,6 +2070,7 @@ public partial class MainWindowViewModel : ViewModelBase
             _logger?.Error($"[MainWindowViewModel] Could not load the journal of '{username}'. The recently played list shows its error state.", ex);
             HasLastPlayedGamesError = true;
             HasLastPlayedGames = false;
+            await EnterOfflineModeIfUnreachableAsync("the recently played list could not be loaded");
         }
         finally
         {
@@ -1306,6 +2084,12 @@ public partial class MainWindowViewModel : ViewModelBase
     private void ReloadRecentlyPlayedGames()
     {
         _logger?.Info("[MainWindowViewModel] User action: reloaded recently played games.");
+        if (IsOffline)
+        {
+            _ = CheckConnectionAsync(manual: true, force: true);
+            return;
+        }
+
         if (!string.IsNullOrEmpty(_authService.Username))
         {
             _ = LoadData(_authService.Username);
@@ -1382,59 +2166,93 @@ public partial class MainWindowViewModel : ViewModelBase
     /// </summary>
     internal void OnPollingTick(object? sender, EventArgs e)
     {
+        if (_logoutWhenIdle && !IsSessionInProgress)
+        {
+            _logoutWhenIdle = false;
+            LogoutForExpiredSession();
+            return;
+        }
+
+        _ = RunDetectionPassAsync();
+    }
+
+    /// <summary>
+    /// Only the scan leaves the UI thread; the await brings the decision back before anything
+    /// observable is touched, which is what keeps <see cref="StartNewGame"/>,
+    /// <see cref="StopRunningGame"/> and the timers on the thread they have always run on.
+    /// </summary>
+    private async Task RunDetectionPassAsync()
+    {
         if (IsGameDetectionPaused) return;
 
-        if (IsGameRunning)
-        {
-            bool isStillRunning = false;
-            if (_currentProcessId != 0)
-            {
-                try
-                {
-                    using (var process = Process.GetProcessById((int)_currentProcessId))
-                    {
-                        if (!process.HasExited)
-                        {
-                            isStillRunning = true;
-                        }
-                    }
-                }
-                catch
-                {
-                    // GetProcessById throws once the PID is gone, which is the normal way a session
-                    // ends: the game was closed.
-                }
-            }
+        // A slow pass (an API call on a bad connection) skips ticks instead of queueing them up.
+        if (!await _detectionGate.WaitAsync(0)) return;
 
-            if (!isStillRunning)
-            {
-                StopRunningGame();
-            }
-        }
-        else
+        try
         {
-            if (_gameDetectionService.IsGameRunning(out string detectedGame, out uint processId, out string? idIgdb))
+            if (IsGameRunning)
             {
-                StartNewGame(detectedGame, processId, idIgdb);
+                var game = _currentGame;
+                if (game == null)
+                {
+                    StopRunningGame();
+                    return;
+                }
+
+                bool stillRunning = await Task.Run(() => _gameDetectionService.IsStillRunning(game));
+
+                // The session may have been closed from the tray while the scan was running.
+                if (!IsGameRunning || !ReferenceEquals(_currentGame, game)) return;
+
+                if (!stillRunning)
+                {
+                    StopRunningGame();
+                }
             }
             else
             {
-                // Ensure text is correct when nothing is happening
-                string defaultText = IsGameDetectionPaused ? LocalizationService.Instance["Home_ResumeSearch"] : LocalizationService.Instance["Home_PauseSearch"];
-                if (TrayMenuActionText != defaultText)
+                long blacklistVersion = _blacklistService.Version;
+                var detected = await Task.Run(() => _gameDetectionService.Detect());
+
+                if (IsGameRunning || IsGameDetectionPaused) return;
+
+                // Scanned against a blacklist that has changed since, so it may be the game just blacklisted.
+                if (_blacklistService.Version != blacklistVersion) return;
+
+                if (detected != null)
                 {
-                    TrayMenuActionText = defaultText;
+                    StartNewGame(detected);
+                }
+                else
+                {
+                    // Ensure text is correct when nothing is happening
+                    string defaultText = IsGameDetectionPaused ? LocalizationService.Instance["Home_ResumeSearch"] : LocalizationService.Instance["Home_PauseSearch"];
+                    if (TrayMenuActionText != defaultText)
+                    {
+                        TrayMenuActionText = defaultText;
+                    }
                 }
             }
         }
+        catch (Exception ex)
+        {
+            // Nothing observes this task, so an escaping exception would take the process down.
+            _logger?.Error("[MainWindowViewModel] The detection pass failed. Skipping this tick.", ex);
+        }
+        finally
+        {
+            _detectionGate.Release();
+        }
     }
 
-    internal void StartNewGame(string gameName, uint processId, string? idIgdb = null)
+    internal void StartNewGame(DetectedGame game)
     {
-        _currentGameName = gameName;
-        _currentProcessId = processId;
-        _currentIdIgdb = idIgdb;
+        string gameName = game.Name;
+        string? idIgdb = game.IdIgdb;
+
+        _currentGame = game;
         GameName = gameName;
+        IsRunningGameEmulated = game.Source == DetectionSource.Emulator;
         IsGameRunning = true;
 
         _stopwatch.Restart();
@@ -1510,17 +2328,18 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         // Snapshot everything before the reset below clears it, since the confirmation modal
         // outlives this method and still needs the values.
-        string? gameToRegister = _currentGameName;
-        string? currentIdIgdb = _currentIdIgdb;
+        var finishedGame = _currentGame;
+        string finishedDisplayName = GameName;
+        string? gameToRegister = _currentGame?.Name;
+        string? currentIdIgdb = _currentGame?.IdIgdb;
         TimeSpan elapsed = _stopwatch.Elapsed;
+        DateTime endedAt = DateTime.Now;
         string finalPlayTime = PlayTime;
 
         _stopwatch.Stop();
         _displayTimer.Stop();
         IsGameRunning = false;
-        _currentGameName = null;
-        _currentProcessId = 0;
-        _currentIdIgdb = null;
+        _currentGame = null;
         GameName = string.Empty;
         UpdateTrayMenuText();
 
@@ -1540,9 +2359,27 @@ public partial class MainWindowViewModel : ViewModelBase
                 return;
             }
 
+            if (_settingsService.AlwaysAddToPending)
+            {
+                _ = AddFinishedSessionToPendingAsync(gameToRegister, currentIdIgdb, endedAt, elapsed);
+                GameStatus = "No Game Running";
+                IsBackgroundImageVisible = false;
+                return;
+            }
+
+            // The confirmation goes first: a picker left open for a pending row would hide it.
+            if (_selectorPendingTarget != null) CloseGameSelector();
+
+            _pendingSessionToken++;
             _pendingGameName = gameToRegister;
             _pendingIdIgdb = currentIdIgdb;
             _pendingSessionDuration = elapsed;
+            _pendingEndedAt = endedAt;
+            _pendingCoverUrl = null;
+            _pendingSaveFailed = false;
+            _pendingGame = finishedGame;
+            _pendingGameDisplayName = finishedDisplayName;
+            IsPendingGameEmulated = finishedGame?.Source == DetectionSource.Emulator;
             SessionGameTitle = gameToRegister;
             SessionPlayTime = finalPlayTime;
 
@@ -1589,6 +2426,7 @@ public partial class MainWindowViewModel : ViewModelBase
                     SessionGameTitle = lookupResult.Name;
                     _pendingGameName = lookupResult.Name;
                     _pendingGameUrl = lookupResult.BackloggdGameUrl;
+                    _pendingCoverUrl = lookupResult.CoverUrl;
                     IsGameIdentified = true;
                     IsSessionTitleLoading = false;
 
@@ -1637,6 +2475,7 @@ public partial class MainWindowViewModel : ViewModelBase
                             {
                                 // API resolved the game — mark as identified
                                 _pendingGameUrl = apiResult.BackloggdGameUrl;
+                                _pendingCoverUrl = apiResult.CoverUrl;
                                 IsGameIdentified = true;
                                 IsSessionTitleLoading = false;
 
@@ -1755,6 +2594,230 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         _pollingTimer.Stop();
         _displayTimer.Stop();
+        _offlineTimer?.Stop();
+        StopConnectionMonitor();
         _stopwatch.Stop();
     }
+
+    #region Offline mode
+
+    // Pinging is cheap; validating the session launches a whole browser, so that waits for a ping
+    // to answer and then runs no more often than the second interval.
+    private static readonly TimeSpan OfflinePingInterval = TimeSpan.FromSeconds(30);
+    private static readonly TimeSpan OfflinePageCheckInterval = TimeSpan.FromMinutes(2);
+
+    private DispatcherTimer? _offlineTimer;
+    private DateTime _nextOfflinePageCheck;
+    private bool _isCheckingConnection;
+
+    /// <summary>
+    /// After a failed call to Backloggd: only a failed ping turns it into offline mode, so an
+    /// anti-bot screen or a changed selector keeps showing its own error.
+    /// </summary>
+    private async Task EnterOfflineModeIfUnreachableAsync(string reason)
+    {
+        if (IsOffline || IsLoggingOut) return;
+        if (await BackloggdConnectivity.IsReachableAsync()) return;
+
+        EnterOfflineMode($"{reason} and backloggd.com does not answer a ping");
+    }
+
+    public void EnterOfflineMode(string reason)
+    {
+        if (IsOffline || IsLoggingOut) return;
+
+        _logger.Warning($"[MainWindowViewModel] Entering offline mode: {reason}.");
+        IsOffline = true;
+        LastPlayedGames.Clear();
+        HasLastPlayedGames = false;
+        HasLastPlayedGamesError = false;
+        foreach (var item in PendingSessions) item.IsOffline = true;
+
+        _onlinePingTimer?.Stop();
+        _failedPings = 0;
+
+        _nextOfflinePageCheck = DateTime.MinValue;
+        if (_offlineTimer == null)
+        {
+            _offlineTimer = new DispatcherTimer { Interval = OfflinePingInterval };
+            _offlineTimer.Tick += (_, _) => _ = CheckConnectionAsync(manual: false);
+        }
+        _offlineTimer.Start();
+    }
+
+    private void ExitOfflineMode()
+    {
+        _offlineTimer?.Stop();
+        _failedPings = 0;
+        if (_onlinePingTimer != null)
+        {
+            _onlinePingTimer.Interval = OnlinePingInterval;
+            _onlinePingTimer.Start();
+        }
+        IsOffline = false;
+        foreach (var item in PendingSessions) item.IsOffline = false;
+        ReloadJournal();
+    }
+
+    /// <summary>
+    /// A ping first, then a real page load: only Backloggd's logged-in page ends offline mode, so a
+    /// captive portal or an anti-bot screen that answers the ping does not count as being back.
+    /// </summary>
+    /// <param name="manual">The reload button: shows the spinner.</param>
+    /// <param name="force">Skips the wait between page checks (manual retries and network changes).</param>
+    private async Task CheckConnectionAsync(bool manual, bool force = false)
+    {
+        if (_isCheckingConnection || !IsOffline) return;
+        _isCheckingConnection = true;
+        if (manual) IsLastPlayedGamesLoading = true;
+
+        try
+        {
+            if (!await BackloggdConnectivity.IsReachableAsync()) return;
+            if (!manual && !force && DateTime.UtcNow < _nextOfflinePageCheck) return;
+            _nextOfflinePageCheck = DateTime.UtcNow + OfflinePageCheckInterval;
+
+            _logger.Info("[MainWindowViewModel] backloggd.com answers a ping again. Validating the session with a page load.");
+            var result = await Task.Run(() => _authService.CheckSessionAsync());
+            if (!IsOffline || IsLoggingOut) return;
+
+            switch (result.Status)
+            {
+                case SessionCheckStatus.Valid:
+                    _logger.Info("[MainWindowViewModel] Backloggd is reachable and the session is valid. Leaving offline mode.");
+                    ExitOfflineMode();
+                    break;
+
+                case SessionCheckStatus.Expired:
+                    _offlineTimer?.Stop();
+                    LogoutForExpiredSession();
+                    break;
+
+                default:
+                    _logger.Info($"[MainWindowViewModel] The ping answered but Backloggd did not serve its page. Staying offline; next page check after {_nextOfflinePageCheck.ToLocalTime():HH:mm:ss}.");
+                    break;
+            }
+        }
+        finally
+        {
+            _isCheckingConnection = false;
+            // Once back online the journal reload owns the spinner.
+            if (manual && IsOffline) IsLastPlayedGamesLoading = false;
+        }
+    }
+
+    // Online, a ping per minute catches a connection that drops while nothing talks to Backloggd. One
+    // lost ping is not enough: a second one follows sooner, and only two failures in a row go offline.
+    private static readonly TimeSpan OnlinePingInterval = TimeSpan.FromSeconds(60);
+    private static readonly TimeSpan OnlinePingRetryInterval = TimeSpan.FromSeconds(10);
+
+    // Network changes arrive in bursts while an adapter comes up (address, DNS, routes); this waits for them to settle.
+    private static readonly TimeSpan NetworkChangeSettleDelay = TimeSpan.FromSeconds(3);
+
+    private DispatcherTimer? _onlinePingTimer;
+    private DispatcherTimer? _networkChangeTimer;
+    private int _failedPings;
+    private bool _isPinging;
+
+    private void StartConnectionMonitor()
+    {
+        _onlinePingTimer = new DispatcherTimer { Interval = OnlinePingInterval };
+        _onlinePingTimer.Tick += (_, _) => _ = PingWhileOnlineAsync();
+        _onlinePingTimer.Start();
+
+        _networkChangeTimer = new DispatcherTimer { Interval = NetworkChangeSettleDelay };
+        _networkChangeTimer.Tick += (_, _) => OnNetworkSettled();
+
+        System.Net.NetworkInformation.NetworkChange.NetworkAddressChanged += OnNetworkAddressChanged;
+        System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged += OnNetworkAvailabilityChanged;
+    }
+
+    // The events are static: a view model left subscribed after a logout would keep reacting.
+    private void StopConnectionMonitor()
+    {
+        System.Net.NetworkInformation.NetworkChange.NetworkAddressChanged -= OnNetworkAddressChanged;
+        System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged -= OnNetworkAvailabilityChanged;
+        _onlinePingTimer?.Stop();
+        _networkChangeTimer?.Stop();
+    }
+
+    // Both raised on a pool thread. They only bring the next check forward: the ping always decides.
+    private void OnNetworkAddressChanged(object? sender, EventArgs e) => Dispatcher.UIThread.Post(RestartNetworkChangeTimer);
+
+    private void OnNetworkAvailabilityChanged(object? sender, System.Net.NetworkInformation.NetworkAvailabilityEventArgs e) => Dispatcher.UIThread.Post(RestartNetworkChangeTimer);
+
+    private void RestartNetworkChangeTimer()
+    {
+        if (IsLoggingOut || _networkChangeTimer == null) return;
+        _networkChangeTimer.Stop();
+        _networkChangeTimer.Start();
+    }
+
+    private void OnNetworkSettled()
+    {
+        _networkChangeTimer?.Stop();
+        if (IsLoggingOut) return;
+
+        _logger.Info($"[MainWindowViewModel] The network changed; checking the connection ({(IsOffline ? "offline" : "online")}).");
+        if (IsOffline) _ = CheckConnectionAsync(manual: false, force: true);
+        else _ = PingWhileOnlineAsync();
+    }
+
+    private async Task PingWhileOnlineAsync()
+    {
+        if (IsOffline || IsLoggingOut || _isPinging) return;
+        _isPinging = true;
+
+        try
+        {
+            bool reachable = await BackloggdConnectivity.IsReachableAsync();
+            if (IsOffline || IsLoggingOut || _onlinePingTimer == null) return;
+
+            if (reachable)
+            {
+                _failedPings = 0;
+                _onlinePingTimer.Interval = OnlinePingInterval;
+                return;
+            }
+
+            _failedPings++;
+            if (_failedPings >= 2)
+            {
+                EnterOfflineMode("backloggd.com did not answer two pings in a row");
+            }
+            else
+            {
+                _logger.Info($"[MainWindowViewModel] backloggd.com did not answer a ping. Trying again in {OnlinePingRetryInterval.TotalSeconds:0} s before going offline.");
+                _onlinePingTimer.Interval = OnlinePingRetryInterval;
+            }
+        }
+        finally
+        {
+            _isPinging = false;
+        }
+    }
+
+    // Set when the session expires mid-game: the logout waits so the session can still go to Pending.
+    private bool _logoutWhenIdle;
+
+    private bool IsSessionInProgress => IsGameRunning || IsSessionConfirmationVisible || IsSavingPending;
+
+    /// <summary>
+    /// Back to the login with the expired notice. Offline mode stays on until then, which keeps Save
+    /// disabled: with dead cookies it could only fail.
+    /// </summary>
+    private void LogoutForExpiredSession()
+    {
+        if (IsSessionInProgress)
+        {
+            _logger.Warning("[MainWindowViewModel] Backloggd is reachable but the saved session has expired. Logging out once the current session is resolved.");
+            _logoutWhenIdle = true;
+            return;
+        }
+
+        _logger.Warning("[MainWindowViewModel] Backloggd is reachable but the saved session has expired. Logging out.");
+        PerformLogout(LocalizationService.Instance["Login_Status_SessionExpired"]);
+    }
+
+    #endregion
 }

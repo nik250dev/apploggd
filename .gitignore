@@ -68,6 +68,9 @@ BackloggdMirror.UITests/
 # --- Internal documentation --------------------------------------------------
 PROJECT_CONTEXT.md
 
+# --- Worker ------------------------------------------------------------------
+worker.js
+
 # --- Operating system --------------------------------------------------------
 Thumbs.db
 ehthumbs.db

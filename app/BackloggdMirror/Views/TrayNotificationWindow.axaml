@@ -2,14 +2,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:services="using:BackloggdMirror.Services"
         x:Class="BackloggdMirror.Views.TrayNotificationWindow"
-        Title="Notification"
+        Title="Apploggd"
         SystemDecorations="None"
         WindowStartupLocation="Manual"
         Topmost="True"
         ShowInTaskbar="False"
+        ShowActivated="False"
         Background="Transparent"
-        Width="350" Height="70"
+        Width="360"
+        SizeToContent="Height"
         CanResize="False">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="DetectingDotBrush" Color="#43B94F"/>
+        <SolidColorBrush x:Key="PendingDotBrush" Color="#F0B429"/>
+    </Window.Resources>
 
     <Window.Styles>
         <Style Selector="Window">
@@ -24,14 +31,56 @@
             <Setter Property="Opacity" Value="1"/>
         </Style>
 
-        <!-- Action button for the notices that carry one. Brand-filled but compact, so it reads as
-             the one thing to click without shouting over a passive notice. -->
+        <!-- The card slides in from the panel the tray sits on. Within the 10px shadow margin, so it never clips. -->
+        <!-- Background set here, not on the element: a local value would override the :pointerover style. -->
+        <Style Selector="Border#Card">
+            <Setter Property="Background" Value="{DynamicResource CardBackgroundBrush}"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.35" Easing="CubicEaseOut"/>
+                    <BrushTransition Property="Background" Duration="0:0:0.15"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Window.from-bottom Border#Card">
+            <Setter Property="RenderTransform" Value="translate(0px, 8px)"/>
+        </Style>
+        <Style Selector="Window.from-top Border#Card">
+            <Setter Property="RenderTransform" Value="translate(0px, -8px)"/>
+        </Style>
+        <Style Selector="Window.from-left Border#Card">
+            <Setter Property="RenderTransform" Value="translate(-8px, 0px)"/>
+        </Style>
+        <Style Selector="Window.from-right Border#Card">
+            <Setter Property="RenderTransform" Value="translate(8px, 0px)"/>
+        </Style>
+        <Style Selector="Window.visible Border#Card">
+            <Setter Property="RenderTransform" Value="translate(0px, 0px)"/>
+        </Style>
+        <Style Selector="Border#Card:pointerover">
+            <Setter Property="Background" Value="{DynamicResource InputHoverBackgroundBrush}"/>
+        </Style>
+
+        <!-- Gated on "visible" like every infinite animation (see MainWindow): it stops when the notice fades out. -->
+        <Style Selector="Window.visible Ellipse.pulse[IsVisible=True]">
+            <Style.Animations>
+                <Animation Duration="0:0:0.8" IterationCount="Infinite" PlaybackDirection="Alternate">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="Opacity" Value="1.0"/>
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="Opacity" Value="0.35"/>
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+
         <Style Selector="Button.tray-action">
             <Setter Property="Background" Value="{DynamicResource BrandPrimaryBrush}"/>
             <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="CornerRadius" Value="6"/>
-            <Setter Property="Padding" Value="12,4"/>
+            <Setter Property="Padding" Value="12,5"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Cursor" Value="Hand"/>
@@ -45,50 +94,120 @@
             <Setter Property="Background" Value="{DynamicResource BrandPrimaryLightBrush}"/>
             <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
         </Style>
+
+        <Style Selector="Button.tray-close">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Width" Value="28"/>
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="Button.tray-close:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SeparatorBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="Button.tray-close:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SidebarBorderBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
     </Window.Styles>
 
-    <Border Background="{DynamicResource CardBackgroundBrush}"
+    <Border x:Name="Card"
             BorderBrush="{DynamicResource SidebarBorderBrush}"
             BorderThickness="1"
-            CornerRadius="10"
+            CornerRadius="12"
             Margin="10"
-            BoxShadow="0 4 15 0 #40000000">
-        <Border CornerRadius="10" ClipToBounds="True">
-            <Grid RowDefinitions="*, Auto, Auto">
-                <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto">
-                    <PathIcon Grid.Column="0" Data="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z"
-                              Width="24" Height="24"
-                              Foreground="{DynamicResource IconMediumBrush}"
-                              Margin="15,0,10,0" VerticalAlignment="Center"/>
+            BoxShadow="0 4 15 0 #40000000"
+            Cursor="Hand"
+            PointerEntered="Card_PointerEntered"
+            PointerExited="Card_PointerExited"
+            PointerMoved="Card_PointerMoved"
+            PointerReleased="Card_PointerReleased">
+        <Border CornerRadius="12" ClipToBounds="True">
+            <Panel>
+                <StackPanel>
+                    <!-- First time only: a screen in miniature with the panel and the tray where they really are. -->
+                    <Border x:Name="IntroDrawing" IsVisible="False" Height="76"
+                            Background="{DynamicResource SurfaceDarkBrush}"
+                            BorderBrush="{DynamicResource SeparatorBrush}" BorderThickness="0,0,0,1">
+                        <Grid ColumnDefinitions="Auto, Auto, Auto" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Border Grid.Column="1" Width="78" Height="50" CornerRadius="5"
+                                    Background="{DynamicResource AppBackgroundBrush}"
+                                    BorderBrush="{DynamicResource IconMediumBrush}" BorderThickness="1.5">
+                                <Panel>
+                                    <Border x:Name="MiniPanel" Background="{DynamicResource SidebarBorderBrush}"/>
+                                    <Border Width="28" Height="18" CornerRadius="3"
+                                            BorderBrush="{DynamicResource IconMediumBrush}" BorderThickness="1"
+                                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <Border x:Name="MiniTray" Width="6" Height="6" CornerRadius="2"
+                                            Background="{DynamicResource BrandPrimaryBrush}"/>
+                                </Panel>
+                            </Border>
+                            <PathIcon x:Name="IntroArrow" Grid.Column="2" Width="18" Height="18"
+                                      Data="M5,6.41L6.41,5L17,15.59V9H19V19H9V17H15.59L5,6.41Z"
+                                      Foreground="{DynamicResource BrandPrimaryBrush}"/>
+                        </Grid>
+                    </Border>
 
-                    <TextBlock x:Name="MessageText"
-                               Grid.Column="1"
-                               Text="{Binding [Tray_BackgroundRunning], Source={x:Static services:LocalizationService.Instance}}"
-                               Foreground="{DynamicResource TextSubtleBrush}"
-                               FontSize="13"
-                               TextWrapping="Wrap"
-                               VerticalAlignment="Center"
-                               Margin="0,0,5,0"/>
+                    <Grid x:Name="ContentGrid" ColumnDefinitions="Auto, *" Margin="14,14,40,16">
+                        <Image x:Name="StatusLogo" Grid.Column="0" IsVisible="False"
+                               Width="44" Height="44" Margin="0,0,12,0" VerticalAlignment="Top"
+                               Source="/Assets/app-logo.png"
+                               RenderOptions.BitmapInterpolationMode="HighQuality"/>
 
-                    <Button Grid.Column="2" Click="CloseButton_Click"
-                            Background="Transparent" BorderThickness="0" Padding="5"
-                            Margin="0,5,5,0" VerticalAlignment="Top" Cursor="Hand">
-                        <PathIcon Data="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
-                                  Width="10" Height="10" Foreground="{DynamicResource IconDarkBrush}"/>
-                    </Button>
-                </Grid>
+                        <StackPanel Grid.Column="1">
+                            <StackPanel x:Name="KickerRow" Orientation="Horizontal" Spacing="6">
+                                <Image x:Name="KickerLogo" IsVisible="False" Width="18" Height="18"
+                                       Source="/Assets/app-logo.png"
+                                       RenderOptions.BitmapInterpolationMode="HighQuality"/>
+                                <Ellipse x:Name="KickerDot" Classes="pulse" IsVisible="False"
+                                         Width="8" Height="8" VerticalAlignment="Center"/>
+                                <PathIcon x:Name="KickerPause" IsVisible="False" Width="9" Height="9"
+                                          Data="M14,19H18V5H14M6,19H10V5H6V19Z"
+                                          Foreground="{DynamicResource TextMutedBrush}"/>
+                                <TextBlock x:Name="KickerText" FontSize="11" VerticalAlignment="Center"
+                                           Foreground="{DynamicResource TextMutedBrush}"/>
+                            </StackPanel>
 
-                <!-- Optional action. Indented to the message, not the icon. -->
-                <Button x:Name="ActionButton" Grid.Row="1" Classes="tray-action"
-                        IsVisible="False" Click="ActionButton_Click"
-                        HorizontalAlignment="Left" Margin="49,8,15,14"/>
+                            <!-- Left-aligned so the pill follows the title instead of sitting at the far right. -->
+                            <Grid x:Name="TitleRow" ColumnDefinitions="*, Auto" HorizontalAlignment="Left" Margin="0,4,0,2">
+                                <TextBlock x:Name="TitleText" FontSize="14" FontWeight="SemiBold"
+                                           TextWrapping="Wrap"
+                                           Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                <Border x:Name="VersionPill" Grid.Column="1" IsVisible="False" Margin="8,0,0,0"
+                                        CornerRadius="999" Padding="7,0" VerticalAlignment="Center"
+                                        BorderBrush="{DynamicResource BrandPrimaryBrush}" BorderThickness="1">
+                                    <TextBlock x:Name="VersionText" FontSize="11"
+                                               Foreground="{DynamicResource BrandPrimaryBrush}"/>
+                                </Border>
+                            </Grid>
 
-                <ProgressBar x:Name="NotificationProgress" Grid.Row="2" Minimum="0" Maximum="100" Value="100"
-                             Height="3"
+                            <TextBlock x:Name="BodyText" FontSize="13" TextWrapping="Wrap" LineHeight="18"
+                                       Foreground="{DynamicResource TextMutedBrush}"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Button x:Name="ActionButton" Classes="tray-action" IsVisible="False"
+                            HorizontalAlignment="Left" Margin="70,-4,14,16"
+                            Click="ActionButton_Click"/>
+                </StackPanel>
+
+                <Button Classes="tray-close" Click="CloseButton_Click"
+                        HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,6,6,0"
+                        ToolTip.Tip="{Binding [TrayNotice_Close], Source={x:Static services:LocalizationService.Instance}}">
+                    <PathIcon Data="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+                              Width="10" Height="10"/>
+                </Button>
+
+                <ProgressBar x:Name="NotificationProgress" Minimum="0" Maximum="100" Value="100"
+                             Height="3" MinHeight="3"
                              Background="Transparent" BorderThickness="0"
-                             Foreground="{DynamicResource IconMediumBrush}"
+                             Foreground="{DynamicResource BrandPrimaryBrush}"
                              VerticalAlignment="Bottom"/>
-            </Grid>
+            </Panel>
         </Border>
     </Border>
 </Window>

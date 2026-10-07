@@ -1,0 +1,94 @@
+using System;
+using System.Linq;
+using BackloggdMirror.Models;
+using BackloggdMirror.Services.Emulation.Cemu;
+using BackloggdMirror.Services.Emulation.Dolphin;
+using BackloggdMirror.Services.Emulation.DuckStation;
+using BackloggdMirror.Services.Emulation.Pcsx2;
+using BackloggdMirror.Services.Emulation.Ppsspp;
+using BackloggdMirror.Services.Emulation.RetroArch;
+using BackloggdMirror.Services.Platform.Linux.Emulation;
+
+namespace BackloggdMirror.Services.Emulation;
+
+/// <summary>
+/// Detection tier 1.5. An emulator is one executable that runs any number of games, so neither the
+/// executable database nor the window heuristic can name what is being played.
+/// Linux has detectors of its own (see <see cref="LinuxEmulatorDetectors"/>): the Windows ones read process memory, which Linux does not allow.
+/// </summary>
+internal sealed class EmulatorDetector
+{
+    private readonly IEmulatorDetector[] _detectors;
+    private readonly EmulatorProcesses? _processes;
+    private readonly IAppLogger? _logger;
+
+    public EmulatorDetector(IAppLogger? logger = null, IDetectionBlacklist? blacklist = null)
+    {
+        _logger = logger;
+        EmulatedGamesDatabase.Instance.Logger = logger;
+
+        var resolver = new EmulatedGameResolver(logger);
+        if (OperatingSystem.IsLinux())
+        {
+            _detectors = LinuxEmulatorDetectors.Create(resolver, logger, blacklist);
+        }
+        else
+        {
+            _processes = new EmulatorProcesses();
+            _detectors = new IEmulatorDetector[]
+            {
+                new RetroArchDetector(_processes, resolver, logger, blacklist),
+                new DolphinDetector(_processes, resolver, logger, blacklist),
+                new CemuDetector(_processes, resolver, logger, blacklist),
+                new PpssppDetector(_processes, resolver, logger, blacklist),
+                new DuckStationDetector(_processes, resolver, logger, blacklist),
+                new Pcsx2Detector(_processes, resolver, logger, blacklist)
+            };
+        }
+    }
+
+    public DetectedGame? Detect()
+    {
+        try
+        {
+            foreach (var detector in _detectors)
+            {
+                try
+                {
+                    var game = detector.Detect();
+                    if (game != null)
+                        return game;
+                }
+                catch (Exception ex)
+                {
+                    _logger?.Error($"[EmulatorDetector] The {detector.Name} detector failed. Emulated sessions for it are not detected this tick.", ex);
+                }
+            }
+
+            return null;
+        }
+        finally
+        {
+            _processes?.EndPass();
+        }
+    }
+
+    public bool IsStillRunning(DetectedGame game)
+    {
+        var detector = _detectors.FirstOrDefault(d => d.Name.Equals(game.EmulatorName, StringComparison.OrdinalIgnoreCase));
+        if (detector == null)
+            return false;
+
+        try
+        {
+            return detector.IsStillRunning(game);
+        }
+        catch (Exception ex)
+        {
+            // Ending the session on an unexpected failure is the safe side: the alternative is a
+            // timer that never stops.
+            _logger?.Error($"[EmulatorDetector] The {detector.Name} detector failed while checking the running session. Closing it.", ex);
+            return false;
+        }
+    }
+}

@@ -1,15 +1,20 @@
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform;
+using Avalonia.Platform.Storage;
 using Avalonia;
 using System;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Skia;
 using Avalonia.Markup.Xaml.MarkupExtensions;
+using BackloggdMirror.Models;
 using BackloggdMirror.Services;
+using BackloggdMirror.Services.Input;
+using BackloggdMirror.Services.Platform.Linux;
 using Avalonia.Threading;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace BackloggdMirror.Views;
 
@@ -17,10 +22,17 @@ public partial class MainWindow : Window
 {
     private bool _canClose = false;
     private TrayIcon? _trayIcon;
+    private NativeMenuItem? _trayOpenItem;
     private NativeMenuItem? _trayToggleItem;
     private NativeMenuItem? _trayExitItem;
     private TrayNotificationWindow? _trayNotificationWindow;
     private UpdateProgressWindow? _updateProgressWindow;
+    private GamepadNavigator? _gamepadNavigator;
+
+    // Big Picture takes the foreground back ~2 s after its game exits, burying the confirmation behind it.
+    private static readonly TimeSpan ConfirmationHoldFront = TimeSpan.FromSeconds(10);
+    private DispatcherTimer? _holdFrontTimer;
+    private DateTime _holdFrontUntil;
 
     // Taken as a constructor argument rather than read off the DataContext: the tray icon is built
     // in the constructor, before any DataContext has been assigned, and its failures are exactly
@@ -54,6 +66,46 @@ public partial class MainWindow : Window
         UpdateAnimationsEnabled();
         InitializeTrayIcons(); // Pre-render icons
         InitializeTrayIcon();
+
+        if (OperatingSystem.IsLinux())
+        {
+            LinuxTrayHost.AvailabilityChanged += OnLinuxTrayAvailabilityChanged;
+        }
+    }
+
+    private void OnLinuxTrayAvailabilityChanged()
+    {
+        Dispatcher.UIThread.Post(() =>
+        {
+            if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+            {
+                vm.NotifyTrayAvailabilityChanged();
+            }
+
+            // A window hidden in a tray that just vanished would be unreachable.
+            if (!LinuxTrayHost.IsAvailable && !IsVisible && !_canClose)
+            {
+                _logger?.Info("[MainWindow] The tray went away while the window was hidden in it; showing the window.");
+                ShowMainWindow();
+            }
+        });
+    }
+
+    /// <summary>Linux silent start: without a tray to hide in, the window goes to the taskbar minimized instead of staying unreachable.</summary>
+    public async Task EnsureReachableAfterLinuxSilentStartAsync()
+    {
+        if (await LinuxTrayHost.WaitForHostAsync(TimeSpan.FromSeconds(15))) return;
+
+        Dispatcher.UIThread.Post(() =>
+        {
+            if (IsVisible || _canClose) return;
+
+            _logger?.Info("[MainWindow] Silent start with no tray: showing the window minimized.");
+            Show();
+
+            // X11 ignores a minimized state set before the window is mapped.
+            Dispatcher.UIThread.Post(() => WindowState = WindowState.Minimized, DispatcherPriority.Background);
+        });
     }
 
     /// <summary>
@@ -132,10 +184,18 @@ public partial class MainWindow : Window
     protected override void OnDataContextChanged(EventArgs e)
     {
         base.OnDataContextChanged(e);
+        _gamepadNavigator?.Dispose();
+        _gamepadNavigator = null;
+
         if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
         {
             SubscribeToEvents(vm);
             UpdateTrayMenuState(vm);
+
+            if (vm.Gamepad != null)
+            {
+                _gamepadNavigator = new GamepadNavigator(this, vm, vm.Gamepad, _logger);
+            }
         }
     }
 
@@ -169,6 +229,9 @@ public partial class MainWindow : Window
         vm.RequestCloseUpdateProgress -= CloseUpdateProgress;
         vm.RequestCloseUpdateProgress += CloseUpdateProgress;
 
+        vm.RequestPickExecutable -= PickExecutableAsync;
+        vm.RequestPickExecutable += PickExecutableAsync;
+
         vm.PropertyChanged -= OnViewModelPropertyChanged;
         vm.PropertyChanged += OnViewModelPropertyChanged;
 
@@ -189,6 +252,15 @@ public partial class MainWindow : Window
             _trayIcon.Clicked += (s, e) => RestoreMainWindow();
 
             var menu = new NativeMenu();
+
+            // Some Linux hosts (GNOME's AppIndicator) open the menu on left click instead of activating the icon.
+            if (OperatingSystem.IsLinux())
+            {
+                _trayOpenItem = new NativeMenuItem(LocalizationService.Instance["Tray_Open"]);
+                _trayOpenItem.Click += (s, e) => RestoreMainWindow();
+                menu.Items.Add(_trayOpenItem);
+                menu.Items.Add(new NativeMenuItemSeparator());
+            }
 
             _trayToggleItem = new NativeMenuItem(LocalizationService.Instance["Home_PauseSearch"]);
             _trayToggleItem.Click += (s, e) =>
@@ -236,8 +308,45 @@ public partial class MainWindow : Window
             if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
             {
                 UpdateTrayMenuState(vm);
+
+                if (e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsSessionConfirmationVisible) && vm.IsSessionConfirmationVisible)
+                {
+                    StartHoldingFront();
+                }
             }
         }
+    }
+
+    private void StartHoldingFront()
+    {
+        _holdFrontUntil = DateTime.UtcNow + ConfirmationHoldFront;
+        if (_holdFrontTimer == null)
+        {
+            // Normal priority: Background timers can starve while the window sits behind another app.
+            _holdFrontTimer = new DispatcherTimer(DispatcherPriority.Normal) { Interval = TimeSpan.FromMilliseconds(500) };
+            _holdFrontTimer.Tick += OnHoldFrontTick;
+        }
+        _holdFrontTimer.Start();
+    }
+
+    private void OnHoldFrontTick(object? sender, EventArgs e)
+    {
+        // Minimized or sent to the tray by the user: they have seen it and chose to leave it.
+        bool stillWanted = DataContext is BackloggdMirror.ViewModels.MainWindowViewModel { IsSessionConfirmationVisible: true }
+            && DateTime.UtcNow < _holdFrontUntil
+            && IsVisible
+            && WindowState != WindowState.Minimized;
+
+        if (!stillWanted)
+        {
+            _holdFrontTimer?.Stop();
+            return;
+        }
+
+        if (OwnsForeground()) return;
+
+        _logger?.Info("[MainWindow] Another window took the foreground over the session confirmation; bringing it back.");
+        BringToFront();
     }
 
     private void UpdateTrayMenuState(BackloggdMirror.ViewModels.MainWindowViewModel vm)
@@ -270,6 +379,10 @@ public partial class MainWindow : Window
     private void ShowMainWindow()
     {
         Console.WriteLine("[MainWindow] ShowMainWindow called.");
+
+        // Tray notices talk about a hidden window. The update one is not marked as dismissed, so the next silent start shows it again.
+        _trayNotificationWindow?.Close();
+
         if (!IsVisible)
         {
             Show();
@@ -283,13 +396,10 @@ public partial class MainWindow : Window
             WindowState = WindowState.Normal;
         }
 
-        Activate();
+        BringToFront();
 
-        // Activate() alone does not raise the window when the foreground belongs to another process,
-        // which is exactly the case here (a game just exited). Toggling Topmost forces it up without
-        // leaving the window permanently pinned.
-        Topmost = true;
-        Topmost = false;
+        // Controller navigation needs the window active, which Windows may refuse to another process.
+        DispatcherTimer.RunOnce(() => _logger?.Info($"[MainWindow] Window shown; active: {IsActive}."), TimeSpan.FromMilliseconds(500));
     }
 
     /// <summary>
@@ -361,7 +471,7 @@ public partial class MainWindow : Window
             }
             else
             {
-                minimizeToTray = vm.MinimizeToTray;
+                minimizeToTray = vm.CanMinimizeToTray && vm.MinimizeToTray;
             }
         }
 
@@ -401,6 +511,14 @@ public partial class MainWindow : Window
 
         LocalizationService.Instance.PropertyChanged -= OnLocalizationPropertyChanged;
 
+        _gamepadNavigator?.Dispose();
+        _gamepadNavigator = null;
+
+        if (OperatingSystem.IsLinux())
+        {
+            LinuxTrayHost.AvailabilityChanged -= OnLinuxTrayAvailabilityChanged;
+        }
+
         // Under OnExplicitShutdown the process outlives its last window, so the shutdown has to be
         // explicit — except on a logout, where the login window is about to take over.
         if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
@@ -413,6 +531,7 @@ public partial class MainWindow : Window
 
             if (!isLoggingOut)
             {
+                (DataContext as BackloggdMirror.ViewModels.MainWindowViewModel)?.Gamepad?.Dispose();
                 desktop.Shutdown();
             }
         }
@@ -420,14 +539,27 @@ public partial class MainWindow : Window
 
     private void ShowTrayNotification()
     {
-        if (_trayNotificationWindow != null)
-        {
-            _trayNotificationWindow.Close();
-        }
+        var notice = (DataContext as BackloggdMirror.ViewModels.MainWindowViewModel)?.BuildBackgroundNotice()
+            ?? new TrayNotice(TrayNoticeKind.Detecting, LocalizationService.Instance["TrayNotice_BackgroundTitle"], string.Empty);
 
-        _trayNotificationWindow = new TrayNotificationWindow(_logger);
-        _trayNotificationWindow.Closed += (s, ev) => _trayNotificationWindow = null;
-        _trayNotificationWindow.Show();
+        ShowTrayNotice(notice);
+    }
+
+    private void ShowTrayNotice(TrayNotice notice)
+    {
+        _trayNotificationWindow?.Close();
+
+        var window = new TrayNotificationWindow(notice, _logger);
+
+        // Checked against the field: a notice replaced mid-fade closes after its successor is already in place.
+        window.Closed += (s, ev) =>
+        {
+            if (_trayNotificationWindow == window) _trayNotificationWindow = null;
+        };
+        window.BodyClicked += ShowMainWindow;
+
+        _trayNotificationWindow = window;
+        window.Show();
     }
 
     /// <summary>
@@ -454,21 +586,28 @@ public partial class MainWindow : Window
         _logger?.Info("[MainWindow] Update progress window closed without applying an update.");
     }
 
+    private async Task<string?> PickExecutableAsync()
+    {
+        var loc = LocalizationService.Instance;
+        var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+        {
+            Title = loc["Settings_Blacklist_PickerTitle"],
+            AllowMultiple = false,
+            // Linux executables have no extension to filter by; the ViewModel checks the file instead.
+            FileTypeFilter = OperatingSystem.IsLinux() ? null : new[]
+            {
+                new FilePickerFileType(loc["Settings_Blacklist_PickerFilter"]) { Patterns = new[] { "*.exe" } }
+            }
+        });
+
+        return files.Count > 0 ? files[0].TryGetLocalPath() : null;
+    }
+
     /// <summary>
     /// The new-version notice on a silent start, where the window was never shown and a toast would
-    /// expire unseen. Same window, placement and fade as the "still running" notice.
+    /// expire unseen.
     /// </summary>
-    private void ShowTrayUpdateNotice(string message, string actionText, Action action)
-    {
-        if (_trayNotificationWindow != null)
-        {
-            _trayNotificationWindow.Close();
-        }
-
-        _trayNotificationWindow = new TrayNotificationWindow(_logger, message, TimeSpan.FromSeconds(30), actionText, action);
-        _trayNotificationWindow.Closed += (s, ev) => _trayNotificationWindow = null;
-        _trayNotificationWindow.Show();
-    }
+    private void ShowTrayUpdateNotice(TrayNotice notice) => ShowTrayNotice(notice);
 
     private void OnInfoIconPointerEntered(object? sender, Avalonia.Input.PointerEventArgs e)
     {
@@ -483,6 +622,56 @@ public partial class MainWindow : Window
         if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
         {
             vm.OnInfoIconExited();
+        }
+    }
+
+    // With a controller, focus stands in for the hover on the info icon and the cover.
+    private void OnInfoButtonGotFocus(object? sender, Avalonia.Input.GotFocusEventArgs e)
+    {
+        if (_gamepadNavigator?.IsControllerMode == true && DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        {
+            vm.DismissForcedTooltip();
+        }
+    }
+
+    private void OnInfoButtonLostFocus(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        {
+            vm.OnInfoIconExited();
+        }
+    }
+
+    private void OnCoverGotFocus(object? sender, Avalonia.Input.GotFocusEventArgs e)
+    {
+        if (_gamepadNavigator?.IsControllerMode == true && DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        {
+            vm.OnCoverPointerEntered();
+        }
+    }
+
+    private void OnCoverLostFocus(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        {
+            vm.OnCoverPointerExited();
+        }
+    }
+
+    // An icon alone says little, so with a controller the focus shows its tooltip.
+    private void OnPostponeButtonGotFocus(object? sender, Avalonia.Input.GotFocusEventArgs e)
+    {
+        if (_gamepadNavigator?.IsControllerMode == true && sender is Control button)
+        {
+            ToolTip.SetIsOpen(button, true);
+        }
+    }
+
+    private void OnPostponeButtonLostFocus(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        if (sender is Control button)
+        {
+            ToolTip.SetIsOpen(button, false);
         }
     }
 
@@ -517,6 +706,68 @@ public partial class MainWindow : Window
             vm.OnSaveButtonPointerExited();
         }
     }
+
+    /// <summary>Windows refuses SetForegroundWindow to a background process unless it shares the foreground thread's input queue.</summary>
+    private void BringToFront()
+    {
+        var handle = OperatingSystem.IsWindows() ? TryGetPlatformHandle()?.Handle ?? IntPtr.Zero : IntPtr.Zero;
+        if (handle == IntPtr.Zero)
+        {
+            Activate();
+        }
+        else
+        {
+            uint foregroundThread = GetWindowThreadProcessId(GetForegroundWindow(), IntPtr.Zero);
+            uint thisThread = GetCurrentThreadId();
+            bool attached = foregroundThread != 0 && foregroundThread != thisThread && AttachThreadInput(thisThread, foregroundThread, true);
+            try
+            {
+                BringWindowToTop(handle);
+                SetForegroundWindow(handle);
+            }
+            finally
+            {
+                if (attached) AttachThreadInput(thisThread, foregroundThread, false);
+            }
+        }
+
+        Topmost = true;
+        Topmost = false;
+    }
+
+    // IsActive can lag behind on Windows, so ask the system who really has the foreground.
+    private bool OwnsForeground()
+    {
+        if (!OperatingSystem.IsWindows()) return IsActive;
+
+        uint foregroundProcess = 0;
+        GetWindowThreadProcessId(GetForegroundWindow(), ref foregroundProcess);
+        return foregroundProcess == (uint)Environment.ProcessId;
+    }
+
+    [System.Runtime.InteropServices.DllImport("user32.dll")]
+    private static extern IntPtr GetForegroundWindow();
+
+    [System.Runtime.InteropServices.DllImport("user32.dll")]
+    private static extern uint GetWindowThreadProcessId(IntPtr hWnd, ref uint lpdwProcessId);
+
+    [System.Runtime.InteropServices.DllImport("user32.dll")]
+    private static extern uint GetWindowThreadProcessId(IntPtr hWnd, IntPtr lpdwProcessId);
+
+    [System.Runtime.InteropServices.DllImport("kernel32.dll")]
+    private static extern uint GetCurrentThreadId();
+
+    [System.Runtime.InteropServices.DllImport("user32.dll")]
+    [return: System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.Bool)]
+    private static extern bool AttachThreadInput(uint idAttach, uint idAttachTo, [System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.Bool)] bool fAttach);
+
+    [System.Runtime.InteropServices.DllImport("user32.dll")]
+    [return: System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.Bool)]
+    private static extern bool BringWindowToTop(IntPtr hWnd);
+
+    [System.Runtime.InteropServices.DllImport("user32.dll")]
+    [return: System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.Bool)]
+    private static extern bool SetForegroundWindow(IntPtr hWnd);
 
     // P/Invoke for FlashWindowEx
     [System.Runtime.InteropServices.DllImport("user32.dll")]
@@ -581,6 +832,8 @@ public partial class MainWindow : Window
                 {
                     if (_trayExitItem != null)
                         _trayExitItem.Header = LocalizationService.Instance["Tray_Exit"];
+                    if (_trayOpenItem != null)
+                        _trayOpenItem.Header = LocalizationService.Instance["Tray_Open"];
                 });
             }
         }

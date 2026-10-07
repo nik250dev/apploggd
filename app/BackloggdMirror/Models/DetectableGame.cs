@@ -21,6 +21,9 @@ public class DetectableGame
     [JsonPropertyName("executables")]
     public List<DetectableExecutable> Executables { get; set; } = new();
 
+    [JsonPropertyName("third_party_skus")]
+    public List<DetectableSku>? ThirdPartySkus { get; set; }
+
     [JsonPropertyName("id_igdb")]
     public string? IdIgdb { get; set; }
 
@@ -47,4 +50,14 @@ public class DetectableExecutable
 
     [JsonPropertyName("is_launcher")]
     public bool IsLauncher { get; set; }
+}
+
+/// <summary>The game's id in a store, e.g. its Steam app id.</summary>
+public class DetectableSku
+{
+    [JsonPropertyName("distributor")]
+    public string Distributor { get; set; } = string.Empty;
+
+    [JsonPropertyName("id")]
+    public string? Id { get; set; }
 }
