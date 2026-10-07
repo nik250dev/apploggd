@@ -56680,7 +56680,7 @@
   },
   {
     "id": "1124352407741149344",
-    "name": "Final Fantasy VII Remake Intergrade",
+    "name": "FINAL FANTASY VII REMAKE INTERGRADE",
     "aliases": [],
     "executables": [
       {
@@ -56691,8 +56691,8 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9N8RG4VX469H"
+        "distributor": "epic",
+        "id": "6F43AB8025AD42D18510AA91E9EB688B"
       },
       {
         "distributor": "steam",
@@ -56703,8 +56703,8 @@
         "id": "9N4SMZC5FMPD"
       },
       {
-        "distributor": "epic",
-        "id": "6F43AB8025AD42D18510AA91E9EB688B"
+        "distributor": "xbox",
+        "id": "9N8RG4VX469H"
       }
     ],
     "id_igdb": "144024",
@@ -69141,10 +69141,9 @@
   },
   {
     "id": "1124353236564983808",
-    "name": "Counterside",
+    "name": "CounterSide",
     "aliases": [
-      "Counter:Side",
-      "CounterSide"
+      "Counter:Side"
     ],
     "executables": [
       {
@@ -254377,12 +254376,16 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "3694620"
+        "distributor": "xbox",
+        "id": "9P5B244SRMW9"
       },
       {
         "distributor": "epic",
         "id": "89988029D4F543188897771C8EE54412"
+      },
+      {
+        "distributor": "steam",
+        "id": "3694620"
       },
       {
         "distributor": "steam",
@@ -287152,7 +287155,7 @@
   },
   {
     "id": "1428180602862964786",
-    "name": "Legend of Heroes: Three Kingdoms",
+    "name": "Heroes' Vow: Three Kingdoms",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -288398,6 +288401,10 @@
       {
         "distributor": "steam",
         "id": "1833200"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.Alientrap.DuneCrawl"
       }
     ],
     "id_igdb": "318505",
@@ -314320,6 +314327,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9P72PP1P22GJ"
+      },
       {
         "distributor": "steam",
         "id": "3216340"
@@ -429934,7 +429945,12 @@
     "name": "Broken Ranks",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "air.com.taern.BrokenRanks"
+      }
+    ],
     "id_igdb": "162520",
     "cover": "co3irn",
     "artwork": [
@@ -530537,15 +530553,23 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9P4DNKT4W66P"
+        "id": "9PNHW2MSSQ80"
       },
       {
         "distributor": "xbox",
-        "id": "9PKWZ4N202MP"
+        "id": "9P4DNKT4W66P"
       },
       {
         "distributor": "steam",
         "id": "3841510"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P3W51K8FHTX"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PKWZ4N202MP"
       }
     ],
     "id_igdb": "369991",
@@ -531135,7 +531159,7 @@
   },
   {
     "id": "1554705155314950215",
-    "name": "Wand & Order: Tidy Up the Magic Shop!",
+    "name": "Wand & Order: Tidy up the magic shop!",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -531426,7 +531450,7 @@
   },
   {
     "id": "1555067015050436669",
-    "name": "Needle In A Haystack",
+    "name": "Needle in a Haystack: A Time for Goats",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -531449,16 +531473,20 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "2288340"
-      },
-      {
         "distributor": "xbox",
         "id": "9NT1N9ZVHXJK"
       },
       {
         "distributor": "xbox",
         "id": "9NQCCNW8HDGC"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PCQ94TF8NX6"
+      },
+      {
+        "distributor": "steam",
+        "id": "2288340"
       }
     ],
     "id_igdb": "381247",
@@ -531787,5 +531815,788 @@
       "ar3ctz"
     ],
     "url": "disneys-atlantis-the-lost-empire"
+  },
+  {
+    "id": "1557241121229377607",
+    "name": "Castlevania: Belmont's Curse",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4231820"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P4TXTFKN90Z"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MTNR5F6JTFT"
+      }
+    ],
+    "id_igdb": "389434",
+    "cover": "coc76j",
+    "artwork": [
+      "ar6ccd",
+      "ar6cce",
+      "ar5bg8",
+      "ar5b7b"
+    ],
+    "url": "castlevania-belmonts-curse"
+  },
+  {
+    "id": "1557241135645196398",
+    "name": "Bowl Big",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4691240"
+      }
+    ],
+    "id_igdb": "411351",
+    "cover": "cockjw",
+    "artwork": [
+      "ar6jgs"
+    ],
+    "url": "bowl-big"
+  },
+  {
+    "id": "1557241151780556921",
+    "name": "Dual Protocol: The Case of Eva & Miles",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4660280"
+      }
+    ],
+    "id_igdb": "407324",
+    "cover": "cocwts",
+    "artwork": [
+      "ar6j8z"
+    ],
+    "url": "dual-protocol-the-case-of-eva-and-miles"
+  },
+  {
+    "id": "1557241159640813660",
+    "name": "diffiCULT",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4537100"
+      }
+    ],
+    "id_igdb": "399873",
+    "cover": "ar5zpi",
+    "artwork": [
+      "ar5zph"
+    ],
+    "url": "difficult"
+  },
+  {
+    "id": "1557241168213971054",
+    "name": "Birb",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4364930"
+      }
+    ],
+    "id_igdb": "388699",
+    "cover": "cobgka",
+    "artwork": [
+      "ar58ex"
+    ],
+    "url": "birb"
+  },
+  {
+    "id": "1557241172748009532",
+    "name": "RADIOSOL",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2934330"
+      }
+    ],
+    "id_igdb": "298421",
+    "cover": "cocyut",
+    "artwork": [
+      "ar2wwm"
+    ],
+    "url": "radiosol"
+  },
+  {
+    "id": "1557241179609763890",
+    "name": "Crack the Pack",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4614210"
+      }
+    ],
+    "id_igdb": "411003",
+    "cover": "cocxjn",
+    "artwork": [
+      "ar6b1d"
+    ],
+    "url": "crack-the-pack"
+  },
+  {
+    "id": "1557241188279648256",
+    "name": "Iron Pact",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3456700"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1557241194734419998",
+    "name": "Steel Gullet",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4626680"
+      }
+    ],
+    "id_igdb": "417436",
+    "cover": "cocw7m",
+    "artwork": [
+      "ar6l72"
+    ],
+    "url": "steel-gullet"
+  },
+  {
+    "id": "1557241204452630549",
+    "name": "Gone Feral",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4009220"
+      }
+    ],
+    "id_igdb": "405127",
+    "cover": "coc77d",
+    "artwork": [
+      "ar60uk"
+    ],
+    "url": "gone-feral"
+  },
+  {
+    "id": "1557241241614290945",
+    "name": "DONUT PANIC",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3910750"
+      }
+    ],
+    "id_igdb": "376950",
+    "cover": "cocv77",
+    "artwork": [
+      "ar5jjk"
+    ],
+    "url": "donut-panic"
+  },
+  {
+    "id": "1557241247909814322",
+    "name": "NEO TITAN",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2401440"
+      }
+    ],
+    "id_igdb": "399362",
+    "cover": "cobz3d",
+    "artwork": [
+      "ar5rsf"
+    ],
+    "url": "neo-titan"
+  },
+  {
+    "id": "1557241255572934667",
+    "name": "Island Restoration",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4395950"
+      }
+    ],
+    "id_igdb": "392569",
+    "cover": "ar63d1",
+    "artwork": [
+      "ar5g7x",
+      "ar6gpz"
+    ],
+    "url": "island-restoration"
+  },
+  {
+    "id": "1557241261302353971",
+    "name": "Stickility",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3419140"
+      }
+    ],
+    "id_igdb": "345101",
+    "cover": "co9uv4",
+    "artwork": [
+      "ar3lw5"
+    ],
+    "url": "stickility"
+  },
+  {
+    "id": "1557241268487323688",
+    "name": "HR: Human Remains",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3541630"
+      }
+    ],
+    "id_igdb": "347337",
+    "cover": "cobywr",
+    "artwork": [
+      "ar4t5h"
+    ],
+    "url": "hr-human-remains"
+  },
+  {
+    "id": "1557241276028424222",
+    "name": "Tunnel Escape Fates Entwined",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4285110"
+      }
+    ],
+    "id_igdb": "389871",
+    "cover": "cocv1e",
+    "artwork": [
+      "ar5bwb"
+    ],
+    "url": "tunnel-escape-fates-entwined"
+  },
+  {
+    "id": "1557241288582234223",
+    "name": "ZONE L.O.S.T.",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4420660"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1557241294730825738",
+    "name": "Greed & Darkness",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3538070"
+      }
+    ],
+    "id_igdb": "328409",
+    "cover": "co9afa",
+    "artwork": null,
+    "url": "greed-and-darkness"
+  },
+  {
+    "id": "1557241322170093629",
+    "name": "Gridiron Remastered",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3878710"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1557241331732979762",
+    "name": "Lunar Drifter",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3115490"
+      }
+    ],
+    "id_igdb": "333701",
+    "cover": "co9gsv",
+    "artwork": [
+      "ar3dr5"
+    ],
+    "url": "lunar-drifter"
+  },
+  {
+    "id": "1557241340331429929",
+    "name": "Leonardo's Island",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1449590"
+      }
+    ],
+    "id_igdb": "160075",
+    "cover": "co458r",
+    "artwork": [
+      "aryml",
+      "ar4rn0"
+    ],
+    "url": "leonardos-island"
+  },
+  {
+    "id": "1557241354025828403",
+    "name": "Urban Yuri: A Lady's Romance Manifesto",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3761680"
+      }
+    ],
+    "id_igdb": "370060",
+    "cover": "coak09",
+    "artwork": [
+      "ar4ai9"
+    ],
+    "url": "urban-yuri-a-ladys-romance-manifesto"
+  },
+  {
+    "id": "1557241358849282130",
+    "name": "GnomeBoozled",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4794780"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1557241369838489650",
+    "name": "Oboro no Ichi",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4559930"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1557241376628805652",
+    "name": "Spooky Ride",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4613790"
+      }
+    ],
+    "id_igdb": "420629",
+    "cover": "cod0e7",
+    "artwork": [
+      "ar6ohn"
+    ],
+    "url": "spooky-ride"
+  },
+  {
+    "id": "1557241384946237460",
+    "name": "Let's Tidy Up!: Treasure",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5023770"
+      }
+    ],
+    "id_igdb": "413295",
+    "cover": "cocog9",
+    "artwork": [
+      "ar6f11"
+    ],
+    "url": "lets-tidy-up-treasure"
+  },
+  {
+    "id": "1557241395562029158",
+    "name": "Safari-TV",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5118500"
+      }
+    ],
+    "id_igdb": "419700",
+    "cover": "cocz9m",
+    "artwork": null,
+    "url": "safari-tv"
+  },
+  {
+    "id": "1557241405192146944",
+    "name": "Tandem Together",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5036280"
+      }
+    ],
+    "id_igdb": "418260",
+    "cover": "cocxsc",
+    "artwork": [
+      "ar6lr1"
+    ],
+    "url": "tandem-together"
+  },
+  {
+    "id": "1557241415602413629",
+    "name": "Elta: Defy All Gods",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9PL31F9901JD"
+      },
+      {
+        "distributor": "steam",
+        "id": "2659410"
+      }
+    ],
+    "id_igdb": "414942",
+    "cover": "cocrge",
+    "artwork": [
+      "ar6hir"
+    ],
+    "url": "elta-defy-all-gods"
+  },
+  {
+    "id": "1557241441955225660",
+    "name": "LumberBoy",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5129170"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1557241452084465694",
+    "name": "Rally Together",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5127350"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1557241458535174224",
+    "name": "Log Drop",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4915640"
+      }
+    ],
+    "id_igdb": "419064",
+    "cover": "cod12y",
+    "artwork": [
+      "ar6oyk"
+    ],
+    "url": "log-drop"
+  },
+  {
+    "id": "1557241466525323294",
+    "name": "Drawaoke: Sing, Scribble, Showdown!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5142810"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1557241486242877480",
+    "name": "MOGGED: Looksmaxx or Die",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4917440"
+      },
+      {
+        "distributor": "steam",
+        "id": "$6.99"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1557241500125896816",
+    "name": "Game Keeper: Somebody Messed Up My Shop!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5186690"
+      }
+    ],
+    "id_igdb": "420849",
+    "cover": "cod22c",
+    "artwork": null,
+    "url": "game-keeper-somebody-messed-up-my-shop"
+  },
+  {
+    "id": "1557241506467676181",
+    "name": "Corrupted Veil",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4208920"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1557241516072632341",
+    "name": "New World: Shadows Entwined",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3319700"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1557241525086326894",
+    "name": "Tidy Up the Flower Shop",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5221510"
+      }
+    ],
+    "id_igdb": "420898",
+    "cover": "cod1b7",
+    "artwork": [
+      "ar6p6r"
+    ],
+    "url": "tidy-up-the-flower-shop"
+  },
+  {
+    "id": "1557241532740796487",
+    "name": "Compound Interest",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4343910"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1557241539418128464",
+    "name": "Escape from Playtime",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2087540"
+      }
+    ],
+    "id_igdb": "415180",
+    "cover": "cocsq4",
+    "artwork": [
+      "ar6mkc"
+    ],
+    "url": "escape-from-playtime"
+  },
+  {
+    "id": "1557241568417812480",
+    "name": "Story of the Needle in a Haystack",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5140770"
+      }
+    ],
+    "id_igdb": "417151",
+    "cover": "cocyts",
+    "artwork": [
+      "ar6n2x",
+      "ar6n2w",
+      "ar6n2t"
+    ],
+    "url": "story-of-the-needle-in-a-haystack"
+  },
+  {
+    "id": "1557241584565620766",
+    "name": "Sengoku Rance",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3867170"
+      }
+    ],
+    "id_igdb": "37138",
+    "cover": "co7k0m",
+    "artwork": [
+      "ar225y"
+    ],
+    "url": "sengoku-rance"
+  },
+  {
+    "id": "1557241131677261834",
+    "name": "End of Abyss",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9N7QX8C7NSH2"
+      },
+      {
+        "distributor": "epic",
+        "id": "68EB3279026C4AA2AB6EC1395D7B7B77"
+      }
+    ],
+    "id_igdb": "347637",
+    "cover": "cocrau",
+    "artwork": [
+      "ar3qup",
+      "ar3quq"
+    ],
+    "url": "end-of-abyss"
+  },
+  {
+    "id": "1557241593700814979",
+    "name": "Real Chess Online",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
   }
 ]
