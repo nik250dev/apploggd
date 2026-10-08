@@ -204197,7 +204197,7 @@
   },
   {
     "id": "1227271880893796372",
-    "name": "Shadow Corridor 2: Ame no Yohira",
+    "name": "Shadow Corridor 2: Ama no Yohira",
     "aliases": [],
     "executables": [
       {
@@ -216221,7 +216221,7 @@
   },
   {
     "id": "1267209993695002705",
-    "name": "Gearblocks",
+    "name": "GearBlocks",
     "aliases": [],
     "executables": [
       {
@@ -286758,6 +286758,10 @@
       {
         "distributor": "steam",
         "id": "1257030"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P9Z6TFM1MWR"
       }
     ],
     "id_igdb": "132711",
@@ -335595,7 +335599,7 @@
   },
   {
     "id": "1440135842952642560",
-    "name": "Parisian Brasserie Simulator",
+    "name": "Parisian Bistro Simulator",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -355428,6 +355432,10 @@
       {
         "distributor": "steam",
         "id": "3417410"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N84TLLJMQS4"
       },
       {
         "distributor": "epic",
@@ -385945,6 +385953,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NSZP0MSFL8S"
+      },
       {
         "distributor": "epic",
         "id": "E6DABDDBC7E3446583D31C5B5CB3104A"
@@ -473146,7 +473158,7 @@
   },
   {
     "id": "1468444864566792386",
-    "name": "Project EXT",
+    "name": "Exterminauts",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -525435,7 +525447,7 @@
   },
   {
     "id": "1545645088393269349",
-    "name": "Too Many Toys",
+    "name": "Too Many Toys!",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -531971,7 +531983,7 @@
   },
   {
     "id": "1557241194734419998",
-    "name": "Steel Gullet",
+    "name": "STEEL GULLET",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -532598,5 +532610,232 @@
     "cover": null,
     "artwork": null,
     "url": null
+  },
+  {
+    "id": "1557604226224496790",
+    "name": "Poopy's Playland",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3926930"
+      }
+    ],
+    "id_igdb": "418643",
+    "cover": "cocxkb",
+    "artwork": [
+      "ar6m7s"
+    ],
+    "url": "poopys-playland"
+  },
+  {
+    "id": "1557604235137261670",
+    "name": "Shake It Co!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3578070"
+      }
+    ],
+    "id_igdb": "348484",
+    "cover": "cod2ea",
+    "artwork": [
+      "ar3pff"
+    ],
+    "url": "shake-it-co"
+  },
+  {
+    "id": "1557604244356464690",
+    "name": "Deadzoned",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1602620"
+      }
+    ],
+    "id_igdb": "157461",
+    "cover": "cocumo",
+    "artwork": [
+      "arwz3"
+    ],
+    "url": "deadzoned"
+  },
+  {
+    "id": "1557604261334876271",
+    "name": "Meow Squad: Incremental Fishing",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4753960"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1557604277969747978",
+    "name": "Greenhouse: Tidy Up!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5146200"
+      }
+    ],
+    "id_igdb": "416831",
+    "cover": "cocznf",
+    "artwork": [
+      "ar6nm2"
+    ],
+    "url": "greenhouse-tidy-up"
+  },
+  {
+    "id": "1557604283820810250",
+    "name": "Dungeonbound",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5200620"
+      }
+    ],
+    "id_igdb": "422022",
+    "cover": "cod2ol",
+    "artwork": [
+      "ar6qcr"
+    ],
+    "url": "dungeonbound"
+  },
+  {
+    "id": "1557604297741434920",
+    "name": "Death Game Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5163750"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1557604309565186128",
+    "name": "Sanidade Zero",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5147020"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1557604321011433514",
+    "name": "Cozy Farm: Tidy Up!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5220090"
+      }
+    ],
+    "id_igdb": "417348",
+    "cover": "cocvmv",
+    "artwork": [
+      "ar6kql"
+    ],
+    "url": "cozy-farm-tidy-up"
+  },
+  {
+    "id": "1557604326581477478",
+    "name": "SMS Returns",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4670920"
+      }
+    ],
+    "id_igdb": "421213",
+    "cover": "cod1f5",
+    "artwork": [
+      "ar6py1"
+    ],
+    "url": "sms-returns"
+  },
+  {
+    "id": "1557604351361556571",
+    "name": "Deleted Wiki: Clean Up the Lost Files",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5204830"
+      }
+    ],
+    "id_igdb": "421540",
+    "cover": "cod23g",
+    "artwork": null,
+    "url": "deleted-wiki-clean-up-the-lost-files"
+  },
+  {
+    "id": "1557604369187475537",
+    "name": "Split Happens",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4408560"
+      }
+    ],
+    "id_igdb": "400899",
+    "cover": "ar613v",
+    "artwork": [
+      "ar5udz",
+      "ar5ue0"
+    ],
+    "url": "split-happens--1"
+  },
+  {
+    "id": "1557604384697880629",
+    "name": "Sacrata",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3201450"
+      }
+    ],
+    "id_igdb": "339600",
+    "cover": "cocypk",
+    "artwork": [
+      "ar3knn"
+    ],
+    "url": "darkfallen-survivors"
   }
 ]
