@@ -308880,8 +308880,10 @@
   },
   {
     "id": "1428223814088790116",
-    "name": "ESCAPE Protocol : Online",
-    "aliases": [],
+    "name": "Escape Protocol: Online",
+    "aliases": [
+      "ESCAPE Protocol : Online"
+    ],
     "executables": [],
     "third_party_skus": [
       {
@@ -326315,7 +326317,12 @@
     "name": "Nugget Royale",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "co.pelicanparty.nuggetroyale"
+      }
+    ],
     "id_igdb": "123253",
     "cover": "co2qv6",
     "artwork": [
@@ -342421,6 +342428,10 @@
       {
         "distributor": "epic",
         "id": "A39B5C89FBCB44278924F9CAB93DD234"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N11994G514B"
       }
     ],
     "id_igdb": "86391",
@@ -435939,7 +435950,7 @@
   },
   {
     "id": "1442740164362375350",
-    "name": "My brother ate my pudding",
+    "name": "My Brother Ate My Pudding",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -436539,6 +436550,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "epic",
+        "id": "B028D8E2032245DFB53BF280CCA4A06D"
+      },
       {
         "distributor": "steam",
         "id": "1727760"
@@ -503257,11 +503272,11 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9NHLZS3G6D8H"
+        "id": "9P2QMWJ6XSB6"
       },
       {
         "distributor": "xbox",
-        "id": "9PLTG5DJ32XQ"
+        "id": "9N4PT8HGCDHQ"
       },
       {
         "distributor": "steam",
@@ -503269,7 +503284,11 @@
       },
       {
         "distributor": "xbox",
-        "id": "9P2QMWJ6XSB6"
+        "id": "9NHLZS3G6D8H"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PLTG5DJ32XQ"
       }
     ],
     "id_igdb": "305160",
@@ -532837,5 +532856,207 @@
       "ar3knn"
     ],
     "url": "darkfallen-survivors"
+  },
+  {
+    "id": "1557866763339960340",
+    "name": "Deadzone Rogue 2",
+    "aliases": [],
+    "executables": [
+      {
+        "name": "deadzone2steam.exe",
+        "os": "win32",
+        "is_launcher": false
+      }
+    ],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4541470"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1557966379976499270",
+    "name": "Decrepit",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2675650"
+      }
+    ],
+    "id_igdb": "376357",
+    "cover": "coat05",
+    "artwork": [
+      "ar4ms9"
+    ],
+    "url": "decrepit"
+  },
+  {
+    "id": "1557966403498287174",
+    "name": "MR. RECORDS",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "epic",
+        "id": "7EFBDE3697904D9AB126CCDDD190A161"
+      },
+      {
+        "distributor": "steam",
+        "id": "3053470"
+      }
+    ],
+    "id_igdb": "404712",
+    "cover": "coc6mf",
+    "artwork": [
+      "ar6hy5"
+    ],
+    "url": "mr-records"
+  },
+  {
+    "id": "1557966409139753000",
+    "name": "Guns of Eschaton",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NC7Z1Z6HW8R"
+      },
+      {
+        "distributor": "steam",
+        "id": "3734220"
+      }
+    ],
+    "id_igdb": "408607",
+    "cover": "cocrqy",
+    "artwork": [
+      "ar6a5a"
+    ],
+    "url": "guns-of-eschaton"
+  },
+  {
+    "id": "1557966419784634369",
+    "name": "Vital Decisions",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4997850"
+      }
+    ],
+    "id_igdb": "415366",
+    "cover": "cocs1q",
+    "artwork": [
+      "ar6icf"
+    ],
+    "url": "vital-decisions"
+  },
+  {
+    "id": "1557966427019935885",
+    "name": "RAT TAG!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5029170"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1557966435022671902",
+    "name": "Dude, Trust Me",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5117520"
+      }
+    ],
+    "id_igdb": "421494",
+    "cover": "cod1v4",
+    "artwork": [
+      "ar6pny"
+    ],
+    "url": "dude-trust-me"
+  },
+  {
+    "id": "1557966441133641761",
+    "name": "Abandoned Gameshop",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5080530"
+      }
+    ],
+    "id_igdb": "419554",
+    "cover": "cocznw",
+    "artwork": null,
+    "url": "abandoned-gameshop"
+  },
+  {
+    "id": "1557966462226931732",
+    "name": "ForgeTax",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5245810"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1557966469176889354",
+    "name": "Dub Party",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5259730"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1557966476042969219",
+    "name": "I Am Plague",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5131690"
+      }
+    ],
+    "id_igdb": "422000",
+    "cover": "cod2mm",
+    "artwork": [
+      "ar6qbg"
+    ],
+    "url": "i-am-plague"
   }
 ]
