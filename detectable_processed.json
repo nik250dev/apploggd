@@ -17825,7 +17825,15 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9WZDNCRDKFHQ"
+        "id": "9N04PVCR2332"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NN5H6NV569H"
+      },
+      {
+        "distributor": "steam",
+        "id": "470220"
       },
       {
         "distributor": "xbox",
@@ -17833,15 +17841,15 @@
       },
       {
         "distributor": "xbox",
-        "id": "9NN5H6NV569H"
+        "id": "9MX3WMSK81HP"
       },
       {
-        "distributor": "epic",
-        "id": "CA93B6D41A4E41AF864942D8F0A2A826"
+        "distributor": "xbox",
+        "id": "9PGDGPCZ6F9W"
       },
       {
-        "distributor": "steam",
-        "id": "470220"
+        "distributor": "xbox",
+        "id": "BNSDHDK45KBR"
       },
       {
         "distributor": "google_play",
@@ -17849,11 +17857,11 @@
       },
       {
         "distributor": "xbox",
-        "id": "9MX3WMSK81HP"
+        "id": "9WZDNCRDKFHQ"
       },
       {
-        "distributor": "xbox",
-        "id": "BNSDHDK45KBR"
+        "distributor": "epic",
+        "id": "CA93B6D41A4E41AF864942D8F0A2A826"
       }
     ],
     "id_igdb": "22739",
@@ -191711,20 +191719,24 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "BVZLS7XZ68KF"
+        "distributor": "steam",
+        "id": "360430"
       },
       {
         "distributor": "epic",
         "id": "8AD9396E01F046AAA784A33F7E60DFBE"
       },
       {
-        "distributor": "steam",
-        "id": "360430"
+        "distributor": "xbox",
+        "id": "9P4V2BGJFWW7"
       },
       {
         "distributor": "xbox",
         "id": "BVV8LHVGPBS3"
+      },
+      {
+        "distributor": "xbox",
+        "id": "BVZLS7XZ68KF"
       }
     ],
     "id_igdb": "11492",
@@ -201724,15 +201736,19 @@
     "third_party_skus": [
       {
         "distributor": "steam",
-        "id": "2019810"
-      },
-      {
-        "distributor": "steam",
         "id": "2511610"
       },
       {
         "distributor": "epic",
         "id": "ABC34708E5A0420287F52302582E3FEC"
+      },
+      {
+        "distributor": "steam",
+        "id": "2019810"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NPNMPVSS6Z1"
       }
     ],
     "id_igdb": "259756",
@@ -207592,12 +207608,16 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9NF5S7MLM8XT"
-      },
-      {
         "distributor": "steam",
         "id": "1177980"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.DoubleDaggerStudio.LittleKittyBigCity"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NF5S7MLM8XT"
       }
     ],
     "id_igdb": "145937",
@@ -220716,17 +220736,17 @@
     ],
     "executables": [
       {
+        "name": "warhammer 40,000 space marine 2 demo/start_protected_game.exe",
+        "os": "win32",
+        "is_launcher": false
+      },
+      {
         "name": "space marine 2/start_protected_game.exe",
         "os": "win32",
         "is_launcher": false
       },
       {
         "name": "warhammer 40000 space marine 2.exe",
-        "os": "win32",
-        "is_launcher": false
-      },
-      {
-        "name": "warhammer 40,000 space marine 2 demo/start_protected_game.exe",
         "os": "win32",
         "is_launcher": false
       },
@@ -220738,8 +220758,28 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "steam",
+        "id": "2183900"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P9F29KKK215"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N4FJT7B2SVH"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N9PCZWHVP2L"
+      },
+      {
         "distributor": "xbox",
         "id": "9N6KKQ71WQ6G"
+      },
+      {
+        "distributor": "steam",
+        "id": "1733641"
       },
       {
         "distributor": "epic",
@@ -220751,19 +220791,7 @@
       },
       {
         "distributor": "xbox",
-        "id": "9N9PCZWHVP2L"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9P9F29KKK215"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9N4FJT7B2SVH"
-      },
-      {
-        "distributor": "steam",
-        "id": "2183900"
+        "id": "9NR13MGVRZDL"
       }
     ],
     "id_igdb": "185252",
@@ -260685,8 +260713,16 @@
         "id": "2235200"
       },
       {
+        "distributor": "steam",
+        "id": "20533"
+      },
+      {
         "distributor": "xbox",
         "id": "9P5QV5XX8S9H"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PNVJ62LPDG4"
       }
     ],
     "id_igdb": "325279",
@@ -312671,15 +312707,23 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9N78W63W9W9R"
+        "id": "9NF005TNWKZX"
       },
       {
         "distributor": "xbox",
-        "id": "9P3QCJ019LP2"
+        "id": "9PKPSN24ZR1J"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N78W63W9W9R"
       },
       {
         "distributor": "steam",
         "id": "1880620"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P3QCJ019LP2"
       }
     ],
     "id_igdb": "358526",
@@ -331201,6 +331245,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NSW7TTLRHVC"
+      },
       {
         "distributor": "steam",
         "id": "3024130"
@@ -464019,6 +464067,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "epic",
+        "id": "ED31F10D954B416FBF9BB97034E0ED41"
+      },
+      {
         "distributor": "steam",
         "id": "2849490"
       }
@@ -479713,6 +479765,10 @@
       {
         "distributor": "steam",
         "id": "2871520"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PPF72ZH6RP8"
       }
     ],
     "id_igdb": "298680",
@@ -482586,6 +482642,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NQJ4MKPWPJ7"
+      },
       {
         "distributor": "steam",
         "id": "1446900"
@@ -502397,12 +502457,16 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9NPJ71QQC6Q3"
+        "distributor": "epic",
+        "id": "8215156E5EE046F9811B506F4935F2B5"
       },
       {
         "distributor": "steam",
         "id": "2333000"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NPJ71QQC6Q3"
       }
     ],
     "id_igdb": "313597",
@@ -503308,12 +503372,12 @@
         "id": "9P2QMWJ6XSB6"
       },
       {
-        "distributor": "xbox",
-        "id": "9N4PT8HGCDHQ"
-      },
-      {
         "distributor": "steam",
         "id": "3010850"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PLTG5DJ32XQ"
       },
       {
         "distributor": "xbox",
@@ -503321,7 +503385,11 @@
       },
       {
         "distributor": "xbox",
-        "id": "9PLTG5DJ32XQ"
+        "id": "9PHPXPZ0JQ4T"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N4PT8HGCDHQ"
       }
     ],
     "id_igdb": "305160",
@@ -508162,11 +508230,19 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
+        "id": "9NFBSR3N0HR5"
+      },
+      {
+        "distributor": "xbox",
         "id": "9NVGT8L46GXT"
       },
       {
         "distributor": "steam",
         "id": "3777850"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NP5QDMCJF5W"
       },
       {
         "distributor": "xbox",
@@ -519200,6 +519276,10 @@
       {
         "distributor": "steam",
         "id": "4067370"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NK1ZZ7BSDJD"
       }
     ],
     "id_igdb": "374812",
@@ -528982,12 +529062,12 @@
     "aliases": [],
     "executables": [
       {
-        "name": "hellraiser.exe",
+        "name": "hellraiser-win64-shipping.exe",
         "os": "win32",
         "is_launcher": false
       },
       {
-        "name": "hellraiser-win64-shipping.exe",
+        "name": "hellraiser.exe",
         "os": "win32",
         "is_launcher": false
       }
@@ -528995,19 +529075,23 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9PN93T01JMSR"
+        "id": "9PN8DJ8MRCC6"
       },
       {
         "distributor": "xbox",
-        "id": "9PN8DJ8MRCC6"
+        "id": "9PN93T01JMSR"
+      },
+      {
+        "distributor": "steam",
+        "id": "1551980"
       },
       {
         "distributor": "xbox",
         "id": "9NSWRGZBQ2MC"
       },
       {
-        "distributor": "steam",
-        "id": "1551980"
+        "distributor": "xbox",
+        "id": "9N3TVB2GX7CT"
       }
     ],
     "id_igdb": "356552",
@@ -533116,10 +533200,15 @@
   },
   {
     "id": "1558329214279622736",
-    "name": "Football Referee Life Simulator 26",
+    "name": "Referee Life Simulator 2026",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3917850"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -533130,7 +533219,12 @@
     "name": "RATSHOT",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3980250"
+      }
+    ],
     "id_igdb": "376215",
     "cover": "coaswg",
     "artwork": [
@@ -533140,10 +533234,15 @@
   },
   {
     "id": "1558329224690016326",
-    "name": "Dead Spin",
+    "name": "DEAD SPIN",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3705670"
+      }
+    ],
     "id_igdb": "404215",
     "cover": "cod21m",
     "artwork": [
@@ -533156,7 +533255,12 @@
     "name": "Railminer",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5284470"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -533167,12 +533271,76 @@
     "name": "Lenin Street Geek Shop",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3225880"
+      }
+    ],
     "id_igdb": "338685",
     "cover": "coc5qw",
     "artwork": [
       "ar3lxe"
     ],
     "url": "lenin-street-geek-shop"
+  },
+  {
+    "id": "1558690790425759774",
+    "name": "At Fate's End",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "epic",
+        "id": "03F537BEB49B430E9027CF0037A99632"
+      },
+      {
+        "distributor": "steam",
+        "id": "2210150"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NZDL3CL3VM4"
+      }
+    ],
+    "id_igdb": "348205",
+    "cover": "co9xwy",
+    "artwork": [
+      "ar3ouo"
+    ],
+    "url": "at-fates-end"
+  },
+  {
+    "id": "1558690808205414410",
+    "name": "STAR WARS: Galactic Racer",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4078430"
+      },
+      {
+        "distributor": "epic",
+        "id": "A3BC6D2109D541ECB37A646D6ADD1DB3"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MXDPXSRVML5"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N8JHQKRF20R"
+      }
+    ],
+    "id_igdb": "381248",
+    "cover": "cod2y0",
+    "artwork": [
+      "ar6ln0",
+      "ar6ln2",
+      "ar6ln1",
+      "ar4v24"
+    ],
+    "url": "star-wars-galactic-racer"
   }
 ]
