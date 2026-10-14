@@ -191719,8 +191719,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "360430"
+        "distributor": "xbox",
+        "id": "BVZLS7XZ68KF"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P724TX61F4G"
       },
       {
         "distributor": "epic",
@@ -191728,15 +191732,15 @@
       },
       {
         "distributor": "xbox",
-        "id": "9P4V2BGJFWW7"
-      },
-      {
-        "distributor": "xbox",
         "id": "BVV8LHVGPBS3"
       },
       {
         "distributor": "xbox",
-        "id": "BVZLS7XZ68KF"
+        "id": "9P4V2BGJFWW7"
+      },
+      {
+        "distributor": "steam",
+        "id": "360430"
       }
     ],
     "id_igdb": "11492",
@@ -288457,6 +288461,10 @@
       {
         "distributor": "google_play",
         "id": "com.Alientrap.DuneCrawl"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N68L1R93J9T"
       }
     ],
     "id_igdb": "318505",
@@ -325952,6 +325960,10 @@
       {
         "distributor": "epic",
         "id": "E9D9B70F9BC14C35B034F4A3DF62270E"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NVQF0F792WT"
       }
     ],
     "id_igdb": "233872",
@@ -533363,10 +533375,15 @@
   },
   {
     "id": "1559415838568874097",
-    "name": "Cook, Serve, Delicious: Re-Mustard!",
+    "name": "Cook, Serve, Delicious: Remustard!",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2139040"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -533374,10 +533391,23 @@
   },
   {
     "id": "1559415861838745730",
-    "name": "Hela",
+    "name": "Hela: Of Mice & Magic",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3161310"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NMBDPRKK1XF"
+      },
+      {
+        "distributor": "epic",
+        "id": "594DA186BB284333BF24478A4AF5CAA1"
+      }
+    ],
     "id_igdb": "314449",
     "cover": "cod34q",
     "artwork": [
@@ -533388,10 +533418,19 @@
   },
   {
     "id": "1559415870164566057",
-    "name": "Rockbeasts",
+    "name": "ROCKBEASTS",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1445880"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P0VK67DJF13"
+      }
+    ],
     "id_igdb": "333047",
     "cover": "co9g3z",
     "artwork": [
@@ -533405,7 +533444,12 @@
     "name": "Everfront",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4681770"
+      }
+    ],
     "id_igdb": "400550",
     "cover": "coc0s3",
     "artwork": [
@@ -533418,7 +533462,12 @@
     "name": "Magnavale: Eternal Soul",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3704270"
+      }
+    ],
     "id_igdb": "385270",
     "cover": "cob9y3",
     "artwork": [
@@ -533431,7 +533480,12 @@
     "name": "Keep Watering",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4569670"
+      }
+    ],
     "id_igdb": "406930",
     "cover": "coc9kr",
     "artwork": [
@@ -533441,10 +533495,23 @@
   },
   {
     "id": "1559415900694642800",
-    "name": "Paperhead",
+    "name": "PAPERHEAD",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NB677KMMDZK"
+      },
+      {
+        "distributor": "steam",
+        "id": "2680280"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NBGV68L88FM"
+      }
+    ],
     "id_igdb": "276028",
     "cover": "cocz72",
     "artwork": [
@@ -533458,7 +533525,12 @@
     "name": "Bad Bitch Blasters",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3591360"
+      }
+    ],
     "id_igdb": "337996",
     "cover": "coas2f",
     "artwork": [
@@ -533471,7 +533543,16 @@
     "name": "Bad Magpie",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NPSJ0DRDZSB"
+      },
+      {
+        "distributor": "steam",
+        "id": "4278970"
+      }
+    ],
     "id_igdb": "405068",
     "cover": "coc73f",
     "artwork": [
@@ -533484,7 +533565,12 @@
     "name": "LIVING HELL",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3078760"
+      }
+    ],
     "id_igdb": "368188",
     "cover": "coaqpt",
     "artwork": [
@@ -533499,7 +533585,12 @@
     "name": "Logic Arrows",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4210250"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -533510,7 +533601,12 @@
     "name": "False Echo",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4418080"
+      }
+    ],
     "id_igdb": "398306",
     "cover": "cobxfg",
     "artwork": [
@@ -533523,7 +533619,12 @@
     "name": "Sous Raccoon",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3919140"
+      }
+    ],
     "id_igdb": "366299",
     "cover": "cod2oo",
     "artwork": [
@@ -533536,7 +533637,12 @@
     "name": "Too Deep To Quit",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4182190"
+      }
+    ],
     "id_igdb": "397820",
     "cover": "cobwi1",
     "artwork": [
@@ -533549,7 +533655,12 @@
     "name": "Car Park Capital",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3031880"
+      }
+    ],
     "id_igdb": "344093",
     "cover": "cod3b5",
     "artwork": [
@@ -533562,7 +533673,12 @@
     "name": "LA Cops",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "278810"
+      }
+    ],
     "id_igdb": "17080",
     "cover": "co454c",
     "artwork": [
@@ -533575,7 +533691,12 @@
     "name": "GrimKeep",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3509380"
+      }
+    ],
     "id_igdb": "339144",
     "cover": "cocycc",
     "artwork": null,
@@ -533586,7 +533707,12 @@
     "name": "Scratch It! Lucky Cards",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4824030"
+      }
+    ],
     "id_igdb": "419281",
     "cover": "cocyhy",
     "artwork": [
@@ -533599,7 +533725,12 @@
     "name": "Outbreak Z",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4908120"
+      }
+    ],
     "id_igdb": "421648",
     "cover": "cod232",
     "artwork": [
@@ -533613,7 +533744,12 @@
     "name": "The Ninth Legion",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4605900"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -533624,7 +533760,12 @@
     "name": "Traffic Architect",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5028050"
+      }
+    ],
     "id_igdb": "419013",
     "cover": "cod20m",
     "artwork": [
@@ -533637,7 +533778,12 @@
     "name": "Swarmvore",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5067670"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -533648,7 +533794,12 @@
     "name": "Carry On Together",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4776500"
+      }
+    ],
     "id_igdb": "391565",
     "cover": "cobvdt",
     "artwork": [
@@ -533661,7 +533812,12 @@
     "name": "Chat, Should We Head Over There?",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5039980"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -533669,10 +533825,21 @@
   },
   {
     "id": "1559416031280234557",
-    "name": "PUBG: DED.NET",
-    "aliases": [],
+    "name": "PUBG Ded.Net",
+    "aliases": [
+      "PUBG: DED.NET"
+    ],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NR8QWV3WC67"
+      },
+      {
+        "distributor": "steam",
+        "id": "2726580"
+      }
+    ],
     "id_igdb": "414104",
     "cover": "cocrhu",
     "artwork": [
@@ -533686,7 +533853,12 @@
     "name": "Towers of Babble",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4984400"
+      }
+    ],
     "id_igdb": "421108",
     "cover": "cod1a3",
     "artwork": [
@@ -533696,10 +533868,15 @@
   },
   {
     "id": "1559416092886179911",
-    "name": "A Normal Quiz Game where you try to solve questions but the questions have tricks and gimmicks and if you get them wrong you have to beat a wacky punishment but they are kinda fun so you lowkey wanna do them even if it means getting the question wrong.",
+    "name": "A Normal Quiz Game Where You Try to Solve Questions but the Questions Have Tricks and Gimmicks and if You Get Them Wrong You Have to Beat a Wacky Punishment but They Are Kinda Fun So You Lowkey Wanna Do Them Even if It Means Getting the Question Wrong.",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5109940"
+      }
+    ],
     "id_igdb": "417742",
     "cover": "cocwos",
     "artwork": null,
@@ -533710,7 +533887,12 @@
     "name": "Lightspeed Lina",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4982870"
+      }
+    ],
     "id_igdb": "417659",
     "cover": "cocw65",
     "artwork": [
@@ -533723,7 +533905,12 @@
     "name": "Zombillionaire",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5133580"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -533734,7 +533921,12 @@
     "name": "That Which Remains",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3166230"
+      }
+    ],
     "id_igdb": "421144",
     "cover": "cod1ax",
     "artwork": [
@@ -533747,7 +533939,12 @@
     "name": "Touhou Garden of the Yukkuri",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5159730"
+      }
+    ],
     "id_igdb": "419066",
     "cover": "cocy6b",
     "artwork": [
@@ -533760,7 +533957,12 @@
     "name": "Hex Reverse",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5257350"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -533771,7 +533973,12 @@
     "name": "Unharvest",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5138990"
+      }
+    ],
     "id_igdb": "420600",
     "cover": "cod0c0",
     "artwork": null,
@@ -533782,7 +533989,12 @@
     "name": "SNAPTIC",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5201040"
+      }
+    ],
     "id_igdb": "403307",
     "cover": "coc4rn",
     "artwork": [
@@ -533795,7 +534007,12 @@
     "name": "The Greedy Knight",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4779990"
+      }
+    ],
     "id_igdb": "418029",
     "cover": "coczzt",
     "artwork": [
@@ -533808,7 +534025,12 @@
     "name": "Lost & Found",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4466940"
+      }
+    ],
     "id_igdb": "390317",
     "cover": "cod39t",
     "artwork": [
@@ -533821,7 +534043,12 @@
     "name": "Tavernia",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4294030"
+      }
+    ],
     "id_igdb": "391212",
     "cover": "cobor9",
     "artwork": [
@@ -533831,15 +534058,200 @@
   },
   {
     "id": "1559416154458554368",
-    "name": "Death by Taxes",
+    "name": "Death By Taxes",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4696280"
+      }
+    ],
     "id_igdb": "370868",
     "cover": "coalag",
     "artwork": [
       "ar4c15"
     ],
     "url": "death-and-taxes--1"
+  },
+  {
+    "id": "1559778929731043359",
+    "name": "BrokenLore: Don't Lie",
+    "aliases": [
+      "BrokenLore: DON’T LIE"
+    ],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "epic",
+        "id": "DE771032DC4443C39AEB702EB040C6E2"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NN0TCQRQMK6"
+      },
+      {
+        "distributor": "steam",
+        "id": "3886200"
+      }
+    ],
+    "id_igdb": "370708",
+    "cover": "coakzn",
+    "artwork": [
+      "ar4bp2"
+    ],
+    "url": "brokenlore-dont-lie"
+  },
+  {
+    "id": "1559778944213844008",
+    "name": "Garfield: Escape from Monday",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9P7TKZMGWWVT"
+      },
+      {
+        "distributor": "epic",
+        "id": "7BBF702D1D574DD3972FED72A825FD67"
+      },
+      {
+        "distributor": "steam",
+        "id": "3932790"
+      }
+    ],
+    "id_igdb": "407405",
+    "cover": "cocat5",
+    "artwork": [
+      "ar6o3s"
+    ],
+    "url": "garfield-escape-from-monday"
+  },
+  {
+    "id": "1559778957803528303",
+    "name": "The Door Factory",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4815930"
+      }
+    ],
+    "id_igdb": "405529",
+    "cover": "coc7zw",
+    "artwork": [
+      "ar6j9p"
+    ],
+    "url": "the-door-factory"
+  },
+  {
+    "id": "1559778974563835986",
+    "name": "Sort of Magic",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4398290"
+      }
+    ],
+    "id_igdb": "420253",
+    "cover": "coczwk",
+    "artwork": [
+      "ar6qqz"
+    ],
+    "url": "sort-of-magic"
+  },
+  {
+    "id": "1559778982008725564",
+    "name": "Carry The Count",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4311440"
+      }
+    ],
+    "id_igdb": "414477",
+    "cover": "cod413",
+    "artwork": null,
+    "url": "carry-the-count"
+  },
+  {
+    "id": "1559778995036233748",
+    "name": "Alchemess: Tidy Up Your Potion Shop!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "epic",
+        "id": "6BBAFEAB5DD04033B92508216ACA8768"
+      },
+      {
+        "distributor": "steam",
+        "id": "4997190"
+      }
+    ],
+    "id_igdb": "419566",
+    "cover": "cocyy4",
+    "artwork": [
+      "ar6qa1"
+    ],
+    "url": "alchemess-tidy-up-your-potion-shop"
+  },
+  {
+    "id": "1559779018578858015",
+    "name": "Sill Dogs",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5119020"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1559779026271342644",
+    "name": "Better Chaos",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5138000"
+      }
+    ],
+    "id_igdb": "420741",
+    "cover": "cod0jz",
+    "artwork": [
+      "ar6oq2"
+    ],
+    "url": "better-chaos"
+  },
+  {
+    "id": "1559779044415774720",
+    "name": "Echoes in Darkness",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4945790"
+      }
+    ],
+    "id_igdb": "419465",
+    "cover": "cod19y",
+    "artwork": [
+      "ar6p5h"
+    ],
+    "url": "echoes-in-darkness"
   }
 ]
