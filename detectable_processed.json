@@ -101451,6 +101451,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9PD8DH0CKHXX"
+      },
+      {
         "distributor": "steam",
         "id": "1035510"
       }
@@ -222067,6 +222071,10 @@
         "id": "9P9GX5D8H9DW"
       },
       {
+        "distributor": "xbox",
+        "id": "9PKB4TT2144R"
+      },
+      {
         "distributor": "steam",
         "id": "3070070"
       }
@@ -246236,12 +246244,16 @@
         "id": "com.netmarble.got"
       },
       {
-        "distributor": "steam",
-        "id": "3183280"
+        "distributor": "google_play",
+        "id": "com.netmarble.gotasia"
       },
       {
         "distributor": "epic",
         "id": "C5D6C13E13AE4E4581E9068D8A75EADB"
+      },
+      {
+        "distributor": "steam",
+        "id": "3183280"
       }
     ],
     "id_igdb": "325605",
@@ -273439,7 +273451,12 @@
     "name": "Ultimate Soccer",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3413330"
+      }
+    ],
     "id_igdb": "331952",
     "cover": "co9ex4",
     "artwork": [
@@ -327298,7 +327315,12 @@
     "name": "Chess.com",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.chess"
+      }
+    ],
     "id_igdb": "121957",
     "cover": "co3wpr",
     "artwork": [
@@ -356991,6 +357013,10 @@
       {
         "distributor": "steam",
         "id": "2699820"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.crunchyroll.gv.shinchanshiroandcoal.game"
       }
     ],
     "id_igdb": "266712",
@@ -360374,21 +360400,21 @@
   },
   {
     "id": "1441991658471161967",
-    "name": "True Fear: Forsaken Souls Part 1",
+    "name": "True Fear: Forsaken Souls - Part 1",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "440420"
+        "distributor": "google_play",
+        "id": "com.Goblinz.TrueFear"
       },
       {
         "distributor": "epic",
         "id": "52D9C5885CB54C9280D4B9B8CF32A7B9"
       },
       {
-        "distributor": "google_play",
-        "id": "com.Goblinz.TrueFear"
+        "distributor": "steam",
+        "id": "440420"
       },
       {
         "distributor": "xbox",
@@ -440629,10 +440655,14 @@
   },
   {
     "id": "1445118952698286080",
-    "name": "True Fear: Forsaken Souls Part 2",
+    "name": "True Fear: Forsaken Souls - Part 2",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9MWLH8V4GXT6"
+      },
       {
         "distributor": "google_play",
         "id": "com.Goblinz.TrueFear2"
@@ -440644,10 +440674,6 @@
       {
         "distributor": "steam",
         "id": "935580"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9MWLH8V4GXT6"
       }
     ],
     "id_igdb": "111276",
@@ -508682,12 +508708,16 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "3778610"
-      },
-      {
         "distributor": "epic",
         "id": "F491C814088A4A22AFC5AEFCF91C56AC"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MV6SZ71GGJT"
+      },
+      {
+        "distributor": "steam",
+        "id": "3778610"
       }
     ],
     "id_igdb": "347850",
@@ -534253,5 +534283,275 @@
       "ar6p5h"
     ],
     "url": "echoes-in-darkness"
+  },
+  {
+    "id": "1560140420489416744",
+    "name": "Paraxima",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3194090"
+      }
+    ],
+    "id_igdb": "399304",
+    "cover": "ar5rpw",
+    "artwork": [
+      "ar5rpy",
+      "ar5rpx",
+      "ar5rpw"
+    ],
+    "url": "paraxima"
+  },
+  {
+    "id": "1560140432472543353",
+    "name": "Birds Organized Neatly",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2707110"
+      }
+    ],
+    "id_igdb": "280674",
+    "cover": "cob3vj",
+    "artwork": [
+      "ar2oq7"
+    ],
+    "url": "birds-organized-neatly"
+  },
+  {
+    "id": "1560140438957064233",
+    "name": "Snowed In",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5049110"
+      }
+    ],
+    "id_igdb": "421605",
+    "cover": "cod2b6",
+    "artwork": [
+      "ar6pxp"
+    ],
+    "url": "snowed-in--1"
+  },
+  {
+    "id": "1560140476235911238",
+    "name": "Meat Without Master",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3560630"
+      }
+    ],
+    "id_igdb": "349839",
+    "cover": "co9zp6",
+    "artwork": null,
+    "url": "meat-without-master"
+  },
+  {
+    "id": "1560140488172896337",
+    "name": "Space Manager",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4229480"
+      }
+    ],
+    "id_igdb": "423039",
+    "cover": "cod49n",
+    "artwork": [
+      "ar6s5a"
+    ],
+    "url": "space-manager"
+  },
+  {
+    "id": "1560140493810049106",
+    "name": "Tower Tactics 2",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3749130"
+      }
+    ],
+    "id_igdb": "374368",
+    "cover": "coapnq",
+    "artwork": [
+      "ar4hzy"
+    ],
+    "url": "tower-tactics-2"
+  },
+  {
+    "id": "1560140514316132413",
+    "name": "FROG IN THE HOLE!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4983370"
+      }
+    ],
+    "id_igdb": "421877",
+    "cover": "cod2jw",
+    "artwork": [
+      "ar6q88",
+      "ar6q0v",
+      "ar6q0w",
+      "ar6q0q"
+    ],
+    "url": "frog-in-the-hole"
+  },
+  {
+    "id": "1560140522557935656",
+    "name": "Echo Mates",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5113760"
+      }
+    ],
+    "id_igdb": "418511",
+    "cover": "cocxcn",
+    "artwork": [
+      "ar6qr1"
+    ],
+    "url": "echo-mates"
+  },
+  {
+    "id": "1560140561011318784",
+    "name": "Crowd Favorites",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4962610"
+      }
+    ],
+    "id_igdb": "416509",
+    "cover": "cocu62",
+    "artwork": [
+      "ar6jqi"
+    ],
+    "url": "crowd-favorites"
+  },
+  {
+    "id": "1560140407214448700",
+    "name": "ASUKA x Redline Reverie",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "405510",
+    "cover": "coc8ih",
+    "artwork": null,
+    "url": "asuka-x-redline-reverie"
+  },
+  {
+    "id": "1560140412042215525",
+    "name": "Amiko Legends",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "209097",
+    "cover": "coau8e",
+    "artwork": [
+      "ar4ldp"
+    ],
+    "url": "amiko-legends"
+  },
+  {
+    "id": "1560140452966047744",
+    "name": "Power Network Tycoon",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "258523",
+    "cover": "co7tup",
+    "artwork": [
+      "ar2f4l"
+    ],
+    "url": "power-network-tycoon"
+  },
+  {
+    "id": "1560140498528636948",
+    "name": "Sublustrum",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "379140",
+    "cover": "coawh1",
+    "artwork": [
+      "ar4qq8"
+    ],
+    "url": "sublustrum"
+  },
+  {
+    "id": "1560140507202457611",
+    "name": "The Backrooms: Threshold",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1560140535472201839",
+    "name": "MAR: Millions Are Rising",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1560140554149429309",
+    "name": "The Drawratos",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1560140575108374538",
+    "name": "Find the Needle: One in Ten Million",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "422384",
+    "cover": "cod397",
+    "artwork": null,
+    "url": "find-the-needle-one-in-ten-million"
+  },
+  {
+    "id": "1560140578941960242",
+    "name": "STARHOME",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
   }
 ]
