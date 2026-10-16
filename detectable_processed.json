@@ -48482,12 +48482,16 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9P2HHT3VS7MP"
+        "distributor": "epic",
+        "id": "7D0AD96B326943A599DDE07A9503C54C"
       },
       {
         "distributor": "steam",
         "id": "1599600"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P2HHT3VS7MP"
       }
     ],
     "id_igdb": "151353",
@@ -224000,6 +224004,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "epic",
+        "id": "FC4C9236E55F455BBB3157213A6DB53B"
+      },
+      {
         "distributor": "steam",
         "id": "1631470"
       }
@@ -227400,6 +227408,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9P0SQ2RH2QRD"
+      },
+      {
         "distributor": "steam",
         "id": "2826800"
       }
@@ -229879,6 +229891,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9P23HM8FBWC2"
+      },
       {
         "distributor": "steam",
         "id": "2793710"
@@ -238711,6 +238727,10 @@
       {
         "distributor": "steam",
         "id": "1096900"
+      },
+      {
+        "distributor": "epic",
+        "id": "DD9FB530BA6047B3B852B50CCC8E144D"
       }
     ],
     "id_igdb": "137146",
@@ -251825,6 +251845,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "epic",
+        "id": "FEDF1E38D23F4652894F73BC4C28122D"
+      },
       {
         "distributor": "steam",
         "id": "2097570"
@@ -275925,6 +275949,11 @@
         "is_launcher": false
       },
       {
+        "name": "bf6event.exe",
+        "os": "win32",
+        "is_launcher": false
+      },
+      {
         "name": "eaanticheat.gameservicelauncer.exe",
         "os": "win32",
         "is_launcher": true
@@ -275933,29 +275962,12 @@
         "name": "battlefield 6 event/bf6event.exe",
         "os": "win32",
         "is_launcher": false
-      },
-      {
-        "name": "bf6event.exe",
-        "os": "win32",
-        "is_launcher": false
       }
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9P0CFMZ94Q8R"
-      },
-      {
         "distributor": "steam",
         "id": "2807960"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9P4BB02MWDZK"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NGCN2R5QB79"
       },
       {
         "distributor": "xbox",
@@ -275964,6 +275976,22 @@
       {
         "distributor": "epic",
         "id": "A14A02AA3C8143729605EAF7C93D7501"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P0CFMZ94Q8R"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NGCN2R5QB79"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P4BB02MWDZK"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P55XDLRJDHB"
       }
     ],
     "id_igdb": "317407",
@@ -285108,6 +285136,10 @@
       {
         "distributor": "steam",
         "id": "3179730"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NZWQ5CK8XK3"
       }
     ],
     "id_igdb": "320726",
@@ -295737,6 +295769,10 @@
       {
         "distributor": "steam",
         "id": "2647820"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NDT27C1N79Z"
       }
     ],
     "id_igdb": "273626",
@@ -309074,6 +309110,10 @@
       {
         "distributor": "steam",
         "id": "3569420"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PKZRN4RJRC9"
       }
     ],
     "id_igdb": "344588",
@@ -313876,6 +313916,10 @@
         "id": "1783560"
       },
       {
+        "distributor": "xbox",
+        "id": "9P9QJ0CNBZG8"
+      },
+      {
         "distributor": "epic",
         "id": "B9DFBAB010554A0B99918EDAF7BA81B7"
       }
@@ -317654,6 +317698,10 @@
       {
         "distributor": "xbox",
         "id": "9MVNB889L3HN"
+      },
+      {
+        "distributor": "epic",
+        "id": "77882E466FC140CDB20EA0C72FCA9F93"
       }
     ],
     "id_igdb": "80006",
@@ -333157,6 +333205,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "epic",
+        "id": "151CE8EDE0D148F2BF2B868F1C25FAC0"
+      },
+      {
         "distributor": "steam",
         "id": "2295060"
       }
@@ -334643,6 +334695,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9N6H2HHKDVNK"
+      },
       {
         "distributor": "steam",
         "id": "2716830"
@@ -395099,12 +395155,16 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9P861V1542BL"
-      },
-      {
         "distributor": "steam",
         "id": "2828710"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N034ZHJC6NR"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P861V1542BL"
       }
     ],
     "id_igdb": "361833",
@@ -467090,10 +467150,8 @@
   },
   {
     "id": "1456486627106095124",
-    "name": "Bodycam Onrecord",
-    "aliases": [
-      "FIRE STATE"
-    ],
+    "name": "FIRE STATE",
+    "aliases": [],
     "executables": [],
     "third_party_skus": [
       {
@@ -483552,6 +483610,10 @@
       {
         "distributor": "steam",
         "id": "3823370"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N1L48JV9DV5"
       }
     ],
     "id_igdb": "375690",
@@ -534454,7 +534516,12 @@
     "name": "ASUKA x Redline Reverie",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3357310"
+      }
+    ],
     "id_igdb": "405510",
     "cover": "coc8ih",
     "artwork": null,
@@ -534465,7 +534532,12 @@
     "name": "Amiko Legends",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4245930"
+      }
+    ],
     "id_igdb": "209097",
     "cover": "coau8e",
     "artwork": [
@@ -534478,7 +534550,12 @@
     "name": "Power Network Tycoon",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2429930"
+      }
+    ],
     "id_igdb": "258523",
     "cover": "co7tup",
     "artwork": [
@@ -534491,7 +534568,12 @@
     "name": "Sublustrum",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4151300"
+      }
+    ],
     "id_igdb": "379140",
     "cover": "coawh1",
     "artwork": [
@@ -534504,7 +534586,12 @@
     "name": "The Backrooms: Threshold",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4935330"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -534515,7 +534602,12 @@
     "name": "MAR: Millions Are Rising",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5167550"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -534526,7 +534618,12 @@
     "name": "The Drawratos",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5136030"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -534537,7 +534634,12 @@
     "name": "Find the Needle: One in Ten Million",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9P8XT70953JV"
+      }
+    ],
     "id_igdb": "422384",
     "cover": "cod397",
     "artwork": null,
@@ -534548,7 +534650,28 @@
     "name": "STARHOME",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1252070"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1560502972872400897",
+    "name": "Deer Hunting: The Season 2",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5158320"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
