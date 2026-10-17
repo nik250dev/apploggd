@@ -534676,5 +534676,34 @@
     "cover": null,
     "artwork": null,
     "url": null
+  },
+  {
+    "id": "1560760495248777256",
+    "name": "Nekome: Nazi Hunter",
+    "aliases": [],
+    "executables": [
+      {
+        "name": "nekomesteamdemo-win64-shipping.exe",
+        "os": "win32",
+        "is_launcher": false
+      },
+      {
+        "name": "nekomedemo.exe",
+        "os": "win32",
+        "is_launcher": false
+      }
+    ],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4200110"
+      }
+    ],
+    "id_igdb": "388249",
+    "cover": "cobqp2",
+    "artwork": [
+      "ar5j2b"
+    ],
+    "url": "nekome-nazi-hunter"
   }
 ]
