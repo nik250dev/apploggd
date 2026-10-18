@@ -4715,23 +4715,27 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
-        "id": "9N4J3P5KV5BZ"
+        "id": "9MT21BXTTD56"
       },
       {
         "distributor": "xbox",
         "id": "9NBLGGH43KZB"
       },
       {
+        "distributor": "steam",
+        "id": "361420"
+      },
+      {
         "distributor": "xbox",
-        "id": "9MT21BXTTD56"
+        "id": "9N4J3P5KV5BZ"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MX0Z9Z2N6BK"
       },
       {
         "distributor": "xbox",
         "id": "9N591H8LVB9K"
-      },
-      {
-        "distributor": "steam",
-        "id": "361420"
       }
     ],
     "id_igdb": "13205",
@@ -7908,12 +7912,16 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "582500"
-      },
-      {
         "distributor": "xbox",
         "id": "9P695V9561VB"
+      },
+      {
+        "distributor": "epic",
+        "id": "53331450FEE741039FB2C570AC7C7F48"
+      },
+      {
+        "distributor": "steam",
+        "id": "582500"
       }
     ],
     "id_igdb": "27310",
@@ -49762,12 +49770,16 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "865360"
+        "distributor": "epic",
+        "id": "C5F6069E7DD644DAB009294F0FDDC7A7"
       },
       {
         "distributor": "xbox",
         "id": "9NZCXHBPJ11B"
+      },
+      {
+        "distributor": "steam",
+        "id": "865360"
       }
     ],
     "id_igdb": "109535",
@@ -62012,6 +62024,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9N8L3RQ4TQSX"
+      },
       {
         "distributor": "steam",
         "id": "756800"
@@ -93062,6 +93078,10 @@
       {
         "distributor": "steam",
         "id": "726830"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.owlchemylabs.vacationsimulator"
       }
     ],
     "id_igdb": "76878",
@@ -162933,6 +162953,10 @@
       },
       {
         "distributor": "xbox",
+        "id": "9NTBK3DSZ01P"
+      },
+      {
+        "distributor": "xbox",
         "id": "9P5HLXMJP3RD"
       }
     ],
@@ -192312,6 +192336,10 @@
       {
         "distributor": "steam",
         "id": "1608640"
+      },
+      {
+        "distributor": "epic",
+        "id": "DFE95C9009F548B0B167B3D65CC91979"
       }
     ],
     "id_igdb": "199736",
@@ -239531,6 +239559,10 @@
       {
         "distributor": "google_play",
         "id": "com.Sunborn.SnqxExilium.Glo"
+      },
+      {
+        "distributor": "epic",
+        "id": "207FA09A6BD24A2DB7FA11E033A66D44"
       }
     ],
     "id_igdb": "174844",
@@ -254324,6 +254356,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "epic",
+        "id": "8D8F8C68D1FE44B8A62DF38DD239C2A0"
+      },
+      {
         "distributor": "steam",
         "id": "2238040"
       }
@@ -256151,16 +256187,20 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "steam",
+        "id": "2405060"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PNW96PZ00QC"
+      },
+      {
         "distributor": "xbox",
         "id": "9N6GLJSQBNZD"
       },
       {
         "distributor": "epic",
         "id": "D53159B0A47C43D08A92968A6FD9CD78"
-      },
-      {
-        "distributor": "steam",
-        "id": "2405060"
       }
     ],
     "id_igdb": "249998",
@@ -273318,7 +273358,12 @@
     "name": "Jigsaw Puzzles",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3356860"
+      }
+    ],
     "id_igdb": "56658",
     "cover": "co2brj",
     "artwork": null,
@@ -274581,8 +274626,16 @@
         "id": "9NM757FVZHMJ"
       },
       {
+        "distributor": "xbox",
+        "id": "9NQMTQSV939P"
+      },
+      {
         "distributor": "steam",
         "id": "2949320"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N325V9CL7CV"
       }
     ],
     "id_igdb": "259339",
@@ -277320,6 +277373,10 @@
       {
         "distributor": "steam",
         "id": "2000210"
+      },
+      {
+        "distributor": "epic",
+        "id": "8DB8B15BFE3F44FAB72075966C7D51B8"
       },
       {
         "distributor": "xbox",
@@ -292802,6 +292859,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9PK5KG7HPRHZ"
+      },
+      {
         "distributor": "steam",
         "id": "2121510"
       }
@@ -305893,6 +305954,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9PDX9JQK6G95"
+      },
       {
         "distributor": "steam",
         "id": "3613270"
@@ -321797,6 +321862,10 @@
         "id": "9P4P8X3BZ7Q2"
       },
       {
+        "distributor": "xbox",
+        "id": "9NCQNCQ3QMQ4"
+      },
+      {
         "distributor": "steam",
         "id": "1639080"
       }
@@ -324637,7 +324706,12 @@
     "name": "Soulframe",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4095380"
+      }
+    ],
     "id_igdb": "209643",
     "cover": "coc6dw",
     "artwork": [
@@ -359256,8 +359330,16 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "steam",
+        "id": "2667950"
+      },
+      {
         "distributor": "xbox",
         "id": "9ND15J624DFH"
+      },
+      {
+        "distributor": "epic",
+        "id": "0F440C591FC240A98CF0C370BAE227D4"
       }
     ],
     "id_igdb": "131773",
@@ -464142,10 +464224,14 @@
   },
   {
     "id": "1449239170664104068",
-    "name": "Inotia 4: Assassin of Berkel",
+    "name": "Inotia 4",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3956320"
+      },
       {
         "distributor": "google_play",
         "id": "com.com2us.inotia4.normal.freefull.google.global.android.common"
@@ -485069,7 +485155,7 @@
   },
   {
     "id": "1479318370309509130",
-    "name": "Australia Did It",
+    "name": "Australia Did It: End-of-the-World Railway Defense Business",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -490920,6 +491006,10 @@
       {
         "distributor": "steam",
         "id": "953330"
+      },
+      {
+        "distributor": "epic",
+        "id": "5FFDF739F9B549EBBA9CAF3596E7C632"
       }
     ],
     "id_igdb": "148923",
@@ -501315,6 +501405,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NSTZ0D3BP0J"
+      },
       {
         "distributor": "steam",
         "id": "3115160"
@@ -520759,6 +520853,10 @@
       {
         "distributor": "steam",
         "id": "2682270"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.mindlabor.pight"
       }
     ],
     "id_igdb": "275839",
@@ -529060,7 +529158,12 @@
     "name": "Galumb",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4945850"
+      }
+    ],
     "id_igdb": "414573",
     "cover": "cocqra",
     "artwork": [
@@ -530627,7 +530730,9 @@
   {
     "id": "1553255112502149211",
     "name": "Scam With Your Friends",
-    "aliases": [],
+    "aliases": [
+      "$cam With Your Friends"
+    ],
     "executables": [],
     "third_party_skus": [
       {
@@ -532084,11 +532189,19 @@
       },
       {
         "distributor": "xbox",
+        "id": "9MTNR5F6JTFT"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NH6N2DNQ0H0"
+      },
+      {
+        "distributor": "xbox",
         "id": "9P4TXTFKN90Z"
       },
       {
         "distributor": "xbox",
-        "id": "9MTNR5F6JTFT"
+        "id": "9N8FDTDX2VHH"
       }
     ],
     "id_igdb": "389434",
@@ -534438,7 +534551,7 @@
   },
   {
     "id": "1560140493810049106",
-    "name": "Tower Tactics 2",
+    "name": "Tower Tactics II",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -534705,5 +534818,384 @@
       "ar5j2b"
     ],
     "url": "nekome-nazi-hunter"
+  },
+  {
+    "id": "1561228962393231370",
+    "name": "Bottled by Bears",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4390080"
+      }
+    ],
+    "id_igdb": "405328",
+    "cover": "cocyle",
+    "artwork": [
+      "ar616o"
+    ],
+    "url": "bottled-by-bears"
+  },
+  {
+    "id": "1561228974279893042",
+    "name": "Bandit Simulator TD",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4267800"
+      }
+    ],
+    "id_igdb": "389945",
+    "cover": "cobm4t",
+    "artwork": [
+      "ar5fph"
+    ],
+    "url": "bandit-simulator-td"
+  },
+  {
+    "id": "1561228983696232519",
+    "name": "Mortuus",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3680170"
+      }
+    ],
+    "id_igdb": "423630",
+    "cover": "cod53s",
+    "artwork": [
+      "ar6sqb"
+    ],
+    "url": "mortuus"
+  },
+  {
+    "id": "1561228991837380738",
+    "name": "Horns of Deliverance",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4080520"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1561228996899897364",
+    "name": "Apple Crumble",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4110770"
+      }
+    ],
+    "id_igdb": "404738",
+    "cover": "coc6nw",
+    "artwork": [
+      "ar60ca"
+    ],
+    "url": "apple-crumble"
+  },
+  {
+    "id": "1561229005238046781",
+    "name": "Death Dealer",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4508450"
+      }
+    ],
+    "id_igdb": "422225",
+    "cover": "cod2zw",
+    "artwork": [
+      "ar6qoq",
+      "ar6qov",
+      "ar6qox",
+      "ar6qow",
+      "ar6qos",
+      "ar6qor",
+      "ar6qou",
+      "ar6qot"
+    ],
+    "url": "death-dealer"
+  },
+  {
+    "id": "1561229018915676191",
+    "name": "Remote Reaper: FPV Drone",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "epic",
+        "id": "50354F70945D439B91945042A47C5666"
+      },
+      {
+        "distributor": "steam",
+        "id": "3295810"
+      }
+    ],
+    "id_igdb": "338625",
+    "cover": "coae4q",
+    "artwork": [
+      "ar3f58"
+    ],
+    "url": "remote-reaper-fpv-drone"
+  },
+  {
+    "id": "1561229023692984400",
+    "name": "Paystreak",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4809710"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1561229033579221012",
+    "name": "Witch Cabin Cleanup",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4991240"
+      }
+    ],
+    "id_igdb": "413299",
+    "cover": "cocogd",
+    "artwork": [
+      "ar6f13"
+    ],
+    "url": "witch-cabin-cleanup"
+  },
+  {
+    "id": "1561229039874609222",
+    "name": "Selkie's Salvage&Co.",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4984870"
+      }
+    ],
+    "id_igdb": "414745",
+    "cover": "cocr2g",
+    "artwork": [
+      "ar6p26"
+    ],
+    "url": "selkies-salvage-and-co"
+  },
+  {
+    "id": "1561229045100847114",
+    "name": "LOTTERY",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4966300"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1561229048762605599",
+    "name": "Greenrise",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4963910"
+      }
+    ],
+    "id_igdb": "416836",
+    "cover": "cocupw",
+    "artwork": [
+      "ar6k39"
+    ],
+    "url": "greenrise"
+  },
+  {
+    "id": "1561229055238348810",
+    "name": "Starlathe",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5090060"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1561229060938399855",
+    "name": "Swarmbreaker",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4948940"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1561229069289398383",
+    "name": "Can 'Em All",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5133900"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1561229078143574076",
+    "name": "Thank You Bus Driver",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5067360"
+      }
+    ],
+    "id_igdb": "416605",
+    "cover": "cocxej",
+    "artwork": [
+      "ar6m3c"
+    ],
+    "url": "thank-you-bus-driver"
+  },
+  {
+    "id": "1561229085038878820",
+    "name": "Foole's World",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5134970"
+      }
+    ],
+    "id_igdb": "419541",
+    "cover": "cocz2g",
+    "artwork": [
+      "ar6r4y"
+    ],
+    "url": "fooles-world"
+  },
+  {
+    "id": "1561229093750448200",
+    "name": "Thief Simulator 3",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5100440"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1561229116915720203",
+    "name": "Total War: SHOGUN 2 - Complete Edition",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "epic",
+        "id": "29643ADC9E3740008BB76DEA025F9AD5"
+      },
+      {
+        "distributor": "steam",
+        "id": "3846830"
+      }
+    ],
+    "id_igdb": "418272",
+    "cover": "cocwz3",
+    "artwork": [
+      "ar6r5f"
+    ],
+    "url": "total-war-shogun-2-complete-edition"
+  },
+  {
+    "id": "1561229126751359036",
+    "name": "Rip It! Card Collector",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5088440"
+      }
+    ],
+    "id_igdb": "419579",
+    "cover": "cocyyt",
+    "artwork": [
+      "ar6p63"
+    ],
+    "url": "rip-it-card-collector"
+  },
+  {
+    "id": "1561229134628257793",
+    "name": "Medium Rare",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4909780"
+      }
+    ],
+    "id_igdb": "414632",
+    "cover": "cocqw1",
+    "artwork": [
+      "ar6h89"
+    ],
+    "url": "medium-rare--2"
   }
 ]
