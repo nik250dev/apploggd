@@ -31062,6 +31062,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.owlchemylabs.jobsimulator"
+      },
+      {
         "distributor": "steam",
         "id": "448280"
       }
@@ -41119,12 +41123,16 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "209950"
+        "distributor": "google_play",
+        "id": "com.spryfox.tripletown"
       },
       {
         "distributor": "gog",
         "id": ""
+      },
+      {
+        "distributor": "steam",
+        "id": "209950"
       }
     ],
     "id_igdb": "14405",
@@ -110614,6 +110622,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.kluge.SynthRiders"
+      },
       {
         "distributor": "steam",
         "id": "885000"
@@ -348701,6 +348713,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.mightyyell.thebigcon"
+      },
+      {
         "distributor": "epic",
         "id": "A1F2A672B08F45D28BB6B65EEF6FFE41"
       },
@@ -476949,6 +476965,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "epic",
+        "id": "592F2146B4D944D5AB0E895E344C8669"
+      },
+      {
         "distributor": "xbox",
         "id": "9NV3L234VGXD"
       },
@@ -476957,8 +476977,8 @@
         "id": "1663850"
       },
       {
-        "distributor": "epic",
-        "id": "592F2146B4D944D5AB0E895E344C8669"
+        "distributor": "google_play",
+        "id": "com.thunderful.replaced4mobile"
       }
     ],
     "id_igdb": "152244",
