@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Support for Steam Deck
+
 ## 1.2.0 — 2026-10-08
 
 ### Added
