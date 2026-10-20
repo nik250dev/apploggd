@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Changed
+
+- Home status panel redesigned
+
 ## 1.2.0 — 2026-10-08
 
 ### Added

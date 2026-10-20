@@ -2104,8 +2104,7 @@ public partial class MainWindowViewModel : ViewModelBase
     public bool IsGameDetectionActive => !IsGameDetectionPaused;
 
     /// <summary>
-    /// IsVisible for the three pulsing circles of the waiting state: they only had it on their
-    /// ancestors, and a collapsed parent does not stop a child's animation.
+    /// Drives the waiting state's idle animations, which a collapsed ancestor alone would not stop.
     /// </summary>
     public bool IsWaitingAnimationVisible => IsHomeVisible && !IsGameRunning && IsGameDetectionActive;
 

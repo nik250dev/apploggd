@@ -1,0 +1,181 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:BackloggdMirror.ViewModels"
+             xmlns:ctl="using:BackloggdMirror.Views.Controls"
+             xmlns:services="using:BackloggdMirror.Services"
+             x:Class="BackloggdMirror.Views.HomeStatusPanel"
+             x:DataType="vm:MainWindowViewModel">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="/Views/Controls/DetectionSwitch.axaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <StreamGeometry x:Key="PauseIconData">M6,5H10V19H6ZM14,5H18V19H14Z</StreamGeometry>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <UserControl.Styles>
+        <!-- Cross-fades between the waiting and paused versions of an element. -->
+        <Style Selector=":is(Control).fade">
+            <Setter Property="Opacity" Value="0"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.26"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector=":is(Control).fade.shown">
+            <Setter Property="Opacity" Value="1"/>
+        </Style>
+
+        <Style Selector="Panel#Artwork">
+            <Setter Property="Opacity" Value="0"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:1.0" Easing="CubicEaseOut"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Panel#Artwork.shown">
+            <Setter Property="Opacity" Value="1"/>
+        </Style>
+
+        <!-- Status disc: brand while detecting, neutral while paused. -->
+        <Style Selector="Ellipse#StatusDisc">
+            <Setter Property="Fill" Value="{DynamicResource SurfaceBrandHoverBrush}"/>
+            <Setter Property="Stroke" Value="#8CEA377A"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Fill" Duration="0:0:0.3"/>
+                    <BrushTransition Property="Stroke" Duration="0:0:0.3"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Ellipse#StatusDisc.paused">
+            <Setter Property="Fill" Value="{DynamicResource InputHoverBackgroundBrush}"/>
+            <Setter Property="Stroke" Value="{DynamicResource SidebarBorderBrush}"/>
+        </Style>
+
+        <!-- Idle animations, stopped with the window's "animate" class like the rest. -->
+        <Style Selector="Window.animate :is(ctl|LoopingAnimationControl)">
+            <Setter Property="IsAnimationEnabled" Value="True"/>
+        </Style>
+    </UserControl.Styles>
+
+    <Panel>
+        <Border CornerRadius="20" ClipToBounds="True" Background="{DynamicResource PanelBackgroundBrush}">
+            <Panel>
+                <Panel x:Name="Artwork" Classes.shown="{Binding IsBackgroundImageVisible}">
+                    <Image Source="{Binding GameBackgroundImage}" Stretch="UniformToFill" Opacity="0.6">
+                        <Image.Effect>
+                            <BlurEffect Radius="10"/>
+                        </Image.Effect>
+                    </Image>
+                    <Border Background="#94121418"/>
+                </Panel>
+
+                <ctl:BreathingGlow Color="{DynamicResource BrandPrimaryColor}"
+                                   IsActive="{Binding IsWaitingAnimationVisible}"/>
+
+                <!-- Waiting / paused -->
+                <StackPanel IsVisible="{Binding !IsGameRunning}" Spacing="18"
+                            HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Panel Width="80" Height="80" HorizontalAlignment="Center">
+                        <ctl:ListeningRing Color="{DynamicResource BrandPrimaryColor}"
+                                           IsActive="{Binding IsWaitingAnimationVisible}"/>
+                        <Ellipse x:Name="StatusDisc" StrokeThickness="1.5" Classes.paused="{Binding IsGameDetectionPaused}"/>
+                        <PathIcon Classes="fade" Classes.shown="{Binding IsGameDetectionActive}"
+                                  Data="{DynamicResource GamepadIconData}" Width="38" Height="38"
+                                  Foreground="{DynamicResource BrandPrimaryBrush}"/>
+                        <PathIcon Classes="fade" Classes.shown="{Binding IsGameDetectionPaused}"
+                                  Data="{StaticResource PauseIconData}" Width="24" Height="24"
+                                  Foreground="{DynamicResource IconMediumBrush}"/>
+                    </Panel>
+
+                    <Panel Height="34" HorizontalAlignment="Center">
+                        <TextBlock Classes="fade" Classes.shown="{Binding IsGameDetectionActive}"
+                                   Text="{Binding [Home_WaitingForGame], Source={x:Static services:LocalizationService.Instance}}"
+                                   FontSize="26" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Classes="fade" Classes.shown="{Binding IsGameDetectionPaused}"
+                                   Text="{Binding [Home_SearchPaused], Source={x:Static services:LocalizationService.Instance}}"
+                                   FontSize="26" FontWeight="Bold" Foreground="{DynamicResource IconLightBrush}"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Panel>
+
+                    <ctl:DetectionSwitch HorizontalAlignment="Center"
+                                         IsChecked="{Binding IsGameDetectionActive, Mode=OneWay}"
+                                         Command="{Binding ToggleGameDetectionCommand}"
+                                         OnLabel="{Binding [Home_DetectionOn], Source={x:Static services:LocalizationService.Instance}}"
+                                         OffLabel="{Binding [Home_DetectionOff], Source={x:Static services:LocalizationService.Instance}}"
+                                         AutomationProperties.Name="{Binding [Home_DetectionSwitch], Source={x:Static services:LocalizationService.Instance}}"/>
+                </StackPanel>
+
+                <!-- Playing -->
+                <StackPanel IsVisible="{Binding IsGameRunning}" Spacing="4"
+                            HorizontalAlignment="Center" VerticalAlignment="Center" Margin="40,0">
+                    <TextBlock Text="{Binding [Home_PlayingNow], Source={x:Static services:LocalizationService.Instance}}"
+                               FontSize="14" FontWeight="SemiBold" LetterSpacing="0.5"
+                               Foreground="{DynamicResource BrandPrimaryLightBrush}" HorizontalAlignment="Center">
+                        <TextBlock.Effect>
+                            <DropShadowEffect Color="Black" BlurRadius="10" Opacity="1.0"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock Text="{Binding GameName}" FontSize="30" FontWeight="Bold"
+                               Foreground="{DynamicResource TextPrimaryBrush}"
+                               TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock.Effect>
+                            <DropShadowEffect Color="Black" BlurRadius="15" Opacity="1.0" OffsetX="0" OffsetY="0"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock Text="{Binding PlayTime}" FontSize="52" FontWeight="SemiBold" FontFeatures="+tnum"
+                               Foreground="{DynamicResource BrandPrimaryBrush}" HorizontalAlignment="Center">
+                        <TextBlock.Effect>
+                            <DropShadowEffect Color="#EA377A" BlurRadius="20" Opacity="0.6"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                </StackPanel>
+
+                <StackPanel IsVisible="{Binding IsGameRunning}" Orientation="Horizontal" Spacing="6"
+                            HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,22,16">
+                    <StackPanel.Effect>
+                        <DropShadowEffect Color="Black" BlurRadius="10" Opacity="1.0"/>
+                    </StackPanel.Effect>
+                    <TextBlock Text="{Binding [Blacklist_NotAGame], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding !IsRunningGameEmulated}"
+                               FontSize="13" Foreground="{DynamicResource TextMutedBrush}" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding [Blacklist_NotWanted], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding IsRunningGameEmulated}"
+                               FontSize="13" Foreground="{DynamicResource TextMutedBrush}" VerticalAlignment="Center"/>
+                    <Button Classes="link" Command="{Binding BlacklistRunningGameCommand}">
+                        <StackPanel Orientation="Horizontal" Spacing="4">
+                            <PathIcon Data="M12,2C17.5,2 22,6.5 22,12C22,17.5 17.5,22 12,22C6.5,22 2,17.5 2,12C2,6.5 6.5,2 12,2M12,4C10.1,4 8.4,4.6 7.1,5.7L18.3,16.9C19.3,15.5 20,13.8 20,12C20,7.6 16.4,4 12,4M16.9,18.3L5.7,7.1C4.6,8.4 4,10.1 4,12C4,16.4 7.6,20 12,20C13.9,20 15.6,19.4 16.9,18.3Z"
+                                      Width="12" Height="12" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding [Blacklist_Add], Source={x:Static services:LocalizationService.Instance}}" FontSize="13" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+                <!-- Top left: toasts stack on the right. -->
+                <Border IsVisible="{Binding IsOffline}"
+                        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16"
+                        Background="{DynamicResource OfflineBackgroundBrush}"
+                        BorderBrush="{DynamicResource OfflineBrush}" BorderThickness="1"
+                        CornerRadius="999" Padding="10,4"
+                        ToolTip.Tip="{Binding [Home_OfflineTooltip], Source={x:Static services:LocalizationService.Instance}}">
+                    <StackPanel Orientation="Horizontal" Spacing="6">
+                        <PathIcon Data="M7.73,10L15.73,18H6A4,4 0 0,1 2,14A4,4 0 0,1 6,10M3,5.27L5.75,8C2.56,8.15 0,10.77 0,14A6,6 0 0,0 6,20H17.73L19.73,22L21,20.73L4.27,4M19.35,10.03C18.67,6.59 15.64,4 12,4C10.5,4 9.15,4.43 8,5.17L9.45,6.63C10.21,6.23 11.08,6 12,6A5.5,5.5 0 0,1 17.5,11.5V12H19A3,3 0 0,1 22,15C22,16.13 21.36,17.11 20.44,17.62L21.89,19.07C23.16,18.16 24,16.68 24,15C24,12.36 21.95,10.22 19.35,10.03Z"
+                                  Width="14" Height="14" VerticalAlignment="Center"
+                                  Foreground="{DynamicResource OfflineBrush}"/>
+                        <TextBlock Text="{Binding [Home_OfflineBadge], Source={x:Static services:LocalizationService.Instance}}"
+                                   FontSize="12" FontWeight="SemiBold" VerticalAlignment="Center"
+                                   Foreground="{DynamicResource OfflineBrush}"/>
+                    </StackPanel>
+                </Border>
+            </Panel>
+        </Border>
+
+        <ctl:AmbientEdge CornerRadius="20" StrokeThickness="2"
+                         Color="{DynamicResource BrandPrimaryColor}"
+                         IsActive="{Binding IsWaitingAnimationVisible}"/>
+    </Panel>
+</UserControl>
