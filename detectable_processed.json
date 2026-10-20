@@ -68886,7 +68886,7 @@
   },
   {
     "id": "1124353218504315057",
-    "name": "Firestone: Online Idle RPG",
+    "name": "Firestone: Idle Clicker Online RPG",
     "aliases": [],
     "executables": [
       {
@@ -68897,12 +68897,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "google_play",
-        "id": "com.HolydayStudios.Firestone"
-      },
-      {
         "distributor": "steam",
         "id": "1013320"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.HolydayStudios.Firestone"
       },
       {
         "distributor": "epic",
@@ -277736,12 +277736,16 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "1425350"
-      },
-      {
         "distributor": "xbox",
         "id": "9PLP9LSKB6WV"
+      },
+      {
+        "distributor": "epic",
+        "id": "969BBFAC9E7840A986C1D594CCD55C01"
+      },
+      {
+        "distributor": "steam",
+        "id": "1425350"
       },
       {
         "distributor": "xbox",
@@ -333291,6 +333295,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9N4ZMKC3GX4M"
+      },
+      {
         "distributor": "epic",
         "id": "151CE8EDE0D148F2BF2B868F1C25FAC0"
       },
@@ -336543,6 +336551,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.Squidy.PixelRoyale3D"
+      },
       {
         "distributor": "steam",
         "id": "2511180"
