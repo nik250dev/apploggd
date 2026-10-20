@@ -448,9 +448,10 @@ public partial class MainWindow : Window
     /// </summary>
     protected override void OnClosing(WindowClosingEventArgs e)
     {
-        if (_canClose)
+        // Exit from the tray menu, or the system shutting down (cancelling it here would block the
+        // shutdown). Either way a session in progress is dropped.
+        if (_canClose || e.CloseReason == WindowCloseReason.ApplicationShutdown)
         {
-            // Exit requested from the tray menu: this one is a real close.
             base.OnClosing(e);
             return;
         }
