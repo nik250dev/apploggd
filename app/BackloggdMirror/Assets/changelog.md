@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Fixed
+
+- The app no longer logs in with less than 50 MB of free disk space, where saving sessions could fail
+
 ## 1.2.0 — 2026-10-08
 
 ### Added
