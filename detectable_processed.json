@@ -18655,6 +18655,18 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "C545JKTS21Q2"
+      },
+      {
+        "distributor": "steam",
+        "id": "18463"
+      },
+      {
+        "distributor": "steam",
+        "id": "4511"
+      },
+      {
         "distributor": "steam",
         "id": "418370"
       }
@@ -144804,23 +144816,8 @@
     "id": "1124358738774601899",
     "name": "Resident Evil 2",
     "aliases": [],
-    "executables": [
-      {
-        "name": "biohazard re2 z/re2.exe",
-        "os": "win32",
-        "is_launcher": false
-      }
-    ],
-    "third_party_skus": [
-      {
-        "distributor": "steam",
-        "id": "895950"
-      },
-      {
-        "distributor": "steam",
-        "id": "4249110"
-      }
-    ],
+    "executables": [],
+    "third_party_skus": [],
     "id_igdb": "880",
     "cover": "co2vz0",
     "artwork": [
@@ -172584,6 +172581,11 @@
     ],
     "executables": [
       {
+        "name": "biohazard re2 z/re2.exe",
+        "os": "win32",
+        "is_launcher": false
+      },
+      {
         "name": "resident evil 2  biohazard re2/re2.exe",
         "os": "win32",
         "is_launcher": false
@@ -172592,7 +172594,15 @@
     "third_party_skus": [
       {
         "distributor": "steam",
+        "id": "4249110"
+      },
+      {
+        "distributor": "steam",
         "id": "883710"
+      },
+      {
+        "distributor": "steam",
+        "id": "895950"
       }
     ],
     "id_igdb": "19686",
@@ -187790,6 +187800,11 @@
       {
         "name": "runelite/runelite.exe",
         "os": "win32",
+        "is_launcher": false
+      },
+      {
+        "name": "runelite.app",
+        "os": "darwin",
         "is_launcher": false
       }
     ],
@@ -523416,6 +523431,10 @@
       {
         "distributor": "steam",
         "id": "4517160"
+      },
+      {
+        "distributor": "epic",
+        "id": "A2A0A1E584A1438C8CDB66E7A3F33BF0"
       }
     ],
     "id_igdb": "411258",
@@ -535229,5 +535248,798 @@
       "ar6h89"
     ],
     "url": "medium-rare--2"
+  },
+  {
+    "id": "1562314831833595957",
+    "name": "Rain98",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3498720"
+      }
+    ],
+    "id_igdb": "339805",
+    "cover": "co9ns6",
+    "artwork": [
+      "ar3fnw"
+    ],
+    "url": "rain98"
+  },
+  {
+    "id": "1562314846257807370",
+    "name": "Evilbane",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3718160"
+      }
+    ],
+    "id_igdb": "364175",
+    "cover": "cod174",
+    "artwork": [
+      "ar6ovz",
+      "ar6p32"
+    ],
+    "url": "evilbane"
+  },
+  {
+    "id": "1562314880441262181",
+    "name": "Godzilla: Destroy All Monsters Melee Remastered",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9P8Q9HV5X96Q"
+      },
+      {
+        "distributor": "steam",
+        "id": "4251460"
+      }
+    ],
+    "id_igdb": "404939",
+    "cover": "coc6x8",
+    "artwork": [
+      "ar6jca",
+      "ar6jcb",
+      "ar6jcc",
+      "ar6jcd"
+    ],
+    "url": "godzilla-destroy-all-monsters-melee-remastered"
+  },
+  {
+    "id": "1562314906571776010",
+    "name": "Toy Story: Retro Roundup!",
+    "aliases": [
+      "Disney•Pixar Toy Story: Retro Roundup!"
+    ],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9P4XBZ4RQ4XS"
+      },
+      {
+        "distributor": "steam",
+        "id": "4049170"
+      }
+    ],
+    "id_igdb": "404006",
+    "cover": "coc5v8",
+    "artwork": [
+      "ar6n2o",
+      "ar6n2n",
+      "ar6n2p"
+    ],
+    "url": "toy-story-retro-roundup--1"
+  },
+  {
+    "id": "1562314928453328977",
+    "name": "Tales of Eternia: Remastered",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3470960"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P30VHWQXPS0"
+      }
+    ],
+    "id_igdb": "405458",
+    "cover": "coc7n7",
+    "artwork": [
+      "ar6qmi",
+      "ar6qmh"
+    ],
+    "url": "tales-of-eternia-remastered"
+  },
+  {
+    "id": "1562314995285368842",
+    "name": "Big Dig",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4304900"
+      }
+    ],
+    "id_igdb": "399372",
+    "cover": "cobz3w",
+    "artwork": [
+      "ar6tlb",
+      "ar6tla"
+    ],
+    "url": "big-dig"
+  },
+  {
+    "id": "1562315030182101092",
+    "name": "Toy Story 3: Complete Edition",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NHB6M30S1BN"
+      },
+      {
+        "distributor": "steam",
+        "id": "4049180"
+      }
+    ],
+    "id_igdb": "404035",
+    "cover": "coc5v1",
+    "artwork": [
+      "ar5zcv"
+    ],
+    "url": "toy-story-3-complete-edition"
+  },
+  {
+    "id": "1562315092475904000",
+    "name": "Veterans: Napoleonic Wars",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4202430"
+      }
+    ],
+    "id_igdb": "390282",
+    "cover": "coc4au",
+    "artwork": [
+      "ar5xsk"
+    ],
+    "url": "veterans-napoleonic-wars"
+  },
+  {
+    "id": "1562315148268404737",
+    "name": "Theos: Cities of Myth",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3002130"
+      }
+    ],
+    "id_igdb": "403819",
+    "cover": "coc5el",
+    "artwork": [
+      "ar5ytd"
+    ],
+    "url": "theos-cities-of-myth"
+  },
+  {
+    "id": "1562315336630534174",
+    "name": "Folded Fables: Tidy Up The Dragon Hoard",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4995030"
+      }
+    ],
+    "id_igdb": "420591",
+    "cover": "cod0at",
+    "artwork": [
+      "ar6syt"
+    ],
+    "url": "folded-fables-tidy-up-the-dragon-hoard"
+  },
+  {
+    "id": "1562315399884705813",
+    "name": "WE'RE ALL IN!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4183130"
+      }
+    ],
+    "id_igdb": "410634",
+    "cover": "cocje1",
+    "artwork": [
+      "ar6adl"
+    ],
+    "url": "dopamine--3"
+  },
+  {
+    "id": "1562315411293343846",
+    "name": "Norn Saber: The Guardian's Oath",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4030680"
+      }
+    ],
+    "id_igdb": "422370",
+    "cover": "cod3i4",
+    "artwork": [
+      "ar6r4i",
+      "ar6r4h"
+    ],
+    "url": "norn-saber-the-guardians-oath"
+  },
+  {
+    "id": "1562314964209766452",
+    "name": "Cyan Heart",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "374245",
+    "cover": "coappb",
+    "artwork": [
+      "ar4i37"
+    ],
+    "url": "cyan-heart"
+  },
+  {
+    "id": "1562314977086410792",
+    "name": "Beautiful Light",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "137217",
+    "cover": "cob9v9",
+    "artwork": [
+      "ar2423"
+    ],
+    "url": "beautiful-light"
+  },
+  {
+    "id": "1562315009294344312",
+    "name": "Police Station Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "296302",
+    "cover": "co81vk",
+    "artwork": [
+      "ar2vxm"
+    ],
+    "url": "police-station-simulator"
+  },
+  {
+    "id": "1562315011806728243",
+    "name": "Azimuth",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "395550",
+    "cover": "cobt7a",
+    "artwork": [
+      "ar5kqo"
+    ],
+    "url": "azimuth--1"
+  },
+  {
+    "id": "1562315014818242560",
+    "name": "Biryado",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "379791",
+    "cover": "cocuvx",
+    "artwork": [
+      "ar4rhc"
+    ],
+    "url": "biryado"
+  },
+  {
+    "id": "1562315039564627968",
+    "name": "EarthX 2",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1562315043046039643",
+    "name": "Playrooms",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "423125",
+    "cover": "cod4dm",
+    "artwork": [
+      "ar6s22"
+    ],
+    "url": "playrooms--1"
+  },
+  {
+    "id": "1562315055351996436",
+    "name": "Anti-Anti-Cheat: a musical action game",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1562315062041907332",
+    "name": "Shadows of War 2",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "7033",
+    "cover": "co25xj",
+    "artwork": [
+      "ar1qro"
+    ],
+    "url": "spellforce-2-shadow-wars"
+  },
+  {
+    "id": "1562315071307128882",
+    "name": "Livin' the Cream: Ice Cream Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "418017",
+    "cover": "cocwpn",
+    "artwork": [
+      "ar6lkz"
+    ],
+    "url": "livin-the-cream-ice-cream-simulator"
+  },
+  {
+    "id": "1562315077489660026",
+    "name": "Feather's Edge",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "399233",
+    "cover": "cobyuy",
+    "artwork": [
+      "ar5rik"
+    ],
+    "url": "feathers-edge"
+  },
+  {
+    "id": "1562315085018439761",
+    "name": "Realm of Taiwu",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "359343",
+    "cover": "coa86o",
+    "artwork": [
+      "ar3ygq"
+    ],
+    "url": "realm-of-taiwu"
+  },
+  {
+    "id": "1562315101242130442",
+    "name": "Clear the Snow",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "122601",
+    "cover": "co41q4",
+    "artwork": [
+      "arl7o"
+    ],
+    "url": "snow-clearing-driving-simulator"
+  },
+  {
+    "id": "1562315107818668062",
+    "name": "Stinker Golf",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "406107",
+    "cover": "coc8sm",
+    "artwork": [
+      "ar6spb"
+    ],
+    "url": "stinker-golf"
+  },
+  {
+    "id": "1562315115703967855",
+    "name": "The Mims Beginning",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "36054",
+    "cover": "co43z7",
+    "artwork": [
+      "ar9v2"
+    ],
+    "url": "the-mims-beginning"
+  },
+  {
+    "id": "1562315122985271296",
+    "name": "FirstPlate",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "400994",
+    "cover": "ar5ufu",
+    "artwork": [
+      "ar5ufv"
+    ],
+    "url": "firstplate"
+  },
+  {
+    "id": "1562315131872874616",
+    "name": "Cartel Pilots Wanted",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "412957",
+    "cover": "cocsdm",
+    "artwork": [
+      "ar6ik7"
+    ],
+    "url": "cartel-pilots-wanted"
+  },
+  {
+    "id": "1562315160826286160",
+    "name": "Resort Island Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "374441",
+    "cover": "coaqpg",
+    "artwork": [
+      "ar4i3t"
+    ],
+    "url": "resort-island-simulator"
+  },
+  {
+    "id": "1562315171857301505",
+    "name": "Trailblazers: Into the March",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "304503",
+    "cover": "co9gvi",
+    "artwork": [
+      "ar2z4v"
+    ],
+    "url": "trailblazers-into-the-march"
+  },
+  {
+    "id": "1562315175502159872",
+    "name": "Skibidi Wars",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "263614",
+    "cover": "co6zt9",
+    "artwork": null,
+    "url": "skibidi-war-toilets-attack"
+  },
+  {
+    "id": "1562315179461709855",
+    "name": "War Footing",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1562315185795104820",
+    "name": "Banana Airways",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "412140",
+    "cover": "cocm33",
+    "artwork": [
+      "ar6d4h"
+    ],
+    "url": "banana-airways"
+  },
+  {
+    "id": "1562315193114034217",
+    "name": "No Body No Problem!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "366043",
+    "cover": null,
+    "artwork": null,
+    "url": "three-body-problem"
+  },
+  {
+    "id": "1562315202756739163",
+    "name": "Midnight Moving Crew",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "420344",
+    "cover": "cod00v",
+    "artwork": [
+      "ar6tt3"
+    ],
+    "url": "midnight-moving-crew"
+  },
+  {
+    "id": "1562315207177543772",
+    "name": "Package chaos",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "411698",
+    "cover": "cocl7v",
+    "artwork": [
+      "ar6igm"
+    ],
+    "url": "package-chaos"
+  },
+  {
+    "id": "1562315211527028807",
+    "name": "10 Million Pixels",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "413109",
+    "cover": "cocv7v",
+    "artwork": [
+      "ar6ufp"
+    ],
+    "url": "10-million-pixels"
+  },
+  {
+    "id": "1562315215683592292",
+    "name": "FAKE ME",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "28351",
+    "cover": "co6v2a",
+    "artwork": null,
+    "url": "fake-colours"
+  },
+  {
+    "id": "1562315218284187729",
+    "name": "Voidwood",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "413180",
+    "cover": "coco7b",
+    "artwork": [
+      "ar6fbj"
+    ],
+    "url": "voidwood"
+  },
+  {
+    "id": "1562315229147308032",
+    "name": "Roll for Order: Sort Every Set!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "420315",
+    "cover": "coczzz",
+    "artwork": [
+      "ar6o0o"
+    ],
+    "url": "roll-for-order-sort-every-set"
+  },
+  {
+    "id": "1562315255151853588",
+    "name": "The Death Game Report",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "413971",
+    "cover": "cocph4",
+    "artwork": [
+      "ar6fu8"
+    ],
+    "url": "the-death-game-report"
+  },
+  {
+    "id": "1562315266895912981",
+    "name": "LIMP MODE",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "414575",
+    "cover": "cocqrh",
+    "artwork": [
+      "ar6knm"
+    ],
+    "url": "limp-mode"
+  },
+  {
+    "id": "1562315277062901790",
+    "name": "TIMBER! Idle Village Builder",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1562315284788944896",
+    "name": "Fenestra: my focus, her future",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "415956",
+    "cover": "cocwvk",
+    "artwork": [
+      "ar6mml"
+    ],
+    "url": "fenestra-my-focus-her-future"
+  },
+  {
+    "id": "1562315290673553408",
+    "name": "Worst Class Ever",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1562315297011138652",
+    "name": "Hay! One Billion!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1562315302404882502",
+    "name": "Monster Cuisine",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "422226",
+    "cover": "cod300",
+    "artwork": [
+      "ar6qoy"
+    ],
+    "url": "monster-cuisine"
+  },
+  {
+    "id": "1562315320830464040",
+    "name": "Keyboard Chaos",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "424118",
+    "cover": "cod5v3",
+    "artwork": null,
+    "url": "keyboard-chaos"
+  },
+  {
+    "id": "1562315327973367888",
+    "name": "One Million Coins",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "424284",
+    "cover": "cod661",
+    "artwork": [
+      "ar6trw"
+    ],
+    "url": "one-million-coins"
+  },
+  {
+    "id": "1562315343190425701",
+    "name": "Quiet Bloom",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "422993",
+    "cover": "cod6ty",
+    "artwork": [
+      "ar6uj4"
+    ],
+    "url": "quiet-bloom"
+  },
+  {
+    "id": "1562315351855865856",
+    "name": "Heartfall — A Tale in Three Lives",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "423521",
+    "cover": "cod593",
+    "artwork": [
+      "ar6svs",
+      "ar6t31"
+    ],
+    "url": "heartfall-a-tale-in-three-lives"
+  },
+  {
+    "id": "1562315356024868924",
+    "name": "Seikyu Let’s Go!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1562315371699241020",
+    "name": "A Game About Needle In A Haystack",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "424555",
+    "cover": null,
+    "artwork": null,
+    "url": "a-game-about-needle-in-a-haystack"
+  },
+  {
+    "id": "1562315383170535454",
+    "name": "Brick by Brick: Tidy Up the Small Town!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "422642",
+    "cover": "cod3wt",
+    "artwork": [
+      "ar6re3",
+      "ar6re5"
+    ],
+    "url": "brick-by-brick-tidy-up-the-small-town"
+  },
+  {
+    "id": "1562315390070161560",
+    "name": "Figure Me Out",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "423068",
+    "cover": "cod4b1",
+    "artwork": [
+      "ar6rre"
+    ],
+    "url": "figure-me-out"
   }
 ]
