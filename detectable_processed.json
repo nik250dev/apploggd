@@ -7170,12 +7170,16 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "242050"
+        "distributor": "xbox",
+        "id": "9NVZ03XT8S2P"
       },
       {
         "distributor": "xbox",
-        "id": "9N3B9B7CSX3C"
+        "id": "BRKMHZX1RCF2"
+      },
+      {
+        "distributor": "steam",
+        "id": "242050"
       },
       {
         "distributor": "uplay",
@@ -7183,7 +7187,7 @@
       },
       {
         "distributor": "xbox",
-        "id": "BRKMHZX1RCF2"
+        "id": "9N3B9B7CSX3C"
       }
     ],
     "id_igdb": "1970",
@@ -8861,16 +8865,20 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "epic",
-        "id": "LARKSPUR"
+        "distributor": "steam",
+        "id": "371660"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P1HX8TFF3VW"
       },
       {
         "distributor": "xbox",
         "id": "9P8X98F4BDC9"
       },
       {
-        "distributor": "steam",
-        "id": "371660"
+        "distributor": "epic",
+        "id": "LARKSPUR"
       },
       {
         "distributor": "xbox",
@@ -9309,8 +9317,16 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "epic",
-        "id": "A646020CB93B4EA995CDA70647BBE001"
+        "distributor": "xbox",
+        "id": "C350VBGGCL6P"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P2RT7TNT37T"
+      },
+      {
+        "distributor": "steam",
+        "id": "460920"
       },
       {
         "distributor": "xbox",
@@ -9321,12 +9337,8 @@
         "id": "3279"
       },
       {
-        "distributor": "steam",
-        "id": "460920"
-      },
-      {
-        "distributor": "xbox",
-        "id": "C350VBGGCL6P"
+        "distributor": "epic",
+        "id": "A646020CB93B4EA995CDA70647BBE001"
       }
     ],
     "id_igdb": "19554",
@@ -18665,10 +18677,6 @@
       {
         "distributor": "steam",
         "id": "4511"
-      },
-      {
-        "distributor": "steam",
-        "id": "418370"
       }
     ],
     "id_igdb": "19562",
@@ -70025,8 +70033,10 @@
   },
   {
     "id": "1124353293301330070",
-    "name": "Resident Evil 7 Teaser: Beginning Hour",
-    "aliases": [],
+    "name": "Resident Evil 7: Biohazard",
+    "aliases": [
+      "RESIDENT EVIL 7 biohazard"
+    ],
     "executables": [
       {
         "name": "resident evil 7 biohazard demo/re7trial.exe",
@@ -70037,7 +70047,27 @@
     "third_party_skus": [
       {
         "distributor": "steam",
+        "id": "418370"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NBLGGH4SPK6"
+      },
+      {
+        "distributor": "steam",
         "id": "530620"
+      },
+      {
+        "distributor": "xbox",
+        "id": "C3CH81WT3G63"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NBLGGH43KPS"
+      },
+      {
+        "distributor": "xbox",
+        "id": "BVFDTJ1XF6CS"
       }
     ],
     "id_igdb": "90566",
@@ -82043,20 +82073,8 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9NK1FQJ1SMCB"
-      },
-      {
-        "distributor": "xbox",
-        "id": "BXRB4ZH2GJHK"
-      },
-      {
-        "distributor": "uplay",
-        "id": "5271"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9P9K6RZC55WH"
+        "distributor": "epic",
+        "id": "1093790870B043CDBAE03D91D76D9AE6"
       },
       {
         "distributor": "steam",
@@ -82071,8 +82089,24 @@
         "id": "9MZHHWCHRJ1T"
       },
       {
-        "distributor": "epic",
-        "id": "1093790870B043CDBAE03D91D76D9AE6"
+        "distributor": "xbox",
+        "id": "9NK1FQJ1SMCB"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P9K6RZC55WH"
+      },
+      {
+        "distributor": "uplay",
+        "id": "5271"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P0G4TBCCS7J"
+      },
+      {
+        "distributor": "xbox",
+        "id": "BXRB4ZH2GJHK"
       }
     ],
     "id_igdb": "119262",
@@ -144816,7 +144850,13 @@
     "id": "1124358738774601899",
     "name": "Resident Evil 2",
     "aliases": [],
-    "executables": [],
+    "executables": [
+      {
+        "name": "4249110_launcher.exe",
+        "os": "win32",
+        "is_launcher": false
+      }
+    ],
     "third_party_skus": [],
     "id_igdb": "880",
     "cover": "co2vz0",
@@ -172581,24 +172621,28 @@
     ],
     "executables": [
       {
-        "name": "biohazard re2 z/re2.exe",
+        "name": "resident evil 2  biohazard re2/re2.exe",
         "os": "win32",
         "is_launcher": false
       },
       {
-        "name": "resident evil 2  biohazard re2/re2.exe",
+        "name": "biohazard re2 z/re2.exe",
         "os": "win32",
         "is_launcher": false
       }
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "4249110"
+        "distributor": "xbox",
+        "id": "C2LXXCC8TB61"
       },
       {
         "distributor": "steam",
         "id": "883710"
+      },
+      {
+        "distributor": "xbox",
+        "id": "BWMH951M3G3P"
       },
       {
         "distributor": "steam",
@@ -217226,49 +217270,29 @@
     "id": "1270832378310557788",
     "name": "Skull and Bones",
     "aliases": [
-      "Skull and Bones (Open Beta)",
-      "Skull and Bones"
+      "Skull and Bones",
+      "Skull and Bones (Open Beta)"
     ],
     "executables": [
       {
-        "name": "skull and bones (open beta)/skullandbones.exe",
+        "name": "skull and bones/skullandbones.exe",
         "os": "win32",
         "is_launcher": false
       },
       {
-        "name": "skull and bones/skullandbones.exe",
+        "name": "skull and bones (open beta)/skullandbones.exe",
         "os": "win32",
         "is_launcher": false
       }
     ],
     "third_party_skus": [
       {
-        "distributor": "uplay",
-        "id": "1713"
-      },
-      {
         "distributor": "xbox",
-        "id": "BXF9VWKCD6QW"
-      },
-      {
-        "distributor": "epic",
-        "id": "0C05E0889C3E42A4BE1D81077D6E653A"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9P7X7VL05K48"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9PCC4D4SCTZW"
+        "id": "9P8CC8LQCLT8"
       },
       {
         "distributor": "uplay",
         "id": "6150"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9P8CC8LQCLT8"
       },
       {
         "distributor": "steam",
@@ -217279,8 +217303,32 @@
         "id": "9PK09JRMP38H"
       },
       {
+        "distributor": "epic",
+        "id": "0C05E0889C3E42A4BE1D81077D6E653A"
+      },
+      {
+        "distributor": "uplay",
+        "id": "1713"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PCC4D4SCTZW"
+      },
+      {
+        "distributor": "xbox",
+        "id": "BXF9VWKCD6QW"
+      },
+      {
         "distributor": "xbox",
         "id": "9NMD3K257FM2"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PG0S835V6J5"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P7X7VL05K48"
       }
     ],
     "id_igdb": "37062",
@@ -220286,16 +220334,20 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "epic",
-        "id": "C7DBE0191D0C45A3961C50C863CB93ED"
+        "distributor": "xbox",
+        "id": "9NCQ70MVCK24"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P1WJCK9B8S6"
       },
       {
         "distributor": "xbox",
         "id": "9P7M1VCXKQVD"
       },
       {
-        "distributor": "xbox",
-        "id": "9P1WJCK9B8S6"
+        "distributor": "epic",
+        "id": "C7DBE0191D0C45A3961C50C863CB93ED"
       },
       {
         "distributor": "steam",
@@ -349398,7 +349450,13 @@
     "id": "1440143043427565681",
     "name": "Resident Evil 3: Nemesis",
     "aliases": [],
-    "executables": [],
+    "executables": [
+      {
+        "name": "4249120_launcher.exe",
+        "os": "win32",
+        "is_launcher": false
+      }
+    ],
     "third_party_skus": [
       {
         "distributor": "steam",
@@ -445237,7 +445295,13 @@
     "id": "1445177238525050950",
     "name": "Resident Evil",
     "aliases": [],
-    "executables": [],
+    "executables": [
+      {
+        "name": "4249100_launcher.exe",
+        "os": "win32",
+        "is_launcher": false
+      }
+    ],
     "third_party_skus": [
       {
         "distributor": "steam",
@@ -467180,20 +467244,14 @@
     "aliases": [
       "RESIDENT EVIL: requiem"
     ],
-    "executables": [],
+    "executables": [
+      {
+        "name": "re9.exe",
+        "os": "win32",
+        "is_launcher": false
+      }
+    ],
     "third_party_skus": [
-      {
-        "distributor": "xbox",
-        "id": "9PDBRV4589NL"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9N003L5R9MMF"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NMFWR0NRLZS"
-      },
       {
         "distributor": "epic",
         "id": "CDF68EA2CDBD443CA0BD1DE2D9CFEA68"
@@ -467201,6 +467259,18 @@
       {
         "distributor": "steam",
         "id": "3764200"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N003L5R9MMF"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PDBRV4589NL"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NMFWR0NRLZS"
       }
     ],
     "id_igdb": "347668",
@@ -536041,5 +536111,23 @@
       "ar6rre"
     ],
     "url": "figure-me-out"
+  },
+  {
+    "id": "1562677993157959791",
+    "name": "Resident Evil 2",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4249110"
+      }
+    ],
+    "id_igdb": "396728",
+    "cover": "ar5ncp",
+    "artwork": [
+      "ar5n30"
+    ],
+    "url": "resident-evil-2--7"
   }
 ]
