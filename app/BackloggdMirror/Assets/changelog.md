@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Notice when the data folder cannot be read or written
+
 ## 1.2.0 — 2026-10-08
 
 ### Added

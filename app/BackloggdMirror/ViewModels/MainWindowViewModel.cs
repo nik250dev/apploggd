@@ -27,12 +27,12 @@ public partial class MainWindowViewModel : ViewModelBase
     /// tasks (registration, database update) that have no idea which thread they are on.
     /// Each toast expires on its own and calls <see cref="RemoveToast"/>.
     /// </summary>
-    public void ShowToast(string message, ToastType type, TimeSpan? duration = null, string? actionText = null, Action? action = null)
+    public void ShowToast(string message, ToastType type, TimeSpan? duration = null, string? actionText = null, Action? action = null, string? detail = null)
     {
         Console.WriteLine($"[MainWindowViewModel] ShowToast called: {message}");
         Dispatcher.UIThread.Post(() =>
         {
-            var toast = new ToastNotificationViewModel(message, type, RemoveToast, duration, actionText, action);
+            var toast = new ToastNotificationViewModel(message, type, RemoveToast, duration, actionText, action, detail);
             ToastNotifications.Add(toast);
         });
     }
@@ -650,6 +650,8 @@ public partial class MainWindowViewModel : ViewModelBase
         // badge and in Settings > About.
         _ = CheckForAppUpdateAsync();
 
+        _ = CheckDataFolderAccessAsync();
+
         // Straight after an update, show what changed. Set here rather than on window load because
         // the modal lives in MainWindow's tree, so it is already up when the window first appears.
         if (AppUpdaterService.RestartedAfterUpdate)
@@ -909,6 +911,31 @@ public partial class MainWindowViewModel : ViewModelBase
     /// <summary>URL shown in the "no browser" modal so the user can copy it by hand.</summary>
     [ObservableProperty]
     private string _noBrowserUrl = BackloggdMirror.Services.AppUpdateService.ReleasesPageUrl;
+
+    private bool _windowOpened;
+
+    // Held until the window opens: on a silent start a toast would count down unseen.
+    private bool _dataFolderToastPending;
+
+    private async Task CheckDataFolderAccessAsync()
+    {
+        if (await Task.Run(() => DataFolderAccess.Check(DataFolderAccess.DefaultFolder, _logger))) return;
+
+        if (_windowOpened) ShowDataFolderToast();
+        else _dataFolderToastPending = true;
+    }
+
+    private void ShowDataFolderToast() =>
+        ShowToast(LocalizationService.Instance["Toast_DataFolderNoAccess"], ToastType.Warning, TimeSpan.FromSeconds(15), detail: DataFolderAccess.DefaultFolder);
+
+    public void OnWindowOpened()
+    {
+        _windowOpened = true;
+        if (!_dataFolderToastPending) return;
+
+        _dataFolderToastPending = false;
+        ShowDataFolderToast();
+    }
 
     /// <summary>
     /// Checks for a newer version in the background. Started when the ViewModel is built and never
