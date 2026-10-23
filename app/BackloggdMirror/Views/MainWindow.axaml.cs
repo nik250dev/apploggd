@@ -246,9 +246,11 @@ public partial class MainWindow : Window
     {
         try
         {
+            // The Deck's panel is dark and its tray icons are white glyphs.
+            string trayLogo = LinuxSteamDeck.IsSteamDeck ? "app-logo-white.png" : "app-logo.png";
             _trayIcon = new TrayIcon
             {
-                Icon = new WindowIcon(AssetLoader.Open(new Uri($"avares://{Assembly.GetExecutingAssembly().GetName().Name}/Assets/app-logo.png"))),
+                Icon = new WindowIcon(AssetLoader.Open(new Uri($"avares://{Assembly.GetExecutingAssembly().GetName().Name}/Assets/{trayLogo}"))),
                 ToolTipText = "Apploggd"
             };
 

@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- Support for Steam Deck
+
 ### Changed
 
 - Home status panel redesigned

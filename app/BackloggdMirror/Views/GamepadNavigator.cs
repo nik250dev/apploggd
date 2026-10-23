@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using Avalonia;
 using Avalonia.Automation.Peers;
@@ -22,6 +23,7 @@ internal sealed class GamepadNavigator : IDisposable
 {
     private const double PointerExitDistance = 4;
     private const double ScrollStep = 80;
+    private const long EchoWindowMs = 150;
 
     private readonly MainWindow _window;
     private readonly MainWindowViewModel _vm;
@@ -33,6 +35,10 @@ internal sealed class GamepadNavigator : IDisposable
     private Control? _pageFocus;
     private ComboBox? _openComboBox;
     private int _comboBoxIndex;
+    private readonly Stopwatch _clock = Stopwatch.StartNew();
+    private readonly DispatcherTimer _echoCheck;
+    private long _lastActionAt = -EchoWindowMs;
+    private long _echoKeyAt;
 
     public GamepadNavigator(MainWindow window, MainWindowViewModel vm, GamepadService gamepad, IAppLogger? logger)
     {
@@ -40,6 +46,8 @@ internal sealed class GamepadNavigator : IDisposable
         _vm = vm;
         _gamepad = gamepad;
         _logger = logger;
+        _echoCheck = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(EchoWindowMs) };
+        _echoCheck.Tick += OnEchoCheck;
 
         _gamepad.ActionReceived += OnAction;
         _vm.PropertyChanged += OnViewModelPropertyChanged;
@@ -49,6 +57,7 @@ internal sealed class GamepadNavigator : IDisposable
         _window.AddHandler(InputElement.PointerMovedEvent, OnPointerMoved, RoutingStrategies.Tunnel, handledEventsToo: true);
         _window.AddHandler(InputElement.PointerPressedEvent, OnPointerPressed, RoutingStrategies.Tunnel, handledEventsToo: true);
         _window.AddHandler(InputElement.KeyDownEvent, OnKeyDown, RoutingStrategies.Tunnel, handledEventsToo: true);
+        _window.AddHandler(InputElement.KeyUpEvent, OnKeyUp, RoutingStrategies.Tunnel, handledEventsToo: true);
 
         UpdateListening();
     }
@@ -94,8 +103,9 @@ internal sealed class GamepadNavigator : IDisposable
             case nameof(MainWindowViewModel.IsSessionConfirmationVisible):
                 if (_vm.IsSessionConfirmationVisible)
                 {
-                    // Each new confirmation starts without controller mode.
+                    // Each new confirmation starts without controller mode, nor a focus Enter could press behind it.
                     ExitControllerMode();
+                    _window.FocusManager?.ClearFocus();
                 }
                 else if (IsControllerMode)
                 {
@@ -135,6 +145,7 @@ internal sealed class GamepadNavigator : IDisposable
     {
         // Posted from the controller thread, so it can arrive just after listening stopped.
         if (!_gamepad.IsListening) return;
+        _lastActionAt = _clock.ElapsedMilliseconds;
 
         _window.Classes.Set("gp-ps", kind == GamepadKind.PlayStation);
         _window.Classes.Set("gp-nintendo", kind == GamepadKind.Nintendo);
@@ -536,7 +547,39 @@ internal sealed class GamepadNavigator : IDisposable
 
     private void OnPointerPressed(object? sender, PointerPressedEventArgs e) => ExitControllerMode();
 
-    private void OnKeyDown(object? sender, KeyEventArgs e) => ExitControllerMode();
+    // Steam's desktop layout also sends each press as a key: the Steam Deck always, a PC with Steam open if so set.
+    private static bool IsEchoKey(Key key) =>
+        key is Key.Up or Key.Down or Key.Left or Key.Right or Key.Enter or Key.Space or Key.Escape;
+
+    private void OnKeyDown(object? sender, KeyEventArgs e)
+    {
+        if (!IsControllerMode) return;
+        if (!IsEchoKey(e.Key))
+        {
+            ExitControllerMode();
+            return;
+        }
+
+        // Enter and Space would press the focused button on their own; the key leaves the mode only if no press comes with it.
+        e.Handled = true;
+        _echoKeyAt = _clock.ElapsedMilliseconds;
+        if (_echoKeyAt - _lastActionAt > EchoWindowMs)
+        {
+            _echoCheck.Stop();
+            _echoCheck.Start();
+        }
+    }
+
+    private void OnKeyUp(object? sender, KeyEventArgs e)
+    {
+        if (IsControllerMode && IsEchoKey(e.Key)) e.Handled = true;
+    }
+
+    private void OnEchoCheck(object? sender, EventArgs e)
+    {
+        _echoCheck.Stop();
+        if (_lastActionAt < _echoKeyAt - EchoWindowMs) ExitControllerMode();
+    }
 
     public void Dispose()
     {
@@ -549,5 +592,8 @@ internal sealed class GamepadNavigator : IDisposable
         _window.RemoveHandler(InputElement.PointerMovedEvent, OnPointerMoved);
         _window.RemoveHandler(InputElement.PointerPressedEvent, OnPointerPressed);
         _window.RemoveHandler(InputElement.KeyDownEvent, OnKeyDown);
+        _window.RemoveHandler(InputElement.KeyUpEvent, OnKeyUp);
+        _echoCheck.Stop();
+        _echoCheck.Tick -= OnEchoCheck;
     }
 }

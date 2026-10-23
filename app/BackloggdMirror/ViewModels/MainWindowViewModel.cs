@@ -1875,7 +1875,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void DiscardSession()
     {
-        IsSessionWarningForcedVisible = false;
+        HideForcedWarning();
         CloseSessionConfirmation();
     }
 
@@ -1904,7 +1904,7 @@ public partial class MainWindowViewModel : ViewModelBase
         _logger.Info($"[MainWindowViewModel] User action: left '{session.GameName}' ({PendingSessionViewModel.FormatDuration(session.Duration)}) for later.");
         AddPendingSession(session, SessionGameCover);
 
-        IsSessionWarningForcedVisible = false;
+        HideForcedWarning();
         CloseSessionConfirmation();
 
         var loc = LocalizationService.Instance;
@@ -1954,7 +1954,7 @@ public partial class MainWindowViewModel : ViewModelBase
         if (IsOffline) return;
 
         IsSavingSession = true;
-        IsSessionWarningForcedVisible = false;
+        HideForcedWarning();
 
         if (!string.IsNullOrEmpty(_pendingGameName))
         {
@@ -2393,7 +2393,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 Dispatcher.UIThread.Post(async () =>
                 {
                     await Task.Delay(100);
-                    IsSessionWarningForcedVisible = true;
+                    IsSessionWarningForcedVisible = IsSessionConfirmationVisible;
                 });
             }
             else
@@ -2541,13 +2541,17 @@ public partial class MainWindowViewModel : ViewModelBase
     public void DismissForcedTooltip()
     {
         IsInfoIconHovered = true;
+        HideForcedWarning();
+    }
 
-        if (IsSessionWarningForcedVisible)
-        {
-            IsSessionWarningForcedVisible = false;
-            _settingsService.HasSeenSessionDiscardWarningV3 = true;
-            _settingsService.Save();
-        }
+    // Closing the modal also counts as seen: on a touchscreen or under Gamescope the icon may never be hovered.
+    private void HideForcedWarning()
+    {
+        if (!IsSessionWarningForcedVisible) return;
+
+        IsSessionWarningForcedVisible = false;
+        _settingsService.HasSeenSessionDiscardWarningV3 = true;
+        _settingsService.Save();
     }
 
     [RelayCommand]
