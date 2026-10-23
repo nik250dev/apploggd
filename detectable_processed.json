@@ -4715,6 +4715,14 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
+        "id": "9N4J3P5KV5BZ"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N591H8LVB9K"
+      },
+      {
+        "distributor": "xbox",
         "id": "9MT21BXTTD56"
       },
       {
@@ -4722,20 +4730,16 @@
         "id": "9NBLGGH43KZB"
       },
       {
+        "distributor": "xbox",
+        "id": "9MX0Z9Z2N6BK"
+      },
+      {
         "distributor": "steam",
         "id": "361420"
       },
       {
         "distributor": "xbox",
-        "id": "9N4J3P5KV5BZ"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9MX0Z9Z2N6BK"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9N591H8LVB9K"
+        "id": "9P4PG729B6PX"
       }
     ],
     "id_igdb": "13205",
@@ -54729,6 +54733,10 @@
       {
         "distributor": "steam",
         "id": "1527950"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NFMDS74SNWZ"
       }
     ],
     "id_igdb": "152257",
@@ -492315,7 +492323,7 @@
   },
   {
     "id": "1491890746616315994",
-    "name": "Car Mechanic Simulator 2026",
+    "name": "Car Mechanic Simulator 2027",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -521233,7 +521241,7 @@
   },
   {
     "id": "1537310211881046029",
-    "name": "500 Finger Fillet",
+    "name": "500 FINGER FILLET",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -530087,10 +530095,6 @@
       {
         "distributor": "steam",
         "id": "5174540"
-      },
-      {
-        "distributor": "steam",
-        "id": "5166890"
       }
     ],
     "id_igdb": null,
@@ -535810,7 +535814,12 @@
     "name": "Skibidi Wars",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4315830"
+      }
+    ],
     "id_igdb": "263614",
     "cover": "co6zt9",
     "artwork": null,
@@ -536129,5 +536138,454 @@
       "ar5n30"
     ],
     "url": "resident-evil-2--7"
+  },
+  {
+    "id": "1562836866657554524",
+    "name": "Post Office: Tidy Up!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5166890"
+      }
+    ],
+    "id_igdb": "419829",
+    "cover": "coczzy",
+    "artwork": [
+      "ar6o0p"
+    ],
+    "url": "post-office-tidy-up--1"
+  },
+  {
+    "id": "1563039718126391396",
+    "name": "All Rats on Deck",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4536480"
+      }
+    ],
+    "id_igdb": "421143",
+    "cover": "cod1av",
+    "artwork": [
+      "ar6p6d",
+      "ar6p6a",
+      "ar6p6e"
+    ],
+    "url": "all-rats-on-deck"
+  },
+  {
+    "id": "1563039730298392719",
+    "name": "Immortal Dao Idle",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4493090"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1563039741534937100",
+    "name": "Abyssal Lapidary",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3797790"
+      }
+    ],
+    "id_igdb": "411093",
+    "cover": "cod5o1",
+    "artwork": [
+      "ar6usb"
+    ],
+    "url": "abyssal-lapidary"
+  },
+  {
+    "id": "1563039750795829349",
+    "name": "Roguefort",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4274730"
+      }
+    ],
+    "id_igdb": "396405",
+    "cover": "cocmhc",
+    "artwork": [
+      "ar5mjn"
+    ],
+    "url": "roguefort"
+  },
+  {
+    "id": "1563039759935217747",
+    "name": "Camp Whittlewood",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4813190"
+      }
+    ],
+    "id_igdb": "420737",
+    "cover": "cod1dz",
+    "artwork": [
+      "ar6p8v",
+      "ar6p8w"
+    ],
+    "url": "camp-whittlewood"
+  },
+  {
+    "id": "1563039768223158294",
+    "name": "Custom Fire",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2121720"
+      }
+    ],
+    "id_igdb": "235457",
+    "cover": "co63t3",
+    "artwork": [
+      "ar24jl"
+    ],
+    "url": "elven-battlegrounds"
+  },
+  {
+    "id": "1563039774846095521",
+    "name": "Draftula",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4598280"
+      }
+    ],
+    "id_igdb": "364615",
+    "cover": "cod0p0",
+    "artwork": null,
+    "url": "draftula"
+  },
+  {
+    "id": "1563039788347560026",
+    "name": "Pitchfork",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "526550"
+      }
+    ],
+    "id_igdb": "31365",
+    "cover": "cod58i",
+    "artwork": null,
+    "url": "pitchfork"
+  },
+  {
+    "id": "1563039798904496172",
+    "name": "Pixel Survivors: Defense",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3878090"
+      }
+    ],
+    "id_igdb": "374632",
+    "cover": "coapxi",
+    "artwork": [
+      "ar4ieq"
+    ],
+    "url": "pixel-survivors-defense"
+  },
+  {
+    "id": "1563039831091585084",
+    "name": "Rent A Car Together",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4265580"
+      }
+    ],
+    "id_igdb": "410753",
+    "cover": "cocjo1",
+    "artwork": [
+      "ar6ane"
+    ],
+    "url": "rent-a-car-together"
+  },
+  {
+    "id": "1563039838054125668",
+    "name": "Gas N Cars",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4908110"
+      }
+    ],
+    "id_igdb": "410455",
+    "cover": "cocj0x",
+    "artwork": [
+      "ar6akz"
+    ],
+    "url": "gas-n-cars"
+  },
+  {
+    "id": "1563039848917377056",
+    "name": "Alien Archeologist",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4881130"
+      }
+    ],
+    "id_igdb": "411075",
+    "cover": "cock36",
+    "artwork": [
+      "ar6utv"
+    ],
+    "url": "alien-archeologist"
+  },
+  {
+    "id": "1563039864734097458",
+    "name": "Scawy Game",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4992660"
+      }
+    ],
+    "id_igdb": "414867",
+    "cover": "cocrai",
+    "artwork": [
+      "ar6hem"
+    ],
+    "url": "scawy-game"
+  },
+  {
+    "id": "1563039874100109363",
+    "name": "PeeVPee",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5086460"
+      }
+    ],
+    "id_igdb": "416220",
+    "cover": "cocvp4",
+    "artwork": [
+      "ar6k9c",
+      "ar6r5l"
+    ],
+    "url": "peevpee"
+  },
+  {
+    "id": "1563039884053184553",
+    "name": "Rise of the Merchants",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5031210"
+      }
+    ],
+    "id_igdb": "415289",
+    "cover": "cocry0",
+    "artwork": [
+      "ar6i3j"
+    ],
+    "url": "rise-of-the-merchants"
+  },
+  {
+    "id": "1563039894798864495",
+    "name": "Here Comes the Horde",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5066010"
+      }
+    ],
+    "id_igdb": "420511",
+    "cover": "cod4fn",
+    "artwork": [
+      "ar6rwm"
+    ],
+    "url": "here-comes-the-horde"
+  },
+  {
+    "id": "1563039901077737622",
+    "name": "Lost Budapest",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5103710"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1563039907067330590",
+    "name": "Bad House",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3557870"
+      }
+    ],
+    "id_igdb": "418601",
+    "cover": "cocxhk",
+    "artwork": [
+      "ar6m7z"
+    ],
+    "url": "bad-house"
+  },
+  {
+    "id": "1563039929901129738",
+    "name": "The First Pixel",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5219900"
+      }
+    ],
+    "id_igdb": "423787",
+    "cover": "cod6tz",
+    "artwork": [
+      "ar6syq"
+    ],
+    "url": "the-first-pixel"
+  },
+  {
+    "id": "1563039939254423643",
+    "name": "Anomaly Inspector Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4663760"
+      }
+    ],
+    "id_igdb": "409646",
+    "cover": "cod3q2",
+    "artwork": [
+      "ar6ra4"
+    ],
+    "url": "anomaly-inspector-simulator"
+  },
+  {
+    "id": "1563039951505981493",
+    "name": "Life, the Universe, and Restaurants",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3746950"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1563039959076700171",
+    "name": "Never Wither",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3809080"
+      }
+    ],
+    "id_igdb": "386675",
+    "cover": "cobhb7",
+    "artwork": [
+      "ar556i"
+    ],
+    "url": "never-wither"
+  },
+  {
+    "id": "1563039970665570425",
+    "name": "Screw It!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5228680"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1563039966118813767",
+    "name": "Monsters & Memories",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "233978",
+    "cover": "co62g5",
+    "artwork": null,
+    "url": "monsters-and-memories--1"
+  },
+  {
+    "id": "1563039978546532404",
+    "name": "Clean Start",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "340093",
+    "cover": "ar5mn3",
+    "artwork": [
+      "ar5jr0",
+      "ar5jr3"
+    ],
+    "url": "clean-start"
   }
 ]
