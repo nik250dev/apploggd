@@ -6,6 +6,7 @@ using BackloggdMirror.Services.Input;
 using BackloggdMirror.Services.Platform.Linux;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
@@ -1872,6 +1873,120 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty]
     private bool _isSessionMarkedFinished;
 
+    /// <summary>Backloggd's note and tags for a log. Only laid out for now: nothing is sent or kept.</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsSessionExtrasRowOpen))]
+    private bool _isSessionNoteOpen;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsSessionExtrasRowOpen))]
+    private bool _isSessionTagsOpen;
+
+    /// <summary>The row of "Add note" / "Add tags" buttons, while either is still closed.</summary>
+    public bool IsSessionExtrasRowOpen => !(IsSessionNoteOpen && IsSessionTagsOpen);
+
+    [ObservableProperty]
+    private string _sessionNote = string.Empty;
+
+    public IReadOnlyList<NotePrivacyOption> NotePrivacyOptions => NotePrivacyOption.All;
+
+    [ObservableProperty]
+    private NotePrivacyOption _sessionNotePrivacy = NotePrivacyOption.All[0];
+
+    public const int MaxSessionTags = 8;
+
+    public ObservableCollection<string> SessionTags { get; } = new();
+
+    [ObservableProperty]
+    private string _sessionTagInput = string.Empty;
+
+    public bool HasSessionTags => SessionTags.Count > 0;
+    public bool IsSessionTagsFull => SessionTags.Count >= MaxSessionTags;
+    public string SessionTagCountText => $"{SessionTags.Count}/{MaxSessionTags}";
+    public string SessionTagWatermark => LocalizationService.Instance[IsSessionTagsFull ? "Session_TagsFullWatermark" : "Session_TagsWatermark"];
+
+    /// <summary>A tag turned away because there are already <see cref="MaxSessionTags"/>.</summary>
+    public event Action? SessionTagRejected;
+
+    [RelayCommand]
+    private void OpenSessionNote() => IsSessionNoteOpen = true;
+
+    [RelayCommand]
+    private void CloseSessionNote()
+    {
+        IsSessionNoteOpen = false;
+        SessionNote = string.Empty;
+        SessionNotePrivacy = NotePrivacyOption.All[0];
+    }
+
+    [RelayCommand]
+    private void OpenSessionTags() => IsSessionTagsOpen = true;
+
+    [RelayCommand]
+    private void CloseSessionTags()
+    {
+        IsSessionTagsOpen = false;
+        SessionTagInput = string.Empty;
+        SessionTags.Clear();
+        NotifySessionTagsChanged();
+    }
+
+    /// <summary>Turns what was typed into a tag; a repeated one is dropped quietly.</summary>
+    public void CommitSessionTagInput()
+    {
+        string tag = string.Join(' ', SessionTagInput.Split(' ', StringSplitOptions.RemoveEmptyEntries));
+        if (tag.Length == 0) return;
+
+        if (SessionTags.Any(t => string.Equals(t, tag, StringComparison.CurrentCultureIgnoreCase)))
+        {
+            SessionTagInput = string.Empty;
+            return;
+        }
+
+        if (IsSessionTagsFull)
+        {
+            SessionTagRejected?.Invoke();
+            return;
+        }
+
+        SessionTags.Add(tag);
+        SessionTagInput = string.Empty;
+        NotifySessionTagsChanged();
+    }
+
+    public void RemoveSessionTag(string tag)
+    {
+        if (SessionTags.Remove(tag)) NotifySessionTagsChanged();
+    }
+
+    // A comma ends a tag, as in Backloggd; pasting "a, b, c" adds the three.
+    partial void OnSessionTagInputChanged(string value)
+    {
+        int comma = value.LastIndexOf(',');
+        if (comma < 0) return;
+
+        foreach (string part in value[..comma].Split(','))
+        {
+            SessionTagInput = part;
+            CommitSessionTagInput();
+        }
+        SessionTagInput = value[(comma + 1)..].TrimStart();
+    }
+
+    private void NotifySessionTagsChanged()
+    {
+        OnPropertyChanged(nameof(HasSessionTags));
+        OnPropertyChanged(nameof(IsSessionTagsFull));
+        OnPropertyChanged(nameof(SessionTagCountText));
+        OnPropertyChanged(nameof(SessionTagWatermark));
+    }
+
+    private void ResetSessionExtras()
+    {
+        CloseSessionNote();
+        CloseSessionTags();
+    }
+
     [RelayCommand]
     private void DiscardSession()
     {
@@ -1934,6 +2049,7 @@ public partial class MainWindowViewModel : ViewModelBase
         _pendingSaveFailed = false;
         IsSessionMarkedStarted = false;
         IsSessionMarkedFinished = false;
+        ResetSessionExtras();
         IsBackgroundImageVisible = false;
         IsGameIdentified = true;
 

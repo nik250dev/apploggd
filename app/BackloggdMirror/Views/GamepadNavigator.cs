@@ -227,8 +227,10 @@ internal sealed class GamepadNavigator : IDisposable
         return candidates;
     }
 
+    // Text boxes only where marked: the session note and tags, which a frontend's on-screen keyboard can fill in.
     private static IEnumerable<Control> NavigableIn(Visual root) =>
-        root.GetVisualDescendants().OfType<Control>().Where(c => c is Button or ComboBox && IsNavigable(c));
+        root.GetVisualDescendants().OfType<Control>()
+            .Where(c => (c is Button or ComboBox || c is TextBox && c.Classes.Contains("gp-text")) && IsNavigable(c));
 
     // The search box and its button are left out: the picker opens with the search already run.
     private static bool IsNavigable(Control control) =>

@@ -7,6 +7,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="using:Avalonia.Controls"
         xmlns:services="using:BackloggdMirror.Services"
+        xmlns:ctl="using:BackloggdMirror.Views.Controls"
+        xmlns:sys="using:System"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="BackloggdMirror.Views.MainWindow"
         WindowStartupLocation="CenterScreen"
@@ -69,6 +71,8 @@
         <StreamGeometry x:Key="GamepadIconData">M7,6H17A6,6 0 0,1 23,12A6,6 0 0,1 17,18C15.22,18 13.63,17.23 12.53,16H11.47C10.37,17.23 8.78,18 7,18A6,6 0 0,1 1,12A6,6 0 0,1 7,6M6,9V11H4V13H6V15H8V13H10V11H8V9H6M15.5,12A1.5,1.5 0 0,0 14,13.5A1.5,1.5 0 0,0 15.5,15A1.5,1.5 0 0,0 17,13.5A1.5,1.5 0 0,0 15.5,12M18.5,9A1.5,1.5 0 0,0 17,10.5A1.5,1.5 0 0,0 18.5,12A1.5,1.5 0 0,0 20,10.5A1.5,1.5 0 0,0 18.5,9Z</StreamGeometry>
         <StreamGeometry x:Key="MarkStartedIconData">M8,5.14V19.14L19,12.14L8,5.14Z</StreamGeometry>
         <StreamGeometry x:Key="MarkFinishedIconData">M14.4,6L14,4H5V21H7V14H12.6L13,16H20V6H14.4Z</StreamGeometry>
+        <StreamGeometry x:Key="AddExtraIconData">M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z</StreamGeometry>
+        <StreamGeometry x:Key="FieldCloseIconData">M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z</StreamGeometry>
     </Window.Resources>
 
     <Window.Styles>
@@ -279,6 +283,299 @@
             <Setter Property="Opacity" Value="0.5"/>
         </Style>
 
+        <!-- "Add note" / "Add tags" in the session confirmation: a dashed pill, so it reads as something to add rather than a mark to toggle. -->
+        <Style Selector="Button.add-extra">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}"/>
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="Padding" Value="10,0,12,0"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <!-- The dash goes over the content, whose background would hide it. -->
+                    <Panel>
+                        <ContentPresenter Name="PART_ContentPresenter" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}"
+                                          Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Padding="{TemplateBinding Padding}"
+                                          Foreground="{TemplateBinding Foreground}" VerticalContentAlignment="Center"/>
+                        <Rectangle Name="PART_Dash" Stroke="{DynamicResource ButtonCancelBrush}" StrokeThickness="1" StrokeDashArray="4,3" RadiusX="14" RadiusY="14" IsHitTestVisible="False"/>
+                    </Panel>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <!-- Hover and press as on the mark chips: a light edge, no brand colour. -->
+        <Style Selector="Button.add-extra:pointerover /template/ Rectangle#PART_Dash">
+            <Setter Property="Stroke" Value="{DynamicResource ControlBorderBrush}"/>
+        </Style>
+        <Style Selector="Button.add-extra:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SurfaceDarkBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="Button.add-extra:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SidebarBorderBrush}"/>
+        </Style>
+        <Style Selector="Button.add-extra:disabled">
+            <Setter Property="Opacity" Value="0.5"/>
+        </Style>
+        <Style Selector="Button.add-extra PathIcon">
+            <Setter Property="Width" Value="10"/>
+            <Setter Property="Height" Value="10"/>
+            <Setter Property="RenderTransform" Value="rotate(0deg)"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.2" Easing="BackEaseOut"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Button.add-extra:pointerover PathIcon">
+            <Setter Property="RenderTransform" Value="rotate(90deg)"/>
+        </Style>
+
+        <!-- The x that takes a field away again. -->
+        <Style Selector="Button.field-close">
+            <Setter Property="Width" Value="22"/>
+            <Setter Property="Height" Value="22"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="CornerRadius" Value="11"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextSubtleBrush}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="Button.field-close PathIcon">
+            <Setter Property="Width" Value="9"/>
+            <Setter Property="Height" Value="9"/>
+        </Style>
+        <Style Selector="Button.field-close:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource PanelBackgroundBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="Button.field-close:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SidebarBorderBrush}"/>
+        </Style>
+
+        <Style Selector="TextBlock.field-label">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+
+        <!-- Tags: chips over a borderless input, all inside one box that lights up as a whole. -->
+        <Style Selector="Border.tag-box">
+            <Setter Property="Background" Value="{DynamicResource InputBackgroundBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource InputBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="Cursor" Value="IBeam"/>
+        </Style>
+        <!-- The hover edge of a TextBox, so the box matches the note above it. -->
+        <Style Selector="Border.tag-box:pointerover">
+            <Setter Property="BorderBrush" Value="{DynamicResource TextControlBorderBrushPointerOver}"/>
+        </Style>
+        <!-- "typing", set from code: focus-within would light the box up for a chip's x too. -->
+        <Style Selector="Border.tag-box.typing">
+            <Setter Property="BorderBrush" Value="{DynamicResource SecondaryInputFocusBorderBrush}"/>
+        </Style>
+        <Style Selector="Border.tag-chip">
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="Margin" Value="0,0,6,6"/>
+            <Setter Property="Padding" Value="9,0,3,0"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Background" Value="#2f3542"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource SidebarBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Cursor" Value="Arrow"/>
+            <Setter Property="RenderTransformOrigin" Value="50%,50%"/>
+        </Style>
+        <!-- A chip pops in once; RenderTransform is a ScaleTransform set on each chip, since KeyFrames cannot animate RenderTransform itself. -->
+        <Style Selector="Border.tag-chip">
+            <Style.Animations>
+                <Animation Duration="0:0:0.2" Easing="BackEaseOut">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="Opacity" Value="0"/>
+                        <Setter Property="ScaleTransform.ScaleX" Value="0.6"/>
+                        <Setter Property="ScaleTransform.ScaleY" Value="0.6"/>
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="Opacity" Value="1"/>
+                        <Setter Property="ScaleTransform.ScaleX" Value="1"/>
+                        <Setter Property="ScaleTransform.ScaleY" Value="1"/>
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+        <Style Selector="Button.tag-remove">
+            <Setter Property="Width" Value="18"/>
+            <Setter Property="Height" Value="18"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="CornerRadius" Value="9"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="Button.tag-remove PathIcon">
+            <Setter Property="Width" Value="8"/>
+            <Setter Property="Height" Value="8"/>
+        </Style>
+        <Style Selector="Button.tag-remove:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource ButtonCancelBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="TextBlock.tag-count">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextSubtleBrush}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="6,0,0,0"/>
+        </Style>
+        <Style Selector="TextBlock.tag-count.full">
+            <Setter Property="Foreground" Value="{DynamicResource BrandPrimaryLightBrush}"/>
+        </Style>
+        <!-- A ninth tag is turned away with a shake of the counter; two classes so each try restarts it. -->
+        <Style Selector="TextBlock.tag-count.shake-a, TextBlock.tag-count.shake-b">
+            <Style.Animations>
+                <Animation Duration="0:0:0.32">
+                    <KeyFrame Cue="0%"><Setter Property="TranslateTransform.X" Value="0"/></KeyFrame>
+                    <KeyFrame Cue="20%"><Setter Property="TranslateTransform.X" Value="-3"/></KeyFrame>
+                    <KeyFrame Cue="40%"><Setter Property="TranslateTransform.X" Value="3"/></KeyFrame>
+                    <KeyFrame Cue="60%"><Setter Property="TranslateTransform.X" Value="-2"/></KeyFrame>
+                    <KeyFrame Cue="80%"><Setter Property="TranslateTransform.X" Value="2"/></KeyFrame>
+                    <KeyFrame Cue="100%"><Setter Property="TranslateTransform.X" Value="0"/></KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+
+        <!-- The note's privacy: a pink link like Backloggd's that drops a menu of the four options.
+             A ComboBox underneath, so keyboard and controller reach it the way they reach the language picker. -->
+        <Style Selector="ComboBox.note-privacy">
+            <Setter Property="Foreground" Value="{DynamicResource BrandPrimaryLightBrush}"/>
+            <Setter Property="Padding" Value="0,2,4,2"/>
+            <Setter Property="MinHeight" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Panel>
+                        <!-- Not "Background": the theme's ComboBox states paint a border of that name. -->
+                        <Border Name="LinkBackground" Background="Transparent" CornerRadius="5" Padding="{TemplateBinding Padding}">
+                            <StackPanel Orientation="Horizontal" Spacing="5">
+                                <ContentPresenter Name="ContentPresenter" Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                                  Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" RenderTransformOrigin="0%,50%">
+                                    <ContentPresenter.RenderTransform>
+                                        <ScaleTransform/>
+                                    </ContentPresenter.RenderTransform>
+                                </ContentPresenter>
+                                <!-- Turned from code when the menu opens and closes. -->
+                                <Path Name="Chevron" Data="M6,9 L12,15 L18,9" Stroke="{TemplateBinding Foreground}" StrokeThickness="2.6" StrokeLineCap="Round" StrokeJoin="Round"
+                                      Width="10" Height="5" Stretch="Fill" VerticalAlignment="Center" RenderTransformOrigin="50%,50%">
+                                    <Path.RenderTransform>
+                                        <RotateTransform>
+                                            <RotateTransform.Transitions>
+                                                <Transitions>
+                                                    <DoubleTransition Property="Angle" Duration="0:0:0.2" Easing="CubicEaseOut"/>
+                                                </Transitions>
+                                            </RotateTransform.Transitions>
+                                        </RotateTransform>
+                                    </Path.RenderTransform>
+                                </Path>
+                            </StackPanel>
+                        </Border>
+                        <Popup Name="PART_Popup" IsOpen="{TemplateBinding IsDropDownOpen, Mode=TwoWay}" PlacementTarget="LinkBackground" Placement="BottomEdgeAlignedLeft"
+                               HorizontalOffset="-10" VerticalOffset="2" IsLightDismissEnabled="True" InheritsTransform="True" WindowManagerAddShadowHint="False">
+                            <!-- The margin leaves the popup room for the shadow. -->
+                            <Border Name="PopupBorder" Margin="0,0,12,14" Width="236" Padding="4" CornerRadius="9"
+                                    Background="{DynamicResource PanelBackgroundBrush}" BorderBrush="{DynamicResource SidebarBorderBrush}" BorderThickness="1"
+                                    BoxShadow="0 10 24 0 #8C000000" RenderTransformOrigin="0%,0%">
+                                <Border.RenderTransform>
+                                    <ScaleTransform/>
+                                </Border.RenderTransform>
+                                <ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}"/>
+                            </Border>
+                        </Popup>
+                    </Panel>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="ComboBox.note-privacy:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="ComboBox.note-privacy.open">
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="ComboBox.note-privacy:disabled">
+            <Setter Property="Opacity" Value="0.5"/>
+        </Style>
+        <Style Selector="ComboBox.note-privacy.open /template/ Border#PopupBorder">
+            <Style.Animations>
+                <Animation Duration="0:0:0.16" Easing="CubicEaseOut">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="Opacity" Value="0"/>
+                        <Setter Property="ScaleTransform.ScaleX" Value="0.96"/>
+                        <Setter Property="ScaleTransform.ScaleY" Value="0.96"/>
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="Opacity" Value="1"/>
+                        <Setter Property="ScaleTransform.ScaleX" Value="1"/>
+                        <Setter Property="ScaleTransform.ScaleY" Value="1"/>
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+        <!-- A new choice pops in; two classes so each change restarts it. -->
+        <Style Selector="ComboBox.note-privacy.pop-a /template/ ContentPresenter#ContentPresenter, ComboBox.note-privacy.pop-b /template/ ContentPresenter#ContentPresenter">
+            <Style.Animations>
+                <Animation Duration="0:0:0.28" Easing="BackEaseOut">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="ScaleTransform.ScaleX" Value="0.8"/>
+                        <Setter Property="ScaleTransform.ScaleY" Value="0.8"/>
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="ScaleTransform.ScaleX" Value="1"/>
+                        <Setter Property="ScaleTransform.ScaleY" Value="1"/>
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+        <Style Selector="ComboBox.note-privacy ComboBoxItem">
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="MinHeight" Value="0"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="ComboBox.note-privacy ComboBoxItem /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="ComboBox.note-privacy ComboBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter, ComboBox.note-privacy ComboBoxItem:selected:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#2f3542"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="ComboBox.note-privacy ComboBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="ComboBox.note-privacy ComboBoxItem:focus-visible /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#2f3542"/>
+        </Style>
+        <Style Selector="Path.privacy-icon">
+            <Setter Property="StrokeThickness" Value="2"/>
+            <Setter Property="StrokeLineCap" Value="Round"/>
+            <Setter Property="StrokeJoin" Value="Round"/>
+        </Style>
+        <Style Selector="ComboBox.note-privacy ComboBoxItem Path.privacy-icon.item">
+            <Setter Property="Stroke" Value="{DynamicResource IconLightBrush}"/>
+        </Style>
+        <Style Selector="ComboBox.note-privacy ComboBoxItem:selected Path.privacy-icon.item">
+            <Setter Property="Stroke" Value="{DynamicResource BrandPrimaryLightBrush}"/>
+        </Style>
+
         <!-- Action button inside a toast. Translucent white instead of a themed brush: it sits on the
              toast's own colour, which is not a surface from the theme. -->
         <Style Selector="Button.toast-action">
@@ -396,6 +693,41 @@
         </Style>
         <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
             <Setter Property="Background" Value="{DynamicResource InputHoverBackgroundBrush}"/>
+        </Style>
+        <!-- The note: the global TextBox look, without its fixed login-form height. -->
+        <Style Selector="TextBox.session-note">
+            <Setter Property="Height" Value="NaN"/>
+            <Setter Property="MinHeight" Value="72"/>
+            <Setter Property="MaxHeight" Value="112"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="AcceptsReturn" Value="True"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="VerticalContentAlignment" Value="Top"/>
+        </Style>
+        <Style Selector="TextBox.tag-input">
+            <Setter Property="Height" Value="NaN"/>
+            <Setter Property="MinHeight" Value="24"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="4,2"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <!-- The note keeps one background whatever the pointer or focus does. -->
+        <Style Selector="TextBox.session-note:pointerover /template/ Border#PART_BorderElement, TextBox.session-note:focus /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="{DynamicResource InputBackgroundBrush}"/>
+        </Style>
+        <!-- The placeholder only shows or hides: the theme brightens it on hover and focus. -->
+        <Style Selector="TextBox.session-note /template/ TextBlock#PART_Watermark, TextBox.session-note:pointerover /template/ TextBlock#PART_Watermark, TextBox.session-note:focus /template/ TextBlock#PART_Watermark, TextBox.tag-input /template/ TextBlock#PART_Watermark, TextBox.tag-input:pointerover /template/ TextBlock#PART_Watermark, TextBox.tag-input:focus /template/ TextBlock#PART_Watermark">
+            <Setter Property="Foreground" Value="{DynamicResource TextSubtleBrush}"/>
+            <Setter Property="Opacity" Value="1"/>
+        </Style>
+        <!-- After the TextBox states above, which it has to beat: the tag box draws the edge for the input inside it. -->
+        <Style Selector="TextBox.tag-input /template/ Border#PART_BorderElement, TextBox.tag-input:focus /template/ Border#PART_BorderElement, TextBox.tag-input:pointerover /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
         </Style>
 
         <!-- The modal footer button styles (discard-btn / save-btn) live in App.axaml so they can
@@ -535,6 +867,24 @@
         </Style>
         <Style Selector="Window.gamepad ComboBoxItem:focus /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="BoxShadow" Value="inset 0 0 0 2 #FFFFFF"/>
+        </Style>
+        <!-- Session note and tags: the dash makes way for the edge, the fields get it outside, the privacy link gets the link pill. -->
+        <Style Selector="Window.gamepad Button.add-extra:focus /template/ Rectangle#PART_Dash">
+            <Setter Property="Stroke" Value="Transparent"/>
+        </Style>
+        <Style Selector="Window.gamepad TextBox.session-note:focus /template/ Border#PART_BorderElement, Window.gamepad Border.tag-box.typing">
+            <Setter Property="BoxShadow" Value="0 0 0 2 #FFFFFF"/>
+        </Style>
+        <Style Selector="Window.gamepad ComboBox.note-privacy">
+            <Setter Property="Padding" Value="4,2,6,2"/>
+            <Setter Property="Margin" Value="-4,0,0,0"/>
+        </Style>
+        <Style Selector="Window.gamepad ComboBox.note-privacy:focus /template/ Border#LinkBackground">
+            <Setter Property="Background" Value="#24FFFFFF"/>
+            <Setter Property="BoxShadow" Value="none"/>
+        </Style>
+        <Style Selector="Window.gamepad ComboBox.note-privacy:focus">
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
         </Style>
         <!-- Press feedback; declared last to beat the focus zoom. -->
         <Style Selector="Window.gamepad Button.gp-press">
@@ -1681,7 +2031,7 @@
                     BoxShadow="0 0 50 0 #EA377A" BorderBrush="{DynamicResource BrandPrimaryBrush}" BorderThickness="1"
                     IsVisible="{Binding !IsGameSelectorVisible}">
                 <Grid RowDefinitions="*, Auto">
-                    <Grid Grid.Row="0" RowDefinitions="Auto, *" Margin="20">
+                    <Grid Grid.Row="0" RowDefinitions="Auto, *, Auto" Margin="20">
                         <Grid Grid.Row="0" Margin="0,0,0,20">
                         <TextBlock Text="{Binding [Session_ConfirmTitle], Source={x:Static services:LocalizationService.Instance}}" FontSize="20" Foreground="{DynamicResource TextPrimaryBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                         
@@ -1708,7 +2058,7 @@
                         </Panel>
                     </Grid>
                     
-                    <Grid Grid.Row="1" ColumnDefinitions="100, *" Margin="0,0,0,20">
+                    <Grid Grid.Row="1" ColumnDefinitions="100, *" >
                         <!-- Game Cover (Clickable). The outer border carries the controller focus edge. -->
                         <Border x:Name="SessionCoverHost" Grid.Column="0" Classes="gp-cover-host" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="4">
                         <Border BorderBrush="#30394c" BorderThickness="1" CornerRadius="4" ClipToBounds="True">
@@ -1822,7 +2172,131 @@
                             </WrapPanel>
                         </StackPanel>
                     </Grid>
-                    
+
+                    <!-- Note and tags, as Backloggd keeps them per log. Each opens in place from its dashed button. -->
+                    <StackPanel Grid.Row="2">
+                        <ctl:RevealPanel IsOpen="{Binding IsSessionExtrasRowOpen}">
+                            <StackPanel>
+                                <Border Height="1" Background="{DynamicResource SeparatorBrush}" Margin="0,16,0,12"/>
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <Button x:Name="SessionAddNoteButton" Classes="add-extra" Command="{Binding OpenSessionNoteCommand}"
+                                            IsVisible="{Binding !IsSessionNoteOpen}" IsEnabled="{Binding AreButtonsEnabled}">
+                                        <StackPanel Orientation="Horizontal" Spacing="6">
+                                            <PathIcon Data="{StaticResource AddExtraIconData}"/>
+                                            <TextBlock Text="{Binding [Session_AddNote], Source={x:Static services:LocalizationService.Instance}}" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button x:Name="SessionAddTagsButton" Classes="add-extra" Command="{Binding OpenSessionTagsCommand}"
+                                            IsVisible="{Binding !IsSessionTagsOpen}" IsEnabled="{Binding AreButtonsEnabled}">
+                                        <StackPanel Orientation="Horizontal" Spacing="6">
+                                            <PathIcon Data="{StaticResource AddExtraIconData}"/>
+                                            <TextBlock Text="{Binding [Session_AddTags], Source={x:Static services:LocalizationService.Instance}}" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+                            </StackPanel>
+                        </ctl:RevealPanel>
+
+                        <ctl:RevealPanel x:Name="SessionNotePanel" IsOpen="{Binding IsSessionNoteOpen}">
+                            <StackPanel Margin="0,16,0,0">
+                                <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,6">
+                                    <TextBlock Classes="field-label" Text="{Binding [Session_Note], Source={x:Static services:LocalizationService.Instance}}"/>
+                                    <Button Grid.Column="1" Classes="field-close gp-icon" Command="{Binding CloseSessionNoteCommand}" IsEnabled="{Binding AreButtonsEnabled}"
+                                            ToolTip.Tip="{Binding [Session_RemoveNote], Source={x:Static services:LocalizationService.Instance}}"
+                                            AutomationProperties.Name="{Binding [Session_RemoveNote], Source={x:Static services:LocalizationService.Instance}}">
+                                        <PathIcon Data="{StaticResource FieldCloseIconData}"/>
+                                    </Button>
+                                </Grid>
+                                <TextBox x:Name="SessionNoteBox" Classes="session-note gp-text" Text="{Binding SessionNote}" IsEnabled="{Binding AreButtonsEnabled}"
+                                         Watermark="{Binding [Session_NoteWatermark], Source={x:Static services:LocalizationService.Instance}}"/>
+                                <ComboBox x:Name="SessionNotePrivacyBox" Classes="note-privacy" Margin="0,6,0,0"
+                                          ItemsSource="{Binding NotePrivacyOptions}" SelectedItem="{Binding SessionNotePrivacy}" IsEnabled="{Binding AreButtonsEnabled}"
+                                          SelectionChanged="OnNotePrivacyChanged" DropDownOpened="OnNotePrivacyDropDownOpened" DropDownClosed="OnNotePrivacyDropDownClosed"
+                                          AutomationProperties.Name="{Binding [Session_NotePrivacy], Source={x:Static services:LocalizationService.Instance}}">
+                                    <ComboBox.SelectionBoxItemTemplate>
+                                        <DataTemplate x:DataType="vm:NotePrivacyOption">
+                                            <StackPanel Orientation="Horizontal" Spacing="5">
+                                                <Viewbox Width="13" Height="13" VerticalAlignment="Center">
+                                                    <Canvas Width="24" Height="24">
+                                                        <Path Classes="privacy-icon" Data="{Binding Icon}" StrokeThickness="2.4" Stroke="{Binding $parent[ContentPresenter].Foreground}"/>
+                                                    </Canvas>
+                                                </Viewbox>
+                                                <TextBlock Text="{Binding Label}" FontSize="12" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.SelectionBoxItemTemplate>
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate x:DataType="vm:NotePrivacyOption">
+                                            <Grid ColumnDefinitions="Auto, *, Auto">
+                                                <Viewbox Width="15" Height="15" Margin="0,0,10,0" VerticalAlignment="Center">
+                                                    <Canvas Width="24" Height="24">
+                                                        <Path Classes="privacy-icon item" Data="{Binding Icon}" StrokeThickness="1.8"/>
+                                                    </Canvas>
+                                                </Viewbox>
+                                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                                    <TextBlock Text="{Binding Label}" FontSize="12"/>
+                                                    <TextBlock Text="{Binding Description}" FontSize="10.5" Foreground="{DynamicResource TextSubtleBrush}"/>
+                                                </StackPanel>
+                                                <Viewbox Grid.Column="2" Width="12" Height="12" Margin="8,0,0,0" VerticalAlignment="Center"
+                                                         IsVisible="{Binding $parent[ComboBoxItem].IsSelected}">
+                                                    <Canvas Width="24" Height="24">
+                                                        <Path Classes="privacy-icon" Data="M20,6 L9,17 L4,12" StrokeThickness="3" Stroke="{DynamicResource BrandPrimaryLightBrush}"/>
+                                                    </Canvas>
+                                                </Viewbox>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </StackPanel>
+                        </ctl:RevealPanel>
+
+                        <ctl:RevealPanel x:Name="SessionTagsPanel" IsOpen="{Binding IsSessionTagsOpen}">
+                            <StackPanel Margin="0,16,0,0">
+                                <Grid ColumnDefinitions="Auto, *, Auto" Margin="0,0,0,6">
+                                    <TextBlock Classes="field-label" Text="{Binding [Session_Tags], Source={x:Static services:LocalizationService.Instance}}"/>
+                                    <TextBlock x:Name="SessionTagCount" Grid.Column="1" Classes="tag-count" Classes.full="{Binding IsSessionTagsFull}" Text="{Binding SessionTagCountText}">
+                                        <TextBlock.RenderTransform>
+                                            <TranslateTransform/>
+                                        </TextBlock.RenderTransform>
+                                    </TextBlock>
+                                    <Button Grid.Column="2" Classes="field-close gp-icon" Command="{Binding CloseSessionTagsCommand}" IsEnabled="{Binding AreButtonsEnabled}"
+                                            ToolTip.Tip="{Binding [Session_RemoveTags], Source={x:Static services:LocalizationService.Instance}}"
+                                            AutomationProperties.Name="{Binding [Session_RemoveTags], Source={x:Static services:LocalizationService.Instance}}">
+                                        <PathIcon Data="{StaticResource FieldCloseIconData}"/>
+                                    </Button>
+                                </Grid>
+                                <Border x:Name="SessionTagBox" Classes="tag-box" PointerPressed="OnTagBoxPointerPressed">
+                                    <StackPanel>
+                                        <ItemsControl x:Name="SessionTagsList" ItemsSource="{Binding SessionTags}" IsVisible="{Binding HasSessionTags}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel/>
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate x:DataType="sys:String">
+                                                    <Border Classes="tag-chip">
+                                                        <Border.RenderTransform>
+                                                            <ScaleTransform/>
+                                                        </Border.RenderTransform>
+                                                        <StackPanel Orientation="Horizontal" Spacing="2">
+                                                            <TextBlock Text="{Binding}" FontSize="12" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center" MaxWidth="200" TextTrimming="CharacterEllipsis"/>
+                                                            <Button Classes="tag-remove gp-icon" Click="OnSessionTagRemoveClick"
+                                                                    AutomationProperties.Name="{Binding [Session_RemoveTag], Source={x:Static services:LocalizationService.Instance}}">
+                                                                <PathIcon Data="{StaticResource FieldCloseIconData}"/>
+                                                            </Button>
+                                                        </StackPanel>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                        <TextBox x:Name="SessionTagInputBox" Classes="tag-input gp-text" GotFocus="OnSessionTagInputFocusChanged" LostFocus="OnSessionTagInputFocusChanged" Text="{Binding SessionTagInput}" MaxLength="32" IsEnabled="{Binding AreButtonsEnabled}"
+                                                 Watermark="{Binding SessionTagWatermark}"/>
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+                        </ctl:RevealPanel>
+                    </StackPanel>
                     </Grid>
 
                     <!-- Buttons Footer -->
