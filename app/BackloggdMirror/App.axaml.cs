@@ -53,6 +53,7 @@ public partial class App : Application
             {
                 _ = LinuxTrayHost.StartAsync(logger);
                 LinuxDesktopEntry.Install(logger);
+                LinuxSessionClientName.Apply(logger);
             }
 
             // Explicitly load settings here to avoid infinite recursion in constructor

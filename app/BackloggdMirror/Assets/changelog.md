@@ -5,6 +5,7 @@
 ### Fixed
 
 - The window no longer jumps to the front while saving a session
+- The app no longer blocks shutting down or logging out while it is in the tray
 
 ## 1.2.0 — 2026-10-08
 
