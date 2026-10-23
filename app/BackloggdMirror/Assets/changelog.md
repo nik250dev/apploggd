@@ -5,6 +5,7 @@
 ### Added
 
 - Support for Steam Deck
+- Notice when the data folder cannot be read or written
 
 ### Changed
 

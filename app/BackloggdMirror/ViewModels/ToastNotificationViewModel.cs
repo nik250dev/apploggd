@@ -16,6 +16,11 @@ public partial class ToastNotificationViewModel : ViewModelBase
     [ObservableProperty]
     private string _message;
 
+    /// <summary>Optional secondary line in smaller text, such as a path.</summary>
+    public string? Detail { get; }
+
+    public bool HasDetail => !string.IsNullOrEmpty(Detail);
+
     [ObservableProperty]
     private ToastType _type;
 
@@ -35,9 +40,10 @@ public partial class ToastNotificationViewModel : ViewModelBase
     private DateTime _startTime;
 
     public ToastNotificationViewModel(string message, ToastType type, Action<ToastNotificationViewModel> onDismiss, TimeSpan? duration = null,
-                                      string? actionText = null, Action? action = null)
+                                      string? actionText = null, Action? action = null, string? detail = null)
     {
         Message = message;
+        Detail = detail;
         Type = type;
         _onDismiss = onDismiss;
         _action = action;

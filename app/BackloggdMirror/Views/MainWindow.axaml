@@ -1754,9 +1754,15 @@
                                           Margin="0,0,15,0"/>
                                           
                                 <!-- Message -->
-                                <TextBlock Grid.Column="1" Text="{Binding Message}" 
-                                           Foreground="{Binding Type, Converter={StaticResource ToastTypeToForegroundConverter}}" VerticalAlignment="Center" 
-                                           TextWrapping="Wrap" FontSize="14" FontWeight="Medium"/>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="6">
+                                    <TextBlock Text="{Binding Message}"
+                                               Foreground="{Binding Type, Converter={StaticResource ToastTypeToForegroundConverter}}"
+                                               TextWrapping="Wrap" FontSize="14" FontWeight="Medium"/>
+                                    <!-- Smaller so a path usually fits on one line. -->
+                                    <TextBlock Text="{Binding Detail}" IsVisible="{Binding HasDetail}"
+                                               Foreground="{Binding Type, Converter={StaticResource ToastTypeToForegroundConverter}}"
+                                               Opacity="0.85" TextWrapping="Wrap" FontSize="11"/>
+                                </StackPanel>
                                            
                                 <!-- Dismiss Button -->
                                 <Button Grid.Column="2" Command="{Binding DismissCommand}"

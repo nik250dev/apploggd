@@ -208,6 +208,7 @@ public partial class MainWindow : Window
         if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
         {
             SubscribeToEvents(vm);
+            vm.OnWindowOpened();
         }
     }
 
