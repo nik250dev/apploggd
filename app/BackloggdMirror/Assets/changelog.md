@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Fixed
+
+- The window no longer jumps to the front while saving a session
+
 ## 1.2.0 — 2026-10-08
 
 ### Added

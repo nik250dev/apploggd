@@ -67,6 +67,9 @@ public partial class MainWindow : Window
         InitializeTrayIcons(); // Pre-render icons
         InitializeTrayIcon();
 
+        AddHandler(PointerPressedEvent, StopHoldingFront, Avalonia.Interactivity.RoutingStrategies.Tunnel, handledEventsToo: true);
+        AddHandler(KeyDownEvent, StopHoldingFront, Avalonia.Interactivity.RoutingStrategies.Tunnel, handledEventsToo: true);
+
         if (OperatingSystem.IsLinux())
         {
             LinuxTrayHost.AvailabilityChanged += OnLinuxTrayAvailabilityChanged;
@@ -329,10 +332,13 @@ public partial class MainWindow : Window
         _holdFrontTimer.Start();
     }
 
+    // A click or key press here means the user is at the desktop, so whatever takes the foreground next is their choice.
+    private void StopHoldingFront(object? sender, Avalonia.Interactivity.RoutedEventArgs e) => _holdFrontTimer?.Stop();
+
     private void OnHoldFrontTick(object? sender, EventArgs e)
     {
-        // Minimized or sent to the tray by the user: they have seen it and chose to leave it.
-        bool stillWanted = DataContext is BackloggdMirror.ViewModels.MainWindowViewModel { IsSessionConfirmationVisible: true }
+        // Minimized, sent to the tray or already saving: the user has seen it and chose to leave it.
+        bool stillWanted = DataContext is BackloggdMirror.ViewModels.MainWindowViewModel { IsSessionConfirmationVisible: true, IsSavingSession: false }
             && DateTime.UtcNow < _holdFrontUntil
             && IsVisible
             && WindowState != WindowState.Minimized;
