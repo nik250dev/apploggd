@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Changed
+
+- Home status panel redesigned
+
 ### Fixed
 
 - The window no longer jumps to the front while saving a session

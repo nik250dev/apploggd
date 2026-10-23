@@ -435,7 +435,7 @@ internal sealed class GamepadNavigator : IDisposable
             else if (peer is IInvokeProvider invoker) invoker.Invoke();
             // Pending decision: after Save, Discard or Later, maybe hide to the tray so the frontend regains the foreground.
 
-            // Pause/Resume, a discarded pending row and the like take the focused button away with them.
+            // A discarded pending row and the like take the focused button away with them.
             RestoreFocusLater(spot);
         }, TimeSpan.FromMilliseconds(90));
     }
