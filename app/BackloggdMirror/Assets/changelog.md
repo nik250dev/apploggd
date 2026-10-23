@@ -6,6 +6,7 @@
 
 - The window no longer jumps to the front while saving a session
 - The app no longer blocks shutting down or logging out while it is in the tray
+- The app no longer logs in with less than 50 MB of free disk space, where saving sessions could fail
 
 ## 1.2.0 — 2026-10-08
 
