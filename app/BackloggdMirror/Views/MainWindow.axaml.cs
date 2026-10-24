@@ -68,8 +68,6 @@ public partial class MainWindow : Window
         _logger = logger;
 
         InitializeComponent();
-        // Tunnel: the TextBox takes Backspace for itself.
-        SessionTagInputBox.AddHandler(KeyDownEvent, OnSessionTagInputKeyDown, Avalonia.Interactivity.RoutingStrategies.Tunnel);
         AddHandler(PointerPressedEvent, (_, _) => _lastInputWasPointer = true, Avalonia.Interactivity.RoutingStrategies.Tunnel, handledEventsToo: true);
         AddHandler(KeyDownEvent, (_, _) => _lastInputWasPointer = false, Avalonia.Interactivity.RoutingStrategies.Tunnel, handledEventsToo: true);
         UpdateAnimationsEnabled();
@@ -244,9 +242,6 @@ public partial class MainWindow : Window
         vm.PropertyChanged -= OnViewModelPropertyChanged;
         vm.PropertyChanged += OnViewModelPropertyChanged;
 
-        vm.SessionTagRejected -= ShakeSessionTagCount;
-        vm.SessionTagRejected += ShakeSessionTagCount;
-
         // Init/Sync initial state
         UpdateTrayMenuState(vm);
     }
@@ -329,83 +324,84 @@ public partial class MainWindow : Window
         }
         else if (e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsSessionNoteOpen) && sender is BackloggdMirror.ViewModels.MainWindowViewModel noteVm)
         {
-            OnSessionExtraToggled(noteVm, noteVm.IsSessionNoteOpen, SessionNotePanel, SessionNoteBox, SessionAddNoteButton);
+            OnSessionExtraToggled(noteVm, noteVm.IsSessionNoteOpen, SessionNotePanel, () => SessionNoteBox, SessionAddNoteButton);
         }
         else if (e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsSessionTagsOpen) && sender is BackloggdMirror.ViewModels.MainWindowViewModel tagsVm)
         {
-            OnSessionExtraToggled(tagsVm, tagsVm.IsSessionTagsOpen, SessionTagsPanel, SessionTagInputBox, SessionAddTagsButton);
+            OnSessionExtraToggled(tagsVm, tagsVm.IsSessionTagsOpen, SessionTagsPanel, () => TagInputIn(SessionTagsPanel), SessionAddTagsButton);
         }
     }
 
     /// <summary>An opened field takes the focus; a removed one hands it back to its button, if the focus was inside.</summary>
-    private void OnSessionExtraToggled(BackloggdMirror.ViewModels.MainWindowViewModel vm, bool opened, Views.Controls.RevealPanel panel, Control field, Button addButton)
+    private void OnSessionExtraToggled(BackloggdMirror.ViewModels.MainWindowViewModel vm, bool opened, Views.Controls.RevealPanel panel, Func<Control?> field, Button addButton)
     {
         if (!vm.IsSessionConfirmationVisible) return;
 
         bool focusInside = FocusManager?.GetFocusedElement() is Visual focused && panel.IsVisualAncestorOf(focused);
         Dispatcher.UIThread.Post(() =>
         {
-            if (opened) FocusSessionControl(field);
+            if (opened) FocusSessionControl(field());
             else if (focusInside || FocusManager?.GetFocusedElement() == null) FocusSessionControl(addButton);
         }, DispatcherPriority.Background);
     }
 
     // Directional under the controller, so the navigator's edge lands on it as on any other control.
-    private void FocusSessionControl(Control control)
+    private void FocusSessionControl(Control? control)
     {
-        if (!control.IsEffectivelyVisible || !control.IsEffectivelyEnabled) return;
+        if (control == null || !control.IsEffectivelyVisible || !control.IsEffectivelyEnabled) return;
         control.Focus(_gamepadNavigator?.IsControllerMode == true ? Avalonia.Input.NavigationMethod.Directional : Avalonia.Input.NavigationMethod.Unspecified);
     }
 
-    private void OnSessionTagInputKeyDown(object? sender, Avalonia.Input.KeyEventArgs e)
-    {
-        if (DataContext is not BackloggdMirror.ViewModels.MainWindowViewModel vm) return;
-
-        if (e.Key == Avalonia.Input.Key.Enter)
-        {
-            vm.CommitSessionTagInput();
-            e.Handled = true;
-        }
-        else if (e.Key == Avalonia.Input.Key.Back && string.IsNullOrEmpty(SessionTagInputBox.Text) && vm.SessionTags.Count > 0)
-        {
-            vm.RemoveSessionTag(vm.SessionTags[^1]);
-            e.Handled = true;
-        }
-    }
-
-    private void OnSessionTagInputFocusChanged(object? sender, Avalonia.Interactivity.RoutedEventArgs e) =>
-        SessionTagBox.Classes.Set("typing", SessionTagInputBox.IsFocused);
+    private static Views.Controls.TagInputBox? TagInputIn(Visual? scope) =>
+        scope?.GetVisualDescendants().OfType<Views.Controls.TagInputBox>().FirstOrDefault();
 
     // A click anywhere in the box, not just on the input line, starts typing.
     private void OnTagBoxPointerPressed(object? sender, Avalonia.Input.PointerPressedEventArgs e)
     {
         if (e.Source is Visual source && source.FindAncestorOfType<Button>(includeSelf: true) != null) return;
-        SessionTagInputBox.Focus();
+        TagInputIn(sender as Visual)?.Focus();
     }
 
     /// <summary>With the pointer the focus goes back to typing; from the keyboard or a controller, to the chip that takes the removed one's place.</summary>
     private void OnSessionTagRemoveClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        if (DataContext is not BackloggdMirror.ViewModels.MainWindowViewModel vm || (sender as Control)?.DataContext is not string tag) return;
+        if ((sender as Control)?.DataContext is not string tag
+            || (sender as Visual)?.FindAncestorOfType<ItemsControl>() is not { DataContext: BackloggdMirror.ViewModels.SessionExtrasViewModel extras } list) return;
 
-        int index = vm.SessionTags.IndexOf(tag);
-        vm.RemoveSessionTag(tag);
+        var tagBox = list.GetVisualAncestors().OfType<Border>().FirstOrDefault(b => b.Classes.Contains("tag-box"));
+        int index = extras.Tags.IndexOf(tag);
+        extras.RemoveTag(tag);
 
         Dispatcher.UIThread.Post(() =>
         {
-            int count = vm.SessionTags.Count;
+            int count = extras.Tags.Count;
             bool byPointer = _lastInputWasPointer && _gamepadNavigator?.IsControllerMode != true;
             Control? next = count == 0 || byPointer ? null
-                : SessionTagsList.ContainerFromIndex(Math.Min(index, count - 1))?.GetVisualDescendants().OfType<Button>().FirstOrDefault();
-            FocusSessionControl(next ?? SessionTagInputBox);
+                : list.ContainerFromIndex(Math.Min(index, count - 1))?.GetVisualDescendants().OfType<Button>().FirstOrDefault();
+            FocusSessionControl(next ?? TagInputIn(tagBox));
         }, DispatcherPriority.Background);
     }
 
-    private void ShakeSessionTagCount()
+    private static Border? PendingCardOf(object? sender) =>
+        (sender as Visual)?.GetVisualAncestors().OfType<Border>().FirstOrDefault(b => b.Classes.Contains("pending-card"));
+
+    // The note takes the focus once the editor is in place.
+    private void OnPendingExtrasOpenClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        bool wasA = SessionTagCount.Classes.Contains("shake-a");
-        SessionTagCount.Classes.Set("shake-a", !wasA);
-        SessionTagCount.Classes.Set("shake-b", wasA);
+        var card = PendingCardOf(sender);
+        Dispatcher.UIThread.Post(() =>
+            FocusSessionControl(card?.GetVisualDescendants().OfType<TextBox>().FirstOrDefault(t => t.Classes.Contains("session-note"))),
+            DispatcherPriority.Background);
+    }
+
+    // Done or Cancel take their buttons away; the focus goes to what opens the editor again.
+    private void OnPendingExtrasClosedClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        var card = PendingCardOf(sender);
+        Dispatcher.UIThread.Post(() =>
+            FocusSessionControl(card?.GetVisualDescendants().OfType<Button>()
+                .FirstOrDefault(b => (b.Classes.Contains("extras-summary") || b.Classes.Contains("add-extra")) && b.IsEffectivelyVisible)),
+            DispatcherPriority.Background);
     }
 
     // Up when it would spill past the window: a popup is only kept on the screen, and under Gamescope it is drawn inside the window.

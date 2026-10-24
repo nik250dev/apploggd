@@ -3,6 +3,7 @@ using Avalonia.Media.Imaging;
 using BackloggdMirror.Models;
 using BackloggdMirror.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace BackloggdMirror.ViewModels;
 
@@ -35,6 +36,38 @@ public partial class PendingSessionViewModel : ViewModelBase
         {
             if (SetProperty(Session.MarkedFinished, value, Session, (s, v) => s.MarkedFinished = v)) _marksChanged?.Invoke(this);
         }
+    }
+
+    /// <summary>Note and tags for the log. Only laid out for now: kept while the app runs, never saved or sent.</summary>
+    public SessionExtrasViewModel Extras { get; } = new();
+
+    private SessionExtrasViewModel.Snapshot? _extrasBeforeEdit;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsAddExtrasVisible))]
+    [NotifyPropertyChangedFor(nameof(IsExtrasSummaryVisible))]
+    private bool _isEditingExtras;
+
+    public bool IsAddExtrasVisible => !IsEditingExtras && Extras.IsEmpty;
+
+    public bool IsExtrasSummaryVisible => !IsEditingExtras && !Extras.IsEmpty;
+
+    [RelayCommand]
+    private void OpenExtras()
+    {
+        _extrasBeforeEdit = Extras.TakeSnapshot();
+        IsEditingExtras = true;
+    }
+
+    [RelayCommand]
+    private void CloseExtras() => IsEditingExtras = false;
+
+    /// <summary>Puts back what the note and tags were when the editor opened.</summary>
+    [RelayCommand]
+    private void CancelExtras()
+    {
+        if (_extrasBeforeEdit != null) Extras.Restore(_extrasBeforeEdit);
+        IsEditingExtras = false;
     }
 
     [ObservableProperty]

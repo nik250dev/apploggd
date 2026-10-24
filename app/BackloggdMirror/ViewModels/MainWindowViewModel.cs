@@ -1885,28 +1885,8 @@ public partial class MainWindowViewModel : ViewModelBase
     /// <summary>The row of "Add note" / "Add tags" buttons, while either is still closed.</summary>
     public bool IsSessionExtrasRowOpen => !(IsSessionNoteOpen && IsSessionTagsOpen);
 
-    [ObservableProperty]
-    private string _sessionNote = string.Empty;
-
-    public IReadOnlyList<NotePrivacyOption> NotePrivacyOptions => NotePrivacyOption.All;
-
-    [ObservableProperty]
-    private NotePrivacyOption _sessionNotePrivacy = NotePrivacyOption.All[0];
-
-    public const int MaxSessionTags = 8;
-
-    public ObservableCollection<string> SessionTags { get; } = new();
-
-    [ObservableProperty]
-    private string _sessionTagInput = string.Empty;
-
-    public bool HasSessionTags => SessionTags.Count > 0;
-    public bool IsSessionTagsFull => SessionTags.Count >= MaxSessionTags;
-    public string SessionTagCountText => $"{SessionTags.Count}/{MaxSessionTags}";
-    public string SessionTagWatermark => LocalizationService.Instance[IsSessionTagsFull ? "Session_TagsFullWatermark" : "Session_TagsWatermark"];
-
-    /// <summary>A tag turned away because there are already <see cref="MaxSessionTags"/>.</summary>
-    public event Action? SessionTagRejected;
+    /// <summary>The note and tags typed in the confirmation.</summary>
+    public SessionExtrasViewModel SessionExtras { get; } = new();
 
     [RelayCommand]
     private void OpenSessionNote() => IsSessionNoteOpen = true;
@@ -1915,8 +1895,7 @@ public partial class MainWindowViewModel : ViewModelBase
     private void CloseSessionNote()
     {
         IsSessionNoteOpen = false;
-        SessionNote = string.Empty;
-        SessionNotePrivacy = NotePrivacyOption.All[0];
+        SessionExtras.ClearNote();
     }
 
     [RelayCommand]
@@ -1926,59 +1905,7 @@ public partial class MainWindowViewModel : ViewModelBase
     private void CloseSessionTags()
     {
         IsSessionTagsOpen = false;
-        SessionTagInput = string.Empty;
-        SessionTags.Clear();
-        NotifySessionTagsChanged();
-    }
-
-    /// <summary>Turns what was typed into a tag; a repeated one is dropped quietly.</summary>
-    public void CommitSessionTagInput()
-    {
-        string tag = string.Join(' ', SessionTagInput.Split(' ', StringSplitOptions.RemoveEmptyEntries));
-        if (tag.Length == 0) return;
-
-        if (SessionTags.Any(t => string.Equals(t, tag, StringComparison.CurrentCultureIgnoreCase)))
-        {
-            SessionTagInput = string.Empty;
-            return;
-        }
-
-        if (IsSessionTagsFull)
-        {
-            SessionTagRejected?.Invoke();
-            return;
-        }
-
-        SessionTags.Add(tag);
-        SessionTagInput = string.Empty;
-        NotifySessionTagsChanged();
-    }
-
-    public void RemoveSessionTag(string tag)
-    {
-        if (SessionTags.Remove(tag)) NotifySessionTagsChanged();
-    }
-
-    // A comma ends a tag, as in Backloggd; pasting "a, b, c" adds the three.
-    partial void OnSessionTagInputChanged(string value)
-    {
-        int comma = value.LastIndexOf(',');
-        if (comma < 0) return;
-
-        foreach (string part in value[..comma].Split(','))
-        {
-            SessionTagInput = part;
-            CommitSessionTagInput();
-        }
-        SessionTagInput = value[(comma + 1)..].TrimStart();
-    }
-
-    private void NotifySessionTagsChanged()
-    {
-        OnPropertyChanged(nameof(HasSessionTags));
-        OnPropertyChanged(nameof(IsSessionTagsFull));
-        OnPropertyChanged(nameof(SessionTagCountText));
-        OnPropertyChanged(nameof(SessionTagWatermark));
+        SessionExtras.ClearTags();
     }
 
     private void ResetSessionExtras()

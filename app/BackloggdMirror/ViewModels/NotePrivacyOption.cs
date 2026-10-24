@@ -35,6 +35,8 @@ public sealed class NotePrivacyOption : ObservableObject
 
     public NotePrivacy Value { get; }
 
+    public bool IsDefault => Value == NotePrivacy.Default;
+
     /// <summary>A 24x24 stroke icon.</summary>
     public Geometry Icon { get; }
 

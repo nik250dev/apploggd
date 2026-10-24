@@ -22,6 +22,70 @@
 
     <Window.Resources>
         <conv:ToastTypeToBrushConverter x:Key="ToastTypeToBrushConverter"/>
+
+        <!-- The note's privacy menu, shared by the confirmation and the pending rows. -->
+        <DataTemplate x:Key="NotePrivacySelectionTemplate" x:DataType="vm:NotePrivacyOption">
+            <StackPanel Orientation="Horizontal" Spacing="5">
+                <Viewbox Width="13" Height="13" VerticalAlignment="Center">
+                    <Canvas Width="24" Height="24">
+                        <Path Classes="privacy-icon" Data="{Binding Icon}" StrokeThickness="2.4" Stroke="{Binding $parent[ContentPresenter].Foreground}"/>
+                    </Canvas>
+                </Viewbox>
+                <TextBlock Text="{Binding Label}" FontSize="12" FontWeight="SemiBold" VerticalAlignment="Center"/>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="NotePrivacyItemTemplate" x:DataType="vm:NotePrivacyOption">
+            <Grid ColumnDefinitions="Auto, *, Auto">
+                <Viewbox Width="15" Height="15" Margin="0,0,10,0" VerticalAlignment="Center">
+                    <Canvas Width="24" Height="24">
+                        <Path Classes="privacy-icon item" Data="{Binding Icon}" StrokeThickness="1.8"/>
+                    </Canvas>
+                </Viewbox>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Label}" FontSize="12"/>
+                    <TextBlock Text="{Binding Description}" FontSize="10.5" Foreground="{DynamicResource TextSubtleBrush}"/>
+                </StackPanel>
+                <Viewbox Grid.Column="2" Width="12" Height="12" Margin="8,0,0,0" VerticalAlignment="Center"
+                         IsVisible="{Binding $parent[ComboBoxItem].IsSelected}">
+                    <Canvas Width="24" Height="24">
+                        <Path Classes="privacy-icon" Data="M20,6 L9,17 L4,12" StrokeThickness="3" Stroke="{DynamicResource BrandPrimaryLightBrush}"/>
+                    </Canvas>
+                </Viewbox>
+            </Grid>
+        </DataTemplate>
+
+        <!-- The tag box: chips over the line they are typed on. Shared too. -->
+        <DataTemplate x:Key="TagEditorTemplate" x:DataType="vm:SessionExtrasViewModel">
+            <Border Classes="tag-box" PointerPressed="OnTagBoxPointerPressed">
+                <StackPanel>
+                    <ItemsControl ItemsSource="{Binding Tags}" IsVisible="{Binding HasTags}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="sys:String">
+                                <Border Classes="tag-chip">
+                                    <Border.RenderTransform>
+                                        <ScaleTransform/>
+                                    </Border.RenderTransform>
+                                    <StackPanel Orientation="Horizontal" Spacing="2">
+                                        <TextBlock Text="{Binding}" FontSize="12" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center" MaxWidth="200" TextTrimming="CharacterEllipsis"/>
+                                        <Button Classes="tag-remove gp-icon" Click="OnSessionTagRemoveClick"
+                                                AutomationProperties.Name="{Binding [Session_RemoveTag], Source={x:Static services:LocalizationService.Instance}}">
+                                            <PathIcon Data="{StaticResource FieldCloseIconData}"/>
+                                        </Button>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <ctl:TagInputBox Classes="tag-input gp-text" Text="{Binding TagInput}" Watermark="{Binding TagWatermark}" MaxLength="32"
+                                     CommitCommand="{Binding CommitTagInputCommand}" RemoveLastCommand="{Binding RemoveLastTagCommand}"/>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
         <conv:ToastTypeToIconConverter x:Key="ToastTypeToIconConverter"/>
         <conv:ToastTypeToBackgroundConverter x:Key="ToastTypeToBackgroundConverter"/>
         <conv:ToastTypeToForegroundConverter x:Key="ToastTypeToForegroundConverter"/>
@@ -71,6 +135,7 @@
         <StreamGeometry x:Key="GamepadIconData">M7,6H17A6,6 0 0,1 23,12A6,6 0 0,1 17,18C15.22,18 13.63,17.23 12.53,16H11.47C10.37,17.23 8.78,18 7,18A6,6 0 0,1 1,12A6,6 0 0,1 7,6M6,9V11H4V13H6V15H8V13H10V11H8V9H6M15.5,12A1.5,1.5 0 0,0 14,13.5A1.5,1.5 0 0,0 15.5,15A1.5,1.5 0 0,0 17,13.5A1.5,1.5 0 0,0 15.5,12M18.5,9A1.5,1.5 0 0,0 17,10.5A1.5,1.5 0 0,0 18.5,12A1.5,1.5 0 0,0 20,10.5A1.5,1.5 0 0,0 18.5,9Z</StreamGeometry>
         <StreamGeometry x:Key="MarkStartedIconData">M8,5.14V19.14L19,12.14L8,5.14Z</StreamGeometry>
         <StreamGeometry x:Key="MarkFinishedIconData">M14.4,6L14,4H5V21H7V14H12.6L13,16H20V6H14.4Z</StreamGeometry>
+        <StreamGeometry x:Key="NoteIconData">M14 3H6A2 2 0 0 0 4 5V19A2 2 0 0 0 6 21H18A2 2 0 0 0 20 19V9Z M14 3V9H20 M8 13H16 M8 17H13</StreamGeometry>
         <StreamGeometry x:Key="AddExtraIconData">M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z</StreamGeometry>
         <StreamGeometry x:Key="FieldCloseIconData">M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z</StreamGeometry>
     </Window.Resources>
@@ -331,6 +396,58 @@
         <Style Selector="Button.add-extra:pointerover PathIcon">
             <Setter Property="RenderTransform" Value="rotate(90deg)"/>
         </Style>
+        <!-- In a pending row, the size of the mark chips beside it. -->
+        <Style Selector="Button.add-extra.compact">
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Padding" Value="7,0,9,0"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="FontSize" Value="11"/>
+        </Style>
+        <Style Selector="Button.add-extra.compact /template/ Rectangle#PART_Dash">
+            <Setter Property="RadiusX" Value="10"/>
+            <Setter Property="RadiusY" Value="10"/>
+        </Style>
+        <Style Selector="Button.add-extra.compact PathIcon">
+            <Setter Property="Width" Value="8"/>
+            <Setter Property="Height" Value="8"/>
+        </Style>
+
+        <!-- The note and tags of a pending row: the whole row lights up, since a click opens the whole editor. -->
+        <Style Selector="Button.extras-summary">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="8,6,8,2"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="Button.extras-summary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SurfaceDarkBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource SidebarBorderBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}"/>
+        </Style>
+        <Style Selector="Button.extras-summary:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SidebarBorderBrush}"/>
+        </Style>
+        <Style Selector="Border.mini-tag">
+            <Setter Property="Background" Value="{DynamicResource SurfaceDarkBrush}"/>
+            <Setter Property="CornerRadius" Value="9"/>
+            <Setter Property="Padding" Value="8,0"/>
+            <Setter Property="Height" Value="18"/>
+            <Setter Property="Margin" Value="0,0,6,4"/>
+        </Style>
+        <Style Selector="Border.mini-tag TextBlock">
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Foreground" Value="{DynamicResource IconLightBrush}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+        </Style>
+        <Style Selector="Button.extras-summary:pointerover Border.mini-tag">
+            <Setter Property="Background" Value="#2f3542"/>
+        </Style>
 
         <!-- The x that takes a field away again. -->
         <Style Selector="Button.field-close">
@@ -437,8 +554,20 @@
         <Style Selector="TextBlock.tag-count.full">
             <Setter Property="Foreground" Value="{DynamicResource BrandPrimaryLightBrush}"/>
         </Style>
-        <!-- A ninth tag is turned away with a shake of the counter; two classes so each try restarts it. -->
-        <Style Selector="TextBlock.tag-count.shake-a, TextBlock.tag-count.shake-b">
+        <!-- A ninth tag is turned away with a shake of the counter; two classes in two styles, so each try restarts it. -->
+        <Style Selector="TextBlock.tag-count.shake-a">
+            <Style.Animations>
+                <Animation Duration="0:0:0.32">
+                    <KeyFrame Cue="0%"><Setter Property="TranslateTransform.X" Value="0"/></KeyFrame>
+                    <KeyFrame Cue="20%"><Setter Property="TranslateTransform.X" Value="-3"/></KeyFrame>
+                    <KeyFrame Cue="40%"><Setter Property="TranslateTransform.X" Value="3"/></KeyFrame>
+                    <KeyFrame Cue="60%"><Setter Property="TranslateTransform.X" Value="-2"/></KeyFrame>
+                    <KeyFrame Cue="80%"><Setter Property="TranslateTransform.X" Value="2"/></KeyFrame>
+                    <KeyFrame Cue="100%"><Setter Property="TranslateTransform.X" Value="0"/></KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+        <Style Selector="TextBlock.tag-count.shake-b">
             <Style.Animations>
                 <Animation Duration="0:0:0.32">
                     <KeyFrame Cue="0%"><Setter Property="TranslateTransform.X" Value="0"/></KeyFrame>
@@ -527,8 +656,22 @@
                 </Animation>
             </Style.Animations>
         </Style>
-        <!-- A new choice pops in; two classes so each change restarts it. -->
-        <Style Selector="ComboBox.note-privacy.pop-a /template/ ContentPresenter#ContentPresenter, ComboBox.note-privacy.pop-b /template/ ContentPresenter#ContentPresenter">
+        <!-- A new choice pops in; two classes in two styles, so each change restarts it. -->
+        <Style Selector="ComboBox.note-privacy.pop-a /template/ ContentPresenter#ContentPresenter">
+            <Style.Animations>
+                <Animation Duration="0:0:0.28" Easing="BackEaseOut">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="ScaleTransform.ScaleX" Value="0.8"/>
+                        <Setter Property="ScaleTransform.ScaleY" Value="0.8"/>
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="ScaleTransform.ScaleX" Value="1"/>
+                        <Setter Property="ScaleTransform.ScaleY" Value="1"/>
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+        <Style Selector="ComboBox.note-privacy.pop-b /template/ ContentPresenter#ContentPresenter">
             <Style.Animations>
                 <Animation Duration="0:0:0.28" Easing="BackEaseOut">
                     <KeyFrame Cue="0%">
@@ -885,6 +1028,10 @@
         </Style>
         <Style Selector="Window.gamepad ComboBox.note-privacy:focus">
             <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <!-- A whole-width row: the edge without the zoom. -->
+        <Style Selector="Window.gamepad Button.extras-summary:focus">
+            <Setter Property="RenderTransform" Value="scale(1)"/>
         </Style>
         <!-- Press feedback; declared last to beat the focus zoom. -->
         <Style Selector="Window.gamepad Button.gp-press">
@@ -1660,6 +1807,7 @@
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate x:DataType="vm:PendingSessionViewModel">
                                             <Border Classes="pending-card" Padding="15,12">
+                                                <StackPanel>
                                                 <Grid ColumnDefinitions="Auto, *, Auto">
                                                     <Border Grid.Column="0" Width="60" Height="80" CornerRadius="4" ClipToBounds="True"
                                                             Background="{DynamicResource SurfaceDarkBrush}" BorderBrush="#30394c" BorderThickness="1"
@@ -1704,6 +1852,14 @@
                                                                     <TextBlock Text="{Binding [Session_MarkFinished], Source={x:Static services:LocalizationService.Instance}}" VerticalAlignment="Center"/>
                                                                 </StackPanel>
                                                             </ToggleButton>
+                                                            <Border Width="1" Height="14" Background="{DynamicResource SidebarBorderBrush}" Margin="2,0" VerticalAlignment="Center" IsVisible="{Binding IsAddExtrasVisible}"/>
+                                                            <Button Classes="add-extra compact" Command="{Binding OpenExtrasCommand}" Click="OnPendingExtrasOpenClick"
+                                                                    IsVisible="{Binding IsAddExtrasVisible}" IsEnabled="{Binding !IsSaving}">
+                                                                <StackPanel Orientation="Horizontal" Spacing="5">
+                                                                    <PathIcon Data="{StaticResource AddExtraIconData}"/>
+                                                                    <TextBlock Text="{Binding [Pending_NoteAndTags], Source={x:Static services:LocalizationService.Instance}}" VerticalAlignment="Center"/>
+                                                                </StackPanel>
+                                                            </Button>
                                                         </StackPanel>
                                                     </StackPanel>
 
@@ -1744,6 +1900,80 @@
                                                         </Button>
                                                     </StackPanel>
                                                 </Grid>
+
+                                                <!-- Under the row, across the whole width past the cover: the note and tags, or their editor. -->
+                                                <Button Classes="extras-summary" Margin="67,8,-8,0" Command="{Binding OpenExtrasCommand}" Click="OnPendingExtrasOpenClick"
+                                                        IsVisible="{Binding IsExtrasSummaryVisible}" IsEnabled="{Binding !IsSaving}"
+                                                        ToolTip.Tip="{Binding [Pending_EditExtras], Source={x:Static services:LocalizationService.Instance}}"
+                                                        AutomationProperties.Name="{Binding [Pending_EditExtras], Source={x:Static services:LocalizationService.Instance}}">
+                                                    <ctl:NoteTagsRow>
+                                                        <DockPanel IsVisible="{Binding Extras.HasNote}" Margin="0,0,0,4">
+                                                            <Viewbox DockPanel.Dock="Left" Width="13" Height="13" Margin="0,2,7,0" VerticalAlignment="Top">
+                                                                <Canvas Width="24" Height="24">
+                                                                    <Path Classes="privacy-icon" Data="{StaticResource NoteIconData}" Stroke="{DynamicResource TextSubtleBrush}"/>
+                                                                </Canvas>
+                                                            </Viewbox>
+                                                            <TextBlock FontSize="12" TextWrapping="Wrap" LineHeight="18">
+                                                                <Run Text="{Binding Extras.NotePreview}"/>
+                                                                <InlineUIContainer>
+                                                                    <Viewbox Width="12" Height="12" Margin="6,0,0,-1" IsVisible="{Binding !Extras.Privacy.IsDefault}">
+                                                                        <Canvas Width="24" Height="24">
+                                                                            <Path Classes="privacy-icon" Data="{Binding Extras.Privacy.Icon}" Stroke="{DynamicResource TextSubtleBrush}" StrokeThickness="2.2"/>
+                                                                        </Canvas>
+                                                                    </Viewbox>
+                                                                </InlineUIContainer>
+                                                            </TextBlock>
+                                                        </DockPanel>
+                                                        <ItemsControl ItemsSource="{Binding Extras.Tags}" IsVisible="{Binding Extras.HasTags}">
+                                                            <ItemsControl.ItemsPanel>
+                                                                <ItemsPanelTemplate>
+                                                                    <WrapPanel/>
+                                                                </ItemsPanelTemplate>
+                                                            </ItemsControl.ItemsPanel>
+                                                            <ItemsControl.ItemTemplate>
+                                                                <DataTemplate x:DataType="sys:String">
+                                                                    <Border Classes="mini-tag">
+                                                                        <TextBlock Text="{Binding}"/>
+                                                                    </Border>
+                                                                </DataTemplate>
+                                                            </ItemsControl.ItemTemplate>
+                                                        </ItemsControl>
+                                                    </ctl:NoteTagsRow>
+                                                </Button>
+
+                                                <ctl:RevealPanel IsOpen="{Binding IsEditingExtras}">
+                                                    <Grid Margin="75,14,0,0" ColumnDefinitions="2*, 16, *" RowDefinitions="Auto, Auto">
+                                                        <StackPanel Grid.Column="0">
+                                                            <TextBlock Classes="field-label" Margin="0,0,0,6" Text="{Binding [Session_Note], Source={x:Static services:LocalizationService.Instance}}"/>
+                                                            <TextBox Classes="session-note gp-text" Text="{Binding Extras.Note}"
+                                                                     Watermark="{Binding [Session_NoteWatermark], Source={x:Static services:LocalizationService.Instance}}"/>
+                                                            <ComboBox Classes="note-privacy" Margin="0,6,0,0"
+                                                                      ItemsSource="{Binding Extras.PrivacyOptions}" SelectedItem="{Binding Extras.Privacy}"
+                                                                      SelectionBoxItemTemplate="{StaticResource NotePrivacySelectionTemplate}" ItemTemplate="{StaticResource NotePrivacyItemTemplate}"
+                                                                      SelectionChanged="OnNotePrivacyChanged" DropDownOpened="OnNotePrivacyDropDownOpened" DropDownClosed="OnNotePrivacyDropDownClosed"
+                                                                      AutomationProperties.Name="{Binding [Session_NotePrivacy], Source={x:Static services:LocalizationService.Instance}}"/>
+                                                        </StackPanel>
+                                                        <StackPanel Grid.Column="2">
+                                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                                                                <TextBlock Classes="field-label" Text="{Binding [Session_Tags], Source={x:Static services:LocalizationService.Instance}}"/>
+                                                                <TextBlock Classes="tag-count" Classes.full="{Binding Extras.IsTagsFull}" Text="{Binding Extras.TagCountText}"
+                                                                           Classes.shake-a="{Binding Extras.IsRejectShakeA}" Classes.shake-b="{Binding Extras.IsRejectShakeB}">
+                                                                    <TextBlock.RenderTransform>
+                                                                        <TranslateTransform/>
+                                                                    </TextBlock.RenderTransform>
+                                                                </TextBlock>
+                                                            </StackPanel>
+                                                            <ContentControl Content="{Binding Extras}" ContentTemplate="{StaticResource TagEditorTemplate}"/>
+                                                        </StackPanel>
+                                                        <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10" Margin="0,12,0,0">
+                                                            <Button Classes="subtle" Command="{Binding CancelExtrasCommand}" Click="OnPendingExtrasClosedClick"
+                                                                    Content="{Binding [Session_Cancel], Source={x:Static services:LocalizationService.Instance}}"/>
+                                                            <Button Classes="subtle" Command="{Binding CloseExtrasCommand}" Click="OnPendingExtrasClosedClick"
+                                                                    Content="{Binding [Pending_ExtrasDone], Source={x:Static services:LocalizationService.Instance}}"/>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </ctl:RevealPanel>
+                                                </StackPanel>
                                             </Border>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
@@ -2207,46 +2437,13 @@
                                         <PathIcon Data="{StaticResource FieldCloseIconData}"/>
                                     </Button>
                                 </Grid>
-                                <TextBox x:Name="SessionNoteBox" Classes="session-note gp-text" Text="{Binding SessionNote}" IsEnabled="{Binding AreButtonsEnabled}"
+                                <TextBox x:Name="SessionNoteBox" Classes="session-note gp-text" Text="{Binding SessionExtras.Note}" IsEnabled="{Binding AreButtonsEnabled}"
                                          Watermark="{Binding [Session_NoteWatermark], Source={x:Static services:LocalizationService.Instance}}"/>
                                 <ComboBox x:Name="SessionNotePrivacyBox" Classes="note-privacy" Margin="0,6,0,0"
-                                          ItemsSource="{Binding NotePrivacyOptions}" SelectedItem="{Binding SessionNotePrivacy}" IsEnabled="{Binding AreButtonsEnabled}"
+                                          ItemsSource="{Binding SessionExtras.PrivacyOptions}" SelectedItem="{Binding SessionExtras.Privacy}" IsEnabled="{Binding AreButtonsEnabled}"
+                                          SelectionBoxItemTemplate="{StaticResource NotePrivacySelectionTemplate}" ItemTemplate="{StaticResource NotePrivacyItemTemplate}"
                                           SelectionChanged="OnNotePrivacyChanged" DropDownOpened="OnNotePrivacyDropDownOpened" DropDownClosed="OnNotePrivacyDropDownClosed"
-                                          AutomationProperties.Name="{Binding [Session_NotePrivacy], Source={x:Static services:LocalizationService.Instance}}">
-                                    <ComboBox.SelectionBoxItemTemplate>
-                                        <DataTemplate x:DataType="vm:NotePrivacyOption">
-                                            <StackPanel Orientation="Horizontal" Spacing="5">
-                                                <Viewbox Width="13" Height="13" VerticalAlignment="Center">
-                                                    <Canvas Width="24" Height="24">
-                                                        <Path Classes="privacy-icon" Data="{Binding Icon}" StrokeThickness="2.4" Stroke="{Binding $parent[ContentPresenter].Foreground}"/>
-                                                    </Canvas>
-                                                </Viewbox>
-                                                <TextBlock Text="{Binding Label}" FontSize="12" FontWeight="SemiBold" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ComboBox.SelectionBoxItemTemplate>
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate x:DataType="vm:NotePrivacyOption">
-                                            <Grid ColumnDefinitions="Auto, *, Auto">
-                                                <Viewbox Width="15" Height="15" Margin="0,0,10,0" VerticalAlignment="Center">
-                                                    <Canvas Width="24" Height="24">
-                                                        <Path Classes="privacy-icon item" Data="{Binding Icon}" StrokeThickness="1.8"/>
-                                                    </Canvas>
-                                                </Viewbox>
-                                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                                    <TextBlock Text="{Binding Label}" FontSize="12"/>
-                                                    <TextBlock Text="{Binding Description}" FontSize="10.5" Foreground="{DynamicResource TextSubtleBrush}"/>
-                                                </StackPanel>
-                                                <Viewbox Grid.Column="2" Width="12" Height="12" Margin="8,0,0,0" VerticalAlignment="Center"
-                                                         IsVisible="{Binding $parent[ComboBoxItem].IsSelected}">
-                                                    <Canvas Width="24" Height="24">
-                                                        <Path Classes="privacy-icon" Data="M20,6 L9,17 L4,12" StrokeThickness="3" Stroke="{DynamicResource BrandPrimaryLightBrush}"/>
-                                                    </Canvas>
-                                                </Viewbox>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
+                                          AutomationProperties.Name="{Binding [Session_NotePrivacy], Source={x:Static services:LocalizationService.Instance}}"/>
                             </StackPanel>
                         </ctl:RevealPanel>
 
@@ -2254,7 +2451,8 @@
                             <StackPanel Margin="0,16,0,0">
                                 <Grid ColumnDefinitions="Auto, *, Auto" Margin="0,0,0,6">
                                     <TextBlock Classes="field-label" Text="{Binding [Session_Tags], Source={x:Static services:LocalizationService.Instance}}"/>
-                                    <TextBlock x:Name="SessionTagCount" Grid.Column="1" Classes="tag-count" Classes.full="{Binding IsSessionTagsFull}" Text="{Binding SessionTagCountText}">
+                                    <TextBlock Grid.Column="1" Classes="tag-count" Classes.full="{Binding SessionExtras.IsTagsFull}" Text="{Binding SessionExtras.TagCountText}"
+                                               Classes.shake-a="{Binding SessionExtras.IsRejectShakeA}" Classes.shake-b="{Binding SessionExtras.IsRejectShakeB}">
                                         <TextBlock.RenderTransform>
                                             <TranslateTransform/>
                                         </TextBlock.RenderTransform>
@@ -2265,35 +2463,7 @@
                                         <PathIcon Data="{StaticResource FieldCloseIconData}"/>
                                     </Button>
                                 </Grid>
-                                <Border x:Name="SessionTagBox" Classes="tag-box" PointerPressed="OnTagBoxPointerPressed">
-                                    <StackPanel>
-                                        <ItemsControl x:Name="SessionTagsList" ItemsSource="{Binding SessionTags}" IsVisible="{Binding HasSessionTags}">
-                                            <ItemsControl.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <WrapPanel/>
-                                                </ItemsPanelTemplate>
-                                            </ItemsControl.ItemsPanel>
-                                            <ItemsControl.ItemTemplate>
-                                                <DataTemplate x:DataType="sys:String">
-                                                    <Border Classes="tag-chip">
-                                                        <Border.RenderTransform>
-                                                            <ScaleTransform/>
-                                                        </Border.RenderTransform>
-                                                        <StackPanel Orientation="Horizontal" Spacing="2">
-                                                            <TextBlock Text="{Binding}" FontSize="12" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center" MaxWidth="200" TextTrimming="CharacterEllipsis"/>
-                                                            <Button Classes="tag-remove gp-icon" Click="OnSessionTagRemoveClick"
-                                                                    AutomationProperties.Name="{Binding [Session_RemoveTag], Source={x:Static services:LocalizationService.Instance}}">
-                                                                <PathIcon Data="{StaticResource FieldCloseIconData}"/>
-                                                            </Button>
-                                                        </StackPanel>
-                                                    </Border>
-                                                </DataTemplate>
-                                            </ItemsControl.ItemTemplate>
-                                        </ItemsControl>
-                                        <TextBox x:Name="SessionTagInputBox" Classes="tag-input gp-text" GotFocus="OnSessionTagInputFocusChanged" LostFocus="OnSessionTagInputFocusChanged" Text="{Binding SessionTagInput}" MaxLength="32" IsEnabled="{Binding AreButtonsEnabled}"
-                                                 Watermark="{Binding SessionTagWatermark}"/>
-                                    </StackPanel>
-                                </Border>
+                                <ContentControl Content="{Binding SessionExtras}" ContentTemplate="{StaticResource TagEditorTemplate}" IsEnabled="{Binding AreButtonsEnabled}"/>
                             </StackPanel>
                         </ctl:RevealPanel>
                     </StackPanel>
