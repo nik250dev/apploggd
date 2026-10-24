@@ -67,12 +67,7 @@
         <Border CornerRadius="20" ClipToBounds="True" Background="{DynamicResource PanelBackgroundBrush}">
             <Panel>
                 <Panel x:Name="Artwork" Classes.shown="{Binding IsBackgroundImageVisible}">
-                    <Image Source="{Binding GameBackgroundImage}" Stretch="UniformToFill" Opacity="0.6">
-                        <Image.Effect>
-                            <BlurEffect Radius="10"/>
-                        </Image.Effect>
-                    </Image>
-                    <Border Background="#94121418"/>
+                    <Image Source="{Binding GameBackgroundImage}" Stretch="UniformToFill" Opacity="0.1"/>
                 </Panel>
 
                 <ctl:BreathingGlow Color="{DynamicResource BrandPrimaryColor}"
