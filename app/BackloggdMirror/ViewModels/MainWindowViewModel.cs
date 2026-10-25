@@ -205,15 +205,48 @@ public partial class MainWindowViewModel : ViewModelBase
         get => _settingsService.AlwaysAddToPending;
         set
         {
-            if (_settingsService.AlwaysAddToPending != value)
+            if (_settingsService.AlwaysAddToPending == value) return;
+
+            // The switch is disabled while the automatic mode is on; this only guards against a stray binding.
+            if (value && _settingsService.AutoRegisterSessions)
             {
-                _settingsService.AlwaysAddToPending = value;
-                _settingsService.Save();
-                _logger.Info($"[MainWindowViewModel] User action: 'Always add to pending' set to {value}.");
                 OnPropertyChanged();
+                return;
             }
+
+            _settingsService.AlwaysAddToPending = value;
+            _settingsService.Save();
+            _logger.Info($"[MainWindowViewModel] User action: 'Always add to pending' set to {value}.");
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(IsAutoRegisterSessionsAvailable));
         }
     }
+
+    /// <summary>The automatic mode: finished sessions are registered on Backloggd without the confirmation.</summary>
+    public bool AutoRegisterSessions
+    {
+        get => _settingsService.AutoRegisterSessions;
+        set
+        {
+            if (_settingsService.AutoRegisterSessions == value) return;
+
+            if (value && _settingsService.AlwaysAddToPending)
+            {
+                OnPropertyChanged();
+                return;
+            }
+
+            _settingsService.AutoRegisterSessions = value;
+            _settingsService.Save();
+            _logger.Info($"[MainWindowViewModel] User action: automatic mode set to {value}.");
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(IsAlwaysAddToPendingAvailable));
+        }
+    }
+
+    public bool IsAlwaysAddToPendingAvailable => !AutoRegisterSessions;
+
+    public bool IsAutoRegisterSessionsAvailable => !AlwaysAddToPending;
 
     /// <summary>Shared for the whole process, like the blacklist: it outlives a logout.</summary>
     internal GamepadService? Gamepad => _gamepadService;
@@ -1097,7 +1130,9 @@ public partial class MainWindowViewModel : ViewModelBase
         if (IsGameRunning)
         {
             return new TrayNotice(TrayNoticeKind.Playing, string.IsNullOrEmpty(GameName) ? title : GameName,
-                loc[_settingsService.AlwaysAddToPending ? "TrayNotice_PlayingBodyPending" : "TrayNotice_PlayingBody"])
+                loc[_settingsService.AlwaysAddToPending ? "TrayNotice_PlayingBodyPending"
+                    : _settingsService.AutoRegisterSessions ? "TrayNotice_PlayingBodyAuto"
+                    : "TrayNotice_PlayingBody"])
             {
                 LiveKicker = () => string.Format(loc["TrayNotice_PlayingKicker"], PlayTime)
             };
@@ -1322,6 +1357,9 @@ public partial class MainWindowViewModel : ViewModelBase
         OnPropertyChanged(nameof(StartWithWindows));
         OnPropertyChanged(nameof(GamepadNavigationEnabled));
         OnPropertyChanged(nameof(AlwaysAddToPending));
+        OnPropertyChanged(nameof(AutoRegisterSessions));
+        OnPropertyChanged(nameof(IsAlwaysAddToPendingAvailable));
+        OnPropertyChanged(nameof(IsAutoRegisterSessionsAvailable));
         OnPropertyChanged(nameof(SelectedLanguageCode));
 
         // Same trap as the settings: the file is gone, but detection keeps this instance.
@@ -1585,6 +1623,60 @@ public partial class MainWindowViewModel : ViewModelBase
     /// </summary>
     private async Task AddFinishedSessionToPendingAsync(string gameName, string? idIgdb, DateTime endedAt, TimeSpan duration)
     {
+        var session = await ResolveFinishedSessionAsync(gameName, idIgdb, endedAt, duration);
+
+        _logger.Info($"[MainWindowViewModel] 'Always add to pending' is on: '{session.GameName}' ({PendingSessionViewModel.FormatDuration(duration)}) goes to the pending list without asking.");
+        AddPendingSession(session);
+
+        var loc = LocalizationService.Instance;
+        ShowToast(string.Format(loc["Toast_SessionPostponed"], session.GameName), ToastType.Warning, UndoToastDuration, loc["Toast_ViewPending"], NavigateToPending);
+    }
+
+    /// <summary>
+    /// The automatic mode: registers the session on the day it ended, without the confirmation and
+    /// without pausing detection. What cannot be registered (unidentified, offline, a failed save) goes to Pending.
+    /// </summary>
+    private async Task AutoRegisterFinishedSessionAsync(string gameName, string? idIgdb, DateTime endedAt, TimeSpan duration)
+    {
+        var session = await ResolveFinishedSessionAsync(gameName, idIgdb, endedAt, duration);
+        var loc = LocalizationService.Instance;
+        string played = PendingSessionViewModel.FormatDuration(duration);
+
+        if (!session.IsIdentified || IsOffline)
+        {
+            _logger.Info($"[MainWindowViewModel] Automatic mode: '{session.GameName}' ({played}) cannot be registered ({(IsOffline ? "offline" : "unidentified")}), so it goes to the pending list.");
+            AddPendingSession(session);
+            ShowToast(string.Format(loc[IsOffline ? "Toast_AutoOfflineToPending" : "Toast_AutoUnidentifiedToPending"], session.GameName), ToastType.Warning, UndoToastDuration, loc["Toast_ViewPending"], NavigateToPending);
+            return;
+        }
+
+        await _registrationGate.WaitAsync();
+        try
+        {
+            // TotalHours, not Hours, which wraps at 24. No extras, so the day's note and tags stay as they are.
+            await _browserService.RegisterGame(session.GameName, _authService.Cookies, (int)duration.TotalHours, duration.Minutes, session.GameUrl, endedAt.Date);
+
+            _logger.Info($"[MainWindowViewModel] Automatic mode: session registered on Backloggd without asking: '{session.GameName}', {played} on {endedAt:yyyy-MM-dd}.");
+            ReloadJournal();
+            ShowToast(string.Format(loc["Toast_AutoSessionSaved"], session.GameName, played), ToastType.Success);
+        }
+        catch (Exception ex)
+        {
+            _logger.Error($"[MainWindowViewModel] Automatic mode: registering '{session.GameName}' ({played}) on Backloggd failed. It goes to the pending list.", ex);
+            session.SaveFailed = true;
+            AddPendingSession(session);
+            await EnterOfflineModeIfUnreachableAsync("an automatic session could not be saved");
+            ShowToast(FriendlySaveError(ex), ToastType.Error, UndoToastDuration, loc["Toast_ViewPending"], NavigateToPending, loc["Toast_AutoSaveFailedToPending"]);
+        }
+        finally
+        {
+            _registrationGate.Release();
+        }
+    }
+
+    /// <summary>Resolves the game the way the modal would, without the user.</summary>
+    private async Task<PendingSession> ResolveFinishedSessionAsync(string gameName, string? idIgdb, DateTime endedAt, TimeSpan duration)
+    {
         var session = new PendingSession
         {
             Username = _authService.Username ?? string.Empty,
@@ -1618,15 +1710,11 @@ public partial class MainWindowViewModel : ViewModelBase
             }
             catch (Exception ex)
             {
-                _logger.Warning($"[MainWindowViewModel] Could not resolve IGDB ID '{idIgdb}' for the pending session: {ex.Message}. It is kept as unidentified.");
+                _logger.Warning($"[MainWindowViewModel] Could not resolve IGDB ID '{idIgdb}' for the finished session: {ex.Message}. It is kept as unidentified.");
             }
         }
 
-        _logger.Info($"[MainWindowViewModel] 'Always add to pending' is on: '{session.GameName}' ({PendingSessionViewModel.FormatDuration(duration)}) goes to the pending list without asking.");
-        AddPendingSession(session);
-
-        var loc = LocalizationService.Instance;
-        ShowToast(string.Format(loc["Toast_SessionPostponed"], session.GameName), ToastType.Warning, UndoToastDuration, loc["Toast_ViewPending"], NavigateToPending);
+        return session;
     }
 
     [RelayCommand]
@@ -1952,8 +2040,8 @@ public partial class MainWindowViewModel : ViewModelBase
 
     private void PrefetchTodaySessionExtras(string gameName, string? gameUrl)
     {
-        // Without the confirmation the pending entry is saved as it is, so there is nothing to fill.
-        if (IsOffline || _settingsService.AlwaysAddToPending || string.IsNullOrEmpty(gameUrl)) return;
+        // Without the confirmation nothing is filled: pending entries start empty and the automatic mode leaves Backloggd's.
+        if (IsOffline || _settingsService.AlwaysAddToPending || _settingsService.AutoRegisterSessions || string.IsNullOrEmpty(gameUrl)) return;
 
         _sessionExtrasPrefetch = new(gameUrl, DateTime.Today, ReadTodaySessionExtrasAsync(gameName, gameUrl));
     }
@@ -2501,8 +2589,8 @@ public partial class MainWindowViewModel : ViewModelBase
 
     /// <summary>
     /// Closes the session once the tracked process dies, and hands it to the user for confirmation.
-    /// Nothing is written to Backloggd from here: the confirmation modal is what triggers the
-    /// registration, so an unattended app never posts anything on its own.
+    /// Nothing is written to Backloggd from here unless the user turned on the automatic mode:
+    /// otherwise the confirmation modal is what triggers the registration.
     /// </summary>
     internal void StopRunningGame()
     {
@@ -2542,6 +2630,14 @@ public partial class MainWindowViewModel : ViewModelBase
             if (_settingsService.AlwaysAddToPending)
             {
                 _ = AddFinishedSessionToPendingAsync(gameToRegister, currentIdIgdb, endedAt, elapsed);
+                GameStatus = "No Game Running";
+                IsBackgroundImageVisible = false;
+                return;
+            }
+
+            if (_settingsService.AutoRegisterSessions)
+            {
+                _ = AutoRegisterFinishedSessionAsync(gameToRegister, currentIdIgdb, endedAt, elapsed);
                 GameStatus = "No Game Running";
                 IsBackgroundImageVisible = false;
                 return;

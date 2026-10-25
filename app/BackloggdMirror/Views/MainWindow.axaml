@@ -1351,8 +1351,23 @@
                                             <StackPanel Spacing="2">
                                                 <TextBlock Text="{Binding [Settings_AlwaysPending], Source={x:Static services:LocalizationService.Instance}}" Classes="setting-label"/>
                                                 <TextBlock Text="{Binding [Settings_AlwaysPendingDesc], Source={x:Static services:LocalizationService.Instance}}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}"/>
+                                                <TextBlock Text="{Binding [Settings_AlwaysPendingBlocked], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding !IsAlwaysAddToPendingAvailable}"
+                                                           FontSize="11" Foreground="{DynamicResource TextSubtleBrush}" FontStyle="Italic" TextWrapping="Wrap"/>
                                             </StackPanel>
-                                            <ToggleSwitch Grid.Column="1" IsChecked="{Binding AlwaysAddToPending}" OnContent="" OffContent=""/>
+                                            <ToggleSwitch Grid.Column="1" IsChecked="{Binding AlwaysAddToPending}" IsEnabled="{Binding IsAlwaysAddToPendingAvailable}" OnContent="" OffContent=""/>
+                                        </Grid>
+
+                                        <Separator Background="{DynamicResource SeparatorBrush}" Height="1"/>
+
+                                        <Grid ColumnDefinitions="*, Auto">
+                                            <StackPanel Spacing="2" Margin="0,0,15,0">
+                                                <TextBlock Text="{Binding [Settings_AutoMode], Source={x:Static services:LocalizationService.Instance}}" Classes="setting-label"/>
+                                                <TextBlock Text="{Binding [Settings_AutoModeDesc], Source={x:Static services:LocalizationService.Instance}}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}" TextWrapping="Wrap"/>
+                                                <TextBlock Text="{Binding [Settings_AutoModeWarning], Source={x:Static services:LocalizationService.Instance}}" FontSize="11" Foreground="{DynamicResource OfflineBrush}" TextWrapping="Wrap"/>
+                                                <TextBlock Text="{Binding [Settings_AutoModeBlocked], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding !IsAutoRegisterSessionsAvailable}"
+                                                           FontSize="11" Foreground="{DynamicResource TextSubtleBrush}" FontStyle="Italic" TextWrapping="Wrap"/>
+                                            </StackPanel>
+                                            <ToggleSwitch Grid.Column="1" IsChecked="{Binding AutoRegisterSessions}" IsEnabled="{Binding IsAutoRegisterSessionsAvailable}" OnContent="" OffContent=""/>
                                         </Grid>
                                     </StackPanel>
                                 </Border>

@@ -26,6 +26,9 @@ public class SettingsService
     /// <summary>Sends every finished session straight to the pending list instead of asking.</summary>
     public bool AlwaysAddToPending { get; set; } = false;
 
+    /// <summary>Registers every finished session on Backloggd without asking. Never on together with <see cref="AlwaysAddToPending"/>.</summary>
+    public bool AutoRegisterSessions { get; set; } = false;
+
     public string Language { get; set; } = "System";
 
     /// <summary>Whether the explained "still running in the tray" notice has already been shown once.</summary>
@@ -78,9 +81,19 @@ public class SettingsService
                     StartWithWindows = settings.StartWithWindows;
                     GamepadNavigationEnabled = settings.GamepadNavigationEnabled;
                     AlwaysAddToPending = settings.AlwaysAddToPending;
+                    AutoRegisterSessions = settings.AutoRegisterSessions;
                     Language = settings.Language ?? "System";
                     HasSeenTrayIntro = settings.HasSeenTrayIntro;
                     DismissedUpdateNoticeVersion = settings.DismissedUpdateNoticeVersion;
+
+                    // Both change what happens to a finished session, so a hand-edited file with both on keeps neither.
+                    if (AlwaysAddToPending && AutoRegisterSessions)
+                    {
+                        _logger?.Warning("[SettingsService] settings.json has both 'Always add to pending' and the automatic mode on. They cannot be combined, so both are turned off.");
+                        AlwaysAddToPending = false;
+                        AutoRegisterSessions = false;
+                        Save();
+                    }
                 }
             }
         }
@@ -103,6 +116,7 @@ public class SettingsService
         StartWithWindows = false;
         GamepadNavigationEnabled = true;
         AlwaysAddToPending = false;
+        AutoRegisterSessions = false;
         Language = "System";
         HasSeenTrayIntro = false;
         DismissedUpdateNoticeVersion = null;
