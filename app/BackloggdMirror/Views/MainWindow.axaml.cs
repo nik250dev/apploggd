@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Controls.Primitives;
 using Avalonia.Platform;
 using Avalonia.Platform.Storage;
 using Avalonia;
@@ -15,6 +16,8 @@ using BackloggdMirror.Services.Platform.Linux;
 using Avalonia.Threading;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Linq;
+using Avalonia.VisualTree;
 
 namespace BackloggdMirror.Views;
 
@@ -28,6 +31,8 @@ public partial class MainWindow : Window
     private TrayNotificationWindow? _trayNotificationWindow;
     private UpdateProgressWindow? _updateProgressWindow;
     private GamepadNavigator? _gamepadNavigator;
+    // Whether the last press came from the pointer rather than the keyboard.
+    private bool _lastInputWasPointer;
 
     // Big Picture takes the foreground back ~2 s after its game exits, burying the confirmation behind it.
     private static readonly TimeSpan ConfirmationHoldFront = TimeSpan.FromSeconds(10);
@@ -63,6 +68,8 @@ public partial class MainWindow : Window
         _logger = logger;
 
         InitializeComponent();
+        AddHandler(PointerPressedEvent, (_, _) => _lastInputWasPointer = true, Avalonia.Interactivity.RoutingStrategies.Tunnel, handledEventsToo: true);
+        AddHandler(KeyDownEvent, (_, _) => _lastInputWasPointer = false, Avalonia.Interactivity.RoutingStrategies.Tunnel, handledEventsToo: true);
         UpdateAnimationsEnabled();
         InitializeTrayIcons(); // Pre-render icons
         InitializeTrayIcon();
@@ -321,6 +328,126 @@ public partial class MainWindow : Window
                 }
             }
         }
+        else if (e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsSessionNoteOpen) && sender is BackloggdMirror.ViewModels.MainWindowViewModel noteVm)
+        {
+            OnSessionExtraToggled(noteVm, noteVm.IsSessionNoteOpen, SessionNotePanel, () => SessionNoteBox, SessionAddNoteButton);
+        }
+        else if (e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsSessionTagsOpen) && sender is BackloggdMirror.ViewModels.MainWindowViewModel tagsVm)
+        {
+            OnSessionExtraToggled(tagsVm, tagsVm.IsSessionTagsOpen, SessionTagsPanel, () => TagInputIn(SessionTagsPanel), SessionAddTagsButton);
+        }
+    }
+
+    /// <summary>An opened field takes the focus, unless it opened to show what Backloggd had; a removed one hands it back to its button, if the focus was inside.</summary>
+    private void OnSessionExtraToggled(BackloggdMirror.ViewModels.MainWindowViewModel vm, bool opened, Views.Controls.RevealPanel panel, Func<Control?> field, Button addButton)
+    {
+        if (!vm.IsSessionConfirmationVisible || vm.IsFillingSessionExtras) return;
+
+        bool focusInside = FocusManager?.GetFocusedElement() is Visual focused && panel.IsVisualAncestorOf(focused);
+        Dispatcher.UIThread.Post(() =>
+        {
+            if (opened) FocusSessionControl(field());
+            else if (focusInside || FocusManager?.GetFocusedElement() == null) FocusSessionControl(addButton);
+        }, DispatcherPriority.Background);
+    }
+
+    // Directional under the controller, so the navigator's edge lands on it as on any other control.
+    private void FocusSessionControl(Control? control)
+    {
+        if (control == null || !control.IsEffectivelyVisible || !control.IsEffectivelyEnabled) return;
+        control.Focus(_gamepadNavigator?.IsControllerMode == true ? Avalonia.Input.NavigationMethod.Directional : Avalonia.Input.NavigationMethod.Unspecified);
+    }
+
+    private static Views.Controls.TagInputBox? TagInputIn(Visual? scope) =>
+        scope?.GetVisualDescendants().OfType<Views.Controls.TagInputBox>().FirstOrDefault();
+
+    // A click anywhere in the box, not just on the input line, starts typing.
+    private void OnTagBoxPointerPressed(object? sender, Avalonia.Input.PointerPressedEventArgs e)
+    {
+        if (e.Source is Visual source && source.FindAncestorOfType<Button>(includeSelf: true) != null) return;
+        TagInputIn(sender as Visual)?.Focus();
+    }
+
+    /// <summary>With the pointer the focus goes back to typing; from the keyboard or a controller, to the chip that takes the removed one's place.</summary>
+    private void OnSessionTagRemoveClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        if ((sender as Control)?.DataContext is not string tag
+            || (sender as Visual)?.FindAncestorOfType<ItemsControl>() is not { DataContext: BackloggdMirror.ViewModels.SessionExtrasViewModel extras } list) return;
+
+        var tagBox = list.GetVisualAncestors().OfType<Border>().FirstOrDefault(b => b.Classes.Contains("tag-box"));
+        int index = extras.Tags.IndexOf(tag);
+        extras.RemoveTag(tag);
+
+        Dispatcher.UIThread.Post(() =>
+        {
+            int count = extras.Tags.Count;
+            bool byPointer = _lastInputWasPointer && _gamepadNavigator?.IsControllerMode != true;
+            Control? next = count == 0 || byPointer ? null
+                : list.ContainerFromIndex(Math.Min(index, count - 1))?.GetVisualDescendants().OfType<Button>().FirstOrDefault();
+            FocusSessionControl(next ?? TagInputIn(tagBox));
+        }, DispatcherPriority.Background);
+    }
+
+    private static Border? PendingCardOf(object? sender) =>
+        (sender as Visual)?.GetVisualAncestors().OfType<Border>().FirstOrDefault(b => b.Classes.Contains("pending-card"));
+
+    // The note takes the focus once the editor is in place.
+    private void OnPendingExtrasOpenClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        var card = PendingCardOf(sender);
+        Dispatcher.UIThread.Post(() =>
+            FocusSessionControl(card?.GetVisualDescendants().OfType<TextBox>().FirstOrDefault(t => t.Classes.Contains("session-note"))),
+            DispatcherPriority.Background);
+    }
+
+    // Done or Cancel take their buttons away; the focus goes to what opens the editor again.
+    private void OnPendingExtrasClosedClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        var card = PendingCardOf(sender);
+        Dispatcher.UIThread.Post(() =>
+            FocusSessionControl(card?.GetVisualDescendants().OfType<Button>()
+                .FirstOrDefault(b => (b.Classes.Contains("extras-summary") || b.Classes.Contains("add-extra")) && b.IsEffectivelyVisible)),
+            DispatcherPriority.Background);
+    }
+
+    // Up when it would spill past the window: a popup is only kept on the screen, and under Gamescope it is drawn inside the window.
+    private void OnNotePrivacyDropDownOpened(object? sender, EventArgs e)
+    {
+        (sender as ComboBox)?.Classes.Add("open");
+        TurnPrivacyChevron(sender, 180);
+        if (sender is not ComboBox comboBox
+            || comboBox.GetVisualDescendants().OfType<Popup>().FirstOrDefault() is not { Child: Control menu } popup
+            || comboBox.TranslatePoint(new Point(0, comboBox.Bounds.Height), this) is not { } linkBottom) return;
+
+        bool up = linkBottom.Y + menu.DesiredSize.Height > ClientSize.Height;
+        popup.Placement = up ? PlacementMode.TopEdgeAlignedLeft : PlacementMode.BottomEdgeAlignedLeft;
+        // The menu keeps a transparent margin below it for the shadow.
+        popup.VerticalOffset = up ? menu.Margin.Bottom - 2 : 2;
+        menu.RenderTransformOrigin = up ? new RelativePoint(0, 1, RelativeUnit.Relative) : RelativePoint.TopLeft;
+    }
+
+    private void OnNotePrivacyDropDownClosed(object? sender, EventArgs e)
+    {
+        (sender as ComboBox)?.Classes.Remove("open");
+        TurnPrivacyChevron(sender, 0);
+    }
+
+    // The angle lives on the template's RotateTransform, which animates it; a RenderTransform set from a style did not turn.
+    private static void TurnPrivacyChevron(object? comboBox, double angle)
+    {
+        if ((comboBox as Visual)?.GetVisualDescendants().OfType<Avalonia.Controls.Shapes.Path>().FirstOrDefault(p => p.Name == "Chevron")?.RenderTransform is RotateTransform rotate)
+        {
+            rotate.Angle = angle;
+        }
+    }
+
+    // The chosen privacy pops in; two classes so each change restarts the animation.
+    private void OnNotePrivacyChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        if (sender is not ComboBox comboBox || e.RemovedItems.Count == 0) return;
+        bool wasA = comboBox.Classes.Contains("pop-a");
+        comboBox.Classes.Set("pop-a", !wasA);
+        comboBox.Classes.Set("pop-b", wasA);
     }
 
     private void StartHoldingFront()

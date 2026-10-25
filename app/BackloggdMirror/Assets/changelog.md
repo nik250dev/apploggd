@@ -6,6 +6,7 @@
 
 - Support for Steam Deck
 - Notice when the data folder cannot be read or written
+- Sessions can have a note and tags
 
 ### Changed
 
@@ -16,6 +17,7 @@
 - The window no longer jumps to the front while saving a session
 - The app no longer blocks shutting down or logging out while it is in the tray
 - The app no longer logs in with less than 50 MB of free disk space, where saving sessions could fail
+- A session saved while Backloggd was slow to answer could be written without its time
 
 ## 1.2.0 — 2026-10-08
 

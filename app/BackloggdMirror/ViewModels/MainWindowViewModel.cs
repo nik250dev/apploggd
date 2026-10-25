@@ -6,6 +6,7 @@ using BackloggdMirror.Services.Input;
 using BackloggdMirror.Services.Platform.Linux;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
@@ -352,6 +353,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [NotifyPropertyChangedFor(nameof(IsSaveEnabled))]
     [NotifyPropertyChangedFor(nameof(IsPostponeEnabled))]
     [NotifyPropertyChangedFor(nameof(IsGameSelectorEnabled))]
+    [NotifyPropertyChangedFor(nameof(AreSessionExtrasEnabled))]
     private bool _isSavingSession;
 
     [ObservableProperty]
@@ -366,10 +368,11 @@ public partial class MainWindowViewModel : ViewModelBase
     // The picker searches Backloggd, so it is useless offline.
     public bool IsGameSelectorEnabled => !IsSavingSession && !IsOffline;
 
-    public bool IsSaveEnabled => !IsSavingSession && IsGameIdentified && !IsOffline;
+    // Not while today's note and tags are read either: saving would write over them unseen.
+    public bool IsSaveEnabled => !IsSavingSession && IsGameIdentified && !IsOffline && !IsSessionExtrasLoading;
 
-    // Not while the title resolves: the pending entry would keep a half-identified game.
-    public bool IsPostponeEnabled => !IsSavingSession && !IsSessionTitleLoading;
+    // Not while the title resolves: the pending entry would keep a half-identified game. Nor without the note and tags.
+    public bool IsPostponeEnabled => !IsSavingSession && !IsSessionTitleLoading && !IsSessionExtrasLoading;
 
     public string? SaveButtonTooltip => IsOffline
         ? LocalizationService.Instance["Session_OfflineSaveTooltip"]
@@ -550,6 +553,9 @@ public partial class MainWindowViewModel : ViewModelBase
         IsGameIdentified = true;
 
         IsGameSelectorVisible = false;
+
+        // What was read so far belongs to the other game's day.
+        _ = LoadTodaySessionExtrasAsync();
     }
     // ############################
 
@@ -1497,7 +1503,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
         foreach (var session in _pendingSessionService.ForUser(_pendingSessionsUser).OrderByDescending(s => s.EndedAt))
         {
-            var item = new PendingSessionViewModel(session, OnPendingMarksChanged) { IsOffline = IsOffline };
+            var item = new PendingSessionViewModel(session, OnPendingMarksChanged, OnPendingExtrasChanged) { IsOffline = IsOffline };
             PendingSessions.Add(item);
             LoadPendingCover(item);
         }
@@ -1508,7 +1514,13 @@ public partial class MainWindowViewModel : ViewModelBase
     private void AddPendingSession(PendingSession session, Avalonia.Media.Imaging.Bitmap? cover = null)
     {
         _pendingSessionService.Add(session);
-        InsertPendingItem(new PendingSessionViewModel(session, OnPendingMarksChanged) { CoverBitmap = cover, IsOffline = IsOffline }, loadCover: cover == null);
+        InsertPendingItem(new PendingSessionViewModel(session, OnPendingMarksChanged, OnPendingExtrasChanged) { CoverBitmap = cover, IsOffline = IsOffline }, loadCover: cover == null);
+    }
+
+    private void OnPendingExtrasChanged(PendingSessionViewModel item)
+    {
+        _logger.Info($"[MainWindowViewModel] User action: note and tags of pending session '{item.Title}' changed ({item.Extras.Note.Length}-character note, {item.Extras.Tags.Count} tags).");
+        _pendingSessionService.Update(item.Session);
     }
 
     private void OnPendingMarksChanged(PendingSessionViewModel item)
@@ -1757,7 +1769,7 @@ public partial class MainWindowViewModel : ViewModelBase
         try
         {
             // TotalHours, not Hours, which wraps at 24.
-            await _browserService.RegisterGame(session.GameName, _authService.Cookies, (int)session.Duration.TotalHours, session.Duration.Minutes, session.GameUrl, session.StartedAt.Date, session.MarkedStarted, session.MarkedFinished);
+            await _browserService.RegisterGame(session.GameName, _authService.Cookies, (int)session.Duration.TotalHours, session.Duration.Minutes, session.GameUrl, session.StartedAt.Date, session.MarkedStarted, session.MarkedFinished, item.Extras.ToExtras());
 
             _logger.Info($"[MainWindowViewModel] Pending session registered on Backloggd: '{session.GameName}', {PendingSessionViewModel.FormatDuration(session.Duration)} on {session.StartedAt:yyyy-MM-dd}.");
             _pendingSessionService.Remove(session);
@@ -1769,6 +1781,7 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             _logger.Error($"[MainWindowViewModel] Registering pending session '{session.GameName}' ({PendingSessionViewModel.FormatDuration(session.Duration)}, {session.StartedAt:yyyy-MM-dd}) on Backloggd failed. It stays in Pending.", ex);
             session.SaveFailed = true;
+            item.CommitExtras();
             _pendingSessionService.Update(session);
             item.Refresh();
             await EnterOfflineModeIfUnreachableAsync("a pending session could not be saved");
@@ -1899,6 +1912,131 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty]
     private bool _isSessionMarkedFinished;
 
+    /// <summary>Backloggd's note and tags for the day's play session.</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsSessionExtrasRowOpen))]
+    private bool _isSessionNoteOpen;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsSessionExtrasRowOpen))]
+    private bool _isSessionTagsOpen;
+
+    /// <summary>The row of "Add note" / "Add tags" buttons, while either is still closed.</summary>
+    public bool IsSessionExtrasRowOpen => !(IsSessionNoteOpen && IsSessionTagsOpen);
+
+    /// <summary>The note and tags typed in the confirmation, starting from those today's play session already has.</summary>
+    public SessionExtrasViewModel SessionExtras { get; } = new();
+
+    /// <summary>While today's note and tags are read from Backloggd; they cannot be edited meanwhile.</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(AreSessionExtrasEnabled))]
+    [NotifyPropertyChangedFor(nameof(IsSaveEnabled))]
+    [NotifyPropertyChangedFor(nameof(IsPostponeEnabled))]
+    private bool _isSessionExtrasLoading;
+
+    public bool AreSessionExtrasEnabled => AreButtonsEnabled && !IsSessionExtrasLoading;
+
+    /// <summary>Set while the fields open to show what was read, so the view does not move the focus into them.</summary>
+    public bool IsFillingSessionExtras { get; private set; }
+
+    // Bumped per read, and on close, so a late result cannot land on another game or session.
+    private int _sessionExtrasRequest;
+
+    // Whether today's note and tags were read; until then an untouched, empty pair must not wipe them.
+    private bool _sessionExtrasKnown;
+
+    /// <summary>A read of today's note and tags started when the game was detected, so the confirmation opens with them.</summary>
+    private sealed record SessionExtrasPrefetch(string GameUrl, DateTime Day, Task<PlaySessionExtras?> Read);
+
+    private SessionExtrasPrefetch? _sessionExtrasPrefetch;
+
+    private void PrefetchTodaySessionExtras(string gameName, string? gameUrl)
+    {
+        // Without the confirmation the pending entry is saved as it is, so there is nothing to fill.
+        if (IsOffline || _settingsService.AlwaysAddToPending || string.IsNullOrEmpty(gameUrl)) return;
+
+        _sessionExtrasPrefetch = new(gameUrl, DateTime.Today, ReadTodaySessionExtrasAsync(gameName, gameUrl));
+    }
+
+    /// <summary>Null when they could not be read.</summary>
+    private async Task<PlaySessionExtras?> ReadTodaySessionExtrasAsync(string gameName, string gameUrl)
+    {
+        try
+        {
+            return await _browserService.GetTodayPlaySessionExtrasAsync(gameName, _authService.Cookies, gameUrl);
+        }
+        catch (Exception ex)
+        {
+            _logger.Warning($"[MainWindowViewModel] Today's note and tags of '{gameName}' could not be read. Saving leaves Backloggd's as they are unless new ones are written. {ex.Message}");
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// Fills the confirmation with the note and tags today's play session of the game already has, so they show up to be
+    /// kept or edited. Takes them from the read started on detection when it is about the same game and day and worked.
+    /// </summary>
+    private async Task LoadTodaySessionExtrasAsync(SessionExtrasPrefetch? prefetch = null)
+    {
+        int request = ++_sessionExtrasRequest;
+        _sessionExtrasKnown = false;
+        ResetSessionExtras();
+
+        string? gameName = _pendingGameName;
+        string? gameUrl = _pendingGameUrl;
+        if (string.IsNullOrEmpty(gameName) || string.IsNullOrEmpty(gameUrl)) return;
+
+        bool usable = prefetch != null && prefetch.GameUrl == gameUrl && prefetch.Day == DateTime.Today
+            && !(prefetch.Read.IsCompleted && prefetch.Read.Result == null);
+        if (!usable && IsOffline) return;
+
+        var read = usable ? prefetch!.Read : ReadTodaySessionExtrasAsync(gameName, gameUrl);
+
+        IsSessionExtrasLoading = !read.IsCompleted;
+        var extras = await read;
+        if (request != _sessionExtrasRequest) return;
+        IsSessionExtrasLoading = false;
+
+        if (extras == null) return;
+
+        _sessionExtrasKnown = true;
+        SessionExtras.Load(extras);
+        IsFillingSessionExtras = true;
+        IsSessionNoteOpen = !string.IsNullOrWhiteSpace(extras.Note);
+        IsSessionTagsOpen = extras.Tags.Count > 0;
+        IsFillingSessionExtras = false;
+    }
+
+    /// <summary>What the save writes as the day's note and tags; null leaves Backloggd's untouched.</summary>
+    private PlaySessionExtras? SessionExtrasToSave() =>
+        _sessionExtrasKnown || !SessionExtras.IsEmpty ? SessionExtras.ToExtras() : null;
+
+    [RelayCommand]
+    private void OpenSessionNote() => IsSessionNoteOpen = true;
+
+    [RelayCommand]
+    private void CloseSessionNote()
+    {
+        IsSessionNoteOpen = false;
+        SessionExtras.ClearNote();
+    }
+
+    [RelayCommand]
+    private void OpenSessionTags() => IsSessionTagsOpen = true;
+
+    [RelayCommand]
+    private void CloseSessionTags()
+    {
+        IsSessionTagsOpen = false;
+        SessionExtras.ClearTags();
+    }
+
+    private void ResetSessionExtras()
+    {
+        CloseSessionNote();
+        CloseSessionTags();
+    }
+
     [RelayCommand]
     private void DiscardSession()
     {
@@ -1923,6 +2061,7 @@ public partial class MainWindowViewModel : ViewModelBase
             SaveFailed = _pendingSaveFailed,
             MarkedStarted = IsSessionMarkedStarted,
             MarkedFinished = IsSessionMarkedFinished,
+            Extras = SessionExtras.ToExtras(),
             StartedAt = _pendingEndedAt - _pendingSessionDuration,
             EndedAt = _pendingEndedAt,
             Duration = _pendingSessionDuration
@@ -1961,6 +2100,10 @@ public partial class MainWindowViewModel : ViewModelBase
         _pendingSaveFailed = false;
         IsSessionMarkedStarted = false;
         IsSessionMarkedFinished = false;
+        _sessionExtrasRequest++;
+        _sessionExtrasKnown = false;
+        IsSessionExtrasLoading = false;
+        ResetSessionExtras();
         IsBackgroundImageVisible = false;
         IsGameIdentified = true;
 
@@ -1978,7 +2121,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private async Task SaveSession()
     {
-        if (IsOffline) return;
+        if (IsOffline || IsSessionExtrasLoading) return;
 
         IsSavingSession = true;
         HideForcedWarning();
@@ -1988,7 +2131,7 @@ public partial class MainWindowViewModel : ViewModelBase
             await _registrationGate.WaitAsync();
             try
             {
-                await _browserService.RegisterGame(_pendingGameName, _authService.Cookies, _pendingSessionDuration.Hours, _pendingSessionDuration.Minutes, _pendingGameUrl, markStarted: IsSessionMarkedStarted, markFinished: IsSessionMarkedFinished);
+                await _browserService.RegisterGame(_pendingGameName, _authService.Cookies, _pendingSessionDuration.Hours, _pendingSessionDuration.Minutes, _pendingGameUrl, markStarted: IsSessionMarkedStarted, markFinished: IsSessionMarkedFinished, extras: SessionExtrasToSave());
 
                 Console.WriteLine($"[SaveSession] Game registered successfully. Reloading data for user: '{_authService.Username}'");
                 _logger?.Info($"[SaveSession] Session registered on Backloggd: '{_pendingGameName}', {_pendingSessionDuration.Hours}h {_pendingSessionDuration.Minutes}m.");
@@ -2280,6 +2423,7 @@ public partial class MainWindowViewModel : ViewModelBase
         GameName = gameName;
         IsRunningGameEmulated = game.Source == DetectionSource.Emulator;
         IsGameRunning = true;
+        _sessionExtrasPrefetch = null;
 
         _stopwatch.Restart();
         _displayTimer.Start();
@@ -2294,6 +2438,8 @@ public partial class MainWindowViewModel : ViewModelBase
             {
                 // Use the canonical name from the JSON database
                 GameName = lookupResult.Name;
+
+                PrefetchTodaySessionExtras(lookupResult.Name, lookupResult.BackloggdGameUrl);
 
                 // Download artwork for background if available
                 if (!string.IsNullOrEmpty(lookupResult.ArtworkUrl))
@@ -2325,6 +2471,14 @@ public partial class MainWindowViewModel : ViewModelBase
                 _ = Task.Run(async () =>
                 {
                     var apiResult = await _gameDataService.LookupByIgdbIdFromApiAsync(capturedIdIgdb);
+                    if (apiResult?.BackloggdGameUrl != null)
+                    {
+                        Dispatcher.UIThread.Post(() =>
+                        {
+                            if (IsGameRunning && GameName == currentGameName) PrefetchTodaySessionExtras(currentGameName, apiResult.BackloggdGameUrl);
+                        });
+                    }
+
                     if (apiResult?.ArtworkUrl != null)
                     {
                         var bitmap = await _browserService.DownloadImageAsync(apiResult.ArtworkUrl);
@@ -2397,6 +2551,8 @@ public partial class MainWindowViewModel : ViewModelBase
             if (_selectorPendingTarget != null) CloseGameSelector();
 
             _pendingSessionToken++;
+            var extrasPrefetch = _sessionExtrasPrefetch;
+            _sessionExtrasPrefetch = null;
             _pendingGameName = gameToRegister;
             _pendingIdIgdb = currentIdIgdb;
             _pendingSessionDuration = elapsed;
@@ -2455,6 +2611,7 @@ public partial class MainWindowViewModel : ViewModelBase
                     _pendingCoverUrl = lookupResult.CoverUrl;
                     IsGameIdentified = true;
                     IsSessionTitleLoading = false;
+                    _ = LoadTodaySessionExtrasAsync(extrasPrefetch);
 
                     // Download cover image
                     if (!string.IsNullOrEmpty(lookupResult.CoverUrl))
@@ -2504,6 +2661,7 @@ public partial class MainWindowViewModel : ViewModelBase
                                 _pendingCoverUrl = apiResult.CoverUrl;
                                 IsGameIdentified = true;
                                 IsSessionTitleLoading = false;
+                                _ = LoadTodaySessionExtrasAsync(extrasPrefetch);
 
                                 // Download cover
                                 if (!string.IsNullOrEmpty(apiResult.CoverUrl))

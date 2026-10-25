@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System;
 using System.Text.RegularExpressions;
 using System.Globalization;
+using System.Linq;
+using BackloggdMirror.Models;
 
 using Avalonia.Controls;
 using Avalonia.Media.Imaging;
@@ -371,77 +373,28 @@ namespace BackloggdMirror.Services
         /// The "Started" and "Finished" marks are only ever added: one the day already has, or one
         /// not asked for, is left as Backloggd has it.
         ///
+        /// The note and tags, on the contrary, replace whatever the day had, empty ones included;
+        /// null <paramref name="extras"/> leaves them untouched.
+        ///
         /// Errors propagate to the caller, which turns them into a toast; the catch here only
         /// enriches the log.
         /// </summary>
-        public async Task RegisterGame(string gameName, System.Net.CookieContainer cookieContainer, int gamePlayDateHours, int gamePlayDateMinutes, string? gameUrl = null, DateTime? playDate = null, bool markStarted = false, bool markFinished = false)
+        public async Task RegisterGame(string gameName, System.Net.CookieContainer cookieContainer, int gamePlayDateHours, int gamePlayDateMinutes, string? gameUrl = null, DateTime? playDate = null, bool markStarted = false, bool markFinished = false, PlaySessionExtras? extras = null)
         {
             DateTime today = DateTime.Today;
             DateTime? pastDate = playDate?.Date < today ? playDate.Value.Date : null;
 
             Console.WriteLine($"[RegisterGame] Starting registration for {gameName} (URL: {gameUrl ?? "search"})...");
-            _logger?.Info($"[RegisterGame] Starting registration for {gameName} (URL: {gameUrl ?? "search"}, target date: {(pastDate?.ToString("yyyy-MM-dd") ?? "today")}, started: {markStarted}, finished: {markFinished})...");
+            _logger?.Info($"[RegisterGame] Starting registration for {gameName} (URL: {gameUrl ?? "search"}, target date: {(pastDate?.ToString("yyyy-MM-dd") ?? "today")}, started: {markStarted}, finished: {markFinished}, note and tags: {DescribeExtras(extras)})...");
 
             using var playwright = await Playwright.CreateAsync();
             await using var browser = await playwright.Chromium.LaunchAsync(BrowserLaunch.HiddenOptions());
 
-            var context = await browser.NewContextAsync(new BrowserNewContextOptions
-            {
-                UserAgent = await BrowserLaunch.ContextUserAgentAsync(browser, GetRandomUserAgent()),
-                ViewportSize = new ViewportSize { Width = 1920, Height = 1080 }
-            });
-
-            await context.AddCookiesAsync(CookieConversion.ToPlaywright(cookieContainer));
-
-            var page = await context.NewPageAsync();
+            var page = await NewSessionPageAsync(browser, cookieContainer);
 
             try
             {
-                if (!string.IsNullOrEmpty(gameUrl))
-                {
-                    // Callers supply the slug in either shape ("slug" or "/games/slug/") depending on
-                    // whether it came from the local database or from the manual game picker.
-                    string slug = gameUrl.Split('/', StringSplitOptions.RemoveEmptyEntries)[^1];
-                    var fullUrl = $"https://backloggd.com/games/{slug}/";
-                    Console.WriteLine($"[RegisterGame] Navigating directly to: {fullUrl}");
-                    _logger?.Info($"[RegisterGame] Navigating directly to: {fullUrl}");
-                    await page.GotoAsync(fullUrl);
-                }
-                else
-                {
-                    // No slug: the game was never identified, so it has to be found by name.
-                    Console.WriteLine($"[RegisterGame] No URL provided, searching for: {gameName}");
-                    _logger?.Info($"[RegisterGame] No URL provided, searching for: {gameName}");
-                    await page.GotoAsync("https://backloggd.com/search/games/");
-                }
-
-                await HandleCookieModalAsync(page);
-
-                if (string.IsNullOrEmpty(gameUrl))
-                {
-                    await page.FillAsync("#nav-bar-search", gameName);
-                    await page.ClickAsync(".search-btn");
-                    await page.WaitForSelectorAsync("#search-results");
-                    // Restricted to .main_game so the pick is the game itself, not one of its DLCs or
-                    // expansions, which the search returns alongside it.
-                    await page.Locator("#search-results :has(.main_game) .game-name").First.ClickAsync();
-                }
-
-                await page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
-
-                var logButtonSelector = ".side-section .d-none.d-md-flex .log-editor-btn";
-                Console.WriteLine($"[RegisterGame] Waiting for log button: {logButtonSelector}");
-                await page.WaitForSelectorAsync(logButtonSelector, new PageWaitForSelectorOptions { Timeout = LogEditorTimeoutMs });
-
-                await DismissConsentOverlayIfPresentAsync(page);
-
-                await page.ClickAsync(logButtonSelector);
-
-                await page.ClickAsync("#journal-nav");
-                Console.WriteLine($"[RegisterGame] Clicked journal-nav");
-
-                // The calendar opens on the month of the last play date, not the current one.
-                await page.ClickAsync("#jump-to-today");
+                await OpenJournalAsync(page, gameName, gameUrl, "RegisterGame");
 
                 string daySelector = ".fc-day-today";
 
@@ -498,6 +451,8 @@ namespace BackloggdMirror.Services
 
                 if (markStarted) await CheckMarkAsync(page, StartedMarkId);
 
+                if (extras != null) await WriteExtrasAsync(page, extras);
+
                 await page.ClickAsync("#play-date-update");
 
                 await page.WaitForSelectorAsync("#playthrough-modal-content", new PageWaitForSelectorOptions { State = WaitForSelectorState.Hidden });
@@ -534,6 +489,188 @@ namespace BackloggdMirror.Services
             }
         }
 
+        /// <summary>
+        /// The note and tags of today's play session of the game, or empty ones when today has none yet.
+        /// Read-only: the editor is left without pressing its save button.
+        /// </summary>
+        public async Task<PlaySessionExtras> GetTodayPlaySessionExtrasAsync(string gameName, System.Net.CookieContainer cookieContainer, string gameUrl)
+        {
+            _logger?.Info($"[GetTodayPlaySessionExtras] Reading today's note and tags for {gameName} (URL: {gameUrl})...");
+
+            using var playwright = await Playwright.CreateAsync();
+            await using var browser = await playwright.Chromium.LaunchAsync(BrowserLaunch.HiddenOptions());
+
+            var page = await NewSessionPageAsync(browser, cookieContainer);
+
+            try
+            {
+                await OpenJournalAsync(page, gameName, gameUrl, "GetTodayPlaySessionExtras");
+
+                await page.WaitForSelectorAsync(".fc-day-today", new PageWaitForSelectorOptions { State = WaitForSelectorState.Visible });
+
+                // Clicking an empty day would create its "Played" entry, and there is nothing to read anyway.
+                if (await page.Locator(".fc-day-today .fc-event").CountAsync() == 0)
+                {
+                    _logger?.Info($"[GetTodayPlaySessionExtras] '{gameName}' has no play session today yet.");
+                    return PlaySessionExtras.Empty;
+                }
+
+                await OpenPlayDateModalAsync(page, ".fc-day-today");
+
+                var extras = await ReadExtrasAsync(page);
+                _logger?.Info($"[GetTodayPlaySessionExtras] Today's play session of '{gameName}' has {DescribeExtras(extras)}.");
+                return extras;
+            }
+            catch (Exception ex)
+            {
+                var block = await AntiBotDetection.DetectAsync(page);
+                if (block != null)
+                {
+                    _logger?.Error($"[GetTodayPlaySessionExtras] Request {block}. Reading today's note and tags of '{gameName}' was interrupted by the protection, not by a page failure.");
+                }
+                else
+                {
+                    _logger?.Error($"[GetTodayPlaySessionExtras] Failed to read today's note and tags of '{gameName}': {ex.Message}", ex);
+                }
+
+                throw;
+            }
+        }
+
+        private async Task<IPage> NewSessionPageAsync(IBrowser browser, System.Net.CookieContainer cookieContainer)
+        {
+            var context = await browser.NewContextAsync(new BrowserNewContextOptions
+            {
+                UserAgent = await BrowserLaunch.ContextUserAgentAsync(browser, GetRandomUserAgent()),
+                ViewportSize = new ViewportSize { Width = 1920, Height = 1080 }
+            });
+
+            await context.AddCookiesAsync(CookieConversion.ToPlaywright(cookieContainer));
+
+            return await context.NewPageAsync();
+        }
+
+        /// <summary>Opens the game's log editor on the journal tab, at the current month.</summary>
+        private async Task OpenJournalAsync(IPage page, string gameName, string? gameUrl, string logTag)
+        {
+            if (!string.IsNullOrEmpty(gameUrl))
+            {
+                // Callers supply the slug in either shape ("slug" or "/games/slug/") depending on
+                // whether it came from the local database or from the manual game picker.
+                string slug = gameUrl.Split('/', StringSplitOptions.RemoveEmptyEntries)[^1];
+                var fullUrl = $"https://backloggd.com/games/{slug}/";
+                Console.WriteLine($"[{logTag}] Navigating directly to: {fullUrl}");
+                _logger?.Info($"[{logTag}] Navigating directly to: {fullUrl}");
+                await page.GotoAsync(fullUrl);
+            }
+            else
+            {
+                // No slug: the game was never identified, so it has to be found by name.
+                Console.WriteLine($"[{logTag}] No URL provided, searching for: {gameName}");
+                _logger?.Info($"[{logTag}] No URL provided, searching for: {gameName}");
+                await page.GotoAsync("https://backloggd.com/search/games/");
+            }
+
+            await HandleCookieModalAsync(page);
+
+            if (string.IsNullOrEmpty(gameUrl))
+            {
+                await page.FillAsync("#nav-bar-search", gameName);
+                await page.ClickAsync(".search-btn");
+                await page.WaitForSelectorAsync("#search-results");
+                // Restricted to .main_game so the pick is the game itself, not one of its DLCs or
+                // expansions, which the search returns alongside it.
+                await page.Locator("#search-results :has(.main_game) .game-name").First.ClickAsync();
+            }
+
+            await page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
+
+            var logButtonSelector = ".side-section .d-none.d-md-flex .log-editor-btn";
+            Console.WriteLine($"[{logTag}] Waiting for log button: {logButtonSelector}");
+            await page.WaitForSelectorAsync(logButtonSelector, new PageWaitForSelectorOptions { Timeout = LogEditorTimeoutMs });
+
+            await DismissConsentOverlayIfPresentAsync(page);
+
+            await page.ClickAsync(logButtonSelector);
+
+            await page.ClickAsync("#journal-nav");
+            Console.WriteLine($"[{logTag}] Clicked journal-nav");
+
+            // The calendar opens on the month of the last play date, not the current one.
+            await page.ClickAsync("#jump-to-today");
+        }
+
+        private const string PlaySessionModal = "#playthrough-modal-content";
+        private const string CurrentPrivacySelector = PlaySessionModal + " #note-privacy-dropdown .nav-link.current-sort";
+
+        private static async Task<PlaySessionExtras> ReadExtrasAsync(IPage page)
+        {
+            string note = await page.InputValueAsync($"{PlaySessionModal} #note");
+            string? privacy = await CurrentPrivacyAsync(page);
+
+            // From the Tagify instance: the hidden input it mirrors its tags into is updated later, and
+            // right after the modal opens it can still be empty.
+            string[] tags = await page.EvaluateAsync<string[]>(
+                "() => document.querySelector('#play-session-tags').__tagify.value.map(tag => tag.value)");
+
+            return new PlaySessionExtras(note, PrivacyFromAttribute(privacy), tags);
+        }
+
+        /// <summary>Fills the open play session modal, replacing whatever note, privacy and tags it had.</summary>
+        private async Task WriteExtrasAsync(IPage page, PlaySessionExtras extras)
+        {
+            await page.FillAsync($"{PlaySessionModal} #note", extras.Note);
+
+            string privacy = PrivacyToAttribute(extras.Privacy);
+            if (await CurrentPrivacyAsync(page) != privacy)
+            {
+                // The options sit in a dropdown, hidden until its toggle opens it.
+                await page.ClickAsync($"{PlaySessionModal} #date-privacy-form .dropdown-toggle");
+                await page.ClickAsync($"{PlaySessionModal} #note-privacy-dropdown .nav-link[privacy='{privacy}']");
+            }
+
+            // Through the Tagify instance behind the field, which is what Backloggd reads the tags from on save.
+            int kept = await page.EvaluateAsync<int>(@"tags => {
+                const tagify = document.querySelector('#play-session-tags').__tagify;
+                tagify.removeAllTags();
+                tagify.addTags(tags);
+                return tagify.value.length;
+            }", extras.Tags.ToArray());
+
+            if (kept != extras.Tags.Count)
+            {
+                _logger?.Warning($"[RegisterGame] Backloggd kept {kept} of {extras.Tags.Count} tags; it drops the ones its pattern refuses.");
+            }
+        }
+
+        private static async Task<string?> CurrentPrivacyAsync(IPage page)
+        {
+            var current = page.Locator(CurrentPrivacySelector);
+            return await current.CountAsync() > 0 ? await current.First.GetAttributeAsync("privacy") : null;
+        }
+
+        // Backloggd's values: "" is the account's default, then 2 anyone, 1 friends and 0 only the owner.
+        private static NotePrivacy PrivacyFromAttribute(string? value) => value switch
+        {
+            "2" => NotePrivacy.Public,
+            "1" => NotePrivacy.Friends,
+            "0" => NotePrivacy.Private,
+            _ => NotePrivacy.Default
+        };
+
+        private static string PrivacyToAttribute(NotePrivacy privacy) => privacy switch
+        {
+            NotePrivacy.Public => "2",
+            NotePrivacy.Friends => "1",
+            NotePrivacy.Private => "0",
+            _ => string.Empty
+        };
+
+        /// <summary>For the log, without the note's text.</summary>
+        private static string DescribeExtras(PlaySessionExtras? extras) => extras == null
+            ? "left as they are"
+            : $"a {extras.Note.Length}-character note ({extras.Privacy} privacy) and {extras.Tags.Count} tags";
+
         private const string StartedMarkId = "is_start_session";
         private const string FinishedMarkId = "is_finish_session";
 
@@ -541,22 +678,54 @@ namespace BackloggdMirror.Services
         /// Opens the play session modal of a calendar day. On a day with nothing logged the first click
         /// only creates the "Played" entry, and Backloggd ignores a second one within 200 ms; the next
         /// click opens the modal.
+        ///
+        /// The opening click is repeated only when it asked Backloggd for nothing. Once asked, it waits for the
+        /// modal's content however slow: a second click gets a second reply, and a late one replaces the modal
+        /// after it was filled, so the save wrote the day's old time, note and tags.
         /// </summary>
         private static async Task OpenPlayDateModalAsync(IPage page, string daySelector)
         {
-            await page.Locator(daySelector).ClickAsync(new LocatorClickOptions { Force = true });
-            Console.WriteLine($"[RegisterGame] Clicked the day in calendar");
+            var day = page.Locator(daySelector);
+            var clickAnywhere = new LocatorClickOptions { Force = true };
 
-            await page.WaitForTimeoutAsync(500);
-
-            if (!await page.IsVisibleAsync("#playthrough-modal-content"))
+            if (await page.Locator($"{daySelector} .fc-event").CountAsync() == 0)
             {
-                await page.Locator(daySelector).ClickAsync(new LocatorClickOptions { Force = true });
-                Console.WriteLine($"[RegisterGame] Clicked the day's Played entry");
+                await day.ClickAsync(clickAnywhere);
+                Console.WriteLine($"[RegisterGame] Clicked the day in calendar");
+
+                await page.Locator($"{daySelector} .fc-event").First.WaitForAsync();
+                await page.WaitForTimeoutAsync(500);
             }
+
+            static bool IsModalRequest(string url) => url.Contains("/open-date-modal/");
+
+            var reply = page.WaitForResponseAsync(response => IsModalRequest(response.Url),
+                new PageWaitForResponseOptions { Timeout = OpenModalClickAttempts * OpenModalRequestTimeoutMs + OpenModalReplyTimeoutMs });
+
+            for (int attempt = 1; ; attempt++)
+            {
+                try
+                {
+                    await page.RunAndWaitForRequestAsync(() => day.ClickAsync(clickAnywhere), request => IsModalRequest(request.Url),
+                        new PageRunAndWaitForRequestOptions { Timeout = OpenModalRequestTimeoutMs });
+                    break;
+                }
+                catch (TimeoutException) when (attempt < OpenModalClickAttempts)
+                {
+                    Console.WriteLine($"[RegisterGame] The click on the day asked for nothing; clicking again");
+                }
+            }
+
+            await reply;
+            Console.WriteLine($"[RegisterGame] Opened the day's Played entry");
 
             await page.WaitForSelectorAsync("#playthrough-modal-content", new PageWaitForSelectorOptions { State = WaitForSelectorState.Visible });
         }
+
+        // The click's request goes out at once, so a few seconds without it means the click was lost.
+        private const int OpenModalRequestTimeoutMs = 5000;
+        private const int OpenModalClickAttempts = 3;
+        private const int OpenModalReplyTimeoutMs = 30000;
 
         /// <summary>
         /// Ticks a mark in the open play session modal, unless the day already has it. Backloggd disables
