@@ -587,6 +587,23 @@ namespace BackloggdMirror.Services
 
             var logButtonSelector = ".side-section .d-none.d-md-flex .log-editor-btn";
             Console.WriteLine($"[{logTag}] Waiting for log button: {logButtonSelector}");
+
+            // Editions ("This game is an edition of") and merged games ("This game was merged into") cannot be
+            // logged: instead of the log button they link the game that takes the log.
+            for (int hops = 0; ; hops++)
+            {
+                await page.WaitForSelectorAsync($"{logButtonSelector}, {BaseGameLinkSelector}", new PageWaitForSelectorOptions { Timeout = LogEditorTimeoutMs });
+
+                if (await page.Locator(logButtonSelector).CountAsync() > 0 || hops == MaxBaseGameHops) break;
+
+                string? baseGameHref = await page.Locator(BaseGameLinkSelector).First.GetAttributeAsync("href");
+                var baseGameUrl = $"https://backloggd.com{baseGameHref}";
+                Console.WriteLine($"[{logTag}] {page.Url} cannot be logged, following its base game: {baseGameUrl}");
+                _logger?.Info($"[{logTag}] {page.Url} cannot be logged, following its base game: {baseGameUrl}");
+                await page.GotoAsync(baseGameUrl);
+                await page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
+            }
+
             await page.WaitForSelectorAsync(logButtonSelector, new PageWaitForSelectorOptions { Timeout = LogEditorTimeoutMs });
 
             await DismissConsentOverlayIfPresentAsync(page);
@@ -599,6 +616,9 @@ namespace BackloggdMirror.Services
             // The calendar opens on the month of the last play date, not the current one.
             await page.ClickAsync("#jump-to-today");
         }
+
+        private const string BaseGameLinkSelector = ".side-section p a[href^='/games/']";
+        private const int MaxBaseGameHops = 2;
 
         private const string PlaySessionModal = "#playthrough-modal-content";
         private const string CurrentPrivacySelector = PlaySessionModal + " #note-privacy-dropdown .nav-link.current-sort";
