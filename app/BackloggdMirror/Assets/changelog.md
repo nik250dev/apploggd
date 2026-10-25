@@ -18,6 +18,7 @@
 - The app no longer blocks shutting down or logging out while it is in the tray
 - The app no longer logs in with less than 50 MB of free disk space, where saving sessions could fail
 - A session saved while Backloggd was slow to answer could be written without its time
+- Sessions of special editions are logged in the base game
 
 ## 1.2.0 — 2026-10-08
 
