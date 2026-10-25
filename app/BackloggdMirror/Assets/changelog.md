@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Sessions can have a note and tags
+
+### Fixed
+
+- A session saved while Backloggd was slow to answer could be written without its time
+
 ## 1.2.0 — 2026-10-08
 
 ### Added

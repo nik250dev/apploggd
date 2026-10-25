@@ -1,17 +1,10 @@
 using System.Collections.Generic;
 using Avalonia.Media;
+using BackloggdMirror.Models;
 using BackloggdMirror.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BackloggdMirror.ViewModels;
-
-public enum NotePrivacy
-{
-    Default,
-    Public,
-    Friends,
-    Private
-}
 
 /// <summary>One entry of the note's privacy menu, the same four Backloggd offers.</summary>
 public sealed class NotePrivacyOption : ObservableObject

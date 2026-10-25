@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text.RegularExpressions;
+using BackloggdMirror.Models;
 using BackloggdMirror.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -12,6 +14,9 @@ namespace BackloggdMirror.ViewModels;
 public partial class SessionExtrasViewModel : ViewModelBase
 {
     public const int MaxTags = 8;
+
+    // Backloggd's own pattern; it silently drops any tag that fails it. The comma is the separator.
+    private static readonly Regex TagPattern = new("^[A-Za-z0-9_ -]{1,24}$");
 
     public sealed record Snapshot(string Note, NotePrivacyOption Privacy, string[] Tags);
 
@@ -31,6 +36,10 @@ public partial class SessionExtrasViewModel : ViewModelBase
     [ObservableProperty]
     private string _tagInput = string.Empty;
 
+    /// <summary>What is being typed would not be a valid tag on Backloggd.</summary>
+    [ObservableProperty]
+    private bool _isTagInputInvalid;
+
     // Two flags so each turned-away tag restarts the counter's shake.
     [ObservableProperty]
     private bool _isRejectShakeA;
@@ -48,20 +57,20 @@ public partial class SessionExtrasViewModel : ViewModelBase
     /// <summary>The note on one paragraph, quoted, for the pending row's summary.</summary>
     public string NotePreview => $"“{string.Join(' ', Note.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries))}”";
 
-    /// <summary>Turns what was typed into a tag; a repeated one is dropped quietly.</summary>
+    /// <summary>Turns what was typed into a tag, lowercase as Backloggd keeps them; a repeated one is dropped quietly.</summary>
     [RelayCommand]
     private void CommitTagInput()
     {
-        string tag = string.Join(' ', TagInput.Split(' ', StringSplitOptions.RemoveEmptyEntries));
+        string tag = NormalizeTag(TagInput);
         if (tag.Length == 0) return;
 
-        if (Tags.Any(t => string.Equals(t, tag, StringComparison.CurrentCultureIgnoreCase)))
+        if (Tags.Contains(tag))
         {
             TagInput = string.Empty;
             return;
         }
 
-        if (IsTagsFull)
+        if (IsTagsFull || !TagPattern.IsMatch(tag))
         {
             bool wasA = IsRejectShakeA;
             IsRejectShakeA = !wasA;
@@ -88,6 +97,9 @@ public partial class SessionExtrasViewModel : ViewModelBase
     // A comma ends a tag, as in Backloggd; pasting "a, b, c" adds the three.
     partial void OnTagInputChanged(string value)
     {
+        string tag = NormalizeTag(value);
+        IsTagInputInvalid = tag.Length > 0 && !value.Contains(',') && !TagPattern.IsMatch(tag);
+
         int comma = value.LastIndexOf(',');
         if (comma < 0) return;
 
@@ -109,6 +121,21 @@ public partial class SessionExtrasViewModel : ViewModelBase
     {
         TagInput = string.Empty;
         Tags.Clear();
+        NotifyTagsChanged();
+    }
+
+    private static string NormalizeTag(string text) =>
+        string.Join(' ', text.Split(' ', StringSplitOptions.RemoveEmptyEntries)).ToLowerInvariant();
+
+    public PlaySessionExtras ToExtras() => new(Note, Privacy.Value, Tags.ToArray());
+
+    public void Load(PlaySessionExtras extras)
+    {
+        Note = extras.Note;
+        Privacy = NotePrivacyOption.All.First(o => o.Value == extras.Privacy);
+        TagInput = string.Empty;
+        Tags.Clear();
+        foreach (string tag in extras.Tags.Take(MaxTags)) Tags.Add(tag);
         NotifyTagsChanged();
     }
 

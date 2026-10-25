@@ -56,6 +56,7 @@
 
         <!-- The tag box: chips over the line they are typed on. Shared too. -->
         <DataTemplate x:Key="TagEditorTemplate" x:DataType="vm:SessionExtrasViewModel">
+            <StackPanel>
             <Border Classes="tag-box" PointerPressed="OnTagBoxPointerPressed">
                 <StackPanel>
                     <ItemsControl ItemsSource="{Binding Tags}" IsVisible="{Binding HasTags}">
@@ -85,6 +86,9 @@
                                      CommitCommand="{Binding CommitTagInputCommand}" RemoveLastCommand="{Binding RemoveLastTagCommand}"/>
                 </StackPanel>
             </Border>
+            <TextBlock Text="{Binding [Session_TagsInvalid], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding IsTagInputInvalid}"
+                       FontSize="11" Foreground="{DynamicResource OfflineBrush}" TextWrapping="Wrap" Margin="2,4,0,0"/>
+            </StackPanel>
         </DataTemplate>
         <conv:ToastTypeToIconConverter x:Key="ToastTypeToIconConverter"/>
         <conv:ToastTypeToBackgroundConverter x:Key="ToastTypeToBackgroundConverter"/>
@@ -2410,19 +2414,33 @@
                                 <Border Height="1" Background="{DynamicResource SeparatorBrush}" Margin="0,16,0,12"/>
                                 <StackPanel Orientation="Horizontal" Spacing="8">
                                     <Button x:Name="SessionAddNoteButton" Classes="add-extra" Command="{Binding OpenSessionNoteCommand}"
-                                            IsVisible="{Binding !IsSessionNoteOpen}" IsEnabled="{Binding AreButtonsEnabled}">
+                                            IsVisible="{Binding !IsSessionNoteOpen}" IsEnabled="{Binding AreSessionExtrasEnabled}">
                                         <StackPanel Orientation="Horizontal" Spacing="6">
                                             <PathIcon Data="{StaticResource AddExtraIconData}"/>
                                             <TextBlock Text="{Binding [Session_AddNote], Source={x:Static services:LocalizationService.Instance}}" VerticalAlignment="Center"/>
                                         </StackPanel>
                                     </Button>
                                     <Button x:Name="SessionAddTagsButton" Classes="add-extra" Command="{Binding OpenSessionTagsCommand}"
-                                            IsVisible="{Binding !IsSessionTagsOpen}" IsEnabled="{Binding AreButtonsEnabled}">
+                                            IsVisible="{Binding !IsSessionTagsOpen}" IsEnabled="{Binding AreSessionExtrasEnabled}">
                                         <StackPanel Orientation="Horizontal" Spacing="6">
                                             <PathIcon Data="{StaticResource AddExtraIconData}"/>
                                             <TextBlock Text="{Binding [Session_AddTags], Source={x:Static services:LocalizationService.Instance}}" VerticalAlignment="Center"/>
                                         </StackPanel>
                                     </Button>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Spacing="6" Margin="0,8,0,0" IsVisible="{Binding IsSessionExtrasLoading}">
+                                    <Path Classes="spinner" IsVisible="{Binding IsSessionExtrasLoading}"
+                                          Data="M 25,0 A 25,25 0 1 1 0,25" StrokeThickness="2" Stretch="Uniform"
+                                          Width="12" Height="12" VerticalAlignment="Center">
+                                        <Path.Stroke>
+                                            <ConicGradientBrush>
+                                                <GradientStop Color="rgba(255, 255, 255, 0)" Offset="0"/>
+                                                <GradientStop Color="rgba(255, 255, 255, 1)" Offset="1"/>
+                                            </ConicGradientBrush>
+                                        </Path.Stroke>
+                                    </Path>
+                                    <TextBlock Text="{Binding [Session_ExtrasLoading], Source={x:Static services:LocalizationService.Instance}}"
+                                               FontSize="12" Foreground="{DynamicResource TextMutedBrush}" VerticalAlignment="Center" TextWrapping="Wrap"/>
                                 </StackPanel>
                             </StackPanel>
                         </ctl:RevealPanel>
@@ -2431,16 +2449,16 @@
                             <StackPanel Margin="0,16,0,0">
                                 <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,6">
                                     <TextBlock Classes="field-label" Text="{Binding [Session_Note], Source={x:Static services:LocalizationService.Instance}}"/>
-                                    <Button Grid.Column="1" Classes="field-close gp-icon" Command="{Binding CloseSessionNoteCommand}" IsEnabled="{Binding AreButtonsEnabled}"
+                                    <Button Grid.Column="1" Classes="field-close gp-icon" Command="{Binding CloseSessionNoteCommand}" IsEnabled="{Binding AreSessionExtrasEnabled}"
                                             ToolTip.Tip="{Binding [Session_RemoveNote], Source={x:Static services:LocalizationService.Instance}}"
                                             AutomationProperties.Name="{Binding [Session_RemoveNote], Source={x:Static services:LocalizationService.Instance}}">
                                         <PathIcon Data="{StaticResource FieldCloseIconData}"/>
                                     </Button>
                                 </Grid>
-                                <TextBox x:Name="SessionNoteBox" Classes="session-note gp-text" Text="{Binding SessionExtras.Note}" IsEnabled="{Binding AreButtonsEnabled}"
+                                <TextBox x:Name="SessionNoteBox" Classes="session-note gp-text" Text="{Binding SessionExtras.Note}" IsEnabled="{Binding AreSessionExtrasEnabled}"
                                          Watermark="{Binding [Session_NoteWatermark], Source={x:Static services:LocalizationService.Instance}}"/>
                                 <ComboBox x:Name="SessionNotePrivacyBox" Classes="note-privacy" Margin="0,6,0,0"
-                                          ItemsSource="{Binding SessionExtras.PrivacyOptions}" SelectedItem="{Binding SessionExtras.Privacy}" IsEnabled="{Binding AreButtonsEnabled}"
+                                          ItemsSource="{Binding SessionExtras.PrivacyOptions}" SelectedItem="{Binding SessionExtras.Privacy}" IsEnabled="{Binding AreSessionExtrasEnabled}"
                                           SelectionBoxItemTemplate="{StaticResource NotePrivacySelectionTemplate}" ItemTemplate="{StaticResource NotePrivacyItemTemplate}"
                                           SelectionChanged="OnNotePrivacyChanged" DropDownOpened="OnNotePrivacyDropDownOpened" DropDownClosed="OnNotePrivacyDropDownClosed"
                                           AutomationProperties.Name="{Binding [Session_NotePrivacy], Source={x:Static services:LocalizationService.Instance}}"/>
@@ -2457,13 +2475,13 @@
                                             <TranslateTransform/>
                                         </TextBlock.RenderTransform>
                                     </TextBlock>
-                                    <Button Grid.Column="2" Classes="field-close gp-icon" Command="{Binding CloseSessionTagsCommand}" IsEnabled="{Binding AreButtonsEnabled}"
+                                    <Button Grid.Column="2" Classes="field-close gp-icon" Command="{Binding CloseSessionTagsCommand}" IsEnabled="{Binding AreSessionExtrasEnabled}"
                                             ToolTip.Tip="{Binding [Session_RemoveTags], Source={x:Static services:LocalizationService.Instance}}"
                                             AutomationProperties.Name="{Binding [Session_RemoveTags], Source={x:Static services:LocalizationService.Instance}}">
                                         <PathIcon Data="{StaticResource FieldCloseIconData}"/>
                                     </Button>
                                 </Grid>
-                                <ContentControl Content="{Binding SessionExtras}" ContentTemplate="{StaticResource TagEditorTemplate}" IsEnabled="{Binding AreButtonsEnabled}"/>
+                                <ContentControl Content="{Binding SessionExtras}" ContentTemplate="{StaticResource TagEditorTemplate}" IsEnabled="{Binding AreSessionExtrasEnabled}"/>
                             </StackPanel>
                         </ctl:RevealPanel>
                     </StackPanel>

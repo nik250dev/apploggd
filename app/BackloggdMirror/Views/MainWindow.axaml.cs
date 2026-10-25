@@ -332,10 +332,10 @@ public partial class MainWindow : Window
         }
     }
 
-    /// <summary>An opened field takes the focus; a removed one hands it back to its button, if the focus was inside.</summary>
+    /// <summary>An opened field takes the focus, unless it opened to show what Backloggd had; a removed one hands it back to its button, if the focus was inside.</summary>
     private void OnSessionExtraToggled(BackloggdMirror.ViewModels.MainWindowViewModel vm, bool opened, Views.Controls.RevealPanel panel, Func<Control?> field, Button addButton)
     {
-        if (!vm.IsSessionConfirmationVisible) return;
+        if (!vm.IsSessionConfirmationVisible || vm.IsFillingSessionExtras) return;
 
         bool focusInside = FocusManager?.GetFocusedElement() is Visual focused && panel.IsVisualAncestorOf(focused);
         Dispatcher.UIThread.Post(() =>

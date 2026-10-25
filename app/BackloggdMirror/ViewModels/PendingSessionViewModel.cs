@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Avalonia.Media.Imaging;
 using BackloggdMirror.Models;
 using BackloggdMirror.Services;
@@ -11,11 +12,14 @@ namespace BackloggdMirror.ViewModels;
 public partial class PendingSessionViewModel : ViewModelBase
 {
     private readonly Action<PendingSessionViewModel>? _marksChanged;
+    private readonly Action<PendingSessionViewModel>? _extrasChanged;
 
-    public PendingSessionViewModel(PendingSession session, Action<PendingSessionViewModel>? marksChanged = null)
+    public PendingSessionViewModel(PendingSession session, Action<PendingSessionViewModel>? marksChanged = null, Action<PendingSessionViewModel>? extrasChanged = null)
     {
         Session = session;
         _marksChanged = marksChanged;
+        _extrasChanged = extrasChanged;
+        Extras.Load(session.Extras);
     }
 
     public PendingSession Session { get; }
@@ -38,7 +42,7 @@ public partial class PendingSessionViewModel : ViewModelBase
         }
     }
 
-    /// <summary>Note and tags for the log. Only laid out for now: kept while the app runs, never saved or sent.</summary>
+    /// <summary>Note and tags for the log, written over the day's on save. Kept in the session once the editor is closed with "Done".</summary>
     public SessionExtrasViewModel Extras { get; } = new();
 
     private SessionExtrasViewModel.Snapshot? _extrasBeforeEdit;
@@ -60,7 +64,22 @@ public partial class PendingSessionViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void CloseExtras() => IsEditingExtras = false;
+    private void CloseExtras()
+    {
+        IsEditingExtras = false;
+        if (CommitExtras()) _extrasChanged?.Invoke(this);
+    }
+
+    /// <summary>Copies the note and tags into the session; false when they were already there.</summary>
+    public bool CommitExtras()
+    {
+        var extras = Extras.ToExtras();
+        var saved = Session.Extras;
+        if (extras.Note == saved.Note && extras.Privacy == saved.Privacy && extras.Tags.SequenceEqual(saved.Tags)) return false;
+
+        Session.Extras = extras;
+        return true;
+    }
 
     /// <summary>Puts back what the note and tags were when the editor opened.</summary>
     [RelayCommand]
