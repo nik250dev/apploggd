@@ -533737,7 +533737,13 @@
     "id": "1559588343023534261",
     "name": "Vindictus: Defying Fate",
     "aliases": [],
-    "executables": [],
+    "executables": [
+      {
+        "name": "vindictus defying fate demo/vindictus.exe",
+        "os": "win32",
+        "is_launcher": false
+      }
+    ],
     "third_party_skus": [
       {
         "distributor": "steam",
@@ -538217,5 +538223,546 @@
       "ar5ge8"
     ],
     "url": "battle-bears-gold"
+  },
+  {
+    "id": "1564489514481881128",
+    "name": "Harvest Moon: Echoes of Teradea",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "400976",
+    "cover": "cocxj6",
+    "artwork": null,
+    "url": "harvest-moon-echoes-of-teradea"
+  },
+  {
+    "id": "1564489549906841700",
+    "name": "Construction Simulator: Evolution",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "398522",
+    "cover": "cobxq2",
+    "artwork": [
+      "ar5pzu"
+    ],
+    "url": "construction-simulator-evolution"
+  },
+  {
+    "id": "1564489555397312612",
+    "name": "Netherwyn",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "423364",
+    "cover": null,
+    "artwork": null,
+    "url": "netherwyn"
+  },
+  {
+    "id": "1564489563571888298",
+    "name": "4 Penny Coffins",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "396126",
+    "cover": "cobtzx",
+    "artwork": [
+      "ar5lu9"
+    ],
+    "url": "4-penny-coffins"
+  },
+  {
+    "id": "1564489581737410690",
+    "name": "Father, Son & Holy Guns",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "388891",
+    "cover": "cobgy1",
+    "artwork": [
+      "ar590e"
+    ],
+    "url": "father-son-and-holy-guns"
+  },
+  {
+    "id": "1564489592131035287",
+    "name": "Rustmourne",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "406184",
+    "cover": "coc8fi",
+    "artwork": [
+      "ar62b6"
+    ],
+    "url": "rustmourne"
+  },
+  {
+    "id": "1564489615564472401",
+    "name": "Into the Crypt",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "116419",
+    "cover": "cob88s",
+    "artwork": [
+      "ar58u",
+      "ar91u"
+    ],
+    "url": "cadence-of-hyrule-crypt-of-the-necrodancer-featuring-the-legend-of-zelda"
+  },
+  {
+    "id": "1564489635705393173",
+    "name": "Okko The Exiled",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "338923",
+    "cover": "co9myf",
+    "artwork": [
+      "ar3f6r"
+    ],
+    "url": "okko-the-exiled"
+  },
+  {
+    "id": "1564489665011253362",
+    "name": "StateOS: The Political Sandbox",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "417262",
+    "cover": "cocvfb",
+    "artwork": [
+      "ar6kl9"
+    ],
+    "url": "stateos-the-political-sandbox"
+  },
+  {
+    "id": "1564489680630710425",
+    "name": "The Doll Shop",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "373835",
+    "cover": "ar5luj",
+    "artwork": [
+      "ar5luk",
+      "ar4h5i"
+    ],
+    "url": "the-doll-shop--1"
+  },
+  {
+    "id": "1564489688088322058",
+    "name": "PRO: Push React Outgun",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1564489702533496872",
+    "name": "Project Hunt",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "253516",
+    "cover": "cobs3i",
+    "artwork": [
+      "ar2cxf"
+    ],
+    "url": "project-hunt"
+  },
+  {
+    "id": "1564489711253323847",
+    "name": "Project SEVER",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "368581",
+    "cover": "coak1q",
+    "artwork": [
+      "ar4ak6"
+    ],
+    "url": "project-sever"
+  },
+  {
+    "id": "1564489735483822101",
+    "name": "Clown Around",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "284727",
+    "cover": "co9up7",
+    "artwork": null,
+    "url": "clown-around"
+  },
+  {
+    "id": "1564489749094203562",
+    "name": "Clowntown",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "405107",
+    "cover": "coc74z",
+    "artwork": [
+      "ar6vgr"
+    ],
+    "url": "clowntown"
+  },
+  {
+    "id": "1564489769256226936",
+    "name": "Silberheim Evolving Card Game",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "393787",
+    "cover": "cocx3d",
+    "artwork": [
+      "ar5i8h"
+    ],
+    "url": "silberheim-evolving-card-game"
+  },
+  {
+    "id": "1564489789208789073",
+    "name": "Moving Castle",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "291759",
+    "cover": "co7wiw",
+    "artwork": [
+      "ar2tng"
+    ],
+    "url": "the-girls-moving-castle"
+  },
+  {
+    "id": "1564489810092232764",
+    "name": "Scream Operator: Haunted House Manager",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "421931",
+    "cover": "cod3y7",
+    "artwork": [
+      "ar6rtc"
+    ],
+    "url": "scream-operator-haunted-house-manager"
+  },
+  {
+    "id": "1564489828383588433",
+    "name": "Galactic Disharmony",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "423397",
+    "cover": "cod6tp",
+    "artwork": [
+      "ar6uil"
+    ],
+    "url": "galactic-disharmony"
+  },
+  {
+    "id": "1564489852265955338",
+    "name": "Leafborn",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "400126",
+    "cover": "coc055",
+    "artwork": [
+      "ar5swm"
+    ],
+    "url": "leafborn"
+  },
+  {
+    "id": "1564489885887242350",
+    "name": "Retroneer",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "392359",
+    "cover": "cobm8j",
+    "artwork": null,
+    "url": "retroneer"
+  },
+  {
+    "id": "1564489917373878313",
+    "name": "The Last Hour of an Epic TO THE MOON RPG",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "274905",
+    "cover": "co9dnd",
+    "artwork": [
+      "ar2m2o"
+    ],
+    "url": "last-hour-of-an-epic-to-the-moon-rpg"
+  },
+  {
+    "id": "1564489943680549025",
+    "name": "Skingdom",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "398555",
+    "cover": "cobxr1",
+    "artwork": [
+      "ar5q1s"
+    ],
+    "url": "skingdom"
+  },
+  {
+    "id": "1564489960768147506",
+    "name": "Idlescape",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "139325",
+    "cover": "cocwvz",
+    "artwork": [
+      "ar31yg"
+    ],
+    "url": "idlescape"
+  },
+  {
+    "id": "1564489975150416035",
+    "name": "Plague Lords",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "189884",
+    "cover": "co9wom",
+    "artwork": [
+      "ar1fbl"
+    ],
+    "url": "plague-lords-witch-hunt"
+  },
+  {
+    "id": "1564489990686113803",
+    "name": "Ladder Lad",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "412153",
+    "cover": "cocm46",
+    "artwork": [
+      "ar6d5s"
+    ],
+    "url": "ladder-lad"
+  },
+  {
+    "id": "1564490022864814110",
+    "name": "Warrior Cats: Clans of the Forest",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "412520",
+    "cover": "cocmt9",
+    "artwork": [
+      "ar6tav",
+      "ar6dsl"
+    ],
+    "url": "warrior-cats-clans-of-the-forest"
+  },
+  {
+    "id": "1564490034722373703",
+    "name": "Finals Week",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "423593",
+    "cover": "cod51z",
+    "artwork": [
+      "ar6tsg"
+    ],
+    "url": "finals-week"
+  },
+  {
+    "id": "1564490050283249789",
+    "name": "Buggos: Death Squad",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "424550",
+    "cover": "cod6ji",
+    "artwork": [
+      "ar6vy4"
+    ],
+    "url": "buggos-death-squad"
+  },
+  {
+    "id": "1564490059024040007",
+    "name": "Heroll: IF",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "418692",
+    "cover": "cod3y6",
+    "artwork": [
+      "ar6rf6"
+    ],
+    "url": "heroll-if"
+  },
+  {
+    "id": "1564490069753204836",
+    "name": "Hubble Bubble",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "424172",
+    "cover": "cod5z8",
+    "artwork": [
+      "ar6tl1",
+      "ar6tl3"
+    ],
+    "url": "hubble-bubble"
+  },
+  {
+    "id": "1564490082495373384",
+    "name": "Archi Vista",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "422305",
+    "cover": "cod3bt",
+    "artwork": [
+      "ar6qzk"
+    ],
+    "url": "archi-vista"
+  },
+  {
+    "id": "1564490094595801209",
+    "name": "Chief? About That File...",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "424797",
+    "cover": "cod7uo",
+    "artwork": [
+      "ar6vly"
+    ],
+    "url": "chief-about-that-file-dot-dot-dot"
+  },
+  {
+    "id": "1564490103202521210",
+    "name": "Paint Gang",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "419878",
+    "cover": "cod1zl",
+    "artwork": [
+      "ar6poa"
+    ],
+    "url": "paint-gang"
+  },
+  {
+    "id": "1564490110597333046",
+    "name": "Wipe Them Out!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "18160",
+    "cover": "tlfgw1mnogzidxob07zl",
+    "artwork": null,
+    "url": "wipe-out"
+  },
+  {
+    "id": "1564490117903814666",
+    "name": "Pack a Plush!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "422163",
+    "cover": "cod2vr",
+    "artwork": [
+      "ar6qm0"
+    ],
+    "url": "pack-a-plush"
+  },
+  {
+    "id": "1564490178134016042",
+    "name": "PC Store Together",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1564490204331380867",
+    "name": "Tie Down",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "395102",
+    "cover": "cobs4q",
+    "artwork": [
+      "ar5k0s"
+    ],
+    "url": "the-prince-of-tennis-doki-doki-survival-eternal-passion-tie-break-game"
+  },
+  {
+    "id": "1564490238603300924",
+    "name": "Trenchhold TD",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1564490255640301679",
+    "name": "Alea",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "86551",
+    "cover": "coawi9",
+    "artwork": null,
+    "url": "alea"
+  },
+  {
+    "id": "1564490262397452338",
+    "name": "Ball Race 5: Volleyball",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1564490273210241066",
+    "name": "Dead Sector",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "399733",
+    "cover": "cobzl6",
+    "artwork": [
+      "ar5sbk"
+    ],
+    "url": "dead-sector-outbreak"
+  },
+  {
+    "id": "1564490284845244476",
+    "name": "Pool of Radiance: Ruins of Myth Drannor",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "5630",
+    "cover": "co5x97",
+    "artwork": null,
+    "url": "pool-of-radiance-ruins-of-myth-drannor"
   }
 ]
