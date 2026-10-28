@@ -538229,7 +538229,16 @@
     "name": "Harvest Moon: Echoes of Teradea",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3591180"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NX06TW3FN8P"
+      }
+    ],
     "id_igdb": "400976",
     "cover": "cocxj6",
     "artwork": null,
@@ -538240,7 +538249,16 @@
     "name": "Construction Simulator: Evolution",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9PN7MV85ZCB7"
+      },
+      {
+        "distributor": "steam",
+        "id": "2744160"
+      }
+    ],
     "id_igdb": "398522",
     "cover": "cobxq2",
     "artwork": [
@@ -538253,7 +538271,12 @@
     "name": "Netherwyn",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2558300"
+      }
+    ],
     "id_igdb": "423364",
     "cover": null,
     "artwork": null,
@@ -538264,7 +538287,12 @@
     "name": "4 Penny Coffins",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3274710"
+      }
+    ],
     "id_igdb": "396126",
     "cover": "cobtzx",
     "artwork": [
@@ -538277,7 +538305,12 @@
     "name": "Father, Son & Holy Guns",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2840880"
+      }
+    ],
     "id_igdb": "388891",
     "cover": "cobgy1",
     "artwork": [
@@ -538290,7 +538323,12 @@
     "name": "Rustmourne",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3775210"
+      }
+    ],
     "id_igdb": "406184",
     "cover": "coc8fi",
     "artwork": [
@@ -538303,7 +538341,12 @@
     "name": "Into the Crypt",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1879270"
+      }
+    ],
     "id_igdb": "116419",
     "cover": "cob88s",
     "artwork": [
@@ -538314,10 +538357,15 @@
   },
   {
     "id": "1564489635705393173",
-    "name": "Okko The Exiled",
+    "name": "Okko the Exiled",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3479420"
+      }
+    ],
     "id_igdb": "338923",
     "cover": "co9myf",
     "artwork": [
@@ -538330,7 +538378,12 @@
     "name": "StateOS: The Political Sandbox",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4114080"
+      }
+    ],
     "id_igdb": "417262",
     "cover": "cocvfb",
     "artwork": [
@@ -538343,7 +538396,12 @@
     "name": "The Doll Shop",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3851680"
+      }
+    ],
     "id_igdb": "373835",
     "cover": "ar5luj",
     "artwork": [
@@ -538357,7 +538415,12 @@
     "name": "PRO: Push React Outgun",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4706020"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -538368,7 +538431,12 @@
     "name": "Project Hunt",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2451010"
+      }
+    ],
     "id_igdb": "253516",
     "cover": "cobs3i",
     "artwork": [
@@ -538381,7 +538449,12 @@
     "name": "Project SEVER",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3188510"
+      }
+    ],
     "id_igdb": "368581",
     "cover": "coak1q",
     "artwork": [
@@ -538394,7 +538467,12 @@
     "name": "Clown Around",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3011890"
+      }
+    ],
     "id_igdb": "284727",
     "cover": "co9up7",
     "artwork": null,
@@ -538405,7 +538483,12 @@
     "name": "Clowntown",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3680200"
+      }
+    ],
     "id_igdb": "405107",
     "cover": "coc74z",
     "artwork": [
@@ -538418,7 +538501,12 @@
     "name": "Silberheim Evolving Card Game",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3601830"
+      }
+    ],
     "id_igdb": "393787",
     "cover": "cocx3d",
     "artwork": [
@@ -538431,7 +538519,12 @@
     "name": "Moving Castle",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1031000"
+      }
+    ],
     "id_igdb": "291759",
     "cover": "co7wiw",
     "artwork": [
@@ -538444,7 +538537,12 @@
     "name": "Scream Operator: Haunted House Manager",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4480080"
+      }
+    ],
     "id_igdb": "421931",
     "cover": "cod3y7",
     "artwork": [
@@ -538457,7 +538555,12 @@
     "name": "Galactic Disharmony",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2939170"
+      }
+    ],
     "id_igdb": "423397",
     "cover": "cod6tp",
     "artwork": [
@@ -538470,7 +538573,12 @@
     "name": "Leafborn",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4247440"
+      }
+    ],
     "id_igdb": "400126",
     "cover": "coc055",
     "artwork": [
@@ -538483,7 +538591,12 @@
     "name": "Retroneer",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4254050"
+      }
+    ],
     "id_igdb": "392359",
     "cover": "cobm8j",
     "artwork": null,
@@ -538491,10 +538604,17 @@
   },
   {
     "id": "1564489917373878313",
-    "name": "The Last Hour of an Epic TO THE MOON RPG",
-    "aliases": [],
+    "name": "Last Hour of an Epic to the Moon RPG",
+    "aliases": [
+      " Last Hour of an Epic TO THE MOON RPG"
+    ],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2664600"
+      }
+    ],
     "id_igdb": "274905",
     "cover": "co9dnd",
     "artwork": [
@@ -538507,7 +538627,12 @@
     "name": "Skingdom",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3244160"
+      }
+    ],
     "id_igdb": "398555",
     "cover": "cobxr1",
     "artwork": [
@@ -538520,7 +538645,12 @@
     "name": "Idlescape",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2692420"
+      }
+    ],
     "id_igdb": "139325",
     "cover": "cocwvz",
     "artwork": [
@@ -538533,7 +538663,12 @@
     "name": "Plague Lords",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2616100"
+      }
+    ],
     "id_igdb": "189884",
     "cover": "co9wom",
     "artwork": [
@@ -538546,7 +538681,12 @@
     "name": "Ladder Lad",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3871300"
+      }
+    ],
     "id_igdb": "412153",
     "cover": "cocm46",
     "artwork": [
@@ -538559,7 +538699,28 @@
     "name": "Warrior Cats: Clans of the Forest",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "80447"
+      },
+      {
+        "distributor": "steam",
+        "id": "3960600"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PB75WFNPDJS"
+      },
+      {
+        "distributor": "epic",
+        "id": "3CCC0EEC192147068FFD613EAABDDEF3"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NBW1S6S897W"
+      }
+    ],
     "id_igdb": "412520",
     "cover": "cocmt9",
     "artwork": [
@@ -538571,9 +538732,16 @@
   {
     "id": "1564490034722373703",
     "name": "Finals Week",
-    "aliases": [],
+    "aliases": [
+      "Finals Week "
+    ],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4715160"
+      }
+    ],
     "id_igdb": "423593",
     "cover": "cod51z",
     "artwork": [
@@ -538586,7 +538754,12 @@
     "name": "Buggos: Death Squad",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4093200"
+      }
+    ],
     "id_igdb": "424550",
     "cover": "cod6ji",
     "artwork": [
@@ -538596,10 +538769,15 @@
   },
   {
     "id": "1564490059024040007",
-    "name": "Heroll: IF",
+    "name": "Heroll: If",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4838670"
+      }
+    ],
     "id_igdb": "418692",
     "cover": "cod3y6",
     "artwork": [
@@ -538612,7 +538790,12 @@
     "name": "Hubble Bubble",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5013160"
+      }
+    ],
     "id_igdb": "424172",
     "cover": "cod5z8",
     "artwork": [
@@ -538626,7 +538809,12 @@
     "name": "Archi Vista",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2513150"
+      }
+    ],
     "id_igdb": "422305",
     "cover": "cod3bt",
     "artwork": [
@@ -538639,7 +538827,12 @@
     "name": "Chief? About That File...",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5156290"
+      }
+    ],
     "id_igdb": "424797",
     "cover": "cod7uo",
     "artwork": [
@@ -538652,7 +538845,12 @@
     "name": "Paint Gang",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5152700"
+      }
+    ],
     "id_igdb": "419878",
     "cover": "cod1zl",
     "artwork": [
@@ -538665,7 +538863,12 @@
     "name": "Wipe Them Out!",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5154590"
+      }
+    ],
     "id_igdb": "18160",
     "cover": "tlfgw1mnogzidxob07zl",
     "artwork": null,
@@ -538673,10 +538876,15 @@
   },
   {
     "id": "1564490117903814666",
-    "name": "Pack a Plush!",
+    "name": "Pack A Plush!",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5123900"
+      }
+    ],
     "id_igdb": "422163",
     "cover": "cod2vr",
     "artwork": [
@@ -538689,7 +538897,12 @@
     "name": "PC Store Together",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4990940"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -538700,7 +538913,12 @@
     "name": "Tie Down",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4500020"
+      }
+    ],
     "id_igdb": "395102",
     "cover": "cobs4q",
     "artwork": [
@@ -538713,7 +538931,12 @@
     "name": "Trenchhold TD",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3343280"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -538724,7 +538947,12 @@
     "name": "Alea",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4230750"
+      }
+    ],
     "id_igdb": "86551",
     "cover": "coawi9",
     "artwork": null,
@@ -538735,7 +538963,12 @@
     "name": "Ball Race 5: Volleyball",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NKD6T3QMWSJ"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -538746,7 +538979,12 @@
     "name": "Dead Sector",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4736470"
+      }
+    ],
     "id_igdb": "399733",
     "cover": "cobzl6",
     "artwork": [
@@ -538759,10 +538997,81 @@
     "name": "Pool of Radiance: Ruins of Myth Drannor",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4834760"
+      }
+    ],
     "id_igdb": "5630",
     "cover": "co5x97",
     "artwork": null,
     "url": "pool-of-radiance-ruins-of-myth-drannor"
+  },
+  {
+    "id": "1564851413794820119",
+    "name": "Void Core",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4429440"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1564851449165512845",
+    "name": "Fire and Water: Spirits of the Forest",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4697950"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1564851521340842035",
+    "name": "QuestAway",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5195600"
+      }
+    ],
+    "id_igdb": "421976",
+    "cover": "cod2km",
+    "artwork": [
+      "ar6vt0"
+    ],
+    "url": "questaway"
+  },
+  {
+    "id": "1564851528454512730",
+    "name": "Burg Tag",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4297360"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
   }
 ]
