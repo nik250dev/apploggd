@@ -117,6 +117,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsWaitingAnimationVisible))]
+    [NotifyPropertyChangedFor(nameof(IsAutoSaveSpinnerVisible))]
     private bool _isHomeVisible = true;
 
     [ObservableProperty]
@@ -1633,10 +1634,26 @@ public partial class MainWindowViewModel : ViewModelBase
     }
 
     /// <summary>
-    /// The automatic mode: registers the session on the day it ended, without the confirmation and
-    /// without pausing detection. What cannot be registered (unidentified, offline, a failed save) goes to Pending.
+    /// The automatic mode: registers the session on the day it ended, without the confirmation. What cannot
+    /// be registered (unidentified, offline, a failed save) goes to Pending. Detection is held until the
+    /// attempt is over, as it is behind the modal.
     /// </summary>
     private async Task AutoRegisterFinishedSessionAsync(string gameName, string? idIgdb, DateTime endedAt, TimeSpan duration)
+    {
+        IsAutoSavingSession = true;
+        UpdateTrayMenuText();
+        try
+        {
+            await TryAutoRegisterFinishedSessionAsync(gameName, idIgdb, endedAt, duration);
+        }
+        finally
+        {
+            IsAutoSavingSession = false;
+            UpdateTrayMenuText();
+        }
+    }
+
+    private async Task TryAutoRegisterFinishedSessionAsync(string gameName, string? idIgdb, DateTime endedAt, TimeSpan duration)
     {
         var session = await ResolveFinishedSessionAsync(gameName, idIgdb, endedAt, duration);
         var loc = LocalizationService.Instance;
@@ -2356,10 +2373,33 @@ public partial class MainWindowViewModel : ViewModelBase
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsGameDetectionActive))]
+    [NotifyPropertyChangedFor(nameof(IsGameDetectionHeld))]
+    [NotifyPropertyChangedFor(nameof(IsDetectionPausedTextVisible))]
     [NotifyPropertyChangedFor(nameof(IsWaitingAnimationVisible))]
     private bool _isGameDetectionPaused = false;
 
-    public bool IsGameDetectionActive => !IsGameDetectionPaused;
+    /// <summary>
+    /// An automatic save is in flight. Detection is held meanwhile, as with the modal, without touching
+    /// <see cref="IsGameDetectionPaused"/>, which stays the user's choice.
+    /// </summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsGameDetectionActive))]
+    [NotifyPropertyChangedFor(nameof(IsGameDetectionHeld))]
+    [NotifyPropertyChangedFor(nameof(IsDetectionPausedTextVisible))]
+    [NotifyPropertyChangedFor(nameof(IsDetectionSwitchEnabled))]
+    [NotifyPropertyChangedFor(nameof(IsWaitingAnimationVisible))]
+    [NotifyPropertyChangedFor(nameof(IsAutoSaveSpinnerVisible))]
+    private bool _isAutoSavingSession;
+
+    public bool IsGameDetectionActive => !IsGameDetectionPaused && !IsAutoSavingSession;
+
+    public bool IsGameDetectionHeld => !IsGameDetectionActive;
+
+    public bool IsDetectionPausedTextVisible => IsGameDetectionPaused && !IsAutoSavingSession;
+
+    public bool IsDetectionSwitchEnabled => !IsAutoSavingSession;
+
+    public bool IsAutoSaveSpinnerVisible => IsHomeVisible && IsAutoSavingSession;
 
     /// <summary>
     /// Drives the waiting state's idle animations, which a collapsed ancestor alone would not stop.
@@ -2381,7 +2421,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void ToggleGameDetection()
     {
-        if (IsSessionConfirmationVisible || IsGameRunning) return;
+        if (IsSessionConfirmationVisible || IsGameRunning || IsAutoSavingSession) return;
 
         IsGameDetectionPaused = !IsGameDetectionPaused;
 
@@ -2405,6 +2445,10 @@ public partial class MainWindowViewModel : ViewModelBase
         else if (IsGameRunning)
         {
             TrayMenuActionText = string.Format(LocalizationService.Instance["Tray_Playing"], GameName, PlayTime);
+        }
+        else if (IsAutoSavingSession)
+        {
+            TrayMenuActionText = LocalizationService.Instance["Home_SavingSession"];
         }
         else if (IsGameDetectionPaused)
         {
@@ -2440,7 +2484,7 @@ public partial class MainWindowViewModel : ViewModelBase
     /// </summary>
     private async Task RunDetectionPassAsync()
     {
-        if (IsGameDetectionPaused) return;
+        if (IsGameDetectionPaused || IsAutoSavingSession) return;
 
         // A slow pass (an API call on a bad connection) skips ticks instead of queueing them up.
         if (!await _detectionGate.WaitAsync(0)) return;
@@ -2471,7 +2515,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 long blacklistVersion = _blacklistService.Version;
                 var detected = await Task.Run(() => _gameDetectionService.Detect());
 
-                if (IsGameRunning || IsGameDetectionPaused) return;
+                if (IsGameRunning || IsGameDetectionPaused || IsAutoSavingSession) return;
 
                 // Scanned against a blacklist that has changed since, so it may be the game just blacklisted.
                 if (_blacklistService.Version != blacklistVersion) return;

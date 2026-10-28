@@ -316,7 +316,8 @@ public partial class MainWindow : Window
     {
         if (e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.TrayMenuActionText)
             || e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsGameRunning)
-            || e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsSessionConfirmationVisible))
+            || e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsSessionConfirmationVisible)
+            || e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsAutoSavingSession))
         {
             if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
             {
@@ -491,9 +492,10 @@ public partial class MainWindow : Window
 
         _trayToggleItem.Header = vm.TrayMenuActionText;
 
-        _trayToggleItem.IsEnabled = !(vm.IsSessionConfirmationVisible || vm.IsGameRunning);
+        bool busy = vm.IsSessionConfirmationVisible || vm.IsGameRunning || vm.IsAutoSavingSession;
+        _trayToggleItem.IsEnabled = !busy;
 
-        if (vm.IsSessionConfirmationVisible || vm.IsGameRunning)
+        if (busy)
         {
             _trayToggleItem.Icon = _clockIconBitmap;
         }
