@@ -79,11 +79,13 @@
                     <Panel Width="80" Height="80" HorizontalAlignment="Center">
                         <ctl:ListeningRing Color="{DynamicResource BrandPrimaryColor}"
                                            IsActive="{Binding IsWaitingAnimationVisible}"/>
-                        <Ellipse x:Name="StatusDisc" StrokeThickness="1.5" Classes.paused="{Binding IsGameDetectionPaused}"/>
+                        <Ellipse x:Name="StatusDisc" StrokeThickness="1.5" Classes.paused="{Binding IsGameDetectionHeld}"/>
+                        <ctl:SpinnerRing Color="White"
+                                         IsActive="{Binding IsAutoSaveSpinnerVisible}"/>
                         <PathIcon Classes="fade" Classes.shown="{Binding IsGameDetectionActive}"
                                   Data="{DynamicResource GamepadIconData}" Width="38" Height="38"
                                   Foreground="{DynamicResource BrandPrimaryBrush}"/>
-                        <PathIcon Classes="fade" Classes.shown="{Binding IsGameDetectionPaused}"
+                        <PathIcon Classes="fade" Classes.shown="{Binding IsGameDetectionHeld}"
                                   Data="{StaticResource PauseIconData}" Width="24" Height="24"
                                   Foreground="{DynamicResource IconMediumBrush}"/>
                     </Panel>
@@ -93,14 +95,19 @@
                                    Text="{Binding [Home_WaitingForGame], Source={x:Static services:LocalizationService.Instance}}"
                                    FontSize="26" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <TextBlock Classes="fade" Classes.shown="{Binding IsGameDetectionPaused}"
+                        <TextBlock Classes="fade" Classes.shown="{Binding IsDetectionPausedTextVisible}"
                                    Text="{Binding [Home_SearchPaused], Source={x:Static services:LocalizationService.Instance}}"
+                                   FontSize="26" FontWeight="Bold" Foreground="{DynamicResource IconLightBrush}"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Classes="fade" Classes.shown="{Binding IsAutoSavingSession}"
+                                   Text="{Binding [Home_SavingSession], Source={x:Static services:LocalizationService.Instance}}"
                                    FontSize="26" FontWeight="Bold" Foreground="{DynamicResource IconLightBrush}"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Panel>
 
                     <ctl:DetectionSwitch HorizontalAlignment="Center"
                                          IsChecked="{Binding IsGameDetectionActive, Mode=OneWay}"
+                                         IsEnabled="{Binding IsDetectionSwitchEnabled}"
                                          Command="{Binding ToggleGameDetectionCommand}"
                                          OnLabel="{Binding [Home_DetectionOn], Source={x:Static services:LocalizationService.Instance}}"
                                          OffLabel="{Binding [Home_DetectionOff], Source={x:Static services:LocalizationService.Instance}}"
