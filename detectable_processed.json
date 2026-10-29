@@ -174455,6 +174455,10 @@
         "id": "541570"
       },
       {
+        "distributor": "epic",
+        "id": "FB5670AFFFD84CECB00DCE276C2A8353"
+      },
+      {
         "distributor": "xbox",
         "id": "9N1C74G2JXHM"
       },
@@ -394347,6 +394351,10 @@
       },
       {
         "distributor": "xbox",
+        "id": "9NBVJGBGFG1S"
+      },
+      {
+        "distributor": "xbox",
         "id": "9N79TQTZTQQ4"
       }
     ],
@@ -415622,7 +415630,12 @@
     "name": "Talking Tom Candy Run",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.outfit7.talkingtomcandyrun"
+      }
+    ],
     "id_igdb": "107165",
     "cover": "co2gl5",
     "artwork": [
@@ -439963,6 +439976,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9P5FZDVKRGRM"
+      },
       {
         "distributor": "steam",
         "id": "3994610"
@@ -480291,7 +480308,7 @@
   },
   {
     "id": "1477143963390574713",
-    "name": "SCOPECREEP",
+    "name": "ScopeCreep",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -532153,7 +532170,12 @@
     "name": "Ace Combat Zero: The Belkan War",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5370600"
+      }
+    ],
     "id_igdb": "14754",
     "cover": "cocpj8",
     "artwork": null,
@@ -535480,12 +535502,16 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9P30VHWQXPS0"
+      },
+      {
         "distributor": "steam",
         "id": "3470960"
       },
       {
         "distributor": "xbox",
-        "id": "9P30VHWQXPS0"
+        "id": "9NSLFS16ZDKW"
       }
     ],
     "id_igdb": "405458",
@@ -539073,5 +539099,528 @@
     "cover": null,
     "artwork": null,
     "url": null
+  },
+  {
+    "id": "1565213908124303470",
+    "name": "One Piece: Grand Gourmet",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3905010"
+      }
+    ],
+    "id_igdb": "405435",
+    "cover": "coc7mu",
+    "artwork": [
+      "ar61bv"
+    ],
+    "url": "one-piece-grand-gourmet"
+  },
+  {
+    "id": "1565213926109614230",
+    "name": "GUNBOAT-8",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4783980"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565213936893169736",
+    "name": "Number Machine",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2231090"
+      }
+    ],
+    "id_igdb": "350604",
+    "cover": "coa9pd",
+    "artwork": null,
+    "url": "number-machine"
+  },
+  {
+    "id": "1565213943029305385",
+    "name": "HollowCity:EscapeFromSeoul",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4434910"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565213951757787196",
+    "name": "Expedition of the Guild",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4261080"
+      }
+    ],
+    "id_igdb": "423345",
+    "cover": "cod4qa",
+    "artwork": [
+      "ar6sbw"
+    ],
+    "url": "expedition-of-the-guild"
+  },
+  {
+    "id": "1565213962453131274",
+    "name": "Knuckle Paradise",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1864220"
+      }
+    ],
+    "id_igdb": "399286",
+    "cover": "cobyxo",
+    "artwork": [
+      "ar5rka"
+    ],
+    "url": "knuckle-paradise"
+  },
+  {
+    "id": "1565213978425171978",
+    "name": "Mayday: The Survival Island",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1686230"
+      }
+    ],
+    "id_igdb": "169856",
+    "cover": "coa10k",
+    "artwork": [
+      "ar13g7"
+    ],
+    "url": "mayday-the-survival-island"
+  },
+  {
+    "id": "1565214000713834526",
+    "name": "Windwoven",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3446130"
+      }
+    ],
+    "id_igdb": "374606",
+    "cover": "coapwm",
+    "artwork": [
+      "ar4idk"
+    ],
+    "url": "windwoven"
+  },
+  {
+    "id": "1565214024939872396",
+    "name": "Dragon's Brew",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3168560"
+      }
+    ],
+    "id_igdb": "317112",
+    "cover": "cob7xl",
+    "artwork": [
+      "ar51z0",
+      "ar3e9h"
+    ],
+    "url": "dragons-brew"
+  },
+  {
+    "id": "1565214032548466810",
+    "name": "MUPO",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4146650"
+      }
+    ],
+    "id_igdb": "389656",
+    "cover": "cobivn",
+    "artwork": [
+      "ar5bko"
+    ],
+    "url": "mupo"
+  },
+  {
+    "id": "1565214040035295282",
+    "name": "Orion Blue",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4264000"
+      }
+    ],
+    "id_igdb": "386437",
+    "cover": "cobls5",
+    "artwork": [
+      "ar54sc",
+      "ar54sb"
+    ],
+    "url": "orion-blue"
+  },
+  {
+    "id": "1565214046054129704",
+    "name": "PITH",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4775660"
+      }
+    ],
+    "id_igdb": "412176",
+    "cover": "cocmnf",
+    "artwork": null,
+    "url": "pith"
+  },
+  {
+    "id": "1565214060839047358",
+    "name": "Tearoom of Terror",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2669710"
+      }
+    ],
+    "id_igdb": "398590",
+    "cover": "cobxxj",
+    "artwork": [
+      "ar5qg8"
+    ],
+    "url": "tearoom-of-terror"
+  },
+  {
+    "id": "1565214071605698571",
+    "name": "SKROLL",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4224290"
+      }
+    ],
+    "id_igdb": "408714",
+    "cover": "cocccv",
+    "artwork": [
+      "ar6hto"
+    ],
+    "url": "skroll"
+  },
+  {
+    "id": "1565214081869156456",
+    "name": "Merc Commander",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4824250"
+      }
+    ],
+    "id_igdb": "423323",
+    "cover": "cod4lk",
+    "artwork": [
+      "ar6s4v"
+    ],
+    "url": "merc-commander"
+  },
+  {
+    "id": "1565214089993519108",
+    "name": "The Big Suck",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4901860"
+      }
+    ],
+    "id_igdb": "415770",
+    "cover": "cocstz",
+    "artwork": [
+      "ar6j6l"
+    ],
+    "url": "the-big-suck"
+  },
+  {
+    "id": "1565214096737960007",
+    "name": "Sand Cruiser",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4943770"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565214110512054272",
+    "name": "Ultimate Pet Shop Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4823440"
+      }
+    ],
+    "id_igdb": "417322",
+    "cover": "cocvm7",
+    "artwork": [
+      "ar6kq4"
+    ],
+    "url": "ultimate-pet-shop-simulator"
+  },
+  {
+    "id": "1565214125498302514",
+    "name": "Ski Lines: Trail Map",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4854120"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565214141256306758",
+    "name": "CASE: Animatronics Redux",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5037250"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565214149645045881",
+    "name": "One More Flight",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4529770"
+      }
+    ],
+    "id_igdb": "424672",
+    "cover": "cod7pp",
+    "artwork": [
+      "ar6vfk"
+    ],
+    "url": "one-more-flight"
+  },
+  {
+    "id": "1565214154795655279",
+    "name": "Line Clear",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1970000"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565214160462024744",
+    "name": "BOB LOGISTICS",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5009390"
+      }
+    ],
+    "id_igdb": "424497",
+    "cover": "cod6hc",
+    "artwork": [
+      "ar6u40"
+    ],
+    "url": "bob-logistics"
+  },
+  {
+    "id": "1565214167734943775",
+    "name": "It Thinks!: Build Your Own GPU",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5196330"
+      }
+    ],
+    "id_igdb": "417229",
+    "cover": "cocvc7",
+    "artwork": [
+      "ar6kwe"
+    ],
+    "url": "it-thinks"
+  },
+  {
+    "id": "1565214182494707803",
+    "name": "Maiba Taya",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5179520"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565214197166379028",
+    "name": "Silk Collector: Tidy Up the Clothing Store!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5285160"
+      }
+    ],
+    "id_igdb": "420751",
+    "cover": "cod0mt",
+    "artwork": [
+      "ar6th1"
+    ],
+    "url": "silk-collector-tidy-up-the-clothing-store"
+  },
+  {
+    "id": "1565214206607888464",
+    "name": "Clean Tides",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5355540"
+      }
+    ],
+    "id_igdb": "422435",
+    "cover": "cod3cr",
+    "artwork": [
+      "ar6r0k"
+    ],
+    "url": "clean-tides"
+  },
+  {
+    "id": "1565214214258298960",
+    "name": "Tin Coffins",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4943260"
+      }
+    ],
+    "id_igdb": "422683",
+    "cover": "cod4tx",
+    "artwork": [
+      "ar6sja"
+    ],
+    "url": "tin-coffins"
+  },
+  {
+    "id": "1565214222118551764",
+    "name": "Pack Ripper",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5071620"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565214228074332252",
+    "name": "Valdrin",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3929800"
+      }
+    ],
+    "id_igdb": "425685",
+    "cover": "cod8dk",
+    "artwork": [
+      "ar6w4l",
+      "ar6w4k"
+    ],
+    "url": "valdrin"
   }
 ]
