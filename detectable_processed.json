@@ -68,17 +68,17 @@
     ],
     "executables": [
       {
+        "name": "_retail_/world of warcraft.app",
+        "os": "darwin",
+        "is_launcher": false
+      },
+      {
         "name": "_ptr_/wow-64.exe",
         "os": "win32",
         "is_launcher": false
       },
       {
-        "name": "_ptr_/wow.exe",
-        "os": "win32",
-        "is_launcher": false
-      },
-      {
-        "name": "_retail_/wow.exe",
+        "name": "_beta_/wow-64.exe",
         "os": "win32",
         "is_launcher": false
       },
@@ -93,12 +93,17 @@
         "is_launcher": false
       },
       {
-        "name": "_beta_/wow-64.exe",
+        "name": "_ptr_/wow.exe",
         "os": "win32",
         "is_launcher": false
       },
       {
         "name": "_beta_/wow.exe",
+        "os": "win32",
+        "is_launcher": false
+      },
+      {
+        "name": "_retail_/wow.exe",
         "os": "win32",
         "is_launcher": false
       }
@@ -8825,12 +8830,8 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9PMTJMML92S4"
-      },
-      {
-        "distributor": "steam",
-        "id": "298110"
+        "distributor": "epic",
+        "id": "CF87285950BA492BBDC370B9D265EA36"
       },
       {
         "distributor": "xbox",
@@ -8838,15 +8839,23 @@
       },
       {
         "distributor": "xbox",
-        "id": "C0KJ40T9QD86"
-      },
-      {
-        "distributor": "epic",
-        "id": "CF87285950BA492BBDC370B9D265EA36"
+        "id": "9MVV32Z0JPCL"
       },
       {
         "distributor": "xbox",
         "id": "66ACD000-77FE-1000-9115-D802555308CA"
+      },
+      {
+        "distributor": "steam",
+        "id": "298110"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PMTJMML92S4"
+      },
+      {
+        "distributor": "xbox",
+        "id": "C0KJ40T9QD86"
       }
     ],
     "id_igdb": "6801",
@@ -131444,6 +131453,10 @@
     "third_party_skus": [
       {
         "distributor": "steam",
+        "id": "5278320"
+      },
+      {
+        "distributor": "steam",
         "id": "671720"
       }
     ],
@@ -224655,6 +224668,10 @@
       {
         "distributor": "steam",
         "id": "2475490"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MVNCSJ14754"
       }
     ],
     "id_igdb": "264410",
@@ -481895,6 +481912,10 @@
       {
         "distributor": "epic",
         "id": "940F50B71205471D95CD3169E2A13763"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PHFMRCFVVRF"
       }
     ],
     "id_igdb": "349412",
@@ -508425,6 +508446,10 @@
     "third_party_skus": [
       {
         "distributor": "steam",
+        "id": "4282780"
+      },
+      {
+        "distributor": "steam",
         "id": "4512390"
       }
     ],
@@ -531038,9 +531063,24 @@
         "name": "wowb.exe",
         "os": "win32",
         "is_launcher": false
+      },
+      {
+        "name": "_forever_/world of warcraft.app",
+        "os": "darwin",
+        "is_launcher": false
+      },
+      {
+        "name": "_forever_/wow.exe",
+        "os": "win32",
+        "is_launcher": false
       }
     ],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "battlenet",
+        "id": "wowf"
+      }
+    ],
     "id_igdb": "417650",
     "cover": "cocxj2",
     "artwork": [
@@ -539502,7 +539542,7 @@
   },
   {
     "id": "1565214167734943775",
-    "name": "It Thinks!: Build Your Own GPU",
+    "name": "IT THINKS!",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -539622,5 +539662,1807 @@
       "ar6w4k"
     ],
     "url": "valdrin"
+  },
+  {
+    "id": "1565576282832511046",
+    "name": "Arisen Force: Vonimir",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2359660"
+      }
+    ],
+    "id_igdb": "244893",
+    "cover": "co7emm",
+    "artwork": [
+      "ar29lr"
+    ],
+    "url": "arisen-force-vonimir"
+  },
+  {
+    "id": "1565576310586089482",
+    "name": "Agents 404",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4686110"
+      }
+    ],
+    "id_igdb": "408224",
+    "cover": "cocbjx",
+    "artwork": [
+      "ar65yv"
+    ],
+    "url": "agents-404"
+  },
+  {
+    "id": "1565576333197844500",
+    "name": "Beat a Boo!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4537500"
+      }
+    ],
+    "id_igdb": "405815",
+    "cover": "coc807",
+    "artwork": [
+      "ar6dwd"
+    ],
+    "url": "beat-a-boo"
+  },
+  {
+    "id": "1565576348674555984",
+    "name": "Game is Full of Bugs",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2868030"
+      }
+    ],
+    "id_igdb": "295583",
+    "cover": "co814a",
+    "artwork": [
+      "ar2vmu"
+    ],
+    "url": "game-is-full-of-bugs"
+  },
+  {
+    "id": "1565576372804522075",
+    "name": "Allogloom",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "epic",
+        "id": "16214ED27A0040BE870D932F5597B737"
+      },
+      {
+        "distributor": "steam",
+        "id": "2644100"
+      }
+    ],
+    "id_igdb": "277935",
+    "cover": "cocze4",
+    "artwork": [
+      "ar6nfj",
+      "ar6nfi"
+    ],
+    "url": "allogloom"
+  },
+  {
+    "id": "1565576406409416836",
+    "name": "9.8",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4247050"
+      }
+    ],
+    "id_igdb": "424708",
+    "cover": "cod6rh",
+    "artwork": [
+      "ar6ufl"
+    ],
+    "url": "9-dot-8"
+  },
+  {
+    "id": "1565576418409185320",
+    "name": "Backdraft",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2218060"
+      }
+    ],
+    "id_igdb": "255080",
+    "cover": "cod377",
+    "artwork": [
+      "ar6qya"
+    ],
+    "url": "backdraft--1"
+  },
+  {
+    "id": "1565576434624364655",
+    "name": "Fast Food: Restaurant Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2971500"
+      }
+    ],
+    "id_igdb": "310138",
+    "cover": "co8keb",
+    "artwork": [
+      "ar31o0"
+    ],
+    "url": "fast-food-restaurant-simulator"
+  },
+  {
+    "id": "1565576466694021261",
+    "name": "Extreme Cleaning Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3586920"
+      }
+    ],
+    "id_igdb": "423200",
+    "cover": "cod6f5",
+    "artwork": [
+      "ar6u0z"
+    ],
+    "url": "extreme-cleaning-simulator"
+  },
+  {
+    "id": "1565576493520916500",
+    "name": "Timberworks",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4374670"
+      }
+    ],
+    "id_igdb": "425024",
+    "cover": "cod769",
+    "artwork": [
+      "ar6uvo"
+    ],
+    "url": "timberworks"
+  },
+  {
+    "id": "1565576538118815905",
+    "name": "Fallbearers",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4508230"
+      }
+    ],
+    "id_igdb": "420853",
+    "cover": "cod0p7",
+    "artwork": [
+      "ar6op7"
+    ],
+    "url": "fallbearers"
+  },
+  {
+    "id": "1565576557701894204",
+    "name": "SHIFU: Traffic Masters",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4554510"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565576571467599962",
+    "name": "Click & Mine",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4506000"
+      }
+    ],
+    "id_igdb": "397443",
+    "cover": "cobw05",
+    "artwork": [
+      "ar5o03"
+    ],
+    "url": "click-and-mine"
+  },
+  {
+    "id": "1565576581026545675",
+    "name": "Lootlands",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3397910"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565576589188800583",
+    "name": "Elven Huntress: Sunveil",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4725170"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565576600739774524",
+    "name": "Cucina Stellata",
+    "aliases": [
+      "Cucina Stellata ✦ Starred Cuisine"
+    ],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3976340"
+      }
+    ],
+    "id_igdb": "341891",
+    "cover": "ar5hex",
+    "artwork": [
+      "ar6ulo"
+    ],
+    "url": "cucina-stellata"
+  },
+  {
+    "id": "1565576612735352952",
+    "name": "It's About Pirates",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4468540"
+      }
+    ],
+    "id_igdb": "414672",
+    "cover": "cocun0",
+    "artwork": [
+      "ar6jcl"
+    ],
+    "url": "its-about-pirates"
+  },
+  {
+    "id": "1565576624076759071",
+    "name": "Only Fans",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3839910"
+      }
+    ],
+    "id_igdb": "377029",
+    "cover": "cod716",
+    "artwork": [
+      "ar4nyr"
+    ],
+    "url": "only-fans"
+  },
+  {
+    "id": "1565576637838401667",
+    "name": "Code of the Savage",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "673100"
+      }
+    ],
+    "id_igdb": "173310",
+    "cover": "co5csx",
+    "artwork": [
+      "ar156q"
+    ],
+    "url": "code-of-the-savage"
+  },
+  {
+    "id": "1565576663125991465",
+    "name": "Aftermath Z: Red Pine Lake",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4129440"
+      }
+    ],
+    "id_igdb": "380638",
+    "cover": "coayxv",
+    "artwork": [
+      "ar4tby"
+    ],
+    "url": "aftermath-z-red-pine-lake"
+  },
+  {
+    "id": "1565576680074903562",
+    "name": "Toto's Journey",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3724300"
+      }
+    ],
+    "id_igdb": "410200",
+    "cover": "cock5e",
+    "artwork": [
+      "ar69l1"
+    ],
+    "url": "totos-journey"
+  },
+  {
+    "id": "1565576687108755538",
+    "name": "Mozentum",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2842670"
+      }
+    ],
+    "id_igdb": "289519",
+    "cover": "co9lyo",
+    "artwork": [
+      "ar2sd0"
+    ],
+    "url": "mozentum"
+  },
+  {
+    "id": "1565576693580828693",
+    "name": "Hypernet Explorer",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4193010"
+      }
+    ],
+    "id_igdb": "381465",
+    "cover": "cocz2i",
+    "artwork": [
+      "ar6n9t",
+      "ar6n9v"
+    ],
+    "url": "hypernet-explorer"
+  },
+  {
+    "id": "1565576702485209118",
+    "name": "Spectral Map",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4331960"
+      }
+    ],
+    "id_igdb": "421888",
+    "cover": "cod2je",
+    "artwork": [
+      "ar6q7w"
+    ],
+    "url": "spectral-map"
+  },
+  {
+    "id": "1565576715571429408",
+    "name": "Second Stone",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3557360"
+      }
+    ],
+    "id_igdb": "216314",
+    "cover": "cocvv9",
+    "artwork": null,
+    "url": "second-stone"
+  },
+  {
+    "id": "1565576739260727327",
+    "name": "Sister Compass: Slow Life Loving with My Sisters on a Deserted Island",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4583960"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565576746743635998",
+    "name": "Spellogger",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4429710"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565576752321929256",
+    "name": "UNDERDEEP",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4065440"
+      }
+    ],
+    "id_igdb": "423858",
+    "cover": "cod5es",
+    "artwork": [
+      "ar6t2s"
+    ],
+    "url": "underdeep"
+  },
+  {
+    "id": "1565576772680941710",
+    "name": "Mike Goes on Hike",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "912000"
+      }
+    ],
+    "id_igdb": "110125",
+    "cover": "co5et1",
+    "artwork": [
+      "ar1w57"
+    ],
+    "url": "mike-goes-on-hike"
+  },
+  {
+    "id": "1565576780104863864",
+    "name": "The 9th Dragon",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "epic",
+        "id": "94A5C6CB903C42CABD7A1F3B2D127792"
+      },
+      {
+        "distributor": "steam",
+        "id": "4402330"
+      }
+    ],
+    "id_igdb": "394675",
+    "cover": "cobrca",
+    "artwork": [
+      "ar5jj1"
+    ],
+    "url": "the-9th-dragon"
+  },
+  {
+    "id": "1565576787235311749",
+    "name": "SUPERPANEL",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3867450"
+      }
+    ],
+    "id_igdb": "377702",
+    "cover": "cod4h1",
+    "artwork": [
+      "ar6ry9",
+      "ar6rya"
+    ],
+    "url": "superpanel"
+  },
+  {
+    "id": "1565576811927310397",
+    "name": "My Own Hero Party",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4833220"
+      }
+    ],
+    "id_igdb": "412980",
+    "cover": "cocnno",
+    "artwork": [
+      "ar6egw"
+    ],
+    "url": "my-own-hero-party"
+  },
+  {
+    "id": "1565576820751990925",
+    "name": "STATO",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4851080"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565576834232352899",
+    "name": "THE DEAD WE KNEW: Open World Survival",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4890760"
+      }
+    ],
+    "id_igdb": "412960",
+    "cover": "cocnv9",
+    "artwork": [
+      "ar6p2b",
+      "ar6p86"
+    ],
+    "url": "the-dead-we-knew-open-world-survival"
+  },
+  {
+    "id": "1565577634275000340",
+    "name": "Super Hole",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4868890"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565577645289115648",
+    "name": "Uyar Party",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4923560"
+      }
+    ],
+    "id_igdb": "423190",
+    "cover": "cod4gu",
+    "artwork": [
+      "ar6rxz"
+    ],
+    "url": "uyar-party"
+  },
+  {
+    "id": "1565577656517267567",
+    "name": "Coup de Grass",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4917900"
+      }
+    ],
+    "id_igdb": "424110",
+    "cover": "cod5ur",
+    "artwork": [
+      "ar6vwz"
+    ],
+    "url": "coup-de-grass"
+  },
+  {
+    "id": "1565577666273480754",
+    "name": "Tenebrarium",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4880410"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565577676448731197",
+    "name": "ROMUL",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4755250"
+      }
+    ],
+    "id_igdb": "424870",
+    "cover": "cod6yz",
+    "artwork": [
+      "ar6vdc"
+    ],
+    "url": "romul"
+  },
+  {
+    "id": "1565577698406039602",
+    "name": "Salt and Soil: A Frontier Family Sim",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4551060"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565577715917131908",
+    "name": "Silicon Architect",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4658620"
+      }
+    ],
+    "id_igdb": "411160",
+    "cover": "cock86",
+    "artwork": [
+      "ar6bb8"
+    ],
+    "url": "silicon-architect"
+  },
+  {
+    "id": "1565577728269353070",
+    "name": "Plushy's Playground: Into the Slide",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4999230"
+      }
+    ],
+    "id_igdb": "413207",
+    "cover": "coco9e",
+    "artwork": [
+      "ar6euo"
+    ],
+    "url": "plushys-playground-into-the-slide"
+  },
+  {
+    "id": "1565577746199875586",
+    "name": "Combustor",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5047230"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565577752407441458",
+    "name": "Folk-Tography",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4941420"
+      }
+    ],
+    "id_igdb": "417107",
+    "cover": "cocv5k",
+    "artwork": [
+      "ar6kw1"
+    ],
+    "url": "folk-tography"
+  },
+  {
+    "id": "1565577771797979308",
+    "name": "Civitas",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4904200"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565577792890863636",
+    "name": "Moto Courier Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5015840"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565577814328213535",
+    "name": "Deep Trouble",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5066980"
+      }
+    ],
+    "id_igdb": "421978",
+    "cover": "cod6q8",
+    "artwork": [
+      "ar6udv"
+    ],
+    "url": "deep-trouble"
+  },
+  {
+    "id": "1565577834192314478",
+    "name": "Bore",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5000170"
+      }
+    ],
+    "id_igdb": "417776",
+    "cover": "cocya6",
+    "artwork": [
+      "ar6lli",
+      "ar6llj"
+    ],
+    "url": "bore"
+  },
+  {
+    "id": "1565577851061936260",
+    "name": "Third Bloc",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5155860"
+      }
+    ],
+    "id_igdb": "425046",
+    "cover": null,
+    "artwork": [
+      "ar6uwl"
+    ],
+    "url": "third-bloc"
+  },
+  {
+    "id": "1565577858884042753",
+    "name": "RPG Maker U2U",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4856440"
+      }
+    ],
+    "id_igdb": "402546",
+    "cover": "coc3k9",
+    "artwork": null,
+    "url": "rpg-maker-u2u"
+  },
+  {
+    "id": "1565577876424892528",
+    "name": "STARPHAGE: Galactic Plague Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4975190"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565577889255002254",
+    "name": "TCG Card Collection: Tidy Up",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3712150"
+      }
+    ],
+    "id_igdb": "424614",
+    "cover": "cod6mz",
+    "artwork": [
+      "ar6u9o"
+    ],
+    "url": "tcg-card-collection-tidy-up"
+  },
+  {
+    "id": "1565577897539010651",
+    "name": "Task Bar Cube",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5084200"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565577932158668831",
+    "name": "Morpho Reverie",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5057180"
+      }
+    ],
+    "id_igdb": "415726",
+    "cover": "cocsu9",
+    "artwork": [
+      "ar6jcq"
+    ],
+    "url": "morpho-reverie"
+  },
+  {
+    "id": "1565577941717487637",
+    "name": "WORKS: Motorsport Factory",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5119400"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565577948919242803",
+    "name": "Ant Mill Inc",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3399660"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565577956581974196",
+    "name": "CRACK",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4312190"
+      }
+    ],
+    "id_igdb": "420601",
+    "cover": "cod0c3",
+    "artwork": [
+      "ar6ofv",
+      "ar6ofx"
+    ],
+    "url": "crack--1"
+  },
+  {
+    "id": "1565577961376321706",
+    "name": "GloveUp!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4714010"
+      }
+    ],
+    "id_igdb": "425440",
+    "cover": "cod7s0",
+    "artwork": [
+      "ar6vns"
+    ],
+    "url": "gloveup"
+  },
+  {
+    "id": "1565577966464016384",
+    "name": "Gateholt",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5207010"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565577973237686322",
+    "name": "Rock and Found",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5203560"
+      }
+    ],
+    "id_igdb": "420455",
+    "cover": "cod04a",
+    "artwork": null,
+    "url": "rock-and-found"
+  },
+  {
+    "id": "1565577980070207568",
+    "name": "Cash Only",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5147690"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565577986613321788",
+    "name": "Solar Imperium",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5213280"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565577996457349120",
+    "name": "We March as One",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5189160"
+      }
+    ],
+    "id_igdb": "425754",
+    "cover": "cod8tc",
+    "artwork": [
+      "ar6wit"
+    ],
+    "url": "we-march-as-one"
+  },
+  {
+    "id": "1565578006255116368",
+    "name": "Cash & Stash: A Vaultkeeper Story",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5182680"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565578026303885352",
+    "name": "SUPER GAHAKU",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4966560"
+      }
+    ],
+    "id_igdb": "417571",
+    "cover": "cocw09",
+    "artwork": null,
+    "url": "super-gahaku"
+  },
+  {
+    "id": "1565578037829967964",
+    "name": "Supercar Collection Together",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5052860"
+      }
+    ],
+    "id_igdb": "420753",
+    "cover": "cod0wh",
+    "artwork": [
+      "ar6p0e"
+    ],
+    "url": "supercar-collection-together"
+  },
+  {
+    "id": "1565578044972859432",
+    "name": "Will It Launch?",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5205090"
+      }
+    ],
+    "id_igdb": "421623",
+    "cover": "cod2i2",
+    "artwork": [
+      "ar6qog",
+      "ar6q6z"
+    ],
+    "url": "will-it-launch"
+  },
+  {
+    "id": "1565578052178673674",
+    "name": "Jono",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5257200"
+      }
+    ],
+    "id_igdb": "419820",
+    "cover": "coczbs",
+    "artwork": [
+      "ar6ptv"
+    ],
+    "url": "jono"
+  },
+  {
+    "id": "1565578058549952593",
+    "name": "No exceptions",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4581880"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565578063360688178",
+    "name": "Seabun",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4990820"
+      }
+    ],
+    "id_igdb": "424542",
+    "cover": "cod6j5",
+    "artwork": null,
+    "url": "seabun"
+  },
+  {
+    "id": "1565578071309033583",
+    "name": "Empty The Lake!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5291460"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565578077864468490",
+    "name": "Groundwork Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5306540"
+      }
+    ],
+    "id_igdb": "421457",
+    "cover": "cod1ri",
+    "artwork": [
+      "ar6u49"
+    ],
+    "url": "groundwork-simulator"
+  },
+  {
+    "id": "1565578084445323284",
+    "name": "Suspencil",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5303370"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565578089054998628",
+    "name": "Desktop Duck",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3901850"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565578096764129332",
+    "name": "Tiny Harbor",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4921500"
+      }
+    ],
+    "id_igdb": "423591",
+    "cover": "cod51v",
+    "artwork": null,
+    "url": "tiny-harbor"
+  },
+  {
+    "id": "1565578107623317644",
+    "name": "Plague Inc: The Board Game",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5283340"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565578119568425030",
+    "name": "Tidy Up the Halloween Shop",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5316540"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NBPB4BTNXVF"
+      }
+    ],
+    "id_igdb": "421266",
+    "cover": "cod41s",
+    "artwork": [
+      "ar6rhx"
+    ],
+    "url": "tidy-up-the-halloween-shop"
+  },
+  {
+    "id": "1565578125633392821",
+    "name": "Left! Left! LEFT!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5362020"
+      }
+    ],
+    "id_igdb": "425554",
+    "cover": "cod8gy",
+    "artwork": [
+      "ar6w89"
+    ],
+    "url": "left-left-left"
+  },
+  {
+    "id": "1565578132029710356",
+    "name": "Moon Sweepers",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5335510"
+      }
+    ],
+    "id_igdb": "423053",
+    "cover": "cod4af",
+    "artwork": [
+      "ar6rr0",
+      "ar6rr3",
+      "ar6rr2"
+    ],
+    "url": "moon-sweepers"
+  },
+  {
+    "id": "1565578138342260837",
+    "name": "Dementium II",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5342930"
+      }
+    ],
+    "id_igdb": "422104",
+    "cover": "cod2s9",
+    "artwork": [
+      "ar6tbj"
+    ],
+    "url": "dementium-ii--1"
+  },
+  {
+    "id": "1565578149314433124",
+    "name": "One More Lawn",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5378110"
+      }
+    ],
+    "id_igdb": "425741",
+    "cover": "cod87r",
+    "artwork": [
+      "ar6x7k"
+    ],
+    "url": "one-more-lawn"
+  },
+  {
+    "id": "1565578156893540392",
+    "name": "Draught King",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5390400"
+      }
+    ],
+    "id_igdb": "425658",
+    "cover": "cod8d7",
+    "artwork": [
+      "ar6w3l"
+    ],
+    "url": "draught-king"
+  },
+  {
+    "id": "1565578188095094784",
+    "name": "La Muraille 1806",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5378030"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565578194801655858",
+    "name": "Stupid Tankers",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5184390"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565578202384957441",
+    "name": "Grand Theft Idiots",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4919380"
+      }
+    ],
+    "id_igdb": "424700",
+    "cover": "cod8ta",
+    "artwork": [
+      "ar6wiq"
+    ],
+    "url": "grand-theft-idiots"
+  },
+  {
+    "id": "1565578208538132570",
+    "name": "Kokon tōzai dābī",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5069990"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565578212791287948",
+    "name": "FOURSAVENT",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4570020"
+      }
+    ],
+    "id_igdb": "405786",
+    "cover": "cocqhh",
+    "artwork": [
+      "ar6glj",
+      "ar6glk"
+    ],
+    "url": "foursavent"
+  },
+  {
+    "id": "1565578217383919626",
+    "name": "Explosive Express",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5108820"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565578222693777508",
+    "name": "Vampire",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "441190"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565578232676229190",
+    "name": "Mirror Backrooms",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5040820"
+      }
+    ],
+    "id_igdb": "418617",
+    "cover": "cocxio",
+    "artwork": [
+      "ar6pz8"
+    ],
+    "url": "mirror-backrooms"
+  },
+  {
+    "id": "1565578251911561307",
+    "name": "Path of the Yaoguai",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3739350"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565578269955194960",
+    "name": "Keep Her Safe",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4532550"
+      }
+    ],
+    "id_igdb": "414300",
+    "cover": "cocq6z",
+    "artwork": [
+      "ar6gf1"
+    ],
+    "url": "keep-her-safe"
+  },
+  {
+    "id": "1565576297835536426",
+    "name": "Gear.Club Unlimited 3",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "381154",
+    "cover": "cob09t",
+    "artwork": [
+      "ar4ux3",
+      "ar6r9h"
+    ],
+    "url": "gear-dot-club-unlimited-3--1"
+  },
+  {
+    "id": "1565576399308333236",
+    "name": "Football Story",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "103391",
+    "cover": "co7c51",
+    "artwork": [
+      "arote"
+    ],
+    "url": "football-story"
+  },
+  {
+    "id": "1565576511099109476",
+    "name": "Bao Bao's Cozy Cleaning Services",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "375527",
+    "cover": "coass0",
+    "artwork": [
+      "ar4mbs"
+    ],
+    "url": "bao-baos-cozy-cleaning-services"
+  },
+  {
+    "id": "1565576761285148804",
+    "name": "Just Dying",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "346218",
+    "cover": "co9w2s",
+    "artwork": [
+      "ar3mpy"
+    ],
+    "url": "die-die-die--1"
+  },
+  {
+    "id": "1565577620849037384",
+    "name": "While 1:",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "297759",
+    "cover": "co8zqv",
+    "artwork": [
+      "ar2wjm"
+    ],
+    "url": "1-shot-1-kill"
+  },
+  {
+    "id": "1565577738541342821",
+    "name": "Timberline Factory",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565577765858840741",
+    "name": "Octbuster: Video Rental Store Cleanup",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "414500",
+    "cover": "cocqm3",
+    "artwork": [
+      "ar6gst",
+      "ar6gsv"
+    ],
+    "url": "octbuster-video-rental-store-cleanup"
+  },
+  {
+    "id": "1565577841087877250",
+    "name": "Anywhere RPG",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "422686",
+    "cover": "cod3so",
+    "artwork": [
+      "ar6rbe"
+    ],
+    "url": "anywhere-rpg"
+  },
+  {
+    "id": "1565577906401443943",
+    "name": "Everyone Will Die",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "127684",
+    "cover": "co3qf9",
+    "artwork": [
+      "aro34"
+    ],
+    "url": "everyone-dies"
+  },
+  {
+    "id": "1565578144847626341",
+    "name": "MemeticBox",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "426089",
+    "cover": "cod9ar",
+    "artwork": [
+      "ar6whj"
+    ],
+    "url": "memeticbox"
+  },
+  {
+    "id": "1565578168717418617",
+    "name": "My Summer Project Together",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1565578242788818965",
+    "name": "Playable Archive",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "425848",
+    "cover": "cod8dm",
+    "artwork": [
+      "ar6w68"
+    ],
+    "url": "playable-archive"
+  },
+  {
+    "id": "1565578280424308866",
+    "name": "Five Nights at Frickbear's 3",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "341540",
+    "cover": "cobs09",
+    "artwork": [
+      "ar3jff",
+      "ar6k11"
+    ],
+    "url": "five-nights-at-frickbears-3--1"
+  },
+  {
+    "id": "1565578287961350195",
+    "name": "Azeroth Survivors",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "425774",
+    "cover": null,
+    "artwork": null,
+    "url": "azeroth-survivors"
+  },
+  {
+    "id": "1565580212664795249",
+    "name": "MapleStory Classic World",
+    "aliases": [],
+    "executables": [
+      {
+        "name": "mscw/maplestory.exe",
+        "os": "win32",
+        "is_launcher": false
+      }
+    ],
+    "third_party_skus": [],
+    "id_igdb": "411557",
+    "cover": "cod5du",
+    "artwork": null,
+    "url": "maplestory-classic-world--2"
   }
 ]
