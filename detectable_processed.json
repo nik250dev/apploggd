@@ -261153,7 +261153,7 @@
   },
   {
     "id": "1398168449724846100",
-    "name": "Parallel Lab",
+    "name": "Parallel Experiment",
     "aliases": [],
     "executables": [
       {
@@ -317154,6 +317154,10 @@
       {
         "distributor": "steam",
         "id": "2861080"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N00W4FPCJ2V"
       }
     ],
     "id_igdb": "302983",
@@ -340234,6 +340238,10 @@
       {
         "distributor": "steam",
         "id": "2747660"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.ninjakiwi.zombieassault"
       }
     ],
     "id_igdb": "392214",
@@ -470660,6 +470668,10 @@
       {
         "distributor": "google_play",
         "id": "com.gryphline.endfield.gp"
+      },
+      {
+        "distributor": "steam",
+        "id": "4732690"
       }
     ],
     "id_igdb": "194558",
@@ -478286,6 +478298,10 @@
       {
         "distributor": "steam",
         "id": "3858650"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.DMAP.CIT"
       }
     ],
     "id_igdb": "362089",
@@ -484081,7 +484097,7 @@
   },
   {
     "id": "1479317952976126063",
-    "name": "Triarchy",
+    "name": "Keelblade",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -503803,12 +503819,16 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "google_play",
-        "id": "com.netflix.NGP.SpiritCrossing"
+        "distributor": "epic",
+        "id": "62B3377E0C5C41C0969EB8C843649BDF"
       },
       {
         "distributor": "steam",
         "id": "2321960"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.netflix.NGP.SpiritCrossing"
       }
     ],
     "id_igdb": "336502",
@@ -508675,7 +508695,7 @@
   },
   {
     "id": "1518103399164416203",
-    "name": "Desk Space: Idle Spacefleet clicker",
+    "name": "Desk Space: Idle Spacefleet Clicker",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -541274,7 +541294,24 @@
     "name": "Gear.Club Unlimited 3",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3659460"
+      },
+      {
+        "distributor": "epic",
+        "id": "3B6D3ABAE75644DAA287258042A990FA"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NN84XCLHJNT"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P02TCQ420TB"
+      }
+    ],
     "id_igdb": "381154",
     "cover": "cob09t",
     "artwork": [
@@ -541288,7 +541325,12 @@
     "name": "Football Story",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "757550"
+      }
+    ],
     "id_igdb": "103391",
     "cover": "co7c51",
     "artwork": [
@@ -541301,7 +541343,16 @@
     "name": "Bao Bao's Cozy Cleaning Services",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NSQXMLQ9925"
+      },
+      {
+        "distributor": "steam",
+        "id": "3832380"
+      }
+    ],
     "id_igdb": "375527",
     "cover": "coass0",
     "artwork": [
@@ -541314,7 +541365,12 @@
     "name": "Just Dying",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4646190"
+      }
+    ],
     "id_igdb": "346218",
     "cover": "co9w2s",
     "artwork": [
@@ -541327,7 +541383,12 @@
     "name": "While 1:",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4703230"
+      }
+    ],
     "id_igdb": "297759",
     "cover": "co8zqv",
     "artwork": [
@@ -541340,7 +541401,12 @@
     "name": "Timberline Factory",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5037170"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -541351,7 +541417,12 @@
     "name": "Octbuster: Video Rental Store Cleanup",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5042370"
+      }
+    ],
     "id_igdb": "414500",
     "cover": "cocqm3",
     "artwork": [
@@ -541365,7 +541436,12 @@
     "name": "Anywhere RPG",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5103870"
+      }
+    ],
     "id_igdb": "422686",
     "cover": "cod3so",
     "artwork": [
@@ -541378,7 +541454,12 @@
     "name": "Everyone Will Die",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5113720"
+      }
+    ],
     "id_igdb": "127684",
     "cover": "co3qf9",
     "artwork": [
@@ -541391,7 +541472,12 @@
     "name": "MemeticBox",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5352720"
+      }
+    ],
     "id_igdb": "426089",
     "cover": "cod9ar",
     "artwork": [
@@ -541404,7 +541490,12 @@
     "name": "My Summer Project Together",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5108500"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -541415,7 +541506,12 @@
     "name": "Playable Archive",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5356470"
+      }
+    ],
     "id_igdb": "425848",
     "cover": "cod8dm",
     "artwork": [
@@ -541464,5 +541560,23 @@
     "cover": "cod5du",
     "artwork": null,
     "url": "maplestory-classic-world--2"
+  },
+  {
+    "id": "1565939100815462430",
+    "name": "You Are Empty: Absolute Edition",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4760480"
+      }
+    ],
+    "id_igdb": "414126",
+    "cover": "cocswn",
+    "artwork": [
+      "ar6iyb"
+    ],
+    "url": "you-are-empty-absolute-edition"
   }
 ]
