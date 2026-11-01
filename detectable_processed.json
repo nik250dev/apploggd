@@ -242036,6 +242036,10 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.DifferentSense.BloomtownaDifferentStory"
+      },
+      {
         "distributor": "steam",
         "id": "2445990"
       },
@@ -523688,11 +523692,19 @@
     "third_party_skus": [
       {
         "distributor": "steam",
-        "id": "4012810"
+        "id": "1707312"
       },
       {
         "distributor": "steam",
-        "id": "1707312"
+        "id": "4012810"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MW886PV1QH3"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N0JGJQMP8XB"
       }
     ],
     "id_igdb": "320972",
@@ -531385,12 +531397,16 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9PKFL1XJT73S"
+        "distributor": "epic",
+        "id": "9322E9A66FEC451D9A23F4A00AB84444"
       },
       {
         "distributor": "steam",
         "id": "2920220"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PKFL1XJT73S"
       }
     ],
     "id_igdb": "296564",
@@ -537564,7 +537580,7 @@
   },
   {
     "id": "1563402355192504361",
-    "name": "Slam Tank",
+    "name": "SLAM TANK",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -541578,5 +541594,281 @@
       "ar6iyb"
     ],
     "url": "you-are-empty-absolute-edition"
+  },
+  {
+    "id": "1566301629798424648",
+    "name": "Phantom Blade Zero",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4115450"
+      },
+      {
+        "distributor": "epic",
+        "id": "8D51845827EA4AD0A117CEFD9EB23BD2"
+      }
+    ],
+    "id_igdb": "250618",
+    "cover": "cococe",
+    "artwork": [
+      "ar4uxd",
+      "ar6eyx"
+    ],
+    "url": "phantom-blade-zero"
+  },
+  {
+    "id": "1566301681283502143",
+    "name": "Office Party",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3154460"
+      }
+    ],
+    "id_igdb": "372327",
+    "cover": "coaxy0",
+    "artwork": null,
+    "url": "office-party"
+  },
+  {
+    "id": "1566301697133908048",
+    "name": "Pro Football Referee",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4272810"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1566301712418078761",
+    "name": "Kopernicus: Incremental Suffering",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4456460"
+      }
+    ],
+    "id_igdb": "403556",
+    "cover": "cod7ma",
+    "artwork": [
+      "ar5yfl",
+      "ar5yfm"
+    ],
+    "url": "kopernicus-incremental-suffering"
+  },
+  {
+    "id": "1566301766029410356",
+    "name": "ROB RUN",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4262460"
+      }
+    ],
+    "id_igdb": "416015",
+    "cover": "cod5g2",
+    "artwork": [
+      "ar6utt"
+    ],
+    "url": "rob-run"
+  },
+  {
+    "id": "1566301779480809482",
+    "name": "We Build Below",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3929340"
+      }
+    ],
+    "id_igdb": "361760",
+    "cover": "cobohu",
+    "artwork": [
+      "ar5hcf",
+      "ar5hcg"
+    ],
+    "url": "we-build-below"
+  },
+  {
+    "id": "1566301788804616212",
+    "name": "Geoplanetical",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "940230"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1566301795834273852",
+    "name": "Studs Up!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4923370"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1566301814545060002",
+    "name": "Network & Cyber Security Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4986050"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1566301837714399368",
+    "name": "Absolute Dap",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4755950"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1566301870300069919",
+    "name": "MAFIA HOTEL",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5090990"
+      }
+    ],
+    "id_igdb": "416006",
+    "cover": "cod6s4",
+    "artwork": [
+      "ar6lg8"
+    ],
+    "url": "mafia-hotel"
+  },
+  {
+    "id": "1566301894853402816",
+    "name": "Home Reset: Organizing Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5161940"
+      }
+    ],
+    "id_igdb": "421654",
+    "cover": "cod23k",
+    "artwork": [
+      "ar6xg3"
+    ],
+    "url": "home-reset-organizing-simulator"
+  },
+  {
+    "id": "1566301912607891597",
+    "name": "miniopolis",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3814960"
+      }
+    ],
+    "id_igdb": "418518",
+    "cover": "cocxwc",
+    "artwork": [
+      "ar6n5v"
+    ],
+    "url": "miniopolis"
+  },
+  {
+    "id": "1566301935336689705",
+    "name": "The Onion Voting Simulator 3D",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5372440"
+      }
+    ],
+    "id_igdb": "425913",
+    "cover": "cod8sm",
+    "artwork": [
+      "ar6whb"
+    ],
+    "url": "the-onion-voting-simulator-3d"
+  },
+  {
+    "id": "1566301947932311563",
+    "name": "Kimodameshi Online",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5321510"
+      }
+    ],
+    "id_igdb": "425989",
+    "cover": "cod8mq",
+    "artwork": [
+      "ar6xhe"
+    ],
+    "url": "kimodameshi-online"
+  },
+  {
+    "id": "1566301956668923974",
+    "name": "Chess Solitairen",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
   }
 ]
