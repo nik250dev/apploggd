@@ -12,6 +12,7 @@
 ### Changed
 
 - Home status panel redesigned
+- Improved detection of Steam games
 
 ### Fixed
 
