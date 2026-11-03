@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.RegularExpressions;
 using BackloggdMirror.Models;
 
 namespace BackloggdMirror.Services.Platform.Linux;
@@ -16,10 +15,8 @@ namespace BackloggdMirror.Services.Platform.Linux;
 /// own process, found among the reaper's descendants as the first one run from the game's install folder
 /// (the others are Steam's runtime container, Proton and Wine's system processes).
 /// </summary>
-internal sealed class LinuxSteamGameDetector
+internal sealed class LinuxSteamGameDetector : ISteamGameDetector
 {
-    private static readonly Regex InstallDirPattern = new("\"installdir\"\\s+\"([^\"]*)\"", RegexOptions.IgnoreCase);
-
     private readonly IAppLogger? _logger;
     private readonly IDetectionBlacklist? _blacklist;
     private Dictionary<string, DetectableGame> _gamesByAppId = new();
@@ -35,19 +32,9 @@ internal sealed class LinuxSteamGameDetector
 
     public void Load(IEnumerable<DetectableGame> games)
     {
-        var index = new Dictionary<string, DetectableGame>(StringComparer.Ordinal);
-        foreach (var game in games)
-        {
-            foreach (var sku in game.ThirdPartySkus ?? new List<DetectableSku>())
-            {
-                if (sku.Distributor == "steam" && !string.IsNullOrEmpty(sku.Id))
-                    index.TryAdd(sku.Id, game);
-            }
-        }
-
-        _gamesByAppId = index;
+        _gamesByAppId = SteamApps.IndexByAppId(games);
         _installDirs.Clear();
-        Console.WriteLine($"[LinuxSteamGameDetector] Indexed {index.Count} Steam app ids.");
+        Console.WriteLine($"[LinuxSteamGameDetector] Indexed {_gamesByAppId.Count} Steam app ids.");
     }
 
     public DetectedGame? Detect()
@@ -173,24 +160,11 @@ internal sealed class LinuxSteamGameDetector
         string key = library + "|" + appId;
         if (!_installDirs.TryGetValue(key, out string? installDir))
         {
-            installDir = ReadInstallDir(Path.Combine(library + "/steamapps", $"appmanifest_{appId}.acf"));
+            installDir = SteamApps.ReadInstallDir(Path.Combine(library + "/steamapps", $"appmanifest_{appId}.acf"));
             _installDirs[key] = installDir;
         }
 
         // Wine keeps the case of the Windows path it was given, which need not be the folder's.
         return installDir != null && string.Equals(rest[..slash], installDir, StringComparison.OrdinalIgnoreCase);
-    }
-
-    private static string? ReadInstallDir(string manifestPath)
-    {
-        try
-        {
-            var match = InstallDirPattern.Match(File.ReadAllText(manifestPath));
-            return match.Success ? match.Groups[1].Value : null;
-        }
-        catch
-        {
-            return null;
-        }
     }
 }

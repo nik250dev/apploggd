@@ -21,14 +21,15 @@ namespace BackloggdMirror.Services;
 /// against the local database is exact and yields the IGDB id for free; the emulator tier is exact
 /// too but has to work out which ROM is loaded before it can name a game; and the window heuristic
 /// only produces a window <em>title</em> that still has to be identified afterwards.
-/// Linux adds a tier of its own between the first two, the Steam app id (see <see cref="LinuxSteamGameDetector"/>),
-/// has its own emulator detectors behind the same tier, and brings its own window heuristic (see <see cref="LinuxWindowGameDetector"/>).
+/// A tier sits between the first two for Steam games by app id (see <see cref="WindowsSteamGameDetector"/> and
+/// <see cref="LinuxSteamGameDetector"/>). Linux has its own emulator detectors behind the same tier, and brings its
+/// own window heuristic (see <see cref="LinuxWindowGameDetector"/>).
 /// </summary>
 public class GameDetectionService : IGameDetectionService
 {
     private readonly IGameDetectionStrategy _strategy;
     private readonly EmulatorDetector? _emulatorDetector;
-    private readonly LinuxSteamGameDetector? _steamDetector;
+    private readonly ISteamGameDetector? _steamDetector;
     private readonly IProcessIdentity _processIdentity;
 
     /// <summary>
@@ -50,6 +51,7 @@ public class GameDetectionService : IGameDetectionService
         {
             var igdbResolver = new IgdbResolverService(logger);
             _strategy = new WindowsGameDetector(igdbResolver, blacklist, logger);
+            _steamDetector = new WindowsSteamGameDetector(logger, blacklist);
             _emulatorDetector = new EmulatorDetector(logger, blacklist);
         }
         else if (OperatingSystem.IsLinux())
@@ -99,7 +101,7 @@ public class GameDetectionService : IGameDetectionService
             return new DetectedGame(exeName, exePid, exeIdIgdb, DetectionSource.Executable);
         }
 
-        // Priority 1.2 (Linux): Steam games by app id, which is what finds native Linux builds
+        // Priority 1.2: Steam games by app id, which finds native Linux builds and games listed without executables
         var steamGame = _steamDetector?.Detect();
         if (steamGame != null)
         {
