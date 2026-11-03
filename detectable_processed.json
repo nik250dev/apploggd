@@ -68,12 +68,27 @@
     ],
     "executables": [
       {
+        "name": "_retail_/wow.exe",
+        "os": "win32",
+        "is_launcher": false
+      },
+      {
+        "name": "_ptr_/wow-64.exe",
+        "os": "win32",
+        "is_launcher": false
+      },
+      {
         "name": "_retail_/world of warcraft.app",
         "os": "darwin",
         "is_launcher": false
       },
       {
-        "name": "_ptr_/wow-64.exe",
+        "name": "_retail_/wow-64.exe",
+        "os": "win32",
+        "is_launcher": false
+      },
+      {
+        "name": "_ptr_/wow.exe",
         "os": "win32",
         "is_launcher": false
       },
@@ -83,27 +98,7 @@
         "is_launcher": false
       },
       {
-        "name": "_retail_/wow-64.exe",
-        "os": "win32",
-        "is_launcher": false
-      },
-      {
-        "name": "world of warcraft.app",
-        "os": "darwin",
-        "is_launcher": false
-      },
-      {
-        "name": "_ptr_/wow.exe",
-        "os": "win32",
-        "is_launcher": false
-      },
-      {
         "name": "_beta_/wow.exe",
-        "os": "win32",
-        "is_launcher": false
-      },
-      {
-        "name": "_retail_/wow.exe",
         "os": "win32",
         "is_launcher": false
       }
@@ -273880,7 +273875,7 @@
   },
   {
     "id": "1413282594195378287",
-    "name": "Hell is Us",
+    "name": "Hell Is Us",
     "aliases": [],
     "executables": [
       {
@@ -273891,20 +273886,20 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9NS0RX8F5865"
-      },
-      {
-        "distributor": "steam",
-        "id": "1620730"
-      },
-      {
         "distributor": "epic",
         "id": "7449318111CD4BAD8D8084A031A707BB"
       },
       {
         "distributor": "xbox",
         "id": "9N9097G0XZMB"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NS0RX8F5865"
+      },
+      {
+        "distributor": "steam",
+        "id": "1620730"
       }
     ],
     "id_igdb": "196954",
@@ -311224,12 +311219,12 @@
     "aliases": [],
     "executables": [
       {
-        "name": "pvz replanted - pc/replanted.exe",
+        "name": "pvz replanted/replanted.exe",
         "os": "win32",
         "is_launcher": false
       },
       {
-        "name": "pvz replanted/replanted.exe",
+        "name": "pvz replanted - pc/replanted.exe",
         "os": "win32",
         "is_launcher": false
       }
@@ -311246,6 +311241,10 @@
       {
         "distributor": "steam",
         "id": "3654560"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NGP0DJVKSFL"
       }
     ],
     "id_igdb": "358529",
