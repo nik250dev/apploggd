@@ -2551,6 +2551,9 @@ public partial class MainWindowViewModel : ViewModelBase
         string gameName = game.Name;
         string? idIgdb = game.IdIgdb;
 
+        string emulator = game.EmulatorName != null ? $" in {game.EmulatorName}" : string.Empty;
+        _logger?.Info($"[StartNewGame] Session started for '{gameName}' (PID {game.ProcessId}, IGDB: {idIgdb ?? "null"}). Detected by {game.Source.TierLabel()}{emulator}.");
+
         _currentGame = game;
         GameName = gameName;
         IsRunningGameEmulated = game.Source == DetectionSource.Emulator;
