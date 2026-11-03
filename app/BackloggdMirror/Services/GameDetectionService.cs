@@ -49,7 +49,7 @@ public class GameDetectionService : IGameDetectionService
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
             var igdbResolver = new IgdbResolverService(logger);
-            _strategy = new WindowsGameDetector(igdbResolver, blacklist);
+            _strategy = new WindowsGameDetector(igdbResolver, blacklist, logger);
             _emulatorDetector = new EmulatorDetector(logger, blacklist);
         }
         else if (OperatingSystem.IsLinux())
