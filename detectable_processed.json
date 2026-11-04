@@ -2105,17 +2105,27 @@
     "aliases": [],
     "executables": [
       {
-        "name": "maplestory.exe",
+        "name": "maplestory.app",
+        "os": "darwin",
+        "is_launcher": false
+      },
+      {
+        "name": "maple/maplestory.exe",
+        "os": "win32",
+        "is_launcher": false
+      },
+      {
+        "name": "maplestory/maplestory.exe",
+        "os": "win32",
+        "is_launcher": false
+      },
+      {
+        "name": "appdata/maplestory.exe",
         "os": "win32",
         "is_launcher": false
       }
     ],
-    "third_party_skus": [
-      {
-        "distributor": "steam",
-        "id": "216150"
-      }
-    ],
+    "third_party_skus": [],
     "id_igdb": "9804",
     "cover": "coaas1",
     "artwork": [
@@ -148078,6 +148088,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "epic",
+        "id": "47066F6D386E4097A112676B5858E5A6"
+      },
+      {
         "distributor": "steam",
         "id": "214950"
       }
@@ -237579,7 +237593,7 @@
   },
   {
     "id": "1333662896235872327",
-    "name": "Virtua Fighter 5 R.E.V.O.",
+    "name": "Virtua Fighter 5 R.E.V.O. World Stage",
     "aliases": [],
     "executables": [
       {
@@ -237590,20 +237604,20 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9NSM674QVLBS"
-      },
-      {
         "distributor": "steam",
         "id": "3112260"
       },
       {
         "distributor": "xbox",
-        "id": "9NZXM47MHK30"
+        "id": "9NSM674QVLBS"
       },
       {
         "distributor": "xbox",
         "id": "9PK9VV0V4DWJ"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NZXM47MHK30"
       },
       {
         "distributor": "xbox",
@@ -262148,6 +262162,10 @@
       }
     ],
     "third_party_skus": [
+      {
+        "distributor": "epic",
+        "id": "0233B9C5EC9C476CB63BDA4B463CAA7E"
+      },
       {
         "distributor": "steam",
         "id": "2951630"
@@ -471195,6 +471213,10 @@
       {
         "distributor": "google_play",
         "id": "com.elementagames.silverpalace.google"
+      },
+      {
+        "distributor": "epic",
+        "id": "4D49AFDE9C7542FBB755B3747005BCDC"
       }
     ],
     "id_igdb": "343335",
@@ -480892,6 +480914,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "epic",
+        "id": "BF756F25330348F28067E367B46DD570"
+      },
       {
         "distributor": "steam",
         "id": "1798230"
@@ -541568,6 +541594,11 @@
         "name": "mscw/maplestory.exe",
         "os": "win32",
         "is_launcher": false
+      },
+      {
+        "name": "maplestory classic world.app",
+        "os": "darwin",
+        "is_launcher": false
       }
     ],
     "third_party_skus": [],
@@ -541776,6 +541807,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "epic",
+        "id": "C102CB63A52643D1A4C3CA009439EECE"
+      },
+      {
         "distributor": "steam",
         "id": "5090990"
       }
@@ -541869,5 +541904,1072 @@
     "cover": null,
     "artwork": null,
     "url": null
+  },
+  {
+    "id": "1567388296282247188",
+    "name": "Deus Mantle",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3116870"
+      }
+    ],
+    "id_igdb": "342306",
+    "cover": "coawx7",
+    "artwork": [
+      "ar3kfv",
+      "ar4r7c"
+    ],
+    "url": "deus-mantle"
+  },
+  {
+    "id": "1567388321225777243",
+    "name": "Beekeeper Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3555210"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1567388327957495939",
+    "name": "Grobnopolis: Last Days",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3851090"
+      }
+    ],
+    "id_igdb": "363914",
+    "cover": "coacue",
+    "artwork": [
+      "ar4363"
+    ],
+    "url": "grobnopolis-last-days"
+  },
+  {
+    "id": "1567388339957530685",
+    "name": "Dinolords",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2587620"
+      }
+    ],
+    "id_igdb": "270548",
+    "cover": "co82cd",
+    "artwork": [
+      "ar2kbz"
+    ],
+    "url": "dinolords"
+  },
+  {
+    "id": "1567388346894782474",
+    "name": "Anhedonia: Sanctuary of Ash",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4202540"
+      }
+    ],
+    "id_igdb": "408915",
+    "cover": "coccnz",
+    "artwork": [
+      "ar6vz0"
+    ],
+    "url": "anhedonia-sanctuary-of-ash"
+  },
+  {
+    "id": "1567388355493240883",
+    "name": "Rasen",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3967860"
+      }
+    ],
+    "id_igdb": "384245",
+    "cover": "cob7ud",
+    "artwork": [
+      "ar51tz"
+    ],
+    "url": "rasen"
+  },
+  {
+    "id": "1567388364494340167",
+    "name": "Rat Game",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3347910"
+      }
+    ],
+    "id_igdb": "364212",
+    "cover": "cod7hq",
+    "artwork": [
+      "ar5bb2"
+    ],
+    "url": "rat-game"
+  },
+  {
+    "id": "1567388373088469063",
+    "name": "Solbrand",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3772990"
+      }
+    ],
+    "id_igdb": "364319",
+    "cover": "coado4",
+    "artwork": [
+      "ar43ld"
+    ],
+    "url": "solbrand"
+  },
+  {
+    "id": "1567388380516458516",
+    "name": "PC Cafe Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3375990"
+      }
+    ],
+    "id_igdb": "426718",
+    "cover": null,
+    "artwork": null,
+    "url": "pc-cafe-simulator"
+  },
+  {
+    "id": "1567388410887278652",
+    "name": "Shelf Heroes",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3151140"
+      }
+    ],
+    "id_igdb": "336147",
+    "cover": "co9k0x",
+    "artwork": [
+      "ar3czh"
+    ],
+    "url": "shelf-heroes"
+  },
+  {
+    "id": "1567388435251994624",
+    "name": "Figure Drawing Garden",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2594620"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1567388445767106591",
+    "name": "One Week Away",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3860760"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1567388451056255046",
+    "name": "Curse of Resthaven",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3796150"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MT4ZXD1LJNN"
+      }
+    ],
+    "id_igdb": "391801",
+    "cover": "cobli5",
+    "artwork": [
+      "ar5ex1"
+    ],
+    "url": "curse-of-resthaven"
+  },
+  {
+    "id": "1567388462083215411",
+    "name": "RPG Chess",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3383450"
+      }
+    ],
+    "id_igdb": "325336",
+    "cover": "cod4q8",
+    "artwork": [
+      "ar382g"
+    ],
+    "url": "rpg-chess"
+  },
+  {
+    "id": "1567388474276061194",
+    "name": "Silent Wounds: The Doll",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4251070"
+      }
+    ],
+    "id_igdb": "414540",
+    "cover": "cod16h",
+    "artwork": [
+      "ar6gv0"
+    ],
+    "url": "silent-wounds-the-doll"
+  },
+  {
+    "id": "1567388485403541634",
+    "name": "The Hat Man",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4347270"
+      },
+      {
+        "distributor": "epic",
+        "id": "68382840B19443BA98AE81A182987DBE"
+      }
+    ],
+    "id_igdb": "406000",
+    "cover": "cocvds",
+    "artwork": [
+      "ar6kj2"
+    ],
+    "url": "the-hat-man"
+  },
+  {
+    "id": "1567388499613720649",
+    "name": "The Hearth and Harbour",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2528170"
+      }
+    ],
+    "id_igdb": "366973",
+    "cover": "coag9d",
+    "artwork": [
+      "ar47k8"
+    ],
+    "url": "the-hearth-and-harbour"
+  },
+  {
+    "id": "1567388523080847481",
+    "name": "Undead Development 2",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1587920"
+      }
+    ],
+    "id_igdb": "150396",
+    "cover": "co3pqm",
+    "artwork": [
+      "arht9"
+    ],
+    "url": "undead-development-2"
+  },
+  {
+    "id": "1567388538347978773",
+    "name": "Outliers: Incrementum",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4563740"
+      }
+    ],
+    "id_igdb": "425175",
+    "cover": "cod7d3",
+    "artwork": [
+      "ar6v41"
+    ],
+    "url": "outliers-incrementum"
+  },
+  {
+    "id": "1567388552495501462",
+    "name": "if you stay",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4437140"
+      }
+    ],
+    "id_igdb": "396455",
+    "cover": "cobuim",
+    "artwork": [
+      "ar5mv4",
+      "ar5mv3"
+    ],
+    "url": "if-you-stay"
+  },
+  {
+    "id": "1567388574268129370",
+    "name": "Planet Harvester: Incremental Odyssey",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4448490"
+      }
+    ],
+    "id_igdb": "406582",
+    "cover": "coc8xu",
+    "artwork": [
+      "ar6ctn"
+    ],
+    "url": "planet-harvester-incremental-odyssey"
+  },
+  {
+    "id": "1567388580182098081",
+    "name": "Thalassomania",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3050090"
+      }
+    ],
+    "id_igdb": "338295",
+    "cover": "co9mao",
+    "artwork": [
+      "ar3eww"
+    ],
+    "url": "thalassomania"
+  },
+  {
+    "id": "1567388587362623561",
+    "name": "SliceShot Padel",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4244730"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1567388593721446430",
+    "name": "Usagi Shima",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3144010"
+      }
+    ],
+    "id_igdb": "204511",
+    "cover": "co4uyi",
+    "artwork": [
+      "ar3ury"
+    ],
+    "url": "usagi-shima"
+  },
+  {
+    "id": "1567388597966082150",
+    "name": "DEEPWARD",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4709270"
+      }
+    ],
+    "id_igdb": "410958",
+    "cover": "cod39m",
+    "artwork": [
+      "ar6qv1"
+    ],
+    "url": "deepward"
+  },
+  {
+    "id": "1567388604978692168",
+    "name": "Earth Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4932460"
+      }
+    ],
+    "id_igdb": "427724",
+    "cover": null,
+    "artwork": null,
+    "url": "earth-simulator"
+  },
+  {
+    "id": "1567388610716766299",
+    "name": "PARRY IT",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4579510"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1567388619365290034",
+    "name": "Prinny Party: Going Overboard!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4509300"
+      }
+    ],
+    "id_igdb": "394548",
+    "cover": "cobr59",
+    "artwork": [
+      "ar6kft"
+    ],
+    "url": "prinny-party-going-overboard"
+  },
+  {
+    "id": "1567388626554331219",
+    "name": "Tinker Islands",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4230380"
+      }
+    ],
+    "id_igdb": "410820",
+    "cover": "cocjs9",
+    "artwork": [
+      "ar6as9"
+    ],
+    "url": "tinker-islands"
+  },
+  {
+    "id": "1567388640282157116",
+    "name": "A Dark Cave",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4882240"
+      }
+    ],
+    "id_igdb": "414272",
+    "cover": "cocq6i",
+    "artwork": [
+      "ar6ge2"
+    ],
+    "url": "a-dark-cave"
+  },
+  {
+    "id": "1567388648415166514",
+    "name": "Broken Oath",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4970110"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1567388668560408676",
+    "name": "Cozy Banker",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5010440"
+      }
+    ],
+    "id_igdb": "413294",
+    "cover": "cocv21",
+    "artwork": [
+      "ar6f16"
+    ],
+    "url": "cozy-banker"
+  },
+  {
+    "id": "1567388681210306683",
+    "name": "Death Row",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5015330"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1567388697983193189",
+    "name": "The Gastarbeiters",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4877100"
+      }
+    ],
+    "id_igdb": "414029",
+    "cover": "cocpn8",
+    "artwork": [
+      "ar6fxd"
+    ],
+    "url": "the-gastarbeiters"
+  },
+  {
+    "id": "1567388704538890380",
+    "name": "Anomaly Sector",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4699560"
+      }
+    ],
+    "id_igdb": "425796",
+    "cover": "cod8ap",
+    "artwork": [
+      "ar6vz1"
+    ],
+    "url": "anomaly-sector"
+  },
+  {
+    "id": "1567388720699543662",
+    "name": "The Winery: Winemaking Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4914970"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1567388734691876884",
+    "name": "Cluttermancer: Tidy Up the Nightmare Alley",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5032140"
+      }
+    ],
+    "id_igdb": "423425",
+    "cover": "cod4r5",
+    "artwork": [
+      "ar6sct"
+    ],
+    "url": "cluttermancer-tidy-up-the-nightmare-alley"
+  },
+  {
+    "id": "1567388743349043341",
+    "name": "Powder Park",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4966730"
+      }
+    ],
+    "id_igdb": "421496",
+    "cover": "cod1ve",
+    "artwork": [
+      "ar6po6"
+    ],
+    "url": "powder-park"
+  },
+  {
+    "id": "1567388748587466784",
+    "name": "Checkpoint '38",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4347560"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1567388753947791400",
+    "name": "False Oath",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4601100"
+      }
+    ],
+    "id_igdb": "415653",
+    "cover": "coctqk",
+    "artwork": [
+      "ar6xtd",
+      "ar6ji4",
+      "ar6ji2",
+      "ar6xte",
+      "ar6ji3"
+    ],
+    "url": "false-oath"
+  },
+  {
+    "id": "1567388759929004173",
+    "name": "Farm to Fortune",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5025010"
+      }
+    ],
+    "id_igdb": "427399",
+    "cover": null,
+    "artwork": null,
+    "url": "farm-to-fortune"
+  },
+  {
+    "id": "1567388768489570515",
+    "name": "Life Is a Dungeon: Lean Into It.",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5062910"
+      }
+    ],
+    "id_igdb": "422588",
+    "cover": "cod3li",
+    "artwork": [
+      "ar6r6j"
+    ],
+    "url": "life-is-a-dungeon-lean-into-it"
+  },
+  {
+    "id": "1567388778232811632",
+    "name": "Mycelarium",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5181520"
+      }
+    ],
+    "id_igdb": "427798",
+    "cover": "codasl",
+    "artwork": [
+      "ar6yd8",
+      "ar6yda"
+    ],
+    "url": "mycelarium"
+  },
+  {
+    "id": "1567388788605329458",
+    "name": "Where the Seeds Fall",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4139580"
+      }
+    ],
+    "id_igdb": "416123",
+    "cover": "coctkd",
+    "artwork": [
+      "ar6olz"
+    ],
+    "url": "where-the-seeds-fall"
+  },
+  {
+    "id": "1567388796108931215",
+    "name": "Game Market Mayhem",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5144470"
+      }
+    ],
+    "id_igdb": "417159",
+    "cover": "cocvc0",
+    "artwork": [
+      "ar6khh"
+    ],
+    "url": "game-market-mayhem"
+  },
+  {
+    "id": "1567388814073143417",
+    "name": "Family Time",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5072600"
+      }
+    ],
+    "id_igdb": "417698",
+    "cover": "cocxiz",
+    "artwork": [
+      "ar6l7h"
+    ],
+    "url": "family-time"
+  },
+  {
+    "id": "1567388820792414389",
+    "name": "How to Hunt",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5208540"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1567388827817877574",
+    "name": "Mimic2: Idle MMORPG",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5191970"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1567388833996218519",
+    "name": "Tidy Farm",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5226940"
+      }
+    ],
+    "id_igdb": "425169",
+    "cover": "cod7cl",
+    "artwork": null,
+    "url": "tidy-farm"
+  },
+  {
+    "id": "1567388846923190376",
+    "name": "Aqua Factory Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5044940"
+      }
+    ],
+    "id_igdb": "423809",
+    "cover": "cod5cg",
+    "artwork": [
+      "ar6szy"
+    ],
+    "url": "aqua-factory-simulator"
+  },
+  {
+    "id": "1567388878376140973",
+    "name": "Mad Dvizhuha: Benzovoz",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5280100"
+      }
+    ],
+    "id_igdb": "425906",
+    "cover": "cod8ti",
+    "artwork": [
+      "ar6wr9"
+    ],
+    "url": "mad-dvizhuha-benzovoz"
+  },
+  {
+    "id": "1567388900039729202",
+    "name": "Halloween On Goober Street",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5279620"
+      }
+    ],
+    "id_igdb": "423620",
+    "cover": "cod53c",
+    "artwork": [
+      "ar6spy"
+    ],
+    "url": "halloween-on-goober-street"
+  },
+  {
+    "id": "1567388916879728753",
+    "name": "CATCAR Pit Crew",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5039630"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1567388935934451823",
+    "name": "Stick A Fork",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5345040"
+      }
+    ],
+    "id_igdb": "425146",
+    "cover": "cod7bp",
+    "artwork": [
+      "ar6vdj"
+    ],
+    "url": "stick-a-fork"
+  },
+  {
+    "id": "1567388941487833108",
+    "name": "Wheel of Death",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4958650"
+      }
+    ],
+    "id_igdb": "422317",
+    "cover": "cod4ed",
+    "artwork": [
+      "ar6rv8"
+    ],
+    "url": "wheel-of-death"
+  },
+  {
+    "id": "1567388949377450035",
+    "name": "Idle Legions",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5238690"
+      }
+    ],
+    "id_igdb": "424844",
+    "cover": "cod85v",
+    "artwork": [
+      "ar6vfe",
+      "ar6v6z"
+    ],
+    "url": "idle-legions"
+  },
+  {
+    "id": "1567388958223245332",
+    "name": "Quarantine Lab Sort",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5345490"
+      }
+    ],
+    "id_igdb": "423590",
+    "cover": "cod51t",
+    "artwork": [
+      "ar6xfs"
+    ],
+    "url": "quarantine-lab-sort"
+  },
+  {
+    "id": "1567388972533944391",
+    "name": "Handle with Care!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4996960"
+      }
+    ],
+    "id_igdb": "419590",
+    "cover": "cocyz4",
+    "artwork": [
+      "ar6n9p"
+    ],
+    "url": "handle-with-care--1"
+  },
+  {
+    "id": "1567388287134339122",
+    "name": "Magma",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "229163",
+    "cover": "co5wqb",
+    "artwork": [
+      "ar21ww",
+      "ar21wt"
+    ],
+    "url": "magma"
+  },
+  {
+    "id": "1567388966200545320",
+    "name": "Armor Sandbox",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1567388979941081239",
+    "name": "Dominoes Together",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "425903",
+    "cover": "cod929",
+    "artwork": [
+      "ar6xwb",
+      "ar6xwa"
+    ],
+    "url": "dominoes-together"
   }
 ]
