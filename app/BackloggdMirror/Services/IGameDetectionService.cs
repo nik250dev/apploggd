@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using BackloggdMirror.Models;
 
 namespace BackloggdMirror.Services;
@@ -5,9 +6,10 @@ namespace BackloggdMirror.Services;
 public interface IGameDetectionService
 {
     /// <summary>
-    /// Polled every three seconds while no session is open. Returns null when nothing is running.
+    /// Polled every three seconds while a session slot is free. Returns null when nothing is running.
     /// </summary>
-    DetectedGame? Detect();
+    /// <param name="excludedProcessIds">Games already being timed, skipped with their ancestors and descendants.</param>
+    DetectedGame? Detect(IReadOnlyCollection<uint>? excludedProcessIds = null);
 
     /// <summary>
     /// Polled every three seconds while a session is open. For an emulated game this is more than a

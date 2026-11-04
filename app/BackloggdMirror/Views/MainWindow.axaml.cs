@@ -246,6 +246,9 @@ public partial class MainWindow : Window
         vm.PropertyChanged -= OnViewModelPropertyChanged;
         vm.PropertyChanged += OnViewModelPropertyChanged;
 
+        vm.Confirmations.CollectionChanged -= OnConfirmationsChanged;
+        vm.Confirmations.CollectionChanged += OnConfirmationsChanged;
+
         // Init/Sync initial state
         UpdateTrayMenuState(vm);
     }
@@ -315,9 +318,10 @@ public partial class MainWindow : Window
     private void OnViewModelPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.TrayMenuActionText)
-            || e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsGameRunning)
+            || e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsAnyGameRunning)
             || e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsSessionConfirmationVisible)
-            || e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsAutoSavingSession))
+            || e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsAnySessionAutoSaving)
+            || e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsPrimaryDetectionPaused))
         {
             if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
             {
@@ -329,26 +333,53 @@ public partial class MainWindow : Window
                 }
             }
         }
-        else if (e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsSessionNoteOpen) && sender is BackloggdMirror.ViewModels.MainWindowViewModel noteVm)
+    }
+
+    private void OnConfirmationsChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+    {
+        foreach (var confirmation in e.OldItems?.OfType<BackloggdMirror.ViewModels.SessionConfirmationViewModel>() ?? [])
+            confirmation.PropertyChanged -= OnConfirmationPropertyChanged;
+
+        foreach (var confirmation in e.NewItems?.OfType<BackloggdMirror.ViewModels.SessionConfirmationViewModel>() ?? [])
+            confirmation.PropertyChanged += OnConfirmationPropertyChanged;
+    }
+
+    private void OnConfirmationPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        if (sender is not BackloggdMirror.ViewModels.SessionConfirmationViewModel confirmation) return;
+
+        if (e.PropertyName == nameof(BackloggdMirror.ViewModels.SessionConfirmationViewModel.IsSessionNoteOpen))
         {
-            OnSessionExtraToggled(noteVm, noteVm.IsSessionNoteOpen, SessionNotePanel, () => SessionNoteBox, SessionAddNoteButton);
+            OnSessionExtraToggled(confirmation, confirmation.IsSessionNoteOpen, "SessionNotePanel",
+                () => SessionControl<TextBox>(confirmation, "SessionNoteBox"), "SessionAddNoteButton");
         }
-        else if (e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsSessionTagsOpen) && sender is BackloggdMirror.ViewModels.MainWindowViewModel tagsVm)
+        else if (e.PropertyName == nameof(BackloggdMirror.ViewModels.SessionConfirmationViewModel.IsSessionTagsOpen))
         {
-            OnSessionExtraToggled(tagsVm, tagsVm.IsSessionTagsOpen, SessionTagsPanel, () => TagInputIn(SessionTagsPanel), SessionAddTagsButton);
+            OnSessionExtraToggled(confirmation, confirmation.IsSessionTagsOpen, "SessionTagsPanel",
+                () => TagInputIn(SessionControl<Views.Controls.RevealPanel>(confirmation, "SessionTagsPanel")), "SessionAddTagsButton");
         }
     }
 
-    /// <summary>An opened field takes the focus, unless it opened to show what Backloggd had; a removed one hands it back to its button, if the focus was inside.</summary>
-    private void OnSessionExtraToggled(BackloggdMirror.ViewModels.MainWindowViewModel vm, bool opened, Views.Controls.RevealPanel panel, Func<Control?> field, Button addButton)
-    {
-        if (!vm.IsSessionConfirmationVisible || vm.IsFillingSessionExtras) return;
+    /// <summary>A named control inside the dialog of a confirmation.</summary>
+    internal T? SessionControl<T>(BackloggdMirror.ViewModels.SessionConfirmationViewModel? confirmation, string name) where T : Control =>
+        confirmation == null ? null
+            : SessionDialogsHost.ContainerFromItem(confirmation)?.GetVisualDescendants().OfType<T>().FirstOrDefault(c => c.Name == name);
 
-        bool focusInside = FocusManager?.GetFocusedElement() is Visual focused && panel.IsVisualAncestorOf(focused);
+    private static BackloggdMirror.ViewModels.SessionConfirmationViewModel? ConfirmationOf(object? sender) =>
+        (sender as Control)?.DataContext as BackloggdMirror.ViewModels.SessionConfirmationViewModel;
+
+    /// <summary>An opened field takes the focus, unless it opened to show what Backloggd had; a removed one hands it back to its button, if the focus was inside.</summary>
+    private void OnSessionExtraToggled(BackloggdMirror.ViewModels.SessionConfirmationViewModel confirmation, bool opened, string panelName, Func<Control?> field, string addButtonName)
+    {
+        if (confirmation.IsFillingSessionExtras
+            || DataContext is not BackloggdMirror.ViewModels.MainWindowViewModel vm || !vm.Confirmations.Contains(confirmation)) return;
+
+        var panel = SessionControl<Views.Controls.RevealPanel>(confirmation, panelName);
+        bool focusInside = panel != null && FocusManager?.GetFocusedElement() is Visual focused && panel.IsVisualAncestorOf(focused);
         Dispatcher.UIThread.Post(() =>
         {
             if (opened) FocusSessionControl(field());
-            else if (focusInside || FocusManager?.GetFocusedElement() == null) FocusSessionControl(addButton);
+            else if (focusInside || FocusManager?.GetFocusedElement() == null) FocusSessionControl(SessionControl<Button>(confirmation, addButtonName));
         }, DispatcherPriority.Background);
     }
 
@@ -469,7 +500,8 @@ public partial class MainWindow : Window
     private void OnHoldFrontTick(object? sender, EventArgs e)
     {
         // Minimized, sent to the tray or already saving: the user has seen it and chose to leave it.
-        bool stillWanted = DataContext is BackloggdMirror.ViewModels.MainWindowViewModel { IsSessionConfirmationVisible: true, IsSavingSession: false }
+        bool stillWanted = DataContext is BackloggdMirror.ViewModels.MainWindowViewModel { IsSessionConfirmationVisible: true } vm
+            && vm.Confirmations.Any(c => !c.IsSavingSession)
             && DateTime.UtcNow < _holdFrontUntil
             && IsVisible
             && WindowState != WindowState.Minimized;
@@ -492,14 +524,14 @@ public partial class MainWindow : Window
 
         _trayToggleItem.Header = vm.TrayMenuActionText;
 
-        bool busy = vm.IsSessionConfirmationVisible || vm.IsGameRunning || vm.IsAutoSavingSession;
+        bool busy = vm.IsSessionConfirmationVisible || vm.IsAnyGameRunning || vm.IsAnySessionAutoSaving;
         _trayToggleItem.IsEnabled = !busy;
 
         if (busy)
         {
             _trayToggleItem.Icon = _clockIconBitmap;
         }
-        else if (vm.IsGameDetectionPaused)
+        else if (vm.IsPrimaryDetectionPaused)
         {
             _trayToggleItem.Icon = _playIconBitmap;
         }
@@ -750,50 +782,50 @@ public partial class MainWindow : Window
 
     private void OnInfoIconPointerEntered(object? sender, Avalonia.Input.PointerEventArgs e)
     {
-        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        if (ConfirmationOf(sender) is { } confirmation)
         {
-            vm.DismissForcedTooltip();
+            confirmation.DismissForcedTooltip();
         }
     }
 
     private void OnInfoIconPointerExited(object? sender, Avalonia.Input.PointerEventArgs e)
     {
-        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        if (ConfirmationOf(sender) is { } confirmation)
         {
-            vm.OnInfoIconExited();
+            confirmation.OnInfoIconExited();
         }
     }
 
     // With a controller, focus stands in for the hover on the info icon and the cover.
     private void OnInfoButtonGotFocus(object? sender, Avalonia.Input.GotFocusEventArgs e)
     {
-        if (_gamepadNavigator?.IsControllerMode == true && DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        if (_gamepadNavigator?.IsControllerMode == true && ConfirmationOf(sender) is { } confirmation)
         {
-            vm.DismissForcedTooltip();
+            confirmation.DismissForcedTooltip();
         }
     }
 
     private void OnInfoButtonLostFocus(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        if (ConfirmationOf(sender) is { } confirmation)
         {
-            vm.OnInfoIconExited();
+            confirmation.OnInfoIconExited();
         }
     }
 
     private void OnCoverGotFocus(object? sender, Avalonia.Input.GotFocusEventArgs e)
     {
-        if (_gamepadNavigator?.IsControllerMode == true && DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        if (_gamepadNavigator?.IsControllerMode == true && ConfirmationOf(sender) is { } confirmation)
         {
-            vm.OnCoverPointerEntered();
+            confirmation.OnCoverPointerEntered();
         }
     }
 
     private void OnCoverLostFocus(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        if (ConfirmationOf(sender) is { } confirmation)
         {
-            vm.OnCoverPointerExited();
+            confirmation.OnCoverPointerExited();
         }
     }
 
@@ -816,33 +848,33 @@ public partial class MainWindow : Window
 
     private void OnCoverPointerEntered(object? sender, Avalonia.Input.PointerEventArgs e)
     {
-        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        if (ConfirmationOf(sender) is { } confirmation)
         {
-            vm.OnCoverPointerEntered();
+            confirmation.OnCoverPointerEntered();
         }
     }
 
     private void OnCoverPointerExited(object? sender, Avalonia.Input.PointerEventArgs e)
     {
-        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        if (ConfirmationOf(sender) is { } confirmation)
         {
-            vm.OnCoverPointerExited();
+            confirmation.OnCoverPointerExited();
         }
     }
 
     private void OnSaveButtonPointerEntered(object? sender, Avalonia.Input.PointerEventArgs e)
     {
-        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        if (ConfirmationOf(sender) is { } confirmation)
         {
-            vm.OnSaveButtonPointerEntered();
+            confirmation.OnSaveButtonPointerEntered();
         }
     }
 
     private void OnSaveButtonPointerExited(object? sender, Avalonia.Input.PointerEventArgs e)
     {
-        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        if (ConfirmationOf(sender) is { } confirmation)
         {
-            vm.OnSaveButtonPointerExited();
+            confirmation.OnSaveButtonPointerExited();
         }
     }
 
