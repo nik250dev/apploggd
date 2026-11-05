@@ -29,6 +29,9 @@ public class SettingsService
     /// <summary>Registers every finished session on Backloggd without asking. Never on together with <see cref="AlwaysAddToPending"/>.</summary>
     public bool AutoRegisterSessions { get; set; } = false;
 
+    /// <summary>Downloads the latest games database on startup. On by default, also for files written before this key existed.</summary>
+    public bool AutoUpdateGamesDatabase { get; set; } = true;
+
     public string Language { get; set; } = "System";
 
     /// <summary>Whether the explained "still running in the tray" notice has already been shown once.</summary>
@@ -82,6 +85,7 @@ public class SettingsService
                     GamepadNavigationEnabled = settings.GamepadNavigationEnabled;
                     AlwaysAddToPending = settings.AlwaysAddToPending;
                     AutoRegisterSessions = settings.AutoRegisterSessions;
+                    AutoUpdateGamesDatabase = settings.AutoUpdateGamesDatabase;
                     Language = settings.Language ?? "System";
                     HasSeenTrayIntro = settings.HasSeenTrayIntro;
                     DismissedUpdateNoticeVersion = settings.DismissedUpdateNoticeVersion;
@@ -117,6 +121,7 @@ public class SettingsService
         GamepadNavigationEnabled = true;
         AlwaysAddToPending = false;
         AutoRegisterSessions = false;
+        AutoUpdateGamesDatabase = true;
         Language = "System";
         HasSeenTrayIntro = false;
         DismissedUpdateNoticeVersion = null;

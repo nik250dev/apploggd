@@ -8,6 +8,7 @@
 - Notice when the data folder cannot be read or written
 - Sessions can have a note and tags
 - New automatic mode that saves every session to Backloggd without asking (Settings > General)
+- Setting to turn off the game database update on startup (Settings > General)
 
 ### Changed
 
