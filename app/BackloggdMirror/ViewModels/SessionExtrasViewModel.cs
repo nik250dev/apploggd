@@ -141,6 +141,9 @@ public partial class SessionExtrasViewModel : ViewModelBase
 
     public Snapshot TakeSnapshot() => new(Note, Privacy, Tags.ToArray());
 
+    public bool Matches(Snapshot snapshot) =>
+        Note == snapshot.Note && Privacy == snapshot.Privacy && Tags.SequenceEqual(snapshot.Tags);
+
     public void Restore(Snapshot snapshot)
     {
         Note = snapshot.Note;

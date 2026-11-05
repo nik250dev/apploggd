@@ -18,6 +18,23 @@ namespace BackloggdMirror.Services
     {
         private readonly IAppLogger? _logger;
 
+        // One for every image: a client per download opened a new connection and TLS handshake each time.
+        // The pooled connections are recycled so a DNS change is still picked up.
+        private static readonly HttpClient ImageClient = new(new SocketsHttpHandler { PooledConnectionLifetime = TimeSpan.FromMinutes(5) })
+        {
+            Timeout = TimeSpan.FromSeconds(30)
+        };
+
+        /// <summary>The user agent goes on the request: the shared client's default headers are not per call.</summary>
+        private static async Task<byte[]> GetImageBytesAsync(string url, string userAgent)
+        {
+            using var request = new HttpRequestMessage(HttpMethod.Get, url);
+            request.Headers.UserAgent.ParseAdd(userAgent);
+            using var response = await ImageClient.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadAsByteArrayAsync();
+        }
+
         public BackloggdBrowserService(IAppLogger? logger = null)
         {
             _logger = logger;
@@ -1047,9 +1064,7 @@ namespace BackloggdMirror.Services
                 Console.WriteLine($"[GetGameCoverAsync] Found cover URL: {src}");
 
                 // 5. Download image and convert to Bitmap
-                using var httpClient = new HttpClient();
-                httpClient.DefaultRequestHeaders.UserAgent.ParseAdd(userAgent);
-                var imageBytes = await httpClient.GetByteArrayAsync(src);
+                var imageBytes = await GetImageBytesAsync(src, userAgent);
 
                 using var stream = new MemoryStream(imageBytes);
                 return (exactTitle, new Bitmap(stream));
@@ -1165,9 +1180,7 @@ namespace BackloggdMirror.Services
         {
             try
             {
-                using var httpClient = new HttpClient();
-                httpClient.DefaultRequestHeaders.UserAgent.ParseAdd(GetRandomUserAgent());
-                var data = await httpClient.GetByteArrayAsync(url);
+                var data = await GetImageBytesAsync(url, GetRandomUserAgent());
                 using var stream = new MemoryStream(data);
                 return new Avalonia.Media.Imaging.Bitmap(stream);
             }

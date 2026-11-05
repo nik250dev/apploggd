@@ -173,11 +173,12 @@
                             </StackPanel>
 
                             <!-- Left-aligned so the pill follows the title instead of sitting at the far right. -->
-                            <Grid x:Name="TitleRow" ColumnDefinitions="*, Auto" HorizontalAlignment="Left" Margin="0,4,0,2">
-                                <TextBlock x:Name="TitleText" FontSize="14" FontWeight="SemiBold"
+                            <Grid x:Name="TitleRow" ColumnDefinitions="Auto, *, Auto" HorizontalAlignment="Left" Margin="0,4,0,2">
+                                <Border x:Name="TitleMarkHost" IsVisible="False" Margin="0,0,7,0" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="TitleText" Grid.Column="1" FontSize="14" FontWeight="SemiBold"
                                            TextWrapping="Wrap"
                                            Foreground="{DynamicResource TextPrimaryBrush}"/>
-                                <Border x:Name="VersionPill" Grid.Column="1" IsVisible="False" Margin="8,0,0,0"
+                                <Border x:Name="VersionPill" Grid.Column="2" IsVisible="False" Margin="8,0,0,0"
                                         CornerRadius="999" Padding="7,0" VerticalAlignment="Center"
                                         BorderBrush="{DynamicResource BrandPrimaryBrush}" BorderThickness="1">
                                     <TextBlock x:Name="VersionText" FontSize="11"
@@ -189,6 +190,12 @@
                                        Foreground="{DynamicResource TextMutedBrush}"/>
                         </StackPanel>
                     </Grid>
+
+                    <!-- Dual detection: one row per half, the full width of the card. -->
+                    <Border x:Name="SlotRowsHost" IsVisible="False" Margin="14,-4,14,14" Padding="0,10,0,0"
+                            BorderBrush="{DynamicResource SeparatorBrush}" BorderThickness="0,1,0,0">
+                        <StackPanel x:Name="SlotRows" Spacing="7"/>
+                    </Border>
 
                     <Button x:Name="ActionButton" Classes="tray-action" IsVisible="False"
                             HorizontalAlignment="Left" Margin="70,-4,14,16"

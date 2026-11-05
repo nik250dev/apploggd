@@ -43,12 +43,12 @@ internal sealed class WindowsSteamGameDetector : ISteamGameDetector
         if (_gamesByAppId.Count == 0)
             return null;
 
-        var processes = Snapshot();
+        var processes = WindowsProcessSnapshot.Take();
         if (processes == null || !ProcessIdToSessionId(GetCurrentProcessId(), out uint ownSession))
             return null;
 
         var paths = new Dictionary<uint, (string ExeName, string? Path)>(processes.Count);
-        var hits = new List<(ProcessEntry Process, string AppId, string Path)>();
+        var hits = new List<(WindowsProcessSnapshot.Entry Process, string AppId, string Path)>();
 
         foreach (var process in processes)
         {
@@ -133,65 +133,6 @@ internal sealed class WindowsSteamGameDetector : ISteamGameDetector
             // An unreadable library names no app; its processes stay with the other tiers.
         }
     }
-
-    private readonly record struct ProcessEntry(uint Id, uint ParentId, string ExeName);
-
-    private static List<ProcessEntry>? Snapshot()
-    {
-        IntPtr snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
-        if (snapshot == INVALID_HANDLE_VALUE)
-            return null;
-
-        try
-        {
-            var entries = new List<ProcessEntry>();
-            var entry = new PROCESSENTRY32W { dwSize = (uint)Marshal.SizeOf<PROCESSENTRY32W>() };
-            for (bool more = Process32FirstW(snapshot, ref entry); more; more = Process32NextW(snapshot, ref entry))
-            {
-                entries.Add(new ProcessEntry(entry.th32ProcessID, entry.th32ParentProcessID, entry.szExeFile));
-            }
-
-            return entries;
-        }
-        finally
-        {
-            CloseHandle(snapshot);
-        }
-    }
-
-    private const uint TH32CS_SNAPPROCESS = 0x2;
-    private static readonly IntPtr INVALID_HANDLE_VALUE = new(-1);
-
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-    private struct PROCESSENTRY32W
-    {
-        public uint dwSize;
-        public uint cntUsage;
-        public uint th32ProcessID;
-        public IntPtr th32DefaultHeapID;
-        public uint th32ModuleID;
-        public uint cntThreads;
-        public uint th32ParentProcessID;
-        public int pcPriClassBase;
-        public uint dwFlags;
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
-        public string szExeFile;
-    }
-
-    [DllImport("kernel32.dll", SetLastError = true)]
-    private static extern IntPtr CreateToolhelp32Snapshot(uint flags, uint processId);
-
-    [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    private static extern bool Process32FirstW(IntPtr snapshot, ref PROCESSENTRY32W entry);
-
-    [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    private static extern bool Process32NextW(IntPtr snapshot, ref PROCESSENTRY32W entry);
-
-    [DllImport("kernel32.dll", SetLastError = true)]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    private static extern bool CloseHandle(IntPtr handle);
 
     [DllImport("kernel32.dll")]
     private static extern uint GetCurrentProcessId();

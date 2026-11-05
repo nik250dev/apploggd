@@ -17,6 +17,7 @@ using Avalonia.Threading;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Collections.Generic;
 using Avalonia.VisualTree;
 
 namespace BackloggdMirror.Views;
@@ -26,7 +27,10 @@ public partial class MainWindow : Window
     private bool _canClose = false;
     private TrayIcon? _trayIcon;
     private NativeMenuItem? _trayOpenItem;
-    private NativeMenuItem? _trayToggleItem;
+    private NativeMenu? _trayMenu;
+    // One pause/resume entry per half of the Home, in order.
+    private readonly List<NativeMenuItem> _traySlotItems = new();
+    private NativeMenuItemSeparator? _trayExitSeparator;
     private NativeMenuItem? _trayExitItem;
     private TrayNotificationWindow? _trayNotificationWindow;
     private UpdateProgressWindow? _updateProgressWindow;
@@ -246,6 +250,12 @@ public partial class MainWindow : Window
         vm.PropertyChanged -= OnViewModelPropertyChanged;
         vm.PropertyChanged += OnViewModelPropertyChanged;
 
+        vm.Confirmations.CollectionChanged -= OnConfirmationsChanged;
+        vm.Confirmations.CollectionChanged += OnConfirmationsChanged;
+
+        vm.TrayMenuChanged -= OnTrayMenuChanged;
+        vm.TrayMenuChanged += OnTrayMenuChanged;
+
         // Init/Sync initial state
         UpdateTrayMenuState(vm);
     }
@@ -275,16 +285,6 @@ public partial class MainWindow : Window
                 menu.Items.Add(new NativeMenuItemSeparator());
             }
 
-            _trayToggleItem = new NativeMenuItem(LocalizationService.Instance["Home_PauseSearch"]);
-            _trayToggleItem.Click += (s, e) =>
-            {
-                if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
-                {
-                    vm.ToggleGameDetectionCommand.Execute(null);
-                }
-            };
-            menu.Items.Add(_trayToggleItem);
-
             _trayExitItem = new NativeMenuItem(LocalizationService.Instance["Tray_Exit"]);
             _trayExitItem.Click += (s, e) =>
             {
@@ -297,6 +297,7 @@ public partial class MainWindow : Window
 
             LocalizationService.Instance.PropertyChanged += OnLocalizationPropertyChanged;
 
+            _trayMenu = menu;
             _trayIcon.Menu = menu;
 
             if (Application.Current != null)
@@ -314,41 +315,117 @@ public partial class MainWindow : Window
 
     private void OnViewModelPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.TrayMenuActionText)
-            || e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsGameRunning)
-            || e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsSessionConfirmationVisible)
-            || e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsAutoSavingSession))
+        if (e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsSessionConfirmationVisible)
+            && DataContext is BackloggdMirror.ViewModels.MainWindowViewModel { IsSessionConfirmationVisible: true })
         {
-            if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
-            {
-                UpdateTrayMenuState(vm);
-
-                if (e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsSessionConfirmationVisible) && vm.IsSessionConfirmationVisible)
-                {
-                    StartHoldingFront();
-                }
-            }
-        }
-        else if (e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsSessionNoteOpen) && sender is BackloggdMirror.ViewModels.MainWindowViewModel noteVm)
-        {
-            OnSessionExtraToggled(noteVm, noteVm.IsSessionNoteOpen, SessionNotePanel, () => SessionNoteBox, SessionAddNoteButton);
-        }
-        else if (e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsSessionTagsOpen) && sender is BackloggdMirror.ViewModels.MainWindowViewModel tagsVm)
-        {
-            OnSessionExtraToggled(tagsVm, tagsVm.IsSessionTagsOpen, SessionTagsPanel, () => TagInputIn(SessionTagsPanel), SessionAddTagsButton);
+            StartHoldingFront();
         }
     }
 
-    /// <summary>An opened field takes the focus, unless it opened to show what Backloggd had; a removed one hands it back to its button, if the focus was inside.</summary>
-    private void OnSessionExtraToggled(BackloggdMirror.ViewModels.MainWindowViewModel vm, bool opened, Views.Controls.RevealPanel panel, Func<Control?> field, Button addButton)
+    private void OnTrayMenuChanged()
     {
-        if (!vm.IsSessionConfirmationVisible || vm.IsFillingSessionExtras) return;
+        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm) UpdateTrayMenuState(vm);
+    }
 
-        bool focusInside = FocusManager?.GetFocusedElement() is Visual focused && panel.IsVisualAncestorOf(focused);
+    private void OnConfirmationsChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+    {
+        foreach (var confirmation in e.OldItems?.OfType<BackloggdMirror.ViewModels.SessionConfirmationViewModel>() ?? [])
+            confirmation.PropertyChanged -= OnConfirmationPropertyChanged;
+
+        foreach (var confirmation in e.NewItems?.OfType<BackloggdMirror.ViewModels.SessionConfirmationViewModel>() ?? [])
+            confirmation.PropertyChanged += OnConfirmationPropertyChanged;
+
+        // Each game that ends brings the window back, the second one too.
+        if (e.NewItems?.Count > 0) StartHoldingFront();
+
+        SlideRemainingDialogs(e);
+    }
+
+    private static readonly TimeSpan DialogSlideDuration = TimeSpan.FromMilliseconds(320);
+
+    // Long enough for a click aimed at the old spot not to land on the dialog that moved under it.
+    private static readonly TimeSpan DialogSlideClickGuard = TimeSpan.FromMilliseconds(400);
+
+    /// <summary>
+    /// One modal centred, two side by side: when the second arrives or one goes, the ones that stay slide to their
+    /// new place instead of jumping, and ignore clicks while they move.
+    /// </summary>
+    private void SlideRemainingDialogs(System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+    {
+        if (DataContext is not BackloggdMirror.ViewModels.MainWindowViewModel vm) return;
+
+        var added = e.NewItems?.OfType<object>().ToHashSet() ?? [];
+        var before = new List<(Control Container, double X)>();
+        foreach (var confirmation in vm.Confirmations)
+        {
+            if (added.Contains(confirmation)) continue;
+            if (SessionDialogsHost.ContainerFromItem(confirmation) is { IsVisible: true } container
+                && container.TranslatePoint(default, this) is { } point)
+            {
+                before.Add((container, point.X));
+            }
+        }
+        if (before.Count == 0) return;
+
+        // After the layout pass, which is when the containers reach their new place.
+        Dispatcher.UIThread.Post(() =>
+        {
+            foreach (var (container, oldX) in before)
+            {
+                if (container.TranslatePoint(default, this) is not { } now) continue;
+                double dx = oldX - now.X;
+                if (Math.Abs(dx) < 1) continue;
+
+                var slide = new TranslateTransform(dx, 0);
+                container.RenderTransform = slide;
+                slide.Transitions = new Avalonia.Animation.Transitions
+                {
+                    new Avalonia.Animation.DoubleTransition { Property = TranslateTransform.XProperty, Duration = DialogSlideDuration, Easing = new Avalonia.Animation.Easings.CubicEaseOut() }
+                };
+                slide.X = 0;
+
+                container.IsHitTestVisible = false;
+                DispatcherTimer.RunOnce(() => container.IsHitTestVisible = true, DialogSlideClickGuard);
+            }
+        }, DispatcherPriority.Background);
+    }
+
+    private void OnConfirmationPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        if (sender is not BackloggdMirror.ViewModels.SessionConfirmationViewModel confirmation) return;
+
+        if (e.PropertyName == nameof(BackloggdMirror.ViewModels.SessionConfirmationViewModel.IsSessionNoteOpen))
+        {
+            OnSessionExtraToggled(confirmation, confirmation.IsSessionNoteOpen, "SessionNotePanel",
+                () => SessionControl<TextBox>(confirmation, "SessionNoteBox"), "SessionAddNoteButton");
+        }
+        else if (e.PropertyName == nameof(BackloggdMirror.ViewModels.SessionConfirmationViewModel.IsSessionTagsOpen))
+        {
+            OnSessionExtraToggled(confirmation, confirmation.IsSessionTagsOpen, "SessionTagsPanel",
+                () => TagInputIn(SessionControl<Views.Controls.RevealPanel>(confirmation, "SessionTagsPanel")), "SessionAddTagsButton");
+        }
+    }
+
+    /// <summary>A named control inside the dialog of a confirmation.</summary>
+    internal T? SessionControl<T>(BackloggdMirror.ViewModels.SessionConfirmationViewModel? confirmation, string name) where T : Control =>
+        confirmation == null ? null
+            : SessionDialogsHost.ContainerFromItem(confirmation)?.GetVisualDescendants().OfType<T>().FirstOrDefault(c => c.Name == name);
+
+    private static BackloggdMirror.ViewModels.SessionConfirmationViewModel? ConfirmationOf(object? sender) =>
+        (sender as Control)?.DataContext as BackloggdMirror.ViewModels.SessionConfirmationViewModel;
+
+    /// <summary>An opened field takes the focus, unless it opened to show what Backloggd had; a removed one hands it back to its button, if the focus was inside.</summary>
+    private void OnSessionExtraToggled(BackloggdMirror.ViewModels.SessionConfirmationViewModel confirmation, bool opened, string panelName, Func<Control?> field, string addButtonName)
+    {
+        if (confirmation.IsFillingSessionExtras
+            || DataContext is not BackloggdMirror.ViewModels.MainWindowViewModel vm || !vm.Confirmations.Contains(confirmation)) return;
+
+        var panel = SessionControl<Views.Controls.RevealPanel>(confirmation, panelName);
+        bool focusInside = panel != null && FocusManager?.GetFocusedElement() is Visual focused && panel.IsVisualAncestorOf(focused);
         Dispatcher.UIThread.Post(() =>
         {
             if (opened) FocusSessionControl(field());
-            else if (focusInside || FocusManager?.GetFocusedElement() == null) FocusSessionControl(addButton);
+            else if (focusInside || FocusManager?.GetFocusedElement() == null) FocusSessionControl(SessionControl<Button>(confirmation, addButtonName));
         }, DispatcherPriority.Background);
     }
 
@@ -469,7 +546,8 @@ public partial class MainWindow : Window
     private void OnHoldFrontTick(object? sender, EventArgs e)
     {
         // Minimized, sent to the tray or already saving: the user has seen it and chose to leave it.
-        bool stillWanted = DataContext is BackloggdMirror.ViewModels.MainWindowViewModel { IsSessionConfirmationVisible: true, IsSavingSession: false }
+        bool stillWanted = DataContext is BackloggdMirror.ViewModels.MainWindowViewModel { IsSessionConfirmationVisible: true } vm
+            && vm.Confirmations.Any(c => !c.IsSavingSession)
             && DateTime.UtcNow < _holdFrontUntil
             && IsVisible
             && WindowState != WindowState.Minimized;
@@ -486,26 +564,59 @@ public partial class MainWindow : Window
         BringToFront();
     }
 
+    /// <summary>One entry per half: its state or what clicking does, disabled with a clock while it is busy with a session.</summary>
     private void UpdateTrayMenuState(BackloggdMirror.ViewModels.MainWindowViewModel vm)
     {
-        if (_trayToggleItem == null) return;
+        if (_trayMenu == null) return;
 
-        _trayToggleItem.Header = vm.TrayMenuActionText;
+        if (_traySlotItems.Count != vm.Slots.Count) RebuildTraySlotItems(vm);
 
-        bool busy = vm.IsSessionConfirmationVisible || vm.IsGameRunning || vm.IsAutoSavingSession;
-        _trayToggleItem.IsEnabled = !busy;
-
-        if (busy)
+        for (int i = 0; i < _traySlotItems.Count; i++)
         {
-            _trayToggleItem.Icon = _clockIconBitmap;
+            var slot = vm.Slots[i];
+            var item = _traySlotItems[i];
+
+            // Set only on change: on Linux every assignment is a D-Bus round trip, and the play time ticks each second.
+            if (item.Header != slot.TrayMenuText) item.Header = slot.TrayMenuText;
+
+            bool busy = slot.IsBusy;
+            if (item.IsEnabled == busy) item.IsEnabled = !busy;
+
+            var icon = busy ? _clockIconBitmap : slot.IsUserPaused ? _playIconBitmap : _pauseIconBitmap;
+            if (!ReferenceEquals(item.Icon, icon)) item.Icon = icon;
         }
-        else if (vm.IsGameDetectionPaused)
+    }
+
+    // Between "Open Apploggd" (Linux) and Exit; with two halves, a separator sets Exit apart.
+    private void RebuildTraySlotItems(BackloggdMirror.ViewModels.MainWindowViewModel vm)
+    {
+        if (_trayMenu == null) return;
+
+        foreach (var old in _traySlotItems) _trayMenu.Items.Remove(old);
+        _traySlotItems.Clear();
+        if (_trayExitSeparator != null) _trayMenu.Items.Remove(_trayExitSeparator);
+        _trayExitSeparator = null;
+
+        int at = OperatingSystem.IsLinux() ? 2 : 0;
+        for (int i = 0; i < vm.Slots.Count; i++)
         {
-            _trayToggleItem.Icon = _playIconBitmap;
+            int index = i;
+            var item = new NativeMenuItem(vm.Slots[i].TrayMenuText);
+            item.Click += (s, e) =>
+            {
+                if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel current && index < current.Slots.Count)
+                {
+                    current.ToggleSlotDetection(current.Slots[index]);
+                }
+            };
+            _trayMenu.Items.Insert(at + i, item);
+            _traySlotItems.Add(item);
         }
-        else
+
+        if (vm.Slots.Count > 1)
         {
-            _trayToggleItem.Icon = _pauseIconBitmap;
+            _trayExitSeparator = new NativeMenuItemSeparator();
+            _trayMenu.Items.Insert(at + vm.Slots.Count, _trayExitSeparator);
         }
     }
 
@@ -750,50 +861,50 @@ public partial class MainWindow : Window
 
     private void OnInfoIconPointerEntered(object? sender, Avalonia.Input.PointerEventArgs e)
     {
-        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        if (ConfirmationOf(sender) is { } confirmation)
         {
-            vm.DismissForcedTooltip();
+            confirmation.DismissForcedTooltip();
         }
     }
 
     private void OnInfoIconPointerExited(object? sender, Avalonia.Input.PointerEventArgs e)
     {
-        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        if (ConfirmationOf(sender) is { } confirmation)
         {
-            vm.OnInfoIconExited();
+            confirmation.OnInfoIconExited();
         }
     }
 
     // With a controller, focus stands in for the hover on the info icon and the cover.
     private void OnInfoButtonGotFocus(object? sender, Avalonia.Input.GotFocusEventArgs e)
     {
-        if (_gamepadNavigator?.IsControllerMode == true && DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        if (_gamepadNavigator?.IsControllerMode == true && ConfirmationOf(sender) is { } confirmation)
         {
-            vm.DismissForcedTooltip();
+            confirmation.DismissForcedTooltip();
         }
     }
 
     private void OnInfoButtonLostFocus(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        if (ConfirmationOf(sender) is { } confirmation)
         {
-            vm.OnInfoIconExited();
+            confirmation.OnInfoIconExited();
         }
     }
 
     private void OnCoverGotFocus(object? sender, Avalonia.Input.GotFocusEventArgs e)
     {
-        if (_gamepadNavigator?.IsControllerMode == true && DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        if (_gamepadNavigator?.IsControllerMode == true && ConfirmationOf(sender) is { } confirmation)
         {
-            vm.OnCoverPointerEntered();
+            confirmation.OnCoverPointerEntered();
         }
     }
 
     private void OnCoverLostFocus(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        if (ConfirmationOf(sender) is { } confirmation)
         {
-            vm.OnCoverPointerExited();
+            confirmation.OnCoverPointerExited();
         }
     }
 
@@ -816,33 +927,33 @@ public partial class MainWindow : Window
 
     private void OnCoverPointerEntered(object? sender, Avalonia.Input.PointerEventArgs e)
     {
-        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        if (ConfirmationOf(sender) is { } confirmation)
         {
-            vm.OnCoverPointerEntered();
+            confirmation.OnCoverPointerEntered();
         }
     }
 
     private void OnCoverPointerExited(object? sender, Avalonia.Input.PointerEventArgs e)
     {
-        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        if (ConfirmationOf(sender) is { } confirmation)
         {
-            vm.OnCoverPointerExited();
+            confirmation.OnCoverPointerExited();
         }
     }
 
     private void OnSaveButtonPointerEntered(object? sender, Avalonia.Input.PointerEventArgs e)
     {
-        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        if (ConfirmationOf(sender) is { } confirmation)
         {
-            vm.OnSaveButtonPointerEntered();
+            confirmation.OnSaveButtonPointerEntered();
         }
     }
 
     private void OnSaveButtonPointerExited(object? sender, Avalonia.Input.PointerEventArgs e)
     {
-        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        if (ConfirmationOf(sender) is { } confirmation)
         {
-            vm.OnSaveButtonPointerExited();
+            confirmation.OnSaveButtonPointerExited();
         }
     }
 

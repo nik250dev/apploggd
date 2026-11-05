@@ -32,6 +32,9 @@ public class SettingsService
     /// <summary>Downloads the latest games database on startup. On by default, also for files written before this key existed.</summary>
     public bool AutoUpdateGamesDatabase { get; set; } = true;
 
+    /// <summary>Experimental: the Home splits in two halves that detect and time a game each.</summary>
+    public bool DualDetectionEnabled { get; set; } = false;
+
     public string Language { get; set; } = "System";
 
     /// <summary>Whether the explained "still running in the tray" notice has already been shown once.</summary>
@@ -86,6 +89,7 @@ public class SettingsService
                     AlwaysAddToPending = settings.AlwaysAddToPending;
                     AutoRegisterSessions = settings.AutoRegisterSessions;
                     AutoUpdateGamesDatabase = settings.AutoUpdateGamesDatabase;
+                    DualDetectionEnabled = settings.DualDetectionEnabled;
                     Language = settings.Language ?? "System";
                     HasSeenTrayIntro = settings.HasSeenTrayIntro;
                     DismissedUpdateNoticeVersion = settings.DismissedUpdateNoticeVersion;
@@ -122,6 +126,7 @@ public class SettingsService
         AlwaysAddToPending = false;
         AutoRegisterSessions = false;
         AutoUpdateGamesDatabase = true;
+        DualDetectionEnabled = false;
         Language = "System";
         HasSeenTrayIntro = false;
         DismissedUpdateNoticeVersion = null;

@@ -9,11 +9,13 @@
 - Sessions can have a note and tags
 - New automatic mode that saves every session to Backloggd without asking (Settings > General)
 - Setting to turn off the game database update on startup (Settings > General)
+- Experimental: detect two games at once (Settings > General)
 
 ### Changed
 
 - Home status panel redesigned
 - Improved detection of Steam games
+- Session toasts now name the game
 
 ### Fixed
 
@@ -22,6 +24,7 @@
 - The app no longer logs in with less than 50 MB of free disk space, where saving sessions could fail
 - A session saved while Backloggd was slow to answer could be written without its time
 - Sessions of special editions are logged in the base game
+- On Linux, the tray menu no longer loses its entries (Exit included) while a game is running
 
 ## 1.2.0 — 2026-10-08
 

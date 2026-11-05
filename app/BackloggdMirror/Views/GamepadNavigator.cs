@@ -53,6 +53,7 @@ internal sealed class GamepadNavigator : IDisposable
         _vm.PropertyChanged += OnViewModelPropertyChanged;
         _vm.ToastNotifications.CollectionChanged += OnToastsChanged;
         _vm.GameSearchResults.CollectionChanged += OnSearchResultsChanged;
+        _vm.Confirmations.CollectionChanged += OnConfirmationsChanged;
         _window.PropertyChanged += OnWindowPropertyChanged;
         _window.AddHandler(InputElement.PointerMovedEvent, OnPointerMoved, RoutingStrategies.Tunnel, handledEventsToo: true);
         _window.AddHandler(InputElement.PointerPressedEvent, OnPointerPressed, RoutingStrategies.Tunnel, handledEventsToo: true);
@@ -81,6 +82,12 @@ internal sealed class GamepadNavigator : IDisposable
 
     // A toast that expires under the focus takes it along.
     private void OnToastsChanged(object? sender, NotifyCollectionChangedEventArgs e) => RestoreFocusLater();
+
+    // With two modals, closing one leaves the other: the focus moves there. A new one does not take it from the other.
+    private void OnConfirmationsChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        if (e.OldItems?.Count > 0 && _vm.Confirmations.Count > 0) RestoreFocusLater();
+    }
 
     // Each cover that streams in replaces its item, which recreates the button under the focus.
     private void OnSearchResultsChanged(object? sender, NotifyCollectionChangedEventArgs e)
@@ -121,7 +128,7 @@ internal sealed class GamepadNavigator : IDisposable
                 if (!IsControllerMode) break;
                 _window.GameSearchResultsList.Classes.Remove("gp-dim");
                 if (_vm.IsGameSelectorVisible) FocusDefaultLater();
-                else if (_vm.IsSessionConfirmationVisible) FocusLater(() => _window.SessionCoverButton);
+                else if (_vm.IsSessionConfirmationVisible) FocusLater(() => _window.SessionControl<Button>(_vm.SelectorConfirmationTarget, "SessionCoverButton"));
                 else RestoreFocusLater();
                 break;
 
@@ -216,7 +223,7 @@ internal sealed class GamepadNavigator : IDisposable
     /// <summary>The topmost dialog, in the order MainWindow.axaml stacks them; null when the pages are in front.</summary>
     private Control? ActiveDialog =>
         _vm.IsGameSelectorVisible ? _window.GameSelectorDialog
-        : _vm.IsSessionConfirmationVisible ? _window.SessionDialog
+        : _vm.IsSessionConfirmationVisible ? _window.SessionDialogsHost
         : _vm.IsNoBrowserWarningVisible ? _window.NoBrowserDialog
         : _vm.IsClearDataConfirmationVisible ? _window.ClearDataDialog
         : _vm.IsChangelogVisible ? _window.ChangelogDialog
@@ -262,12 +269,12 @@ internal sealed class GamepadNavigator : IDisposable
             // Offline nothing can be saved, and the game selector needs Backloggd too.
             if (_vm.IsOffline)
             {
-                return candidates.FirstOrDefault(b => b == _window.SessionPostponeButton) ?? candidates[0];
+                return candidates.FirstOrDefault(b => b.Name == "SessionPostponeButton") ?? candidates[0];
             }
 
             // An unidentified game cannot be saved; picking it is the way forward.
-            return candidates.FirstOrDefault(b => b == _window.SessionSaveButton)
-                ?? candidates.FirstOrDefault(b => b == _window.SessionCoverButton)
+            return candidates.FirstOrDefault(b => b.Name == "SessionSaveButton")
+                ?? candidates.FirstOrDefault(b => b.Name == "SessionCoverButton")
                 ?? candidates[0];
         }
 
@@ -434,7 +441,9 @@ internal sealed class GamepadNavigator : IDisposable
         }
 
         // The session cover draws its ring on the frame around it, so that is what gets pressed.
-        Control pressed = control == _window.SessionCoverButton ? _window.SessionCoverHost : control;
+        Control pressed = control.Name == "SessionCoverButton"
+            ? control.GetVisualAncestors().OfType<Border>().FirstOrDefault(b => b.Name == "SessionCoverHost") ?? control
+            : control;
         Rect? spot = IsToast(control) ? null : BoundsOf(control);
 
         pressed.Classes.Add("gp-press");
@@ -525,8 +534,11 @@ internal sealed class GamepadNavigator : IDisposable
 
         // Focus stood in for the hover on these two; the pointer takes over again.
         var focused = FocusedControl;
-        if (focused == _window.SessionCoverButton) _vm.OnCoverPointerExited();
-        else if (focused == _window.InfoButton) _vm.OnInfoIconExited();
+        if (focused?.DataContext is SessionConfirmationViewModel confirmation)
+        {
+            if (focused.Name == "SessionCoverButton") confirmation.OnCoverPointerExited();
+            else if (focused.Name == "InfoButton") confirmation.OnInfoIconExited();
+        }
     }
 
     // A window appearing under a still cursor gets pointer events too; only a real move counts.
@@ -590,6 +602,7 @@ internal sealed class GamepadNavigator : IDisposable
         _vm.PropertyChanged -= OnViewModelPropertyChanged;
         _vm.ToastNotifications.CollectionChanged -= OnToastsChanged;
         _vm.GameSearchResults.CollectionChanged -= OnSearchResultsChanged;
+        _vm.Confirmations.CollectionChanged -= OnConfirmationsChanged;
         _window.PropertyChanged -= OnWindowPropertyChanged;
         _window.RemoveHandler(InputElement.PointerMovedEvent, OnPointerMoved);
         _window.RemoveHandler(InputElement.PointerPressedEvent, OnPointerPressed);
