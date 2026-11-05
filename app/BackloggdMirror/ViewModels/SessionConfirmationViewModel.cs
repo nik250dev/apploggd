@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Threading;
 using BackloggdMirror.Models;
@@ -47,10 +48,18 @@ public partial class SessionConfirmationViewModel : ViewModelBase
         SessionGameTitle = gameName;
         SessionPlayTime = playTime;
         _isOffline = owner.IsOffline;
+        IsSlotMarkVisible = owner.IsDualDetectionActive;
     }
 
     /// <summary>The half the session was played in; detection there waits for this modal.</summary>
     internal SessionSlotViewModel Slot { get; }
+
+    /// <summary>The split-screen mark by the title, which says whose half this is. The setting cannot change while a modal is up.</summary>
+    public bool IsSlotMarkVisible { get; }
+
+    public bool IsFirstSlot => Slot.Index == 0;
+
+    internal string? GameUrl => _pendingGameUrl;
 
     [ObservableProperty]
     private string _sessionGameTitle = string.Empty;
@@ -69,6 +78,36 @@ public partial class SessionConfirmationViewModel : ViewModelBase
     partial void OnSessionGameCoverChanged(Avalonia.Media.Imaging.Bitmap? value)
     {
         if (value != null) IsNoCoverPlaceholderVisible = false;
+    }
+
+    // Only the cover this modal downloaded is its to release: a picked one belongs to the picker, a postponed one to its pending row.
+    private bool _ownsCover;
+    private bool _coverReleased;
+
+    private void ShowOwnCover(Avalonia.Media.Imaging.Bitmap? bitmap)
+    {
+        if (_coverReleased)
+        {
+            bitmap?.Dispose();
+            return;
+        }
+
+        var previous = _ownsCover ? SessionGameCover : null;
+        SessionGameCover = bitmap;
+        _ownsCover = bitmap != null;
+        if (!ReferenceEquals(previous, bitmap)) previous?.Dispose();
+    }
+
+    /// <summary>Once the modal is gone: its native memory goes now, not whenever the finalizer runs.</summary>
+    internal void ReleaseCover()
+    {
+        _coverReleased = true;
+        if (!_ownsCover) return;
+
+        var cover = SessionGameCover;
+        _ownsCover = false;
+        SessionGameCover = null;
+        cover?.Dispose();
     }
 
     [ObservableProperty]
@@ -192,7 +231,10 @@ public partial class SessionConfirmationViewModel : ViewModelBase
             Dispatcher.UIThread.Post(async () =>
             {
                 await Task.Delay(100);
-                IsSessionWarningForcedVisible = !_closed;
+
+                // One at a time: with two modals up, the other one may already be showing it.
+                IsSessionWarningForcedVisible = !_closed && !_owner.Settings.HasSeenSessionDiscardWarningV3
+                    && !_owner.Confirmations.Any(c => c != this && c.IsSessionWarningForcedVisible);
             });
         }
 
@@ -229,7 +271,7 @@ public partial class SessionConfirmationViewModel : ViewModelBase
                         {
                             if (bitmap != null)
                             {
-                                SessionGameCover = bitmap;
+                                ShowOwnCover(bitmap);
                             }
                             else
                             {
@@ -277,7 +319,7 @@ public partial class SessionConfirmationViewModel : ViewModelBase
                                     var bitmap = await _owner.Browser.DownloadImageAsync(coverUrl);
                                     Dispatcher.UIThread.Post(() =>
                                     {
-                                        SessionGameCover = bitmap ?? null;
+                                        ShowOwnCover(bitmap);
                                         if (bitmap == null) ShowNoCoverPlaceholder();
                                         IsSessionCoverLoading = false;
                                     });
@@ -320,7 +362,7 @@ public partial class SessionConfirmationViewModel : ViewModelBase
     /// <summary>Shows the "No cover" text placeholder in the session cover slot.</summary>
     private void ShowNoCoverPlaceholder()
     {
-        SessionGameCover = null;
+        ShowOwnCover(null);
         IsNoCoverPlaceholderVisible = true;
     }
 
@@ -335,7 +377,10 @@ public partial class SessionConfirmationViewModel : ViewModelBase
     internal void ApplyPickedGame(GameSearchResult selectedGame)
     {
         SessionGameTitle = selectedGame.Title;
+        var downloaded = _ownsCover ? SessionGameCover : null;
         SessionGameCover = selectedGame.CoverBitmap;
+        _ownsCover = false;
+        downloaded?.Dispose();
         _pendingGameName = selectedGame.Title;
         _pendingGameUrl = selectedGame.RedirectLink;
         _pendingIdIgdb = null;
@@ -367,6 +412,7 @@ public partial class SessionConfirmationViewModel : ViewModelBase
     {
         int request = ++_sessionExtrasRequest;
         _sessionExtrasKnown = false;
+        _sessionExtrasBaseline = null;
         ResetSessionExtras();
 
         string? gameName = _pendingGameName;
@@ -388,10 +434,27 @@ public partial class SessionConfirmationViewModel : ViewModelBase
 
         _sessionExtrasKnown = true;
         SessionExtras.Load(extras);
+        _sessionExtrasBaseline = SessionExtras.TakeSnapshot();
         IsFillingSessionExtras = true;
         IsSessionNoteOpen = !string.IsNullOrWhiteSpace(extras.Note);
         IsSessionTagsOpen = extras.Tags.Count > 0;
         IsFillingSessionExtras = false;
+    }
+
+    // What the fields held once filled, to tell whether the user has touched them since.
+    private SessionExtrasViewModel.Snapshot? _sessionExtrasBaseline;
+
+    /// <summary>
+    /// The other modal saved the same game's day, so what this one read is stale and saving it would undo that.
+    /// Reread unless the user already edited the fields: then their version stands.
+    /// </summary>
+    internal void OnSameDaySaved()
+    {
+        if (_closed || IsSavingSession) return;
+        if (_sessionExtrasBaseline != null ? !SessionExtras.Matches(_sessionExtrasBaseline) : !SessionExtras.IsEmpty) return;
+
+        _owner.Logger.Info($"[SessionConfirmation] The other modal saved '{_pendingGameName}' today; rereading the note and tags this one shows.");
+        _ = LoadTodaySessionExtrasAsync();
     }
 
     /// <summary>What the save writes as the day's note and tags; null leaves Backloggd's untouched.</summary>
@@ -456,6 +519,7 @@ public partial class SessionConfirmationViewModel : ViewModelBase
 
         _owner.Logger.Info($"[MainWindowViewModel] User action: left '{session.GameName}' ({PendingSessionViewModel.FormatDuration(session.Duration)}) for later.");
         _owner.AddPendingSession(session, SessionGameCover);
+        _ownsCover = false;
 
         HideForcedWarning();
         Close();
@@ -504,7 +568,8 @@ public partial class SessionConfirmationViewModel : ViewModelBase
 
                 Close();
 
-                _owner.ShowToast(LocalizationService.Instance["Toast_SessionSaved"], ToastType.Success);
+                _owner.ShowToast(string.Format(LocalizationService.Instance["Toast_SessionSavedGame"], _pendingGameName), ToastType.Success);
+                _owner.OnConfirmationSaved(this);
             }
             catch (Exception ex)
             {

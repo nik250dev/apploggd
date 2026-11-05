@@ -79,6 +79,17 @@ public partial class SessionSlotViewModel : ViewModelBase
     [NotifyPropertyChangedFor(nameof(IsAutoSaveSpinnerVisible))]
     private bool _isHomeVisible = true;
 
+    /// <summary>Half the width of the Home, with the dual detection on.</summary>
+    [ObservableProperty]
+    private bool _isCompact;
+
+    /// <summary>This half's entry in the tray menu.</summary>
+    [ObservableProperty]
+    private string _trayMenuText = string.Empty;
+
+    /// <summary>"1" or "2" for the user: the halves are named by game, left first.</summary>
+    public int Number => Index + 1;
+
     public bool IsGameDetectionActive => !IsUserPaused && !IsAwaitingConfirmation && !IsAutoSavingSession;
 
     public bool IsGameDetectionHeld => !IsGameDetectionActive;
@@ -142,9 +153,20 @@ public partial class SessionSlotViewModel : ViewModelBase
     /// <summary>For a late artwork download: only the session it was requested for.</summary>
     internal bool IsTiming(DetectedGame game) => IsGameRunning && ReferenceEquals(CurrentGame, game);
 
+    /// <summary>The previous game's artwork stays until here, so it can fade out; then it is released.</summary>
     internal void ShowArtwork(Avalonia.Media.Imaging.Bitmap bitmap)
     {
+        var previous = GameBackgroundImage;
         GameBackgroundImage = bitmap;
         IsBackgroundImageVisible = true;
+        if (!ReferenceEquals(previous, bitmap)) previous?.Dispose();
+    }
+
+    /// <summary>For a half that is being removed.</summary>
+    internal void ReleaseArtwork()
+    {
+        var previous = GameBackgroundImage;
+        GameBackgroundImage = null;
+        previous?.Dispose();
     }
 }

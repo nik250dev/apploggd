@@ -247,6 +247,55 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public bool IsAutoRegisterSessionsAvailable => !AlwaysAddToPending;
 
+    /// <summary>Experimental: a second half on the Home that detects and times a game of its own.</summary>
+    public bool DualDetectionEnabled
+    {
+        get => _settingsService.DualDetectionEnabled;
+        set
+        {
+            if (_settingsService.DualDetectionEnabled == value) return;
+
+            // The switch is disabled meanwhile: removing a half would drop its session.
+            if (!CanChangeDualDetection)
+            {
+                OnPropertyChanged();
+                return;
+            }
+
+            _settingsService.DualDetectionEnabled = value;
+            _settingsService.Save();
+            _logger.Info($"[MainWindowViewModel] User action: dual detection set to {value}.");
+            ApplyDualDetection();
+            OnPropertyChanged();
+        }
+    }
+
+    /// <summary>Only in the idle state, when no half has a session in any of its stages.</summary>
+    public bool CanChangeDualDetection => !Slots.Any(s => s.IsBusy);
+
+    public bool IsDualDetectionActive => Slots.Count > 1;
+
+    /// <summary>Adds or removes the second half to match the setting. A new half starts paused.</summary>
+    private void ApplyDualDetection()
+    {
+        if (_settingsService.DualDetectionEnabled && Slots.Count == 1)
+        {
+            var slot = AddSlot();
+            slot.IsUserPaused = true;
+        }
+        else if (!_settingsService.DualDetectionEnabled && Slots.Count > 1 && !Slots[1].IsBusy)
+        {
+            var slot = Slots[1];
+            slot.PropertyChanged -= OnSlotPropertyChanged;
+            Slots.RemoveAt(1);
+            slot.ReleaseArtwork();
+        }
+
+        foreach (var slot in Slots) slot.IsCompact = Slots.Count > 1;
+        OnPropertyChanged(nameof(IsDualDetectionActive));
+        UpdateTrayMenuText();
+    }
+
     /// <summary>Shared for the whole process, like the blacklist: it outlives a logout.</summary>
     internal GamepadService? Gamepad => _gamepadService;
 
@@ -326,25 +375,23 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             case nameof(SessionSlotViewModel.IsGameRunning):
                 OnPropertyChanged(nameof(IsAnyGameRunning));
+                OnPropertyChanged(nameof(CanChangeDualDetection));
                 break;
             case nameof(SessionSlotViewModel.IsAutoSavingSession):
                 OnPropertyChanged(nameof(IsAnySessionAutoSaving));
+                OnPropertyChanged(nameof(CanChangeDualDetection));
                 break;
-            case nameof(SessionSlotViewModel.IsUserPaused):
-                OnPropertyChanged(nameof(IsPrimaryDetectionPaused));
+            case nameof(SessionSlotViewModel.IsAwaitingConfirmation):
+                OnPropertyChanged(nameof(CanChangeDualDetection));
+                UpdateTrayMenuText();
                 break;
         }
     }
-
-    public bool IsPrimaryDetectionPaused => PrimarySlot.IsUserPaused;
 
     partial void OnIsHomeVisibleChanged(bool value)
     {
         foreach (var slot in Slots) slot.IsHomeVisible = value;
     }
-
-    [ObservableProperty]
-    private string _trayMenuActionText = LocalizationService.Instance["Home_PauseSearch"];
 
     // #### Session Confirmation Properties
     [ObservableProperty]
@@ -384,6 +431,18 @@ public partial class MainWindowViewModel : ViewModelBase
 
         confirmation.Slot.IsAwaitingConfirmation = false;
         IsSessionConfirmationVisible = Confirmations.Count > 0;
+        confirmation.ReleaseCover();
+    }
+
+    /// <summary>The same game in the other half: what its modal read of today's note and tags has just been overwritten.</summary>
+    internal void OnConfirmationSaved(SessionConfirmationViewModel saved)
+    {
+        if (string.IsNullOrEmpty(saved.GameUrl)) return;
+
+        foreach (var other in Confirmations.Where(c => c != saved && c.GameUrl == saved.GameUrl).ToList())
+        {
+            other.OnSameDaySaved();
+        }
     }
 
     partial void OnIsOfflineChanged(bool value)
@@ -410,8 +469,12 @@ public partial class MainWindowViewModel : ViewModelBase
     /// <summary>The confirmation the picker is choosing for.</summary>
     private SessionConfirmationViewModel? _selectorConfirmationTarget;
 
+    // The last one the picker opened for, which keeps the focus there once it closes.
+    private SessionConfirmationViewModel? _lastSelectorConfirmation;
+
     /// <summary>The confirmation the picker serves, or would serve, for the view to put the focus back on it.</summary>
-    internal SessionConfirmationViewModel? SelectorConfirmationTarget => _selectorConfirmationTarget ?? Confirmations.FirstOrDefault();
+    internal SessionConfirmationViewModel? SelectorConfirmationTarget => _selectorConfirmationTarget
+        ?? (_lastSelectorConfirmation != null && Confirmations.Contains(_lastSelectorConfirmation) ? _lastSelectorConfirmation : Confirmations.FirstOrDefault());
 
     [ObservableProperty]
     private string _gameSearchQuery = string.Empty;
@@ -427,6 +490,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
         _selectorPendingTarget = null;
         _selectorConfirmationTarget = confirmation;
+        _lastSelectorConfirmation = confirmation;
         ShowGameSelector(confirmation.SessionGameTitle);
     }
 
@@ -605,6 +669,7 @@ public partial class MainWindowViewModel : ViewModelBase
         LoadPendingSessions();
 
         AddSlot();
+        ApplyDualDetection();
 
         _pollingTimer = new DispatcherTimer
         {
@@ -1053,6 +1118,8 @@ public partial class MainWindowViewModel : ViewModelBase
         var loc = LocalizationService.Instance;
         var title = loc["TrayNotice_BackgroundTitle"];
 
+        if (IsDualDetectionActive && Confirmations.Count > 0) return BuildDualPendingNotice();
+
         if (Confirmations.FirstOrDefault() is { } confirmation)
         {
             return new TrayNotice(TrayNoticeKind.PendingSession, $"{confirmation.SessionGameTitle} · {confirmation.SessionPlayTime}", loc["TrayNotice_PendingBody"])
@@ -1069,6 +1136,8 @@ public partial class MainWindowViewModel : ViewModelBase
             _settingsService.Save();
             return new TrayNotice(TrayNoticeKind.Intro, title, loc["TrayNotice_IntroBody"]);
         }
+
+        if (IsDualDetectionActive) return BuildDualStatusNotice();
 
         if (Slots.FirstOrDefault(s => s.IsGameRunning) is { } playing)
         {
@@ -1089,11 +1158,76 @@ public partial class MainWindowViewModel : ViewModelBase
         return new TrayNotice(TrayNoticeKind.Detecting, title, loc["TrayNotice_DetectingBody"]) { Kicker = loc["TrayNotice_DetectingKicker"] };
     }
 
+    /// <summary>Both halves under the title, each with its state.</summary>
+    private TrayNotice BuildDualStatusNotice()
+    {
+        var loc = LocalizationService.Instance;
+        bool anyPlaying = Slots.Any(s => s.IsGameRunning);
+        string body = anyPlaying
+            ? loc[_settingsService.AlwaysAddToPending ? "TrayNotice_PlayingBodyDualPending"
+                : _settingsService.AutoRegisterSessions ? "TrayNotice_PlayingBodyDualAuto"
+                : "TrayNotice_PlayingBodyDual"]
+            : Slots.All(s => s.IsUserPaused) ? loc["TrayNotice_PausedBody"]
+            : loc["TrayNotice_DetectingBody"];
+
+        return new TrayNotice(anyPlaying ? TrayNoticeKind.Playing : TrayNoticeKind.Detecting, loc["TrayNotice_BackgroundTitle"], body)
+        {
+            Rows = Slots.Select(NoticeRow).ToList()
+        };
+    }
+
+    /// <summary>One or two sessions waiting: which half stays paused, and how the other one is doing.</summary>
+    private TrayNotice BuildDualPendingNotice()
+    {
+        var loc = LocalizationService.Instance;
+        Action review = () => RequestShowMainWindow?.Invoke();
+
+        if (Confirmations.Count > 1)
+        {
+            return new TrayNotice(TrayNoticeKind.PendingSession, string.Empty, loc["TrayNotice_PendingBodyMany"])
+            {
+                Kicker = string.Format(loc["TrayNotice_PendingKickerMany"], Confirmations.Count),
+                Rows = Slots.Select(NoticeRow).ToList(),
+                ActionText = loc["TrayNotice_PendingActionMany"],
+                Action = review
+            };
+        }
+
+        var confirmation = Confirmations[0];
+        return new TrayNotice(TrayNoticeKind.PendingSession, $"{confirmation.SessionGameTitle} · {confirmation.SessionPlayTime}",
+            string.Format(loc["TrayNotice_PendingBodySlot"], confirmation.Slot.Number))
+        {
+            Kicker = loc["TrayNotice_PendingKicker"],
+            TitleSlotIndex = confirmation.Slot.Index,
+            Rows = Slots.Where(s => s != confirmation.Slot).Select(NoticeRow).ToList(),
+            ActionText = loc["TrayNotice_PendingAction"],
+            Action = review
+        };
+    }
+
+    private TrayNoticeRow NoticeRow(SessionSlotViewModel slot)
+    {
+        var loc = LocalizationService.Instance;
+        if (slot.IsAwaitingConfirmation && Confirmations.FirstOrDefault(c => c.Slot == slot) is { } confirmation)
+        {
+            return new TrayNoticeRow(slot.Index, TrayNoticeRowState.Pending, confirmation.SessionGameTitle) { Time = confirmation.SessionPlayTime };
+        }
+
+        if (slot.IsGameRunning)
+        {
+            return new TrayNoticeRow(slot.Index, TrayNoticeRowState.Playing, string.Format(loc["TrayNotice_SlotPlaying"], slot.GameName)) { LiveTime = () => slot.PlayTime };
+        }
+
+        if (slot.IsAutoSavingSession) return new TrayNoticeRow(slot.Index, TrayNoticeRowState.Saving, loc["Home_SavingSession"]);
+        if (slot.IsGameDetectionHeld) return new TrayNoticeRow(slot.Index, TrayNoticeRowState.Paused, loc["TrayNotice_PausedKicker"]);
+        return new TrayNoticeRow(slot.Index, TrayNoticeRowState.Detecting, loc["TrayNotice_DetectingKicker"]);
+    }
+
     /// <summary>
     /// Stops detection before an update, so nothing starts a session while the process is being
     /// replaced. A session already being timed is <b>discarded</b>, not registered: the confirmation
     /// modal needs a user and a process, and this one is about to have neither.
-    /// Leaves detection paused, so the restarted copy comes back in "Detection paused".
+    /// Leaves detection paused until the process exits; the pause is not saved, so the restarted copy detects again.
     /// </summary>
     private void SuspendDetectionForUpdate()
     {
@@ -1307,6 +1441,7 @@ public partial class MainWindowViewModel : ViewModelBase
         OnPropertyChanged(nameof(AutoRegisterSessions));
         OnPropertyChanged(nameof(IsAlwaysAddToPendingAvailable));
         OnPropertyChanged(nameof(IsAutoRegisterSessionsAvailable));
+        OnPropertyChanged(nameof(DualDetectionEnabled));
         OnPropertyChanged(nameof(SelectedLanguageCode));
 
         // Same trap as the settings: the file is gone, but detection keeps this instance.
@@ -1816,16 +1951,69 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
+    // A reload waiting to start takes in every request made meanwhile; one asked for while a load runs follows it.
+    private bool _journalReloadQueued;
+    private bool _journalReloadRunning;
+    private bool _journalReloadAgain;
+
+    /// <summary>
+    /// Refreshes the recently played list after a save. Two saves in a row reload once, after both: each load is a whole
+    /// browser, and the first one's list would be stale before it arrived.
+    /// </summary>
     internal void ReloadJournal()
     {
-        if (_authService.Username != null)
-        {
-            _ = LoadData(_authService.Username);
-        }
-        else
+        if (_authService.Username == null)
         {
             _logger.Warning("[MainWindowViewModel] A session was registered but the username is null, so the recently played list could not be refreshed.");
+            return;
         }
+
+        if (_journalReloadQueued) return;
+        if (_journalReloadRunning)
+        {
+            _journalReloadAgain = true;
+            return;
+        }
+
+        _journalReloadQueued = true;
+        _ = RunJournalReloadAsync();
+    }
+
+    private async Task RunJournalReloadAsync()
+    {
+        try
+        {
+            do
+            {
+                _journalReloadAgain = false;
+                await WaitForRegistrationsAsync();
+
+                _journalReloadQueued = false;
+                _journalReloadRunning = true;
+                if (_authService.Username is { } username) await LoadData(username);
+                _journalReloadRunning = false;
+            }
+            while (_journalReloadAgain && !IsLoggingOut);
+        }
+        finally
+        {
+            _journalReloadQueued = false;
+            _journalReloadRunning = false;
+        }
+    }
+
+    /// <summary>Until no registration holds or awaits the gate. Its waiters are released in order, so this comes after those already queued.</summary>
+    private async Task WaitForRegistrationsAsync()
+    {
+        do
+        {
+            await _registrationGate.WaitAsync();
+            _registrationGate.Release();
+
+            // A save that was waiting takes the gate right after it is released.
+            await Task.Delay(250);
+        }
+        while (_registrationGate.CurrentCount == 0);
     }
 
     #endregion
@@ -1970,7 +2158,10 @@ public partial class MainWindowViewModel : ViewModelBase
             var games = await _browserService.GetLastPlayedGames(username, _authService.Cookies);
             if (load != _journalLoad) return;
 
+            // Their native memory goes now, not whenever the finalizer runs.
+            var replaced = LastPlayedGames.ToList();
             LastPlayedGames.Clear();
+            foreach (var old in replaced) old.CoverBitmap?.Dispose();
             if (games == null)
             {
                 HasLastPlayedGamesError = true;
@@ -1993,7 +2184,11 @@ public partial class MainWindowViewModel : ViewModelBase
                             _logger?.Warning($"[MainWindowViewModel] Could not download the cover for '{game.GameName}' in the recently played list: {ex.Message}. The entry is shown without an image.");
                         }
                     }
-                    if (load != _journalLoad) return;
+                    if (load != _journalLoad)
+                    {
+                        game.CoverBitmap?.Dispose();
+                        return;
+                    }
                     LastPlayedGames.Add(game);
                 }
                 HasLastPlayedGames = LastPlayedGames.Count > 0;
@@ -2044,10 +2239,6 @@ public partial class MainWindowViewModel : ViewModelBase
         RequestCloseApplication?.Invoke();
     }
 
-    /// <summary>The tray's switch, which is the left half's.</summary>
-    [RelayCommand]
-    private void ToggleGameDetection() => ToggleSlotDetection(PrimarySlot);
-
     internal void ToggleSlotDetection(SessionSlotViewModel slot)
     {
         if (slot.IsBusy) return;
@@ -2056,28 +2247,25 @@ public partial class MainWindowViewModel : ViewModelBase
         UpdateTrayMenuText();
     }
 
+    /// <summary>Raised whenever the tray entries may have changed; the native menu has no bindings.</summary>
+    public event Action? TrayMenuChanged;
+
     private void UpdateTrayMenuText()
     {
-        if (IsSessionConfirmationVisible)
+        var loc = LocalizationService.Instance;
+        foreach (var slot in Slots)
         {
-            TrayMenuActionText = LocalizationService.Instance["Tray_WaitingConfirmation"];
+            string text = slot.IsAwaitingConfirmation ? loc["Tray_WaitingConfirmation"]
+                // Without the time on Linux: GNOME's AppIndicator drops an entry that changes every second, and every one below it.
+                : slot.IsGameRunning ? (OperatingSystem.IsLinux() ? string.Format(loc["Tray_PlayingNoTime"], slot.GameName) : string.Format(loc["Tray_Playing"], slot.GameName, slot.PlayTime))
+                : slot.IsAutoSavingSession ? loc["Home_SavingSession"]
+                : slot.IsUserPaused ? loc["Home_ResumeSearch"]
+                : loc["Home_PauseSearch"];
+
+            slot.TrayMenuText = IsDualDetectionActive ? string.Format(loc["Tray_Slot"], slot.Number, text) : text;
         }
-        else if (Slots.FirstOrDefault(s => s.IsGameRunning) is { } playing)
-        {
-            TrayMenuActionText = string.Format(LocalizationService.Instance["Tray_Playing"], playing.GameName, playing.PlayTime);
-        }
-        else if (IsAnySessionAutoSaving)
-        {
-            TrayMenuActionText = LocalizationService.Instance["Home_SavingSession"];
-        }
-        else if (PrimarySlot.IsUserPaused)
-        {
-            TrayMenuActionText = LocalizationService.Instance["Home_ResumeSearch"];
-        }
-        else
-        {
-            TrayMenuActionText = LocalizationService.Instance["Home_PauseSearch"];
-        }
+
+        TrayMenuChanged?.Invoke();
     }
 
     /// <summary>
@@ -2272,7 +2460,7 @@ public partial class MainWindowViewModel : ViewModelBase
             {
                 Console.WriteLine($"[StopRunningGame] Session too short: {elapsed.TotalMinutes} minutes. Min required: {_minAllowedSession.TotalMinutes}");
                 _logger?.Warning($"[StopRunningGame] Session discarded: {elapsed.TotalMinutes:F1} min played, {_minAllowedSession.TotalMinutes} min required. Nothing is registered on Backloggd and the user is not asked.");
-                ShowToast(LocalizationService.Instance["Toast_SessionTooShort"], ToastType.Warning);
+                ShowToast(string.Format(LocalizationService.Instance["Toast_SessionTooShortGame"], finishedDisplayName), ToastType.Warning);
                 return;
             }
 
@@ -2296,7 +2484,9 @@ public partial class MainWindowViewModel : ViewModelBase
             // The slot is held for as long as the modal is up: a new game starting now would
             // overwrite the pending session before the user has decided what to do with it.
             slot.IsAwaitingConfirmation = true;
-            Confirmations.Add(confirmation);
+
+            // By half, not by arrival: game 1's modal always sits on the left.
+            Confirmations.Insert(Confirmations.Count(c => c.Slot.Index < slot.Index), confirmation);
             IsSessionConfirmationVisible = true;
 
             // The app is usually minimised to the tray when a game closes, so the window has to

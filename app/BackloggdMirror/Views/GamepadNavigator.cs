@@ -53,6 +53,7 @@ internal sealed class GamepadNavigator : IDisposable
         _vm.PropertyChanged += OnViewModelPropertyChanged;
         _vm.ToastNotifications.CollectionChanged += OnToastsChanged;
         _vm.GameSearchResults.CollectionChanged += OnSearchResultsChanged;
+        _vm.Confirmations.CollectionChanged += OnConfirmationsChanged;
         _window.PropertyChanged += OnWindowPropertyChanged;
         _window.AddHandler(InputElement.PointerMovedEvent, OnPointerMoved, RoutingStrategies.Tunnel, handledEventsToo: true);
         _window.AddHandler(InputElement.PointerPressedEvent, OnPointerPressed, RoutingStrategies.Tunnel, handledEventsToo: true);
@@ -81,6 +82,12 @@ internal sealed class GamepadNavigator : IDisposable
 
     // A toast that expires under the focus takes it along.
     private void OnToastsChanged(object? sender, NotifyCollectionChangedEventArgs e) => RestoreFocusLater();
+
+    // With two modals, closing one leaves the other: the focus moves there. A new one does not take it from the other.
+    private void OnConfirmationsChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        if (e.OldItems?.Count > 0 && _vm.Confirmations.Count > 0) RestoreFocusLater();
+    }
 
     // Each cover that streams in replaces its item, which recreates the button under the focus.
     private void OnSearchResultsChanged(object? sender, NotifyCollectionChangedEventArgs e)
@@ -595,6 +602,7 @@ internal sealed class GamepadNavigator : IDisposable
         _vm.PropertyChanged -= OnViewModelPropertyChanged;
         _vm.ToastNotifications.CollectionChanged -= OnToastsChanged;
         _vm.GameSearchResults.CollectionChanged -= OnSearchResultsChanged;
+        _vm.Confirmations.CollectionChanged -= OnConfirmationsChanged;
         _window.PropertyChanged -= OnWindowPropertyChanged;
         _window.RemoveHandler(InputElement.PointerMovedEvent, OnPointerMoved);
         _window.RemoveHandler(InputElement.PointerPressedEvent, OnPointerPressed);

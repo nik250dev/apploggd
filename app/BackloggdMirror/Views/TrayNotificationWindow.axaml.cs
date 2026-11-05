@@ -7,6 +7,7 @@ using Avalonia.Threading;
 using BackloggdMirror.Models;
 using BackloggdMirror.Services;
 using System;
+using System.Collections.Generic;
 
 namespace BackloggdMirror.Views;
 
@@ -126,7 +127,27 @@ public partial class TrayNotificationWindow : Window
                     // A session waiting on the user is a standstill, not activity.
                     if (_notice.Kind == TrayNoticeKind.PendingSession) KickerDot.Classes.Remove("pulse");
                 }
+
+                // The dual status notice: each row has its own dot, and a lone one above the title says nothing.
+                if (string.IsNullOrEmpty(KickerText.Text))
+                {
+                    KickerRow.IsVisible = false;
+                    TitleRow.Margin = new Thickness(0, 0, 0, 2);
+                }
                 break;
+        }
+
+        TitleRow.IsVisible = !string.IsNullOrEmpty(_notice.Title);
+        if (_notice.TitleSlotIndex is { } titleSlot)
+        {
+            TitleMarkHost.Child = SlotMark(titleSlot);
+            TitleMarkHost.IsVisible = true;
+        }
+
+        if (_notice.Rows is { Count: > 0 } rows)
+        {
+            foreach (var row in rows) SlotRows.Children.Add(BuildRow(row));
+            SlotRowsHost.IsVisible = true;
         }
 
         if (_notice.Action != null)
@@ -138,6 +159,90 @@ public partial class TrayNotificationWindow : Window
         }
 
         NotificationProgress.IsVisible = _notice.Duration != null;
+    }
+
+    // Play times still running, re-read on every tick.
+    private readonly List<(TextBlock Text, Func<string> Read)> _liveTimes = new();
+
+    /// <summary>The split screen with its half lit, as on the confirmation modal.</summary>
+    private Control SlotMark(int slotIndex)
+    {
+        var lit = (IBrush?)this.FindResource("TextPrimaryBrush");
+        var halves = new Grid { ColumnDefinitions = new ColumnDefinitions("*, 1.5, *") };
+        var fill = new Border { CornerRadius = new CornerRadius(1), Background = lit };
+        Grid.SetColumn(fill, slotIndex == 0 ? 0 : 2);
+        halves.Children.Add(fill);
+
+        return new Border
+        {
+            Width = 18,
+            Height = 13,
+            CornerRadius = new CornerRadius(3),
+            Padding = new Thickness(1.5),
+            BorderThickness = new Thickness(1.5),
+            BorderBrush = (IBrush?)this.FindResource("IconMediumBrush"),
+            VerticalAlignment = VerticalAlignment.Center,
+            Child = halves
+        };
+    }
+
+    /// <summary>A half's mark, a status dot, what it is doing and, if any, its time.</summary>
+    private Control BuildRow(TrayNoticeRow row)
+    {
+        var grid = new Grid { ColumnDefinitions = new ColumnDefinitions("Auto, Auto, *, Auto") };
+
+        grid.Children.Add(SlotMark(row.SlotIndex));
+
+        var dot = new Avalonia.Controls.Shapes.Ellipse { Width = 8, Height = 8, Margin = new Thickness(9, 0, 8, 0), VerticalAlignment = VerticalAlignment.Center };
+        switch (row.State)
+        {
+            case TrayNoticeRowState.Paused:
+                dot.Stroke = (IBrush?)this.FindResource("TextSubtleBrush");
+                dot.StrokeThickness = 1.5;
+                break;
+            case TrayNoticeRowState.Pending:
+                dot.Fill = (IBrush?)this.FindResource("PendingDotBrush");
+                break;
+            case TrayNoticeRowState.Saving:
+                dot.Fill = (IBrush?)this.FindResource("TextMutedBrush");
+                break;
+            default:
+                dot.Fill = (IBrush?)this.FindResource(row.State == TrayNoticeRowState.Playing ? "BrandPrimaryBrush" : "DetectingDotBrush");
+                dot.Classes.Add("pulse");
+                break;
+        }
+        Grid.SetColumn(dot, 1);
+        grid.Children.Add(dot);
+
+        var text = new TextBlock
+        {
+            Text = row.Text,
+            FontSize = 12,
+            TextTrimming = TextTrimming.CharacterEllipsis,
+            VerticalAlignment = VerticalAlignment.Center,
+            Foreground = (IBrush?)this.FindResource("TextSecondaryBrush")
+        };
+        Grid.SetColumn(text, 2);
+        grid.Children.Add(text);
+
+        if (row.LiveTime != null || row.Time != null)
+        {
+            var time = new TextBlock
+            {
+                Text = row.LiveTime?.Invoke() ?? row.Time,
+                FontSize = 12,
+                FontWeight = FontWeight.SemiBold,
+                FontFeatures = new FontFeatureCollection { FontFeature.Parse("+tnum") },
+                Margin = new Thickness(10, 0, 0, 0),
+                VerticalAlignment = VerticalAlignment.Center,
+                Foreground = (IBrush?)this.FindResource("BrandPrimaryLightBrush")
+            };
+            Grid.SetColumn(time, 3);
+            grid.Children.Add(time);
+            if (row.LiveTime != null) _liveTimes.Add((time, row.LiveTime));
+        }
+
+        return grid;
     }
 
     /// <summary>The strip is the panel and the dot the tray at its end; the arrow points the same way.</summary>
@@ -240,6 +345,7 @@ public partial class TrayNotificationWindow : Window
         _lastTick = now;
 
         if (_notice.LiveKicker != null) KickerText.Text = _notice.LiveKicker();
+        foreach (var (text, read) in _liveTimes) text.Text = read();
 
         var duration = _notice.Duration!.Value;
         var remaining = duration - _elapsed;

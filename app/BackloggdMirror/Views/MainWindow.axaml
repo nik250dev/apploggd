@@ -1122,7 +1122,19 @@
                 <!-- Home View -->
                 <Grid IsVisible="{Binding IsHomeVisible}" RowDefinitions="*, *, 10">
                     <Panel Grid.Row="0" Margin="20">
-                        <views:HomeStatusPanel DataContext="{Binding PrimarySlot}"/>
+                        <!-- One panel per half, 10px apart like the recently played cards: the negative margin takes back the outer half of each item's gap. -->
+                        <ItemsControl x:Name="HomeSlotsHost" ItemsSource="{Binding Slots}" Margin="-5,0">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Rows="1"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="vm:SessionSlotViewModel">
+                                    <views:HomeStatusPanel Margin="5,0"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
 
                         <!-- Top left: toasts stack on the right. -->
                         <Border IsVisible="{Binding IsOffline}"
@@ -1324,6 +1336,14 @@
                         <Style Selector="ToggleSwitch:checked /template/ Border#SwitchKnob">
                             <Setter Property="Background" Value="{DynamicResource TextPrimaryBrush}"/>
                         </Style>
+                        <!-- Locked while on: the neutral grey of a paused switch, or it reads as enabled. -->
+                        <Style Selector="ToggleSwitch:checked:disabled /template/ Border#SwitchKnobBounds">
+                            <Setter Property="Background" Value="{DynamicResource ButtonCancelBrush}"/>
+                            <Setter Property="BorderBrush" Value="{DynamicResource ButtonCancelBrush}"/>
+                        </Style>
+                        <Style Selector="ToggleSwitch:checked:disabled /template/ Border#SwitchKnob">
+                            <Setter Property="Background" Value="{DynamicResource TextMutedBrush}"/>
+                        </Style>
                     </Panel.Styles>
 
                     <Grid RowDefinitions="Auto, *" Margin="20,0,5,0">
@@ -1387,6 +1407,23 @@
                                                            FontSize="11" Foreground="{DynamicResource TextSubtleBrush}" FontStyle="Italic" TextWrapping="Wrap"/>
                                             </StackPanel>
                                             <ToggleSwitch Grid.Column="1" IsChecked="{Binding AutoRegisterSessions}" IsEnabled="{Binding IsAutoRegisterSessionsAvailable}" OnContent="" OffContent=""/>
+                                        </Grid>
+
+                                        <Separator Background="{DynamicResource SeparatorBrush}" Height="1"/>
+
+                                        <Grid ColumnDefinitions="*, Auto">
+                                            <StackPanel Spacing="2" Margin="0,0,15,0">
+                                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                                    <TextBlock Text="{Binding [Settings_DualDetection], Source={x:Static services:LocalizationService.Instance}}" Classes="setting-label"/>
+                                                    <Border BorderBrush="{DynamicResource OfflineBrush}" BorderThickness="1" CornerRadius="999" Padding="7,0" VerticalAlignment="Center">
+                                                        <TextBlock Text="{Binding [Settings_Experimental], Source={x:Static services:LocalizationService.Instance}}" FontSize="11" FontWeight="SemiBold" Foreground="{DynamicResource OfflineBrush}"/>
+                                                    </Border>
+                                                </StackPanel>
+                                                <TextBlock Text="{Binding [Settings_DualDetectionDesc], Source={x:Static services:LocalizationService.Instance}}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}" TextWrapping="Wrap"/>
+                                                <TextBlock Text="{Binding [Settings_DualDetectionBusy], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding !CanChangeDualDetection}"
+                                                           FontSize="11" Foreground="{DynamicResource TextSubtleBrush}" FontStyle="Italic" TextWrapping="Wrap"/>
+                                            </StackPanel>
+                                            <ToggleSwitch Grid.Column="1" IsChecked="{Binding DualDetectionEnabled}" IsEnabled="{Binding CanChangeDualDetection}" OnContent="" OffContent=""/>
                                         </Grid>
                                     </StackPanel>
                                 </Border>
@@ -2134,8 +2171,9 @@
             </Panel>
 
             <!-- Session Content: one dialog per confirmation, side by side. -->
+            <!-- Unclipped, or it cuts the glow and a dialog sliding past its edge. -->
             <ItemsControl x:Name="SessionDialogsHost" ItemsSource="{Binding Confirmations}" IsVisible="{Binding !IsGameSelectorVisible}"
-                          HorizontalAlignment="Center" VerticalAlignment="Center">
+                          HorizontalAlignment="Center" VerticalAlignment="Center" ClipToBounds="False">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal" Spacing="24"/>
@@ -2148,7 +2186,17 @@
                             <Grid RowDefinitions="*, Auto">
                                 <Grid Grid.Row="0" RowDefinitions="Auto, *, Auto" Margin="20">
                                     <Grid Grid.Row="0" Margin="0,0,0,20">
-                                    <TextBlock Text="{Binding [Session_ConfirmTitle], Source={x:Static services:LocalizationService.Instance}}" FontSize="20" Foreground="{DynamicResource TextPrimaryBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                    <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <!-- The half this session was played in, as a split screen with its side lit. Nudged down onto the middle of the capitals. -->
+                                        <Border IsVisible="{Binding IsSlotMarkVisible}" Width="18" Height="13" CornerRadius="3" Padding="1.5" Margin="0,3,0,0"
+                                                BorderBrush="{DynamicResource IconMediumBrush}" BorderThickness="1.5" VerticalAlignment="Center">
+                                            <Grid ColumnDefinitions="*, 1.5, *">
+                                                <Border Grid.Column="0" CornerRadius="1" Background="{DynamicResource TextPrimaryBrush}" IsVisible="{Binding IsFirstSlot}"/>
+                                                <Border Grid.Column="2" CornerRadius="1" Background="{DynamicResource TextPrimaryBrush}" IsVisible="{Binding !IsFirstSlot}"/>
+                                            </Grid>
+                                        </Border>
+                                        <TextBlock Text="{Binding [Session_ConfirmTitle], Source={x:Static services:LocalizationService.Instance}}" FontSize="20" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+                                    </StackPanel>
                                     
                                     <!-- Info Icon and Tooltip -->
                                     <Panel HorizontalAlignment="Right" VerticalAlignment="Center">
