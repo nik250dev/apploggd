@@ -13525,8 +13525,8 @@
     "id": "425458328278401044",
     "name": "Metro Redux",
     "aliases": [
-      "Metro: Redux",
-      "Metro Redux"
+      "Metro Redux",
+      "Metro: Redux"
     ],
     "executables": [
       {
@@ -13537,16 +13537,20 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "steam",
+        "id": "44169"
+      },
+      {
         "distributor": "xbox",
-        "id": "BV6MJX1TDL17"
+        "id": "9NT97ZJRV60X"
       },
       {
         "distributor": "xbox",
         "id": "BZWVXSWNHN0V"
       },
       {
-        "distributor": "steam",
-        "id": "44169"
+        "distributor": "xbox",
+        "id": "BV6MJX1TDL17"
       }
     ],
     "id_igdb": "6880",
@@ -295825,7 +295829,7 @@
   },
   {
     "id": "1428186806792229025",
-    "name": "Pit of Goblin",
+    "name": "PIT OF GOBLIN",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -334889,12 +334893,16 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "1388130"
+        "distributor": "google_play",
+        "id": "com.gamefirst.religioninc"
       },
       {
         "distributor": "google_play",
-        "id": "com.gamefirst.religioninc"
+        "id": "com.gamefirst.free.strategy.god.simulator"
+      },
+      {
+        "distributor": "steam",
+        "id": "1388130"
       }
     ],
     "id_igdb": "159425",
@@ -395742,12 +395750,16 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "google_play",
-        "id": "com.sweatychair.tingus"
+        "distributor": "xbox",
+        "id": "9N0916DNZGLD"
       },
       {
         "distributor": "steam",
         "id": "3629780"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.sweatychair.tingus"
       }
     ],
     "id_igdb": "285342",
@@ -479814,6 +479826,10 @@
       {
         "distributor": "steam",
         "id": "2863680"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N2TDPGLP9JZ"
       }
     ],
     "id_igdb": "361880",
@@ -482744,7 +482760,7 @@
   },
   {
     "id": "1478589329705009213",
-    "name": "Nocturnal II",
+    "name": "Nocturnal 2",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -506198,7 +506214,7 @@
   },
   {
     "id": "1516279365082808390",
-    "name": "Eets: Hunger. It's emotional.",
+    "name": "Eets: Hunger. It's Emotional.",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -542971,5 +542987,521 @@
       "ar6xwa"
     ],
     "url": "dominoes-together"
+  },
+  {
+    "id": "1567750968299233393",
+    "name": "Come to my party!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3003760"
+      },
+      {
+        "distributor": "epic",
+        "id": "F4036D147E8747E3A08455FFB868F473"
+      }
+    ],
+    "id_igdb": "404091",
+    "cover": "coc5t2",
+    "artwork": [
+      "ar5zbs",
+      "ar5zbr"
+    ],
+    "url": "come-to-my-party"
+  },
+  {
+    "id": "1567750987551346688",
+    "name": "Gear Up Einstein!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2950410"
+      }
+    ],
+    "id_igdb": "342137",
+    "cover": "cod2sj",
+    "artwork": [
+      "ar5lgw",
+      "ar5gu6",
+      "ar5gu5"
+    ],
+    "url": "gear-up-einstein"
+  },
+  {
+    "id": "1567750999001792642",
+    "name": "Diecast",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2443590"
+      }
+    ],
+    "id_igdb": "355401",
+    "cover": "ar5z9t",
+    "artwork": null,
+    "url": "diecast"
+  },
+  {
+    "id": "1567751025220263995",
+    "name": "ABSOLUTELY NOTHING GOOD",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4761550"
+      }
+    ],
+    "id_igdb": "414420",
+    "cover": "cocqgy",
+    "artwork": null,
+    "url": "absolutely-nothing-good"
+  },
+  {
+    "id": "1567751049216000121",
+    "name": "What's in the box?",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4271720"
+      }
+    ],
+    "id_igdb": "383452",
+    "cover": "cob6kd",
+    "artwork": [
+      "ar50ko"
+    ],
+    "url": "whats-in-the-box"
+  },
+  {
+    "id": "1567751071206740038",
+    "name": "The Electorate",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3859180"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1567751096284225628",
+    "name": "The Factory Must Fall",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3970860"
+      }
+    ],
+    "id_igdb": "394065",
+    "cover": "ar5xiq",
+    "artwork": [
+      "ar5ipj"
+    ],
+    "url": "the-factory-must-fall"
+  },
+  {
+    "id": "1567751157995143208",
+    "name": "Gun Restoration Shop Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4561010"
+      }
+    ],
+    "id_igdb": "410317",
+    "cover": "cock0c",
+    "artwork": null,
+    "url": "gun-restoration-shop-simulator"
+  },
+  {
+    "id": "1567751175972061266",
+    "name": "Inside Job",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4761990"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1567751197215957024",
+    "name": "Croc 2: Kingdom of the Gobbos",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4198360"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MWR2QK58LPQ"
+      }
+    ],
+    "id_igdb": "411706",
+    "cover": "coclei",
+    "artwork": [
+      "ar6c93"
+    ],
+    "url": "croc-2-kingdom-of-the-gobbos"
+  },
+  {
+    "id": "1567751208616337539",
+    "name": "System Arrival",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5019800"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1567751265956528172",
+    "name": "Nullnest",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4996910"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1567751278019350660",
+    "name": "Pizzapoly",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4414500"
+      }
+    ],
+    "id_igdb": "423547",
+    "cover": "cod6vp",
+    "artwork": [
+      "ar6ukj"
+    ],
+    "url": "pizzapoly"
+  },
+  {
+    "id": "1567751296189206618",
+    "name": "Ghillie Wars",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5211690"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1567751308105228369",
+    "name": "Taskbar Legends",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4904570"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1567751317781487677",
+    "name": "Water TD",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5295330"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1567751332541235351",
+    "name": "Happy Propaganda",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4950600"
+      }
+    ],
+    "id_igdb": "424529",
+    "cover": "cod6ip",
+    "artwork": null,
+    "url": "happy-propaganda"
+  },
+  {
+    "id": "1567751355697995837",
+    "name": "Mayday Airways",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5460910"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1567751415932395531",
+    "name": "Patient Zero: Plague Idle",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3624090"
+      }
+    ],
+    "id_igdb": "388417",
+    "cover": "ar5z2m",
+    "artwork": [
+      "ar5810",
+      "ar5814"
+    ],
+    "url": "patient-zero-plague-idle"
+  },
+  {
+    "id": "1567751430578765854",
+    "name": "Just Weeding",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5178240"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1567750994606166097",
+    "name": "Cordura",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "394664",
+    "cover": "cobrbi",
+    "artwork": [
+      "ar5ji3"
+    ],
+    "url": "cordura"
+  },
+  {
+    "id": "1567751010615697431",
+    "name": "A Whole Wolfrush",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "329682",
+    "cover": "co9c18",
+    "artwork": [
+      "ar3dow"
+    ],
+    "url": "a-whole-wolfrush"
+  },
+  {
+    "id": "1567751106979963050",
+    "name": "Vincit",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "407067",
+    "cover": "coc9x8",
+    "artwork": null,
+    "url": "vincit"
+  },
+  {
+    "id": "1567751111862124614",
+    "name": "Zero Sievert 2",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "400088",
+    "cover": "coc079",
+    "artwork": [
+      "ar5st1"
+    ],
+    "url": "zero-sievert-2"
+  },
+  {
+    "id": "1567751116182257694",
+    "name": "Wilderdark",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "400112",
+    "cover": "coc03a",
+    "artwork": [
+      "ar5su1"
+    ],
+    "url": "wilderdark"
+  },
+  {
+    "id": "1567751137577148489",
+    "name": "Ichorous",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "287888",
+    "cover": "codanf",
+    "artwork": null,
+    "url": "ichorous"
+  },
+  {
+    "id": "1567751148444848220",
+    "name": "Ridiculous Space Battles",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "349222",
+    "cover": "co9z1b",
+    "artwork": [
+      "ar3qjs"
+    ],
+    "url": "ridiculous-space-battles"
+  },
+  {
+    "id": "1567751167516213328",
+    "name": "All 4 Naught",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "423773",
+    "cover": "cod5ki",
+    "artwork": [
+      "ar6vn5"
+    ],
+    "url": "all-4-naught"
+  },
+  {
+    "id": "1567751241042231329",
+    "name": "Balingo",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "423079",
+    "cover": "cod4bh",
+    "artwork": [
+      "ar6rrt"
+    ],
+    "url": "balingo"
+  },
+  {
+    "id": "1567751351390314577",
+    "name": "Test Fire: Armor Penetration Sim",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1567751367706157177",
+    "name": "IAFT Fear Diagnosis",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1567751376887349410",
+    "name": "Incremental Traffic",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "426642",
+    "cover": "cod9a4",
+    "artwork": [
+      "ar6x2k"
+    ],
+    "url": "incremental-traffic"
+  },
+  {
+    "id": "1567751383170424832",
+    "name": "Let 'Em Cast",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1567751439906775153",
+    "name": "LEVELS",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "325096",
+    "cover": "co94wt",
+    "artwork": null,
+    "url": "dcs-world-uh-1h-worlds-apart-stormfront-campaign-by-low-level-heaven-mission-development"
   }
 ]
