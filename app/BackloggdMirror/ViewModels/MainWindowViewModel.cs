@@ -245,6 +245,20 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
+    public bool AutoUpdateGamesDatabase
+    {
+        get => _settingsService.AutoUpdateGamesDatabase;
+        set
+        {
+            if (_settingsService.AutoUpdateGamesDatabase == value) return;
+
+            _settingsService.AutoUpdateGamesDatabase = value;
+            _settingsService.Save();
+            _logger.Info($"[MainWindowViewModel] User action: games database auto-update set to {value}.");
+            OnPropertyChanged();
+        }
+    }
+
     public bool IsAlwaysAddToPendingAvailable => !AutoRegisterSessions;
 
     public bool IsAutoRegisterSessionsAvailable => !AlwaysAddToPending;
@@ -683,7 +697,10 @@ public partial class MainWindowViewModel : ViewModelBase
         _selectedLanguageOption = System.Linq.Enumerable.FirstOrDefault(LanguageOptions, x => x.Code == _settingsService.Language) ?? LanguageOptions[0];
 
         // Fire-and-forget: attempt to download an updated detectable_processed.json
-        _ = TryUpdateDetectableGamesAsync();
+        if (_settingsService.AutoUpdateGamesDatabase)
+            _ = TryUpdateDetectableGamesAsync();
+        else
+            _logger.Info("[MainWindowViewModel] Games database auto-update is off in the settings. Using the local copy.");
 
         // Fire-and-forget check for a newer Apploggd version. It deliberately avoids the bottom bar,
         // which at this very moment is busy with the games database: the notice lives in the sidebar
@@ -1359,6 +1376,7 @@ public partial class MainWindowViewModel : ViewModelBase
         OnPropertyChanged(nameof(GamepadNavigationEnabled));
         OnPropertyChanged(nameof(AlwaysAddToPending));
         OnPropertyChanged(nameof(AutoRegisterSessions));
+        OnPropertyChanged(nameof(AutoUpdateGamesDatabase));
         OnPropertyChanged(nameof(IsAlwaysAddToPendingAvailable));
         OnPropertyChanged(nameof(IsAutoRegisterSessionsAvailable));
         OnPropertyChanged(nameof(SelectedLanguageCode));

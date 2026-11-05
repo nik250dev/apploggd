@@ -1369,6 +1369,17 @@
                                             </StackPanel>
                                             <ToggleSwitch Grid.Column="1" IsChecked="{Binding AutoRegisterSessions}" IsEnabled="{Binding IsAutoRegisterSessionsAvailable}" OnContent="" OffContent=""/>
                                         </Grid>
+
+                                        <Separator Background="{DynamicResource SeparatorBrush}" Height="1"/>
+
+                                        <Grid ColumnDefinitions="*, Auto">
+                                            <StackPanel Spacing="2" Margin="0,0,15,0">
+                                                <TextBlock Text="{Binding [Settings_AutoUpdateDb], Source={x:Static services:LocalizationService.Instance}}" Classes="setting-label"/>
+                                                <TextBlock Text="{Binding [Settings_AutoUpdateDbDesc], Source={x:Static services:LocalizationService.Instance}}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}" TextWrapping="Wrap"/>
+                                                <TextBlock Text="{Binding [Settings_AutoUpdateDbWarning], Source={x:Static services:LocalizationService.Instance}}" FontSize="11" Foreground="{DynamicResource OfflineBrush}" TextWrapping="Wrap"/>
+                                            </StackPanel>
+                                            <ToggleSwitch Grid.Column="1" IsChecked="{Binding AutoUpdateGamesDatabase}" OnContent="" OffContent=""/>
+                                        </Grid>
                                     </StackPanel>
                                 </Border>
 
