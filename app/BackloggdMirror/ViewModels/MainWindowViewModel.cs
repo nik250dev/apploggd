@@ -113,6 +113,7 @@ public partial class MainWindowViewModel : ViewModelBase
     private readonly AutostartService _autostartService;
     private readonly BlacklistService _blacklistService;
     private readonly PendingSessionService _pendingSessionService;
+    private readonly RememberedGameService _rememberedGameService;
     private readonly GamepadService? _gamepadService;
 
     [ObservableProperty]
@@ -503,6 +504,7 @@ public partial class MainWindowViewModel : ViewModelBase
         if (IsOffline) return;
 
         _selectorPendingTarget = null;
+        _selectorRememberedTarget = null;
         _selectorConfirmationTarget = confirmation;
         _lastSelectorConfirmation = confirmation;
         ShowGameSelector(confirmation.SessionGameTitle);
@@ -514,6 +516,7 @@ public partial class MainWindowViewModel : ViewModelBase
         if (item == null || IsOffline) return;
 
         _selectorPendingTarget = item;
+        _selectorRememberedTarget = null;
         ShowGameSelector(item.Title);
     }
 
@@ -533,6 +536,7 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         IsGameSelectorVisible = false;
         _selectorPendingTarget = null;
+        _selectorRememberedTarget = null;
         _selectorConfirmationTarget = null;
     }
 
@@ -594,6 +598,13 @@ public partial class MainWindowViewModel : ViewModelBase
     private void SelectRefinedGame(BackloggdMirror.Models.GameSearchResult selectedGame)
     {
         if (selectedGame == null) return;
+
+        if (_selectorRememberedTarget is { } remembered)
+        {
+            ApplyPickedGame(remembered, selectedGame);
+            CloseGameSelector();
+            return;
+        }
 
         if (_selectorPendingTarget is { } item)
         {
@@ -664,7 +675,7 @@ public partial class MainWindowViewModel : ViewModelBase
     // One RegisterGame at a time: two on the same game and day would read the same total and one would overwrite the other.
     private readonly SemaphoreSlim _registrationGate = new(1, 1);
 
-    public MainWindowViewModel(IGameDetectionService gameDetectionService, IBackloggdAuthService authService, IBackloggdBrowserService browserService, SettingsService settingsService, ICredentialStorageService credentialStorageService, IAppLogger logger, GameDataService? gameDataService = null, AutostartService? autostartService = null, BlacklistService? blacklistService = null, GamepadService? gamepadService = null, PendingSessionService? pendingSessionService = null)
+    public MainWindowViewModel(IGameDetectionService gameDetectionService, IBackloggdAuthService authService, IBackloggdBrowserService browserService, SettingsService settingsService, ICredentialStorageService credentialStorageService, IAppLogger logger, GameDataService? gameDataService = null, AutostartService? autostartService = null, BlacklistService? blacklistService = null, GamepadService? gamepadService = null, PendingSessionService? pendingSessionService = null, RememberedGameService? rememberedGameService = null)
     {
         _authService = authService;
         _browserService = browserService;
@@ -677,10 +688,12 @@ public partial class MainWindowViewModel : ViewModelBase
         _blacklistService = blacklistService ?? new BlacklistService(logger);
         _gamepadService = gamepadService;
         _pendingSessionService = pendingSessionService ?? new PendingSessionService(logger);
+        _rememberedGameService = rememberedGameService ?? new RememberedGameService(logger);
         _changelogService = new ChangelogService(logger);
 
         RefreshBlacklistEntries();
         LoadPendingSessions();
+        RefreshRememberedGames();
 
         AddSlot();
         ApplyDualDetection();
@@ -1469,6 +1482,9 @@ public partial class MainWindowViewModel : ViewModelBase
         _pendingSessionService.Reset();
         LoadPendingSessions();
 
+        _rememberedGameService.Reset();
+        RefreshRememberedGames();
+
         Logout();
     }
 
@@ -1593,6 +1609,124 @@ public partial class MainWindowViewModel : ViewModelBase
 
     #endregion
 
+    #region Remembered games
+
+    /// <summary>Games chosen by hand for an executable or a ROM, newest first.</summary>
+    public ObservableCollection<RememberedGameViewModel> RememberedGames { get; } = new();
+
+    [ObservableProperty]
+    private bool _hasRememberedGames;
+
+    /// <summary>The remembered game the picker is choosing for, from Settings.</summary>
+    private RememberedGameViewModel? _selectorRememberedTarget;
+
+    // Rows are kept across refreshes, so their covers are not downloaded again.
+    private void RefreshRememberedGames()
+    {
+        var previous = new Dictionary<RememberedGame, RememberedGameViewModel>(ReferenceEqualityComparer.Instance);
+        foreach (var row in RememberedGames) previous[row.Entry] = row;
+        RememberedGames.Clear();
+
+        foreach (var entry in _rememberedGameService.Entries.OrderByDescending(e => e.AddedAt))
+        {
+            if (previous.Remove(entry, out var row))
+            {
+                RememberedGames.Add(row);
+                continue;
+            }
+
+            row = new RememberedGameViewModel(entry);
+            RememberedGames.Add(row);
+            LoadRememberedGameCover(row);
+        }
+
+        foreach (var gone in previous.Values) gone.ShowCover(null);
+        HasRememberedGames = RememberedGames.Count > 0;
+    }
+
+    private void LoadRememberedGameCover(RememberedGameViewModel row)
+    {
+        int request = ++row.CoverRequest;
+        string? url = row.Entry.CoverUrl;
+        if (string.IsNullOrEmpty(url))
+        {
+            row.ShowCover(null);
+            return;
+        }
+
+        _ = Task.Run(async () =>
+        {
+            var bitmap = await _browserService.DownloadImageAsync(url);
+            Dispatcher.UIThread.Post(() =>
+            {
+                if (request == row.CoverRequest && RememberedGames.Contains(row)) row.ShowCover(bitmap);
+                else bitmap?.Dispose();
+            });
+        });
+    }
+
+    /// <summary>From the confirmation, once its session is saved or postponed with the box ticked.</summary>
+    internal void RememberGame(RememberedGame entry)
+    {
+        _rememberedGameService.Remember(entry);
+        RefreshRememberedGames();
+    }
+
+    /// <summary>From the confirmation's "Forget"; the modal goes back to detection by itself.</summary>
+    internal void ForgetRememberedGame(RememberedGame entry)
+    {
+        if (!_rememberedGameService.Remove(entry)) return;
+        OnRememberedGameRemoved(entry);
+        ShowToast(string.Format(LocalizationService.Instance["Toast_RememberedGameForgotten"], entry.GameName, entry.TargetLabel), ToastType.Warning);
+    }
+
+    // Every modal showing it goes back to detection; a session still running finds out when it ends.
+    private void OnRememberedGameRemoved(RememberedGame entry)
+    {
+        RefreshRememberedGames();
+        foreach (var confirmation in Confirmations.ToList()) confirmation.OnRememberedGameRemoved(entry);
+    }
+
+    [RelayCommand]
+    private void ChangeRememberedGame(RememberedGameViewModel row)
+    {
+        if (row == null || IsOffline) return;
+
+        _selectorPendingTarget = null;
+        _selectorConfirmationTarget = null;
+        _selectorRememberedTarget = row;
+        ShowGameSelector(row.GameName);
+    }
+
+    private void ApplyPickedGame(RememberedGameViewModel row, BackloggdMirror.Models.GameSearchResult selectedGame)
+    {
+        var entry = row.Entry;
+        entry.GameName = selectedGame.Title;
+        entry.GameUrl = selectedGame.RedirectLink;
+        entry.CoverUrl = string.IsNullOrEmpty(selectedGame.CoverUrl) ? null : selectedGame.CoverUrl;
+        entry.IdIgdb = null;
+        _rememberedGameService.Update(entry);
+
+        row.Refresh();
+        LoadRememberedGameCover(row);
+    }
+
+    [RelayCommand]
+    private void RemoveRememberedGame(RememberedGameViewModel row)
+    {
+        var entry = row.Entry;
+        if (!_rememberedGameService.Remove(entry)) return;
+        OnRememberedGameRemoved(entry);
+
+        var loc = LocalizationService.Instance;
+        ShowToast(string.Format(loc["Toast_RememberedGameRemoved"], entry.GameName), ToastType.Warning, UndoToastDuration, loc["Toast_Undo"], () =>
+        {
+            if (_rememberedGameService.Restore(entry)) RefreshRememberedGames();
+        });
+    }
+
+    #endregion
+
     #region Pending sessions
 
     /// <summary>Newest first, and only those of the account signed in.</summary>
@@ -1693,9 +1827,9 @@ public partial class MainWindowViewModel : ViewModelBase
     /// "Always add to pending": resolves the game the way the modal would, without the user, and
     /// keeps the session for later. Detection is never paused for it.
     /// </summary>
-    private async Task AddFinishedSessionToPendingAsync(string gameName, string? idIgdb, DateTime endedAt, TimeSpan duration)
+    private async Task AddFinishedSessionToPendingAsync(string gameName, string? idIgdb, DateTime endedAt, TimeSpan duration, RememberedGame? remembered)
     {
-        var session = await ResolveFinishedSessionAsync(gameName, idIgdb, endedAt, duration);
+        var session = await ResolveFinishedSessionAsync(gameName, idIgdb, endedAt, duration, remembered);
 
         _logger.Info($"[MainWindowViewModel] 'Always add to pending' is on: '{session.GameName}' ({PendingSessionViewModel.FormatDuration(duration)}) goes to the pending list without asking.");
         AddPendingSession(session);
@@ -1709,13 +1843,13 @@ public partial class MainWindowViewModel : ViewModelBase
     /// be registered (unidentified, offline, a failed save) goes to Pending. Detection is held until the
     /// attempt is over, as it is behind the modal.
     /// </summary>
-    private async Task AutoRegisterFinishedSessionAsync(SessionSlotViewModel slot, string gameName, string? idIgdb, DateTime endedAt, TimeSpan duration)
+    private async Task AutoRegisterFinishedSessionAsync(SessionSlotViewModel slot, string gameName, string? idIgdb, DateTime endedAt, TimeSpan duration, RememberedGame? remembered)
     {
         slot.IsAutoSavingSession = true;
         UpdateTrayMenuText();
         try
         {
-            await TryAutoRegisterFinishedSessionAsync(gameName, idIgdb, endedAt, duration);
+            await TryAutoRegisterFinishedSessionAsync(gameName, idIgdb, endedAt, duration, remembered);
         }
         finally
         {
@@ -1724,9 +1858,9 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
-    private async Task TryAutoRegisterFinishedSessionAsync(string gameName, string? idIgdb, DateTime endedAt, TimeSpan duration)
+    private async Task TryAutoRegisterFinishedSessionAsync(string gameName, string? idIgdb, DateTime endedAt, TimeSpan duration, RememberedGame? remembered)
     {
-        var session = await ResolveFinishedSessionAsync(gameName, idIgdb, endedAt, duration);
+        var session = await ResolveFinishedSessionAsync(gameName, idIgdb, endedAt, duration, remembered);
         var loc = LocalizationService.Instance;
         string played = PendingSessionViewModel.FormatDuration(duration);
 
@@ -1763,7 +1897,7 @@ public partial class MainWindowViewModel : ViewModelBase
     }
 
     /// <summary>Resolves the game the way the modal would, without the user.</summary>
-    private async Task<PendingSession> ResolveFinishedSessionAsync(string gameName, string? idIgdb, DateTime endedAt, TimeSpan duration)
+    private async Task<PendingSession> ResolveFinishedSessionAsync(string gameName, string? idIgdb, DateTime endedAt, TimeSpan duration, RememberedGame? remembered = null)
     {
         var session = new PendingSession
         {
@@ -1774,6 +1908,16 @@ public partial class MainWindowViewModel : ViewModelBase
             EndedAt = endedAt,
             Duration = duration
         };
+
+        if (remembered != null)
+        {
+            session.GameName = remembered.GameName;
+            session.IdIgdb = null;
+            session.GameUrl = remembered.GameUrl;
+            session.CoverUrl = remembered.CoverUrl;
+            session.IsIdentified = !string.IsNullOrEmpty(remembered.GameUrl);
+            return session;
+        }
 
         if (!string.IsNullOrEmpty(idIgdb))
         {
@@ -2388,6 +2532,17 @@ public partial class MainWindowViewModel : ViewModelBase
         UpdateDisplayTimer();
         UpdateTrayMenuText();
 
+        // Chosen by hand before: it wins over detection, including the artwork.
+        if (_rememberedGameService.Find(game) is { } remembered)
+        {
+            _logger?.Info($"[StartNewGame] '{remembered.Details}' has '{remembered.GameName}' remembered; using it instead of '{gameName}'.");
+            slot.RememberedGame = remembered;
+            slot.GameName = remembered.GameName;
+            PrefetchTodaySessionExtras(slot, remembered.GameName, remembered.GameUrl);
+            LoadRememberedGameArtwork(slot, game, remembered);
+            return;
+        }
+
         // If the game has an IGDB ID, try to resolve its name and background artwork
         if (!string.IsNullOrEmpty(idIgdb))
         {
@@ -2447,6 +2602,42 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
+    /// <summary>A picked game has no IGDB id: it is looked up once from its Backloggd link and kept with the entry.</summary>
+    private void LoadRememberedGameArtwork(SessionSlotViewModel slot, DetectedGame game, RememberedGame remembered)
+    {
+        string? gameUrl = remembered.GameUrl;
+        string? knownIdIgdb = remembered.IdIgdb;
+
+        _ = Task.Run(async () =>
+        {
+            string? idIgdb = knownIdIgdb ?? await _gameDataService.FindIdIgdbByBackloggdUrlAsync(gameUrl, remembered.GameName);
+            if (idIgdb == null) return;
+
+            if (knownIdIgdb == null)
+            {
+                Dispatcher.UIThread.Post(() =>
+                {
+                    // Changed in Settings meanwhile: the id found belongs to the old game.
+                    if (remembered.IdIgdb != null || remembered.GameUrl != gameUrl) return;
+                    remembered.IdIgdb = idIgdb;
+                    _rememberedGameService.Update(remembered);
+                });
+            }
+
+            var lookup = _gameDataService.LookupByIgdbId(idIgdb) ?? await _gameDataService.LookupByIgdbIdFromApiAsync(idIgdb);
+            if (string.IsNullOrEmpty(lookup?.ArtworkUrl)) return;
+
+            var bitmap = await _browserService.DownloadImageAsync(lookup.ArtworkUrl);
+            if (bitmap == null) return;
+
+            Dispatcher.UIThread.Post(() =>
+            {
+                if (slot.IsTiming(game)) slot.ShowArtwork(bitmap);
+                else bitmap.Dispose();
+            });
+        });
+    }
+
     /// <summary>
     /// Closes the session once the tracked process dies, and hands it to the user for confirmation.
     /// Nothing is written to Backloggd from here unless the user turned on the automatic mode:
@@ -2464,6 +2655,8 @@ public partial class MainWindowViewModel : ViewModelBase
         DateTime endedAt = DateTime.Now;
         string finalPlayTime = slot.PlayTime;
         var extrasPrefetch = slot.ExtrasPrefetch;
+        // Removed while it was played: the session goes back to what detection found.
+        var remembered = slot.RememberedGame is { } chosen && _rememberedGameService.Entries.Contains(chosen) ? chosen : null;
 
         slot.Stop();
         UpdateDisplayTimer();
@@ -2484,20 +2677,20 @@ public partial class MainWindowViewModel : ViewModelBase
 
             if (_settingsService.AlwaysAddToPending)
             {
-                _ = AddFinishedSessionToPendingAsync(gameToRegister, currentIdIgdb, endedAt, elapsed);
+                _ = AddFinishedSessionToPendingAsync(gameToRegister, currentIdIgdb, endedAt, elapsed, remembered);
                 return;
             }
 
             if (_settingsService.AutoRegisterSessions)
             {
-                _ = AutoRegisterFinishedSessionAsync(slot, gameToRegister, currentIdIgdb, endedAt, elapsed);
+                _ = AutoRegisterFinishedSessionAsync(slot, gameToRegister, currentIdIgdb, endedAt, elapsed, remembered);
                 return;
             }
 
             // The confirmation goes first: a picker left open for a pending row would hide it.
-            if (_selectorPendingTarget != null) CloseGameSelector();
+            if (_selectorPendingTarget != null || _selectorRememberedTarget != null) CloseGameSelector();
 
-            var confirmation = new SessionConfirmationViewModel(this, slot, finishedGame, finishedDisplayName, gameToRegister, elapsed, endedAt, finalPlayTime);
+            var confirmation = new SessionConfirmationViewModel(this, slot, finishedGame, finishedDisplayName, gameToRegister, elapsed, endedAt, finalPlayTime, remembered);
 
             // The slot is held for as long as the modal is up: a new game starting now would
             // overwrite the pending session before the user has decided what to do with it.

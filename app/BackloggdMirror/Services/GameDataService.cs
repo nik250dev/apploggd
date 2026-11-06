@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
@@ -46,6 +47,50 @@ public class GameDataService
     public void ReloadDatabase()
     {
         _igdbIndex = BuildIgdbIndex();
+        _slugIndex = null;
+    }
+
+    private Dictionary<string, string>? _slugIndex;
+
+    /// <summary>
+    /// The IGDB id behind a Backloggd link, for a game picked by hand: the local database first, then the search API by
+    /// name, accepted only if IGDB gives the same slug back (otherwise the artwork could be another game's).
+    /// </summary>
+    public virtual async Task<string?> FindIdIgdbByBackloggdUrlAsync(string? gameUrl, string gameName)
+    {
+        string? slug = SlugOf(gameUrl);
+        if (string.IsNullOrEmpty(slug)) return null;
+
+        var index = _slugIndex ??= BuildSlugIndex();
+        if (index.TryGetValue(slug, out var local)) return local;
+
+        try
+        {
+            string? idIgdb = await FetchJsonFieldAsync($"{ApiBaseUrl}/search?query={WebUtility.UrlEncode(gameName)}", "id_igdb");
+            if (string.IsNullOrEmpty(idIgdb)) return null;
+
+            string? apiSlug = ParseBackloggdSlug(await FetchJsonFieldAsync($"{ApiBaseUrl}/url?game_id={idIgdb}", "game_url"));
+            if (string.Equals(apiSlug, slug, StringComparison.OrdinalIgnoreCase)) return idIgdb;
+
+            _logger?.Info($"[GameDataService] The search API gave IGDB ID '{idIgdb}' ('{apiSlug}') for '{gameName}', which is not '{slug}'. No artwork for it.");
+        }
+        catch (Exception ex)
+        {
+            _logger?.Warning($"[GameDataService] Could not find the IGDB ID of '{gameName}': {ex.Message}. No artwork for it.");
+        }
+        return null;
+    }
+
+    private static string? SlugOf(string? url) => url?.Trim('/').Split('/')[^1].ToLowerInvariant();
+
+    private Dictionary<string, string> BuildSlugIndex()
+    {
+        var index = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var game in _igdbIndex.Values)
+        {
+            if (!string.IsNullOrEmpty(game.Url) && !string.IsNullOrEmpty(game.IdIgdb)) index.TryAdd(SlugOf(game.Url)!, game.IdIgdb);
+        }
+        return index;
     }
 
     /// <summary>

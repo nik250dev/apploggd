@@ -10,6 +10,7 @@
 - New automatic mode that saves every session to Backloggd without asking (Settings > General)
 - Setting to turn off the game database update on startup (Settings > General)
 - Experimental: detect two games at once (Settings > General)
+- A game picked by hand can be remembered for its executable or ROM (Settings > Remembered games)
 
 ### Changed
 
