@@ -33,11 +33,16 @@ public partial class SessionConfirmationViewModel : ViewModelBase
 
     private bool _closed;
 
+    // The game chosen by hand for this executable or ROM, which replaces what detection identified.
+    private RememberedGame? _remembered;
+
     internal SessionConfirmationViewModel(MainWindowViewModel owner, SessionSlotViewModel slot, DetectedGame? game,
-        string displayName, string gameName, TimeSpan duration, DateTime endedAt, string playTime)
+        string displayName, string gameName, TimeSpan duration, DateTime endedAt, string playTime, RememberedGame? remembered = null)
     {
         _owner = owner;
         Slot = slot;
+        _remembered = remembered;
+        IsGameRemembered = remembered != null;
         _pendingGame = game;
         _pendingGameDisplayName = displayName;
         _pendingGameName = gameName;
@@ -45,6 +50,7 @@ public partial class SessionConfirmationViewModel : ViewModelBase
         _pendingSessionDuration = duration;
         _pendingEndedAt = endedAt;
         IsPendingGameEmulated = game?.Source == DetectionSource.Emulator;
+        RememberTarget = RememberTargetOf(game);
         SessionGameTitle = gameName;
         SessionPlayTime = playTime;
         _isOffline = owner.IsOffline;
@@ -183,6 +189,38 @@ public partial class SessionConfirmationViewModel : ViewModelBase
     [ObservableProperty]
     private bool _isPendingGameEmulated;
 
+    /// <summary>What a remembered game is tied to, as shown: the executable's file name, or the ROM's. Null when neither is known.</summary>
+    public string? RememberTarget { get; }
+
+    // The game detection gave, taken before the first pick, to tell a real change from picking it again.
+    private bool _detectedGameTaken;
+    private string? _detectedGameSlug;
+
+    [ObservableProperty]
+    private string _detectedGameTitle = string.Empty;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsRememberGameOffered))]
+    private bool _isGameChangedByHand;
+
+    /// <summary>The "always use this game" box, offered once the game was changed in the picker.</summary>
+    public bool IsRememberGameOffered => IsGameChangedByHand && RememberTarget != null;
+
+    [ObservableProperty]
+    private bool _isRememberGameChosen;
+
+    /// <summary>The game came from a remembered choice rather than from detection.</summary>
+    [ObservableProperty]
+    private bool _isGameRemembered;
+
+    private static string? RememberTargetOf(DetectedGame? game)
+    {
+        string? key = game?.Source == DetectionSource.Emulator ? game.ContentKey : game?.ExecutablePath;
+        return string.IsNullOrEmpty(key) ? null : RememberedGame.FileNameOf(key);
+    }
+
+    private static string? SlugOf(string? url) => url?.Trim('/').Split('/')[^1].ToLowerInvariant();
+
     /// <summary>Backloggd's "Started" and "Finished" marks, chosen in the confirmation.</summary>
     [ObservableProperty]
     private bool _isSessionMarkedStarted;
@@ -238,10 +276,21 @@ public partial class SessionConfirmationViewModel : ViewModelBase
             });
         }
 
+        ResolveGame(extrasPrefetch);
+    }
+
+    private void ResolveGame(MainWindowViewModel.SessionExtrasPrefetch? extrasPrefetch)
+    {
         // Resolve game data from JSON using IGDB ID
         IsNoCoverPlaceholderVisible = false;
         IsSessionCoverLoading = true;
         IsSessionTitleLoading = true;
+
+        if (_remembered != null)
+        {
+            ResolveRememberedGame(_remembered, extrasPrefetch);
+            return;
+        }
 
         var logger = _owner.Logger;
         string? currentIdIgdb = _pendingIdIgdb;
@@ -359,6 +408,50 @@ public partial class SessionConfirmationViewModel : ViewModelBase
         }
     }
 
+    private void ResolveRememberedGame(RememberedGame remembered, MainWindowViewModel.SessionExtrasPrefetch? extrasPrefetch)
+    {
+        // What detection would have given: "Detected as" names it, and picking it again is no change.
+        var detected = string.IsNullOrEmpty(_pendingGame?.IdIgdb) ? null : _owner.GameData.LookupByIgdbId(_pendingGame.IdIgdb);
+        _detectedGameTaken = true;
+        _detectedGameSlug = SlugOf(detected?.BackloggdGameUrl);
+        DetectedGameTitle = detected?.Name ?? _pendingGame?.Name ?? string.Empty;
+
+        SessionGameTitle = remembered.GameName;
+        _pendingGameName = remembered.GameName;
+        _pendingGameUrl = remembered.GameUrl;
+        _pendingIdIgdb = null;
+        _pendingCoverUrl = remembered.CoverUrl;
+        IsGameIdentified = !string.IsNullOrEmpty(remembered.GameUrl);
+        IsSessionTitleLoading = false;
+        _ = LoadTodaySessionExtrasAsync(extrasPrefetch);
+
+        if (string.IsNullOrEmpty(remembered.CoverUrl))
+        {
+            ShowNoCoverPlaceholder();
+            IsSessionCoverLoading = false;
+            return;
+        }
+
+        var coverUrl = remembered.CoverUrl;
+        _ = Task.Run(async () =>
+        {
+            var bitmap = await _owner.Browser.DownloadImageAsync(coverUrl);
+            Dispatcher.UIThread.Post(() =>
+            {
+                // Forgotten meanwhile: this cover is no longer the game shown.
+                if (!ReferenceEquals(_remembered, remembered))
+                {
+                    bitmap?.Dispose();
+                    return;
+                }
+
+                ShowOwnCover(bitmap);
+                if (bitmap == null) ShowNoCoverPlaceholder();
+                IsSessionCoverLoading = false;
+            });
+        });
+    }
+
     /// <summary>Shows the "No cover" text placeholder in the session cover slot.</summary>
     private void ShowNoCoverPlaceholder()
     {
@@ -376,6 +469,24 @@ public partial class SessionConfirmationViewModel : ViewModelBase
     /// <summary>The game chosen in the picker, which fixes the title and the link and allows saving.</summary>
     internal void ApplyPickedGame(GameSearchResult selectedGame)
     {
+        if (!_detectedGameTaken)
+        {
+            _detectedGameTaken = true;
+            DetectedGameTitle = SessionGameTitle;
+            _detectedGameSlug = IsGameIdentified ? SlugOf(_pendingGameUrl) : null;
+        }
+
+        // Changing a remembered game offers to remember the new one in its place; left unticked, it is just this once.
+        if (IsGameRemembered)
+        {
+            _remembered = null;
+            IsGameRemembered = false;
+            IsRememberGameChosen = true;
+        }
+
+        IsGameChangedByHand = SlugOf(selectedGame.RedirectLink) != _detectedGameSlug;
+        if (!IsGameChangedByHand) IsRememberGameChosen = false;
+
         SessionGameTitle = selectedGame.Title;
         var downloaded = _ownsCover ? SessionGameCover : null;
         SessionGameCover = selectedGame.CoverBitmap;
@@ -402,6 +513,47 @@ public partial class SessionConfirmationViewModel : ViewModelBase
 
         DiscardSession();
         _owner.AddToBlacklist(entry);
+    }
+
+    /// <summary>Drops the remembered game and goes back to what detection found.</summary>
+    [RelayCommand]
+    private void ForgetRememberedGame()
+    {
+        var remembered = _remembered;
+        if (remembered == null || _closed) return;
+
+        _owner.Logger.Info($"[SessionConfirmation] User action: forgot '{remembered.GameName}' for '{remembered.Details}' from the confirmation modal.");
+        _owner.ForgetRememberedGame(remembered);
+        // Already replaced from another modal: nothing was removed, but this one still goes back.
+        OnRememberedGameRemoved(remembered);
+    }
+
+    /// <summary>The entry this modal shows was dropped, here or elsewhere: back to what detection found.</summary>
+    internal void OnRememberedGameRemoved(RememberedGame entry)
+    {
+        if (_closed || IsSavingSession || !ReferenceEquals(_remembered, entry)) return;
+
+        _remembered = null;
+        IsGameRemembered = false;
+        _detectedGameTaken = false;
+        IsGameChangedByHand = false;
+        IsRememberGameChosen = false;
+
+        _pendingGameName = _pendingGame?.Name ?? _pendingGameName;
+        _pendingIdIgdb = _pendingGame?.IdIgdb;
+        _pendingGameUrl = null;
+        _pendingCoverUrl = null;
+        SessionGameTitle = _pendingGameName ?? string.Empty;
+        ResolveGame(null);
+    }
+
+    /// <summary>Keeps the game picked for this executable or ROM, if the box asks for it. Only once the session is saved or postponed.</summary>
+    private void ApplyRememberChoice()
+    {
+        if (!IsRememberGameOffered || !IsRememberGameChosen || _pendingGame == null || string.IsNullOrEmpty(_pendingGameName)) return;
+
+        var entry = RememberedGameService.ForDetectedGame(_pendingGame, _pendingGameName, _pendingGameUrl, _pendingCoverUrl);
+        if (entry != null) _owner.RememberGame(entry);
     }
 
     /// <summary>
@@ -518,6 +670,7 @@ public partial class SessionConfirmationViewModel : ViewModelBase
         };
 
         _owner.Logger.Info($"[MainWindowViewModel] User action: left '{session.GameName}' ({PendingSessionViewModel.FormatDuration(session.Duration)}) for later.");
+        ApplyRememberChoice();
         _owner.AddPendingSession(session, SessionGameCover);
         _ownsCover = false;
 
@@ -563,6 +716,7 @@ public partial class SessionConfirmationViewModel : ViewModelBase
 
                 Console.WriteLine($"[SaveSession] Game registered successfully. Reloading data for user: '{_owner.Auth.Username}'");
                 logger.Info($"[SaveSession] Session registered on Backloggd: '{_pendingGameName}', {_pendingSessionDuration.Hours}h {_pendingSessionDuration.Minutes}m.");
+                ApplyRememberChoice();
 
                 _owner.ReloadJournal();
 

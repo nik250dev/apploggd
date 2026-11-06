@@ -142,6 +142,7 @@
         <StreamGeometry x:Key="MarkFinishedIconData">M14.4,6L14,4H5V21H7V14H12.6L13,16H20V6H14.4Z</StreamGeometry>
         <StreamGeometry x:Key="NoteIconData">M14 3H6A2 2 0 0 0 4 5V19A2 2 0 0 0 6 21H18A2 2 0 0 0 20 19V9Z M14 3V9H20 M8 13H16 M8 17H13</StreamGeometry>
         <StreamGeometry x:Key="AddExtraIconData">M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z</StreamGeometry>
+        <StreamGeometry x:Key="RememberedIconData">M16,12V4H17V2H7V4H8V12L6,14V16H11.2V22H12.8V16H18V14L16,12Z</StreamGeometry>
         <StreamGeometry x:Key="FieldCloseIconData">M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z</StreamGeometry>
     </Window.Resources>
 
@@ -322,6 +323,44 @@
             <Setter Property="BorderBrush" Value="{DynamicResource BrandPrimaryBrush}"/>
         </Style>
         <Style Selector="ToggleButton.mark-chip:disabled /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Opacity" Value="0.5"/>
+        </Style>
+
+        <!-- "Always use this game": the whole block toggles, with its box drawn inside. -->
+        <Style Selector="ToggleButton.remember-toggle">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Name="PART_Root" Background="{DynamicResource SurfaceDarkBrush}" BorderBrush="{DynamicResource SidebarBorderBrush}"
+                            BorderThickness="1" CornerRadius="8" Padding="12,9">
+                        <Grid ColumnDefinitions="Auto, *">
+                            <Border Name="PART_Box" Width="18" Height="18" CornerRadius="4" BorderThickness="1.5" BorderBrush="{DynamicResource ControlBorderBrush}"
+                                    VerticalAlignment="Center" Margin="0,0,10,0">
+                                <PathIcon Name="PART_Check" Data="M9,16.2L4.8,12L3.4,13.4L9,19L21,7L19.6,5.6Z" Width="12" Height="12"
+                                          Foreground="{DynamicResource TextPrimaryBrush}" IsVisible="False"/>
+                            </Border>
+                            <!-- Not PART_ContentPresenter: Fluent's checked style would paint it with the accent colour. -->
+                            <ContentPresenter Grid.Column="1" Name="PART_Content" Content="{TemplateBinding Content}" VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="ToggleButton.remember-toggle:pointerover /template/ Border#PART_Root">
+            <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}"/>
+        </Style>
+        <Style Selector="ToggleButton.remember-toggle:pressed /template/ Border#PART_Root">
+            <Setter Property="Background" Value="{DynamicResource SidebarBorderBrush}"/>
+        </Style>
+        <Style Selector="ToggleButton.remember-toggle:checked /template/ Border#PART_Box">
+            <Setter Property="Background" Value="{DynamicResource BrandPrimaryBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BrandPrimaryBrush}"/>
+        </Style>
+        <Style Selector="ToggleButton.remember-toggle:checked /template/ PathIcon#PART_Check">
+            <Setter Property="IsVisible" Value="True"/>
+        </Style>
+        <Style Selector="ToggleButton.remember-toggle:disabled">
             <Setter Property="Opacity" Value="0.5"/>
         </Style>
 
@@ -915,6 +954,13 @@
             <Setter Property="FocusAdorner" Value="{x:Null}"/>
         </Style>
         <Style Selector="Window.gamepad ToggleButton.mark-chip:focus /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="BoxShadow" Value="0 0 0 2 #FFFFFF, 0 4 12 0 #8C000000"/>
+        </Style>
+        <Style Selector="Window.gamepad ToggleButton.remember-toggle">
+            <Setter Property="ClipToBounds" Value="False"/>
+            <Setter Property="FocusAdorner" Value="{x:Null}"/>
+        </Style>
+        <Style Selector="Window.gamepad ToggleButton.remember-toggle:focus /template/ Border#PART_Root">
             <Setter Property="BoxShadow" Value="0 0 0 2 #FFFFFF, 0 4 12 0 #8C000000"/>
         </Style>
         <!-- Switches: the edge goes around the track; only one of its two borders shows at a time. -->
@@ -1513,6 +1559,81 @@
                                                                     Content="{Binding [Settings_Blacklist_Remove], Source={x:Static services:LocalizationService.Instance}}"
                                                                     Command="{Binding #Root.((vm:MainWindowViewModel)DataContext).RemoveFromBlacklistCommand}"
                                                                     CommandParameter="{Binding}"/>
+                                                        </Grid>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </StackPanel>
+                                </Border>
+
+                                <!-- Section: Remembered games, laid out like the blacklist. -->
+                                <StackPanel Orientation="Horizontal" Spacing="10">
+                                    <TextBlock Text="{Binding [Settings_Section_RememberedGames], Source={x:Static services:LocalizationService.Instance}}" Classes="h3"/>
+                                    <Border Classes="count-pill" IsVisible="{Binding HasRememberedGames}">
+                                        <TextBlock Text="{Binding RememberedGames.Count}" FontSize="12" Foreground="{DynamicResource TextMutedBrush}"/>
+                                    </Border>
+                                </StackPanel>
+                                <Border Classes="setting-group">
+                                    <StackPanel Spacing="15">
+                                        <StackPanel Spacing="2">
+                                            <TextBlock Text="{Binding [Settings_RememberedGames_Title], Source={x:Static services:LocalizationService.Instance}}" Classes="setting-label"/>
+                                            <TextBlock Text="{Binding [Settings_RememberedGames_Desc], Source={x:Static services:LocalizationService.Instance}}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}" TextWrapping="Wrap"/>
+                                        </StackPanel>
+
+                                        <StackPanel Spacing="15" IsVisible="{Binding !HasRememberedGames}">
+                                            <Separator Background="{DynamicResource SeparatorBrush}" Height="1"/>
+                                            <StackPanel Spacing="4" HorizontalAlignment="Center" Margin="20,0,20,5">
+                                                <PathIcon Data="{StaticResource RememberedIconData}" Width="22" Height="22" Foreground="{DynamicResource IconDarkBrush}" HorizontalAlignment="Center" Margin="0,0,0,4"/>
+                                                <TextBlock Text="{Binding [Settings_RememberedGames_EmptyTitle], Source={x:Static services:LocalizationService.Instance}}" FontSize="13" Foreground="{DynamicResource TextSecondaryBrush}" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="{Binding [Settings_RememberedGames_EmptyHint], Source={x:Static services:LocalizationService.Instance}}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center"/>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <ItemsControl ItemsSource="{Binding RememberedGames}" IsVisible="{Binding HasRememberedGames}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <StackPanel Spacing="15"/>
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate x:DataType="vm:RememberedGameViewModel">
+                                                    <StackPanel Spacing="15">
+                                                        <Separator Background="{DynamicResource SeparatorBrush}" Height="1"/>
+                                                        <Grid ColumnDefinitions="Auto, *, Auto">
+                                                            <Border Grid.Column="0" Width="32" Height="43" CornerRadius="4" ClipToBounds="True" Margin="0,0,12,0" VerticalAlignment="Center"
+                                                                    Background="{DynamicResource SurfaceDarkBrush}" BorderBrush="#30394c" BorderThickness="1">
+                                                                <Panel>
+                                                                    <Image Source="{Binding Cover}" Stretch="UniformToFill"/>
+                                                                    <PathIcon IsVisible="{Binding !HasCover}"
+                                                                              Data="M7,6H17A6,6 0 0,1 23,12A6,6 0 0,1 17,18C15.22,18 13.63,17.23 12.53,16H11.47C10.37,17.23 8.78,18 7,18A6,6 0 0,1 1,12A6,6 0 0,1 7,6M6,9V11H4V13H6V15H8V13H10V11H8V9H6M15.5,12A1.5,1.5 0 0,0 14,13.5A1.5,1.5 0 0,0 15.5,15A1.5,1.5 0 0,0 17,13.5A1.5,1.5 0 0,0 15.5,12M18.5,9A1.5,1.5 0 0,0 17,10.5A1.5,1.5 0 0,0 18.5,12A1.5,1.5 0 0,0 20,10.5A1.5,1.5 0 0,0 18.5,9Z"
+                                                                              Width="16" Height="16" Foreground="{DynamicResource IconMediumBrush}"/>
+                                                                </Panel>
+                                                            </Border>
+
+                                                            <StackPanel Grid.Column="1" Spacing="2" VerticalAlignment="Center" Margin="0,0,15,0">
+                                                                <TextBlock Text="{Binding GameName}" Classes="setting-label" TextTrimming="CharacterEllipsis"/>
+                                                                <!-- Trimmed from the start, as in the blacklist: the end of the path is what tells two Game.exe apart. -->
+                                                                <TextBlock Text="{Binding Entry.ExecutablePath}" IsVisible="{Binding Entry.IsApplication}"
+                                                                           FontSize="12" Foreground="{DynamicResource TextSubtleBrush}"
+                                                                           TextTrimming="LeadingCharacterEllipsis" ToolTip.Tip="{Binding Entry.Details}"/>
+                                                                <TextBlock IsVisible="{Binding Entry.IsEmulatedGame}" FontSize="12" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding Entry.Details}">
+                                                                    <Run Text="{Binding Entry.EmulatorName}" Foreground="{DynamicResource TextMutedBrush}"/>
+                                                                    <Run Text=" · " Foreground="{DynamicResource TextSubtleBrush}"/>
+                                                                    <Run Text="{Binding Entry.ContentLabel}" Foreground="{DynamicResource TextSubtleBrush}"/>
+                                                                </TextBlock>
+                                                            </StackPanel>
+
+                                                            <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                                                                <Button Classes="subtle" IsEnabled="{Binding !#Root.((vm:MainWindowViewModel)DataContext).IsOffline}"
+                                                                        Content="{Binding [Settings_RememberedGames_Change], Source={x:Static services:LocalizationService.Instance}}"
+                                                                        Command="{Binding #Root.((vm:MainWindowViewModel)DataContext).ChangeRememberedGameCommand}"
+                                                                        CommandParameter="{Binding}"/>
+                                                                <Button Classes="subtle"
+                                                                        Content="{Binding [Settings_RememberedGames_Remove], Source={x:Static services:LocalizationService.Instance}}"
+                                                                        Command="{Binding #Root.((vm:MainWindowViewModel)DataContext).RemoveRememberedGameCommand}"
+                                                                        CommandParameter="{Binding}"/>
+                                                            </StackPanel>
                                                         </Grid>
                                                     </StackPanel>
                                                 </DataTemplate>
@@ -2310,6 +2431,19 @@
                                                 </Border>
                                             </Border>
                                         </Panel>
+                                        <!-- The game came from a remembered choice; "Forget" goes back to detection. -->
+                                        <WrapPanel Margin="0,4,0,0" IsVisible="{Binding IsGameRemembered}">
+                                            <StackPanel Orientation="Horizontal" Spacing="4" Margin="0,0,5,0" VerticalAlignment="Center">
+                                                <PathIcon Data="{StaticResource RememberedIconData}" Width="11" Height="11" Foreground="{DynamicResource TextSubtleBrush}" VerticalAlignment="Center"/>
+                                                <TextBlock FontSize="12" Foreground="{DynamicResource TextSubtleBrush}" VerticalAlignment="Center" MaxWidth="190" TextTrimming="CharacterEllipsis"
+                                                           ToolTip.Tip="{Binding RememberTarget}">
+                                                    <Run Text="{Binding [Session_RememberedFor], Source={x:Static services:LocalizationService.Instance}}"/><Run Text="{Binding RememberTarget}"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                            <Button Classes="link" Command="{Binding ForgetRememberedGameCommand}" IsEnabled="{Binding AreButtonsEnabled}">
+                                                <TextBlock Text="{Binding [Session_ForgetGame], Source={x:Static services:LocalizationService.Instance}}" FontSize="12" VerticalAlignment="Center"/>
+                                            </Button>
+                                        </WrapPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                                             <TextBlock Text="{Binding [Session_TotalTime], Source={x:Static services:LocalizationService.Instance}}" Foreground="{DynamicResource TextMutedBrush}" FontSize="14"/>
                                             <TextBlock Text="{Binding SessionPlayTime}" Foreground="{DynamicResource BrandPrimaryBrush}" FontWeight="Bold" FontSize="14"/>
@@ -2349,6 +2483,20 @@
 
                                 <!-- Note and tags, as Backloggd keeps them per log. Each opens in place from its dashed button. -->
                                 <StackPanel Grid.Row="2">
+                                    <ctl:RevealPanel IsOpen="{Binding IsRememberGameOffered}">
+                                        <ToggleButton x:Name="SessionRememberGameToggle" Classes="remember-toggle" Margin="0,16,0,0"
+                                                      IsChecked="{Binding IsRememberGameChosen}" IsEnabled="{Binding AreButtonsEnabled}">
+                                            <StackPanel Spacing="2">
+                                                <TextBlock FontSize="13" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap">
+                                                    <Run Text="{Binding [Session_RememberGame], Source={x:Static services:LocalizationService.Instance}}"/><Run Text="{Binding RememberTarget}" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                                </TextBlock>
+                                                <TextBlock FontSize="11" Foreground="{DynamicResource TextSubtleBrush}" TextTrimming="CharacterEllipsis">
+                                                    <Run Text="{Binding [Session_DetectedAs], Source={x:Static services:LocalizationService.Instance}}"/><Run Text="{Binding DetectedGameTitle}"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </ToggleButton>
+                                    </ctl:RevealPanel>
+
                                     <ctl:RevealPanel IsOpen="{Binding IsSessionExtrasRowOpen}">
                                         <StackPanel>
                                             <Border Height="1" Background="{DynamicResource SeparatorBrush}" Margin="0,16,0,12"/>

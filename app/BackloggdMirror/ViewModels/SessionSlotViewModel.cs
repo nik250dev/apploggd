@@ -26,6 +26,9 @@ public partial class SessionSlotViewModel : ViewModelBase
     /// <summary>The read of today's note and tags started on detection, for the confirmation to reuse.</summary>
     internal MainWindowViewModel.SessionExtrasPrefetch? ExtrasPrefetch { get; set; }
 
+    /// <summary>The game chosen by hand for this executable or ROM, used instead of what detection identified.</summary>
+    internal RememberedGame? RememberedGame { get; set; }
+
     internal TimeSpan Elapsed => _stopwatch.Elapsed;
 
     [ObservableProperty]
@@ -121,6 +124,7 @@ public partial class SessionSlotViewModel : ViewModelBase
         GameName = game.Name;
         IsRunningGameEmulated = game.Source == DetectionSource.Emulator;
         ExtrasPrefetch = null;
+        RememberedGame = null;
         _stopwatch.Restart();
         PlayTime = "00:00:00";
         IsGameRunning = true;
@@ -139,6 +143,7 @@ public partial class SessionSlotViewModel : ViewModelBase
         CurrentGame = null;
         GameName = string.Empty;
         ExtrasPrefetch = null;
+        RememberedGame = null;
         IsBackgroundImageVisible = false;
     }
 

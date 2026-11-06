@@ -311,7 +311,7 @@ public sealed class BlacklistService : IDetectionBlacklist
     }
 
     // Linux also resolves symlinks, so a game reached through a linked Steam library still matches.
-    private static string NormalizePath(string path) =>
+    internal static string NormalizePath(string path) =>
         (OperatingSystem.IsLinux() ? LinuxBlacklistFile.CanonicalPath(path) : path).Replace('/', '\\');
 
     private static string ContentId(string emulatorName, string contentKey) => emulatorName + "|" + contentKey;
