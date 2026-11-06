@@ -80,6 +80,7 @@ public partial class MainWindow : Window
 
         AddHandler(PointerPressedEvent, StopHoldingFront, Avalonia.Interactivity.RoutingStrategies.Tunnel, handledEventsToo: true);
         AddHandler(KeyDownEvent, StopHoldingFront, Avalonia.Interactivity.RoutingStrategies.Tunnel, handledEventsToo: true);
+        if (OperatingSystem.IsWindows()) Win32Properties.AddWndProcHookCallback(this, OnWndProc);
 
         if (OperatingSystem.IsLinux())
         {
@@ -538,10 +539,17 @@ public partial class MainWindow : Window
             _holdFrontTimer.Tick += OnHoldFrontTick;
         }
         _holdFrontTimer.Start();
+        WatchInputElsewhere(true);
+    }
+
+    private void StopHoldingFront()
+    {
+        _holdFrontTimer?.Stop();
+        WatchInputElsewhere(false);
     }
 
     // A click or key press here means the user is at the desktop, so whatever takes the foreground next is their choice.
-    private void StopHoldingFront(object? sender, Avalonia.Interactivity.RoutedEventArgs e) => _holdFrontTimer?.Stop();
+    private void StopHoldingFront(object? sender, Avalonia.Interactivity.RoutedEventArgs e) => StopHoldingFront();
 
     private void OnHoldFrontTick(object? sender, EventArgs e)
     {
@@ -554,7 +562,7 @@ public partial class MainWindow : Window
 
         if (!stillWanted)
         {
-            _holdFrontTimer?.Stop();
+            StopHoldingFront();
             return;
         }
 
@@ -563,6 +571,95 @@ public partial class MainWindow : Window
         _logger?.Info("[MainWindow] Another window took the foreground over the session confirmation; bringing it back.");
         BringToFront();
     }
+
+    private bool _watchingInputElsewhere;
+
+    /// <summary>Raw input in sink mode: presses in other windows too, which the window's own events never see.</summary>
+    private void WatchInputElsewhere(bool watch)
+    {
+        if (!OperatingSystem.IsWindows() || watch == _watchingInputElsewhere) return;
+        var handle = TryGetPlatformHandle()?.Handle ?? IntPtr.Zero;
+        if (handle == IntPtr.Zero) return;
+
+        uint flags = watch ? RIDEV_INPUTSINK : RIDEV_REMOVE;
+        IntPtr target = watch ? handle : IntPtr.Zero;
+        var devices = new[]
+        {
+            new RAWINPUTDEVICE { usUsagePage = 0x01, usUsage = 0x02, dwFlags = flags, hwndTarget = target },
+            new RAWINPUTDEVICE { usUsagePage = 0x01, usUsage = 0x06, dwFlags = flags, hwndTarget = target }
+        };
+        if (RegisterRawInputDevices(devices, (uint)devices.Length, (uint)System.Runtime.InteropServices.Marshal.SizeOf<RAWINPUTDEVICE>()))
+        {
+            _watchingInputElsewhere = watch;
+        }
+        else
+        {
+            _logger?.Warning($"[MainWindow] Could not {(watch ? "watch" : "stop watching")} clicks and key presses outside the window (error {System.Runtime.InteropServices.Marshal.GetLastWin32Error()}).");
+        }
+    }
+
+    private IntPtr OnWndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+    {
+        if (msg == WM_INPUT && _watchingInputElsewhere && IsRawPress(lParam))
+        {
+            _logger?.Info("[MainWindow] Click or key press while the session confirmation was up; leaving the foreground to the user.");
+            StopHoldingFront();
+        }
+        return IntPtr.Zero;
+    }
+
+    /// <summary>A mouse button or a key going down; moving the mouse or letting go does not count.</summary>
+    private static bool IsRawPress(IntPtr rawInput)
+    {
+        int headerSize = System.Runtime.InteropServices.Marshal.SizeOf<RAWINPUTHEADER>();
+        uint size = 0;
+        GetRawInputData(rawInput, RID_INPUT, null, ref size, (uint)headerSize);
+        if (size < headerSize + 8 || size > 256) return false;
+
+        var buffer = new byte[size];
+        if (GetRawInputData(rawInput, RID_INPUT, buffer, ref size, (uint)headerSize) != size) return false;
+
+        return BitConverter.ToUInt32(buffer, 0) switch
+        {
+            // RAWMOUSE.usButtonFlags: the *_DOWN flags of the five buttons.
+            RIM_TYPEMOUSE => (BitConverter.ToUInt16(buffer, headerSize + 4) & 0x0155) != 0,
+            // RAWKEYBOARD.Flags without RI_KEY_BREAK.
+            RIM_TYPEKEYBOARD => (BitConverter.ToUInt16(buffer, headerSize + 2) & 0x01) == 0,
+            _ => false
+        };
+    }
+
+    private const uint WM_INPUT = 0x00FF;
+    private const uint RID_INPUT = 0x10000003;
+    private const uint RIDEV_REMOVE = 0x00000001;
+    private const uint RIDEV_INPUTSINK = 0x00000100;
+    private const uint RIM_TYPEMOUSE = 0;
+    private const uint RIM_TYPEKEYBOARD = 1;
+
+    [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
+    private struct RAWINPUTDEVICE
+    {
+        public ushort usUsagePage;
+        public ushort usUsage;
+        public uint dwFlags;
+        public IntPtr hwndTarget;
+    }
+
+    [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
+    private struct RAWINPUTHEADER
+    {
+        public uint dwType;
+        public uint dwSize;
+        public IntPtr hDevice;
+        public IntPtr wParam;
+    }
+
+    [System.Runtime.InteropServices.DllImport("user32.dll", SetLastError = true)]
+    [return: System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.Bool)]
+    private static extern bool RegisterRawInputDevices(RAWINPUTDEVICE[] devices, uint count, uint size);
+
+    [System.Runtime.InteropServices.DllImport("user32.dll")]
+    private static extern uint GetRawInputData(IntPtr rawInput, uint command, [System.Runtime.InteropServices.Out] byte[]? data, ref uint size, uint headerSize);
 
     /// <summary>One entry per half: its state or what clicking does, disabled with a clock while it is busy with a session.</summary>
     private void UpdateTrayMenuState(BackloggdMirror.ViewModels.MainWindowViewModel vm)
