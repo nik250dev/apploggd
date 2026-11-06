@@ -18,7 +18,6 @@ public class SettingsService
     // settings.json, and the logger has no business being written there.
     private readonly IAppLogger? _logger;
 
-    public bool HasSeenSessionDiscardWarningV3 { get; set; } = false;
     public bool MinimizeToTray { get; set; } = true;
     public bool StartWithWindows { get; set; } = false;
     public bool GamepadNavigationEnabled { get; set; } = true;
@@ -82,7 +81,6 @@ public class SettingsService
                 var settings = JsonSerializer.Deserialize<SettingsService>(json);
                 if (settings != null)
                 {
-                    HasSeenSessionDiscardWarningV3 = settings.HasSeenSessionDiscardWarningV3;
                     MinimizeToTray = settings.MinimizeToTray;
                     StartWithWindows = settings.StartWithWindows;
                     GamepadNavigationEnabled = settings.GamepadNavigationEnabled;
@@ -119,7 +117,6 @@ public class SettingsService
     /// </summary>
     public void Reset()
     {
-        HasSeenSessionDiscardWarningV3 = false;
         MinimizeToTray = true;
         StartWithWindows = false;
         GamepadNavigationEnabled = true;

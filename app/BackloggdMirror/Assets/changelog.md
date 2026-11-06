@@ -17,6 +17,7 @@
 - Home status panel redesigned
 - Improved detection of Steam games
 - Session toasts now name the game
+- Session confirmation redesigned
 
 ### Fixed
 
