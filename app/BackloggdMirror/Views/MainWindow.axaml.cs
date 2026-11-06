@@ -859,102 +859,59 @@ public partial class MainWindow : Window
     /// </summary>
     private void ShowTrayUpdateNotice(TrayNotice notice) => ShowTrayNotice(notice);
 
-    private void OnInfoIconPointerEntered(object? sender, Avalonia.Input.PointerEventArgs e)
-    {
-        if (ConfirmationOf(sender) is { } confirmation)
-        {
-            confirmation.DismissForcedTooltip();
-        }
-    }
+    private static readonly Avalonia.Animation.Easings.SplineEasing DialogEnterEasing = new(0.2, 0, 0, 1);
 
-    private void OnInfoIconPointerExited(object? sender, Avalonia.Input.PointerEventArgs e)
-    {
-        if (ConfirmationOf(sender) is { } confirmation)
-        {
-            confirmation.OnInfoIconExited();
-        }
-    }
+    // The arrival: the dialog grows into place, a pink ring spreads out once and fades, and the lasting glow comes in after it.
+    private static readonly BoxShadows HaloStart = BoxShadows.Parse("0 0 0 0 #99EA377A, 0 20 50 0 #8C000000, 0 0 0 0 #00EA377A");
+    private static readonly BoxShadows HaloEnd = BoxShadows.Parse("0 0 0 18 #00EA377A, 0 20 50 0 #8C000000, 0 0 0 0 #00EA377A");
+    private static readonly BoxShadows DialogGlow = BoxShadows.Parse("0 0 0 0 #00EA377A, 0 20 50 0 #8C000000, 0 0 32 0 #80EA377A");
 
-    // With a controller, focus stands in for the hover on the info icon and the cover.
-    private void OnInfoButtonGotFocus(object? sender, Avalonia.Input.GotFocusEventArgs e)
+    private void OnSessionDialogAttached(object? sender, VisualTreeAttachmentEventArgs e)
     {
-        if (_gamepadNavigator?.IsControllerMode == true && ConfirmationOf(sender) is { } confirmation)
-        {
-            confirmation.DismissForcedTooltip();
-        }
-    }
+        if (sender is not Border dialog) return;
 
-    private void OnInfoButtonLostFocus(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
-    {
-        if (ConfirmationOf(sender) is { } confirmation)
+        if (ReducedMotion.IsOn)
         {
-            confirmation.OnInfoIconExited();
+            dialog.BoxShadow = DialogGlow;
+            return;
         }
-    }
 
-    private void OnCoverGotFocus(object? sender, Avalonia.Input.GotFocusEventArgs e)
-    {
-        if (_gamepadNavigator?.IsControllerMode == true && ConfirmationOf(sender) is { } confirmation)
+        var scale = new ScaleTransform(0.97, 0.97);
+        var shift = new TranslateTransform(0, 10);
+        var enter = TimeSpan.FromMilliseconds(240);
+        scale.Transitions = new Avalonia.Animation.Transitions
         {
-            confirmation.OnCoverPointerEntered();
-        }
-    }
+            new Avalonia.Animation.DoubleTransition { Property = ScaleTransform.ScaleXProperty, Duration = enter, Easing = DialogEnterEasing },
+            new Avalonia.Animation.DoubleTransition { Property = ScaleTransform.ScaleYProperty, Duration = enter, Easing = DialogEnterEasing }
+        };
+        shift.Transitions = new Avalonia.Animation.Transitions
+        {
+            new Avalonia.Animation.DoubleTransition { Property = TranslateTransform.YProperty, Duration = enter, Easing = DialogEnterEasing }
+        };
+        dialog.RenderTransform = new TransformGroup { Children = { scale, shift } };
+        dialog.Opacity = 0;
+        dialog.BoxShadow = HaloStart;
+        dialog.Transitions = new Avalonia.Animation.Transitions
+        {
+            new Avalonia.Animation.DoubleTransition { Property = OpacityProperty, Duration = TimeSpan.FromMilliseconds(200), Easing = new Avalonia.Animation.Easings.CubicEaseOut() },
+            new Avalonia.Animation.BoxShadowsTransition { Property = Border.BoxShadowProperty, Duration = TimeSpan.FromMilliseconds(900), Easing = new Avalonia.Animation.Easings.CubicEaseOut() }
+        };
 
-    private void OnCoverLostFocus(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
-    {
-        if (ConfirmationOf(sender) is { } confirmation)
+        DispatcherTimer.RunOnce(() =>
         {
-            confirmation.OnCoverPointerExited();
-        }
-    }
-
-    // An icon alone says little, so with a controller the focus shows its tooltip.
-    private void OnPostponeButtonGotFocus(object? sender, Avalonia.Input.GotFocusEventArgs e)
-    {
-        if (_gamepadNavigator?.IsControllerMode == true && sender is Control button)
+            scale.ScaleX = scale.ScaleY = 1;
+            shift.Y = 0;
+            dialog.Opacity = 1;
+        }, TimeSpan.FromMilliseconds(16));
+        DispatcherTimer.RunOnce(() => dialog.BoxShadow = HaloEnd, TimeSpan.FromMilliseconds(140));
+        DispatcherTimer.RunOnce(() =>
         {
-            ToolTip.SetIsOpen(button, true);
-        }
-    }
-
-    private void OnPostponeButtonLostFocus(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
-    {
-        if (sender is Control button)
-        {
-            ToolTip.SetIsOpen(button, false);
-        }
-    }
-
-    private void OnCoverPointerEntered(object? sender, Avalonia.Input.PointerEventArgs e)
-    {
-        if (ConfirmationOf(sender) is { } confirmation)
-        {
-            confirmation.OnCoverPointerEntered();
-        }
-    }
-
-    private void OnCoverPointerExited(object? sender, Avalonia.Input.PointerEventArgs e)
-    {
-        if (ConfirmationOf(sender) is { } confirmation)
-        {
-            confirmation.OnCoverPointerExited();
-        }
-    }
-
-    private void OnSaveButtonPointerEntered(object? sender, Avalonia.Input.PointerEventArgs e)
-    {
-        if (ConfirmationOf(sender) is { } confirmation)
-        {
-            confirmation.OnSaveButtonPointerEntered();
-        }
-    }
-
-    private void OnSaveButtonPointerExited(object? sender, Avalonia.Input.PointerEventArgs e)
-    {
-        if (ConfirmationOf(sender) is { } confirmation)
-        {
-            confirmation.OnSaveButtonPointerExited();
-        }
+            dialog.Transitions = new Avalonia.Animation.Transitions
+            {
+                new Avalonia.Animation.BoxShadowsTransition { Property = Border.BoxShadowProperty, Duration = TimeSpan.FromMilliseconds(700), Easing = new Avalonia.Animation.Easings.SineEaseInOut() }
+            };
+            dialog.BoxShadow = DialogGlow;
+        }, TimeSpan.FromMilliseconds(1060));
     }
 
     /// <summary>Windows refuses SetForegroundWindow to a background process unless it shares the foreground thread's input queue.</summary>

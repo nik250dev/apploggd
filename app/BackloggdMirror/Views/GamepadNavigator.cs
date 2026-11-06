@@ -531,14 +531,6 @@ internal sealed class GamepadNavigator : IDisposable
         _openComboBox = null;
         _window.Classes.Remove("gamepad");
         _window.GameSearchResultsList.Classes.Remove("gp-dim");
-
-        // Focus stood in for the hover on these two; the pointer takes over again.
-        var focused = FocusedControl;
-        if (focused?.DataContext is SessionConfirmationViewModel confirmation)
-        {
-            if (focused.Name == "SessionCoverButton") confirmation.OnCoverPointerExited();
-            else if (focused.Name == "InfoButton") confirmation.OnInfoIconExited();
-        }
     }
 
     // A window appearing under a still cursor gets pointer events too; only a real move counts.

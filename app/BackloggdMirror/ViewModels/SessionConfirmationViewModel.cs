@@ -101,7 +101,16 @@ public partial class SessionConfirmationViewModel : ViewModelBase
         var previous = _ownsCover ? SessionGameCover : null;
         SessionGameCover = bitmap;
         _ownsCover = bitmap != null;
-        if (!ReferenceEquals(previous, bitmap)) previous?.Dispose();
+        if (!ReferenceEquals(previous, bitmap)) DisposeAfterFade(previous);
+    }
+
+    // The cover cross-fades, so the old bitmap is still drawn for a moment after it is replaced.
+    private static readonly TimeSpan CoverFadeOut = TimeSpan.FromMilliseconds(600);
+
+    private static void DisposeAfterFade(Avalonia.Media.Imaging.Bitmap? bitmap)
+    {
+        if (bitmap == null) return;
+        DispatcherTimer.RunOnce(bitmap.Dispose, CoverFadeOut);
     }
 
     /// <summary>Once the modal is gone: its native memory goes now, not whenever the finalizer runs.</summary>
@@ -129,6 +138,7 @@ public partial class SessionConfirmationViewModel : ViewModelBase
     [NotifyPropertyChangedFor(nameof(IsPostponeEnabled))]
     [NotifyPropertyChangedFor(nameof(IsGameSelectorEnabled))]
     [NotifyPropertyChangedFor(nameof(AreSessionExtrasEnabled))]
+    [NotifyPropertyChangedFor(nameof(IsSaveSpinnerVisible))]
     private bool _isSavingSession;
 
     [ObservableProperty]
@@ -144,7 +154,6 @@ public partial class SessionConfirmationViewModel : ViewModelBase
     [NotifyPropertyChangedFor(nameof(SaveButtonTooltip))]
     [NotifyPropertyChangedFor(nameof(IsSaveTooltipVisible))]
     [NotifyPropertyChangedFor(nameof(IsGameSelectorEnabled))]
-    [NotifyPropertyChangedFor(nameof(IsRecycleOverlayVisible))]
     private bool _isOffline;
 
     public bool AreButtonsEnabled => !IsSavingSession;
@@ -164,26 +173,26 @@ public partial class SessionConfirmationViewModel : ViewModelBase
 
     public bool IsSaveTooltipVisible => IsOffline || !IsGameIdentified;
 
+    /// <summary>Saved on Backloggd: the button shows its check for a moment before the modal closes.</summary>
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(IsTooltipVisible))]
-    private bool _isSessionWarningForcedVisible;
+    [NotifyPropertyChangedFor(nameof(IsSaveSpinnerVisible))]
+    private bool _isSessionSaved;
 
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(IsTooltipVisible))]
-    [NotifyPropertyChangedFor(nameof(IsRecycleOverlayVisible))]
-    private bool _isInfoIconHovered;
+    public bool IsSaveSpinnerVisible => IsSavingSession && !IsSessionSaved;
 
-    public bool IsTooltipVisible => IsSessionWarningForcedVisible || IsInfoIconHovered;
+    /// <summary>Played time, for the counter; SessionPlayTime is the same as text.</summary>
+    public TimeSpan SessionDuration => _pendingSessionDuration;
 
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(IsRecycleOverlayVisible))]
-    private bool _isCoverHovered;
-
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(IsRecycleOverlayVisible))]
-    private bool _isSaveButtonHovered;
-
-    public bool IsRecycleOverlayVisible => IsInfoIconHovered || (!IsOffline && (IsCoverHovered || (IsSaveButtonHovered && !IsGameIdentified)));
+    /// <summary>The line over the game: when the session ended, in the app's language.</summary>
+    public string SessionEndedText
+    {
+        get
+        {
+            var loc = LocalizationService.Instance;
+            var culture = loc.CurrentCulture;
+            return string.Format(loc["Session_EndedAt"], _pendingEndedAt.ToString("t", culture)).ToUpper(culture);
+        }
+    }
 
     /// <summary>Switches the prompt next to the link: a ROM is a game, so "Not a game?" does not fit it.</summary>
     [ObservableProperty]
@@ -262,22 +271,7 @@ public partial class SessionConfirmationViewModel : ViewModelBase
     private bool _sessionExtrasKnown;
 
     /// <summary>Resolves the game behind the session: its canonical name, Backloggd link, cover, and today's note and tags.</summary>
-    internal void Begin(MainWindowViewModel.SessionExtrasPrefetch? extrasPrefetch)
-    {
-        if (!_owner.Settings.HasSeenSessionDiscardWarningV3)
-        {
-            Dispatcher.UIThread.Post(async () =>
-            {
-                await Task.Delay(100);
-
-                // One at a time: with two modals up, the other one may already be showing it.
-                IsSessionWarningForcedVisible = !_closed && !_owner.Settings.HasSeenSessionDiscardWarningV3
-                    && !_owner.Confirmations.Any(c => c != this && c.IsSessionWarningForcedVisible);
-            });
-        }
-
-        ResolveGame(extrasPrefetch);
-    }
+    internal void Begin(MainWindowViewModel.SessionExtrasPrefetch? extrasPrefetch) => ResolveGame(extrasPrefetch);
 
     private void ResolveGame(MainWindowViewModel.SessionExtrasPrefetch? extrasPrefetch)
     {
@@ -491,7 +485,7 @@ public partial class SessionConfirmationViewModel : ViewModelBase
         var downloaded = _ownsCover ? SessionGameCover : null;
         SessionGameCover = selectedGame.CoverBitmap;
         _ownsCover = false;
-        downloaded?.Dispose();
+        DisposeAfterFade(downloaded);
         _pendingGameName = selectedGame.Title;
         _pendingGameUrl = selectedGame.RedirectLink;
         _pendingIdIgdb = null;
@@ -640,11 +634,7 @@ public partial class SessionConfirmationViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void DiscardSession()
-    {
-        HideForcedWarning();
-        Close();
-    }
+    private void DiscardSession() => Close();
 
     /// <summary>The clock button: keeps the session in the pending list instead of saving or discarding it.</summary>
     [RelayCommand]
@@ -674,7 +664,6 @@ public partial class SessionConfirmationViewModel : ViewModelBase
         _owner.AddPendingSession(session, SessionGameCover);
         _ownsCover = false;
 
-        HideForcedWarning();
         Close();
 
         var loc = LocalizationService.Instance;
@@ -704,11 +693,11 @@ public partial class SessionConfirmationViewModel : ViewModelBase
         if (IsOffline || IsSessionExtrasLoading) return;
 
         IsSavingSession = true;
-        HideForcedWarning();
 
         if (!string.IsNullOrEmpty(_pendingGameName))
         {
             var logger = _owner.Logger;
+            bool saved = false;
             await _owner.RegistrationGate.WaitAsync();
             try
             {
@@ -717,13 +706,8 @@ public partial class SessionConfirmationViewModel : ViewModelBase
                 Console.WriteLine($"[SaveSession] Game registered successfully. Reloading data for user: '{_owner.Auth.Username}'");
                 logger.Info($"[SaveSession] Session registered on Backloggd: '{_pendingGameName}', {_pendingSessionDuration.Hours}h {_pendingSessionDuration.Minutes}m.");
                 ApplyRememberChoice();
-
-                _owner.ReloadJournal();
-
-                Close();
-
-                _owner.ShowToast(string.Format(LocalizationService.Instance["Toast_SessionSavedGame"], _pendingGameName), ToastType.Success);
-                _owner.OnConfirmationSaved(this);
+                saved = true;
+                IsSessionSaved = true;
             }
             catch (Exception ex)
             {
@@ -737,55 +721,21 @@ public partial class SessionConfirmationViewModel : ViewModelBase
             finally
             {
                 _owner.RegistrationGate.Release();
-                IsSavingSession = false;
+                if (!saved) IsSavingSession = false;
             }
+
+            if (!saved) return;
+
+            _owner.ReloadJournal();
+
+            // Long enough to see the check; the buttons stay off meanwhile.
+            await Task.Delay(SavedCheckHold);
+            Close();
+
+            _owner.ShowToast(string.Format(LocalizationService.Instance["Toast_SessionSavedGame"], _pendingGameName), ToastType.Success);
+            _owner.OnConfirmationSaved(this);
         }
     }
 
-    [RelayCommand]
-    public void DismissForcedTooltip()
-    {
-        IsInfoIconHovered = true;
-        HideForcedWarning();
-    }
-
-    // Closing the modal also counts as seen: on a touchscreen or under Gamescope the icon may never be hovered.
-    private void HideForcedWarning()
-    {
-        if (!IsSessionWarningForcedVisible) return;
-
-        IsSessionWarningForcedVisible = false;
-        _owner.Settings.HasSeenSessionDiscardWarningV3 = true;
-        _owner.Settings.Save();
-    }
-
-    [RelayCommand]
-    public void OnInfoIconExited()
-    {
-        IsInfoIconHovered = false;
-    }
-
-    [RelayCommand]
-    public void OnCoverPointerEntered()
-    {
-        IsCoverHovered = true;
-    }
-
-    [RelayCommand]
-    public void OnCoverPointerExited()
-    {
-        IsCoverHovered = false;
-    }
-
-    [RelayCommand]
-    public void OnSaveButtonPointerEntered()
-    {
-        IsSaveButtonHovered = true;
-    }
-
-    [RelayCommand]
-    public void OnSaveButtonPointerExited()
-    {
-        IsSaveButtonHovered = false;
-    }
+    private static readonly TimeSpan SavedCheckHold = TimeSpan.FromMilliseconds(500);
 }
