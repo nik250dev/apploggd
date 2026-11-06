@@ -7797,20 +7797,8 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "epic",
-        "id": "C7F9346E3DB148FCA6DD63E9DD8451BD"
-      },
-      {
         "distributor": "xbox",
-        "id": "9NQV7C0G1040"
-      },
-      {
-        "distributor": "xbox",
-        "id": "BXBJQ1932138"
-      },
-      {
-        "distributor": "steam",
-        "id": "28780"
+        "id": "9NT956N9XCFN"
       },
       {
         "distributor": "xbox",
@@ -7818,27 +7806,27 @@
       },
       {
         "distributor": "xbox",
-        "id": "9PNQ207SL5ZH"
+        "id": "BXBJQ1932138"
       },
       {
         "distributor": "steam",
-        "id": "28743"
-      },
-      {
-        "distributor": "steam",
-        "id": "28774"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NT956N9XCFN"
+        "id": "518790"
       },
       {
         "distributor": "xbox",
         "id": "9NLMD5ZKBKX2"
       },
       {
-        "distributor": "steam",
-        "id": "518790"
+        "distributor": "xbox",
+        "id": "9NQV7C0G1040"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PNQ207SL5ZH"
+      },
+      {
+        "distributor": "epic",
+        "id": "C7F9346E3DB148FCA6DD63E9DD8451BD"
       }
     ],
     "id_igdb": "26381",
@@ -267885,7 +267873,36 @@
         "is_launcher": false
       }
     ],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9NPRV0R4CS1Z"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N6PP6VQZ6KM"
+      },
+      {
+        "distributor": "steam",
+        "id": "594650"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NFQ36KRHW1B"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P9CZK15QN0X"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N96G8K88F9H"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NCMQ9DXGXF6"
+      }
+    ],
     "id_igdb": "7291",
     "cover": "coc7wz",
     "artwork": null,
@@ -346103,7 +346120,7 @@
     "id": "1440141516671549664",
     "name": "Senren Banka",
     "aliases": [
-      "Senren ＊ Banka"
+      "Senren＊Banka"
     ],
     "executables": [],
     "third_party_skus": [
@@ -430493,6 +430510,10 @@
       {
         "distributor": "steam",
         "id": "1674900"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N9DX7DV1NJL"
       }
     ],
     "id_igdb": "167370",
@@ -463709,6 +463730,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9N412VR88LS3"
+      },
+      {
         "distributor": "steam",
         "id": "3985400"
       }
@@ -478275,7 +478300,7 @@
   },
   {
     "id": "1474968234104197302",
-    "name": "Might & Magic Fates: The Trading Card Game",
+    "name": "Might and Magic The Card Game",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
@@ -535572,6 +535597,10 @@
         "id": "9P8Q9HV5X96Q"
       },
       {
+        "distributor": "xbox",
+        "id": "9NWPRLQBJ2T6"
+      },
+      {
         "distributor": "steam",
         "id": "4251460"
       }
@@ -541607,13 +541636,18 @@
     "aliases": [],
     "executables": [
       {
+        "name": "maplestory classic world.app",
+        "os": "darwin",
+        "is_launcher": false
+      },
+      {
         "name": "mscw/maplestory.exe",
         "os": "win32",
         "is_launcher": false
       },
       {
-        "name": "maplestory classic world.app",
-        "os": "darwin",
+        "name": "maplestorycw/appdata/maplestory.exe",
+        "os": "win32",
         "is_launcher": false
       }
     ],
@@ -543336,10 +543370,15 @@
   },
   {
     "id": "1567750994606166097",
-    "name": "Cordura",
+    "name": "CORDURA",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4414560"
+      }
+    ],
     "id_igdb": "394664",
     "cover": "cobrbi",
     "artwork": [
@@ -543352,7 +543391,12 @@
     "name": "A Whole Wolfrush",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3450750"
+      }
+    ],
     "id_igdb": "329682",
     "cover": "co9c18",
     "artwork": [
@@ -543365,7 +543409,12 @@
     "name": "Vincit",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3966800"
+      }
+    ],
     "id_igdb": "407067",
     "cover": "coc9x8",
     "artwork": null,
@@ -543373,10 +543422,19 @@
   },
   {
     "id": "1567751111862124614",
-    "name": "Zero Sievert 2",
+    "name": "ZERO Sievert 2",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4210060"
+      },
+      {
+        "distributor": "epic",
+        "id": "FE98B6F1D68B45B795D60CED8F77C449"
+      }
+    ],
     "id_igdb": "400088",
     "cover": "coc079",
     "artwork": [
@@ -543389,7 +543447,12 @@
     "name": "Wilderdark",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2735850"
+      }
+    ],
     "id_igdb": "400112",
     "cover": "coc03a",
     "artwork": [
@@ -543402,7 +543465,12 @@
     "name": "Ichorous",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4050810"
+      }
+    ],
     "id_igdb": "287888",
     "cover": "codanf",
     "artwork": null,
@@ -543413,7 +543481,12 @@
     "name": "Ridiculous Space Battles",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3607230"
+      }
+    ],
     "id_igdb": "349222",
     "cover": "co9z1b",
     "artwork": [
@@ -543426,7 +543499,12 @@
     "name": "All 4 Naught",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4687650"
+      }
+    ],
     "id_igdb": "423773",
     "cover": "cod5ki",
     "artwork": [
@@ -543439,7 +543517,12 @@
     "name": "Balingo",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4716880"
+      }
+    ],
     "id_igdb": "423079",
     "cover": "cod4bh",
     "artwork": [
@@ -543452,7 +543535,12 @@
     "name": "Test Fire: Armor Penetration Sim",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5339200"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -543463,7 +543551,12 @@
     "name": "IAFT Fear Diagnosis",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5349710"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -543474,7 +543567,12 @@
     "name": "Incremental Traffic",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5475960"
+      }
+    ],
     "id_igdb": "426642",
     "cover": "cod9a4",
     "artwork": [
@@ -543498,10 +543596,31 @@
     "name": "LEVELS",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4885090"
+      }
+    ],
     "id_igdb": "325096",
     "cover": "co94wt",
     "artwork": null,
     "url": "dcs-world-uh-1h-worlds-apart-stormfront-campaign-by-low-level-heaven-mission-development"
+  },
+  {
+    "id": "1568113119794823208",
+    "name": "Doroga Zhizni",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4693550"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
   }
 ]
