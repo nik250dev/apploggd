@@ -15,7 +15,7 @@ to your Backloggd journal when you close the game.
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-0078d4)
 ![.NET](https://img.shields.io/badge/.NET-8.0-512bd4)
 <br>
-![Discord](https://img.shields.io/badge/Discord-nik2500946-5865f2?logo=discord&logoColor=white)
+[![Discord](https://img.shields.io/badge/Discord-nik2500946-5865f2?logo=discord&logoColor=white)](https://discordapp.com/users/536692656399450153)
 [![Ko-fi](https://img.shields.io/badge/Ko--fi-nik250dev-ff5a16?logo=kofi&logoColor=white)](https://ko-fi.com/nik250dev)
 
 </div>
