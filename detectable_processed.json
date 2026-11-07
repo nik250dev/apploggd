@@ -2105,6 +2105,11 @@
     "aliases": [],
     "executables": [
       {
+        "name": "maplestory/appdata/maplestory.exe",
+        "os": "win32",
+        "is_launcher": false
+      },
+      {
         "name": "maplestory.app",
         "os": "darwin",
         "is_launcher": false
@@ -2116,11 +2121,6 @@
       },
       {
         "name": "maplestory/maplestory.exe",
-        "os": "win32",
-        "is_launcher": false
-      },
-      {
-        "name": "appdata/maplestory.exe",
         "os": "win32",
         "is_launcher": false
       }
@@ -7797,8 +7797,12 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9NT956N9XCFN"
+        "distributor": "steam",
+        "id": "28743"
+      },
+      {
+        "distributor": "epic",
+        "id": "C7F9346E3DB148FCA6DD63E9DD8451BD"
       },
       {
         "distributor": "xbox",
@@ -7810,6 +7814,18 @@
       },
       {
         "distributor": "steam",
+        "id": "28774"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NT956N9XCFN"
+      },
+      {
+        "distributor": "steam",
+        "id": "28780"
+      },
+      {
+        "distributor": "steam",
         "id": "518790"
       },
       {
@@ -7818,15 +7834,11 @@
       },
       {
         "distributor": "xbox",
-        "id": "9NQV7C0G1040"
-      },
-      {
-        "distributor": "xbox",
         "id": "9PNQ207SL5ZH"
       },
       {
-        "distributor": "epic",
-        "id": "C7F9346E3DB148FCA6DD63E9DD8451BD"
+        "distributor": "xbox",
+        "id": "9NQV7C0G1040"
       }
     ],
     "id_igdb": "26381",
@@ -91644,8 +91656,16 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9NX6S1NXFNT2"
+      },
+      {
         "distributor": "steam",
         "id": "1104280"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NV344S1D4J2"
       }
     ],
     "id_igdb": "123764",
@@ -270905,7 +270925,12 @@
         "is_launcher": false
       }
     ],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4997370"
+      }
+    ],
     "cover": null,
     "artwork": null,
     "url": null
@@ -356041,8 +356066,16 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9P3N7TQQDC10"
+      },
+      {
         "distributor": "steam",
         "id": "2373990"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MVHCQ7CJX01"
       }
     ],
     "id_igdb": "349302",
@@ -361730,6 +361763,10 @@
       {
         "distributor": "google_play",
         "id": "com.stove.epic7.google"
+      },
+      {
+        "distributor": "steam",
+        "id": "5019180"
       }
     ],
     "id_igdb": "112191",
@@ -466040,16 +466077,20 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "epic",
+        "id": "AA226D3267954F9AB2D2ECB64B8CDE43"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N8924XJJHDM"
+      },
+      {
         "distributor": "xbox",
         "id": "9P743P6195Q5"
       },
       {
         "distributor": "steam",
         "id": "3296060"
-      },
-      {
-        "distributor": "epic",
-        "id": "AA226D3267954F9AB2D2ECB64B8CDE43"
       }
     ],
     "id_igdb": "347671",
@@ -471913,6 +471954,10 @@
       {
         "distributor": "steam",
         "id": "3273260"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P2V5Z29J6SQ"
       }
     ],
     "id_igdb": "378896",
@@ -510635,7 +510680,7 @@
   },
   {
     "id": "1519191085526683676",
-    "name": "Waifu Pogo Club",
+    "name": "Pogo Together",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -525347,6 +525392,10 @@
       {
         "distributor": "steam",
         "id": "3572090"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N2LXTNZC05C"
       }
     ],
     "id_igdb": "404343",
@@ -543618,6 +543667,208 @@
         "id": "4693550"
       }
     ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1568475523934453780",
+    "name": "Cultivation Legend",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4618670"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1568475533812043950",
+    "name": "Tale Sweeper",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4764420"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1568475596206383184",
+    "name": "Pill & Chill",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5012130"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1568475612757229701",
+    "name": "Needle in a Haystack Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5159870"
+      }
+    ],
+    "id_igdb": "419225",
+    "cover": "cocyes",
+    "artwork": [
+      "ar6rdk"
+    ],
+    "url": "needle-in-a-haystack-simulator"
+  },
+  {
+    "id": "1568475641613910097",
+    "name": "Daydream Cat: DreamSpirits Idle Adventure",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5147000"
+      }
+    ],
+    "id_igdb": "421962",
+    "cover": "cod2m9",
+    "artwork": null,
+    "url": "daydream-cat-dreamspirits-idle-adventure"
+  },
+  {
+    "id": "1568475680948232203",
+    "name": "Potato Please",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5266240"
+      }
+    ],
+    "id_igdb": "420360",
+    "cover": "cod1mv",
+    "artwork": [
+      "ar6ph4"
+    ],
+    "url": "potato-please"
+  },
+  {
+    "id": "1568475695989129386",
+    "name": "Caravan Carnage: Fruity Road",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3330940"
+      }
+    ],
+    "id_igdb": "428247",
+    "cover": "codbe1",
+    "artwork": [
+      "ar6z6n"
+    ],
+    "url": "caravan-carnage-fruity-road"
+  },
+  {
+    "id": "1568475715194716342",
+    "name": "Winds of Viridia",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5178570"
+      }
+    ],
+    "id_igdb": "426338",
+    "cover": "cod8yv",
+    "artwork": [
+      "ar6wqg"
+    ],
+    "url": "winds-of-viridia"
+  },
+  {
+    "id": "1547021075949293579",
+    "name": "Invokers: Titan Legacy",
+    "aliases": [],
+    "executables": [
+      {
+        "name": "invokers.app",
+        "os": "darwin",
+        "is_launcher": false
+      },
+      {
+        "name": "invokers.exe",
+        "os": "win32",
+        "is_launcher": false
+      }
+    ],
+    "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "hitzone.anima.spirit.guardians"
+      }
+    ],
+    "id_igdb": "389816",
+    "cover": "cocvjv",
+    "artwork": [
+      "ar5e2p",
+      "ar5egs",
+      "ar5epo"
+    ],
+    "url": "invokers-titan-legacy"
+  },
+  {
+    "id": "1568475515344519231",
+    "name": "WhiteClothes",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "247941",
+    "cover": "co6qo7",
+    "artwork": [
+      "ar2amt"
+    ],
+    "url": "whiteclothes"
+  },
+  {
+    "id": "1568475674870685857",
+    "name": "Sort On The Ball",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "240194",
+    "cover": null,
+    "artwork": null,
+    "url": "ball-sort"
+  },
+  {
+    "id": "1568475709817491607",
+    "name": "Looks Fine On Paper",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
