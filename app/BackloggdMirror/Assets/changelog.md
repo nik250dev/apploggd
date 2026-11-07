@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.3.0 — 2026-11-07
 
 ### Added
 
@@ -27,6 +27,12 @@
 - A session saved while Backloggd was slow to answer could be written without its time
 - Sessions of special editions are logged in the base game
 - On Linux, the tray menu no longer loses its entries (Exit included) while a game is running
+
+### Thanks
+
+- @sai-xx, @macarrarrones, @JoelD333, @littlecow27, @GitHJack, @IAmSympathy for testing.
+- @TheVers for extensive testing on Steam Deck.
+- @swirlytwirl for the support. All of you, go play Dragon's Dogma. First warning.
 
 ## 1.2.0 — 2026-10-08
 
