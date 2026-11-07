@@ -114,6 +114,8 @@ public class LocalizationService : INotifyPropertyChanged
             { "Changelog_Title", "What's new" },
             { "Changelog_Empty", "The changelog could not be loaded." },
             { "Changelog_Close", "Close" },
+            { "Changelog_Kofi", "Buy me a Ko-fi" },
+            { "Kofi_NoBrowser_Body", "Apploggd could not open a web browser to show the Ko-fi page. It can be visited manually at:" },
             // AppUpdate_* = a new Apploggd version. Not to be confused with Update_*, which is the
             // games database update.
             { "AppUpdate_Available", "New version available: {0}" },
@@ -394,6 +396,8 @@ public class LocalizationService : INotifyPropertyChanged
             { "Changelog_Title", "Novedades" },
             { "Changelog_Empty", "No se ha podido cargar el changelog." },
             { "Changelog_Close", "Cerrar" },
+            { "Changelog_Kofi", "Invitar a un Ko-fi" },
+            { "Kofi_NoBrowser_Body", "Apploggd no ha podido abrir un navegador para mostrar la página de Ko-fi. Se puede visitar manualmente en:" },
             // AppUpdate_* = a new Apploggd version. Not to be confused with Update_*, which is the
             // games database update.
             { "AppUpdate_Available", "Nueva versión disponible: {0}" },

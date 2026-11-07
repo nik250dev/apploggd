@@ -12,7 +12,10 @@
         <SolidColorBrush x:Key="BrandPrimaryHoverBrush" Color="#D62F6B"/>
         <SolidColorBrush x:Key="BrandPrimaryLightBrush" Color="#FF5C99"/>
         <SolidColorBrush x:Key="BrandSecondaryBorderBrush" Color="#BBDDFD"/>
-        
+        <SolidColorBrush x:Key="KofiBrush" Color="#FF5A16"/>
+        <SolidColorBrush x:Key="KofiHoverBrush" Color="#F04E0B"/>
+        <SolidColorBrush x:Key="KofiPressedBrush" Color="#DB4708"/>
+
         <!-- === Application Backgrounds === -->
         <SolidColorBrush x:Key="AppBackgroundBrush" Color="#16181C"/>
         <SolidColorBrush x:Key="PanelBackgroundBrush" Color="#242832"/>

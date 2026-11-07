@@ -1,0 +1,32 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:BackloggdMirror.ViewModels"
+             xmlns:ctl="using:BackloggdMirror.Views.Controls"
+             xmlns:services="using:BackloggdMirror.Services"
+             x:Class="BackloggdMirror.Views.KofiButton"
+             x:DataType="vm:MainWindowViewModel">
+
+    <!-- Looks and unfolding live in MainWindow's Button.kofi styles. -->
+    <Button x:Name="LinkButton" Classes="kofi" Command="{Binding OpenKofiCommand}"
+            AutomationProperties.Name="{Binding [Changelog_Kofi], Source={x:Static services:LocalizationService.Instance}}">
+        <StackPanel Orientation="Horizontal">
+            <Panel Width="21" Height="21">
+                <ctl:KofiSteam x:Name="Steam" Width="14" Height="11" Color="White"
+                               HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1.3,-6,0,0"/>
+                <Viewbox Width="21" Height="21">
+                    <Canvas Width="24" Height="24">
+                        <Path Stroke="White" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"
+                              Data="M4.083 5h10.834a1.08 1.08 0 0 1 1.083 1.077v8.615c0 2.38-1.94 4.308-4.333 4.308h-4.334c-2.393 0-4.333-1.929-4.333-4.308v-8.615a1.08 1.08 0 0 1 1.083-1.077"/>
+                        <Path Stroke="White" StrokeThickness="2" StrokeLineCap="Round" StrokeJoin="Round"
+                              Data="M16 8h2.5c1.38 0 2.5 1.045 2.5 2.333v2.334c0 1.288-1.12 2.333-2.5 2.333h-2.5"/>
+                        <Path Fill="White" Data="M9.5 15L6.7 12.2A1.75 1.75 0 0 1 9.5 10A1.75 1.75 0 0 1 12.3 12.2Z"/>
+                    </Canvas>
+                </Viewbox>
+            </Panel>
+            <ctl:SideRevealPanel VerticalAlignment="Center">
+                <TextBlock Text="{Binding [Changelog_Kofi], Source={x:Static services:LocalizationService.Instance}}"
+                           Margin="6,0,2,0" FontSize="12" FontWeight="SemiBold" Foreground="White"/>
+            </ctl:SideRevealPanel>
+        </StackPanel>
+    </Button>
+</UserControl>

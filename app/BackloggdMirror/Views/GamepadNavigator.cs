@@ -196,6 +196,13 @@ internal sealed class GamepadNavigator : IDisposable
                 break;
 
             default:
+                // The changelog text sits between Ko-fi and Close, so it scrolls before the focus jumps across it.
+                if (action is GamepadAction.Up or GamepadAction.Down && ActiveDialog == _window.ChangelogDialog
+                    && Scroll(current, action))
+                {
+                    break;
+                }
+
                 var next = FindNext(current, action, candidates);
                 if (next != null) Focus(next);
                 else if (action is GamepadAction.Up or GamepadAction.Down) Scroll(current, action);
@@ -418,18 +425,22 @@ internal sealed class GamepadNavigator : IDisposable
     }
 
     // Past the last control up or down, the content scrolls instead: the changelog has nothing else to move through.
-    private void Scroll(Control from, GamepadAction direction)
+    /// <returns>Whether there was anything left to scroll that way.</returns>
+    private bool Scroll(Control from, GamepadAction direction)
     {
         var scope = (Visual?)ActiveDialog ?? _window.MainContent;
         var viewer = from.FindAncestorOfType<ScrollViewer>() is { } own && scope.IsVisualAncestorOf(own)
             ? own
             : scope.GetVisualDescendants().OfType<ScrollViewer>()
                 .FirstOrDefault(v => v.IsEffectivelyVisible && v.Extent.Height > v.Viewport.Height);
-        if (viewer == null) return;
+        if (viewer == null) return false;
 
         double max = Math.Max(0, viewer.Extent.Height - viewer.Viewport.Height);
-        double y = viewer.Offset.Y + (direction == GamepadAction.Up ? -ScrollStep : ScrollStep);
-        viewer.Offset = viewer.Offset.WithY(Math.Clamp(y, 0, max));
+        double y = Math.Clamp(viewer.Offset.Y + (direction == GamepadAction.Up ? -ScrollStep : ScrollStep), 0, max);
+        if (Math.Abs(y - viewer.Offset.Y) < 0.5) return false;
+
+        viewer.Offset = viewer.Offset.WithY(y);
+        return true;
     }
 
     private void Press(Control control)
