@@ -913,6 +913,19 @@ public partial class MainWindowViewModel : ViewModelBase
         IsChangelogVisible = false;
     }
 
+    private const string KofiUrl = "https://ko-fi.com/nik250dev";
+
+    [RelayCommand]
+    private void OpenKofi()
+    {
+        if (!ExternalLinkService.TryOpen(KofiUrl))
+        {
+            NoBrowserUrl = KofiUrl;
+            IsNoBrowserForKofi = true;
+            IsNoBrowserWarningVisible = true;
+        }
+    }
+
     #endregion
 
     #region Application update
@@ -988,6 +1001,10 @@ public partial class MainWindowViewModel : ViewModelBase
     /// <summary>URL shown in the "no browser" modal so the user can copy it by hand.</summary>
     [ObservableProperty]
     private string _noBrowserUrl = BackloggdMirror.Services.AppUpdateService.ReleasesPageUrl;
+
+    /// <summary>Whether the "no browser" modal is about the Ko-fi page rather than the download.</summary>
+    [ObservableProperty]
+    private bool _isNoBrowserForKofi;
 
     private bool _windowOpened;
 
@@ -1113,6 +1130,7 @@ public partial class MainWindowViewModel : ViewModelBase
         if (!ExternalLinkService.TryOpen(url))
         {
             NoBrowserUrl = url;
+            IsNoBrowserForKofi = false;
             IsNoBrowserWarningVisible = true;
         }
     }

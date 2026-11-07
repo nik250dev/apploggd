@@ -213,6 +213,34 @@
             <Setter Property="Opacity" Value="0.5"/>
         </Style>
 
+        <!-- Ko-fi button (views:KofiButton). Not clipped: the steam rises past the top of the mug. -->
+        <Style Selector="Button.kofi">
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="Padding" Value="7,0"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="{DynamicResource KofiBrush}"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="ClipToBounds" Value="False"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="Button.kofi:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource KofiHoverBrush}"/>
+        </Style>
+        <Style Selector="Button.kofi:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource KofiPressedBrush}"/>
+        </Style>
+        <!-- Unfolds on hover, keyboard or controller focus, and while peeking (for a moment when the changelog opens). -->
+        <Style Selector="Button.kofi:pointerover ctl|SideRevealPanel, Button.kofi:focus-visible ctl|SideRevealPanel, Window.gamepad Button.kofi:focus ctl|SideRevealPanel, Button.kofi.peek ctl|SideRevealPanel">
+            <Setter Property="IsOpen" Value="True"/>
+        </Style>
+        <Style Selector="Button.kofi:pointerover ctl|KofiSteam, Button.kofi:focus-visible ctl|KofiSteam, Window.gamepad Button.kofi:focus ctl|KofiSteam, Button.kofi.peek ctl|KofiSteam">
+            <Setter Property="IsContinuous" Value="True"/>
+        </Style>
+        <Style Selector="Window.animate ctl|KofiSteam">
+            <Setter Property="IsAnimationEnabled" Value="True"/>
+        </Style>
+
         <!-- Circular Spinner Loader Animation. Look and animation are split on purpose: an
              Avalonia animation runs while its selector matches, on screen or not, so every
              infinite animation below is gated on the element showing ([IsVisible=True]) and on
@@ -1880,7 +1908,8 @@
                                 </Border>
 
                                  <!-- Info Footer -->
-                                <StackPanel HorizontalAlignment="Center" Margin="0,10,0,30" Spacing="5">
+                                <StackPanel HorizontalAlignment="Center" Margin="0,10,0,30" Spacing="12">
+                                    <views:KofiButton HorizontalAlignment="Center" IsSteamActive="{Binding IsSettingsVisible}"/>
                                     <TextBlock Text="{Binding [Settings_MadeBy], Source={x:Static services:LocalizationService.Instance}}" Foreground="{DynamicResource TextFooterBrush}" FontSize="12" HorizontalAlignment="Center"/>
                                 </StackPanel>
 
@@ -2287,6 +2316,10 @@
                                 Background="{DynamicResource ButtonCancelBrush}" Foreground="{DynamicResource TextPrimaryBrush}"
                                 CornerRadius="5" Padding="15,8" Cursor="Hand"/>
                     </Border>
+
+                    <!-- After the footer on purpose: the controller lands on a dialog's first button, and Close is the safe one. -->
+                    <views:KofiButton x:Name="ChangelogKofi" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,17,20,0"
+                                      IsSteamActive="{Binding IsChangelogVisible}"/>
                 </Grid>
             </Border>
         </Panel>
@@ -2332,6 +2365,10 @@
                         <TextBlock Text="{Binding [AppUpdate_NoBrowser_Title], Source={x:Static services:LocalizationService.Instance}}"
                                    FontSize="20" Foreground="{DynamicResource TextPrimaryBrush}" TextWrapping="Wrap"/>
                         <TextBlock Text="{Binding [AppUpdate_NoBrowser_Body], Source={x:Static services:LocalizationService.Instance}}"
+                                   IsVisible="{Binding !IsNoBrowserForKofi}"
+                                   FontSize="13" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding [Kofi_NoBrowser_Body], Source={x:Static services:LocalizationService.Instance}}"
+                                   IsVisible="{Binding IsNoBrowserForKofi}"
                                    FontSize="13" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap"/>
                         <Border Background="{DynamicResource SurfaceDarkBrush}" CornerRadius="8" Padding="12,10">
                             <SelectableTextBlock Text="{Binding NoBrowserUrl}"

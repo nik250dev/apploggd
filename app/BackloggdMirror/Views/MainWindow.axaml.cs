@@ -259,6 +259,8 @@ public partial class MainWindow : Window
 
         // Init/Sync initial state
         UpdateTrayMenuState(vm);
+        // After an update the changelog is already open by the time the view model gets here.
+        OnChangelogVisibilityChanged(vm.IsChangelogVisible);
     }
 
     private void InitializeTrayIcon()
@@ -321,6 +323,28 @@ public partial class MainWindow : Window
         {
             StartHoldingFront();
         }
+        else if (e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsChangelogVisible)
+                 && DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        {
+            OnChangelogVisibilityChanged(vm.IsChangelogVisible);
+        }
+    }
+
+    private static readonly TimeSpan KofiPeekStart = TimeSpan.FromSeconds(1);
+    private static readonly TimeSpan KofiPeekEnd = TimeSpan.FromSeconds(3.6);
+    private readonly List<IDisposable> _kofiTimers = new();
+
+    // The Ko-fi button unfolds for a moment after the changelog opens, so it is clear what it is
+    // without hovering it (a controller has no hover), then settles back to the mug.
+    private void OnChangelogVisibilityChanged(bool visible)
+    {
+        _kofiTimers.ForEach(timer => timer.Dispose());
+        _kofiTimers.Clear();
+        ChangelogKofi.IsPeeking = false;
+        if (!visible) return;
+
+        _kofiTimers.Add(DispatcherTimer.RunOnce(() => ChangelogKofi.IsPeeking = true, KofiPeekStart));
+        _kofiTimers.Add(DispatcherTimer.RunOnce(() => ChangelogKofi.IsPeeking = false, KofiPeekEnd));
     }
 
     private void OnTrayMenuChanged()

@@ -79,6 +79,9 @@ public abstract class LoopingAnimationControl : Control
     /// <summary>How faded in the animation is, from 0 to 1.</summary>
     protected double Visibility { get; private set; }
 
+    /// <summary>Seconds the animation has been running, not counting pauses.</summary>
+    protected double Time { get; private set; }
+
     protected abstract void RenderFrame(DrawingContext context);
 
     public sealed override void Render(DrawingContext context)
@@ -136,6 +139,7 @@ public abstract class LoopingAnimationControl : Control
         if (_lastFrame == null) return;
 
         Phase = (Phase + elapsed / Math.Max(CycleDuration.TotalSeconds, 0.1)) % 1;
+        Time += elapsed;
 
         double fadeStep = elapsed / Math.Max(FadeDuration.TotalSeconds, 0.01);
         Visibility = IsActive ? Math.Min(1, Visibility + fadeStep) : Math.Max(0, Visibility - fadeStep);
