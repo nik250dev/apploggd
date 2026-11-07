@@ -18,13 +18,21 @@ public class SettingsService
     // settings.json, and the logger has no business being written there.
     private readonly IAppLogger? _logger;
 
-    public bool HasSeenSessionDiscardWarningV3 { get; set; } = false;
     public bool MinimizeToTray { get; set; } = true;
     public bool StartWithWindows { get; set; } = false;
     public bool GamepadNavigationEnabled { get; set; } = true;
 
     /// <summary>Sends every finished session straight to the pending list instead of asking.</summary>
     public bool AlwaysAddToPending { get; set; } = false;
+
+    /// <summary>Registers every finished session on Backloggd without asking. Never on together with <see cref="AlwaysAddToPending"/>.</summary>
+    public bool AutoRegisterSessions { get; set; } = false;
+
+    /// <summary>Downloads the latest games database on startup. On by default, also for files written before this key existed.</summary>
+    public bool AutoUpdateGamesDatabase { get; set; } = true;
+
+    /// <summary>Experimental: the Home splits in two halves that detect and time a game each.</summary>
+    public bool DualDetectionEnabled { get; set; } = false;
 
     public string Language { get; set; } = "System";
 
@@ -73,14 +81,25 @@ public class SettingsService
                 var settings = JsonSerializer.Deserialize<SettingsService>(json);
                 if (settings != null)
                 {
-                    HasSeenSessionDiscardWarningV3 = settings.HasSeenSessionDiscardWarningV3;
                     MinimizeToTray = settings.MinimizeToTray;
                     StartWithWindows = settings.StartWithWindows;
                     GamepadNavigationEnabled = settings.GamepadNavigationEnabled;
                     AlwaysAddToPending = settings.AlwaysAddToPending;
+                    AutoRegisterSessions = settings.AutoRegisterSessions;
+                    AutoUpdateGamesDatabase = settings.AutoUpdateGamesDatabase;
+                    DualDetectionEnabled = settings.DualDetectionEnabled;
                     Language = settings.Language ?? "System";
                     HasSeenTrayIntro = settings.HasSeenTrayIntro;
                     DismissedUpdateNoticeVersion = settings.DismissedUpdateNoticeVersion;
+
+                    // Both change what happens to a finished session, so a hand-edited file with both on keeps neither.
+                    if (AlwaysAddToPending && AutoRegisterSessions)
+                    {
+                        _logger?.Warning("[SettingsService] settings.json has both 'Always add to pending' and the automatic mode on. They cannot be combined, so both are turned off.");
+                        AlwaysAddToPending = false;
+                        AutoRegisterSessions = false;
+                        Save();
+                    }
                 }
             }
         }
@@ -98,11 +117,13 @@ public class SettingsService
     /// </summary>
     public void Reset()
     {
-        HasSeenSessionDiscardWarningV3 = false;
         MinimizeToTray = true;
         StartWithWindows = false;
         GamepadNavigationEnabled = true;
         AlwaysAddToPending = false;
+        AutoRegisterSessions = false;
+        AutoUpdateGamesDatabase = true;
+        DualDetectionEnabled = false;
         Language = "System";
         HasSeenTrayIntro = false;
         DismissedUpdateNoticeVersion = null;

@@ -13,7 +13,9 @@ namespace BackloggdMirror.Services
         /// </summary>
         Task<(string? username, System.Net.CookieContainer? cookies, string? errorMessage)> LoginAsync(string username, string password, bool rememberMe);
         Task PerformLogin();
-        Task RegisterGame(string gameName, System.Net.CookieContainer cookieContainer, int gamePlayDateHours, int gamePlayDateMinutes, string? gameUrl = null, System.DateTime? playDate = null, bool markStarted = false, bool markFinished = false);
+        /// <param name="extras">Replaces the day's note and tags, even with empty ones; null leaves them as they are.</param>
+        Task RegisterGame(string gameName, System.Net.CookieContainer cookieContainer, int gamePlayDateHours, int gamePlayDateMinutes, string? gameUrl = null, System.DateTime? playDate = null, bool markStarted = false, bool markFinished = false, BackloggdMirror.Models.PlaySessionExtras? extras = null);
+        Task<BackloggdMirror.Models.PlaySessionExtras> GetTodayPlaySessionExtrasAsync(string gameName, System.Net.CookieContainer cookieContainer, string gameUrl);
         Task<List<BackloggdMirror.Models.JournalEntry>?> GetLastPlayedGames(string username, System.Net.CookieContainer cookieContainer);
         Task<(string? Title, Bitmap? Cover)> GetGameCoverAsync(string gameName);
         Task<List<BackloggdMirror.Models.GameSearchResult>> SearchGamesAsync(string query);

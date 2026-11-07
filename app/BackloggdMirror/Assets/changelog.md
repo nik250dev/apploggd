@@ -1,5 +1,39 @@
 # Changelog
 
+## 1.3.0 — 2026-11-07
+
+### Added
+
+- Support for Steam Deck
+- Notice when the data folder cannot be read or written
+- Sessions can have a note and tags
+- New automatic mode that saves every session to Backloggd without asking (Settings > General)
+- Setting to turn off the game database update on startup (Settings > General)
+- Experimental: detect two games at once (Settings > General)
+- A game picked by hand can be remembered for its executable or ROM (Settings > Remembered games)
+
+### Changed
+
+- Home status panel redesigned
+- Improved detection of Steam games
+- Session toasts now name the game
+- Session confirmation redesigned
+
+### Fixed
+
+- The window no longer jumps to the front while saving a session
+- The app no longer blocks shutting down or logging out while it is in the tray
+- The app no longer logs in with less than 50 MB of free disk space, where saving sessions could fail
+- A session saved while Backloggd was slow to answer could be written without its time
+- Sessions of special editions are logged in the base game
+- On Linux, the tray menu no longer loses its entries (Exit included) while a game is running
+
+### Thanks
+
+- @sai-xx, @macarrarrones, @JoelD333, @littlecow27, @GitHJack, @IAmSympathy for testing.
+- @TheVers for extensive testing on Steam Deck.
+- @swirlytwirl for the support. All of you, go play Dragon's Dogma. First warning.
+
 ## 1.2.0 — 2026-10-08
 
 ### Added

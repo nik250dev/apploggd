@@ -1,4 +1,4 @@
-﻿<Window xmlns="https://github.com/avaloniaui"
+<Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:BackloggdMirror.ViewModels"
         xmlns:conv="using:BackloggdMirror.Converters"
@@ -7,6 +7,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="using:Avalonia.Controls"
         xmlns:services="using:BackloggdMirror.Services"
+        xmlns:views="using:BackloggdMirror.Views"
+        xmlns:ctl="using:BackloggdMirror.Views.Controls"
+        xmlns:sys="using:System"
+        xmlns:imaging="using:Avalonia.Media.Imaging"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="BackloggdMirror.Views.MainWindow"
         WindowStartupLocation="CenterScreen"
@@ -20,6 +24,74 @@
 
     <Window.Resources>
         <conv:ToastTypeToBrushConverter x:Key="ToastTypeToBrushConverter"/>
+
+        <!-- The note's privacy menu, shared by the confirmation and the pending rows. -->
+        <DataTemplate x:Key="NotePrivacySelectionTemplate" x:DataType="vm:NotePrivacyOption">
+            <StackPanel Orientation="Horizontal" Spacing="5">
+                <Viewbox Width="13" Height="13" VerticalAlignment="Center">
+                    <Canvas Width="24" Height="24">
+                        <Path Classes="privacy-icon" Data="{Binding Icon}" StrokeThickness="2.4" Stroke="{Binding $parent[ContentPresenter].Foreground}"/>
+                    </Canvas>
+                </Viewbox>
+                <TextBlock Text="{Binding Label}" FontSize="12" FontWeight="SemiBold" VerticalAlignment="Center"/>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="NotePrivacyItemTemplate" x:DataType="vm:NotePrivacyOption">
+            <Grid ColumnDefinitions="Auto, *, Auto">
+                <Viewbox Width="15" Height="15" Margin="0,0,10,0" VerticalAlignment="Center">
+                    <Canvas Width="24" Height="24">
+                        <Path Classes="privacy-icon item" Data="{Binding Icon}" StrokeThickness="1.8"/>
+                    </Canvas>
+                </Viewbox>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Label}" FontSize="12"/>
+                    <TextBlock Text="{Binding Description}" FontSize="10.5" Foreground="{DynamicResource TextSubtleBrush}"/>
+                </StackPanel>
+                <Viewbox Grid.Column="2" Width="12" Height="12" Margin="8,0,0,0" VerticalAlignment="Center"
+                         IsVisible="{Binding $parent[ComboBoxItem].IsSelected}">
+                    <Canvas Width="24" Height="24">
+                        <Path Classes="privacy-icon" Data="M20,6 L9,17 L4,12" StrokeThickness="3" Stroke="{DynamicResource BrandPrimaryLightBrush}"/>
+                    </Canvas>
+                </Viewbox>
+            </Grid>
+        </DataTemplate>
+
+        <!-- The tag box: chips over the line they are typed on. Shared too. -->
+        <DataTemplate x:Key="TagEditorTemplate" x:DataType="vm:SessionExtrasViewModel">
+            <StackPanel>
+            <Border Classes="tag-box" PointerPressed="OnTagBoxPointerPressed">
+                <StackPanel>
+                    <ItemsControl ItemsSource="{Binding Tags}" IsVisible="{Binding HasTags}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="sys:String">
+                                <Border Classes="tag-chip">
+                                    <Border.RenderTransform>
+                                        <ScaleTransform/>
+                                    </Border.RenderTransform>
+                                    <StackPanel Orientation="Horizontal" Spacing="2">
+                                        <TextBlock Text="{Binding}" FontSize="12" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center" MaxWidth="200" TextTrimming="CharacterEllipsis"/>
+                                        <Button Classes="tag-remove gp-icon" Click="OnSessionTagRemoveClick"
+                                                AutomationProperties.Name="{Binding [Session_RemoveTag], Source={x:Static services:LocalizationService.Instance}}">
+                                            <PathIcon Data="{StaticResource FieldCloseIconData}"/>
+                                        </Button>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <ctl:TagInputBox Classes="tag-input gp-text" Text="{Binding TagInput}" Watermark="{Binding TagWatermark}" MaxLength="32"
+                                     CommitCommand="{Binding CommitTagInputCommand}" RemoveLastCommand="{Binding RemoveLastTagCommand}"/>
+                </StackPanel>
+            </Border>
+            <TextBlock Text="{Binding [Session_TagsInvalid], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding IsTagInputInvalid}"
+                       FontSize="11" Foreground="{DynamicResource OfflineBrush}" TextWrapping="Wrap" Margin="2,4,0,0"/>
+            </StackPanel>
+        </DataTemplate>
         <conv:ToastTypeToIconConverter x:Key="ToastTypeToIconConverter"/>
         <conv:ToastTypeToBackgroundConverter x:Key="ToastTypeToBackgroundConverter"/>
         <conv:ToastTypeToForegroundConverter x:Key="ToastTypeToForegroundConverter"/>
@@ -69,20 +141,14 @@
         <StreamGeometry x:Key="GamepadIconData">M7,6H17A6,6 0 0,1 23,12A6,6 0 0,1 17,18C15.22,18 13.63,17.23 12.53,16H11.47C10.37,17.23 8.78,18 7,18A6,6 0 0,1 1,12A6,6 0 0,1 7,6M6,9V11H4V13H6V15H8V13H10V11H8V9H6M15.5,12A1.5,1.5 0 0,0 14,13.5A1.5,1.5 0 0,0 15.5,15A1.5,1.5 0 0,0 17,13.5A1.5,1.5 0 0,0 15.5,12M18.5,9A1.5,1.5 0 0,0 17,10.5A1.5,1.5 0 0,0 18.5,12A1.5,1.5 0 0,0 20,10.5A1.5,1.5 0 0,0 18.5,9Z</StreamGeometry>
         <StreamGeometry x:Key="MarkStartedIconData">M8,5.14V19.14L19,12.14L8,5.14Z</StreamGeometry>
         <StreamGeometry x:Key="MarkFinishedIconData">M14.4,6L14,4H5V21H7V14H12.6L13,16H20V6H14.4Z</StreamGeometry>
+        <StreamGeometry x:Key="NoteIconData">M14 3H6A2 2 0 0 0 4 5V19A2 2 0 0 0 6 21H18A2 2 0 0 0 20 19V9Z M14 3V9H20 M8 13H16 M8 17H13</StreamGeometry>
+        <StreamGeometry x:Key="AddExtraIconData">M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z</StreamGeometry>
+        <StreamGeometry x:Key="ChangeGameIconData">M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z</StreamGeometry>
+        <StreamGeometry x:Key="RememberedIconData">M16,12V4H17V2H7V4H8V12L6,14V16H11.2V22H12.8V16H18V14L16,12Z</StreamGeometry>
+        <StreamGeometry x:Key="FieldCloseIconData">M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z</StreamGeometry>
     </Window.Resources>
 
     <Window.Styles>
-        <Style Selector="Image.bg">
-            <Setter Property="Opacity" Value="0"/>
-            <Setter Property="Transitions">
-                <Transitions>
-                    <DoubleTransition Property="Opacity" Duration="0:0:1.0" Easing="CubicEaseOut"/>
-                </Transitions>
-            </Setter>
-        </Style>
-        <Style Selector="Image.bg.visible">
-            <Setter Property="Opacity" Value="0.1"/> 
-        </Style>
         <Style Selector="Button.sidebar">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
@@ -112,19 +178,6 @@
             <Setter Property="Effect">
                 <BlurEffect Radius="20"/>
             </Setter>
-        </Style>
-
-        <!-- Info Icon Style -->
-        <Style Selector="Button.icon-btn PathIcon">
-            <Setter Property="Foreground" Value="{DynamicResource IconMediumBrush}"/>
-        </Style>
-        
-        <Style Selector="Button.icon-btn:pointerover /template/ ContentPresenter">
-            <Setter Property="Background" Value="Transparent"/>
-        </Style>
-        
-        <Style Selector="Button.icon-btn:pressed /template/ ContentPresenter">
-            <Setter Property="Background" Value="Transparent"/>
         </Style>
 
         <!-- Link Button Style: underlined muted text, no chrome, brightens on hover. -->
@@ -160,6 +213,34 @@
             <Setter Property="Opacity" Value="0.5"/>
         </Style>
 
+        <!-- Ko-fi button (views:KofiButton). Not clipped: the steam rises past the top of the mug. -->
+        <Style Selector="Button.kofi">
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="Padding" Value="7,0"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="{DynamicResource KofiBrush}"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="ClipToBounds" Value="False"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="Button.kofi:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource KofiHoverBrush}"/>
+        </Style>
+        <Style Selector="Button.kofi:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource KofiPressedBrush}"/>
+        </Style>
+        <!-- Unfolds on hover, keyboard or controller focus, and while peeking (for a moment when the changelog opens). -->
+        <Style Selector="Button.kofi:pointerover ctl|SideRevealPanel, Button.kofi:focus-visible ctl|SideRevealPanel, Window.gamepad Button.kofi:focus ctl|SideRevealPanel, Button.kofi.peek ctl|SideRevealPanel">
+            <Setter Property="IsOpen" Value="True"/>
+        </Style>
+        <Style Selector="Button.kofi:pointerover ctl|KofiSteam, Button.kofi:focus-visible ctl|KofiSteam, Window.gamepad Button.kofi:focus ctl|KofiSteam, Button.kofi.peek ctl|KofiSteam">
+            <Setter Property="IsContinuous" Value="True"/>
+        </Style>
+        <Style Selector="Window.animate ctl|KofiSteam">
+            <Setter Property="IsAnimationEnabled" Value="True"/>
+        </Style>
+
         <!-- Circular Spinner Loader Animation. Look and animation are split on purpose: an
              Avalonia animation runs while its selector matches, on screen or not, so every
              infinite animation below is gated on the element showing ([IsVisible=True]) and on
@@ -185,23 +266,6 @@
                     </KeyFrame>
                 </Animation>
             </Style.Animations>
-        </Style>
-
-        <!-- Outline Button Style -->
-        <Style Selector="Button.outline">
-            <Setter Property="Background" Value="{DynamicResource SurfaceDarkBrush}"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource BrandPrimaryBrush}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="8"/>
-            <Setter Property="Padding" Value="15,5"/>
-            <Setter Property="Cursor" Value="Hand"/>
-        </Style>
-        <Style Selector="Button.outline:pointerover /template/ ContentPresenter">
-            <Setter Property="Background" Value="{DynamicResource SurfaceBrandHoverBrush}"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource BrandPrimaryLightBrush}"/>
-        </Style>
-        <Style Selector="Button.outline:pressed /template/ ContentPresenter">
-            <Setter Property="Background" Value="{DynamicResource SurfaceBrandPressedBrush}"/>
         </Style>
 
         <!-- Subtle Button Style. Same colours as the modals' "Discard" (Button.discard-btn in
@@ -279,6 +343,549 @@
             <Setter Property="Opacity" Value="0.5"/>
         </Style>
 
+        <!-- The session's marks: a 28 px target, and the icon gives way to a check that draws itself. -->
+        <Style Selector="ToggleButton.session-chip">
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="Padding" Value="9,0,11,0"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="ToggleButton.session-chip PathIcon.chip-icon">
+            <Setter Property="Width" Value="10"/>
+            <Setter Property="Height" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.12"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="ToggleButton.session-chip:checked PathIcon.chip-icon">
+            <Setter Property="Opacity" Value="0"/>
+        </Style>
+        <!-- Dash lengths count in stroke widths: 10 of them covers the whole tick, so the offset hides it and 0 draws it. -->
+        <Style Selector="Path.chip-check, Path.save-check, Path.remember-check">
+            <Setter Property="Stroke" Value="{DynamicResource TextPrimaryBrush}"/>
+            <Setter Property="StrokeLineCap" Value="Round"/>
+            <Setter Property="StrokeJoin" Value="Round"/>
+            <Setter Property="StrokeDashArray" Value="10,10"/>
+            <Setter Property="StrokeDashOffset" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="Path.chip-check">
+            <Setter Property="Width" Value="12"/>
+            <Setter Property="Height" Value="12"/>
+            <Setter Property="StrokeThickness" Value="2"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="StrokeDashOffset" Duration="0:0:0.2" Easing="CubicEaseOut"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="ToggleButton.session-chip:checked Path.chip-check">
+            <Setter Property="StrokeDashOffset" Value="0"/>
+        </Style>
+
+        <!-- The modal's Discard: no box, so it reads as the least of the three and keeps away from Save. -->
+        <Style Selector="Button.ghost-btn">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="Padding" Value="12,0"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="Button.ghost-btn TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}"/>
+        </Style>
+        <Style Selector="Button.ghost-btn:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#1FF05A5A"/>
+        </Style>
+        <Style Selector="Button.ghost-btn:pointerover TextBlock">
+            <Setter Property="Foreground" Value="#FFB0B0"/>
+        </Style>
+        <Style Selector="Button.ghost-btn:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="#33F05A5A"/>
+        </Style>
+        <Style Selector="Button.ghost-btn:disabled /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style Selector="Button.ghost-btn:disabled TextBlock">
+            <Setter Property="Opacity" Value="0.5"/>
+        </Style>
+
+        <!-- Save stays lit while it works: the spinner and then the check are the feedback, not a dimmed button. -->
+        <Style Selector="Button.save-btn.saving:disabled">
+            <Setter Property="Opacity" Value="1"/>
+        </Style>
+        <Style Selector="Path.save-check">
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="StrokeThickness" Value="2.6"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="StrokeDashOffset" Duration="0:0:0.3" Easing="CubicEaseOut"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Button.save-btn.saved Path.save-check">
+            <Setter Property="StrokeDashOffset" Value="0"/>
+        </Style>
+
+        <!-- "Change" on the session cover: always there, pink and turning its arrow while the cover is pointed at. -->
+        <Style Selector="Border.cover-pill">
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="7,0,9,0"/>
+            <Setter Property="Background" Value="#BD0A0C10"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.15"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Border.cover-pill TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="Border.cover-pill PathIcon">
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+            <Setter Property="RenderTransform" Value="rotate(0deg)"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.35" Easing="CubicEaseOut"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Border.session-cover:pointerover Border.cover-pill">
+            <Setter Property="Background" Value="#EBEA377A"/>
+        </Style>
+        <Style Selector="Border.session-cover:pointerover Border.cover-pill PathIcon">
+            <Setter Property="RenderTransform" Value="rotate(180deg)"/>
+        </Style>
+        <Style Selector="Window.gamepad Border.session-cover:focus-within Border.cover-pill">
+            <Setter Property="Background" Value="#EBEA377A"/>
+        </Style>
+        <Style Selector="Window.gamepad Border.session-cover:focus-within Border.cover-pill PathIcon">
+            <Setter Property="RenderTransform" Value="rotate(180deg)"/>
+        </Style>
+
+        <!-- "Always use this game": the whole block toggles, with its box drawn inside. -->
+        <Style Selector="ToggleButton.remember-toggle">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Name="PART_Root" Background="{DynamicResource SurfaceDarkBrush}" BorderBrush="{DynamicResource SidebarBorderBrush}"
+                            BorderThickness="1" CornerRadius="8" Padding="12,9">
+                        <Grid ColumnDefinitions="Auto, *">
+                            <Border Name="PART_Box" Width="18" Height="18" CornerRadius="4" BorderThickness="1.5" BorderBrush="{DynamicResource ControlBorderBrush}"
+                                    VerticalAlignment="Center" Margin="0,0,10,0">
+                                <Path Name="PART_Check" Classes="remember-check" Data="M2,6.5 L5,9.3 L10.2,3" Width="12" Height="12" StrokeThickness="2">
+                                    <Path.Transitions>
+                                        <Transitions>
+                                            <DoubleTransition Property="StrokeDashOffset" Duration="0:0:0.18" Easing="CubicEaseOut"/>
+                                        </Transitions>
+                                    </Path.Transitions>
+                                </Path>
+                            </Border>
+                            <!-- Not PART_ContentPresenter: Fluent's checked style would paint it with the accent colour. -->
+                            <ContentPresenter Grid.Column="1" Name="PART_Content" Content="{TemplateBinding Content}" VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="ToggleButton.remember-toggle:pointerover /template/ Border#PART_Root">
+            <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}"/>
+        </Style>
+        <Style Selector="ToggleButton.remember-toggle:pressed /template/ Border#PART_Root">
+            <Setter Property="Background" Value="{DynamicResource SidebarBorderBrush}"/>
+        </Style>
+        <Style Selector="ToggleButton.remember-toggle:checked /template/ Border#PART_Box">
+            <Setter Property="Background" Value="{DynamicResource BrandPrimaryBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BrandPrimaryBrush}"/>
+        </Style>
+        <Style Selector="ToggleButton.remember-toggle:checked /template/ Path#PART_Check">
+            <Setter Property="StrokeDashOffset" Value="0"/>
+        </Style>
+        <Style Selector="ToggleButton.remember-toggle:disabled">
+            <Setter Property="Opacity" Value="0.5"/>
+        </Style>
+
+        <!-- "Add note" / "Add tags" in the session confirmation: a dashed pill, so it reads as something to add rather than a mark to toggle. -->
+        <Style Selector="Button.add-extra">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}"/>
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="Padding" Value="10,0,12,0"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <!-- The dash goes over the content, whose background would hide it. -->
+                    <Panel>
+                        <ContentPresenter Name="PART_ContentPresenter" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}"
+                                          Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Padding="{TemplateBinding Padding}"
+                                          Foreground="{TemplateBinding Foreground}" VerticalContentAlignment="Center"/>
+                        <Rectangle Name="PART_Dash" Stroke="{DynamicResource ButtonCancelBrush}" StrokeThickness="1" StrokeDashArray="4,3" RadiusX="14" RadiusY="14" IsHitTestVisible="False"/>
+                    </Panel>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <!-- Hover and press as on the mark chips: a light edge, no brand colour. -->
+        <Style Selector="Button.add-extra:pointerover /template/ Rectangle#PART_Dash">
+            <Setter Property="Stroke" Value="{DynamicResource ControlBorderBrush}"/>
+        </Style>
+        <Style Selector="Button.add-extra:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SurfaceDarkBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="Button.add-extra:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SidebarBorderBrush}"/>
+        </Style>
+        <Style Selector="Button.add-extra:disabled">
+            <Setter Property="Opacity" Value="0.5"/>
+        </Style>
+        <Style Selector="Button.add-extra PathIcon">
+            <Setter Property="Width" Value="10"/>
+            <Setter Property="Height" Value="10"/>
+            <Setter Property="RenderTransform" Value="rotate(0deg)"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.2" Easing="BackEaseOut"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Button.add-extra:pointerover PathIcon">
+            <Setter Property="RenderTransform" Value="rotate(90deg)"/>
+        </Style>
+        <!-- In a pending row, the size of the mark chips beside it. -->
+        <Style Selector="Button.add-extra.compact">
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Padding" Value="7,0,9,0"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="FontSize" Value="11"/>
+        </Style>
+        <Style Selector="Button.add-extra.compact /template/ Rectangle#PART_Dash">
+            <Setter Property="RadiusX" Value="10"/>
+            <Setter Property="RadiusY" Value="10"/>
+        </Style>
+        <Style Selector="Button.add-extra.compact PathIcon">
+            <Setter Property="Width" Value="8"/>
+            <Setter Property="Height" Value="8"/>
+        </Style>
+
+        <!-- The note and tags of a pending row: the whole row lights up, since a click opens the whole editor. -->
+        <Style Selector="Button.extras-summary">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="8,6,8,2"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="Button.extras-summary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SurfaceDarkBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource SidebarBorderBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}"/>
+        </Style>
+        <Style Selector="Button.extras-summary:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SidebarBorderBrush}"/>
+        </Style>
+        <Style Selector="Border.mini-tag">
+            <Setter Property="Background" Value="{DynamicResource SurfaceDarkBrush}"/>
+            <Setter Property="CornerRadius" Value="9"/>
+            <Setter Property="Padding" Value="8,0"/>
+            <Setter Property="Height" Value="18"/>
+            <Setter Property="Margin" Value="0,0,6,4"/>
+        </Style>
+        <Style Selector="Border.mini-tag TextBlock">
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Foreground" Value="{DynamicResource IconLightBrush}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+        </Style>
+        <Style Selector="Button.extras-summary:pointerover Border.mini-tag">
+            <Setter Property="Background" Value="#2f3542"/>
+        </Style>
+
+        <!-- The x that takes a field away again. -->
+        <Style Selector="Button.field-close">
+            <Setter Property="Width" Value="22"/>
+            <Setter Property="Height" Value="22"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="CornerRadius" Value="11"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextSubtleBrush}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="Button.field-close PathIcon">
+            <Setter Property="Width" Value="9"/>
+            <Setter Property="Height" Value="9"/>
+        </Style>
+        <Style Selector="Button.field-close:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource PanelBackgroundBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="Button.field-close:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SidebarBorderBrush}"/>
+        </Style>
+
+        <Style Selector="TextBlock.field-label">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+
+        <!-- Tags: chips over a borderless input, all inside one box that lights up as a whole. -->
+        <Style Selector="Border.tag-box">
+            <Setter Property="Background" Value="{DynamicResource InputBackgroundBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource InputBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="Cursor" Value="IBeam"/>
+        </Style>
+        <!-- The hover edge of a TextBox, so the box matches the note above it. -->
+        <Style Selector="Border.tag-box:pointerover">
+            <Setter Property="BorderBrush" Value="{DynamicResource TextControlBorderBrushPointerOver}"/>
+        </Style>
+        <!-- "typing", set from code: focus-within would light the box up for a chip's x too. -->
+        <Style Selector="Border.tag-box.typing">
+            <Setter Property="BorderBrush" Value="{DynamicResource SecondaryInputFocusBorderBrush}"/>
+        </Style>
+        <Style Selector="Border.tag-chip">
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="Margin" Value="0,0,6,6"/>
+            <Setter Property="Padding" Value="9,0,3,0"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Background" Value="#2f3542"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource SidebarBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Cursor" Value="Arrow"/>
+            <Setter Property="RenderTransformOrigin" Value="50%,50%"/>
+        </Style>
+        <!-- A chip pops in once; RenderTransform is a ScaleTransform set on each chip, since KeyFrames cannot animate RenderTransform itself. -->
+        <Style Selector="Border.tag-chip">
+            <Style.Animations>
+                <Animation Duration="0:0:0.2" Easing="BackEaseOut">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="Opacity" Value="0"/>
+                        <Setter Property="ScaleTransform.ScaleX" Value="0.6"/>
+                        <Setter Property="ScaleTransform.ScaleY" Value="0.6"/>
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="Opacity" Value="1"/>
+                        <Setter Property="ScaleTransform.ScaleX" Value="1"/>
+                        <Setter Property="ScaleTransform.ScaleY" Value="1"/>
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+        <Style Selector="Button.tag-remove">
+            <Setter Property="Width" Value="18"/>
+            <Setter Property="Height" Value="18"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="CornerRadius" Value="9"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="Button.tag-remove PathIcon">
+            <Setter Property="Width" Value="8"/>
+            <Setter Property="Height" Value="8"/>
+        </Style>
+        <Style Selector="Button.tag-remove:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource ButtonCancelBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="TextBlock.tag-count">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextSubtleBrush}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="6,0,0,0"/>
+        </Style>
+        <Style Selector="TextBlock.tag-count.full">
+            <Setter Property="Foreground" Value="{DynamicResource BrandPrimaryLightBrush}"/>
+        </Style>
+        <!-- A ninth tag is turned away with a shake of the counter; two classes in two styles, so each try restarts it. -->
+        <Style Selector="TextBlock.tag-count.shake-a">
+            <Style.Animations>
+                <Animation Duration="0:0:0.32">
+                    <KeyFrame Cue="0%"><Setter Property="TranslateTransform.X" Value="0"/></KeyFrame>
+                    <KeyFrame Cue="20%"><Setter Property="TranslateTransform.X" Value="-3"/></KeyFrame>
+                    <KeyFrame Cue="40%"><Setter Property="TranslateTransform.X" Value="3"/></KeyFrame>
+                    <KeyFrame Cue="60%"><Setter Property="TranslateTransform.X" Value="-2"/></KeyFrame>
+                    <KeyFrame Cue="80%"><Setter Property="TranslateTransform.X" Value="2"/></KeyFrame>
+                    <KeyFrame Cue="100%"><Setter Property="TranslateTransform.X" Value="0"/></KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+        <Style Selector="TextBlock.tag-count.shake-b">
+            <Style.Animations>
+                <Animation Duration="0:0:0.32">
+                    <KeyFrame Cue="0%"><Setter Property="TranslateTransform.X" Value="0"/></KeyFrame>
+                    <KeyFrame Cue="20%"><Setter Property="TranslateTransform.X" Value="-3"/></KeyFrame>
+                    <KeyFrame Cue="40%"><Setter Property="TranslateTransform.X" Value="3"/></KeyFrame>
+                    <KeyFrame Cue="60%"><Setter Property="TranslateTransform.X" Value="-2"/></KeyFrame>
+                    <KeyFrame Cue="80%"><Setter Property="TranslateTransform.X" Value="2"/></KeyFrame>
+                    <KeyFrame Cue="100%"><Setter Property="TranslateTransform.X" Value="0"/></KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+
+        <!-- The note's privacy: a pink link like Backloggd's that drops a menu of the four options.
+             A ComboBox underneath, so keyboard and controller reach it the way they reach the language picker. -->
+        <Style Selector="ComboBox.note-privacy">
+            <Setter Property="Foreground" Value="{DynamicResource BrandPrimaryLightBrush}"/>
+            <Setter Property="Padding" Value="0,2,4,2"/>
+            <Setter Property="MinHeight" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Panel>
+                        <!-- Not "Background": the theme's ComboBox states paint a border of that name. -->
+                        <Border Name="LinkBackground" Background="Transparent" CornerRadius="5" Padding="{TemplateBinding Padding}">
+                            <StackPanel Orientation="Horizontal" Spacing="5">
+                                <ContentPresenter Name="ContentPresenter" Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                                  Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" RenderTransformOrigin="0%,50%">
+                                    <ContentPresenter.RenderTransform>
+                                        <ScaleTransform/>
+                                    </ContentPresenter.RenderTransform>
+                                </ContentPresenter>
+                                <!-- Turned from code when the menu opens and closes. -->
+                                <Path Name="Chevron" Data="M6,9 L12,15 L18,9" Stroke="{TemplateBinding Foreground}" StrokeThickness="2.6" StrokeLineCap="Round" StrokeJoin="Round"
+                                      Width="10" Height="5" Stretch="Fill" VerticalAlignment="Center" RenderTransformOrigin="50%,50%">
+                                    <Path.RenderTransform>
+                                        <RotateTransform>
+                                            <RotateTransform.Transitions>
+                                                <Transitions>
+                                                    <DoubleTransition Property="Angle" Duration="0:0:0.2" Easing="CubicEaseOut"/>
+                                                </Transitions>
+                                            </RotateTransform.Transitions>
+                                        </RotateTransform>
+                                    </Path.RenderTransform>
+                                </Path>
+                            </StackPanel>
+                        </Border>
+                        <Popup Name="PART_Popup" IsOpen="{TemplateBinding IsDropDownOpen, Mode=TwoWay}" PlacementTarget="LinkBackground" Placement="BottomEdgeAlignedLeft"
+                               HorizontalOffset="-10" VerticalOffset="2" IsLightDismissEnabled="True" InheritsTransform="True" WindowManagerAddShadowHint="False">
+                            <!-- The margin leaves the popup room for the shadow. -->
+                            <Border Name="PopupBorder" Margin="0,0,12,14" Width="236" Padding="4" CornerRadius="9"
+                                    Background="{DynamicResource PanelBackgroundBrush}" BorderBrush="{DynamicResource SidebarBorderBrush}" BorderThickness="1"
+                                    BoxShadow="0 10 24 0 #8C000000" RenderTransformOrigin="0%,0%">
+                                <Border.RenderTransform>
+                                    <ScaleTransform/>
+                                </Border.RenderTransform>
+                                <ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}"/>
+                            </Border>
+                        </Popup>
+                    </Panel>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="ComboBox.note-privacy:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="ComboBox.note-privacy.open">
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="ComboBox.note-privacy:disabled">
+            <Setter Property="Opacity" Value="0.5"/>
+        </Style>
+        <Style Selector="ComboBox.note-privacy.open /template/ Border#PopupBorder">
+            <Style.Animations>
+                <Animation Duration="0:0:0.16" Easing="CubicEaseOut">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="Opacity" Value="0"/>
+                        <Setter Property="ScaleTransform.ScaleX" Value="0.96"/>
+                        <Setter Property="ScaleTransform.ScaleY" Value="0.96"/>
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="Opacity" Value="1"/>
+                        <Setter Property="ScaleTransform.ScaleX" Value="1"/>
+                        <Setter Property="ScaleTransform.ScaleY" Value="1"/>
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+        <!-- A new choice pops in; two classes in two styles, so each change restarts it. -->
+        <Style Selector="ComboBox.note-privacy.pop-a /template/ ContentPresenter#ContentPresenter">
+            <Style.Animations>
+                <Animation Duration="0:0:0.28" Easing="BackEaseOut">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="ScaleTransform.ScaleX" Value="0.8"/>
+                        <Setter Property="ScaleTransform.ScaleY" Value="0.8"/>
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="ScaleTransform.ScaleX" Value="1"/>
+                        <Setter Property="ScaleTransform.ScaleY" Value="1"/>
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+        <Style Selector="ComboBox.note-privacy.pop-b /template/ ContentPresenter#ContentPresenter">
+            <Style.Animations>
+                <Animation Duration="0:0:0.28" Easing="BackEaseOut">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="ScaleTransform.ScaleX" Value="0.8"/>
+                        <Setter Property="ScaleTransform.ScaleY" Value="0.8"/>
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="ScaleTransform.ScaleX" Value="1"/>
+                        <Setter Property="ScaleTransform.ScaleY" Value="1"/>
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+        <Style Selector="ComboBox.note-privacy ComboBoxItem">
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="MinHeight" Value="0"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="ComboBox.note-privacy ComboBoxItem /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="ComboBox.note-privacy ComboBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter, ComboBox.note-privacy ComboBoxItem:selected:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#2f3542"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="ComboBox.note-privacy ComboBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <Style Selector="ComboBox.note-privacy ComboBoxItem:focus-visible /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#2f3542"/>
+        </Style>
+        <Style Selector="Path.privacy-icon">
+            <Setter Property="StrokeThickness" Value="2"/>
+            <Setter Property="StrokeLineCap" Value="Round"/>
+            <Setter Property="StrokeJoin" Value="Round"/>
+        </Style>
+        <Style Selector="ComboBox.note-privacy ComboBoxItem Path.privacy-icon.item">
+            <Setter Property="Stroke" Value="{DynamicResource IconLightBrush}"/>
+        </Style>
+        <Style Selector="ComboBox.note-privacy ComboBoxItem:selected Path.privacy-icon.item">
+            <Setter Property="Stroke" Value="{DynamicResource BrandPrimaryLightBrush}"/>
+        </Style>
+
         <!-- Action button inside a toast. Translucent white instead of a themed brush: it sits on the
              toast's own colour, which is not a surface from the theme. -->
         <Style Selector="Button.toast-action">
@@ -301,51 +908,6 @@
         <Style Selector="Button.toast-action:pressed /template/ ContentPresenter">
             <Setter Property="Background" Value="#66FFFFFF"/>
             <Setter Property="Foreground" Value="White"/>
-        </Style>
-
-        <!-- Waiting Circles Animation -->
-        <Style Selector="Ellipse.waiting">
-            <Setter Property="Width" Value="30"/>
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="Fill" Value="{DynamicResource BrandPrimaryBrush}"/>
-            <Setter Property="Margin" Value="10"/>
-        </Style>
-
-        <Style Selector="Window.animate Ellipse.c1[IsVisible=True]">
-            <Style.Animations>
-                <Animation Duration="0:0:0.8" IterationCount="Infinite" PlaybackDirection="Alternate">
-                    <KeyFrame Cue="0%">
-                        <Setter Property="Opacity" Value="0.3"/>
-                    </KeyFrame>
-                    <KeyFrame Cue="100%">
-                        <Setter Property="Opacity" Value="1.0"/>
-                    </KeyFrame>
-                </Animation>
-            </Style.Animations>
-        </Style>
-        <Style Selector="Window.animate Ellipse.c2[IsVisible=True]">
-            <Style.Animations>
-                <Animation Duration="0:0:0.8" Delay="0:0:0.2" IterationCount="Infinite" PlaybackDirection="Alternate">
-                    <KeyFrame Cue="0%">
-                        <Setter Property="Opacity" Value="0.3"/>
-                    </KeyFrame>
-                    <KeyFrame Cue="100%">
-                        <Setter Property="Opacity" Value="1.0"/>
-                    </KeyFrame>
-                </Animation>
-            </Style.Animations>
-        </Style>
-        <Style Selector="Window.animate Ellipse.c3[IsVisible=True]">
-            <Style.Animations>
-                <Animation Duration="0:0:0.8" Delay="0:0:0.4" IterationCount="Infinite" PlaybackDirection="Alternate">
-                    <KeyFrame Cue="0%">
-                        <Setter Property="Opacity" Value="0.3"/>
-                    </KeyFrame>
-                    <KeyFrame Cue="100%">
-                        <Setter Property="Opacity" Value="1.0"/>
-                    </KeyFrame>
-                </Animation>
-            </Style.Animations>
         </Style>
 
         <!-- Skeleton Loader Style -->
@@ -397,9 +959,52 @@
         <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
             <Setter Property="Background" Value="{DynamicResource InputHoverBackgroundBrush}"/>
         </Style>
+        <!-- The note: the global TextBox look, without its fixed login-form height. -->
+        <Style Selector="TextBox.session-note">
+            <Setter Property="Height" Value="NaN"/>
+            <Setter Property="MinHeight" Value="72"/>
+            <Setter Property="MaxHeight" Value="112"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="AcceptsReturn" Value="True"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="VerticalContentAlignment" Value="Top"/>
+        </Style>
+        <Style Selector="TextBox.tag-input">
+            <Setter Property="Height" Value="NaN"/>
+            <Setter Property="MinHeight" Value="24"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="4,2"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <!-- The note keeps one background whatever the pointer or focus does. -->
+        <Style Selector="TextBox.session-note:pointerover /template/ Border#PART_BorderElement, TextBox.session-note:focus /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="{DynamicResource InputBackgroundBrush}"/>
+        </Style>
+        <!-- The placeholder only shows or hides: the theme brightens it on hover and focus. -->
+        <Style Selector="TextBox.session-note /template/ TextBlock#PART_Watermark, TextBox.session-note:pointerover /template/ TextBlock#PART_Watermark, TextBox.session-note:focus /template/ TextBlock#PART_Watermark, TextBox.tag-input /template/ TextBlock#PART_Watermark, TextBox.tag-input:pointerover /template/ TextBlock#PART_Watermark, TextBox.tag-input:focus /template/ TextBlock#PART_Watermark">
+            <Setter Property="Foreground" Value="{DynamicResource TextSubtleBrush}"/>
+            <Setter Property="Opacity" Value="1"/>
+        </Style>
+        <!-- After the TextBox states above, which it has to beat: the tag box draws the edge for the input inside it. -->
+        <Style Selector="TextBox.tag-input /template/ Border#PART_BorderElement, TextBox.tag-input:focus /template/ Border#PART_BorderElement, TextBox.tag-input:pointerover /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
 
         <!-- The modal footer button styles (discard-btn / save-btn) live in App.axaml so they can
              be shared with LoginWindow. -->
+        <!-- Fluent fills a disabled button grey; the outlined one just fades, as "Later" does while the note and tags load. -->
+        <Style Selector="Button.discard-btn:disabled /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}"/>
+        </Style>
+        <Style Selector="Button.discard-btn:disabled">
+            <Setter Property="Opacity" Value="0.5"/>
+        </Style>
 
         <!-- Bottom Message Bar Styles -->
         <Style Selector="Border.bottom-message">
@@ -462,6 +1067,11 @@
                 </Transitions>
             </Setter>
         </Style>
+        <!-- After the base above, which would otherwise reset the transform; before the controller edge below, which wins. -->
+        <Style Selector="Border.session-cover:pointerover">
+            <Setter Property="RenderTransform" Value="translateY(-2px)"/>
+            <Setter Property="BoxShadow" Value="0 10 24 0 #8C000000"/>
+        </Style>
         <Style Selector="Window.gamepad Border.gp-cover-host:focus-within">
             <Setter Property="BoxShadow" Value="0 0 0 2 #FFFFFF, 0 8 18 0 #99000000"/>
             <Setter Property="RenderTransform" Value="scale(1.06)"/>
@@ -482,14 +1092,14 @@
         <Style Selector="Window.gamepad Button.link:focus TextBlock">
             <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
         </Style>
-        <Style Selector="Window.gamepad Button.icon-btn, Window.gamepad Button.gp-icon">
+        <Style Selector="Window.gamepad Button.gp-icon">
             <Setter Property="CornerRadius" Value="12"/>
         </Style>
-        <Style Selector="Window.gamepad Button.icon-btn:focus /template/ ContentPresenter#PART_ContentPresenter, Window.gamepad Button.gp-icon:focus /template/ ContentPresenter#PART_ContentPresenter">
+        <Style Selector="Window.gamepad Button.gp-icon:focus /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="#24FFFFFF"/>
             <Setter Property="BoxShadow" Value="none"/>
         </Style>
-        <Style Selector="Window.gamepad Button.icon-btn:focus PathIcon, Window.gamepad Button.gp-icon:focus PathIcon">
+        <Style Selector="Window.gamepad Button.gp-icon:focus PathIcon">
             <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
         </Style>
         <!-- Sidebar: the hover look plus the edge, no zoom. -->
@@ -510,12 +1120,29 @@
         <Style Selector="Window.gamepad ToggleButton.mark-chip:focus /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="BoxShadow" Value="0 0 0 2 #FFFFFF, 0 4 12 0 #8C000000"/>
         </Style>
+        <Style Selector="Window.gamepad ToggleButton.remember-toggle">
+            <Setter Property="ClipToBounds" Value="False"/>
+            <Setter Property="FocusAdorner" Value="{x:Null}"/>
+        </Style>
+        <Style Selector="Window.gamepad ToggleButton.remember-toggle:focus /template/ Border#PART_Root">
+            <Setter Property="BoxShadow" Value="0 0 0 2 #FFFFFF, 0 4 12 0 #8C000000"/>
+        </Style>
         <!-- Switches: the edge goes around the track; only one of its two borders shows at a time. -->
         <Style Selector="Window.gamepad ToggleSwitch">
             <Setter Property="FocusAdorner" Value="{x:Null}"/>
         </Style>
         <Style Selector="Window.gamepad ToggleSwitch:focus /template/ Border#OuterBorder, Window.gamepad ToggleSwitch:focus /template/ Border#SwitchKnobBounds">
             <Setter Property="BoxShadow" Value="0 0 0 2 #FFFFFF, 0 4 12 0 #8C000000"/>
+        </Style>
+        <!-- Detection switch: the edge goes around its track, plus the usual zoom. -->
+        <Style Selector="Window.gamepad ctl|DetectionSwitch">
+            <Setter Property="FocusAdorner" Value="{x:Null}"/>
+        </Style>
+        <Style Selector="Window.gamepad ctl|DetectionSwitch:focus">
+            <Setter Property="RenderTransform" Value="scale(1.04)"/>
+        </Style>
+        <Style Selector="Window.gamepad ctl|DetectionSwitch:focus /template/ Border#PART_Track">
+            <Setter Property="BoxShadow" Value="0 0 0 2 #FFFFFF, 0 8 20 0 #8C000000"/>
         </Style>
         <Style Selector="Window.gamepad ComboBox">
             <Setter Property="ClipToBounds" Value="False"/>
@@ -536,8 +1163,30 @@
         <Style Selector="Window.gamepad ComboBoxItem:focus /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="BoxShadow" Value="inset 0 0 0 2 #FFFFFF"/>
         </Style>
+        <!-- Session note and tags: the dash makes way for the edge, the fields get it outside, the privacy link gets the link pill. -->
+        <Style Selector="Window.gamepad Button.add-extra:focus /template/ Rectangle#PART_Dash">
+            <Setter Property="Stroke" Value="Transparent"/>
+        </Style>
+        <Style Selector="Window.gamepad TextBox.session-note:focus /template/ Border#PART_BorderElement, Window.gamepad Border.tag-box.typing">
+            <Setter Property="BoxShadow" Value="0 0 0 2 #FFFFFF"/>
+        </Style>
+        <Style Selector="Window.gamepad ComboBox.note-privacy">
+            <Setter Property="Padding" Value="4,2,6,2"/>
+            <Setter Property="Margin" Value="-4,0,0,0"/>
+        </Style>
+        <Style Selector="Window.gamepad ComboBox.note-privacy:focus /template/ Border#LinkBackground">
+            <Setter Property="Background" Value="#24FFFFFF"/>
+            <Setter Property="BoxShadow" Value="none"/>
+        </Style>
+        <Style Selector="Window.gamepad ComboBox.note-privacy:focus">
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+        <!-- A whole-width row: the edge without the zoom. -->
+        <Style Selector="Window.gamepad Button.extras-summary:focus">
+            <Setter Property="RenderTransform" Value="scale(1)"/>
+        </Style>
         <!-- Press feedback; declared last to beat the focus zoom. -->
-        <Style Selector="Window.gamepad Button.gp-press">
+        <Style Selector="Window.gamepad Button.gp-press, Window.gamepad ctl|DetectionSwitch.gp-press">
             <Setter Property="RenderTransform" Value="scale(0.97)"/>
         </Style>
         <Style Selector="Window.gamepad Border.gp-cover-host.gp-press">
@@ -682,106 +1331,38 @@
                 
                 <!-- Home View -->
                 <Grid IsVisible="{Binding IsHomeVisible}" RowDefinitions="*, *, 10">
-                    <Border Grid.Row="0" Background="{DynamicResource PanelBackgroundBrush}" Margin="20" CornerRadius="20" ClipToBounds="True">
-                        <Panel>
-                             <Image Source="{Binding GameBackgroundImage}" 
-                                    Stretch="UniformToFill" 
-                                    Classes="bg" 
-                                    Classes.visible="{Binding IsBackgroundImageVisible}" />
-                            <!-- Waiting State -->
-                            <Panel IsVisible="{Binding !IsGameRunning}" VerticalAlignment="Stretch" Margin="20">
-                                
-                                <!-- Scanning Mode -->
-                                <Grid RowDefinitions="*, Auto, Auto" IsVisible="{Binding IsGameDetectionActive}" VerticalAlignment="Stretch">
-                                    <!-- Section 1: Animation -->
-                                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        <Ellipse Classes="waiting c1" IsVisible="{Binding IsWaitingAnimationVisible}"/>
-                                        <Ellipse Classes="waiting c2" IsVisible="{Binding IsWaitingAnimationVisible}"/>
-                                        <Ellipse Classes="waiting c3" IsVisible="{Binding IsWaitingAnimationVisible}"/>
-                                    </StackPanel>
-                                    
-                                    <!-- Section 2: Text -->
-                                    <TextBlock Grid.Row="1" Text="{Binding [Home_WaitingForGame], Source={x:Static services:LocalizationService.Instance}}" FontSize="24" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}" HorizontalAlignment="Center" Margin="0,0,0,20"/>
-                                    
-                                    <!-- Section 3: Button -->
-                                    <Button Grid.Row="2" Classes="outline" HorizontalAlignment="Center" Command="{Binding ToggleGameDetectionCommand}">
-                                        <StackPanel Orientation="Horizontal" Spacing="10">
-                                            <PathIcon Data="M23 5C22 5 22 6 22 6V16C22 17 23 17 24 17H25C26 17 26 16 26 16V6C26 6 26 5 25 5ZM30 5C30 5 29 5 29 6V16C29 17 30 17 31 17H32C32 17 33 17 33 16V6C33 6 33 5 32 5Z" Width="14" Height="14" Foreground="{DynamicResource BrandPrimaryBrush}"/>
-                                            <TextBlock Text="{Binding [Home_PauseSearch], Source={x:Static services:LocalizationService.Instance}}" Foreground="{DynamicResource BrandPrimaryBrush}"/>
-                                        </StackPanel>
-                                    </Button>
-                                </Grid>
+                    <Panel Grid.Row="0" Margin="20">
+                        <!-- One panel per half, 10px apart like the recently played cards: the negative margin takes back the outer half of each item's gap. -->
+                        <ItemsControl x:Name="HomeSlotsHost" ItemsSource="{Binding Slots}" Margin="-5,0">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Rows="1"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="vm:SessionSlotViewModel">
+                                    <views:HomeStatusPanel Margin="5,0"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
 
-                                <!-- Paused Mode -->
-                                <Grid RowDefinitions="*, Auto, Auto" IsVisible="{Binding IsGameDetectionPaused}" VerticalAlignment="Stretch">
-                                    <!-- Section 1: Icon -->
-                                    <PathIcon Grid.Row="0" Data="M23 5C22 5 22 6 22 6V16C22 17 23 17 24 17H25C26 17 26 16 26 16V6C26 6 26 5 25 5ZM30 5C30 5 29 5 29 6V16C29 17 30 17 31 17H32C32 17 33 17 33 16V6C33 6 33 5 32 5Z" Width="125" Height="125" Foreground="{DynamicResource BrandPrimaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    
-                                    <!-- Section 2: Text -->
-                                    <TextBlock Grid.Row="1" Text="{Binding [Home_SearchPaused], Source={x:Static services:LocalizationService.Instance}}" FontSize="24" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}" HorizontalAlignment="Center" Margin="0,0,0,20"/>
-                                    
-                                    <!-- Section 3: Button -->
-                                    <Button Grid.Row="2" Classes="outline" HorizontalAlignment="Center" Command="{Binding ToggleGameDetectionCommand}">
-                                        <StackPanel Orientation="Horizontal" Spacing="10">
-                                            <PathIcon Data="M8,5.14V19.14L19,12.14L8,5.14Z" Width="14" Height="14" Foreground="{DynamicResource BrandPrimaryBrush}"/>
-                                            <TextBlock Text="{Binding [Home_ResumeSearch], Source={x:Static services:LocalizationService.Instance}}" Foreground="{DynamicResource BrandPrimaryBrush}"/>
-                                        </StackPanel>
-                                    </Button>
-                                </Grid>
-
-                            </Panel>
-
-                            <!-- Game Running State -->
-                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="10" IsVisible="{Binding IsGameRunning}">
-                                <TextBlock Text="{Binding [Home_PlayingNow], Source={x:Static services:LocalizationService.Instance}}" FontSize="18" Foreground="{DynamicResource BrandPrimaryBrush}" HorizontalAlignment="Center">
-                                    <TextBlock.Effect>
-                                        <DropShadowEffect Color="Black" BlurRadius="10" Opacity="1.0"/>
-                                    </TextBlock.Effect>
-                                </TextBlock>
-                                <TextBlock Text="{Binding GameName}" FontSize="36" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}" HorizontalAlignment="Center" TextWrapping="Wrap">
-                                    <TextBlock.Effect>
-                                        <DropShadowEffect Color="Black" BlurRadius="15" Opacity="1.0" OffsetX="0" OffsetY="0"/>
-                                    </TextBlock.Effect>
-                                </TextBlock>
-                                <TextBlock Text="{Binding PlayTime}" FontSize="60" FontFamily="Consolas, Monospace" Foreground="{DynamicResource BrandPrimaryBrush}" HorizontalAlignment="Center" Margin="0,10,0,0">
-                                    <TextBlock.Effect>
-                                        <DropShadowEffect Color="#EA377A" BlurRadius="20" Opacity="0.6"/>
-                                    </TextBlock.Effect>
-                                </TextBlock>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="6" Margin="0,8,0,0">
-                                    <StackPanel.Effect>
-                                        <DropShadowEffect Color="Black" BlurRadius="10" Opacity="1.0"/>
-                                    </StackPanel.Effect>
-                                    <TextBlock Text="{Binding [Blacklist_NotAGame], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding !IsRunningGameEmulated}" FontSize="13" Foreground="{DynamicResource TextSubtleBrush}" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{Binding [Blacklist_NotWanted], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding IsRunningGameEmulated}" FontSize="13" Foreground="{DynamicResource TextSubtleBrush}" VerticalAlignment="Center"/>
-                                    <Button Classes="link" Command="{Binding BlacklistRunningGameCommand}">
-                                        <StackPanel Orientation="Horizontal" Spacing="4">
-                                            <PathIcon Data="M12,2C17.5,2 22,6.5 22,12C22,17.5 17.5,22 12,22C6.5,22 2,17.5 2,12C2,6.5 6.5,2 12,2M12,4C10.1,4 8.4,4.6 7.1,5.7L18.3,16.9C19.3,15.5 20,13.8 20,12C20,7.6 16.4,4 12,4M16.9,18.3L5.7,7.1C4.6,8.4 4,10.1 4,12C4,16.4 7.6,20 12,20C13.9,20 15.6,19.4 16.9,18.3Z"
-                                                      Width="12" Height="12" VerticalAlignment="Center"/>
-                                            <TextBlock Text="{Binding [Blacklist_Add], Source={x:Static services:LocalizationService.Instance}}" FontSize="13" VerticalAlignment="Center"/>
-                                        </StackPanel>
-                                    </Button>
-                                </StackPanel>
+                        <!-- Top left: toasts stack on the right. -->
+                        <Border IsVisible="{Binding IsOffline}"
+                                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16"
+                                Background="{DynamicResource OfflineBackgroundBrush}"
+                                BorderBrush="{DynamicResource OfflineBrush}" BorderThickness="1"
+                                CornerRadius="999" Padding="10,4"
+                                ToolTip.Tip="{Binding [Home_OfflineTooltip], Source={x:Static services:LocalizationService.Instance}}">
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <PathIcon Data="M7.73,10L15.73,18H6A4,4 0 0,1 2,14A4,4 0 0,1 6,10M3,5.27L5.75,8C2.56,8.15 0,10.77 0,14A6,6 0 0,0 6,20H17.73L19.73,22L21,20.73L4.27,4M19.35,10.03C18.67,6.59 15.64,4 12,4C10.5,4 9.15,4.43 8,5.17L9.45,6.63C10.21,6.23 11.08,6 12,6A5.5,5.5 0 0,1 17.5,11.5V12H19A3,3 0 0,1 22,15C22,16.13 21.36,17.11 20.44,17.62L21.89,19.07C23.16,18.16 24,16.68 24,15C24,12.36 21.95,10.22 19.35,10.03Z"
+                                          Width="14" Height="14" VerticalAlignment="Center"
+                                          Foreground="{DynamicResource OfflineBrush}"/>
+                                <TextBlock Text="{Binding [Home_OfflineBadge], Source={x:Static services:LocalizationService.Instance}}"
+                                           FontSize="12" FontWeight="SemiBold" VerticalAlignment="Center"
+                                           Foreground="{DynamicResource OfflineBrush}"/>
                             </StackPanel>
-
-                            <!-- Top left: toasts stack on the right. -->
-                            <Border IsVisible="{Binding IsOffline}"
-                                    HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16"
-                                    Background="{DynamicResource OfflineBackgroundBrush}"
-                                    BorderBrush="{DynamicResource OfflineBrush}" BorderThickness="1"
-                                    CornerRadius="999" Padding="10,4"
-                                    ToolTip.Tip="{Binding [Home_OfflineTooltip], Source={x:Static services:LocalizationService.Instance}}">
-                                <StackPanel Orientation="Horizontal" Spacing="6">
-                                    <PathIcon Data="M7.73,10L15.73,18H6A4,4 0 0,1 2,14A4,4 0 0,1 6,10M3,5.27L5.75,8C2.56,8.15 0,10.77 0,14A6,6 0 0,0 6,20H17.73L19.73,22L21,20.73L4.27,4M19.35,10.03C18.67,6.59 15.64,4 12,4C10.5,4 9.15,4.43 8,5.17L9.45,6.63C10.21,6.23 11.08,6 12,6A5.5,5.5 0 0,1 17.5,11.5V12H19A3,3 0 0,1 22,15C22,16.13 21.36,17.11 20.44,17.62L21.89,19.07C23.16,18.16 24,16.68 24,15C24,12.36 21.95,10.22 19.35,10.03Z"
-                                              Width="14" Height="14" VerticalAlignment="Center"
-                                              Foreground="{DynamicResource OfflineBrush}"/>
-                                    <TextBlock Text="{Binding [Home_OfflineBadge], Source={x:Static services:LocalizationService.Instance}}"
-                                               FontSize="12" FontWeight="SemiBold" VerticalAlignment="Center"
-                                               Foreground="{DynamicResource OfflineBrush}"/>
-                                </StackPanel>
-                            </Border>
-                        </Panel>
-                    </Border>
+                        </Border>
+                    </Panel>
 
                     <!-- Last Played Games List -->
                     <Grid Grid.Row="1" Margin="20,0,20,20" RowDefinitions="Auto, *">
@@ -965,6 +1546,14 @@
                         <Style Selector="ToggleSwitch:checked /template/ Border#SwitchKnob">
                             <Setter Property="Background" Value="{DynamicResource TextPrimaryBrush}"/>
                         </Style>
+                        <!-- Locked while on: the neutral grey of a paused switch, or it reads as enabled. -->
+                        <Style Selector="ToggleSwitch:checked:disabled /template/ Border#SwitchKnobBounds">
+                            <Setter Property="Background" Value="{DynamicResource ButtonCancelBrush}"/>
+                            <Setter Property="BorderBrush" Value="{DynamicResource ButtonCancelBrush}"/>
+                        </Style>
+                        <Style Selector="ToggleSwitch:checked:disabled /template/ Border#SwitchKnob">
+                            <Setter Property="Background" Value="{DynamicResource TextMutedBrush}"/>
+                        </Style>
                     </Panel.Styles>
 
                     <Grid RowDefinitions="Auto, *" Margin="20,0,5,0">
@@ -1011,8 +1600,51 @@
                                             <StackPanel Spacing="2">
                                                 <TextBlock Text="{Binding [Settings_AlwaysPending], Source={x:Static services:LocalizationService.Instance}}" Classes="setting-label"/>
                                                 <TextBlock Text="{Binding [Settings_AlwaysPendingDesc], Source={x:Static services:LocalizationService.Instance}}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}"/>
+                                                <TextBlock Text="{Binding [Settings_AlwaysPendingBlocked], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding !IsAlwaysAddToPendingAvailable}"
+                                                           FontSize="11" Foreground="{DynamicResource TextSubtleBrush}" FontStyle="Italic" TextWrapping="Wrap"/>
                                             </StackPanel>
-                                            <ToggleSwitch Grid.Column="1" IsChecked="{Binding AlwaysAddToPending}" OnContent="" OffContent=""/>
+                                            <ToggleSwitch Grid.Column="1" IsChecked="{Binding AlwaysAddToPending}" IsEnabled="{Binding IsAlwaysAddToPendingAvailable}" OnContent="" OffContent=""/>
+                                        </Grid>
+
+                                        <Separator Background="{DynamicResource SeparatorBrush}" Height="1"/>
+
+                                        <Grid ColumnDefinitions="*, Auto">
+                                            <StackPanel Spacing="2" Margin="0,0,15,0">
+                                                <TextBlock Text="{Binding [Settings_AutoMode], Source={x:Static services:LocalizationService.Instance}}" Classes="setting-label"/>
+                                                <TextBlock Text="{Binding [Settings_AutoModeDesc], Source={x:Static services:LocalizationService.Instance}}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}" TextWrapping="Wrap"/>
+                                                <TextBlock Text="{Binding [Settings_AutoModeWarning], Source={x:Static services:LocalizationService.Instance}}" FontSize="11" Foreground="{DynamicResource OfflineBrush}" TextWrapping="Wrap"/>
+                                                <TextBlock Text="{Binding [Settings_AutoModeBlocked], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding !IsAutoRegisterSessionsAvailable}"
+                                                           FontSize="11" Foreground="{DynamicResource TextSubtleBrush}" FontStyle="Italic" TextWrapping="Wrap"/>
+                                            </StackPanel>
+                                            <ToggleSwitch Grid.Column="1" IsChecked="{Binding AutoRegisterSessions}" IsEnabled="{Binding IsAutoRegisterSessionsAvailable}" OnContent="" OffContent=""/>
+                                        </Grid>
+
+                                        <Separator Background="{DynamicResource SeparatorBrush}" Height="1"/>
+
+                                        <Grid ColumnDefinitions="*, Auto">
+                                            <StackPanel Spacing="2" Margin="0,0,15,0">
+                                                <TextBlock Text="{Binding [Settings_AutoUpdateDb], Source={x:Static services:LocalizationService.Instance}}" Classes="setting-label"/>
+                                                <TextBlock Text="{Binding [Settings_AutoUpdateDbDesc], Source={x:Static services:LocalizationService.Instance}}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}" TextWrapping="Wrap"/>
+                                                <TextBlock Text="{Binding [Settings_AutoUpdateDbWarning], Source={x:Static services:LocalizationService.Instance}}" FontSize="11" Foreground="{DynamicResource OfflineBrush}" TextWrapping="Wrap"/>
+                                            </StackPanel>
+                                            <ToggleSwitch Grid.Column="1" IsChecked="{Binding AutoUpdateGamesDatabase}" OnContent="" OffContent=""/>
+                                        </Grid>
+
+                                        <Separator Background="{DynamicResource SeparatorBrush}" Height="1"/>
+
+                                        <Grid ColumnDefinitions="*, Auto">
+                                            <StackPanel Spacing="2" Margin="0,0,15,0">
+                                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                                    <TextBlock Text="{Binding [Settings_DualDetection], Source={x:Static services:LocalizationService.Instance}}" Classes="setting-label"/>
+                                                    <Border BorderBrush="{DynamicResource OfflineBrush}" BorderThickness="1" CornerRadius="999" Padding="7,0" VerticalAlignment="Center">
+                                                        <TextBlock Text="{Binding [Settings_Experimental], Source={x:Static services:LocalizationService.Instance}}" FontSize="11" FontWeight="SemiBold" Foreground="{DynamicResource OfflineBrush}"/>
+                                                    </Border>
+                                                </StackPanel>
+                                                <TextBlock Text="{Binding [Settings_DualDetectionDesc], Source={x:Static services:LocalizationService.Instance}}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}" TextWrapping="Wrap"/>
+                                                <TextBlock Text="{Binding [Settings_DualDetectionBusy], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding !CanChangeDualDetection}"
+                                                           FontSize="11" Foreground="{DynamicResource TextSubtleBrush}" FontStyle="Italic" TextWrapping="Wrap"/>
+                                            </StackPanel>
+                                            <ToggleSwitch Grid.Column="1" IsChecked="{Binding DualDetectionEnabled}" IsEnabled="{Binding CanChangeDualDetection}" OnContent="" OffContent=""/>
                                         </Grid>
                                     </StackPanel>
                                 </Border>
@@ -1091,6 +1723,81 @@
                                                                     Content="{Binding [Settings_Blacklist_Remove], Source={x:Static services:LocalizationService.Instance}}"
                                                                     Command="{Binding #Root.((vm:MainWindowViewModel)DataContext).RemoveFromBlacklistCommand}"
                                                                     CommandParameter="{Binding}"/>
+                                                        </Grid>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </StackPanel>
+                                </Border>
+
+                                <!-- Section: Remembered games, laid out like the blacklist. -->
+                                <StackPanel Orientation="Horizontal" Spacing="10">
+                                    <TextBlock Text="{Binding [Settings_Section_RememberedGames], Source={x:Static services:LocalizationService.Instance}}" Classes="h3"/>
+                                    <Border Classes="count-pill" IsVisible="{Binding HasRememberedGames}">
+                                        <TextBlock Text="{Binding RememberedGames.Count}" FontSize="12" Foreground="{DynamicResource TextMutedBrush}"/>
+                                    </Border>
+                                </StackPanel>
+                                <Border Classes="setting-group">
+                                    <StackPanel Spacing="15">
+                                        <StackPanel Spacing="2">
+                                            <TextBlock Text="{Binding [Settings_RememberedGames_Title], Source={x:Static services:LocalizationService.Instance}}" Classes="setting-label"/>
+                                            <TextBlock Text="{Binding [Settings_RememberedGames_Desc], Source={x:Static services:LocalizationService.Instance}}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}" TextWrapping="Wrap"/>
+                                        </StackPanel>
+
+                                        <StackPanel Spacing="15" IsVisible="{Binding !HasRememberedGames}">
+                                            <Separator Background="{DynamicResource SeparatorBrush}" Height="1"/>
+                                            <StackPanel Spacing="4" HorizontalAlignment="Center" Margin="20,0,20,5">
+                                                <PathIcon Data="{StaticResource RememberedIconData}" Width="22" Height="22" Foreground="{DynamicResource IconDarkBrush}" HorizontalAlignment="Center" Margin="0,0,0,4"/>
+                                                <TextBlock Text="{Binding [Settings_RememberedGames_EmptyTitle], Source={x:Static services:LocalizationService.Instance}}" FontSize="13" Foreground="{DynamicResource TextSecondaryBrush}" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="{Binding [Settings_RememberedGames_EmptyHint], Source={x:Static services:LocalizationService.Instance}}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center"/>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <ItemsControl ItemsSource="{Binding RememberedGames}" IsVisible="{Binding HasRememberedGames}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <StackPanel Spacing="15"/>
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate x:DataType="vm:RememberedGameViewModel">
+                                                    <StackPanel Spacing="15">
+                                                        <Separator Background="{DynamicResource SeparatorBrush}" Height="1"/>
+                                                        <Grid ColumnDefinitions="Auto, *, Auto">
+                                                            <Border Grid.Column="0" Width="32" Height="43" CornerRadius="4" ClipToBounds="True" Margin="0,0,12,0" VerticalAlignment="Center"
+                                                                    Background="{DynamicResource SurfaceDarkBrush}" BorderBrush="#30394c" BorderThickness="1">
+                                                                <Panel>
+                                                                    <Image Source="{Binding Cover}" Stretch="UniformToFill"/>
+                                                                    <PathIcon IsVisible="{Binding !HasCover}"
+                                                                              Data="M7,6H17A6,6 0 0,1 23,12A6,6 0 0,1 17,18C15.22,18 13.63,17.23 12.53,16H11.47C10.37,17.23 8.78,18 7,18A6,6 0 0,1 1,12A6,6 0 0,1 7,6M6,9V11H4V13H6V15H8V13H10V11H8V9H6M15.5,12A1.5,1.5 0 0,0 14,13.5A1.5,1.5 0 0,0 15.5,15A1.5,1.5 0 0,0 17,13.5A1.5,1.5 0 0,0 15.5,12M18.5,9A1.5,1.5 0 0,0 17,10.5A1.5,1.5 0 0,0 18.5,12A1.5,1.5 0 0,0 20,10.5A1.5,1.5 0 0,0 18.5,9Z"
+                                                                              Width="16" Height="16" Foreground="{DynamicResource IconMediumBrush}"/>
+                                                                </Panel>
+                                                            </Border>
+
+                                                            <StackPanel Grid.Column="1" Spacing="2" VerticalAlignment="Center" Margin="0,0,15,0">
+                                                                <TextBlock Text="{Binding GameName}" Classes="setting-label" TextTrimming="CharacterEllipsis"/>
+                                                                <!-- Trimmed from the start, as in the blacklist: the end of the path is what tells two Game.exe apart. -->
+                                                                <TextBlock Text="{Binding Entry.ExecutablePath}" IsVisible="{Binding Entry.IsApplication}"
+                                                                           FontSize="12" Foreground="{DynamicResource TextSubtleBrush}"
+                                                                           TextTrimming="LeadingCharacterEllipsis" ToolTip.Tip="{Binding Entry.Details}"/>
+                                                                <TextBlock IsVisible="{Binding Entry.IsEmulatedGame}" FontSize="12" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding Entry.Details}">
+                                                                    <Run Text="{Binding Entry.EmulatorName}" Foreground="{DynamicResource TextMutedBrush}"/>
+                                                                    <Run Text=" · " Foreground="{DynamicResource TextSubtleBrush}"/>
+                                                                    <Run Text="{Binding Entry.ContentLabel}" Foreground="{DynamicResource TextSubtleBrush}"/>
+                                                                </TextBlock>
+                                                            </StackPanel>
+
+                                                            <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                                                                <Button Classes="subtle" IsEnabled="{Binding !#Root.((vm:MainWindowViewModel)DataContext).IsOffline}"
+                                                                        Content="{Binding [Settings_RememberedGames_Change], Source={x:Static services:LocalizationService.Instance}}"
+                                                                        Command="{Binding #Root.((vm:MainWindowViewModel)DataContext).ChangeRememberedGameCommand}"
+                                                                        CommandParameter="{Binding}"/>
+                                                                <Button Classes="subtle"
+                                                                        Content="{Binding [Settings_RememberedGames_Remove], Source={x:Static services:LocalizationService.Instance}}"
+                                                                        Command="{Binding #Root.((vm:MainWindowViewModel)DataContext).RemoveRememberedGameCommand}"
+                                                                        CommandParameter="{Binding}"/>
+                                                            </StackPanel>
                                                         </Grid>
                                                     </StackPanel>
                                                 </DataTemplate>
@@ -1201,7 +1908,8 @@
                                 </Border>
 
                                  <!-- Info Footer -->
-                                <StackPanel HorizontalAlignment="Center" Margin="0,10,0,30" Spacing="5">
+                                <StackPanel HorizontalAlignment="Center" Margin="0,10,0,30" Spacing="12">
+                                    <views:KofiButton HorizontalAlignment="Center" IsSteamActive="{Binding IsSettingsVisible}"/>
                                     <TextBlock Text="{Binding [Settings_MadeBy], Source={x:Static services:LocalizationService.Instance}}" Foreground="{DynamicResource TextFooterBrush}" FontSize="12" HorizontalAlignment="Center"/>
                                 </StackPanel>
 
@@ -1310,6 +2018,7 @@
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate x:DataType="vm:PendingSessionViewModel">
                                             <Border Classes="pending-card" Padding="15,12">
+                                                <StackPanel>
                                                 <Grid ColumnDefinitions="Auto, *, Auto">
                                                     <Border Grid.Column="0" Width="60" Height="80" CornerRadius="4" ClipToBounds="True"
                                                             Background="{DynamicResource SurfaceDarkBrush}" BorderBrush="#30394c" BorderThickness="1"
@@ -1354,6 +2063,14 @@
                                                                     <TextBlock Text="{Binding [Session_MarkFinished], Source={x:Static services:LocalizationService.Instance}}" VerticalAlignment="Center"/>
                                                                 </StackPanel>
                                                             </ToggleButton>
+                                                            <Border Width="1" Height="14" Background="{DynamicResource SidebarBorderBrush}" Margin="2,0" VerticalAlignment="Center" IsVisible="{Binding IsAddExtrasVisible}"/>
+                                                            <Button Classes="add-extra compact" Command="{Binding OpenExtrasCommand}" Click="OnPendingExtrasOpenClick"
+                                                                    IsVisible="{Binding IsAddExtrasVisible}" IsEnabled="{Binding !IsSaving}">
+                                                                <StackPanel Orientation="Horizontal" Spacing="5">
+                                                                    <PathIcon Data="{StaticResource AddExtraIconData}"/>
+                                                                    <TextBlock Text="{Binding [Pending_NoteAndTags], Source={x:Static services:LocalizationService.Instance}}" VerticalAlignment="Center"/>
+                                                                </StackPanel>
+                                                            </Button>
                                                         </StackPanel>
                                                     </StackPanel>
 
@@ -1394,6 +2111,80 @@
                                                         </Button>
                                                     </StackPanel>
                                                 </Grid>
+
+                                                <!-- Under the row, across the whole width past the cover: the note and tags, or their editor. -->
+                                                <Button Classes="extras-summary" Margin="67,8,-8,0" Command="{Binding OpenExtrasCommand}" Click="OnPendingExtrasOpenClick"
+                                                        IsVisible="{Binding IsExtrasSummaryVisible}" IsEnabled="{Binding !IsSaving}"
+                                                        ToolTip.Tip="{Binding [Pending_EditExtras], Source={x:Static services:LocalizationService.Instance}}"
+                                                        AutomationProperties.Name="{Binding [Pending_EditExtras], Source={x:Static services:LocalizationService.Instance}}">
+                                                    <ctl:NoteTagsRow>
+                                                        <DockPanel IsVisible="{Binding Extras.HasNote}" Margin="0,0,0,4">
+                                                            <Viewbox DockPanel.Dock="Left" Width="13" Height="13" Margin="0,2,7,0" VerticalAlignment="Top">
+                                                                <Canvas Width="24" Height="24">
+                                                                    <Path Classes="privacy-icon" Data="{StaticResource NoteIconData}" Stroke="{DynamicResource TextSubtleBrush}"/>
+                                                                </Canvas>
+                                                            </Viewbox>
+                                                            <TextBlock FontSize="12" TextWrapping="Wrap" LineHeight="18">
+                                                                <Run Text="{Binding Extras.NotePreview}"/>
+                                                                <InlineUIContainer>
+                                                                    <Viewbox Width="12" Height="12" Margin="6,0,0,-1" IsVisible="{Binding !Extras.Privacy.IsDefault}">
+                                                                        <Canvas Width="24" Height="24">
+                                                                            <Path Classes="privacy-icon" Data="{Binding Extras.Privacy.Icon}" Stroke="{DynamicResource TextSubtleBrush}" StrokeThickness="2.2"/>
+                                                                        </Canvas>
+                                                                    </Viewbox>
+                                                                </InlineUIContainer>
+                                                            </TextBlock>
+                                                        </DockPanel>
+                                                        <ItemsControl ItemsSource="{Binding Extras.Tags}" IsVisible="{Binding Extras.HasTags}">
+                                                            <ItemsControl.ItemsPanel>
+                                                                <ItemsPanelTemplate>
+                                                                    <WrapPanel/>
+                                                                </ItemsPanelTemplate>
+                                                            </ItemsControl.ItemsPanel>
+                                                            <ItemsControl.ItemTemplate>
+                                                                <DataTemplate x:DataType="sys:String">
+                                                                    <Border Classes="mini-tag">
+                                                                        <TextBlock Text="{Binding}"/>
+                                                                    </Border>
+                                                                </DataTemplate>
+                                                            </ItemsControl.ItemTemplate>
+                                                        </ItemsControl>
+                                                    </ctl:NoteTagsRow>
+                                                </Button>
+
+                                                <ctl:RevealPanel IsOpen="{Binding IsEditingExtras}">
+                                                    <Grid Margin="75,14,0,0" ColumnDefinitions="2*, 16, *" RowDefinitions="Auto, Auto">
+                                                        <StackPanel Grid.Column="0">
+                                                            <TextBlock Classes="field-label" Margin="0,0,0,6" Text="{Binding [Session_Note], Source={x:Static services:LocalizationService.Instance}}"/>
+                                                            <TextBox Classes="session-note gp-text" Text="{Binding Extras.Note}"
+                                                                     Watermark="{Binding [Session_NoteWatermark], Source={x:Static services:LocalizationService.Instance}}"/>
+                                                            <ComboBox Classes="note-privacy" Margin="0,6,0,0"
+                                                                      ItemsSource="{Binding Extras.PrivacyOptions}" SelectedItem="{Binding Extras.Privacy}"
+                                                                      SelectionBoxItemTemplate="{StaticResource NotePrivacySelectionTemplate}" ItemTemplate="{StaticResource NotePrivacyItemTemplate}"
+                                                                      SelectionChanged="OnNotePrivacyChanged" DropDownOpened="OnNotePrivacyDropDownOpened" DropDownClosed="OnNotePrivacyDropDownClosed"
+                                                                      AutomationProperties.Name="{Binding [Session_NotePrivacy], Source={x:Static services:LocalizationService.Instance}}"/>
+                                                        </StackPanel>
+                                                        <StackPanel Grid.Column="2">
+                                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                                                                <TextBlock Classes="field-label" Text="{Binding [Session_Tags], Source={x:Static services:LocalizationService.Instance}}"/>
+                                                                <TextBlock Classes="tag-count" Classes.full="{Binding Extras.IsTagsFull}" Text="{Binding Extras.TagCountText}"
+                                                                           Classes.shake-a="{Binding Extras.IsRejectShakeA}" Classes.shake-b="{Binding Extras.IsRejectShakeB}">
+                                                                    <TextBlock.RenderTransform>
+                                                                        <TranslateTransform/>
+                                                                    </TextBlock.RenderTransform>
+                                                                </TextBlock>
+                                                            </StackPanel>
+                                                            <ContentControl Content="{Binding Extras}" ContentTemplate="{StaticResource TagEditorTemplate}"/>
+                                                        </StackPanel>
+                                                        <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10" Margin="0,12,0,0">
+                                                            <Button Classes="subtle" Command="{Binding CancelExtrasCommand}" Click="OnPendingExtrasClosedClick"
+                                                                    Content="{Binding [Session_Cancel], Source={x:Static services:LocalizationService.Instance}}"/>
+                                                            <Button Classes="subtle" Command="{Binding CloseExtrasCommand}" Click="OnPendingExtrasClosedClick"
+                                                                    Content="{Binding [Pending_ExtrasDone], Source={x:Static services:LocalizationService.Instance}}"/>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </ctl:RevealPanel>
+                                                </StackPanel>
                                             </Border>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
@@ -1525,6 +2316,10 @@
                                 Background="{DynamicResource ButtonCancelBrush}" Foreground="{DynamicResource TextPrimaryBrush}"
                                 CornerRadius="5" Padding="15,8" Cursor="Hand"/>
                     </Border>
+
+                    <!-- After the footer on purpose: the controller lands on a dialog's first button, and Close is the safe one. -->
+                    <views:KofiButton x:Name="ChangelogKofi" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,17,20,0"
+                                      IsSteamActive="{Binding IsChangelogVisible}"/>
                 </Grid>
             </Border>
         </Panel>
@@ -1570,6 +2365,10 @@
                         <TextBlock Text="{Binding [AppUpdate_NoBrowser_Title], Source={x:Static services:LocalizationService.Instance}}"
                                    FontSize="20" Foreground="{DynamicResource TextPrimaryBrush}" TextWrapping="Wrap"/>
                         <TextBlock Text="{Binding [AppUpdate_NoBrowser_Body], Source={x:Static services:LocalizationService.Instance}}"
+                                   IsVisible="{Binding !IsNoBrowserForKofi}"
+                                   FontSize="13" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding [Kofi_NoBrowser_Body], Source={x:Static services:LocalizationService.Instance}}"
+                                   IsVisible="{Binding IsNoBrowserForKofi}"
                                    FontSize="13" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap"/>
                         <Border Background="{DynamicResource SurfaceDarkBrush}" CornerRadius="8" Padding="12,10">
                             <SelectableTextBlock Text="{Binding NoBrowserUrl}"
@@ -1676,215 +2475,342 @@
                 </Border>
             </Panel>
 
-            <!-- Session Content -->
-            <Border x:Name="SessionDialog" Background="{DynamicResource AppBackgroundBrush}" CornerRadius="20" Width="400" MinHeight="320" VerticalAlignment="Center"
-                    BoxShadow="0 0 50 0 #EA377A" BorderBrush="{DynamicResource BrandPrimaryBrush}" BorderThickness="1"
-                    IsVisible="{Binding !IsGameSelectorVisible}">
-                <Grid RowDefinitions="*, Auto">
-                    <Grid Grid.Row="0" RowDefinitions="Auto, *" Margin="20">
-                        <Grid Grid.Row="0" Margin="0,0,0,20">
-                        <TextBlock Text="{Binding [Session_ConfirmTitle], Source={x:Static services:LocalizationService.Instance}}" FontSize="20" Foreground="{DynamicResource TextPrimaryBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                        
-                        <!-- Info Icon and Tooltip -->
-                        <Panel HorizontalAlignment="Right" VerticalAlignment="Center">
-                            <Button x:Name="InfoButton" Classes="icon-btn" PointerEntered="OnInfoIconPointerEntered" PointerExited="OnInfoIconPointerExited" GotFocus="OnInfoButtonGotFocus" LostFocus="OnInfoButtonLostFocus"  Command="{Binding DismissForcedTooltipCommand}" Background="Transparent" BorderThickness="0" Padding="0">
-                                <PathIcon x:Name="InfoIcon" Data="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z" 
-                                          Width="20" Height="20"/>
-                            </Button>
-                            
-                            <!-- Custom Tooltip Popup (Used for both Forced and Hover states) -->
-                            <Popup IsOpen="{Binding IsTooltipVisible}" PlacementTarget="{Binding ElementName=InfoButton}" PlacementMode="Top" VerticalOffset="-10">
-                                <Grid RowDefinitions="*, Auto">
-                                    <Border Grid.Row="0" Background="{DynamicResource PanelBackgroundBrush}" BorderBrush="{DynamicResource BrandPrimaryBrush}" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,0,0,0">
-                                        <TextBlock Text="{Binding [Session_IncorrectGameTooltip], Source={x:Static services:LocalizationService.Instance}}" 
-                                                   Foreground="{DynamicResource TextPrimaryBrush}" MaxWidth="250" TextWrapping="Wrap" FontSize="12"/>
-                                    </Border>
-                                    <Path Grid.Row="1" Data="M0,0 L5,5 L10,0" Stroke="{DynamicResource BrandPrimaryBrush}" StrokeThickness="1" HorizontalAlignment="Center" Margin="0,0,0,0"/>
-                                    <!-- Cover bottom border of box to merge with arrow 
-                                    <Path Grid.Row="1" Data="M0,0 8,0 8,2 0,2 Z" Fill="#242832" Stroke="#242832" StrokeThickness="1" HorizontalAlignment="Center" Margin="0,-2,0,0"/> -->
-                                    <Path Grid.Row="1" Data="M0,0 L10,0" Stroke="{DynamicResource PanelBackgroundBrush}" StrokeThickness="3" HorizontalAlignment="Center" Margin="0,-1,0,0"/> 
-                                </Grid>
-                            </Popup>
-                        </Panel>
-                    </Grid>
-                    
-                    <Grid Grid.Row="1" ColumnDefinitions="100, *" Margin="0,0,0,20">
-                        <!-- Game Cover (Clickable). The outer border carries the controller focus edge. -->
-                        <Border x:Name="SessionCoverHost" Grid.Column="0" Classes="gp-cover-host" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="4">
-                        <Border BorderBrush="#30394c" BorderThickness="1" CornerRadius="4" ClipToBounds="True">
-                            <Panel Cursor="Hand">
-                                <!-- Helper Container for Aspect Ratio Scaling -->
-                                <Viewbox Stretch="Uniform">
-                                <Panel Width="528" Height="704">
-                                    <Button x:Name="SessionCoverButton" Classes="gp-cover" Command="{Binding OpenGameSelectorCommand}" IsEnabled="{Binding IsGameSelectorEnabled}"
-                                            HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                            PointerEntered="OnCoverPointerEntered" PointerExited="OnCoverPointerExited"
-                                            GotFocus="OnCoverGotFocus" LostFocus="OnCoverLostFocus"
-                                            Padding="0" BorderThickness="0" Background="Transparent" CornerRadius="10"
-                                            ToolTip.Tip="{Binding [Session_ChangeGameTooltip], Source={x:Static services:LocalizationService.Instance}}">
-                                        <Border CornerRadius="10" ClipToBounds="True">
-                                             <Panel>
-                                                 <Image Source="{Binding SessionGameCover}" Stretch="UniformToFill"/>
-
-                                                 <!-- Placeholder for games with no cover. The FontSize is in the
-                                                      coordinates of the 528x704 Panel, which the Viewbox scales. -->
-                                                 <TextBlock Text="No cover"
-                                                            IsVisible="{Binding IsNoCoverPlaceholderVisible}"
-                                                            Foreground="{DynamicResource ButtonCancelBrush}"
-                                                            FontSize="72" FontWeight="SemiBold"
-                                                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                             </Panel>
+            <!-- Session Content: one dialog per confirmation, side by side. -->
+            <!-- Unclipped, or it cuts the glow and a dialog sliding past its edge. -->
+            <ItemsControl x:Name="SessionDialogsHost" ItemsSource="{Binding Confirmations}" IsVisible="{Binding !IsGameSelectorVisible}"
+                          HorizontalAlignment="Center" VerticalAlignment="Center" ClipToBounds="False">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" Spacing="24"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="vm:SessionConfirmationViewModel">
+                        <!-- The glow is its resting look; OnSessionDialogAttached plays the entrance and the one-off halo before it. -->
+                        <Border x:Name="SessionDialog" Background="{DynamicResource AppBackgroundBrush}" CornerRadius="16" Width="420" MinHeight="320" VerticalAlignment="Center"
+                                BoxShadow="0 0 0 0 #00EA377A, 0 20 50 0 #8C000000, 0 0 32 0 #80EA377A" BorderBrush="#73EA377A" BorderThickness="1"
+                                AttachedToVisualTree="OnSessionDialogAttached">
+                            <Grid RowDefinitions="*, Auto">
+                                <StackPanel Grid.Row="0" Margin="20,18,20,20">
+                                    <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,0,0,16">
+                                        <!-- The half this session was played in, as a split screen with its side lit. -->
+                                        <Border IsVisible="{Binding IsSlotMarkVisible}" Width="16" Height="12" CornerRadius="3" Padding="1.5"
+                                                BorderBrush="{DynamicResource IconMediumBrush}" BorderThickness="1.5" VerticalAlignment="Center">
+                                            <Grid ColumnDefinitions="*, 1.5, *">
+                                                <Border Grid.Column="0" CornerRadius="1" Background="{DynamicResource TextPrimaryBrush}" IsVisible="{Binding IsFirstSlot}"/>
+                                                <Border Grid.Column="2" CornerRadius="1" Background="{DynamicResource TextPrimaryBrush}" IsVisible="{Binding !IsFirstSlot}"/>
+                                            </Grid>
                                         </Border>
-                                    </Button>
-                                </Panel>
-                            </Viewbox>
-                            
-                            <!-- Hover Overlay Hint (Outside Viewbox) -->
-                            <Border Background="{DynamicResource OverlayLightBrush}" IsHitTestVisible="False" CornerRadius="2" IsVisible="{Binding IsRecycleOverlayVisible}">
-                                <PathIcon Data="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z" 
-                                          Foreground="{DynamicResource IconLightBrush}" 
-                                          Width="20" Height="20"
-                                          HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            
-                            <!-- Loading Spinner (Outside Viewbox to maintain fixed size) -->
-                            <Path Classes="spinner" 
-                                  IsVisible="{Binding IsSessionCoverLoading}"
-                                  Data="M 25,0 A 25,25 0 1 1 0,25" 
-                                  StrokeThickness="3" 
-                                  Stretch="Uniform"
-                                  Width="25" Height="25"
-                                  HorizontalAlignment="Center" VerticalAlignment="Center">
-                                  <Path.Stroke>
-                                       <ConicGradientBrush>
-                                           <GradientStop Color="rgba(143, 156, 167, 0)" Offset="0" /> 
-                                           <GradientStop Color="rgba(143, 156, 167, 1)" Offset="1" />   
-                                       </ConicGradientBrush>
-                                   </Path.Stroke>
-                            </Path>
-                        </Panel>
-                    </Border>
-                        </Border>
+                                        <TextBlock Text="{Binding SessionEndedText}" FontSize="11" FontWeight="SemiBold" LetterSpacing="1"
+                                                   Foreground="{DynamicResource TextSubtleBrush}" VerticalAlignment="Center"/>
+                                    </StackPanel>
 
-                        <!-- Game Details -->
-                        <StackPanel Grid.Column="1" Margin="15,0,0,0" VerticalAlignment="Center">
-                            <Panel>
-                                <TextBlock Text="{Binding SessionGameTitle}" 
-                                           IsVisible="{Binding !IsSessionTitleLoading}"
-                                           FontSize="22" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}" TextWrapping="Wrap"/>
-                                           
-                                <!-- Title Loader (Skeleton) -->
-                                <Border Classes="skeleton" 
-                                        IsVisible="{Binding IsSessionTitleLoading}" 
-                                        VerticalAlignment="Center" 
-                                        HorizontalAlignment="Left"
-                                        Width="200" Height="28">
-                                    <Border Width="100" HorizontalAlignment="Left" Margin="0" Height="28">
-                                         <Border.RenderTransform>
-                                             <TranslateTransform />
-                                         </Border.RenderTransform>
-                                    </Border>
-                                </Border>
-                            </Panel>
-                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                                <TextBlock Text="{Binding [Session_TotalTime], Source={x:Static services:LocalizationService.Instance}}" Foreground="{DynamicResource TextMutedBrush}" FontSize="14"/>
-                                <TextBlock Text="{Binding SessionPlayTime}" Foreground="{DynamicResource BrandPrimaryBrush}" FontWeight="Bold" FontSize="14"/>
-                            </StackPanel>
+                                    <Grid ColumnDefinitions="112, *">
+                                        <!-- The cover is how the game is changed. The outer border carries the controller focus edge. -->
+                                        <Border x:Name="SessionCoverHost" Grid.Column="0" Classes="gp-cover-host session-cover" VerticalAlignment="Top" CornerRadius="8">
+                                            <Border BorderBrush="#30394c" BorderThickness="1" CornerRadius="8" ClipToBounds="True">
+                                                <Panel Cursor="Hand">
+                                                    <!-- The FontSize below is in the coordinates of the 528x704 Panel, which the Viewbox scales. -->
+                                                    <Viewbox Stretch="Uniform">
+                                                        <Panel Width="528" Height="704">
+                                                            <Button x:Name="SessionCoverButton" Classes="gp-cover" Command="{Binding OpenGameSelectorCommand}" IsEnabled="{Binding IsGameSelectorEnabled}"
+                                                                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                                                                    Padding="0" BorderThickness="0" Background="Transparent" CornerRadius="0"
+                                                                    AutomationProperties.Name="{Binding [Session_ChangeGameTooltip], Source={x:Static services:LocalizationService.Instance}}">
+                                                                <Panel>
+                                                                    <TransitioningContentControl Content="{Binding SessionGameCover}">
+                                                                        <TransitioningContentControl.PageTransition>
+                                                                            <CrossFade Duration="0:0:0.25"/>
+                                                                        </TransitioningContentControl.PageTransition>
+                                                                        <TransitioningContentControl.ContentTemplate>
+                                                                            <DataTemplate x:DataType="imaging:Bitmap">
+                                                                                <Image Source="{Binding}" Stretch="UniformToFill"/>
+                                                                            </DataTemplate>
+                                                                        </TransitioningContentControl.ContentTemplate>
+                                                                    </TransitioningContentControl>
+                                                                    <TextBlock Text="No cover"
+                                                                               IsVisible="{Binding IsNoCoverPlaceholderVisible}"
+                                                                               Foreground="{DynamicResource ButtonCancelBrush}"
+                                                                               FontSize="72" FontWeight="SemiBold"
+                                                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                </Panel>
+                                                            </Button>
+                                                        </Panel>
+                                                    </Viewbox>
 
-                                <StackPanel Orientation="Horizontal" Spacing="6" Margin="0,8,0,0">
-                                    <ToggleButton Classes="mark-chip" IsChecked="{Binding IsSessionMarkedStarted}" IsEnabled="{Binding AreButtonsEnabled}"
-                                                  ToolTip.Placement="Top" ToolTip.VerticalOffset="-6" ToolTip.Tip="{Binding [Session_MarkStartedTooltip], Source={x:Static services:LocalizationService.Instance}}">
-                                        <StackPanel Orientation="Horizontal" Spacing="4">
-                                            <PathIcon Data="{StaticResource MarkStartedIconData}"/>
-                                            <TextBlock Text="{Binding [Session_MarkStarted], Source={x:Static services:LocalizationService.Instance}}" VerticalAlignment="Center"/>
+                                                    <!-- Always shown, so changing the game needs no hover to be found; clicks go through to the cover. -->
+                                                    <Border Classes="cover-pill" IsVisible="{Binding IsGameSelectorEnabled}" IsHitTestVisible="False"
+                                                            HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="6">
+                                                        <StackPanel Orientation="Horizontal" Spacing="5">
+                                                            <PathIcon Data="{StaticResource ChangeGameIconData}" Width="12" Height="12" VerticalAlignment="Center"/>
+                                                            <TextBlock Text="{Binding [Session_ChangeGame], Source={x:Static services:LocalizationService.Instance}}"
+                                                                       FontSize="11.5" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                                                        </StackPanel>
+                                                    </Border>
+
+                                                    <!-- Outside the Viewbox to keep a fixed size. -->
+                                                    <Path Classes="spinner"
+                                                          IsVisible="{Binding IsSessionCoverLoading}"
+                                                          Data="M 25,0 A 25,25 0 1 1 0,25"
+                                                          StrokeThickness="3"
+                                                          Stretch="Uniform"
+                                                          Width="25" Height="25"
+                                                          HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Path.Stroke>
+                                                            <ConicGradientBrush>
+                                                                <GradientStop Color="rgba(143, 156, 167, 0)" Offset="0" />
+                                                                <GradientStop Color="rgba(143, 156, 167, 1)" Offset="1" />
+                                                            </ConicGradientBrush>
+                                                        </Path.Stroke>
+                                                    </Path>
+                                                </Panel>
+                                            </Border>
+                                        </Border>
+
+                                        <StackPanel Grid.Column="1" Margin="16,2,0,0">
+                                            <Panel>
+                                                <TransitioningContentControl Content="{Binding SessionGameTitle}" IsVisible="{Binding !IsSessionTitleLoading}">
+                                                    <TransitioningContentControl.PageTransition>
+                                                        <CrossFade Duration="0:0:0.25"/>
+                                                    </TransitioningContentControl.PageTransition>
+                                                    <TransitioningContentControl.ContentTemplate>
+                                                        <DataTemplate x:DataType="sys:String">
+                                                            <TextBlock Text="{Binding}" FontSize="20" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}" TextWrapping="Wrap"/>
+                                                        </DataTemplate>
+                                                    </TransitioningContentControl.ContentTemplate>
+                                                </TransitioningContentControl>
+
+                                                <!-- Title Loader (Skeleton) -->
+                                                <Border Classes="skeleton"
+                                                        IsVisible="{Binding IsSessionTitleLoading}"
+                                                        VerticalAlignment="Center"
+                                                        HorizontalAlignment="Left"
+                                                        Width="200" Height="26">
+                                                    <Border Width="100" HorizontalAlignment="Left" Margin="0" Height="26">
+                                                        <Border.RenderTransform>
+                                                            <TranslateTransform />
+                                                        </Border.RenderTransform>
+                                                    </Border>
+                                                </Border>
+                                            </Panel>
+
+                                            <!-- The game came from a remembered choice; "Forget" folds the line away and goes back to detection. -->
+                                            <ctl:RevealPanel IsOpen="{Binding IsGameRemembered}">
+                                                <WrapPanel Margin="0,4,0,0">
+                                                    <StackPanel Orientation="Horizontal" Spacing="4" Margin="0,0,6,0" VerticalAlignment="Center">
+                                                        <PathIcon Data="{StaticResource RememberedIconData}" Width="11" Height="11" Foreground="{DynamicResource TextSubtleBrush}" VerticalAlignment="Center"/>
+                                                        <TextBlock FontSize="12" Foreground="{DynamicResource TextSubtleBrush}" VerticalAlignment="Center" MaxWidth="190" TextTrimming="CharacterEllipsis"
+                                                                   ToolTip.Tip="{Binding RememberTarget}">
+                                                            <Run Text="{Binding [Session_RememberedFor], Source={x:Static services:LocalizationService.Instance}}"/><Run Text="{Binding RememberTarget}"/>
+                                                        </TextBlock>
+                                                    </StackPanel>
+                                                    <Button Classes="link" Command="{Binding ForgetRememberedGameCommand}" IsEnabled="{Binding AreButtonsEnabled}">
+                                                        <TextBlock Text="{Binding [Session_ForgetGame], Source={x:Static services:LocalizationService.Instance}}" FontSize="12" VerticalAlignment="Center"/>
+                                                    </Button>
+                                                </WrapPanel>
+                                            </ctl:RevealPanel>
+
+                                            <ctl:SessionTimeText Duration="{Binding SessionDuration}" Margin="0,10,0,0" FontSize="30" FontWeight="Bold"
+                                                                 Foreground="{DynamicResource TextPrimaryBrush}" UnitFontSize="17" UnitForeground="{DynamicResource TextMutedBrush}"
+                                                                 AutomationProperties.Name="{Binding SessionPlayTime}"/>
+
+                                            <!-- A WrapPanel so the link drops to its own line when the prompt leaves no room. -->
+                                            <WrapPanel Margin="0,6,0,0">
+                                                <TextBlock Text="{Binding [Blacklist_NotAGame], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding !IsPendingGameEmulated}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                                <TextBlock Text="{Binding [Blacklist_NotWanted], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding IsPendingGameEmulated}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                                <Button Classes="link" Command="{Binding BlacklistPendingGameCommand}" IsEnabled="{Binding AreButtonsEnabled}">
+                                                    <StackPanel Orientation="Horizontal" Spacing="4">
+                                                        <PathIcon Data="M12,2C17.5,2 22,6.5 22,12C22,17.5 17.5,22 12,22C6.5,22 2,17.5 2,12C2,6.5 6.5,2 12,2M12,4C10.1,4 8.4,4.6 7.1,5.7L18.3,16.9C19.3,15.5 20,13.8 20,12C20,7.6 16.4,4 12,4M16.9,18.3L5.7,7.1C4.6,8.4 4,10.1 4,12C4,16.4 7.6,20 12,20C13.9,20 15.6,19.4 16.9,18.3Z"
+                                                                  Width="11" Height="11" VerticalAlignment="Center"/>
+                                                        <TextBlock Text="{Binding [Blacklist_Add], Source={x:Static services:LocalizationService.Instance}}" FontSize="12" VerticalAlignment="Center"/>
+                                                    </StackPanel>
+                                                </Button>
+                                            </WrapPanel>
+
+                                            <StackPanel Orientation="Horizontal" Spacing="6" Margin="0,12,0,0">
+                                                <ToggleButton Classes="mark-chip session-chip" IsChecked="{Binding IsSessionMarkedStarted}" IsEnabled="{Binding AreButtonsEnabled}"
+                                                              ToolTip.Placement="Top" ToolTip.VerticalOffset="-6" ToolTip.Tip="{Binding [Session_MarkStartedTooltip], Source={x:Static services:LocalizationService.Instance}}">
+                                                    <StackPanel Orientation="Horizontal" Spacing="5">
+                                                        <Panel VerticalAlignment="Center">
+                                                            <PathIcon Classes="chip-icon" Data="{StaticResource MarkStartedIconData}"/>
+                                                            <Path Classes="chip-check" Data="M1.5,6.5 L4.8,9.5 L10.5,2.8"/>
+                                                        </Panel>
+                                                        <TextBlock Text="{Binding [Session_MarkStarted], Source={x:Static services:LocalizationService.Instance}}" VerticalAlignment="Center"/>
+                                                    </StackPanel>
+                                                </ToggleButton>
+                                                <ToggleButton Classes="mark-chip session-chip" IsChecked="{Binding IsSessionMarkedFinished}" IsEnabled="{Binding AreButtonsEnabled}"
+                                                              ToolTip.Placement="Top" ToolTip.VerticalOffset="-6" ToolTip.Tip="{Binding [Session_MarkFinishedTooltip], Source={x:Static services:LocalizationService.Instance}}">
+                                                    <StackPanel Orientation="Horizontal" Spacing="5">
+                                                        <Panel VerticalAlignment="Center">
+                                                            <PathIcon Classes="chip-icon" Data="{StaticResource MarkFinishedIconData}"/>
+                                                            <Path Classes="chip-check" Data="M1.5,6.5 L4.8,9.5 L10.5,2.8"/>
+                                                        </Panel>
+                                                        <TextBlock Text="{Binding [Session_MarkFinished], Source={x:Static services:LocalizationService.Instance}}" VerticalAlignment="Center"/>
+                                                    </StackPanel>
+                                                </ToggleButton>
+                                            </StackPanel>
                                         </StackPanel>
-                                    </ToggleButton>
-                                    <ToggleButton Classes="mark-chip" IsChecked="{Binding IsSessionMarkedFinished}" IsEnabled="{Binding AreButtonsEnabled}"
-                                                  ToolTip.Placement="Top" ToolTip.VerticalOffset="-6" ToolTip.Tip="{Binding [Session_MarkFinishedTooltip], Source={x:Static services:LocalizationService.Instance}}">
-                                        <StackPanel Orientation="Horizontal" Spacing="4">
-                                            <PathIcon Data="{StaticResource MarkFinishedIconData}"/>
-                                            <TextBlock Text="{Binding [Session_MarkFinished], Source={x:Static services:LocalizationService.Instance}}" VerticalAlignment="Center"/>
+                                    </Grid>
+
+                                <!-- Note and tags, as Backloggd keeps them per log. Each opens in place from its dashed button. -->
+                                <StackPanel>
+                                    <ctl:RevealPanel IsOpen="{Binding IsRememberGameOffered}">
+                                        <ToggleButton x:Name="SessionRememberGameToggle" Classes="remember-toggle" Margin="0,16,0,0"
+                                                      IsChecked="{Binding IsRememberGameChosen}" IsEnabled="{Binding AreButtonsEnabled}">
+                                            <StackPanel Spacing="2">
+                                                <TextBlock FontSize="13" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap">
+                                                    <Run Text="{Binding [Session_RememberGame], Source={x:Static services:LocalizationService.Instance}}"/><Run Text="{Binding RememberTarget}" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                                </TextBlock>
+                                                <TextBlock FontSize="11" Foreground="{DynamicResource TextSubtleBrush}" TextTrimming="CharacterEllipsis">
+                                                    <Run Text="{Binding [Session_DetectedAs], Source={x:Static services:LocalizationService.Instance}}"/><Run Text="{Binding DetectedGameTitle}"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </ToggleButton>
+                                    </ctl:RevealPanel>
+
+                                    <ctl:RevealPanel IsOpen="{Binding IsSessionExtrasRowOpen}">
+                                        <StackPanel>
+                                            <Border Height="1" Background="{DynamicResource SeparatorBrush}" Margin="0,16,0,12"/>
+                                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                                <Button x:Name="SessionAddNoteButton" Classes="add-extra" Command="{Binding OpenSessionNoteCommand}"
+                                                        IsVisible="{Binding !IsSessionNoteOpen}" IsEnabled="{Binding AreSessionExtrasEnabled}">
+                                                    <StackPanel Orientation="Horizontal" Spacing="6">
+                                                        <PathIcon Data="{StaticResource AddExtraIconData}"/>
+                                                        <TextBlock Text="{Binding [Session_AddNote], Source={x:Static services:LocalizationService.Instance}}" VerticalAlignment="Center"/>
+                                                    </StackPanel>
+                                                </Button>
+                                                <Button x:Name="SessionAddTagsButton" Classes="add-extra" Command="{Binding OpenSessionTagsCommand}"
+                                                        IsVisible="{Binding !IsSessionTagsOpen}" IsEnabled="{Binding AreSessionExtrasEnabled}">
+                                                    <StackPanel Orientation="Horizontal" Spacing="6">
+                                                        <PathIcon Data="{StaticResource AddExtraIconData}"/>
+                                                        <TextBlock Text="{Binding [Session_AddTags], Source={x:Static services:LocalizationService.Instance}}" VerticalAlignment="Center"/>
+                                                    </StackPanel>
+                                                </Button>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Spacing="6" Margin="0,8,0,0" IsVisible="{Binding IsSessionExtrasLoading}">
+                                                <Path Classes="spinner" IsVisible="{Binding IsSessionExtrasLoading}"
+                                                      Data="M 25,0 A 25,25 0 1 1 0,25" StrokeThickness="2" Stretch="Uniform"
+                                                      Width="12" Height="12" VerticalAlignment="Center">
+                                                    <Path.Stroke>
+                                                        <ConicGradientBrush>
+                                                            <GradientStop Color="rgba(255, 255, 255, 0)" Offset="0"/>
+                                                            <GradientStop Color="rgba(255, 255, 255, 1)" Offset="1"/>
+                                                        </ConicGradientBrush>
+                                                    </Path.Stroke>
+                                                </Path>
+                                                <TextBlock Text="{Binding [Session_ExtrasLoading], Source={x:Static services:LocalizationService.Instance}}"
+                                                           FontSize="12" Foreground="{DynamicResource TextMutedBrush}" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                            </StackPanel>
                                         </StackPanel>
-                                    </ToggleButton>
+                                    </ctl:RevealPanel>
+
+                                    <ctl:RevealPanel x:Name="SessionNotePanel" IsOpen="{Binding IsSessionNoteOpen}">
+                                        <StackPanel Margin="0,16,0,0">
+                                            <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,6">
+                                                <TextBlock Classes="field-label" Text="{Binding [Session_Note], Source={x:Static services:LocalizationService.Instance}}"/>
+                                                <Button Grid.Column="1" Classes="field-close gp-icon" Command="{Binding CloseSessionNoteCommand}" IsEnabled="{Binding AreSessionExtrasEnabled}"
+                                                        ToolTip.Tip="{Binding [Session_RemoveNote], Source={x:Static services:LocalizationService.Instance}}"
+                                                        AutomationProperties.Name="{Binding [Session_RemoveNote], Source={x:Static services:LocalizationService.Instance}}">
+                                                    <PathIcon Data="{StaticResource FieldCloseIconData}"/>
+                                                </Button>
+                                            </Grid>
+                                            <TextBox x:Name="SessionNoteBox" Classes="session-note gp-text" Text="{Binding SessionExtras.Note}" IsEnabled="{Binding AreSessionExtrasEnabled}"
+                                                     Watermark="{Binding [Session_NoteWatermark], Source={x:Static services:LocalizationService.Instance}}"/>
+                                            <ComboBox x:Name="SessionNotePrivacyBox" Classes="note-privacy" Margin="0,6,0,0"
+                                                      ItemsSource="{Binding SessionExtras.PrivacyOptions}" SelectedItem="{Binding SessionExtras.Privacy}" IsEnabled="{Binding AreSessionExtrasEnabled}"
+                                                      SelectionBoxItemTemplate="{StaticResource NotePrivacySelectionTemplate}" ItemTemplate="{StaticResource NotePrivacyItemTemplate}"
+                                                      SelectionChanged="OnNotePrivacyChanged" DropDownOpened="OnNotePrivacyDropDownOpened" DropDownClosed="OnNotePrivacyDropDownClosed"
+                                                      AutomationProperties.Name="{Binding [Session_NotePrivacy], Source={x:Static services:LocalizationService.Instance}}"/>
+                                        </StackPanel>
+                                    </ctl:RevealPanel>
+
+                                    <ctl:RevealPanel x:Name="SessionTagsPanel" IsOpen="{Binding IsSessionTagsOpen}">
+                                        <StackPanel Margin="0,16,0,0">
+                                            <Grid ColumnDefinitions="Auto, *, Auto" Margin="0,0,0,6">
+                                                <TextBlock Classes="field-label" Text="{Binding [Session_Tags], Source={x:Static services:LocalizationService.Instance}}"/>
+                                                <TextBlock Grid.Column="1" Classes="tag-count" Classes.full="{Binding SessionExtras.IsTagsFull}" Text="{Binding SessionExtras.TagCountText}"
+                                                           Classes.shake-a="{Binding SessionExtras.IsRejectShakeA}" Classes.shake-b="{Binding SessionExtras.IsRejectShakeB}">
+                                                    <TextBlock.RenderTransform>
+                                                        <TranslateTransform/>
+                                                    </TextBlock.RenderTransform>
+                                                </TextBlock>
+                                                <Button Grid.Column="2" Classes="field-close gp-icon" Command="{Binding CloseSessionTagsCommand}" IsEnabled="{Binding AreSessionExtrasEnabled}"
+                                                        ToolTip.Tip="{Binding [Session_RemoveTags], Source={x:Static services:LocalizationService.Instance}}"
+                                                        AutomationProperties.Name="{Binding [Session_RemoveTags], Source={x:Static services:LocalizationService.Instance}}">
+                                                    <PathIcon Data="{StaticResource FieldCloseIconData}"/>
+                                                </Button>
+                                            </Grid>
+                                            <ContentControl Content="{Binding SessionExtras}" ContentTemplate="{StaticResource TagEditorTemplate}" IsEnabled="{Binding AreSessionExtrasEnabled}"/>
+                                        </StackPanel>
+                                    </ctl:RevealPanel>
+                                </StackPanel>
                                 </StackPanel>
 
-                            <!-- A WrapPanel so the link drops to its own line when the prompt leaves no room. -->
-                            <WrapPanel Margin="0,8,0,0">
-                                <TextBlock Text="{Binding [Blacklist_NotAGame], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding !IsPendingGameEmulated}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                                <TextBlock Text="{Binding [Blacklist_NotWanted], Source={x:Static services:LocalizationService.Instance}}" IsVisible="{Binding IsPendingGameEmulated}" FontSize="12" Foreground="{DynamicResource TextSubtleBrush}" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                                <Button Classes="link" Command="{Binding BlacklistPendingGameCommand}" IsEnabled="{Binding AreButtonsEnabled}">
-                                    <StackPanel Orientation="Horizontal" Spacing="4">
-                                        <PathIcon Data="M12,2C17.5,2 22,6.5 22,12C22,17.5 17.5,22 12,22C6.5,22 2,17.5 2,12C2,6.5 6.5,2 12,2M12,4C10.1,4 8.4,4.6 7.1,5.7L18.3,16.9C19.3,15.5 20,13.8 20,12C20,7.6 16.4,4 12,4M16.9,18.3L5.7,7.1C4.6,8.4 4,10.1 4,12C4,16.4 7.6,20 12,20C13.9,20 15.6,19.4 16.9,18.3Z"
-                                                  Width="11" Height="11" VerticalAlignment="Center"/>
-                                        <TextBlock Text="{Binding [Blacklist_Add], Source={x:Static services:LocalizationService.Instance}}" FontSize="12" VerticalAlignment="Center"/>
-                                    </StackPanel>
-                                </Button>
-                            </WrapPanel>
-                        </StackPanel>
-                    </Grid>
-                    
-                    </Grid>
+                                <!-- Discard stays quiet and apart from Save; "Later" is the safe way out, so it says what it does. -->
+                                <Border Grid.Row="1" Background="{DynamicResource PanelBackgroundBrush}" Height="64" Padding="10,0,16,0" CornerRadius="0,0,15,15">
+                                    <Grid ColumnDefinitions="Auto, *, Auto, 8, Auto" VerticalAlignment="Center">
+                                        <Button Grid.Column="0" Classes="ghost-btn" Command="{Binding DiscardSessionCommand}" IsEnabled="{Binding AreButtonsEnabled}">
+                                            <TextBlock Text="{Binding [Session_Discard], Source={x:Static services:LocalizationService.Instance}}" VerticalAlignment="Center"/>
+                                        </Button>
 
-                    <!-- Buttons Footer -->
-                    <Border Grid.Row="1" Background="{DynamicResource PanelBackgroundBrush}" Height="60" Padding="20,0" CornerRadius="0,0,20,20">
-                        <Grid ColumnDefinitions="Auto, 15, *, 15, *">
-                            <Button x:Name="SessionPostponeButton" Grid.Column="0" Classes="discard-btn" Width="40" Padding="0"
-                                    Command="{Binding PostponeSessionCommand}" IsEnabled="{Binding IsPostponeEnabled}"
-                                    GotFocus="OnPostponeButtonGotFocus" LostFocus="OnPostponeButtonLostFocus"
-                                    ToolTip.Tip="{Binding [Session_PostponeTooltip], Source={x:Static services:LocalizationService.Instance}}"
-                                    ToolTip.Placement="Top" ToolTip.VerticalOffset="-10" ToolTip.ShowOnDisabled="True">
-                                <PathIcon Data="M12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22C6.47,22 2,17.5 2,12A10,10 0 0,1 12,2M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z"
-                                          Width="18" Height="18" Foreground="{DynamicResource TextPrimaryBrush}"/>
-                            </Button>
+                                        <Button x:Name="SessionPostponeButton" Grid.Column="2" Classes="discard-btn" Padding="14,0"
+                                                Command="{Binding PostponeSessionCommand}" IsEnabled="{Binding IsPostponeEnabled}"
+                                                ToolTip.Tip="{Binding [Session_PostponeTooltip], Source={x:Static services:LocalizationService.Instance}}"
+                                                ToolTip.Placement="Top" ToolTip.VerticalOffset="-10" ToolTip.ShowOnDisabled="True">
+                                            <StackPanel Orientation="Horizontal" Spacing="7">
+                                                <PathIcon Data="M12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22C6.47,22 2,17.5 2,12A10,10 0 0,1 12,2M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z"
+                                                          Width="16" Height="16" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+                                                <TextBlock Text="{Binding [Session_Postpone], Source={x:Static services:LocalizationService.Instance}}" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Button>
 
-                            <Button Grid.Column="2" Classes="discard-btn" Command="{Binding DiscardSessionCommand}" IsEnabled="{Binding AreButtonsEnabled}">
-                                <TextBlock Text="{Binding [Session_Discard], Source={x:Static services:LocalizationService.Instance}}" VerticalAlignment="Center"/>
-                            </Button>
-                            
-                            <Panel Grid.Column="4" Background="Transparent" PointerEntered="OnSaveButtonPointerEntered" PointerExited="OnSaveButtonPointerExited">
-                                <Button x:Name="SessionSaveButton" Classes="save-btn" Command="{Binding SaveSessionCommand}" IsEnabled="{Binding IsSaveEnabled}"
-                                    ToolTip.Placement="Top" ToolTip.VerticalOffset="-10" ToolTip.ShowOnDisabled="True" ToolTip.ShowDelay="0"
-                                    ToolTip.Tip="{Binding SaveButtonTooltip}">
-                                <Button.Styles>
-                                    <Style Selector="ToolTip">
-                                        <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="BorderThickness" Value="0"/>
-                                        <Setter Property="Template">
-                                            <ControlTemplate>
-                                                <Grid RowDefinitions="*, Auto" IsVisible="{Binding IsSaveTooltipVisible}">
-                                                    <Border Grid.Row="0" Background="{DynamicResource PanelBackgroundBrush}" BorderBrush="{DynamicResource BrandPrimaryBrush}" BorderThickness="1" CornerRadius="5" Padding="10">
-                                                        <TextBlock Text="{TemplateBinding Content}" MaxWidth="250" TextWrapping="Wrap" FontSize="12" Foreground="{DynamicResource TextPrimaryBrush}"/>
-                                                    </Border>
-                                                    <Path Grid.Row="1" Data="M0,0 L5,5 L10,0" Stroke="{DynamicResource BrandPrimaryBrush}" StrokeThickness="1" HorizontalAlignment="Center" Margin="0,0,0,0"/>
-                                                    <Path Grid.Row="1" Data="M0,0 L10,0" Stroke="{DynamicResource PanelBackgroundBrush}" StrokeThickness="3" HorizontalAlignment="Center" Margin="0,-1,0,0"/>
-                                                </Grid>
-                                            </ControlTemplate>
-                                        </Setter>
-                                    </Style>
-                                </Button.Styles>
-                                <Panel VerticalAlignment="Center" HorizontalAlignment="Center">
-                                    <TextBlock Text="{Binding [Session_Save], Source={x:Static services:LocalizationService.Instance}}" Foreground="{DynamicResource TextPrimaryBrush}" FontWeight="Bold" IsVisible="{Binding !IsSavingSession}" VerticalAlignment="Center"/>
-                                    <Path Classes="spinner" 
-                                          IsVisible="{Binding IsSavingSession}"
-                                          Data="M 25,0 A 25,25 0 1 1 0,25" 
-                                          StrokeThickness="3" 
-                                          Stretch="Uniform"
-                                          Width="20" Height="20"
-                                          HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        <Path.Stroke>
-                                            <ConicGradientBrush>
-                                                <GradientStop Color="rgba(255, 255, 255, 0)" Offset="0" /> 
-                                                <GradientStop Color="rgba(255, 255, 255, 1)" Offset="1" />   
-                                            </ConicGradientBrush>
-                                        </Path.Stroke>
-                                    </Path>
-                                </Panel>
-                            </Button>
-                            </Panel>
-                        </Grid>
-                    </Border>
-                </Grid>
-            </Border>
+                                        <Button x:Name="SessionSaveButton" Grid.Column="4" Classes="save-btn" Classes.saving="{Binding IsSavingSession}" Classes.saved="{Binding IsSessionSaved}"
+                                                MinWidth="108" Padding="18,0" Command="{Binding SaveSessionCommand}" IsEnabled="{Binding IsSaveEnabled}"
+                                                ToolTip.Placement="Top" ToolTip.VerticalOffset="-10" ToolTip.ShowOnDisabled="True" ToolTip.ShowDelay="0"
+                                                ToolTip.Tip="{Binding SaveButtonTooltip}">
+                                            <Button.Styles>
+                                                <Style Selector="ToolTip">
+                                                    <Setter Property="Background" Value="Transparent"/>
+                                                    <Setter Property="BorderThickness" Value="0"/>
+                                                    <Setter Property="Template">
+                                                        <ControlTemplate>
+                                                            <Grid RowDefinitions="*, Auto" IsVisible="{Binding IsSaveTooltipVisible}">
+                                                                <Border Grid.Row="0" Background="{DynamicResource PanelBackgroundBrush}" BorderBrush="{DynamicResource BrandPrimaryBrush}" BorderThickness="1" CornerRadius="5" Padding="10">
+                                                                    <TextBlock Text="{TemplateBinding Content}" MaxWidth="250" TextWrapping="Wrap" FontSize="12" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                                                </Border>
+                                                                <Path Grid.Row="1" Data="M0,0 L5,5 L10,0" Stroke="{DynamicResource BrandPrimaryBrush}" StrokeThickness="1" HorizontalAlignment="Center" Margin="0,0,0,0"/>
+                                                                <Path Grid.Row="1" Data="M0,0 L10,0" Stroke="{DynamicResource PanelBackgroundBrush}" StrokeThickness="3" HorizontalAlignment="Center" Margin="0,-1,0,0"/>
+                                                            </Grid>
+                                                        </ControlTemplate>
+                                                    </Setter>
+                                                </Style>
+                                            </Button.Styles>
+                                            <Panel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                <TextBlock Text="{Binding [Session_Save], Source={x:Static services:LocalizationService.Instance}}" Foreground="{DynamicResource TextPrimaryBrush}" FontWeight="Bold" IsVisible="{Binding !IsSavingSession}" VerticalAlignment="Center"/>
+                                                <Path Classes="spinner"
+                                                      IsVisible="{Binding IsSaveSpinnerVisible}"
+                                                      Data="M 25,0 A 25,25 0 1 1 0,25"
+                                                      StrokeThickness="3"
+                                                      Stretch="Uniform"
+                                                      Width="20" Height="20"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                    <Path.Stroke>
+                                                        <ConicGradientBrush>
+                                                            <GradientStop Color="rgba(255, 255, 255, 0)" Offset="0" />
+                                                            <GradientStop Color="rgba(255, 255, 255, 1)" Offset="1" />
+                                                        </ConicGradientBrush>
+                                                    </Path.Stroke>
+                                                </Path>
+                                                <Path Classes="save-check" IsVisible="{Binding IsSessionSaved}" Data="M4,10.5 L8.3,14.5 L16,6"/>
+                                            </Panel>
+                                        </Button>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
 
         </Panel>
 
@@ -1914,9 +2840,15 @@
                                           Margin="0,0,15,0"/>
                                           
                                 <!-- Message -->
-                                <TextBlock Grid.Column="1" Text="{Binding Message}" 
-                                           Foreground="{Binding Type, Converter={StaticResource ToastTypeToForegroundConverter}}" VerticalAlignment="Center" 
-                                           TextWrapping="Wrap" FontSize="14" FontWeight="Medium"/>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="6">
+                                    <TextBlock Text="{Binding Message}"
+                                               Foreground="{Binding Type, Converter={StaticResource ToastTypeToForegroundConverter}}"
+                                               TextWrapping="Wrap" FontSize="14" FontWeight="Medium"/>
+                                    <!-- Smaller so a path usually fits on one line. -->
+                                    <TextBlock Text="{Binding Detail}" IsVisible="{Binding HasDetail}"
+                                               Foreground="{Binding Type, Converter={StaticResource ToastTypeToForegroundConverter}}"
+                                               Opacity="0.85" TextWrapping="Wrap" FontSize="11"/>
+                                </StackPanel>
                                            
                                 <!-- Dismiss Button -->
                                 <Button Grid.Column="2" Command="{Binding DismissCommand}"

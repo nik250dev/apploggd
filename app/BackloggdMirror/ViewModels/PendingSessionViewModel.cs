@@ -1,8 +1,10 @@
 using System;
+using System.Linq;
 using Avalonia.Media.Imaging;
 using BackloggdMirror.Models;
 using BackloggdMirror.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace BackloggdMirror.ViewModels;
 
@@ -10,11 +12,14 @@ namespace BackloggdMirror.ViewModels;
 public partial class PendingSessionViewModel : ViewModelBase
 {
     private readonly Action<PendingSessionViewModel>? _marksChanged;
+    private readonly Action<PendingSessionViewModel>? _extrasChanged;
 
-    public PendingSessionViewModel(PendingSession session, Action<PendingSessionViewModel>? marksChanged = null)
+    public PendingSessionViewModel(PendingSession session, Action<PendingSessionViewModel>? marksChanged = null, Action<PendingSessionViewModel>? extrasChanged = null)
     {
         Session = session;
         _marksChanged = marksChanged;
+        _extrasChanged = extrasChanged;
+        Extras.Load(session.Extras);
     }
 
     public PendingSession Session { get; }
@@ -35,6 +40,53 @@ public partial class PendingSessionViewModel : ViewModelBase
         {
             if (SetProperty(Session.MarkedFinished, value, Session, (s, v) => s.MarkedFinished = v)) _marksChanged?.Invoke(this);
         }
+    }
+
+    /// <summary>Note and tags for the log, written over the day's on save. Kept in the session once the editor is closed with "Done".</summary>
+    public SessionExtrasViewModel Extras { get; } = new();
+
+    private SessionExtrasViewModel.Snapshot? _extrasBeforeEdit;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsAddExtrasVisible))]
+    [NotifyPropertyChangedFor(nameof(IsExtrasSummaryVisible))]
+    private bool _isEditingExtras;
+
+    public bool IsAddExtrasVisible => !IsEditingExtras && Extras.IsEmpty;
+
+    public bool IsExtrasSummaryVisible => !IsEditingExtras && !Extras.IsEmpty;
+
+    [RelayCommand]
+    private void OpenExtras()
+    {
+        _extrasBeforeEdit = Extras.TakeSnapshot();
+        IsEditingExtras = true;
+    }
+
+    [RelayCommand]
+    private void CloseExtras()
+    {
+        IsEditingExtras = false;
+        if (CommitExtras()) _extrasChanged?.Invoke(this);
+    }
+
+    /// <summary>Copies the note and tags into the session; false when they were already there.</summary>
+    public bool CommitExtras()
+    {
+        var extras = Extras.ToExtras();
+        var saved = Session.Extras;
+        if (extras.Note == saved.Note && extras.Privacy == saved.Privacy && extras.Tags.SequenceEqual(saved.Tags)) return false;
+
+        Session.Extras = extras;
+        return true;
+    }
+
+    /// <summary>Puts back what the note and tags were when the editor opened.</summary>
+    [RelayCommand]
+    private void CancelExtras()
+    {
+        if (_extrasBeforeEdit != null) Extras.Restore(_extrasBeforeEdit);
+        IsEditingExtras = false;
     }
 
     [ObservableProperty]

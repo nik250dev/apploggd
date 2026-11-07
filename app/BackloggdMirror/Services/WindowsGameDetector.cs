@@ -30,11 +30,13 @@ internal class WindowsGameDetector : IGameDetectionStrategy
     private readonly Dictionary<uint, string> _processNameCache = new Dictionary<uint, string>();
     private readonly IgdbResolverService _igdbResolver;
     private readonly IDetectionBlacklist? _blacklist;
+    private readonly IAppLogger? _logger;
 
-    public WindowsGameDetector(IgdbResolverService igdbResolver, IDetectionBlacklist? blacklist = null)
+    public WindowsGameDetector(IgdbResolverService igdbResolver, IDetectionBlacklist? blacklist = null, IAppLogger? logger = null)
     {
         _igdbResolver = igdbResolver;
         _blacklist = blacklist;
+        _logger = logger;
     }
 
     public void ReloadDatabase()
@@ -115,6 +117,7 @@ internal class WindowsGameDetector : IGameDetectionStrategy
                     foundGameName = GetWindowTitle(hWnd);
                     GetWindowThreadProcessId(hWnd, out foundProcessId);
                     gameFound = true;
+                    _logger?.Info($"[WindowsGameDetector] Window '{foundGameName}' (PID {foundProcessId}) has the game engine class '{className}'.");
                     return false; // Stop enumeration
                 }
             }
@@ -127,6 +130,7 @@ internal class WindowsGameDetector : IGameDetectionStrategy
                     foundGameName = GetWindowTitle(hWnd);
                     GetWindowThreadProcessId(hWnd, out foundProcessId);
                     gameFound = true;
+                    _logger?.Info($"[WindowsGameDetector] Window '{foundGameName}' (PID {foundProcessId}, class '{className}') covers the whole monitor.");
                     return false; // Stop enumeration
                 }
             }

@@ -11,14 +11,17 @@ Tired of manually logging every play session on Backloggd? Me too :)
 Apploggd automatically detects what you're playing, times the session and logs the playtime
 to your Backloggd journal when you close the game.
 
-![Version](https://img.shields.io/badge/version-1.2.0-8b5cf6)
+![Version](https://img.shields.io/badge/version-1.3.0-8b5cf6)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-0078d4)
 ![.NET](https://img.shields.io/badge/.NET-8.0-512bd4)
+<br>
+![Discord](https://img.shields.io/badge/Discord-nik2500946-5865f2?logo=discord&logoColor=white)
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-nik250dev-ff5a16?logo=kofi&logoColor=white)](https://ko-fi.com/nik250dev)
 
 </div>
 
 ---
-<img width="1202" height="692" alt="image" src="https://github.com/user-attachments/assets/e8d690d2-daa9-46a5-bba9-3ab22925b7c4" />
+<img width="1202" height="692" alt="Apploggd's Home screen" src="docs/screenshot.png" />
 
 
 ## Contents
@@ -46,32 +49,39 @@ sessions to your account.**
 ## Features
 
 - **Automatic game detection** — by executable name (game database) and, as a fallback, by window
-  heuristics (known game engines, fullscreen windows, and so on). On Linux, Steam games (native or
-  through Proton) are recognized by their Steam App ID.
+  heuristics (known game engines, fullscreen windows, and so on). Steam games are also recognized by
+  their Steam App ID, on Linux both native ones and those running through Proton.
 - **Emulated games** — RetroArch, Dolphin, Cemu, PPSSPP, DuckStation and PCSX2 are supported, so the
   session is logged for the game actually running in the emulator, across 20+ consoles (Game Boy,
   DS, 3DS, NES, SNES, Nintendo 64, GameCube, Wii, Wii U, Mega Drive, Dreamcast, PlayStation, PS2,
   PS3, PSP, PS Vita, Xbox, Xbox 360...).
 - **Manual picker** — if a game isn't recognized, you can search Backloggd from within the app and
   pick the right one.
+- **Remembered games** — a game picked by hand can be remembered for that executable or ROM, so the
+  next sessions are identified right away.
 - **Playtime accumulates per day** — if you play several sessions of the same game on the same
   day, they're added to the existing entry instead of overwriting it.
 - **Started / finished** — a session can be marked as the day the game was started or finished,
   like Backloggd's own play session options.
+- **Notes and tags** — a session can carry a note and tags before it's saved.
+- **Automatic mode** — every session can be saved to Backloggd on its own, without asking.
 - **Pending sessions** — sessions can be left in a Pending section to review and save later, on the
   day they were played. There's also a setting to send every session there without asking.
 - **Blacklist** — apps and emulated games that shouldn't be detected can be added to a blacklist.
-- **Controller support** — the whole app can be used with a controller, without leaving the couch.
+- **Controller support** — the whole app can be used with a controller (or a Steam Deck's own
+  controls), without leaving the couch.
 - **Offline mode** — with a remembered session, the app keeps working without a connection and
   reconnects on its own.
 - **"Recently played" list** with your latest journal entries.
 - **Self-updating** — both the app and its detection database update themselves.
+- **Two games at once** *(experimental)* — two games running at the same time can be detected and
+  logged as separate sessions.
 
 ## Requirements
 
 | | |
 |---|---|
-| **Operating system** | Windows 10/11 or Linux (x64). *(macOS is not supported yet)* |
+| **Operating system** | Windows 10/11 or Linux (x64, Steam Deck included). *(macOS is not supported yet)* |
 | **Browser** | A Chromium-based one (Chrome, Edge, Chromium). If there isn't one, the app will offer to download its own (~400 MB). |
 | **Account** | A [Backloggd](https://backloggd.com) account. |
 
@@ -108,6 +118,9 @@ and how to reach its page.
 Some executables are generic (`hl2.exe` belongs to several games), so entries may include folder
 segments, and the process's actual path is checked against them.
 
+Steam games are also recognized by their **Steam App ID**, which covers the ones whose executable
+isn't in the database. On Windows it's read from the Steam library folder the game is installed in.
+
 The app **updates this file automatically** at startup, downloading it from this repository with a
 conditional check (`ETag`): if it hasn't changed, the download is skipped. It's stored in your
 local data folder, and the app always ships an embedded copy as a fallback for the first run or
@@ -118,9 +131,9 @@ known engines (Unreal, Unity, Source, SDL, GLFW, etc) or fullscreen windows, wit
 for browsers, store launchers, Discord, OBS, IDEs, etc.
 
 On Linux most games run through Proton/Wine, so the game's `.exe` and its path are read from the
-Wine process and checked against the same database. Steam games, native ones included, are also
-recognized by their Steam App ID, and since X11 windows carry no engine classes, the window heuristics
-look at the libraries and files of the process instead (Unity, Unreal, Godot, Ren'Py...).
+Wine process and checked against the same database. The Steam App ID works for native Steam games
+too, and since X11 windows carry no engine classes, the window heuristics look at the libraries and
+files of the process instead (Unity, Unreal, Godot, Ren'Py...).
 
 **Emulators** have their own detectors: they work out which ROM, ISO or title is running (from the
 emulator's memory, its window title or its open files, depending on the emulator and the system)
@@ -161,6 +174,7 @@ Everything Apploggd stores lives in `%LOCALAPPDATA%\Apploggd\` on Windows and in
 | `detectable_processed.json` | Detection database |
 | `blacklist.json` | Apps and games you've blacklisted |
 | `pending_sessions.json` | Sessions left in Pending |
+| `remembered_games.json` | Games remembered for an executable or ROM |
 | `Logs\` | Daily diagnostic logs (they rotate automatically, 5 files max) |
 
 None of this leaves your machine. The only connections the app makes are to Backloggd (your
@@ -234,7 +248,9 @@ after a while; if it persists, check the latest log in the `Logs` folder (see
 
 ## Credits
 
-Created by **[nik250](https://www.reddit.com/user/nik250dev/)**.
+Created by **[nik250](https://www.reddit.com/user/nik250dev/)**. Questions, ideas or just want to
+talk games? Reach me on Discord (`nik2500946`). If Apploggd saves you some time, you can support it
+on [Ko-fi](https://ko-fi.com/nik250dev).
 
 Game data from [IGDB](https://www.igdb.com/). This project is not affiliated with or endorsed by
 Backloggd or IGDB.

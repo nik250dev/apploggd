@@ -3,6 +3,7 @@ using System;
 using System.Threading;
 using System.Runtime.InteropServices;
 using BackloggdMirror.Services;
+using BackloggdMirror.Services.Platform.Linux;
 using Velopack;
 
 namespace BackloggdMirror;
@@ -75,6 +76,8 @@ sealed class Program
     public static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>()
             .UsePlatformDetect()
+            // Gamescope takes a popup's own X11 window for the game window and shows it alone, so popups stay inside the window.
+            .With(new X11PlatformOptions { OverlayPopups = LinuxGamescope.IsActive })
             .WithInterFont()
             .LogToTrace();
 }

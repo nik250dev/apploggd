@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json.Serialization;
 
 namespace BackloggdMirror.Models;
 
@@ -28,6 +31,26 @@ public sealed class PendingSession
     /// <summary>Backloggd's "Started" and "Finished" marks for the play date.</summary>
     public bool MarkedStarted { get; set; }
     public bool MarkedFinished { get; set; }
+
+    /// <summary>Backloggd's note, its privacy and tags, written over the play date's on save.</summary>
+    public string? Note { get; set; }
+
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public NotePrivacy NotePrivacy { get; set; }
+
+    public List<string>? Tags { get; set; }
+
+    [JsonIgnore]
+    public PlaySessionExtras Extras
+    {
+        get => new(Note ?? string.Empty, NotePrivacy, Tags ?? new List<string>());
+        set
+        {
+            Note = string.IsNullOrEmpty(value.Note) ? null : value.Note;
+            NotePrivacy = value.Privacy;
+            Tags = value.Tags.Count == 0 ? null : value.Tags.ToList();
+        }
+    }
 
     public DateTime StartedAt { get; set; }
     public DateTime EndedAt { get; set; }

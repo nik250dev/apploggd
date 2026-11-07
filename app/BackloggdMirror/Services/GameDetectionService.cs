@@ -21,14 +21,15 @@ namespace BackloggdMirror.Services;
 /// against the local database is exact and yields the IGDB id for free; the emulator tier is exact
 /// too but has to work out which ROM is loaded before it can name a game; and the window heuristic
 /// only produces a window <em>title</em> that still has to be identified afterwards.
-/// Linux adds a tier of its own between the first two, the Steam app id (see <see cref="LinuxSteamGameDetector"/>),
-/// has its own emulator detectors behind the same tier, and brings its own window heuristic (see <see cref="LinuxWindowGameDetector"/>).
+/// A tier sits between the first two for Steam games by app id (see <see cref="WindowsSteamGameDetector"/> and
+/// <see cref="LinuxSteamGameDetector"/>). Linux has its own emulator detectors behind the same tier, and brings its
+/// own window heuristic (see <see cref="LinuxWindowGameDetector"/>).
 /// </summary>
 public class GameDetectionService : IGameDetectionService
 {
     private readonly IGameDetectionStrategy _strategy;
     private readonly EmulatorDetector? _emulatorDetector;
-    private readonly LinuxSteamGameDetector? _steamDetector;
+    private readonly ISteamGameDetector? _steamDetector;
     private readonly IProcessIdentity _processIdentity;
 
     /// <summary>
@@ -39,17 +40,21 @@ public class GameDetectionService : IGameDetectionService
     private Dictionary<string, List<ExeCandidate>> _exeIndex;
 
     private readonly IAppLogger? _logger;
-    private readonly IDetectionBlacklist? _blacklist;
+    private readonly DetectionFilter _filter;
 
     public GameDetectionService(IAppLogger? logger = null, IDetectionBlacklist? blacklist = null)
     {
         _logger = logger;
-        _blacklist = blacklist;
+
+        // Every tier gets the filter, so the games already being timed are skipped where the blacklist is.
+        _filter = new DetectionFilter(blacklist);
+        blacklist = _filter;
 
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
             var igdbResolver = new IgdbResolverService(logger);
-            _strategy = new WindowsGameDetector(igdbResolver, blacklist);
+            _strategy = new WindowsGameDetector(igdbResolver, blacklist, logger);
+            _steamDetector = new WindowsSteamGameDetector(logger, blacklist);
             _emulatorDetector = new EmulatorDetector(logger, blacklist);
         }
         else if (OperatingSystem.IsLinux())
@@ -85,10 +90,18 @@ public class GameDetectionService : IGameDetectionService
     /// the result: every tier stops at its first hit, so a blacklisted app listed first would
     /// otherwise hide a real game running alongside it on every tick.
     /// </summary>
-    public DetectedGame? Detect()
+    public DetectedGame? Detect(IReadOnlyCollection<uint>? excludedProcessIds = null)
     {
-        var game = DetectUnresolved();
-        return game == null ? null : game with { ExecutablePath = ProcessImagePath.TryGet((int)game.ProcessId) };
+        _filter.Exclude(excludedProcessIds is { Count: > 0 } ? ProcessTree.Lineage(excludedProcessIds) : null);
+        try
+        {
+            var game = DetectUnresolved();
+            return game == null ? null : game with { ExecutablePath = ProcessImagePath.TryGet((int)game.ProcessId) };
+        }
+        finally
+        {
+            _filter.Exclude(null);
+        }
     }
 
     private DetectedGame? DetectUnresolved()
@@ -99,7 +112,7 @@ public class GameDetectionService : IGameDetectionService
             return new DetectedGame(exeName, exePid, exeIdIgdb, DetectionSource.Executable);
         }
 
-        // Priority 1.2 (Linux): Steam games by app id, which is what finds native Linux builds
+        // Priority 1.2: Steam games by app id, which finds native Linux builds and games listed without executables
         var steamGame = _steamDetector?.Detect();
         if (steamGame != null)
         {
@@ -314,7 +327,7 @@ public class GameDetectionService : IGameDetectionService
                     if (!_processIdentity.IsOwnProcess(process))
                         continue;
 
-                    if (_blacklist?.IsApplicationBlocked(process.Id, processName) == true)
+                    if (_filter.IsApplicationBlocked(process.Id, processName))
                         continue;
 
                     string? fullPath = null;

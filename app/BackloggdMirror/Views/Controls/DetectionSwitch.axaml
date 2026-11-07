@@ -1,0 +1,137 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ctl="using:BackloggdMirror.Views.Controls">
+
+    <StreamGeometry x:Key="DetectionSwitchOnIcon">M12,2A10,10 0 1,1 12,22A10,10 0 1,1 12,2Z</StreamGeometry>
+    <StreamGeometry x:Key="DetectionSwitchOffIcon">M6,5H10V19H6ZM14,5H18V19H14Z</StreamGeometry>
+
+    <ControlTheme x:Key="{x:Type ctl:DetectionSwitch}" TargetType="ctl:DetectionSwitch">
+        <!-- Fixed width, wide enough for long translations: the halves never resize between states or languages. -->
+        <Setter Property="Width" Value="344"/>
+        <Setter Property="Height" Value="52"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="ClipToBounds" Value="False"/>
+        <Setter Property="FocusAdorner" Value="{x:Null}"/>
+        <Setter Property="RenderTransform" Value="scale(1)"/>
+        <Setter Property="Transitions">
+            <Transitions>
+                <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12" Easing="CubicEaseOut"/>
+                <DoubleTransition Property="Opacity" Duration="0:0:0.26"/>
+            </Transitions>
+        </Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_Track"
+                        Background="{DynamicResource SurfaceDarkBrush}"
+                        BorderBrush="{DynamicResource SeparatorBrush}" BorderThickness="1"
+                        CornerRadius="14" Padding="4">
+                    <Grid ColumnDefinitions="*,*">
+                        <Border Name="PART_Thumb" Grid.Column="0">
+                            <Border Name="PART_ThumbFill" CornerRadius="10" RenderTransformOrigin="50%,50%">
+                                <Border.RenderTransform>
+                                    <ScaleTransform/>
+                                </Border.RenderTransform>
+                            </Border>
+                        </Border>
+                        <Border Name="PART_OnHalf" Grid.Column="0" CornerRadius="10" Background="Transparent">
+                            <StackPanel Name="PART_OnContent" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <PathIcon Data="{StaticResource DetectionSwitchOnIcon}" Width="7" Height="7" VerticalAlignment="Center"/>
+                                <TextBlock Text="{TemplateBinding OnLabel}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Name="PART_OffHalf" Grid.Column="1" CornerRadius="10" Background="Transparent">
+                            <StackPanel Name="PART_OffContent" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <PathIcon Data="{StaticResource DetectionSwitchOffIcon}" Width="11" Height="11" VerticalAlignment="Center"/>
+                                <TextBlock Text="{TemplateBinding OffLabel}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:pressed">
+            <Setter Property="RenderTransform" Value="scale(0.985)"/>
+        </Style>
+        <Style Selector="^:focus-visible /template/ Border#PART_Track">
+            <Setter Property="BoxShadow" Value="0 0 0 2 #FFFFFF"/>
+        </Style>
+        <Style Selector="^:disabled">
+            <Setter Property="Opacity" Value="0.5"/>
+            <Setter Property="Cursor" Value="Arrow"/>
+        </Style>
+
+        <!-- Thumb: brand colour while detecting, neutral while paused. -->
+        <Style Selector="^ /template/ Border#PART_ThumbFill">
+            <Setter Property="Background" Value="{DynamicResource BrandPrimaryBrush}"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.26"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="^:unchecked /template/ Border#PART_ThumbFill">
+            <Setter Property="Background" Value="{DynamicResource ButtonCancelBrush}"/>
+        </Style>
+
+        <!-- Labels: white on the selected half, muted on the other. -->
+        <Style Selector="^ /template/ StackPanel">
+            <Setter Property="TextElement.Foreground" Value="{DynamicResource TextMutedBrush}"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="TextElement.Foreground" Duration="0:0:0.22"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="^:checked /template/ StackPanel#PART_OnContent, ^:unchecked /template/ StackPanel#PART_OffContent">
+            <Setter Property="TextElement.Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+
+        <!-- Only the half that would change anything reacts to the pointer. -->
+        <Style Selector="^:checked /template/ Border#PART_OnHalf, ^:unchecked /template/ Border#PART_OffHalf">
+            <Setter Property="Cursor" Value="Arrow"/>
+        </Style>
+        <Style Selector="^:checked /template/ Border#PART_OffHalf:pointerover, ^:unchecked /template/ Border#PART_OnHalf:pointerover">
+            <Setter Property="Background" Value="#0FFFFFFF"/>
+        </Style>
+        <Style Selector="^:checked /template/ Border#PART_OffHalf:pointerover > StackPanel, ^:unchecked /template/ Border#PART_OnHalf:pointerover > StackPanel">
+            <Setter Property="TextElement.Foreground" Value="{DynamicResource TextSecondaryBrush}"/>
+        </Style>
+
+        <!-- Micro-interaction: the thumb overshoots its slide and squashes on the way (ease-out per keyframe, as in CSS). -->
+        <Style Selector="^:animated /template/ Border#PART_Thumb">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.38">
+                        <TransformOperationsTransition.Easing>
+                            <SplineEasing X1="0.34" Y1="1.45" X2="0.64" Y2="1"/>
+                        </TransformOperationsTransition.Easing>
+                    </TransformOperationsTransition>
+                </Transitions>
+            </Setter>
+        </Style>
+        <!-- Two identical animations: each starts when its selector begins to match. -->
+        <Style Selector="^:animated:checked /template/ Border#PART_ThumbFill">
+            <Style.Animations>
+                <Animation Duration="0:0:0.38">
+                    <KeyFrame Cue="0%"><Setter Property="ScaleTransform.ScaleX" Value="1"/><Setter Property="ScaleTransform.ScaleY" Value="1"/></KeyFrame>
+                    <KeyFrame Cue="30%" KeySpline="0,0,0.58,1"><Setter Property="ScaleTransform.ScaleX" Value="1.1"/><Setter Property="ScaleTransform.ScaleY" Value="0.9"/></KeyFrame>
+                    <KeyFrame Cue="65%" KeySpline="0,0,0.58,1"><Setter Property="ScaleTransform.ScaleX" Value="0.97"/><Setter Property="ScaleTransform.ScaleY" Value="1.03"/></KeyFrame>
+                    <KeyFrame Cue="100%" KeySpline="0,0,0.58,1"><Setter Property="ScaleTransform.ScaleX" Value="1"/><Setter Property="ScaleTransform.ScaleY" Value="1"/></KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+        <Style Selector="^:animated:unchecked /template/ Border#PART_ThumbFill">
+            <Style.Animations>
+                <Animation Duration="0:0:0.38">
+                    <KeyFrame Cue="0%"><Setter Property="ScaleTransform.ScaleX" Value="1"/><Setter Property="ScaleTransform.ScaleY" Value="1"/></KeyFrame>
+                    <KeyFrame Cue="30%" KeySpline="0,0,0.58,1"><Setter Property="ScaleTransform.ScaleX" Value="1.1"/><Setter Property="ScaleTransform.ScaleY" Value="0.9"/></KeyFrame>
+                    <KeyFrame Cue="65%" KeySpline="0,0,0.58,1"><Setter Property="ScaleTransform.ScaleX" Value="0.97"/><Setter Property="ScaleTransform.ScaleY" Value="1.03"/></KeyFrame>
+                    <KeyFrame Cue="100%" KeySpline="0,0,0.58,1"><Setter Property="ScaleTransform.ScaleX" Value="1"/><Setter Property="ScaleTransform.ScaleY" Value="1"/></KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+    </ControlTheme>
+</ResourceDictionary>

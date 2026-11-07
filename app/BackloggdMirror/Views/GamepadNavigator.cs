@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using Avalonia;
 using Avalonia.Automation.Peers;
@@ -22,6 +23,7 @@ internal sealed class GamepadNavigator : IDisposable
 {
     private const double PointerExitDistance = 4;
     private const double ScrollStep = 80;
+    private const long EchoWindowMs = 150;
 
     private readonly MainWindow _window;
     private readonly MainWindowViewModel _vm;
@@ -33,6 +35,10 @@ internal sealed class GamepadNavigator : IDisposable
     private Control? _pageFocus;
     private ComboBox? _openComboBox;
     private int _comboBoxIndex;
+    private readonly Stopwatch _clock = Stopwatch.StartNew();
+    private readonly DispatcherTimer _echoCheck;
+    private long _lastActionAt = -EchoWindowMs;
+    private long _echoKeyAt;
 
     public GamepadNavigator(MainWindow window, MainWindowViewModel vm, GamepadService gamepad, IAppLogger? logger)
     {
@@ -40,15 +46,19 @@ internal sealed class GamepadNavigator : IDisposable
         _vm = vm;
         _gamepad = gamepad;
         _logger = logger;
+        _echoCheck = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(EchoWindowMs) };
+        _echoCheck.Tick += OnEchoCheck;
 
         _gamepad.ActionReceived += OnAction;
         _vm.PropertyChanged += OnViewModelPropertyChanged;
         _vm.ToastNotifications.CollectionChanged += OnToastsChanged;
         _vm.GameSearchResults.CollectionChanged += OnSearchResultsChanged;
+        _vm.Confirmations.CollectionChanged += OnConfirmationsChanged;
         _window.PropertyChanged += OnWindowPropertyChanged;
         _window.AddHandler(InputElement.PointerMovedEvent, OnPointerMoved, RoutingStrategies.Tunnel, handledEventsToo: true);
         _window.AddHandler(InputElement.PointerPressedEvent, OnPointerPressed, RoutingStrategies.Tunnel, handledEventsToo: true);
         _window.AddHandler(InputElement.KeyDownEvent, OnKeyDown, RoutingStrategies.Tunnel, handledEventsToo: true);
+        _window.AddHandler(InputElement.KeyUpEvent, OnKeyUp, RoutingStrategies.Tunnel, handledEventsToo: true);
 
         UpdateListening();
     }
@@ -73,6 +83,12 @@ internal sealed class GamepadNavigator : IDisposable
     // A toast that expires under the focus takes it along.
     private void OnToastsChanged(object? sender, NotifyCollectionChangedEventArgs e) => RestoreFocusLater();
 
+    // With two modals, closing one leaves the other: the focus moves there. A new one does not take it from the other.
+    private void OnConfirmationsChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        if (e.OldItems?.Count > 0 && _vm.Confirmations.Count > 0) RestoreFocusLater();
+    }
+
     // Each cover that streams in replaces its item, which recreates the button under the focus.
     private void OnSearchResultsChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
@@ -94,8 +110,9 @@ internal sealed class GamepadNavigator : IDisposable
             case nameof(MainWindowViewModel.IsSessionConfirmationVisible):
                 if (_vm.IsSessionConfirmationVisible)
                 {
-                    // Each new confirmation starts without controller mode.
+                    // Each new confirmation starts without controller mode, nor a focus Enter could press behind it.
                     ExitControllerMode();
+                    _window.FocusManager?.ClearFocus();
                 }
                 else if (IsControllerMode)
                 {
@@ -111,7 +128,7 @@ internal sealed class GamepadNavigator : IDisposable
                 if (!IsControllerMode) break;
                 _window.GameSearchResultsList.Classes.Remove("gp-dim");
                 if (_vm.IsGameSelectorVisible) FocusDefaultLater();
-                else if (_vm.IsSessionConfirmationVisible) FocusLater(() => _window.SessionCoverButton);
+                else if (_vm.IsSessionConfirmationVisible) FocusLater(() => _window.SessionControl<Button>(_vm.SelectorConfirmationTarget, "SessionCoverButton"));
                 else RestoreFocusLater();
                 break;
 
@@ -135,6 +152,7 @@ internal sealed class GamepadNavigator : IDisposable
     {
         // Posted from the controller thread, so it can arrive just after listening stopped.
         if (!_gamepad.IsListening) return;
+        _lastActionAt = _clock.ElapsedMilliseconds;
 
         _window.Classes.Set("gp-ps", kind == GamepadKind.PlayStation);
         _window.Classes.Set("gp-nintendo", kind == GamepadKind.Nintendo);
@@ -178,6 +196,13 @@ internal sealed class GamepadNavigator : IDisposable
                 break;
 
             default:
+                // The changelog text sits between Ko-fi and Close, so it scrolls before the focus jumps across it.
+                if (action is GamepadAction.Up or GamepadAction.Down && ActiveDialog == _window.ChangelogDialog
+                    && Scroll(current, action))
+                {
+                    break;
+                }
+
                 var next = FindNext(current, action, candidates);
                 if (next != null) Focus(next);
                 else if (action is GamepadAction.Up or GamepadAction.Down) Scroll(current, action);
@@ -205,7 +230,7 @@ internal sealed class GamepadNavigator : IDisposable
     /// <summary>The topmost dialog, in the order MainWindow.axaml stacks them; null when the pages are in front.</summary>
     private Control? ActiveDialog =>
         _vm.IsGameSelectorVisible ? _window.GameSelectorDialog
-        : _vm.IsSessionConfirmationVisible ? _window.SessionDialog
+        : _vm.IsSessionConfirmationVisible ? _window.SessionDialogsHost
         : _vm.IsNoBrowserWarningVisible ? _window.NoBrowserDialog
         : _vm.IsClearDataConfirmationVisible ? _window.ClearDataDialog
         : _vm.IsChangelogVisible ? _window.ChangelogDialog
@@ -227,8 +252,10 @@ internal sealed class GamepadNavigator : IDisposable
         return candidates;
     }
 
+    // Text boxes only where marked: the session note and tags, which a frontend's on-screen keyboard can fill in.
     private static IEnumerable<Control> NavigableIn(Visual root) =>
-        root.GetVisualDescendants().OfType<Control>().Where(c => c is Button or ComboBox && IsNavigable(c));
+        root.GetVisualDescendants().OfType<Control>()
+            .Where(c => (c is Button or ComboBox || c is TextBox && c.Classes.Contains("gp-text")) && IsNavigable(c));
 
     // The search box and its button are left out: the picker opens with the search already run.
     private static bool IsNavigable(Control control) =>
@@ -249,12 +276,12 @@ internal sealed class GamepadNavigator : IDisposable
             // Offline nothing can be saved, and the game selector needs Backloggd too.
             if (_vm.IsOffline)
             {
-                return candidates.FirstOrDefault(b => b == _window.SessionPostponeButton) ?? candidates[0];
+                return candidates.FirstOrDefault(b => b.Name == "SessionPostponeButton") ?? candidates[0];
             }
 
             // An unidentified game cannot be saved; picking it is the way forward.
-            return candidates.FirstOrDefault(b => b == _window.SessionSaveButton)
-                ?? candidates.FirstOrDefault(b => b == _window.SessionCoverButton)
+            return candidates.FirstOrDefault(b => b.Name == "SessionSaveButton")
+                ?? candidates.FirstOrDefault(b => b.Name == "SessionCoverButton")
                 ?? candidates[0];
         }
 
@@ -398,18 +425,22 @@ internal sealed class GamepadNavigator : IDisposable
     }
 
     // Past the last control up or down, the content scrolls instead: the changelog has nothing else to move through.
-    private void Scroll(Control from, GamepadAction direction)
+    /// <returns>Whether there was anything left to scroll that way.</returns>
+    private bool Scroll(Control from, GamepadAction direction)
     {
         var scope = (Visual?)ActiveDialog ?? _window.MainContent;
         var viewer = from.FindAncestorOfType<ScrollViewer>() is { } own && scope.IsVisualAncestorOf(own)
             ? own
             : scope.GetVisualDescendants().OfType<ScrollViewer>()
                 .FirstOrDefault(v => v.IsEffectivelyVisible && v.Extent.Height > v.Viewport.Height);
-        if (viewer == null) return;
+        if (viewer == null) return false;
 
         double max = Math.Max(0, viewer.Extent.Height - viewer.Viewport.Height);
-        double y = viewer.Offset.Y + (direction == GamepadAction.Up ? -ScrollStep : ScrollStep);
-        viewer.Offset = viewer.Offset.WithY(Math.Clamp(y, 0, max));
+        double y = Math.Clamp(viewer.Offset.Y + (direction == GamepadAction.Up ? -ScrollStep : ScrollStep), 0, max);
+        if (Math.Abs(y - viewer.Offset.Y) < 0.5) return false;
+
+        viewer.Offset = viewer.Offset.WithY(y);
+        return true;
     }
 
     private void Press(Control control)
@@ -421,7 +452,9 @@ internal sealed class GamepadNavigator : IDisposable
         }
 
         // The session cover draws its ring on the frame around it, so that is what gets pressed.
-        Control pressed = control == _window.SessionCoverButton ? _window.SessionCoverHost : control;
+        Control pressed = control.Name == "SessionCoverButton"
+            ? control.GetVisualAncestors().OfType<Border>().FirstOrDefault(b => b.Name == "SessionCoverHost") ?? control
+            : control;
         Rect? spot = IsToast(control) ? null : BoundsOf(control);
 
         pressed.Classes.Add("gp-press");
@@ -435,7 +468,7 @@ internal sealed class GamepadNavigator : IDisposable
             else if (peer is IInvokeProvider invoker) invoker.Invoke();
             // Pending decision: after Save, Discard or Later, maybe hide to the tray so the frontend regains the foreground.
 
-            // Pause/Resume, a discarded pending row and the like take the focused button away with them.
+            // A discarded pending row and the like take the focused button away with them.
             RestoreFocusLater(spot);
         }, TimeSpan.FromMilliseconds(90));
     }
@@ -509,11 +542,6 @@ internal sealed class GamepadNavigator : IDisposable
         _openComboBox = null;
         _window.Classes.Remove("gamepad");
         _window.GameSearchResultsList.Classes.Remove("gp-dim");
-
-        // Focus stood in for the hover on these two; the pointer takes over again.
-        var focused = FocusedControl;
-        if (focused == _window.SessionCoverButton) _vm.OnCoverPointerExited();
-        else if (focused == _window.InfoButton) _vm.OnInfoIconExited();
     }
 
     // A window appearing under a still cursor gets pointer events too; only a real move counts.
@@ -536,7 +564,39 @@ internal sealed class GamepadNavigator : IDisposable
 
     private void OnPointerPressed(object? sender, PointerPressedEventArgs e) => ExitControllerMode();
 
-    private void OnKeyDown(object? sender, KeyEventArgs e) => ExitControllerMode();
+    // Steam's desktop layout also sends each press as a key: the Steam Deck always, a PC with Steam open if so set.
+    private static bool IsEchoKey(Key key) =>
+        key is Key.Up or Key.Down or Key.Left or Key.Right or Key.Enter or Key.Space or Key.Escape;
+
+    private void OnKeyDown(object? sender, KeyEventArgs e)
+    {
+        if (!IsControllerMode) return;
+        if (!IsEchoKey(e.Key))
+        {
+            ExitControllerMode();
+            return;
+        }
+
+        // Enter and Space would press the focused button on their own; the key leaves the mode only if no press comes with it.
+        e.Handled = true;
+        _echoKeyAt = _clock.ElapsedMilliseconds;
+        if (_echoKeyAt - _lastActionAt > EchoWindowMs)
+        {
+            _echoCheck.Stop();
+            _echoCheck.Start();
+        }
+    }
+
+    private void OnKeyUp(object? sender, KeyEventArgs e)
+    {
+        if (IsControllerMode && IsEchoKey(e.Key)) e.Handled = true;
+    }
+
+    private void OnEchoCheck(object? sender, EventArgs e)
+    {
+        _echoCheck.Stop();
+        if (_lastActionAt < _echoKeyAt - EchoWindowMs) ExitControllerMode();
+    }
 
     public void Dispose()
     {
@@ -545,9 +605,13 @@ internal sealed class GamepadNavigator : IDisposable
         _vm.PropertyChanged -= OnViewModelPropertyChanged;
         _vm.ToastNotifications.CollectionChanged -= OnToastsChanged;
         _vm.GameSearchResults.CollectionChanged -= OnSearchResultsChanged;
+        _vm.Confirmations.CollectionChanged -= OnConfirmationsChanged;
         _window.PropertyChanged -= OnWindowPropertyChanged;
         _window.RemoveHandler(InputElement.PointerMovedEvent, OnPointerMoved);
         _window.RemoveHandler(InputElement.PointerPressedEvent, OnPointerPressed);
         _window.RemoveHandler(InputElement.KeyDownEvent, OnKeyDown);
+        _window.RemoveHandler(InputElement.KeyUpEvent, OnKeyUp);
+        _echoCheck.Stop();
+        _echoCheck.Tick -= OnEchoCheck;
     }
 }

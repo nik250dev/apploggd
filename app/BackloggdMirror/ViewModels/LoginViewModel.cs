@@ -33,6 +33,11 @@ namespace BackloggdMirror.ViewModels
         // UI thread only, so no synchronization needed.
         private bool _acceptProgress;
 
+        // False when startup skipped the browser check for lack of disk space; Login runs it then.
+        private bool _browserReady;
+
+        private bool _loginAfterBrowserReady;
+
         [ObservableProperty]
         private string _username = string.Empty;
 
@@ -133,6 +138,13 @@ namespace BackloggdMirror.ViewModels
         /// </summary>
         private void EnsureBrowserThenCheckSession()
         {
+            // Probing a browser writes to disk too, and a failed probe would offer a 400 MB download.
+            if (!DiskSpace.HasEnoughFreeSpace(_logger))
+            {
+                ShowFormForLowDiskSpace();
+                return;
+            }
+
             IsBusy = true;
             IsCheckingSession = true;
             IsBrowserPromptVisible = false;
@@ -199,11 +211,37 @@ namespace BackloggdMirror.ViewModels
         /// </summary>
         private void ContinueAfterBrowserReady()
         {
+            _browserReady = true;
             IsBusy = false;
             IsCheckingSession = false;
             IsBrowserPromptVisible = false;
             StatusMessage = string.Empty;
+
+            if (_loginAfterBrowserReady)
+            {
+                _loginAfterBrowserReady = false;
+                _ = Login();
+                return;
+            }
+
             CheckSavedSession();
+        }
+
+        // With no saved session the message waits for Login, which repeats the check.
+        private void ShowFormForLowDiskSpace()
+        {
+            _logger.Warning("[LoginViewModel] Not enough free disk space. Skipping the browser check and the saved session.");
+            IsBusy = false;
+            IsCheckingSession = false;
+            IsBrowserPromptVisible = false;
+            _acceptProgress = false;
+
+            bool showMessage = _loginAfterBrowserReady || _credentialStorageService.LoadSession().Cookies.Count > 0;
+            _loginAfterBrowserReady = false;
+            StatusMessage = showMessage
+                ? LocalizationService.Instance["Login_Status_LowDiskSpace"]
+                : _initialStatusMessage ?? string.Empty;
+            UserInputRequired?.Invoke();
         }
 
         /// <summary>
@@ -342,6 +380,15 @@ namespace BackloggdMirror.ViewModels
                 return;
             }
 
+            // The saved session is kept on disk, so it is restored once space is freed.
+            if (!DiskSpace.HasEnoughFreeSpace(_logger))
+            {
+                _logger.Warning("[LoginViewModel] Not enough free disk space. Skipping the saved session.");
+                StatusMessage = LocalizationService.Instance["Login_Status_LowDiskSpace"];
+                UserInputRequired?.Invoke();
+                return;
+            }
+
             // CookieContainer drops expired cookies on Add, so an empty container is a dead session
             // that no connection could revive.
             foreach (var c in stored.Cookies)
@@ -428,6 +475,12 @@ namespace BackloggdMirror.ViewModels
         {
             System.Diagnostics.Debug.WriteLine($"[LoginViewModel] Username: '{Username}'");
 
+            if (!DiskSpace.HasEnoughFreeSpace(_logger))
+            {
+                StatusMessage = LocalizationService.Instance["Login_Status_LowDiskSpace"];
+                return;
+            }
+
             if (IsBrowserUnavailable)
             {
                 StatusMessage = LocalizationService.Instance["Browser_Install_Failed"];
@@ -437,6 +490,13 @@ namespace BackloggdMirror.ViewModels
             if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
             {
                 StatusMessage = LocalizationService.Instance["Login_Status_EnterCredentials"];
+                return;
+            }
+
+            if (!_browserReady)
+            {
+                _loginAfterBrowserReady = true;
+                EnsureBrowserThenCheckSession();
                 return;
             }
 

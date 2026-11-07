@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Controls.Primitives;
 using Avalonia.Platform;
 using Avalonia.Platform.Storage;
 using Avalonia;
@@ -15,6 +16,9 @@ using BackloggdMirror.Services.Platform.Linux;
 using Avalonia.Threading;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Linq;
+using System.Collections.Generic;
+using Avalonia.VisualTree;
 
 namespace BackloggdMirror.Views;
 
@@ -23,11 +27,16 @@ public partial class MainWindow : Window
     private bool _canClose = false;
     private TrayIcon? _trayIcon;
     private NativeMenuItem? _trayOpenItem;
-    private NativeMenuItem? _trayToggleItem;
+    private NativeMenu? _trayMenu;
+    // One pause/resume entry per half of the Home, in order.
+    private readonly List<NativeMenuItem> _traySlotItems = new();
+    private NativeMenuItemSeparator? _trayExitSeparator;
     private NativeMenuItem? _trayExitItem;
     private TrayNotificationWindow? _trayNotificationWindow;
     private UpdateProgressWindow? _updateProgressWindow;
     private GamepadNavigator? _gamepadNavigator;
+    // Whether the last press came from the pointer rather than the keyboard.
+    private bool _lastInputWasPointer;
 
     // Big Picture takes the foreground back ~2 s after its game exits, burying the confirmation behind it.
     private static readonly TimeSpan ConfirmationHoldFront = TimeSpan.FromSeconds(10);
@@ -63,9 +72,15 @@ public partial class MainWindow : Window
         _logger = logger;
 
         InitializeComponent();
+        AddHandler(PointerPressedEvent, (_, _) => _lastInputWasPointer = true, Avalonia.Interactivity.RoutingStrategies.Tunnel, handledEventsToo: true);
+        AddHandler(KeyDownEvent, (_, _) => _lastInputWasPointer = false, Avalonia.Interactivity.RoutingStrategies.Tunnel, handledEventsToo: true);
         UpdateAnimationsEnabled();
         InitializeTrayIcons(); // Pre-render icons
         InitializeTrayIcon();
+
+        AddHandler(PointerPressedEvent, StopHoldingFront, Avalonia.Interactivity.RoutingStrategies.Tunnel, handledEventsToo: true);
+        AddHandler(KeyDownEvent, StopHoldingFront, Avalonia.Interactivity.RoutingStrategies.Tunnel, handledEventsToo: true);
+        if (OperatingSystem.IsWindows()) Win32Properties.AddWndProcHookCallback(this, OnWndProc);
 
         if (OperatingSystem.IsLinux())
         {
@@ -205,6 +220,7 @@ public partial class MainWindow : Window
         if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
         {
             SubscribeToEvents(vm);
+            vm.OnWindowOpened();
         }
     }
 
@@ -235,17 +251,27 @@ public partial class MainWindow : Window
         vm.PropertyChanged -= OnViewModelPropertyChanged;
         vm.PropertyChanged += OnViewModelPropertyChanged;
 
+        vm.Confirmations.CollectionChanged -= OnConfirmationsChanged;
+        vm.Confirmations.CollectionChanged += OnConfirmationsChanged;
+
+        vm.TrayMenuChanged -= OnTrayMenuChanged;
+        vm.TrayMenuChanged += OnTrayMenuChanged;
+
         // Init/Sync initial state
         UpdateTrayMenuState(vm);
+        // After an update the changelog is already open by the time the view model gets here.
+        OnChangelogVisibilityChanged(vm.IsChangelogVisible);
     }
 
     private void InitializeTrayIcon()
     {
         try
         {
+            // The Deck's panel is dark and its tray icons are white glyphs.
+            string trayLogo = LinuxSteamDeck.IsSteamDeck ? "app-logo-white.png" : "app-logo.png";
             _trayIcon = new TrayIcon
             {
-                Icon = new WindowIcon(AssetLoader.Open(new Uri($"avares://{Assembly.GetExecutingAssembly().GetName().Name}/Assets/app-logo.png"))),
+                Icon = new WindowIcon(AssetLoader.Open(new Uri($"avares://{Assembly.GetExecutingAssembly().GetName().Name}/Assets/{trayLogo}"))),
                 ToolTipText = "Apploggd"
             };
 
@@ -262,16 +288,6 @@ public partial class MainWindow : Window
                 menu.Items.Add(new NativeMenuItemSeparator());
             }
 
-            _trayToggleItem = new NativeMenuItem(LocalizationService.Instance["Home_PauseSearch"]);
-            _trayToggleItem.Click += (s, e) =>
-            {
-                if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
-                {
-                    vm.ToggleGameDetectionCommand.Execute(null);
-                }
-            };
-            menu.Items.Add(_trayToggleItem);
-
             _trayExitItem = new NativeMenuItem(LocalizationService.Instance["Tray_Exit"]);
             _trayExitItem.Click += (s, e) =>
             {
@@ -284,6 +300,7 @@ public partial class MainWindow : Window
 
             LocalizationService.Instance.PropertyChanged += OnLocalizationPropertyChanged;
 
+            _trayMenu = menu;
             _trayIcon.Menu = menu;
 
             if (Application.Current != null)
@@ -301,20 +318,239 @@ public partial class MainWindow : Window
 
     private void OnViewModelPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.TrayMenuActionText)
-            || e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsGameRunning)
-            || e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsSessionConfirmationVisible))
+        if (e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsSessionConfirmationVisible)
+            && DataContext is BackloggdMirror.ViewModels.MainWindowViewModel { IsSessionConfirmationVisible: true })
         {
-            if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
-            {
-                UpdateTrayMenuState(vm);
+            StartHoldingFront();
+        }
+        else if (e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsChangelogVisible)
+                 && DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        {
+            OnChangelogVisibilityChanged(vm.IsChangelogVisible);
+        }
+    }
 
-                if (e.PropertyName == nameof(BackloggdMirror.ViewModels.MainWindowViewModel.IsSessionConfirmationVisible) && vm.IsSessionConfirmationVisible)
-                {
-                    StartHoldingFront();
-                }
+    private static readonly TimeSpan KofiPeekStart = TimeSpan.FromSeconds(1);
+    private static readonly TimeSpan KofiPeekEnd = TimeSpan.FromSeconds(3.6);
+    private readonly List<IDisposable> _kofiTimers = new();
+
+    // The Ko-fi button unfolds for a moment after the changelog opens, so it is clear what it is
+    // without hovering it (a controller has no hover), then settles back to the mug.
+    private void OnChangelogVisibilityChanged(bool visible)
+    {
+        _kofiTimers.ForEach(timer => timer.Dispose());
+        _kofiTimers.Clear();
+        ChangelogKofi.IsPeeking = false;
+        if (!visible) return;
+
+        _kofiTimers.Add(DispatcherTimer.RunOnce(() => ChangelogKofi.IsPeeking = true, KofiPeekStart));
+        _kofiTimers.Add(DispatcherTimer.RunOnce(() => ChangelogKofi.IsPeeking = false, KofiPeekEnd));
+    }
+
+    private void OnTrayMenuChanged()
+    {
+        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm) UpdateTrayMenuState(vm);
+    }
+
+    private void OnConfirmationsChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+    {
+        foreach (var confirmation in e.OldItems?.OfType<BackloggdMirror.ViewModels.SessionConfirmationViewModel>() ?? [])
+            confirmation.PropertyChanged -= OnConfirmationPropertyChanged;
+
+        foreach (var confirmation in e.NewItems?.OfType<BackloggdMirror.ViewModels.SessionConfirmationViewModel>() ?? [])
+            confirmation.PropertyChanged += OnConfirmationPropertyChanged;
+
+        // Each game that ends brings the window back, the second one too.
+        if (e.NewItems?.Count > 0) StartHoldingFront();
+
+        SlideRemainingDialogs(e);
+    }
+
+    private static readonly TimeSpan DialogSlideDuration = TimeSpan.FromMilliseconds(320);
+
+    // Long enough for a click aimed at the old spot not to land on the dialog that moved under it.
+    private static readonly TimeSpan DialogSlideClickGuard = TimeSpan.FromMilliseconds(400);
+
+    /// <summary>
+    /// One modal centred, two side by side: when the second arrives or one goes, the ones that stay slide to their
+    /// new place instead of jumping, and ignore clicks while they move.
+    /// </summary>
+    private void SlideRemainingDialogs(System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+    {
+        if (DataContext is not BackloggdMirror.ViewModels.MainWindowViewModel vm) return;
+
+        var added = e.NewItems?.OfType<object>().ToHashSet() ?? [];
+        var before = new List<(Control Container, double X)>();
+        foreach (var confirmation in vm.Confirmations)
+        {
+            if (added.Contains(confirmation)) continue;
+            if (SessionDialogsHost.ContainerFromItem(confirmation) is { IsVisible: true } container
+                && container.TranslatePoint(default, this) is { } point)
+            {
+                before.Add((container, point.X));
             }
         }
+        if (before.Count == 0) return;
+
+        // After the layout pass, which is when the containers reach their new place.
+        Dispatcher.UIThread.Post(() =>
+        {
+            foreach (var (container, oldX) in before)
+            {
+                if (container.TranslatePoint(default, this) is not { } now) continue;
+                double dx = oldX - now.X;
+                if (Math.Abs(dx) < 1) continue;
+
+                var slide = new TranslateTransform(dx, 0);
+                container.RenderTransform = slide;
+                slide.Transitions = new Avalonia.Animation.Transitions
+                {
+                    new Avalonia.Animation.DoubleTransition { Property = TranslateTransform.XProperty, Duration = DialogSlideDuration, Easing = new Avalonia.Animation.Easings.CubicEaseOut() }
+                };
+                slide.X = 0;
+
+                container.IsHitTestVisible = false;
+                DispatcherTimer.RunOnce(() => container.IsHitTestVisible = true, DialogSlideClickGuard);
+            }
+        }, DispatcherPriority.Background);
+    }
+
+    private void OnConfirmationPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        if (sender is not BackloggdMirror.ViewModels.SessionConfirmationViewModel confirmation) return;
+
+        if (e.PropertyName == nameof(BackloggdMirror.ViewModels.SessionConfirmationViewModel.IsSessionNoteOpen))
+        {
+            OnSessionExtraToggled(confirmation, confirmation.IsSessionNoteOpen, "SessionNotePanel",
+                () => SessionControl<TextBox>(confirmation, "SessionNoteBox"), "SessionAddNoteButton");
+        }
+        else if (e.PropertyName == nameof(BackloggdMirror.ViewModels.SessionConfirmationViewModel.IsSessionTagsOpen))
+        {
+            OnSessionExtraToggled(confirmation, confirmation.IsSessionTagsOpen, "SessionTagsPanel",
+                () => TagInputIn(SessionControl<Views.Controls.RevealPanel>(confirmation, "SessionTagsPanel")), "SessionAddTagsButton");
+        }
+    }
+
+    /// <summary>A named control inside the dialog of a confirmation.</summary>
+    internal T? SessionControl<T>(BackloggdMirror.ViewModels.SessionConfirmationViewModel? confirmation, string name) where T : Control =>
+        confirmation == null ? null
+            : SessionDialogsHost.ContainerFromItem(confirmation)?.GetVisualDescendants().OfType<T>().FirstOrDefault(c => c.Name == name);
+
+    private static BackloggdMirror.ViewModels.SessionConfirmationViewModel? ConfirmationOf(object? sender) =>
+        (sender as Control)?.DataContext as BackloggdMirror.ViewModels.SessionConfirmationViewModel;
+
+    /// <summary>An opened field takes the focus, unless it opened to show what Backloggd had; a removed one hands it back to its button, if the focus was inside.</summary>
+    private void OnSessionExtraToggled(BackloggdMirror.ViewModels.SessionConfirmationViewModel confirmation, bool opened, string panelName, Func<Control?> field, string addButtonName)
+    {
+        if (confirmation.IsFillingSessionExtras
+            || DataContext is not BackloggdMirror.ViewModels.MainWindowViewModel vm || !vm.Confirmations.Contains(confirmation)) return;
+
+        var panel = SessionControl<Views.Controls.RevealPanel>(confirmation, panelName);
+        bool focusInside = panel != null && FocusManager?.GetFocusedElement() is Visual focused && panel.IsVisualAncestorOf(focused);
+        Dispatcher.UIThread.Post(() =>
+        {
+            if (opened) FocusSessionControl(field());
+            else if (focusInside || FocusManager?.GetFocusedElement() == null) FocusSessionControl(SessionControl<Button>(confirmation, addButtonName));
+        }, DispatcherPriority.Background);
+    }
+
+    // Directional under the controller, so the navigator's edge lands on it as on any other control.
+    private void FocusSessionControl(Control? control)
+    {
+        if (control == null || !control.IsEffectivelyVisible || !control.IsEffectivelyEnabled) return;
+        control.Focus(_gamepadNavigator?.IsControllerMode == true ? Avalonia.Input.NavigationMethod.Directional : Avalonia.Input.NavigationMethod.Unspecified);
+    }
+
+    private static Views.Controls.TagInputBox? TagInputIn(Visual? scope) =>
+        scope?.GetVisualDescendants().OfType<Views.Controls.TagInputBox>().FirstOrDefault();
+
+    // A click anywhere in the box, not just on the input line, starts typing.
+    private void OnTagBoxPointerPressed(object? sender, Avalonia.Input.PointerPressedEventArgs e)
+    {
+        if (e.Source is Visual source && source.FindAncestorOfType<Button>(includeSelf: true) != null) return;
+        TagInputIn(sender as Visual)?.Focus();
+    }
+
+    /// <summary>With the pointer the focus goes back to typing; from the keyboard or a controller, to the chip that takes the removed one's place.</summary>
+    private void OnSessionTagRemoveClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        if ((sender as Control)?.DataContext is not string tag
+            || (sender as Visual)?.FindAncestorOfType<ItemsControl>() is not { DataContext: BackloggdMirror.ViewModels.SessionExtrasViewModel extras } list) return;
+
+        var tagBox = list.GetVisualAncestors().OfType<Border>().FirstOrDefault(b => b.Classes.Contains("tag-box"));
+        int index = extras.Tags.IndexOf(tag);
+        extras.RemoveTag(tag);
+
+        Dispatcher.UIThread.Post(() =>
+        {
+            int count = extras.Tags.Count;
+            bool byPointer = _lastInputWasPointer && _gamepadNavigator?.IsControllerMode != true;
+            Control? next = count == 0 || byPointer ? null
+                : list.ContainerFromIndex(Math.Min(index, count - 1))?.GetVisualDescendants().OfType<Button>().FirstOrDefault();
+            FocusSessionControl(next ?? TagInputIn(tagBox));
+        }, DispatcherPriority.Background);
+    }
+
+    private static Border? PendingCardOf(object? sender) =>
+        (sender as Visual)?.GetVisualAncestors().OfType<Border>().FirstOrDefault(b => b.Classes.Contains("pending-card"));
+
+    // The note takes the focus once the editor is in place.
+    private void OnPendingExtrasOpenClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        var card = PendingCardOf(sender);
+        Dispatcher.UIThread.Post(() =>
+            FocusSessionControl(card?.GetVisualDescendants().OfType<TextBox>().FirstOrDefault(t => t.Classes.Contains("session-note"))),
+            DispatcherPriority.Background);
+    }
+
+    // Done or Cancel take their buttons away; the focus goes to what opens the editor again.
+    private void OnPendingExtrasClosedClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        var card = PendingCardOf(sender);
+        Dispatcher.UIThread.Post(() =>
+            FocusSessionControl(card?.GetVisualDescendants().OfType<Button>()
+                .FirstOrDefault(b => (b.Classes.Contains("extras-summary") || b.Classes.Contains("add-extra")) && b.IsEffectivelyVisible)),
+            DispatcherPriority.Background);
+    }
+
+    // Up when it would spill past the window: a popup is only kept on the screen, and under Gamescope it is drawn inside the window.
+    private void OnNotePrivacyDropDownOpened(object? sender, EventArgs e)
+    {
+        (sender as ComboBox)?.Classes.Add("open");
+        TurnPrivacyChevron(sender, 180);
+        if (sender is not ComboBox comboBox
+            || comboBox.GetVisualDescendants().OfType<Popup>().FirstOrDefault() is not { Child: Control menu } popup
+            || comboBox.TranslatePoint(new Point(0, comboBox.Bounds.Height), this) is not { } linkBottom) return;
+
+        bool up = linkBottom.Y + menu.DesiredSize.Height > ClientSize.Height;
+        popup.Placement = up ? PlacementMode.TopEdgeAlignedLeft : PlacementMode.BottomEdgeAlignedLeft;
+        // The menu keeps a transparent margin below it for the shadow.
+        popup.VerticalOffset = up ? menu.Margin.Bottom - 2 : 2;
+        menu.RenderTransformOrigin = up ? new RelativePoint(0, 1, RelativeUnit.Relative) : RelativePoint.TopLeft;
+    }
+
+    private void OnNotePrivacyDropDownClosed(object? sender, EventArgs e)
+    {
+        (sender as ComboBox)?.Classes.Remove("open");
+        TurnPrivacyChevron(sender, 0);
+    }
+
+    // The angle lives on the template's RotateTransform, which animates it; a RenderTransform set from a style did not turn.
+    private static void TurnPrivacyChevron(object? comboBox, double angle)
+    {
+        if ((comboBox as Visual)?.GetVisualDescendants().OfType<Avalonia.Controls.Shapes.Path>().FirstOrDefault(p => p.Name == "Chevron")?.RenderTransform is RotateTransform rotate)
+        {
+            rotate.Angle = angle;
+        }
+    }
+
+    // The chosen privacy pops in; two classes so each change restarts the animation.
+    private void OnNotePrivacyChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        if (sender is not ComboBox comboBox || e.RemovedItems.Count == 0) return;
+        bool wasA = comboBox.Classes.Contains("pop-a");
+        comboBox.Classes.Set("pop-a", !wasA);
+        comboBox.Classes.Set("pop-b", wasA);
     }
 
     private void StartHoldingFront()
@@ -327,19 +563,30 @@ public partial class MainWindow : Window
             _holdFrontTimer.Tick += OnHoldFrontTick;
         }
         _holdFrontTimer.Start();
+        WatchInputElsewhere(true);
     }
+
+    private void StopHoldingFront()
+    {
+        _holdFrontTimer?.Stop();
+        WatchInputElsewhere(false);
+    }
+
+    // A click or key press here means the user is at the desktop, so whatever takes the foreground next is their choice.
+    private void StopHoldingFront(object? sender, Avalonia.Interactivity.RoutedEventArgs e) => StopHoldingFront();
 
     private void OnHoldFrontTick(object? sender, EventArgs e)
     {
-        // Minimized or sent to the tray by the user: they have seen it and chose to leave it.
-        bool stillWanted = DataContext is BackloggdMirror.ViewModels.MainWindowViewModel { IsSessionConfirmationVisible: true }
+        // Minimized, sent to the tray or already saving: the user has seen it and chose to leave it.
+        bool stillWanted = DataContext is BackloggdMirror.ViewModels.MainWindowViewModel { IsSessionConfirmationVisible: true } vm
+            && vm.Confirmations.Any(c => !c.IsSavingSession)
             && DateTime.UtcNow < _holdFrontUntil
             && IsVisible
             && WindowState != WindowState.Minimized;
 
         if (!stillWanted)
         {
-            _holdFrontTimer?.Stop();
+            StopHoldingFront();
             return;
         }
 
@@ -349,25 +596,148 @@ public partial class MainWindow : Window
         BringToFront();
     }
 
-    private void UpdateTrayMenuState(BackloggdMirror.ViewModels.MainWindowViewModel vm)
+    private bool _watchingInputElsewhere;
+
+    /// <summary>Raw input in sink mode: presses in other windows too, which the window's own events never see.</summary>
+    private void WatchInputElsewhere(bool watch)
     {
-        if (_trayToggleItem == null) return;
+        if (!OperatingSystem.IsWindows() || watch == _watchingInputElsewhere) return;
+        var handle = TryGetPlatformHandle()?.Handle ?? IntPtr.Zero;
+        if (handle == IntPtr.Zero) return;
 
-        _trayToggleItem.Header = vm.TrayMenuActionText;
-
-        _trayToggleItem.IsEnabled = !(vm.IsSessionConfirmationVisible || vm.IsGameRunning);
-
-        if (vm.IsSessionConfirmationVisible || vm.IsGameRunning)
+        uint flags = watch ? RIDEV_INPUTSINK : RIDEV_REMOVE;
+        IntPtr target = watch ? handle : IntPtr.Zero;
+        var devices = new[]
         {
-            _trayToggleItem.Icon = _clockIconBitmap;
-        }
-        else if (vm.IsGameDetectionPaused)
+            new RAWINPUTDEVICE { usUsagePage = 0x01, usUsage = 0x02, dwFlags = flags, hwndTarget = target },
+            new RAWINPUTDEVICE { usUsagePage = 0x01, usUsage = 0x06, dwFlags = flags, hwndTarget = target }
+        };
+        if (RegisterRawInputDevices(devices, (uint)devices.Length, (uint)System.Runtime.InteropServices.Marshal.SizeOf<RAWINPUTDEVICE>()))
         {
-            _trayToggleItem.Icon = _playIconBitmap;
+            _watchingInputElsewhere = watch;
         }
         else
         {
-            _trayToggleItem.Icon = _pauseIconBitmap;
+            _logger?.Warning($"[MainWindow] Could not {(watch ? "watch" : "stop watching")} clicks and key presses outside the window (error {System.Runtime.InteropServices.Marshal.GetLastWin32Error()}).");
+        }
+    }
+
+    private IntPtr OnWndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+    {
+        if (msg == WM_INPUT && _watchingInputElsewhere && IsRawPress(lParam))
+        {
+            _logger?.Info("[MainWindow] Click or key press while the session confirmation was up; leaving the foreground to the user.");
+            StopHoldingFront();
+        }
+        return IntPtr.Zero;
+    }
+
+    /// <summary>A mouse button or a key going down; moving the mouse or letting go does not count.</summary>
+    private static bool IsRawPress(IntPtr rawInput)
+    {
+        int headerSize = System.Runtime.InteropServices.Marshal.SizeOf<RAWINPUTHEADER>();
+        uint size = 0;
+        GetRawInputData(rawInput, RID_INPUT, null, ref size, (uint)headerSize);
+        if (size < headerSize + 8 || size > 256) return false;
+
+        var buffer = new byte[size];
+        if (GetRawInputData(rawInput, RID_INPUT, buffer, ref size, (uint)headerSize) != size) return false;
+
+        return BitConverter.ToUInt32(buffer, 0) switch
+        {
+            // RAWMOUSE.usButtonFlags: the *_DOWN flags of the five buttons.
+            RIM_TYPEMOUSE => (BitConverter.ToUInt16(buffer, headerSize + 4) & 0x0155) != 0,
+            // RAWKEYBOARD.Flags without RI_KEY_BREAK.
+            RIM_TYPEKEYBOARD => (BitConverter.ToUInt16(buffer, headerSize + 2) & 0x01) == 0,
+            _ => false
+        };
+    }
+
+    private const uint WM_INPUT = 0x00FF;
+    private const uint RID_INPUT = 0x10000003;
+    private const uint RIDEV_REMOVE = 0x00000001;
+    private const uint RIDEV_INPUTSINK = 0x00000100;
+    private const uint RIM_TYPEMOUSE = 0;
+    private const uint RIM_TYPEKEYBOARD = 1;
+
+    [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
+    private struct RAWINPUTDEVICE
+    {
+        public ushort usUsagePage;
+        public ushort usUsage;
+        public uint dwFlags;
+        public IntPtr hwndTarget;
+    }
+
+    [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
+    private struct RAWINPUTHEADER
+    {
+        public uint dwType;
+        public uint dwSize;
+        public IntPtr hDevice;
+        public IntPtr wParam;
+    }
+
+    [System.Runtime.InteropServices.DllImport("user32.dll", SetLastError = true)]
+    [return: System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.Bool)]
+    private static extern bool RegisterRawInputDevices(RAWINPUTDEVICE[] devices, uint count, uint size);
+
+    [System.Runtime.InteropServices.DllImport("user32.dll")]
+    private static extern uint GetRawInputData(IntPtr rawInput, uint command, [System.Runtime.InteropServices.Out] byte[]? data, ref uint size, uint headerSize);
+
+    /// <summary>One entry per half: its state or what clicking does, disabled with a clock while it is busy with a session.</summary>
+    private void UpdateTrayMenuState(BackloggdMirror.ViewModels.MainWindowViewModel vm)
+    {
+        if (_trayMenu == null) return;
+
+        if (_traySlotItems.Count != vm.Slots.Count) RebuildTraySlotItems(vm);
+
+        for (int i = 0; i < _traySlotItems.Count; i++)
+        {
+            var slot = vm.Slots[i];
+            var item = _traySlotItems[i];
+
+            // Set only on change: on Linux every assignment is a D-Bus round trip, and the play time ticks each second.
+            if (item.Header != slot.TrayMenuText) item.Header = slot.TrayMenuText;
+
+            bool busy = slot.IsBusy;
+            if (item.IsEnabled == busy) item.IsEnabled = !busy;
+
+            var icon = busy ? _clockIconBitmap : slot.IsUserPaused ? _playIconBitmap : _pauseIconBitmap;
+            if (!ReferenceEquals(item.Icon, icon)) item.Icon = icon;
+        }
+    }
+
+    // Between "Open Apploggd" (Linux) and Exit; with two halves, a separator sets Exit apart.
+    private void RebuildTraySlotItems(BackloggdMirror.ViewModels.MainWindowViewModel vm)
+    {
+        if (_trayMenu == null) return;
+
+        foreach (var old in _traySlotItems) _trayMenu.Items.Remove(old);
+        _traySlotItems.Clear();
+        if (_trayExitSeparator != null) _trayMenu.Items.Remove(_trayExitSeparator);
+        _trayExitSeparator = null;
+
+        int at = OperatingSystem.IsLinux() ? 2 : 0;
+        for (int i = 0; i < vm.Slots.Count; i++)
+        {
+            int index = i;
+            var item = new NativeMenuItem(vm.Slots[i].TrayMenuText);
+            item.Click += (s, e) =>
+            {
+                if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel current && index < current.Slots.Count)
+                {
+                    current.ToggleSlotDetection(current.Slots[index]);
+                }
+            };
+            _trayMenu.Items.Insert(at + i, item);
+            _traySlotItems.Add(item);
+        }
+
+        if (vm.Slots.Count > 1)
+        {
+            _trayExitSeparator = new NativeMenuItemSeparator();
+            _trayMenu.Items.Insert(at + vm.Slots.Count, _trayExitSeparator);
         }
     }
 
@@ -448,9 +818,10 @@ public partial class MainWindow : Window
     /// </summary>
     protected override void OnClosing(WindowClosingEventArgs e)
     {
-        if (_canClose)
+        // Exit from the tray menu, or the system shutting down (cancelling it here would block the
+        // shutdown). Either way a session in progress is dropped.
+        if (_canClose || e.CloseReason == WindowCloseReason.ApplicationShutdown)
         {
-            // Exit requested from the tray menu: this one is a real close.
             base.OnClosing(e);
             return;
         }
@@ -609,102 +980,59 @@ public partial class MainWindow : Window
     /// </summary>
     private void ShowTrayUpdateNotice(TrayNotice notice) => ShowTrayNotice(notice);
 
-    private void OnInfoIconPointerEntered(object? sender, Avalonia.Input.PointerEventArgs e)
-    {
-        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
-        {
-            vm.DismissForcedTooltip();
-        }
-    }
+    private static readonly Avalonia.Animation.Easings.SplineEasing DialogEnterEasing = new(0.2, 0, 0, 1);
 
-    private void OnInfoIconPointerExited(object? sender, Avalonia.Input.PointerEventArgs e)
-    {
-        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
-        {
-            vm.OnInfoIconExited();
-        }
-    }
+    // The arrival: the dialog grows into place, a pink ring spreads out once and fades, and the lasting glow comes in after it.
+    private static readonly BoxShadows HaloStart = BoxShadows.Parse("0 0 0 0 #99EA377A, 0 20 50 0 #8C000000, 0 0 0 0 #00EA377A");
+    private static readonly BoxShadows HaloEnd = BoxShadows.Parse("0 0 0 18 #00EA377A, 0 20 50 0 #8C000000, 0 0 0 0 #00EA377A");
+    private static readonly BoxShadows DialogGlow = BoxShadows.Parse("0 0 0 0 #00EA377A, 0 20 50 0 #8C000000, 0 0 32 0 #80EA377A");
 
-    // With a controller, focus stands in for the hover on the info icon and the cover.
-    private void OnInfoButtonGotFocus(object? sender, Avalonia.Input.GotFocusEventArgs e)
+    private void OnSessionDialogAttached(object? sender, VisualTreeAttachmentEventArgs e)
     {
-        if (_gamepadNavigator?.IsControllerMode == true && DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
-        {
-            vm.DismissForcedTooltip();
-        }
-    }
+        if (sender is not Border dialog) return;
 
-    private void OnInfoButtonLostFocus(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
-    {
-        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        if (ReducedMotion.IsOn)
         {
-            vm.OnInfoIconExited();
+            dialog.BoxShadow = DialogGlow;
+            return;
         }
-    }
 
-    private void OnCoverGotFocus(object? sender, Avalonia.Input.GotFocusEventArgs e)
-    {
-        if (_gamepadNavigator?.IsControllerMode == true && DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        var scale = new ScaleTransform(0.97, 0.97);
+        var shift = new TranslateTransform(0, 10);
+        var enter = TimeSpan.FromMilliseconds(240);
+        scale.Transitions = new Avalonia.Animation.Transitions
         {
-            vm.OnCoverPointerEntered();
-        }
-    }
+            new Avalonia.Animation.DoubleTransition { Property = ScaleTransform.ScaleXProperty, Duration = enter, Easing = DialogEnterEasing },
+            new Avalonia.Animation.DoubleTransition { Property = ScaleTransform.ScaleYProperty, Duration = enter, Easing = DialogEnterEasing }
+        };
+        shift.Transitions = new Avalonia.Animation.Transitions
+        {
+            new Avalonia.Animation.DoubleTransition { Property = TranslateTransform.YProperty, Duration = enter, Easing = DialogEnterEasing }
+        };
+        dialog.RenderTransform = new TransformGroup { Children = { scale, shift } };
+        dialog.Opacity = 0;
+        dialog.BoxShadow = HaloStart;
+        dialog.Transitions = new Avalonia.Animation.Transitions
+        {
+            new Avalonia.Animation.DoubleTransition { Property = OpacityProperty, Duration = TimeSpan.FromMilliseconds(200), Easing = new Avalonia.Animation.Easings.CubicEaseOut() },
+            new Avalonia.Animation.BoxShadowsTransition { Property = Border.BoxShadowProperty, Duration = TimeSpan.FromMilliseconds(900), Easing = new Avalonia.Animation.Easings.CubicEaseOut() }
+        };
 
-    private void OnCoverLostFocus(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
-    {
-        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
+        DispatcherTimer.RunOnce(() =>
         {
-            vm.OnCoverPointerExited();
-        }
-    }
-
-    // An icon alone says little, so with a controller the focus shows its tooltip.
-    private void OnPostponeButtonGotFocus(object? sender, Avalonia.Input.GotFocusEventArgs e)
-    {
-        if (_gamepadNavigator?.IsControllerMode == true && sender is Control button)
+            scale.ScaleX = scale.ScaleY = 1;
+            shift.Y = 0;
+            dialog.Opacity = 1;
+        }, TimeSpan.FromMilliseconds(16));
+        DispatcherTimer.RunOnce(() => dialog.BoxShadow = HaloEnd, TimeSpan.FromMilliseconds(140));
+        DispatcherTimer.RunOnce(() =>
         {
-            ToolTip.SetIsOpen(button, true);
-        }
-    }
-
-    private void OnPostponeButtonLostFocus(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
-    {
-        if (sender is Control button)
-        {
-            ToolTip.SetIsOpen(button, false);
-        }
-    }
-
-    private void OnCoverPointerEntered(object? sender, Avalonia.Input.PointerEventArgs e)
-    {
-        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
-        {
-            vm.OnCoverPointerEntered();
-        }
-    }
-
-    private void OnCoverPointerExited(object? sender, Avalonia.Input.PointerEventArgs e)
-    {
-        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
-        {
-            vm.OnCoverPointerExited();
-        }
-    }
-
-    private void OnSaveButtonPointerEntered(object? sender, Avalonia.Input.PointerEventArgs e)
-    {
-        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
-        {
-            vm.OnSaveButtonPointerEntered();
-        }
-    }
-
-    private void OnSaveButtonPointerExited(object? sender, Avalonia.Input.PointerEventArgs e)
-    {
-        if (DataContext is BackloggdMirror.ViewModels.MainWindowViewModel vm)
-        {
-            vm.OnSaveButtonPointerExited();
-        }
+            dialog.Transitions = new Avalonia.Animation.Transitions
+            {
+                new Avalonia.Animation.BoxShadowsTransition { Property = Border.BoxShadowProperty, Duration = TimeSpan.FromMilliseconds(700), Easing = new Avalonia.Animation.Easings.SineEaseInOut() }
+            };
+            dialog.BoxShadow = DialogGlow;
+        }, TimeSpan.FromMilliseconds(1060));
     }
 
     /// <summary>Windows refuses SetForegroundWindow to a background process unless it shares the foreground thread's input queue.</summary>
