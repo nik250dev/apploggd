@@ -113410,7 +113410,7 @@
   },
   {
     "id": "1124356487108640859",
-    "name": "Stick RPG 2: Director's Cut",
+    "name": "Stick RPG 2",
     "aliases": [],
     "executables": [
       {
@@ -193978,16 +193978,20 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "epic",
-        "id": "DDCE4DCB2DEE4A3693E902573C77B146"
-      },
-      {
         "distributor": "steam",
         "id": "2626940"
       },
       {
         "distributor": "google_play",
         "id": "com.archosaur.seareal.yslzm.gp"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.archosaur.vn.yslzm.gp"
+      },
+      {
+        "distributor": "epic",
+        "id": "DDCE4DCB2DEE4A3693E902573C77B146"
       }
     ],
     "id_igdb": "212426",
@@ -226133,15 +226137,19 @@
     "third_party_skus": [
       {
         "distributor": "google_play",
+        "id": "net.kairosoft.android.gamedev3"
+      },
+      {
+        "distributor": "steam",
+        "id": "1847240"
+      },
+      {
+        "distributor": "google_play",
         "id": "net.kairosoft.android.gamedev3en"
       },
       {
         "distributor": "xbox",
         "id": "9NH9QDVG63P1"
-      },
-      {
-        "distributor": "steam",
-        "id": "1847240"
       }
     ],
     "id_igdb": "19815",
@@ -310375,6 +310383,10 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
+        "id": "9N8RS7CW8CGL"
+      },
+      {
+        "distributor": "xbox",
         "id": "9NJ71RH89RJ5"
       }
     ],
@@ -345744,6 +345756,10 @@
       {
         "distributor": "xbox",
         "id": "9P9JZZ79KHDK"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N74KFV7253H"
       }
     ],
     "id_igdb": "2689",
@@ -350763,16 +350779,20 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9PDXMNRV4KKK"
-      },
-      {
         "distributor": "steam",
         "id": "1918540"
       },
       {
         "distributor": "google_play",
+        "id": "net.kairosoft.android.noodle_ja"
+      },
+      {
+        "distributor": "google_play",
         "id": "net.kairosoft.android.noodle_en"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PDXMNRV4KKK"
       }
     ],
     "id_igdb": "146944",
@@ -360800,16 +360820,20 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "steam",
+        "id": "440420"
+      },
+      {
         "distributor": "google_play",
         "id": "com.Goblinz.TrueFear"
       },
       {
-        "distributor": "epic",
-        "id": "52D9C5885CB54C9280D4B9B8CF32A7B9"
+        "distributor": "google_play",
+        "id": "ko.Goblinz.TrueFear"
       },
       {
-        "distributor": "steam",
-        "id": "440420"
+        "distributor": "epic",
+        "id": "52D9C5885CB54C9280D4B9B8CF32A7B9"
       },
       {
         "distributor": "xbox",
@@ -417333,12 +417357,16 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "google_play",
-        "id": "net.kairosoft.android.ninja_en"
-      },
-      {
         "distributor": "steam",
         "id": "1918520"
+      },
+      {
+        "distributor": "google_play",
+        "id": "net.kairosoft.android.ninja_ja"
+      },
+      {
+        "distributor": "google_play",
+        "id": "net.kairosoft.android.ninja_en"
       },
       {
         "distributor": "xbox",
@@ -420150,16 +420178,20 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "1918530"
-      },
-      {
         "distributor": "google_play",
         "id": "net.kairosoft.android.horse_en"
       },
       {
+        "distributor": "google_play",
+        "id": "net.kairosoft.android.horse_ja"
+      },
+      {
         "distributor": "xbox",
         "id": "9N74DQ4WKFXT"
+      },
+      {
+        "distributor": "steam",
+        "id": "1918530"
       }
     ],
     "id_igdb": "22155",
@@ -420851,12 +420883,16 @@
         "id": "1952160"
       },
       {
-        "distributor": "xbox",
-        "id": "9NBKFJZVN6PS"
+        "distributor": "google_play",
+        "id": "net.kairosoft.android.ongaku2_en"
       },
       {
         "distributor": "google_play",
-        "id": "net.kairosoft.android.ongaku2_en"
+        "id": "net.kairosoft.android.ongaku2_ja"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NBKFJZVN6PS"
       }
     ],
     "id_igdb": "56730",
@@ -422381,16 +422417,20 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "google_play",
-        "id": "net.kairosoft.android.gamecenterdx"
+        "distributor": "steam",
+        "id": "2072130"
       },
       {
         "distributor": "xbox",
         "id": "9NZ5JBKQSJ9M"
       },
       {
-        "distributor": "steam",
-        "id": "2072130"
+        "distributor": "google_play",
+        "id": "net.kairosoft.android.gamecenter_ja"
+      },
+      {
+        "distributor": "google_play",
+        "id": "net.kairosoft.android.gamecenterdx"
       },
       {
         "distributor": "google_play",
@@ -443844,16 +443884,20 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "1859360"
+        "distributor": "google_play",
+        "id": "net.kairosoft.android.bouken_ja"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NG500N8Q3QX"
       },
       {
         "distributor": "google_play",
         "id": "net.kairosoft.android.bouken_en"
       },
       {
-        "distributor": "xbox",
-        "id": "9NG500N8Q3QX"
+        "distributor": "steam",
+        "id": "1859360"
       }
     ],
     "id_igdb": "19814",
@@ -463277,6 +463321,10 @@
     "third_party_skus": [
       {
         "distributor": "google_play",
+        "id": "com.YoStarJP.AzurLane"
+      },
+      {
+        "distributor": "google_play",
         "id": "com.YoStarEN.AzurLane"
       }
     ],
@@ -466082,15 +466130,19 @@
       },
       {
         "distributor": "xbox",
-        "id": "9N8924XJJHDM"
-      },
-      {
-        "distributor": "xbox",
         "id": "9P743P6195Q5"
       },
       {
         "distributor": "steam",
+        "id": "91234"
+      },
+      {
+        "distributor": "steam",
         "id": "3296060"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N8924XJJHDM"
       }
     ],
     "id_igdb": "347671",
@@ -480627,6 +480679,10 @@
       {
         "distributor": "steam",
         "id": "3515530"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N2QMT5KJ917"
       }
     ],
     "id_igdb": "345665",
@@ -508355,12 +508411,16 @@
         "id": "net.kairosoft.android.manga_ippon_en"
       },
       {
-        "distributor": "steam",
-        "id": "1921770"
-      },
-      {
         "distributor": "xbox",
         "id": "9P5XBMG9BWJL"
+      },
+      {
+        "distributor": "google_play",
+        "id": "net.kairosoft.android.manga_ippon_ja"
+      },
+      {
+        "distributor": "steam",
+        "id": "1921770"
       }
     ],
     "id_igdb": "57465",
@@ -543844,7 +543904,12 @@
     "name": "WhiteClothes",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1495940"
+      }
+    ],
     "id_igdb": "247941",
     "cover": "co6qo7",
     "artwork": [
@@ -543857,7 +543922,12 @@
     "name": "Sort On The Ball",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5234330"
+      }
+    ],
     "id_igdb": "240194",
     "cover": null,
     "artwork": null,
@@ -543868,7 +543938,273 @@
     "name": "Looks Fine On Paper",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5429370"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1568837909597921442",
+    "name": "HAVKER-MAN X",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3645540"
+      }
+    ],
+    "id_igdb": "346331",
+    "cover": "co9w5m",
+    "artwork": [
+      "ar5qwj"
+    ],
+    "url": "havker-man-x"
+  },
+  {
+    "id": "1568837921082052678",
+    "name": "Reason & Rhyme",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4461870"
+      }
+    ],
+    "id_igdb": "420846",
+    "cover": "cod0tv",
+    "artwork": [
+      "ar6pxm",
+      "ar6qiv"
+    ],
+    "url": "reason-and-rhyme"
+  },
+  {
+    "id": "1568837935439282216",
+    "name": "How Empires Work",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4663730"
+      }
+    ],
+    "id_igdb": "423445",
+    "cover": "cod4ur",
+    "artwork": [
+      "ar6sdh"
+    ],
+    "url": "how-empires-work"
+  },
+  {
+    "id": "1568837971157848135",
+    "name": "Miner Shop Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4625950"
+      }
+    ],
+    "id_igdb": "418394",
+    "cover": "cocxih",
+    "artwork": [
+      "ar6m6d"
+    ],
+    "url": "miner-shop-simulator"
+  },
+  {
+    "id": "1568838012383666298",
+    "name": "Twin Drive",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4944320"
+      }
+    ],
+    "id_igdb": "425143",
+    "cover": "cod7bl",
+    "artwork": [
+      "ar6v76"
+    ],
+    "url": "twin-drive"
+  },
+  {
+    "id": "1568838022508576779",
+    "name": "Carpet Daddy",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5076320"
+      }
+    ],
+    "id_igdb": "423913",
+    "cover": "cod5tt",
+    "artwork": [
+      "ar6tfg"
+    ],
+    "url": "carpet-daddy"
+  },
+  {
+    "id": "1568838050618802287",
+    "name": "Fleets of Valor",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5222940"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1568838056977375362",
+    "name": "REMORFIN",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5243010"
+      }
+    ],
+    "id_igdb": "424751",
+    "cover": "cod6sw",
+    "artwork": [
+      "ar6uid"
+    ],
+    "url": "remorfin"
+  },
+  {
+    "id": "1568838067786219520",
+    "name": "Want a Bomb?",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5251070"
+      }
+    ],
+    "id_igdb": "419925",
+    "cover": "cod365",
+    "artwork": [
+      "ar6qup"
+    ],
+    "url": "want-a-bomb"
+  },
+  {
+    "id": "1568838081342214275",
+    "name": "KESSLER: Orbital Incremental",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5131440"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1568838089911173120",
+    "name": "Tanuki Tag",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5128560"
+      }
+    ],
+    "id_igdb": "424298",
+    "cover": "cod66j",
+    "artwork": [
+      "ar6tsb"
+    ],
+    "url": "tanuki-tag"
+  },
+  {
+    "id": "1568838101088866404",
+    "name": "Dwarf Hole",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4783170"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1568838121645150288",
+    "name": "WendyQuest: Legend of the Four Corner Stones",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3339970"
+      }
+    ],
+    "id_igdb": "426109",
+    "cover": "cod9cg",
+    "artwork": [
+      "ar6x3n"
+    ],
+    "url": "wendyquest-legend-of-the-four-corner-stones"
+  },
+  {
+    "id": "1568838130147008595",
+    "name": "High Wizards",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5449310"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1568838140137971842",
+    "name": "SHRED A BILLION",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5472080"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
