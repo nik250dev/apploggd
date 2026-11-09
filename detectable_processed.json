@@ -132258,7 +132258,7 @@
   },
   {
     "id": "1124357856565674167",
-    "name": "Monument Valley: Panoramic Edition",
+    "name": "Monument Valley",
     "aliases": [],
     "executables": [
       {
@@ -132269,16 +132269,20 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9NT17X2MR55H"
+        "distributor": "steam",
+        "id": "1927720"
       },
       {
         "distributor": "xbox",
         "id": "9NBLGGH3Z8PQ"
       },
       {
-        "distributor": "steam",
-        "id": "1927720"
+        "distributor": "xbox",
+        "id": "9NT17X2MR55H"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.ustwo.monumentvalley"
       }
     ],
     "id_igdb": "203331",
@@ -221300,12 +221304,16 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "epic",
+        "id": "E6ABEBFDA00F45E2B3B9BA79970BC511"
+      },
+      {
         "distributor": "steam",
         "id": "1927740"
       },
       {
-        "distributor": "epic",
-        "id": "E6ABEBFDA00F45E2B3B9BA79970BC511"
+        "distributor": "google_play",
+        "id": "com.ustwo.monumentvalley2"
       },
       {
         "distributor": "xbox",
@@ -523429,7 +523437,7 @@
   },
   {
     "id": "1540209018553892904",
-    "name": "Hands Over",
+    "name": "HANDS OVER",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -543283,6 +543291,10 @@
       {
         "distributor": "steam",
         "id": "4761990"
+      },
+      {
+        "distributor": "steam",
+        "id": "4736090"
       }
     ],
     "id_igdb": null,
