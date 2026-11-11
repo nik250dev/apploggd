@@ -1099,14 +1099,9 @@
     ],
     "executables": [
       {
-        "name": "deadbydaylight-egs-shipping.exe",
+        "name": "deadbydaylight-win64-shipping.exe",
         "os": "win32",
         "is_launcher": false
-      },
-      {
-        "name": "deadbydaylight.exe",
-        "os": "win32",
-        "is_launcher": true
       },
       {
         "name": "dead by daylight/deadbydaylight.exe",
@@ -1114,19 +1109,40 @@
         "is_launcher": true
       },
       {
-        "name": "deadbydaylight-win64-shipping.exe",
+        "name": "deadbydaylight.exe",
+        "os": "win32",
+        "is_launcher": true
+      },
+      {
+        "name": "deadbydaylight-egs-shipping.exe",
         "os": "win32",
         "is_launcher": false
       }
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "381210"
+        "distributor": "xbox",
+        "id": "9NMS4SFNBGBH"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NCPDFS5CJ8V"
+      },
+      {
+        "distributor": "xbox",
+        "id": "C0N22P73QZ60"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NQWPGS5WVJZ"
       },
       {
         "distributor": "epic",
         "id": "611482B8586142CDA48A0786EB8A127C"
+      },
+      {
+        "distributor": "steam",
+        "id": "381210"
       }
     ],
     "id_igdb": "18866",
@@ -34539,7 +34555,7 @@
     "aliases": [],
     "executables": [
       {
-        "name": "cyphers.exe",
+        "name": "graszyfrow.exe",
         "os": "win32",
         "is_launcher": false
       }
@@ -543308,17 +543324,17 @@
   },
   {
     "id": "1567751197215957024",
-    "name": "Croc 2: Kingdom of the Gobbos",
+    "name": "Croc 2 Kingdom of the Gobbos",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "4198360"
-      },
-      {
         "distributor": "xbox",
         "id": "9MWR2QK58LPQ"
+      },
+      {
+        "distributor": "steam",
+        "id": "4198360"
       }
     ],
     "id_igdb": "411706",
@@ -544641,5 +544657,176 @@
       "ar451a"
     ],
     "url": "warfront"
+  },
+  {
+    "id": "1569789408557932614",
+    "name": "Cyphers",
+    "aliases": [],
+    "executables": [
+      {
+        "name": "cyphers.exe",
+        "os": "win32",
+        "is_launcher": false
+      }
+    ],
+    "third_party_skus": [],
+    "id_igdb": "390398",
+    "cover": "cobrov",
+    "artwork": [
+      "ar5cr0"
+    ],
+    "url": "cypher-dungeon"
+  },
+  {
+    "id": "1569924815001755701",
+    "name": "Imperial Grace",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "159717",
+    "cover": "co43ir",
+    "artwork": [
+      "arydb"
+    ],
+    "url": "imperial-grace"
+  },
+  {
+    "id": "1569924826905321552",
+    "name": "Farmer's Diary",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "285575",
+    "cover": "co7q5m",
+    "artwork": [
+      "ar2qi2"
+    ],
+    "url": "farmers-diary"
+  },
+  {
+    "id": "1569924834635292824",
+    "name": "Apotheosis Engine",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "399701",
+    "cover": "cocu9d",
+    "artwork": [
+      "ar6jsu",
+      "ar6jss",
+      "ar6jst"
+    ],
+    "url": "apotheosis-engine"
+  },
+  {
+    "id": "1569924872342077490",
+    "name": "Net Worthless",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "410971",
+    "cover": "cocjz6",
+    "artwork": [
+      "ar6c4f"
+    ],
+    "url": "net-worthless"
+  },
+  {
+    "id": "1569924875554922507",
+    "name": "Aethyr Idle",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1569924885138898965",
+    "name": "Sabado",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "427290",
+    "cover": "coda6i",
+    "artwork": [
+      "ar6zy3"
+    ],
+    "url": "sabado"
+  },
+  {
+    "id": "1569924894844784723",
+    "name": "Callsign: Stargazer",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "413978",
+    "cover": "cocw4p",
+    "artwork": [
+      "ar6l4y"
+    ],
+    "url": "callsign-stargazer"
+  },
+  {
+    "id": "1569924934262595675",
+    "name": "Bio Inc. Classic",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1569925001388363806",
+    "name": "Road Rash: 30th Anniversary Edition",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "428364",
+    "cover": "codbbn",
+    "artwork": [
+      "ar6z4l"
+    ],
+    "url": "road-rash-30th-anniversary-edition"
+  },
+  {
+    "id": "1569925013585535116",
+    "name": "Wing Commander: 35th Anniversary Edition",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "428355",
+    "cover": "codbbd",
+    "artwork": [
+      "ar6z50"
+    ],
+    "url": "wing-commander-35th-anniversary-edition"
+  },
+  {
+    "id": "1569925020312936600",
+    "name": "I Don't Do Quests Anymore",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "423843",
+    "cover": "cod5dz",
+    "artwork": [
+      "ar6v7u"
+    ],
+    "url": "i-dont-do-quests-anymore-dot-dot-dot"
+  },
+  {
+    "id": "1569925023924232283",
+    "name": "Witchkeeping",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
   }
 ]
