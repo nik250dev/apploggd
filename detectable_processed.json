@@ -56087,28 +56087,20 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "xbox",
-        "id": "9P028SPXSZ5Q"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NXBNBRJ2K8M"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NRP1NLSJMVM"
-      },
-      {
-        "distributor": "steam",
-        "id": "2061641"
-      },
-      {
         "distributor": "steam",
         "id": "1401590"
       },
       {
         "distributor": "xbox",
-        "id": "9MWGMVJGBJR2"
+        "id": "9NSF0BGH8D86"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P028SPXSZ5Q"
+      },
+      {
+        "distributor": "steam",
+        "id": "2061640"
       },
       {
         "distributor": "epic",
@@ -56116,15 +56108,27 @@
       },
       {
         "distributor": "xbox",
+        "id": "9NRP1NLSJMVM"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NJS3KD3D9D7"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9MWGMVJGBJR2"
+      },
+      {
+        "distributor": "xbox",
         "id": "9PNGZM2223JP"
       },
       {
         "distributor": "xbox",
-        "id": "9NSF0BGH8D86"
+        "id": "9NXBNBRJ2K8M"
       },
       {
         "distributor": "steam",
-        "id": "2061640"
+        "id": "2061641"
       }
     ],
     "id_igdb": "214449",
@@ -96472,6 +96476,10 @@
         "id": "9PJDVRGGFPPH"
       },
       {
+        "distributor": "xbox",
+        "id": "9NX4FP08FS2R"
+      },
+      {
         "distributor": "steam",
         "id": "965680"
       }
@@ -106832,7 +106840,7 @@
   },
   {
     "id": "1124356017216565279",
-    "name": "Life is Strange Remastered",
+    "name": "Life Is Strange Remastered",
     "aliases": [],
     "executables": [
       {
@@ -175648,6 +175656,18 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "steam",
+        "id": "27649"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PJWC2BJKZXW"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N67P5D62MWZ"
+      },
+      {
         "distributor": "epic",
         "id": "E29E6EF093FD468DB40B6FB505DE6FA8"
       },
@@ -175656,8 +175676,8 @@
         "id": "861650"
       },
       {
-        "distributor": "steam",
-        "id": "27649"
+        "distributor": "xbox",
+        "id": "9P4B19SCKJN6"
       },
       {
         "distributor": "xbox",
@@ -175665,15 +175685,7 @@
       },
       {
         "distributor": "xbox",
-        "id": "9P4B19SCKJN6"
-      },
-      {
-        "distributor": "xbox",
         "id": "9PDXV0B2DMTJ"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9N67P5D62MWZ"
       }
     ],
     "id_igdb": "75694",
@@ -226245,7 +226257,7 @@
   },
   {
     "id": "1297409020109262908",
-    "name": "Life is Strange: Double Exposure",
+    "name": "Life Is Strange: Double Exposure",
     "aliases": [],
     "executables": [
       {
@@ -226256,20 +226268,20 @@
     ],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "1874000"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9NPZHQH1TT23"
-      },
-      {
         "distributor": "xbox",
         "id": "9N376FWQ5JVH"
       },
       {
         "distributor": "xbox",
         "id": "9P4Z19LZVPKN"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NPZHQH1TT23"
+      },
+      {
+        "distributor": "steam",
+        "id": "1874000"
       }
     ],
     "id_igdb": "305158",
@@ -285020,17 +285032,17 @@
   },
   {
     "id": "1428178396344488036",
-    "name": "Tanuki: Pon's Summer",
+    "name": "TANUKI: Pon's Summer",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "3218570"
-      },
-      {
         "distributor": "xbox",
         "id": "9NRBW3FJSJWT"
+      },
+      {
+        "distributor": "steam",
+        "id": "3218570"
       }
     ],
     "id_igdb": "317817",
@@ -308362,6 +308374,10 @@
       {
         "distributor": "steam",
         "id": "3035330"
+      },
+      {
+        "distributor": "epic",
+        "id": "AE1F4942CBED406C821BAA33E28EE33F"
       }
     ],
     "id_igdb": "319726",
@@ -341407,7 +341423,7 @@
   },
   {
     "id": "1440138280447377509",
-    "name": "Chordioid",
+    "name": "CHORDIOID",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -427746,12 +427762,16 @@
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "steam",
-        "id": "1752540"
+        "distributor": "epic",
+        "id": "0ABAC31CBF654893A857D351A3320308"
       },
       {
         "distributor": "xbox",
         "id": "9NH600HW7HDG"
+      },
+      {
+        "distributor": "steam",
+        "id": "1752540"
       }
     ],
     "id_igdb": "173308",
@@ -475687,7 +475707,12 @@
     "name": "Theme Hospital",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2229820"
+      }
+    ],
     "id_igdb": "1624",
     "cover": "co3wfx",
     "artwork": null,
@@ -544244,10 +544269,15 @@
   },
   {
     "id": "1569562804866912317",
-    "name": "Harma",
+    "name": "HARMA",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2483700"
+      }
+    ],
     "id_igdb": "260566",
     "cover": "co70c3",
     "artwork": null,
@@ -544258,7 +544288,12 @@
     "name": "Athanasia",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1761910"
+      }
+    ],
     "id_igdb": "202129",
     "cover": "co9wni",
     "artwork": [
@@ -544271,7 +544306,12 @@
     "name": "Beyond The Frame",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4765520"
+      }
+    ],
     "id_igdb": "411756",
     "cover": "cod37m",
     "artwork": [
@@ -544284,7 +544324,12 @@
     "name": "In the Same Boat",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2548410"
+      }
+    ],
     "id_igdb": "399704",
     "cover": "cobzjp",
     "artwork": [
@@ -544297,7 +544342,12 @@
     "name": "99Day Survival Guide",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3850230"
+      }
+    ],
     "id_igdb": "424842",
     "cover": "cod7ci",
     "artwork": [
@@ -544310,7 +544360,12 @@
     "name": "Backrooms Anomaly: Pools",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4560260"
+      }
+    ],
     "id_igdb": "424056",
     "cover": "cod5rv",
     "artwork": [
@@ -544323,7 +544378,12 @@
     "name": "Killdozer Simulator",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2849750"
+      }
+    ],
     "id_igdb": "291386",
     "cover": "co7w7d",
     "artwork": [
@@ -544336,7 +544396,12 @@
     "name": "Hole Punch Cocktail",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4693300"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -544344,10 +544409,15 @@
   },
   {
     "id": "1569562899628691527",
-    "name": "Ryn: And The Thread Of Life",
+    "name": "Ryn: And the thread of life",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4130370"
+      }
+    ],
     "id_igdb": "378245",
     "cover": "coav9i",
     "artwork": [
@@ -544360,7 +544430,12 @@
     "name": "Adopt Me Please",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4417910"
+      }
+    ],
     "id_igdb": "135719",
     "cover": "co2ckx",
     "artwork": null,
@@ -544371,7 +544446,12 @@
     "name": "MECH OPS 2092",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4307930"
+      }
+    ],
     "id_igdb": "401622",
     "cover": "coc2b9",
     "artwork": [
@@ -544381,10 +544461,15 @@
   },
   {
     "id": "1569562924807102605",
-    "name": "PHUY",
+    "name": "WAZATO: Sabotage or Mistake?",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4132280"
+      }
+    ],
     "id_igdb": "427284",
     "cover": "coda6a",
     "artwork": [
@@ -544394,10 +544479,15 @@
   },
   {
     "id": "1569562941605289995",
-    "name": "Cash is King!",
+    "name": "Cash is King! Business Simulator",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4140700"
+      }
+    ],
     "id_igdb": "254960",
     "cover": "co6op6",
     "artwork": [
@@ -544410,7 +544500,12 @@
     "name": "Quiet Express: Cabin 909",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3962240"
+      }
+    ],
     "id_igdb": "366348",
     "cover": "cocw0r",
     "artwork": [
@@ -544421,10 +544516,15 @@
   },
   {
     "id": "1569562974220193812",
-    "name": "That Bomb Game",
+    "name": "THAT BOMB GAME",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4840650"
+      }
+    ],
     "id_igdb": "410566",
     "cover": "cocj8f",
     "artwork": [
@@ -544437,7 +544537,12 @@
     "name": "Mapping Creator",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4997480"
+      }
+    ],
     "id_igdb": "241101",
     "cover": "co68sb",
     "artwork": [
@@ -544447,10 +544552,23 @@
   },
   {
     "id": "1569563014523392071",
-    "name": "Chosen by Odin",
+    "name": "Chosen By Odin",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1120230"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PB6FHZ8JSJC"
+      },
+      {
+        "distributor": "epic",
+        "id": "A61801C599474EDF8406544B19AA9DC5"
+      }
+    ],
     "id_igdb": "415124",
     "cover": "cocrp6",
     "artwork": [
@@ -544463,7 +544581,12 @@
     "name": "Hey, Don't Look at Me",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4551470"
+      }
+    ],
     "id_igdb": "416644",
     "cover": "cocuzp",
     "artwork": [
@@ -544476,7 +544599,12 @@
     "name": "Aldmark Calls for Aid",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5168960"
+      }
+    ],
     "id_igdb": "420288",
     "cover": "cod97w",
     "artwork": [
@@ -544487,9 +544615,16 @@
   {
     "id": "1569563050363846786",
     "name": "Helena: Cloud District",
-    "aliases": [],
+    "aliases": [
+      "HELENA : Cloud District"
+    ],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5190580"
+      }
+    ],
     "id_igdb": "416638",
     "cover": "cocud1",
     "artwork": [
@@ -544502,7 +544637,16 @@
     "name": "Otherside Tapes: Favela",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4977840"
+      },
+      {
+        "distributor": "epic",
+        "id": "6927FA09E93247B9A6842CB6406B9D52"
+      }
+    ],
     "id_igdb": "422100",
     "cover": "cod2s0",
     "artwork": [
@@ -544515,7 +544659,12 @@
     "name": "AUTOMATE DEATH",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5304530"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -544526,7 +544675,12 @@
     "name": "Grave Mistakes",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4635290"
+      }
+    ],
     "id_igdb": "421041",
     "cover": "codb7j",
     "artwork": [
@@ -544539,7 +544693,12 @@
     "name": "Desktop Wallet Heroes",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5052450"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -544547,10 +544706,15 @@
   },
   {
     "id": "1569563103262277733",
-    "name": "Hammer These Nails!",
+    "name": "Hammer these nails!",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5229450"
+      }
+    ],
     "id_igdb": "428409",
     "cover": "codbda",
     "artwork": null,
@@ -544558,10 +544722,15 @@
   },
   {
     "id": "1569563111172743168",
-    "name": "Iron Sol",
+    "name": "IRON SOL",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5271880"
+      }
+    ],
     "id_igdb": "426788",
     "cover": "cod9hw",
     "artwork": [
@@ -544574,7 +544743,12 @@
     "name": "Address The Mess",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5357350"
+      }
+    ],
     "id_igdb": "424709",
     "cover": "cod6rz",
     "artwork": [
@@ -544587,7 +544761,12 @@
     "name": "SetPoint Volleyball",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2591700"
+      }
+    ],
     "id_igdb": "422498",
     "cover": "cod4dy",
     "artwork": null,
@@ -544598,7 +544777,12 @@
     "name": "Backrooms Anomaly Project",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4725940"
+      }
+    ],
     "id_igdb": "426279",
     "cover": "codb8l",
     "artwork": [
@@ -544611,7 +544795,12 @@
     "name": "Punch The Walls",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5455340"
+      }
+    ],
     "id_igdb": "426276",
     "cover": "cod8wj",
     "artwork": [
@@ -544621,10 +544810,15 @@
   },
   {
     "id": "1569563143892377600",
-    "name": "Dunk",
+    "name": "DUNK",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4591520"
+      }
+    ],
     "id_igdb": "251983",
     "cover": "co8u79",
     "artwork": [
@@ -544637,7 +544831,12 @@
     "name": "Exomates",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4791590"
+      }
+    ],
     "id_igdb": "213513",
     "cover": "co55ji",
     "artwork": [
@@ -544650,7 +544849,12 @@
     "name": "WarFront",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5344530"
+      }
+    ],
     "id_igdb": "365367",
     "cover": "coaekq",
     "artwork": [
@@ -544682,7 +544886,12 @@
     "name": "Imperial Grace",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1652580"
+      }
+    ],
     "id_igdb": "159717",
     "cover": "co43ir",
     "artwork": [
@@ -544695,7 +544904,12 @@
     "name": "Farmer's Diary",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2715880"
+      }
+    ],
     "id_igdb": "285575",
     "cover": "co7q5m",
     "artwork": [
@@ -544708,7 +544922,12 @@
     "name": "Apotheosis Engine",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4665590"
+      }
+    ],
     "id_igdb": "399701",
     "cover": "cocu9d",
     "artwork": [
@@ -544723,7 +544942,12 @@
     "name": "Net Worthless",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4878900"
+      }
+    ],
     "id_igdb": "410971",
     "cover": "cocjz6",
     "artwork": [
@@ -544736,7 +544960,12 @@
     "name": "Aethyr Idle",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4843460"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -544747,7 +544976,12 @@
     "name": "Sabado",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4986750"
+      }
+    ],
     "id_igdb": "427290",
     "cover": "coda6i",
     "artwork": [
@@ -544760,7 +544994,12 @@
     "name": "Callsign: Stargazer",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5024450"
+      }
+    ],
     "id_igdb": "413978",
     "cover": "cocw4p",
     "artwork": [
@@ -544773,7 +545012,12 @@
     "name": "Bio Inc. Classic",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5164130"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -544784,7 +545028,12 @@
     "name": "Road Rash: 30th Anniversary Edition",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2448570"
+      }
+    ],
     "id_igdb": "428364",
     "cover": "codbbn",
     "artwork": [
@@ -544797,7 +545046,12 @@
     "name": "Wing Commander: 35th Anniversary Edition",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1996640"
+      }
+    ],
     "id_igdb": "428355",
     "cover": "codbbd",
     "artwork": [
@@ -544807,10 +545061,15 @@
   },
   {
     "id": "1569925020312936600",
-    "name": "I Don't Do Quests Anymore",
+    "name": "I Don't Do Quests Anymore...",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4801140"
+      }
+    ],
     "id_igdb": "423843",
     "cover": "cod5dz",
     "artwork": [
@@ -544823,10 +545082,117 @@
     "name": "Witchkeeping",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5169710"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
     "url": null
+  },
+  {
+    "id": "1570287494006702170",
+    "name": "WAZATO: Sabotage or Mistake?",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4953670"
+      }
+    ],
+    "id_igdb": "426730",
+    "cover": "cod9ek",
+    "artwork": null,
+    "url": "wazato-sabotage-or-mistake"
+  },
+  {
+    "id": "1570287564017901629",
+    "name": "Scrolls: Tidy Up the Library of Olympus!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5329940"
+      }
+    ],
+    "id_igdb": "427734",
+    "cover": "codbv4",
+    "artwork": [
+      "ar6y8o"
+    ],
+    "url": "scrolls-tidy-up-the-library-of-olympus"
+  },
+  {
+    "id": "1570287576617590854",
+    "name": "Corner Pocket: World Billiards",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5341010"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1570287586918928454",
+    "name": "Excuse Me, King!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4953360"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1570287594669875231",
+    "name": "GeForce 8800 GTX: 20 Years of a Legend",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4910040"
+      }
+    ],
+    "id_igdb": "428348",
+    "cover": "codcc7",
+    "artwork": [
+      "ar706b"
+    ],
+    "url": "geforce-8800-gtx-20-years-of-a-legend"
+  },
+  {
+    "id": "1570287620695527544",
+    "name": "Wing Commander III: Heart of the Tiger - 30th Anniversary Edition",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2008740"
+      }
+    ],
+    "id_igdb": "428358",
+    "cover": "codbbh",
+    "artwork": [
+      "ar6z4q"
+    ],
+    "url": "wing-commander-iii-heart-of-the-tiger-30th-anniversary-edition"
   }
 ]
