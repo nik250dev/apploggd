@@ -303277,6 +303277,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "com.PianoGlow"
+      },
+      {
         "distributor": "steam",
         "id": "3499520"
       }
@@ -318985,14 +318989,10 @@
   },
   {
     "id": "1439430087928844318",
-    "name": "The Falconeer: Revolution Remaster",
+    "name": "The Falconeer",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
-      {
-        "distributor": "epic",
-        "id": "29E93200BB53431A961AFC53E39FB9C8"
-      },
       {
         "distributor": "xbox",
         "id": "9N8J0T5HCDB9"
@@ -319000,6 +319000,10 @@
       {
         "distributor": "steam",
         "id": "1135260"
+      },
+      {
+        "distributor": "epic",
+        "id": "29E93200BB53431A961AFC53E39FB9C8"
       }
     ],
     "id_igdb": "121709",
@@ -367752,6 +367756,10 @@
     "third_party_skus": [
       {
         "distributor": "google_play",
+        "id": "com.blockblast.lite"
+      },
+      {
+        "distributor": "google_play",
         "id": "com.block.juggle"
       }
     ],
@@ -394792,17 +394800,17 @@
   },
   {
     "id": "1442721158326911180",
-    "name": "Norse: Oath of Blood",
+    "name": "NORSE: Oath of Blood",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
       {
-        "distributor": "epic",
-        "id": "059219B5334940BBBF06E995C6B74E21"
-      },
-      {
         "distributor": "steam",
         "id": "3054690"
+      },
+      {
+        "distributor": "epic",
+        "id": "059219B5334940BBBF06E995C6B74E21"
       }
     ],
     "id_igdb": "336868",
@@ -440106,7 +440114,7 @@
   },
   {
     "id": "1444889008793452736",
-    "name": "Mazebound: Hunt, Gather, Run!",
+    "name": "MAZEBOUND: Hunt, Gather, Run!",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -464828,6 +464836,10 @@
       {
         "distributor": "steam",
         "id": "2725250"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.quesera.nientum"
       }
     ],
     "id_igdb": "292173",
@@ -478507,6 +478519,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.DrawMeAPixel.CIT"
+      },
       {
         "distributor": "steam",
         "id": "3858650"
@@ -524266,7 +524282,7 @@
   },
   {
     "id": "1542021042426486845",
-    "name": "Payday: Aces High",
+    "name": "PAYDAY: Aces High",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -543898,6 +543914,10 @@
       {
         "distributor": "steam",
         "id": "3330940"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.gonzossm.ccfr"
       }
     ],
     "id_igdb": "428247",
@@ -545194,5 +545214,205 @@
       "ar6z4q"
     ],
     "url": "wing-commander-iii-heart-of-the-tiger-30th-anniversary-edition"
+  },
+  {
+    "id": "1570649646303416411",
+    "name": "Brick Buddies",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2643300"
+      }
+    ],
+    "id_igdb": "272274",
+    "cover": "co78t5",
+    "artwork": [
+      "ar2kxg"
+    ],
+    "url": "brick-buddies"
+  },
+  {
+    "id": "1570649689601343609",
+    "name": "Where Is My Pet?",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4466850"
+      }
+    ],
+    "id_igdb": "417359",
+    "cover": "cocvkw",
+    "artwork": [
+      "ar6kp5"
+    ],
+    "url": "where-is-my-pet"
+  },
+  {
+    "id": "1570649761965408397",
+    "name": "Immortal Zenith: Idle to Ascension",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4989520"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1570649809289744526",
+    "name": "Starliners",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5102300"
+      }
+    ],
+    "id_igdb": "424858",
+    "cover": "cod6xp",
+    "artwork": [
+      "ar6zr8"
+    ],
+    "url": "starliners"
+  },
+  {
+    "id": "1570649851589431396",
+    "name": "Laid-Back Camp All-in-one!!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5063150"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1570649874905440427",
+    "name": "Volcaldera Ashfall",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5274420"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1570649906350399518",
+    "name": "Wild Ones Evolution",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5219930"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1570649928022106123",
+    "name": "Island Sort",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5329820"
+      }
+    ],
+    "id_igdb": "424438",
+    "cover": "cod6gb",
+    "artwork": [
+      "ar6u2n"
+    ],
+    "url": "island-sort"
+  },
+  {
+    "id": "1570649957927485460",
+    "name": "Shrek 2 Remastered",
+    "aliases": [
+      "DreamWorks Shrek 2 Remastered"
+    ],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2523740"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PCW6X6ZQP4Z"
+      },
+      {
+        "distributor": "epic",
+        "id": "11050ED0645943779A79E30E8349826D"
+      }
+    ],
+    "id_igdb": "424208",
+    "cover": "cod7f1",
+    "artwork": [
+      "ar6ul4",
+      "ar6v68",
+      "ar6v69"
+    ],
+    "url": "shrek-2-remastered"
+  },
+  {
+    "id": "1570649975015084133",
+    "name": "Round and Round Inc.",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5455960"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1570649988084801648",
+    "name": "Scarecrow: 90s Crime Story",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2280360"
+      }
+    ],
+    "id_igdb": "176841",
+    "cover": "codc5v",
+    "artwork": [
+      "ar6zwc"
+    ],
+    "url": "scarecrow-90s-crime-story"
   }
 ]
