@@ -4300,7 +4300,7 @@
   },
   {
     "id": "363425276300099584",
-    "name": "NieR: Automata",
+    "name": "NieR:Automata",
     "aliases": [
       "NieR:Automata™"
     ],
@@ -89031,16 +89031,27 @@
     "aliases": [],
     "executables": [
       {
-        "name": "sable/sable.exe",
+        "name": "games/sable/sable.exe",
+        "os": "win32",
+        "is_launcher": false
+      },
+      {
+        "name": "epic games/sable/sable.exe",
+        "os": "win32",
+        "is_launcher": false
+      },
+      {
+        "name": "sable/content/sable.exe",
+        "os": "win32",
+        "is_launcher": false
+      },
+      {
+        "name": "common/sable/sable.exe",
         "os": "win32",
         "is_launcher": false
       }
     ],
     "third_party_skus": [
-      {
-        "distributor": "steam",
-        "id": "757310"
-      },
       {
         "distributor": "epic",
         "id": "66A0893B7B9A42A695F0A387D64DFCC6"
@@ -89048,6 +89059,10 @@
       {
         "distributor": "xbox",
         "id": "9MZ4V4RG0W81"
+      },
+      {
+        "distributor": "steam",
+        "id": "757310"
       }
     ],
     "id_igdb": "79995",
@@ -184002,12 +184017,20 @@
     ],
     "third_party_skus": [
       {
+        "distributor": "xbox",
+        "id": "9PPPS0B7R8ZT"
+      },
+      {
         "distributor": "epic",
         "id": "8FAB06FADBC544A8A17B0CBFD6DDE51C"
       },
       {
         "distributor": "google_play",
         "id": "com.doghowlgames.thronefall"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NWWL1CBWFCG"
       },
       {
         "distributor": "steam",
@@ -545414,5 +545437,180 @@
       "ar6zwc"
     ],
     "url": "scarecrow-90s-crime-story"
+  },
+  {
+    "id": "1571012056512077945",
+    "name": "Icy Tower",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "371201",
+    "cover": "coalqd",
+    "artwork": [
+      "ar4pgs"
+    ],
+    "url": "icy-tower--1"
+  },
+  {
+    "id": "1571012084593070170",
+    "name": "Attack of the Astrals",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "13806",
+    "cover": null,
+    "artwork": null,
+    "url": "astral-attack"
+  },
+  {
+    "id": "1571012111230959696",
+    "name": "Annihilated",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "291331",
+    "cover": "coav33",
+    "artwork": [
+      "ar2tc6",
+      "ar4pgw"
+    ],
+    "url": "annihilated"
+  },
+  {
+    "id": "1571012125772750858",
+    "name": "Hookshot",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "428655",
+    "cover": null,
+    "artwork": null,
+    "url": "hookshot--1"
+  },
+  {
+    "id": "1571012146396012615",
+    "name": "Trollheim: Gnomes",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "423849",
+    "cover": "cod6x6",
+    "artwork": [
+      "ar6ulm"
+    ],
+    "url": "trollheim-gnomes"
+  },
+  {
+    "id": "1571012188867661864",
+    "name": "Never Sort By Color",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "411710",
+    "cover": "codd7m",
+    "artwork": [
+      "ar70wk",
+      "ar70wj"
+    ],
+    "url": "never-sort-by-color"
+  },
+  {
+    "id": "1571012226004029540",
+    "name": "Gas Station Horror",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1571012230022172686",
+    "name": "Worldkampf '72",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "425430",
+    "cover": "cod7rt",
+    "artwork": [
+      "ar6vi0",
+      "ar6wbt"
+    ],
+    "url": "worldkampf-72"
+  },
+  {
+    "id": "1571012242345042002",
+    "name": "Exterminauts",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "414975",
+    "cover": "cocrhq",
+    "artwork": [
+      "ar6hku"
+    ],
+    "url": "exterminauts"
+  },
+  {
+    "id": "1571012254852321301",
+    "name": "Hold the Dawn",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "417080",
+    "cover": "cocwxs",
+    "artwork": [
+      "ar6zr7"
+    ],
+    "url": "hold-the-dawn"
+  },
+  {
+    "id": "1571012274980790292",
+    "name": "Sort Them Cats",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "428408",
+    "cover": "codbu9",
+    "artwork": [
+      "ar6zjj"
+    ],
+    "url": "sort-them-cats"
+  },
+  {
+    "id": "1571012280840233001",
+    "name": "GroundInFlames",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1571012299135787069",
+    "name": "Wait, They Can Climb?!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "425366",
+    "cover": "codbe5",
+    "artwork": [
+      "ar6vxu"
+    ],
+    "url": "wait-they-can-climb"
+  },
+  {
+    "id": "1571012320253972642",
+    "name": "Infinite Loop: Incremental",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
   }
 ]
