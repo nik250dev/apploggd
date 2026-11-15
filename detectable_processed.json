@@ -410154,7 +410154,12 @@
     "name": "Grabbed by the Ghoulies",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "BTHC2G28X9H4"
+      }
+    ],
     "id_igdb": "5849",
     "cover": "co2xci",
     "artwork": null,
@@ -498108,6 +498113,18 @@
       {
         "distributor": "steam",
         "id": "1374680"
+      },
+      {
+        "distributor": "steam",
+        "id": "74188"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PL81G0BWGDL"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PD49M0VJVTQ"
       }
     ],
     "id_igdb": "371097",
@@ -545443,7 +545460,12 @@
     "name": "Icy Tower",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3014860"
+      }
+    ],
     "id_igdb": "371201",
     "cover": "coalqd",
     "artwork": [
@@ -545456,7 +545478,12 @@
     "name": "Attack of the Astrals",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3991790"
+      }
+    ],
     "id_igdb": "13806",
     "cover": null,
     "artwork": null,
@@ -545467,7 +545494,12 @@
     "name": "Annihilated",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2638080"
+      }
+    ],
     "id_igdb": "291331",
     "cover": "coav33",
     "artwork": [
@@ -545481,7 +545513,12 @@
     "name": "Hookshot",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1031570"
+      }
+    ],
     "id_igdb": "428655",
     "cover": null,
     "artwork": null,
@@ -545489,10 +545526,15 @@
   },
   {
     "id": "1571012146396012615",
-    "name": "Trollheim: Gnomes",
+    "name": "TROLLHEIM: GNOMES",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4139890"
+      }
+    ],
     "id_igdb": "423849",
     "cover": "cod6x6",
     "artwork": [
@@ -545505,7 +545547,12 @@
     "name": "Never Sort By Color",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4876650"
+      }
+    ],
     "id_igdb": "411710",
     "cover": "codd7m",
     "artwork": [
@@ -545519,7 +545566,12 @@
     "name": "Gas Station Horror",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5109640"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -545530,7 +545582,12 @@
     "name": "Worldkampf '72",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4753740"
+      }
+    ],
     "id_igdb": "425430",
     "cover": "cod7rt",
     "artwork": [
@@ -545544,7 +545601,16 @@
     "name": "Exterminauts",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "epic",
+        "id": "42C9216A055D4E118B0FF6B55E58CBFE"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PMGKK4NXHMH"
+      }
+    ],
     "id_igdb": "414975",
     "cover": "cocrhq",
     "artwork": [
@@ -545557,7 +545623,12 @@
     "name": "Hold the Dawn",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5198270"
+      }
+    ],
     "id_igdb": "417080",
     "cover": "cocwxs",
     "artwork": [
@@ -545570,7 +545641,12 @@
     "name": "Sort Them Cats",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5263460"
+      }
+    ],
     "id_igdb": "428408",
     "cover": "codbu9",
     "artwork": [
@@ -545583,7 +545659,12 @@
     "name": "GroundInFlames",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5211290"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -545594,7 +545675,12 @@
     "name": "Wait, They Can Climb?!",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5484330"
+      }
+    ],
     "id_igdb": "425366",
     "cover": "codbe5",
     "artwork": [
@@ -545607,10 +545693,313 @@
     "name": "Infinite Loop: Incremental",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4992770"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
     "url": null
+  },
+  {
+    "id": "1571374904929030214",
+    "name": "Incremental RTS",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4526450"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1571374915796336831",
+    "name": "MONOMOON",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3285880"
+      }
+    ],
+    "id_igdb": "360260",
+    "cover": "coax94",
+    "artwork": [
+      "ar4bwo"
+    ],
+    "url": "monomoon"
+  },
+  {
+    "id": "1571374951028760633",
+    "name": "Cinema Theater Tycoon",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3433110"
+      },
+      {
+        "distributor": "epic",
+        "id": "924B42633A79416A8468934606237810"
+      }
+    ],
+    "id_igdb": "358377",
+    "cover": "ar5hm9",
+    "artwork": null,
+    "url": "cinema-theater-tycoon"
+  },
+  {
+    "id": "1571374974797877360",
+    "name": "Hope in the City",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3610790"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9P1S707BPW6W"
+      }
+    ],
+    "id_igdb": "347898",
+    "cover": "co9y32",
+    "artwork": [
+      "ar5z5v"
+    ],
+    "url": "hope-in-the-city"
+  },
+  {
+    "id": "1571375011397238806",
+    "name": "Funeral for the Sun",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4088360"
+      }
+    ],
+    "id_igdb": "385063",
+    "cover": "cob9pp",
+    "artwork": [
+      "ar6l1j",
+      "ar6l1i"
+    ],
+    "url": "funeral-for-the-sun"
+  },
+  {
+    "id": "1571375041248239626",
+    "name": "Music Manager",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4611240"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1571375107665035435",
+    "name": "DPS: Desktop Pension Squad",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5135440"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1571375133124464722",
+    "name": "Monster Girls Survival & Craft 2040",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5110520"
+      }
+    ],
+    "id_igdb": "421361",
+    "cover": "cod1om",
+    "artwork": [
+      "ar6pil"
+    ],
+    "url": "monster-girls-survival-and-craft-2040"
+  },
+  {
+    "id": "1571375148894912674",
+    "name": "The Nugget",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5277580"
+      }
+    ],
+    "id_igdb": "429531",
+    "cover": "coddb3",
+    "artwork": [
+      "ar71fg"
+    ],
+    "url": "the-nugget"
+  },
+  {
+    "id": "1571375181119619155",
+    "name": "Crypto in a Haystack",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5330680"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1571375201998872706",
+    "name": "Black Autumn: 1438",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4208990"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1571375220193755136",
+    "name": "Lootmob",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5429910"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1571375237331951750",
+    "name": "Lost Bitcoin",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5427110"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1571375261306454036",
+    "name": "We Steal From Old People: The Game",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5051080"
+      }
+    ],
+    "id_igdb": "429108",
+    "cover": "codckc",
+    "artwork": [
+      "ar70cj"
+    ],
+    "url": "we-steal-from-old-people-the-game"
+  },
+  {
+    "id": "1571375267069567098",
+    "name": "Pure Skill",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5501560"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1571375274581430283",
+    "name": "No Asteroids",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5527800"
+      }
+    ],
+    "id_igdb": "427422",
+    "cover": "coddil",
+    "artwork": [
+      "ar716d",
+      "ar716c"
+    ],
+    "url": "no-asteroids"
+  },
+  {
+    "id": "1571375288833675344",
+    "name": "Privateer 2: The Darkening - 30th Anniversary Edition",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3067130"
+      }
+    ],
+    "id_igdb": "428361",
+    "cover": "codbbl",
+    "artwork": [
+      "ar6z4z"
+    ],
+    "url": "privateer-2-the-darkening-30th-anniversary-edition"
   }
 ]
