@@ -364484,6 +364484,10 @@
       {
         "distributor": "steam",
         "id": "2747770"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.ArteExperience.wednesdays"
       }
     ],
     "id_igdb": "333946",
@@ -431155,7 +431159,9 @@
   {
     "id": "1442738197573402767",
     "name": "Kyuukyoku Tiger Heli: Toaplan Arcade Garage",
-    "aliases": [],
+    "aliases": [
+      "Kyukyoku TigerHeli -TOAPLAN ARCADE GARAGE-"
+    ],
     "executables": [],
     "third_party_skus": [],
     "cover": null,
@@ -529060,7 +529066,7 @@
   },
   {
     "id": "1549993920287612960",
-    "name": "Find The Needle",
+    "name": "Find the Needle",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -544283,6 +544289,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "google_play",
+        "id": "com.monkeys.freshquest"
+      },
       {
         "distributor": "steam",
         "id": "3339970"
