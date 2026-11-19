@@ -13075,12 +13075,16 @@
         "id": "13BB5776B9E1424D84CE42D9BA61C0CA"
       },
       {
+        "distributor": "steam",
+        "id": "304430"
+      },
+      {
         "distributor": "xbox",
         "id": "C17GQF31D617"
       },
       {
-        "distributor": "steam",
-        "id": "304430"
+        "distributor": "google_play",
+        "id": "com.playdead.inside.full"
       }
     ],
     "id_igdb": "7342",
@@ -111949,12 +111953,16 @@
         "id": "9P19V385GM8T"
       },
       {
+        "distributor": "epic",
+        "id": "B2C22F02A966425DB54645674EEEAEE0"
+      },
+      {
         "distributor": "steam",
         "id": "1220150"
       },
       {
-        "distributor": "epic",
-        "id": "B2C22F02A966425DB54645674EEEAEE0"
+        "distributor": "google_play",
+        "id": "com.robi.bluefire"
       }
     ],
     "id_igdb": "131868",
@@ -143758,16 +143766,20 @@
         "id": "2395D558DCB140C69C1BFAC0BD2FA28B"
       },
       {
-        "distributor": "google_play",
-        "id": "com.blinigames.lus"
+        "distributor": "steam",
+        "id": "871420"
       },
       {
         "distributor": "xbox",
         "id": "9PC2NXSD00KP"
       },
       {
-        "distributor": "steam",
-        "id": "871420"
+        "distributor": "google_play",
+        "id": "com.blinigames.lus"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.blinigames.lus_lite"
       }
     ],
     "id_igdb": "102995",
@@ -174075,12 +174087,12 @@
     ],
     "executables": [
       {
-        "name": "pc/wwzretail.exe",
+        "name": "pc/wwzretailegs.exe",
         "os": "win32",
         "is_launcher": false
       },
       {
-        "name": "pc/wwzretailegs.exe",
+        "name": "pc/wwzretail.exe",
         "os": "win32",
         "is_launcher": false
       }
@@ -174088,15 +174100,23 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
+        "id": "9PFNW8JJJG2N"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NKB13TFF8M6"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9N8NZMCCC1KG"
+      },
+      {
+        "distributor": "xbox",
         "id": "9PBF1FL7K192"
       },
       {
         "distributor": "xbox",
         "id": "9PLCL2VB2SC0"
-      },
-      {
-        "distributor": "xbox",
-        "id": "9N8NZMCCC1KG"
       }
     ],
     "id_igdb": "152123",
@@ -193337,6 +193357,10 @@
       {
         "distributor": "steam",
         "id": "2671970"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.WatashiGames.KyosFruitMerge"
       }
     ],
     "id_igdb": "276624",
@@ -203786,6 +203810,10 @@
       {
         "distributor": "steam",
         "id": "1837220"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9NKFP38QC4MW"
       }
     ],
     "id_igdb": "289536",
@@ -230771,6 +230799,10 @@
       {
         "distributor": "steam",
         "id": "3204250"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.game.LostButFound"
       }
     ],
     "id_igdb": "319745",
@@ -280493,6 +280525,10 @@
     "executables": [],
     "third_party_skus": [
       {
+        "distributor": "google_play",
+        "id": "jp.co.infinibrain.taimanin.rpgextasy"
+      },
+      {
         "distributor": "steam",
         "id": "2197730"
       }
@@ -313768,6 +313804,10 @@
     "aliases": [],
     "executables": [],
     "third_party_skus": [
+      {
+        "distributor": "epic",
+        "id": "DC4C4BE805E344A4BAB504DC2C2A526D"
+      },
       {
         "distributor": "epic",
         "id": "fghi4567JM73rzjUvJ0co8syeN7BcJdz"
@@ -501984,7 +502024,7 @@
   },
   {
     "id": "1510003932020211893",
-    "name": "Melvor Idle 2",
+    "name": "Melvor Idle 2: A RuneScape Adventure",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -535025,7 +535065,7 @@
   },
   {
     "id": "1559779026271342644",
-    "name": "Better Chaos",
+    "name": "Better Chaos: Tidy Up the Supermarket",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -546366,7 +546406,7 @@
   },
   {
     "id": "1572462971248967691",
-    "name": "Roads & Riches: Traveling Merchant Simulator",
+    "name": "Roads & Riches",
     "aliases": [],
     "executables": [],
     "third_party_skus": [
@@ -546984,6 +547024,431 @@
   {
     "id": "1572463482912378962",
     "name": "GoreBox 27",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1572823987526836304",
+    "name": "Homgard",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4287570"
+      }
+    ],
+    "id_igdb": "389851",
+    "cover": "cobj59",
+    "artwork": [
+      "ar5bv5"
+    ],
+    "url": "homgard"
+  },
+  {
+    "id": "1572824017407311992",
+    "name": "Near Mint",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4660470"
+      }
+    ],
+    "id_igdb": "399599",
+    "cover": "cod3w7",
+    "artwork": [
+      "ar6rdw",
+      "ar6rdu"
+    ],
+    "url": "near-mint--1"
+  },
+  {
+    "id": "1572824128556105748",
+    "name": "Love: Fall in Death",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9PPP3X71K06W"
+      },
+      {
+        "distributor": "steam",
+        "id": "3077540"
+      }
+    ],
+    "id_igdb": "379670",
+    "cover": "coax21",
+    "artwork": [
+      "ar4rfs"
+    ],
+    "url": "love-fall-in-death"
+  },
+  {
+    "id": "1572824159552143500",
+    "name": "Marque & Reprisal",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4516500"
+      }
+    ],
+    "id_igdb": "412123",
+    "cover": "cocm47",
+    "artwork": null,
+    "url": "marque-and-reprisal"
+  },
+  {
+    "id": "1572824241458643106",
+    "name": "Love, Death & My Daughter",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5105650"
+      }
+    ],
+    "id_igdb": "427265",
+    "cover": "coda5e",
+    "artwork": [
+      "ar6xr1",
+      "ar6zr9"
+    ],
+    "url": "love-death-and-my-daughter"
+  },
+  {
+    "id": "1572824269333987379",
+    "name": "Idle King: Loot Together",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5013290"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1572824315181924465",
+    "name": "Ray Ray Zombies",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5244680"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1572824334286852206",
+    "name": "Lestvitsa",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5446260"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1572824343980015616",
+    "name": "Paid Parking Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5458820"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1572824360878608466",
+    "name": "Punch Through",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5474170"
+      }
+    ],
+    "id_igdb": "425694",
+    "cover": "cod87a",
+    "artwork": [
+      "ar6vtz"
+    ],
+    "url": "punch-through"
+  },
+  {
+    "id": "1572824376557043883",
+    "name": "The Coin Keeper: Tidy Up!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5302870"
+      }
+    ],
+    "id_igdb": "429067",
+    "cover": "codcic",
+    "artwork": [
+      "ar70xh"
+    ],
+    "url": "the-coin-keeper-tidy-up"
+  },
+  {
+    "id": "1572824392210055228",
+    "name": "Blood of Rome",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2659460"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1572824411155726347",
+    "name": "Become Blackhole",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4994890"
+      }
+    ],
+    "id_igdb": "429955",
+    "cover": "codeff",
+    "artwork": [
+      "ar71w0"
+    ],
+    "url": "become-blackhole"
+  },
+  {
+    "id": "1572823930572509305",
+    "name": "PAW Patrol: Dino World",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "398427",
+    "cover": "cobxhw",
+    "artwork": [
+      "ar5pp2",
+      "ar5pp3",
+      "ar6cju",
+      "ar6cjv"
+    ],
+    "url": "paw-patrol-dino-world"
+  },
+  {
+    "id": "1572823964890173480",
+    "name": "Angel Investor Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "425791",
+    "cover": "codbc2",
+    "artwork": [
+      "ar6z46"
+    ],
+    "url": "angel-investor-simulator"
+  },
+  {
+    "id": "1572823980031873175",
+    "name": "Obey Me! Sinner's Choice: Lucifer",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "396555",
+    "cover": "codek4",
+    "artwork": [
+      "ar5mly"
+    ],
+    "url": "obey-me-sinners-choice-lucifer"
+  },
+  {
+    "id": "1572824001535934606",
+    "name": "Prerolled",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "378560",
+    "cover": "cocd25",
+    "artwork": [
+      "ar6zv0"
+    ],
+    "url": "prerolled"
+  },
+  {
+    "id": "1572824087892598795",
+    "name": "Tokatonton: One-Armed Blacksmith",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "368606",
+    "cover": "coaia7",
+    "artwork": [
+      "ar48ue"
+    ],
+    "url": "tokatonton-one-armed-blacksmith"
+  },
+  {
+    "id": "1572824105932030063",
+    "name": "Motocross The Game",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "337185",
+    "cover": "co9mw6",
+    "artwork": [
+      "ar4iyn"
+    ],
+    "url": "motocross-the-game"
+  },
+  {
+    "id": "1572824178480910468",
+    "name": "Resettle",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "417573",
+    "cover": "cocws3",
+    "artwork": [
+      "ar6l23"
+    ],
+    "url": "resettle"
+  },
+  {
+    "id": "1572824222848385135",
+    "name": "Pixel Chaos: Tidy Up the Museum",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "421720",
+    "cover": "cod271",
+    "artwork": [
+      "ar6pup"
+    ],
+    "url": "pixel-chaos-tidy-up-the-museum"
+  },
+  {
+    "id": "1572824235775234231",
+    "name": "Trash to Trees: Tidy Up The Forest!",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "421719",
+    "cover": "codbd2",
+    "artwork": [
+      "ar6z5b",
+      "ar6yz9",
+      "ar6z5a"
+    ],
+    "url": "trash-to-trees-tidy-up-the-forest"
+  },
+  {
+    "id": "1572824246244347904",
+    "name": "Trafficity",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "23032",
+    "cover": "co3vmr",
+    "artwork": null,
+    "url": "air-traffic-chaos"
+  },
+  {
+    "id": "1572824278628442173",
+    "name": "Swords and Cavalry",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1572824282994839553",
+    "name": "Fakin' It XL",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "422318",
+    "cover": "cod35h",
+    "artwork": [
+      "ar6qtx",
+      "ar6yzb",
+      "ar6yzc"
+    ],
+    "url": "fakin-it-xl"
+  },
+  {
+    "id": "1572824298421358725",
+    "name": "Bio Inc. Total Defense",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "428771",
+    "cover": "codbyx",
+    "artwork": [
+      "ar70c1"
+    ],
+    "url": "bio-inc-total-defense"
+  },
+  {
+    "id": "1572824353928904807",
+    "name": "Hypermarket: Sort & Stock",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "429419",
+    "cover": "codd86",
+    "artwork": [
+      "ar70x4",
+      "ar70x5"
+    ],
+    "url": "hypermarket-sort-and-stock"
+  },
+  {
+    "id": "1572824385587519562",
+    "name": "Beer Thirty",
     "aliases": [],
     "executables": [],
     "third_party_skus": [],
