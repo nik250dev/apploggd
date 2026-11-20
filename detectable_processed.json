@@ -311178,15 +311178,11 @@
     "third_party_skus": [
       {
         "distributor": "steam",
-        "id": "3315890"
-      },
-      {
-        "distributor": "steam",
         "id": "9460"
       },
       {
-        "distributor": "xbox",
-        "id": "C535G04WLZ9R"
+        "distributor": "steam",
+        "id": "3315890"
       }
     ],
     "id_igdb": "340265",
@@ -395961,7 +395957,12 @@
     "name": "Frontlines: Fuel of War",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "C535G04WLZ9R"
+      }
+    ],
     "id_igdb": "6997",
     "cover": "co3zzn",
     "artwork": [
@@ -472683,6 +472684,10 @@
       {
         "distributor": "steam",
         "id": "3917700"
+      },
+      {
+        "distributor": "google_play",
+        "id": "com.playstack.dicevaders"
       }
     ],
     "id_igdb": "386448",
@@ -477849,15 +477854,19 @@
     "third_party_skus": [
       {
         "distributor": "xbox",
+        "id": "9NF2BSCRCPFT"
+      },
+      {
+        "distributor": "steam",
+        "id": "2502780"
+      },
+      {
+        "distributor": "xbox",
         "id": "9PK70LXMQVHX"
       },
       {
         "distributor": "epic",
         "id": "0B8BD3DE06B44324A3B29498DC9FD7C2"
-      },
-      {
-        "distributor": "steam",
-        "id": "2502780"
       }
     ],
     "id_igdb": "366709",
@@ -483728,6 +483737,10 @@
       {
         "distributor": "steam",
         "id": "4096910"
+      },
+      {
+        "distributor": "epic",
+        "id": "05AFD594F71040038374A330AC4BF85B"
       }
     ],
     "id_igdb": "390730",
@@ -547265,7 +547278,20 @@
     "name": "PAW Patrol: Dino World",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "xbox",
+        "id": "9N3P3TRJGWV0"
+      },
+      {
+        "distributor": "epic",
+        "id": "75BD9275293B4D09B8D1208E2C9F8886"
+      },
+      {
+        "distributor": "steam",
+        "id": "3525790"
+      }
+    ],
     "id_igdb": "398427",
     "cover": "cobxhw",
     "artwork": [
@@ -547281,7 +547307,12 @@
     "name": "Angel Investor Simulator",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4771830"
+      }
+    ],
     "id_igdb": "425791",
     "cover": "codbc2",
     "artwork": [
@@ -547294,7 +547325,12 @@
     "name": "Obey Me! Sinner's Choice: Lucifer",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4444800"
+      }
+    ],
     "id_igdb": "396555",
     "cover": "codek4",
     "artwork": [
@@ -547307,7 +547343,12 @@
     "name": "Prerolled",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4475970"
+      }
+    ],
     "id_igdb": "378560",
     "cover": "cocd25",
     "artwork": [
@@ -547320,7 +547361,12 @@
     "name": "Tokatonton: One-Armed Blacksmith",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3399610"
+      }
+    ],
     "id_igdb": "368606",
     "cover": "coaia7",
     "artwork": [
@@ -547333,7 +547379,12 @@
     "name": "Motocross The Game",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3188660"
+      }
+    ],
     "id_igdb": "337185",
     "cover": "co9mw6",
     "artwork": [
@@ -547346,7 +547397,12 @@
     "name": "Resettle",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4972050"
+      }
+    ],
     "id_igdb": "417573",
     "cover": "cocws3",
     "artwork": [
@@ -547359,7 +547415,12 @@
     "name": "Pixel Chaos: Tidy Up the Museum",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5149240"
+      }
+    ],
     "id_igdb": "421720",
     "cover": "cod271",
     "artwork": [
@@ -547372,7 +547433,12 @@
     "name": "Trash to Trees: Tidy Up The Forest!",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5123310"
+      }
+    ],
     "id_igdb": "421719",
     "cover": "codbd2",
     "artwork": [
@@ -547387,7 +547453,12 @@
     "name": "Trafficity",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5185750"
+      }
+    ],
     "id_igdb": "23032",
     "cover": "co3vmr",
     "artwork": null,
@@ -547398,7 +547469,12 @@
     "name": "Swords and Cavalry",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "2997680"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -547406,10 +547482,23 @@
   },
   {
     "id": "1572824282994839553",
-    "name": "Fakin' It XL",
+    "name": "Fakin It XL",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "epic",
+        "id": "6E09A5702C964BAFAC9BD874C68D5759"
+      },
+      {
+        "distributor": "steam",
+        "id": "5054700"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PH4VWPW7Q6W"
+      }
+    ],
     "id_igdb": "422318",
     "cover": "cod35h",
     "artwork": [
@@ -547424,7 +547513,12 @@
     "name": "Bio Inc. Total Defense",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5164110"
+      }
+    ],
     "id_igdb": "428771",
     "cover": "codbyx",
     "artwork": [
@@ -547437,7 +547531,12 @@
     "name": "Hypermarket: Sort & Stock",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5472580"
+      }
+    ],
     "id_igdb": "429419",
     "cover": "codd86",
     "artwork": [
@@ -547451,10 +547550,134 @@
     "name": "Beer Thirty",
     "aliases": [],
     "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5499680"
+      }
+    ],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1573186530825207829",
+    "name": "VacBot Simulator",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "389716",
+    "cover": "codcpj",
+    "artwork": [
+      "ar5bnm"
+    ],
+    "url": "vacbot-simulator"
+  },
+  {
+    "id": "1573186537343156325",
+    "name": "THE OFFICE ROOMS",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "373305",
+    "cover": "coaods",
+    "artwork": [
+      "ar4ga3"
+    ],
+    "url": "the-office-rooms"
+  },
+  {
+    "id": "1573186560445259887",
+    "name": "Ball Picker: Clean Up the Golf Yard",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "412590",
+    "cover": "cod34f",
+    "artwork": [
+      "ar6e2y",
+      "ar6e2x"
+    ],
+    "url": "ball-picker-clean-up-the-golf-yard"
+  },
+  {
+    "id": "1573186572214599691",
+    "name": "Gold Mining Simulator: Definitive Edition",
+    "aliases": [],
+    "executables": [],
     "third_party_skus": [],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
     "url": null
+  },
+  {
+    "id": "1573186601587187763",
+    "name": "Touhou Smash",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "394271",
+    "cover": "coc478",
+    "artwork": null,
+    "url": "super-smash-bros-ultimate-hong-meiling-moveset-touhou-hisoutensoku"
+  },
+  {
+    "id": "1573186622445453352",
+    "name": "Dwarven Digging Machine",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1573186634453618748",
+    "name": "Oreloop",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1573186641416421456",
+    "name": "Touhou Chess",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": null,
+    "cover": null,
+    "artwork": null,
+    "url": null
+  },
+  {
+    "id": "1573186653961588746",
+    "name": "All Army Attack",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "429081",
+    "cover": "codcj0",
+    "artwork": [
+      "ar70ay"
+    ],
+    "url": "all-army-attack"
+  },
+  {
+    "id": "1573186656692084907",
+    "name": "PAPERWORKS",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [],
+    "id_igdb": "382491",
+    "cover": "cob3i2",
+    "artwork": null,
+    "url": "mizi-no-paperwork"
   }
 ]
