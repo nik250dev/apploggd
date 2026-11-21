@@ -295072,6 +295072,10 @@
       {
         "distributor": "steam",
         "id": "3333850"
+      },
+      {
+        "distributor": "xbox",
+        "id": "9PF4B4MD1QZC"
       }
     ],
     "id_igdb": "368311",
@@ -547566,7 +547570,12 @@
     "name": "VacBot Simulator",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4297050"
+      }
+    ],
     "id_igdb": "389716",
     "cover": "codcpj",
     "artwork": [
@@ -547579,7 +547588,12 @@
     "name": "THE OFFICE ROOMS",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "1925940"
+      }
+    ],
     "id_igdb": "373305",
     "cover": "coaods",
     "artwork": [
@@ -547590,9 +547604,16 @@
   {
     "id": "1573186560445259887",
     "name": "Ball Picker: Clean Up the Golf Yard",
-    "aliases": [],
+    "aliases": [
+      "BALL PICKER - Clean Up the Golf Yard"
+    ],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5035380"
+      }
+    ],
     "id_igdb": "412590",
     "cover": "cod34f",
     "artwork": [
@@ -547603,10 +547624,15 @@
   },
   {
     "id": "1573186572214599691",
-    "name": "Gold Mining Simulator: Definitive Edition",
+    "name": "Gold Mining Simulator",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4707700"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -547617,7 +547643,12 @@
     "name": "Touhou Smash",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4971300"
+      }
+    ],
     "id_igdb": "394271",
     "cover": "coc478",
     "artwork": null,
@@ -547628,7 +547659,12 @@
     "name": "Dwarven Digging Machine",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5083810"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -547639,7 +547675,12 @@
     "name": "Oreloop",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4302320"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -547650,7 +547691,12 @@
     "name": "Touhou Chess",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5482350"
+      }
+    ],
     "id_igdb": null,
     "cover": null,
     "artwork": null,
@@ -547661,7 +547707,12 @@
     "name": "All Army Attack",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "4128840"
+      }
+    ],
     "id_igdb": "429081",
     "cover": "codcj0",
     "artwork": [
@@ -547671,13 +547722,36 @@
   },
   {
     "id": "1573186656692084907",
-    "name": "PAPERWORKS",
+    "name": "PAPERWORKS: Paper Shredder Inc.",
     "aliases": [],
     "executables": [],
-    "third_party_skus": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "5353570"
+      }
+    ],
     "id_igdb": "382491",
     "cover": "cob3i2",
     "artwork": null,
     "url": "mizi-no-paperwork"
+  },
+  {
+    "id": "1573549119912546395",
+    "name": "Professor Layton and the New World of Steam",
+    "aliases": [],
+    "executables": [],
+    "third_party_skus": [
+      {
+        "distributor": "steam",
+        "id": "3384600"
+      }
+    ],
+    "id_igdb": "236665",
+    "cover": "co66va",
+    "artwork": [
+      "ar260r"
+    ],
+    "url": "professor-layton-and-the-new-world-of-steam"
   }
 ]
